@@ -1,0 +1,1009 @@
+[
+  {
+    "subclass_key": "spy",
+    "tree_name_en": "Spy Arsenal",
+    "tree_name_tr": "Casus Cephaneliği",
+    "tree_desc_en": "The Spy spell tree focuses on infiltration, gathering intel, utilizing advanced gadgets, and striking from the shadows.",
+    "tree_desc_tr": "Casus büyü ağacı, sızma, istihbarat toplama, gelişmiş teçhizat kullanımı ve gölgelerden saldırmaya odaklanır.",
+    "branches": [
+      "Infiltration",
+      "Gadgets",
+      "Intel"
+    ],
+    "spells": [
+      {
+        "spell_key": "sp_shadow_step",
+        "name_en": "Shadow Step",
+        "name_tr": "Gölge Adımı",
+        "description_en": "Merge slightly into the shadows, gaining a +5 bonus to stealth checks and increasing movement speed by 3m for 1 hour.",
+        "description_tr": "Gölgelerle hafifçe bütünleşerek gizlilik zarlarına +5 bonus kazanır ve 1 saat boyunca hareket hızını 3m artırırsınız.",
+        "branch": "Infiltration",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🥷",
+        "effects": {
+          "stealth_bonus": "+5",
+          "movement_speed": "+3m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "sp_disguise_self",
+        "name_en": "Quick Disguise",
+        "name_tr": "Hızlı Kılık Değiştirme",
+        "description_en": "Quickly alter your appearance, clothes, and voice to match another humanoid for 4 hours, granting a +10 to deception.",
+        "description_tr": "Görünümünüzü, kıyafetlerinizi ve sesinizi 4 saatliğine başka bir insansıyla eşleşecek şekilde hızla değiştirerek aldatmaya +10 kazanırsınız.",
+        "branch": "Infiltration",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sp_shadow_step"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "disguise_duration": "4 hours",
+          "deception_bonus": "+10"
+        }
+      },
+      {
+        "spell_key": "sp_lockpick_mastery",
+        "name_en": "Silent Lockpick",
+        "name_tr": "Sessiz Maymuncuk",
+        "description_en": "Open non-magical and basic magical locks completely silently in 1 action with a 95% success rate.",
+        "description_tr": "Büyülü olmayan ve temel büyülü kilitleri 1 eylemde %95 başarı oranıyla tamamen sessizce açarsınız.",
+        "branch": "Infiltration",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sp_disguise_self"
+        ],
+        "icon": "🔓",
+        "effects": {
+          "unlock_time": "1 action",
+          "success_chance": "95%",
+          "noise_level": "0m"
+        }
+      },
+      {
+        "spell_key": "sp_blend_in",
+        "name_en": "Blend In",
+        "name_tr": "Kalabalığa Karışma",
+        "description_en": "Become virtually invisible as long as you are within a crowd of at least 3 people. Detection radius is reduced to 1m.",
+        "description_tr": "En az 3 kişilik bir kalabalığın içinde olduğunuz sürece neredeyse görünmez olursunuz. Tespit edilme yarıçapı 1m'ye düşer.",
+        "branch": "Infiltration",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sp_lockpick_mastery"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "invisibility_in_crowds": "True",
+          "detection_radius": "1m"
+        }
+      },
+      {
+        "spell_key": "sp_wall_crawler",
+        "name_en": "Wall Crawler",
+        "name_tr": "Duvar Sürüngeni",
+        "description_en": "Climb vertical surfaces and ceilings at your normal walking speed, leaving your hands free for combat or gadgets.",
+        "description_tr": "Dikey yüzeylere ve tavanlara normal yürüme hızınızda tırmanarak ellerinizi savaş veya teçhizat için serbest bırakırsınız.",
+        "branch": "Infiltration",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sp_blend_in"
+        ],
+        "icon": "🕷️",
+        "effects": {
+          "climb_speed": "Equal to walking speed",
+          "hands_free": "True"
+        }
+      },
+      {
+        "spell_key": "sp_voice_mimicry",
+        "name_en": "Voice Mimicry",
+        "name_tr": "Ses Taklidi",
+        "description_en": "Flawlessly mimic any voice you have heard for at least 1 minute. The mimicry lasts indefinitely.",
+        "description_tr": "En az 1 dakika boyunca duyduğunuz herhangi bir sesi kusursuzca taklit edersiniz. Taklit süresiz devam eder.",
+        "branch": "Infiltration",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sp_wall_crawler"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "mimicry_accuracy": "100%",
+          "duration": "Unlimited"
+        }
+      },
+      {
+        "spell_key": "sp_vanish",
+        "name_en": "Vanish",
+        "name_tr": "Ortadan Kaybolma",
+        "description_en": "Turn completely invisible for 10 minutes as a bonus action. Breaking stealth attacks end the effect.",
+        "description_tr": "Bonus eylem olarak 10 dakika boyunca tamamen görünmez olursunuz. Gizliliği bozan saldırılar etkiyi sonlandırır.",
+        "branch": "Infiltration",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sp_voice_mimicry"
+        ],
+        "icon": "💨",
+        "effects": {
+          "invisibility_duration": "10 minutes",
+          "bonus_action": "True"
+        }
+      },
+      {
+        "spell_key": "sp_phase_door",
+        "name_en": "Phase Door",
+        "name_tr": "Duvar Geçişi",
+        "description_en": "Walk through solid barriers up to 1.5m thick. Usable 3 times per long rest.",
+        "description_tr": "1.5m kalınlığa kadar katı engellerin içinden geçersiniz. Uzun dinlenme başına 3 kez kullanılabilir.",
+        "branch": "Infiltration",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sp_vanish"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "wall_thickness_max": "1.5m",
+          "uses_per_rest": "3"
+        }
+      },
+      {
+        "spell_key": "sp_perfect_imposter",
+        "name_en": "Perfect Imposter",
+        "name_tr": "Kusursuz Sahtekar",
+        "description_en": "Assume someone's exact identity perfectly for 24 hours. Passive insight DC to notice something wrong is 20.",
+        "description_tr": "24 saatliğine birinin tam kimliğine bürünürsünüz. Bir şeylerin yanlış olduğunu fark etmek için gereken pasif sezgi Zorluk Derecesi 20'dir.",
+        "branch": "Infiltration",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sp_phase_door"
+        ],
+        "icon": "👥",
+        "effects": {
+          "imposter_duration": "24 hours",
+          "insight_dc": "20"
+        }
+      },
+      {
+        "spell_key": "sp_mass_hallucination",
+        "name_en": "Mass Hallucination",
+        "name_tr": "Kitlesel Halüsinasyon",
+        "description_en": "Project a psychic illusion over a 20m radius. Targets failing a DC 18 save forget seeing you for 1 hour.",
+        "description_tr": "20m yarıçapa psişik bir illüzyon yansıtır. 18 ZD kurtarmasını geçemeyen hedefler 1 saat boyunca sizi gördüklerini unutur.",
+        "branch": "Infiltration",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sp_perfect_imposter"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "radius": "20m",
+          "memory_loss_duration": "1 hour",
+          "save_dc": "18"
+        }
+      },
+      {
+        "spell_key": "sp_shadow_clone",
+        "name_en": "Shadow Clone",
+        "name_tr": "Gölge Kopyası",
+        "description_en": "Create a tangible clone made of shadow with 50 HP. It mimics your actions or distracts enemies for 10 minutes.",
+        "description_tr": "Gölgeden yapılmış 50 Canlı somut bir kopya yaratır. 10 dakika boyunca eylemlerinizi taklit eder veya düşmanları oyalar.",
+        "branch": "Infiltration",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sp_mass_hallucination"
+        ],
+        "icon": "👯",
+        "effects": {
+          "clone_hp": "50",
+          "duration": "10 minutes",
+          "action_mimicry": "True"
+        }
+      },
+      {
+        "spell_key": "sp_ghost_walker",
+        "name_en": "Ghost Walker",
+        "name_tr": "Hayalet Yürüyüşçü",
+        "description_en": "Ultimate Infiltration. Become completely intangible and invisible for 1 minute. Immune to physical damage and +10m speed.",
+        "description_tr": "Nihai Sızma. 1 dakika boyunca tamamen dokunulmaz ve görünmez olursunuz. Fiziksel hasara bağışıklık ve +10m hız kazanırsınız.",
+        "branch": "Infiltration",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sp_shadow_clone"
+        ],
+        "icon": "👻",
+        "effects": {
+          "intangibility_duration": "1 minute",
+          "movement_speed": "+10m",
+          "immune_to_physical": "True"
+        }
+      },
+      {
+        "spell_key": "sp_smoke_bomb",
+        "name_en": "Smoke Bomb",
+        "name_tr": "Sis Bombası",
+        "description_en": "Throw a bomb that creates a heavily obscured area of thick smoke in a 10m radius for 1 minute.",
+        "description_tr": "10m yarıçapında 1 dakika boyunca yoğun dumandan oluşan ağır gizlenmiş bir alan yaratan bir bomba fırlatır.",
+        "branch": "Gadgets",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "💣",
+        "effects": {
+          "radius": "10m",
+          "duration": "1 minute",
+          "vision": "Heavily Obscured"
+        }
+      },
+      {
+        "spell_key": "sp_poison_dart",
+        "name_en": "Poison Dart",
+        "name_tr": "Zehirli Ok",
+        "description_en": "Fire a silent dart up to 20m. Deals 1d4 piercing and 2d8 poison damage, leaving the target poisoned for 1 minute.",
+        "description_tr": "20m'ye kadar sessiz bir ok atar. 1d4 delici ve 2d8 zehir hasarı vererek hedefi 1 dakika boyunca zehirli bırakır.",
+        "branch": "Gadgets",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [
+          "sp_smoke_bomb"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "1d4 piercing + 2d8 poison",
+          "range": "20m",
+          "condition": "Poisoned for 1 min"
+        }
+      },
+      {
+        "spell_key": "sp_grappling_hook",
+        "name_en": "Grappling Hook",
+        "name_tr": "Kanca",
+        "description_en": "Shoot a hook up to 30m away. Pulls you to the target location at 15m per turn.",
+        "description_tr": "30m uzağa kadar bir kanca fırlatır. Sizi tur başına 15m hızla hedef konuma çeker.",
+        "branch": "Gadgets",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sp_poison_dart"
+        ],
+        "icon": "🪝",
+        "effects": {
+          "range": "30m",
+          "pull_speed": "15m/turn"
+        }
+      },
+      {
+        "spell_key": "sp_flashbang",
+        "name_en": "Flashbang",
+        "name_tr": "Flaş Bombası",
+        "description_en": "Detonate a blinding flash within 15m. Blinds enemies for 1d4 turns and deafens them for 1 minute.",
+        "description_tr": "15m içinde kör edici bir flaş patlatır. Düşmanları 1d4 tur boyunca kör eder ve 1 dakika boyunca sağır bırakır.",
+        "branch": "Gadgets",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sp_grappling_hook"
+        ],
+        "icon": "💥",
+        "effects": {
+          "radius": "15m",
+          "blind_duration": "1d4 turns",
+          "deafen_duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "sp_caltrops",
+        "name_en": "Caltrops",
+        "name_tr": "Çivili Tuzak",
+        "description_en": "Scatter spikes over a 5m x 5m area. Enemies entering take 1d6 piercing damage and lose 3m of speed.",
+        "description_tr": "5m x 5m alana dikenler saçar. Giren düşmanlar 1d6 delici hasar alır ve hızları 3m düşer.",
+        "branch": "Gadgets",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 230,
+        "prerequisites": [
+          "sp_flashbang"
+        ],
+        "icon": "📌",
+        "effects": {
+          "area": "5m x 5m",
+          "damage": "1d6 piercing",
+          "speed_reduction": "-3m"
+        }
+      },
+      {
+        "spell_key": "sp_wire_garrote",
+        "name_en": "Wire Garrote",
+        "name_tr": "Çelik Tel",
+        "description_en": "Silently strangle a target from behind. Deals 4d6 slashing damage, silences, and grapples them.",
+        "description_tr": "Bir hedefi arkadan sessizce boğar. 4d6 kesici hasar verir, susturur ve yakalar.",
+        "branch": "Gadgets",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sp_caltrops"
+        ],
+        "icon": "🧵",
+        "effects": {
+          "damage": "4d6 slashing",
+          "condition": "Silenced and Grappled",
+          "stealth_req": "Advantage"
+        }
+      },
+      {
+        "spell_key": "sp_explosive_decoy",
+        "name_en": "Explosive Decoy",
+        "name_tr": "Patlayıcı Yem",
+        "description_en": "Deploy a small mechanical lure. Explodes in a 10m radius for 6d6 fire damage when an enemy comes within 2m.",
+        "description_tr": "Küçük mekanik bir yem bırakır. Bir düşman 2m yaklaştığında 10m yarıçapta patlayarak 6d6 ateş hasarı verir.",
+        "branch": "Gadgets",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "sp_wire_garrote"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "6d6 fire",
+          "radius": "10m",
+          "trigger": "Proximity 2m"
+        }
+      },
+      {
+        "spell_key": "sp_sleeping_gas",
+        "name_en": "Sleeping Gas",
+        "name_tr": "Uyku Gazı",
+        "description_en": "Release a silent gas canister in a 15m radius. Targets failing a DC 16 save fall asleep for 1 hour.",
+        "description_tr": "15m yarıçapında sessiz bir gaz bombası salar. 16 ZD kurtarmasını geçemeyen hedefler 1 saat uykuya dalar.",
+        "branch": "Gadgets",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sp_explosive_decoy"
+        ],
+        "icon": "💤",
+        "effects": {
+          "radius": "15m",
+          "sleep_duration": "1 hour",
+          "save_dc": "16"
+        }
+      },
+      {
+        "spell_key": "sp_sabotage_kit",
+        "name_en": "Sabotage Kit",
+        "name_tr": "Sabotaj Kiti",
+        "description_en": "Quickly disable traps automatically or deal 3d10 damage to magical or mechanical constructs via touch.",
+        "description_tr": "Tuzakları otomatik olarak hızla devre dışı bırakır veya temas yoluyla büyülü veya mekanik yapılara 3d10 hasar verir.",
+        "branch": "Gadgets",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sp_sleeping_gas"
+        ],
+        "icon": "🔧",
+        "effects": {
+          "disable_construct": "3d10 damage",
+          "disable_trap": "100% success",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "sp_nano_tracker",
+        "name_en": "Nano Tracker",
+        "name_tr": "Nano Takipçi",
+        "description_en": "Plant a microscopic tracker. Allows unlimited range tracking of the target's exact position for 30 days.",
+        "description_tr": "Mikroskobik bir takip cihazı yerleştirir. 30 gün boyunca hedefin tam konumunu sınırsız mesafeden takip etmeyi sağlar.",
+        "branch": "Gadgets",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sp_sabotage_kit"
+        ],
+        "icon": "📡",
+        "effects": {
+          "tracking_range": "Unlimited",
+          "duration": "30 days"
+        }
+      },
+      {
+        "spell_key": "sp_emp_grenade",
+        "name_en": "Magic Disruptor",
+        "name_tr": "Büyü Bozucu Bomba",
+        "description_en": "Throw a device that disrupts magic and electronics in a 20m radius for 1 minute. Stuns constructs for 1d4 turns.",
+        "description_tr": "20m yarıçapındaki büyü ve elektronikleri 1 dakikalığına bozan bir cihaz fırlatır. Yapıları 1d4 tur sersemletir.",
+        "branch": "Gadgets",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sp_nano_tracker"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "radius": "20m",
+          "magic_disable_duration": "1 minute",
+          "construct_stun": "1d4 turns"
+        }
+      },
+      {
+        "spell_key": "sp_gadget_mastery",
+        "name_en": "Gadget Arsenal",
+        "name_tr": "Teçhizat Cephaneliği",
+        "description_en": "Ultimate Gadget. For 5 minutes, your gadget cooldowns are reset instantly and all gadgets deal an extra +2d6 damage.",
+        "description_tr": "Nihai Teçhizat. 5 dakika boyunca teçhizat bekleme süreleri anında sıfırlanır ve tüm teçhizatlar ek +2d6 hasar verir.",
+        "branch": "Gadgets",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sp_emp_grenade"
+        ],
+        "icon": "🧰",
+        "effects": {
+          "duration": "5 minutes",
+          "gadget_cooldowns": "0",
+          "gadget_damage_bonus": "+2d6"
+        }
+      },
+      {
+        "spell_key": "sp_eavesdrop",
+        "name_en": "Eavesdrop",
+        "name_tr": "Gizli Dinleme",
+        "description_en": "Focus your hearing to clearly listen to conversations up to 50m away, even through standard walls.",
+        "description_tr": "İşitmenizi odaklayarak standart duvarların arkasından bile 50m'ye kadar uzaklıktaki konuşmaları net bir şekilde dinlersiniz.",
+        "branch": "Intel",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "👂",
+        "effects": {
+          "hearing_range": "50m",
+          "through_walls": "True"
+        }
+      },
+      {
+        "spell_key": "sp_lip_reading",
+        "name_en": "Lip Reading",
+        "name_tr": "Dudak Okuma",
+        "description_en": "Understand what people are saying by reading their lips with 100% accuracy up to 100m away.",
+        "description_tr": "100m'ye kadar uzaktaki insanların dudaklarını okuyarak ne dediklerini %100 doğrulukla anlarsınız.",
+        "branch": "Intel",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 130,
+        "prerequisites": [
+          "sp_eavesdrop"
+        ],
+        "icon": "👄",
+        "effects": {
+          "sight_range": "100m",
+          "accuracy": "100%"
+        }
+      },
+      {
+        "spell_key": "sp_target_analysis",
+        "name_en": "Target Analysis",
+        "name_tr": "Hedef Analizi",
+        "description_en": "Analyze a target for 1 minute to reveal their weaknesses, gaining a +3 attack bonus against them.",
+        "description_tr": "Bir hedefi 1 dakika inceleyerek zayıf noktalarını ortaya çıkarır ve onlara karşı +3 saldırı bonusu kazanırsınız.",
+        "branch": "Intel",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sp_lip_reading"
+        ],
+        "icon": "🔍",
+        "effects": {
+          "reveal_weakness": "True",
+          "attack_bonus": "+3 vs Target"
+        }
+      },
+      {
+        "spell_key": "sp_interrogation",
+        "name_en": "Enhanced Interrogation",
+        "name_tr": "Gelişmiş Sorgu",
+        "description_en": "Interrogate a bound target. They must pass a DC 15 save or be compelled to answer all questions truthfully for 10 minutes.",
+        "description_tr": "Bağlı bir hedefi sorgularsınız. 15 ZD kurtarmasını geçemezlerse 10 dakika boyunca tüm sorulara dürüstçe cevap vermeye zorlanırlar.",
+        "branch": "Intel",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sp_target_analysis"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "truth_compulsion": "Save DC 15",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "sp_mind_read",
+        "name_en": "Surface Thoughts",
+        "name_tr": "Yüzeysel Düşünceler",
+        "description_en": "Probe the surface thoughts of a target within 10m for 1 minute on a failed DC 16 save.",
+        "description_tr": "16 ZD kurtarmasında başarısız olan 10m içindeki bir hedefin yüzeysel düşüncelerini 1 dakika boyunca araştırırsınız.",
+        "branch": "Intel",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "sp_interrogation"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "10m",
+          "duration": "1 minute",
+          "save_dc": "16"
+        }
+      },
+      {
+        "spell_key": "sp_photographic_memory",
+        "name_en": "Photographic Memory",
+        "name_tr": "Fotografik Hafıza",
+        "description_en": "Memorize any document, map, or book instantly (1 action per page) with 100% recall accuracy forever.",
+        "description_tr": "Herhangi bir belge, harita veya kitabı (sayfa başına 1 eylem) sonsuza dek %100 hatırlama doğruluğuyla anında ezberlersiniz.",
+        "branch": "Intel",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 290,
+        "prerequisites": [
+          "sp_mind_read"
+        ],
+        "icon": "📸",
+        "effects": {
+          "memorize_time": "1 action/page",
+          "recall_accuracy": "100%"
+        }
+      },
+      {
+        "spell_key": "sp_clairvoyance",
+        "name_en": "Clairvoyance",
+        "name_tr": "Uzaktan Görü",
+        "description_en": "Create an invisible sensor up to 500m away to see and hear the area for 10 minutes.",
+        "description_tr": "Bölgeyi 10 dakika boyunca görmek ve duymak için 500m uzağa kadar görünmez bir sensör yaratırsınız.",
+        "branch": "Intel",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sp_photographic_memory"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "range": "500m",
+          "duration": "10 minutes",
+          "sensor_visibility": "Invisible"
+        }
+      },
+      {
+        "spell_key": "sp_extract_secrets",
+        "name_en": "Extract Secrets",
+        "name_tr": "Sır Çıkarma",
+        "description_en": "Rip a major secret directly from a mind. Target takes 4d8 psychic damage and must fail a DC 17 save.",
+        "description_tr": "Önemli bir sırrı doğrudan zihinden söküp alırsınız. Hedef 4d8 psişik hasar alır ve 17 ZD kurtarmasını geçemezse sırrı verir.",
+        "branch": "Intel",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 460,
+        "prerequisites": [
+          "sp_clairvoyance"
+        ],
+        "icon": "🗝️",
+        "effects": {
+          "damage": "4d8 psychic",
+          "secret_revealed": "1 Major Secret",
+          "save_dc": "17"
+        }
+      },
+      {
+        "spell_key": "sp_network_of_spies",
+        "name_en": "Informant Network",
+        "name_tr": "Muhbir Ağı",
+        "description_en": "Call upon 1d4 local informants in any settlement to gather intel for 1 hour on a specific topic.",
+        "description_tr": "Belirli bir konuda 1 saat boyunca bilgi toplamak için herhangi bir yerleşim yerindeki 1d4 yerel muhbiri çağırırsınız.",
+        "branch": "Intel",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sp_extract_secrets"
+        ],
+        "icon": "🐦",
+        "effects": {
+          "summon_spies": "1d4",
+          "intel_gathering_time": "1 hour"
+        }
+      },
+      {
+        "spell_key": "sp_precognition",
+        "name_en": "Tactical Precognition",
+        "name_tr": "Taktiksel Öngörü",
+        "description_en": "Gain flashes of the future for 8 hours. Grants a +5 bonus to initiative and a +2 bonus to Armor Class.",
+        "description_tr": "8 saat boyunca geleceğe dair anlık görüler kazanırsınız. İnisiyatife +5 ve Zırh Sınıfına +2 bonus sağlar.",
+        "branch": "Intel",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sp_network_of_spies"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "initiative_bonus": "+5",
+          "ac_bonus": "+2",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "sp_blackmail",
+        "name_en": "Blackmail",
+        "name_tr": "Şantaj",
+        "description_en": "Leverage a discovered secret to force an NPC into compliance. Grants +10 Charisma against them until the task is complete.",
+        "description_tr": "Keşfedilen bir sırrı kullanarak bir NPC'yi itaate zorlarsınız. Görev tamamlanana kadar onlara karşı +10 Karizma sağlar.",
+        "branch": "Intel",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 860,
+        "prerequisites": [
+          "sp_precognition"
+        ],
+        "icon": "📜",
+        "effects": {
+          "npc_control": "1 task",
+          "duration": "Until completed",
+          "charisma_bonus": "+10"
+        }
+      },
+      {
+        "spell_key": "sp_omniscience",
+        "name_en": "Omniscient Spymaster",
+        "name_tr": "Her Şeyi Bilen Casus",
+        "description_en": "Ultimate Intel. Instantly know the locations, secrets, and current plans of all major entities within a 10km radius for 1 hour.",
+        "description_tr": "Nihai İstihbarat. 1 saat boyunca 10km yarıçap içindeki tüm önemli varlıkların konumlarını, sırlarını ve mevcut planlarını anında öğrenirsiniz.",
+        "branch": "Intel",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "sp_blackmail"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "10km",
+          "reveal_all": "True",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "sp_concealed_blade",
+        "name_en": "Concealed Blade",
+        "name_tr": "Gizli Bıçak",
+        "description_en": "A hidden strike using a concealed blade. Deals 3d6 piercing damage and adds +2d6 to your sneak attack.",
+        "description_tr": "Gizli bir bıçak kullanarak yapılan saklı saldırı. 3d6 delici hasar verir ve sinsi saldırınıza +2d6 ekler.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sp_lockpick_mastery",
+          "sp_grappling_hook"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "3d6 piercing",
+          "sneak_attack_bonus": "+2d6",
+          "concealment_dc": "18"
+        }
+      },
+      {
+        "spell_key": "sp_scout_drone",
+        "name_en": "Clockwork Scout",
+        "name_tr": "Saatli Gözcü",
+        "description_en": "Deploys a small mechanical drone with 10 HP and 15m fly speed to safely scout areas remotely.",
+        "description_tr": "Bölgeleri uzaktan güvenle keşfetmek için 10 Canlı ve 15m uçuş hızlı küçük mekanik bir gözcü konuşlandırır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 280,
+        "prerequisites": [
+          "sp_flashbang",
+          "sp_interrogation"
+        ],
+        "icon": "🚁",
+        "effects": {
+          "drone_hp": "10",
+          "fly_speed": "15m",
+          "stealth": "+10"
+        }
+      },
+      {
+        "spell_key": "sp_shadow_tailing",
+        "name_en": "Shadow Tailing",
+        "name_tr": "Gölge Takibi",
+        "description_en": "Follow a target flawlessly for up to 8 hours. Grants a +10 stealth bonus while keeping them within 30m.",
+        "description_tr": "Bir hedefi 8 saat boyunca kusursuzca takip edersiniz. Onları 30m içinde tutarken gizliliğe +10 bonus sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sp_wall_crawler",
+          "sp_mind_read"
+        ],
+        "icon": "👣",
+        "effects": {
+          "stealth_bonus": "+10",
+          "tracking_duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "sp_silent_assassination",
+        "name_en": "Silent Assassination",
+        "name_tr": "Sessiz Suikast",
+        "description_en": "Execute an instant kill attempt on an unaware target. Deals 10d6 precision damage; instantly kills if they drop below 50 HP.",
+        "description_tr": "Farkında olmayan bir hedefe anında ölümcül saldırı yapar. 10d6 kesin vuruş hasarı verir; 50 Canın altına düşerlerse anında öldürür.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 420,
+        "prerequisites": [
+          "sp_voice_mimicry",
+          "sp_wire_garrote"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "10d6 precision",
+          "instant_kill_threshold": "50 HP"
+        }
+      },
+      {
+        "spell_key": "sp_truth_serum",
+        "name_en": "Truth Serum",
+        "name_tr": "Doğruluk Serumu",
+        "description_en": "Administer a potent serum. Target must pass a DC 18 save or become charmed and forced to speak the truth for 1 hour.",
+        "description_tr": "Güçlü bir serum enjekte eder. Hedef 18 ZD kurtarmasını geçemezse büyülenir ve 1 saat boyunca doğruları söylemeye zorlanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sp_sleeping_gas",
+          "sp_extract_secrets"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "duration": "1 hour",
+          "save_dc": "18",
+          "condition": "Charmed"
+        }
+      },
+      {
+        "spell_key": "sp_identity_theft",
+        "name_en": "Identity Theft",
+        "name_tr": "Kimlik Hırsızlığı",
+        "description_en": "Steal a target's identity for 7 days. You gain full access to their memories, allowing perfect mimicry.",
+        "description_tr": "Bir hedefin kimliğini 7 gün boyunca çalarsınız. Anılarına tam erişim kazanarak kusursuz taklit yapmanızı sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 490,
+        "prerequisites": [
+          "sp_perfect_imposter",
+          "sp_extract_secrets"
+        ],
+        "icon": "🥸",
+        "effects": {
+          "duration": "7 days",
+          "memory_access": "Full",
+          "mimicry_perfection": "True"
+        }
+      },
+      {
+        "spell_key": "sp_toxic_room",
+        "name_en": "Toxic Room",
+        "name_tr": "Zehirli Oda",
+        "description_en": "Trap an enclosed space up to 30m x 30m. It fills with deadly gas dealing 8d6 poison damage per turn for 10 minutes.",
+        "description_tr": "30m x 30m'ye kadar kapalı bir alanı tuzağa düşürür. 10 dakika boyunca tur başına 8d6 zehir hasarı veren ölümcül bir gazla dolar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sp_phase_door",
+          "sp_sabotage_kit"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "room_size": "Up to 30m x 30m",
+          "damage": "8d6 poison/turn",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "sp_mind_hack",
+        "name_en": "Mind Hack",
+        "name_tr": "Zihin Hackleme",
+        "description_en": "Use an arcane gadget to permanently alter up to 24 hours of a target's memories. DC 19 save to resist.",
+        "description_tr": "Arkana teçhizatı kullanarak hedefin 24 saate kadar olan anılarını kalıcı olarak değiştirir. Direnmek için 19 ZD kurtarması.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sp_nano_tracker",
+          "sp_precognition"
+        ],
+        "icon": "💻",
+        "effects": {
+          "memory_alteration": "Up to 24 hours of memory",
+          "save_dc": "19"
+        }
+      },
+      {
+        "spell_key": "sp_feign_death",
+        "name_en": "Feign Death",
+        "name_tr": "Sahte Ölüm",
+        "description_en": "Enter a state that perfectly mimics death for up to 24 hours. Can be ended instantly with a bonus action.",
+        "description_tr": "24 saate kadar ölümü kusursuzca taklit eden bir duruma girersiniz. Bonus eylemle anında sonlandırılabilir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sp_mass_hallucination",
+          "sp_emp_grenade"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "duration": "1 to 24 hours",
+          "catalepsy": "True",
+          "revive_action": "Bonus Action"
+        }
+      },
+      {
+        "spell_key": "sp_inside_job",
+        "name_en": "Inside Job",
+        "name_tr": "İçeriden Vurgun",
+        "description_en": "Convince up to 5 enemies within 30m that their allies are traitors, making them hostile to each other for 1 minute.",
+        "description_tr": "30m içindeki 5'e kadar düşmanı müttefiklerinin hain olduğuna ikna ederek, 1 dakika boyunca birbirlerine düşman olmalarını sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sp_shadow_clone",
+          "sp_blackmail"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "targets": "Up to 5",
+          "duration": "1 minute",
+          "condition": "Hostile to allies"
+        }
+      },
+      {
+        "spell_key": "sp_arcane_wiretap",
+        "name_en": "Arcane Wiretap",
+        "name_tr": "Arkana Dinleme Cihazı",
+        "description_en": "Plant an undetectable magic listener on a target. You can hear everything around them for 30 days regardless of distance.",
+        "description_tr": "Hedefe tespit edilemeyen büyülü bir dinleyici yerleştirir. Mesafe ne olursa olsun 30 gün boyunca etrafındaki her şeyi duyabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sp_emp_grenade",
+          "sp_blackmail"
+        ],
+        "icon": "🎙️",
+        "effects": {
+          "range": "Unlimited",
+          "duration": "30 days",
+          "detection_dc": "25"
+        }
+      },
+      {
+        "spell_key": "sp_doppelganger_protocol",
+        "name_en": "Doppelganger Protocol",
+        "name_tr": "Çifte Yaşam Protokolü",
+        "description_en": "Create an autonomous clone with 100% of your HP. It fights independently and gathers intelligence for 24 hours.",
+        "description_tr": "Canınızın %100'üne sahip otonom bir kopya yaratır. 24 saat boyunca bağımsız olarak savaşır ve istihbarat toplar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "sp_mass_hallucination",
+          "sp_emp_grenade",
+          "sp_precognition"
+        ],
+        "icon": "🤖",
+        "effects": {
+          "clone_hp": "100%",
+          "duration": "24 hours",
+          "autonomous": "True"
+        }
+      },
+      {
+        "spell_key": "sp_deep_cover",
+        "name_en": "Deep Cover",
+        "name_tr": "Derin Gizlilik",
+        "description_en": "Immersion so deep that all divination fails to read your true alignment or intent, hiding you completely.",
+        "description_tr": "O kadar derin bir gizlilik ki, tüm kehanet büyüleri gerçek yöneliminizi veya niyetinizi okumada başarısız olur, sizi tamamen gizler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "sp_shadow_clone",
+          "sp_blackmail"
+        ],
+        "icon": "🕵️",
+        "effects": {
+          "duration": "Unlimited",
+          "anti_divination": "True",
+          "alignment_mask": "True"
+        }
+      },
+      {
+        "spell_key": "sp_syndicate_master",
+        "name_en": "Master of the Syndicate",
+        "name_tr": "Sendika Lideri",
+        "description_en": "Grand Ultimate. Summons 10 Elite Shadows within 100m for 10 minutes. They lockdown the area, disable traps, extract secrets, and assassinate enemies (20d10 total damage).",
+        "description_tr": "Görkemli Nihai Yetenek. 100m yarıçap içinde 10 dakikalığına 10 Elit Gölge çağırır. Bölgeyi kilitler, tuzakları bozar, sırları çıkarır ve düşmanlara suikast yaparlar (Toplam 20d10 hasar).",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sp_ghost_walker",
+          "sp_gadget_mastery",
+          "sp_omniscience"
+        ],
+        "icon": "👑",
+        "effects": {
+          "summon_agents": "10 Elite Shadows",
+          "area_control": "100m radius",
+          "duration": "10 minutes",
+          "damage": "20d10 total"
+        }
+      }
+    ]
+  }
+]

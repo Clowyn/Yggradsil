@@ -1,0 +1,1008 @@
+[
+  {
+    "subclass_key": "monk",
+    "tree_name_en": "Path of the Ascendant Monk",
+    "tree_name_tr": "Yükselen Keşiş Yolu",
+    "tree_desc_en": "Master the balance of mind, body, and spirit to unleash devastating martial arts and potent ki energy.",
+    "tree_desc_tr": "Yıkıcı dövüş sanatları ve güçlü ki enerjisini açığa çıkarmak için zihin, beden ve ruh dengesinde ustalaşın.",
+    "branches": [
+      "Martial Arts",
+      "Meditation",
+      "Ki Energy"
+    ],
+    "spells": [
+      {
+        "spell_key": "mk_rapid_strikes",
+        "name_en": "Rapid Strikes",
+        "name_tr": "Seri Vuruşlar",
+        "description_en": "Unleashes a quick barrage of two strikes dealing 1d8 physical damage each to a target within 2m.",
+        "description_tr": "2m içindeki bir hedefe her biri 1d8 fiziksel hasar veren iki hızlı vuruş yapar.",
+        "branch": "Martial Arts",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🥊",
+        "effects": {
+          "damage": "2d8",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_sweeping_kick",
+        "name_en": "Sweeping Kick",
+        "name_tr": "Süpüren Tekme",
+        "description_en": "A low kick that deals 1d6 physical damage and knocks enemies prone in a 2m cone.",
+        "description_tr": "2m'lik bir koni içindeki düşmanlara 1d6 fiziksel hasar veren ve onları yere düşüren alçak bir tekme.",
+        "branch": "Martial Arts",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🦵",
+        "effects": {
+          "damage": "1d6",
+          "aoe": "2m cone",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "mk_deflecting_palm",
+        "name_en": "Deflecting Palm",
+        "name_tr": "Saptıran Avuç",
+        "description_en": "Use your reaction to deflect an incoming melee attack, reducing its damage by 1d10 + Dexterity modifier.",
+        "description_tr": "Gelen bir yakın dövüş saldırısını saptırmak için reaksiyonunuzu kullanın, hasarını 1d10 + Çeviklik değiştiricisi kadar azaltın.",
+        "branch": "Martial Arts",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🤚",
+        "effects": {
+          "damage_reduction": "1d10+dex",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "mk_tiger_claw",
+        "name_en": "Tiger Claw",
+        "name_tr": "Kaplan Pençesi",
+        "description_en": "Slash the target for 2d6 slashing damage within 2m, causing them to bleed for 1d4 damage per turn for 2 turns.",
+        "description_tr": "2m içindeki hedefe 2d6 kesici hasar verin, 2 tur boyunca tur başına 1d4 kanama hasarı almalarına neden olun.",
+        "branch": "Martial Arts",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🐅",
+        "effects": {
+          "damage": "2d6",
+          "dot": "1d4/turn",
+          "duration": "2 turns",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_flying_kick",
+        "name_en": "Flying Kick",
+        "name_tr": "Uçan Tekme",
+        "description_en": "Leap up to 10m towards an enemy and deliver a powerful kick, dealing 3d6 physical damage upon impact.",
+        "description_tr": "Bir düşmana doğru 10m'ye kadar sıçrayın ve güçlü bir tekme atarak çarpma anında 3d6 fiziksel hasar verin.",
+        "branch": "Martial Arts",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mk_sweeping_kick"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m jump"
+        }
+      },
+      {
+        "spell_key": "mk_pressure_point",
+        "name_en": "Pressure Point",
+        "name_tr": "Basınç Noktası",
+        "description_en": "Strike a vital nerve within 2m, dealing 2d8 physical damage and preventing the target from using reactions for 1 turn.",
+        "description_tr": "2m içindeki hayati bir sinire vurarak 2d8 fiziksel hasar verin ve hedefin 1 tur boyunca reaksiyon kullanmasını engelleyin.",
+        "branch": "Martial Arts",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 225,
+        "prerequisites": [
+          "mk_rapid_strikes"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage": "2d8",
+          "condition": "No Reactions",
+          "duration": "1 turn",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_flurry_of_blows",
+        "name_en": "Flurry of Blows",
+        "name_tr": "Yumruk Fırtınası",
+        "description_en": "Unleash a devastating flurry of 4 rapid punches, each dealing 1d6 physical damage to a target within 2m.",
+        "description_tr": "2m içindeki bir hedefe her biri 1d6 fiziksel hasar veren 4 hızlı yumruktan oluşan yıkıcı bir fırtına serbest bırakın.",
+        "branch": "Martial Arts",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mk_rapid_strikes"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d6",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_crane_stance",
+        "name_en": "Crane Stance",
+        "name_tr": "Turna Duruşu",
+        "description_en": "Adopt a defensive stance, gaining +3 AC for 2 turns. If an enemy misses a melee attack against you, counterattack for 1d8 physical damage.",
+        "description_tr": "Savunma duruşuna geçerek 2 tur boyunca +3 Zırh Sınıfı kazanın. Bir düşman size karşı yakın dövüş saldırısını kaçırırsa, 1d8 fiziksel hasarla karşı saldırı yapın.",
+        "branch": "Martial Arts",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mk_deflecting_palm"
+        ],
+        "icon": "🦩",
+        "effects": {
+          "buff": "+3 AC",
+          "counterattack": "1d8",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_dragon_punch",
+        "name_en": "Dragon Punch",
+        "name_tr": "Ejderha Yumruğu",
+        "description_en": "Deliver a mighty uppercut that deals 4d8 bludgeoning damage and knocks the target back 5m.",
+        "description_tr": "4d8 ezici hasar veren ve hedefi 5m geriye savuran güçlü bir aparkat atın.",
+        "branch": "Martial Arts",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mk_flurry_of_blows"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "4d8",
+          "knockback": "5m",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_one_inch_punch",
+        "name_en": "One Inch Punch",
+        "name_tr": "Bir İnçlik Yumruk",
+        "description_en": "Channel immense force from close range. Deals 5d8 force damage within 2m, completely ignoring armor.",
+        "description_tr": "Yakın mesafeden muazzam bir güç yönlendirin. 2m içinde zırhı tamamen yok sayarak 5d8 güç hasarı verir.",
+        "branch": "Martial Arts",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mk_pressure_point"
+        ],
+        "icon": "📏",
+        "effects": {
+          "damage": "5d8",
+          "armor_penetration": "100%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_whirlwind_kick",
+        "name_en": "Whirlwind Kick",
+        "name_tr": "Kasırga Tekmesi",
+        "description_en": "Spin rapidly with extended legs, dealing 4d6 physical damage to all enemies within a 3m radius.",
+        "description_tr": "Bacaklarınız açıkken hızla dönerek 3m yarıçapındaki tüm düşmanlara 4d6 fiziksel hasar verin.",
+        "branch": "Martial Arts",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mk_flying_kick"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "4d6",
+          "aoe": "3m radius"
+        }
+      },
+      {
+        "spell_key": "mk_shattering_strike",
+        "name_en": "Shattering Strike",
+        "name_tr": "Parçalayan Vuruş",
+        "description_en": "A focused strike that deals 6d8 physical damage and instantly shatters any magical barriers or shields on the target.",
+        "description_tr": "6d8 fiziksel hasar veren ve hedefteki tüm büyülü bariyerleri veya kalkanları anında parçalayan odaklanmış bir vuruş.",
+        "branch": "Martial Arts",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mk_dragon_punch",
+          "mk_one_inch_punch"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d8",
+          "utility": "Shatters Shields",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_quivering_palm",
+        "name_en": "Quivering Palm",
+        "name_tr": "Titreyen Avuç",
+        "description_en": "Set up lethal vibrations in the target's body. Deals 8d8 necrotic damage within 2m; target must save or be stunned for 1 turn.",
+        "description_tr": "Hedefin vücudunda ölümcül titreşimler oluşturun. 2m içinde 8d8 nekrotik hasar verir; hedef kurtarma zarı atamazsa 1 tur sersemler.",
+        "branch": "Martial Arts",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mk_one_inch_punch",
+          "mk_whirlwind_kick"
+        ],
+        "icon": "🫨",
+        "effects": {
+          "damage": "8d8",
+          "condition": "Stunned",
+          "duration": "1 turn",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_hundred_fists",
+        "name_en": "Hundred Fists of the Ascendant",
+        "name_tr": "Yükselenin Yüz Yumruğu",
+        "description_en": "Ultimate martial technique. Deliver an unstoppable barrage of strikes dealing 12d6 bludgeoning damage within 3m and leaving the target paralyzed for 1 turn.",
+        "description_tr": "Nihai dövüş tekniği. 3m içinde 12d6 ezici hasar veren ve hedefi 1 tur felç bırakan durdurulamaz bir vuruş yağmuru yapın.",
+        "branch": "Martial Arts",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mk_shattering_strike",
+          "mk_quivering_palm"
+        ],
+        "icon": "💯",
+        "effects": {
+          "damage": "12d6",
+          "condition": "Paralyzed",
+          "duration": "1 turn",
+          "range": "3m"
+        }
+      },
+      {
+        "spell_key": "mk_inner_peace",
+        "name_en": "Inner Peace",
+        "name_tr": "İç Huzur",
+        "description_en": "Meditate to restore 2d6 + Wisdom modifier HP to yourself and remove minor debuffs.",
+        "description_tr": "Kendinize 2d6 + Bilgelik değiştiricisi kadar Can Puanı yenilemek ve küçük zayıflatmaları kaldırmak için meditasyon yapın.",
+        "branch": "Meditation",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧘",
+        "effects": {
+          "healing": "2d6+wis",
+          "utility": "Cleanse Debuffs"
+        }
+      },
+      {
+        "spell_key": "mk_mindful_step",
+        "name_en": "Mindful Step",
+        "name_tr": "Bilinçli Adım",
+        "description_en": "Focus your mind on movement, gaining +5m movement speed and immunity to opportunity attacks for 1 turn.",
+        "description_tr": "Zihninizi harekete odaklayarak 1 tur boyunca +5m hareket hızı ve fırsat saldırılarına karşı bağışıklık kazanın.",
+        "branch": "Meditation",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "buff": "+5m speed",
+          "immunity": "Opportunity Attacks",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "mk_focus_breath",
+        "name_en": "Focused Breath",
+        "name_tr": "Odaklanmış Nefes",
+        "description_en": "Take a deep breath to regain 5 stamina and add 1d6 force damage to your next attack.",
+        "description_tr": "5 dayanıklılık yenilemek ve bir sonraki saldırınıza 1d6 güç hasarı eklemek için derin bir nefes alın.",
+        "branch": "Meditation",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🌬️",
+        "effects": {
+          "restore": "5 Stamina",
+          "buff": "+1d6 damage next attack"
+        }
+      },
+      {
+        "spell_key": "mk_iron_skin",
+        "name_en": "Iron Skin",
+        "name_tr": "Demir Deri",
+        "description_en": "Harden your body with ki, gaining 10 temporary HP and resistance to physical damage for 3 turns.",
+        "description_tr": "Vücudunuzu ki ile sertleştirin, 10 geçici Can Puanı ve 3 tur boyunca fiziksel hasara karşı direnç kazanın.",
+        "branch": "Meditation",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🗿",
+        "effects": {
+          "temp_hp": "10",
+          "resistance": "Physical",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mk_stillness_of_mind",
+        "name_en": "Stillness of Mind",
+        "name_tr": "Zihnin Durgunluğu",
+        "description_en": "Clear your mind, curing any charm or fear effects and becoming immune to them for 2 turns.",
+        "description_tr": "Zihninizi boşaltın, her türlü çekicilik veya korku etkisini iyileştirin ve 2 tur boyunca bunlara karşı bağışıklık kazanın.",
+        "branch": "Meditation",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mk_inner_peace"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "cleanse": "Charm/Fear",
+          "immunity": "Charm/Fear",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_healing_trance",
+        "name_en": "Healing Trance",
+        "name_tr": "İyileştiren Trans",
+        "description_en": "Enter a deep trance, healing 4d6 HP over 2 turns. You cannot move while the trance is active.",
+        "description_tr": "Derin bir transa girerek 2 tur boyunca 4d6 Can Puanı iyileşin. Trans aktifken hareket edemezsiniz.",
+        "branch": "Meditation",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mk_inner_peace"
+        ],
+        "icon": "🛌",
+        "effects": {
+          "healing": "4d6",
+          "condition": "Immobile",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_empty_body",
+        "name_en": "Empty Body",
+        "name_tr": "Boş Beden",
+        "description_en": "Turn invisible for 2 turns and gain resistance to all damage types except force damage.",
+        "description_tr": "2 tur boyunca görünmez olun ve güç hasarı hariç tüm hasar türlerine karşı direnç kazanın.",
+        "branch": "Meditation",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 275,
+        "prerequisites": [
+          "mk_mindful_step"
+        ],
+        "icon": "👻",
+        "effects": {
+          "buff": "Invisibility",
+          "resistance": "All except Force",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_diamond_soul",
+        "name_en": "Diamond Soul",
+        "name_tr": "Elmas Ruh",
+        "description_en": "Fortify your soul. Reroll a failed saving throw and gain +2 to all saving throws for 2 turns.",
+        "description_tr": "Ruhunuzu güçlendirin. Başarısız bir kurtarma zarını yeniden atın ve 2 tur boyunca tüm kurtarma zarlarına +2 kazanın.",
+        "branch": "Meditation",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mk_iron_skin"
+        ],
+        "icon": "💎",
+        "effects": {
+          "utility": "Reroll Save",
+          "buff": "+2 Saves",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_zen_state",
+        "name_en": "Zen State",
+        "name_tr": "Zen Hali",
+        "description_en": "Achieve perfect balance, gaining +4 AC and +4 to all saving throws for 3 turns.",
+        "description_tr": "Mükemmel dengeye ulaşarak 3 tur boyunca +4 Zırh Sınıfı ve tüm kurtarma zarlarına +4 kazanın.",
+        "branch": "Meditation",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mk_stillness_of_mind"
+        ],
+        "icon": "☯️",
+        "effects": {
+          "buff": "+4 AC, +4 Saves",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mk_purity_of_body",
+        "name_en": "Purity of Body",
+        "name_tr": "Bedenin Saflığı",
+        "description_en": "Purify your system, curing all diseases and poisons, and gaining immunity to them for 1 hour.",
+        "description_tr": "Sisteminizi arındırarak tüm hastalıkları ve zehirleri iyileştirin ve 1 saat boyunca bunlara karşı bağışıklık kazanın.",
+        "branch": "Meditation",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mk_healing_trance"
+        ],
+        "icon": "🌿",
+        "effects": {
+          "cleanse": "Disease/Poison",
+          "immunity": "Disease/Poison",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "mk_timeless_body",
+        "name_en": "Timeless Body",
+        "name_tr": "Zamansız Beden",
+        "description_en": "Ignore all exhaustion levels for 5 turns, halt aging effects, and instantly heal 5d8 HP.",
+        "description_tr": "5 tur boyunca tüm yorgunluk seviyelerini yok sayın, yaşlanma etkilerini durdurun ve anında 5d8 Can Puanı iyileşin.",
+        "branch": "Meditation",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mk_diamond_soul"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "healing": "5d8",
+          "utility": "Ignore Exhaustion",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "mk_astral_refuge",
+        "name_en": "Astral Refuge",
+        "name_tr": "Astral Sığınak",
+        "description_en": "Phase out of reality into the astral plane for 1 turn, becoming immune to all damage and healing 8d8 HP.",
+        "description_tr": "1 tur boyunca gerçeklikten astral düzleme geçerek tüm hasarlara karşı bağışıklık kazanın ve 8d8 Can Puanı iyileşin.",
+        "branch": "Meditation",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mk_empty_body",
+          "mk_zen_state"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "healing": "8d8",
+          "immunity": "All Damage",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "mk_mantra_of_resilience",
+        "name_en": "Mantra of Resilience",
+        "name_tr": "Direnç Mantrası",
+        "description_en": "Chant a mantra that projects a 10m aura. Allies inside gain 20 temporary HP and +3 to saving throws.",
+        "description_tr": "10m'lik bir aura yayan bir mantra söyleyin. İçerideki müttefikler 20 geçici Can Puanı ve kurtarma zarlarına +3 kazanır.",
+        "branch": "Meditation",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mk_purity_of_body",
+          "mk_timeless_body"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "aoe": "10m aura",
+          "temp_hp": "20",
+          "buff": "+3 Saves"
+        }
+      },
+      {
+        "spell_key": "mk_nirvana_incarnate",
+        "name_en": "Nirvana Incarnate",
+        "name_tr": "Nirvana'nın Vücut Bulmuş Hali",
+        "description_en": "Ultimate meditation. Transform into pure enlightenment for 4 turns. Heal to full HP, become immune to crowd control, and deal 4d8 extra radiant damage with all attacks.",
+        "description_tr": "Nihai meditasyon. 4 tur boyunca saf aydınlanmaya dönüşün. Tam Can Puanına iyileşin, kitle kontrolüne karşı bağışıklık kazanın ve tüm saldırılarla fazladan 4d8 parlak hasar verin.",
+        "branch": "Meditation",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mk_astral_refuge",
+          "mk_mantra_of_resilience"
+        ],
+        "icon": "🪷",
+        "effects": {
+          "healing": "100%",
+          "immunity": "CC",
+          "buff": "+4d8 Radiant damage",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "mk_ki_blast",
+        "name_en": "Ki Blast",
+        "name_tr": "Ki Patlaması",
+        "description_en": "Fire a concentrated blast of ki energy at an enemy, dealing 1d10 force damage up to 15m away.",
+        "description_tr": "Bir düşmana 15m'ye kadar mesafeden yoğunlaştırılmış ki enerjisi patlaması ateşleyerek 1d10 güç hasarı verin.",
+        "branch": "Ki Energy",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💥",
+        "effects": {
+          "damage": "1d10",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mk_spirit_dart",
+        "name_en": "Spirit Dart",
+        "name_tr": "Ruh Oku",
+        "description_en": "Shoot two glowing darts of spirit energy. Each dart deals 1d6 force damage with a 20m range.",
+        "description_tr": "İki parlayan ruh enerjisi oku fırlatın. Her ok 20m menzille 1d6 güç hasarı verir.",
+        "branch": "Ki Energy",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "☄️",
+        "effects": {
+          "damage": "2d6",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mk_ki_shield",
+        "name_en": "Ki Shield",
+        "name_tr": "Ki Kalkanı",
+        "description_en": "Project a shield of ki as a reaction, gaining +4 AC against ranged attacks for 1 turn.",
+        "description_tr": "Reaksiyon olarak bir ki kalkanı yansıtın ve 1 tur boyunca menzilli saldırılara karşı +4 Zırh Sınıfı kazanın.",
+        "branch": "Ki Energy",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "💠",
+        "effects": {
+          "buff": "+4 AC vs Ranged",
+          "trigger": "Reaction",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "mk_elemental_fist",
+        "name_en": "Elemental Fist",
+        "name_tr": "Element Yumruğu",
+        "description_en": "Infuse your fists with raw ki, adding 1d6 fire, cold, or lightning damage to your unarmed strikes for 2 turns.",
+        "description_tr": "Yumruklarınızı saf ki ile doldurarak 2 tur boyunca silahsız vuruşlarınıza 1d6 ateş, soğuk veya yıldırım hasarı ekleyin.",
+        "branch": "Ki Energy",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "buff": "+1d6 Elemental Damage",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "mk_ki_wave",
+        "name_en": "Ki Wave",
+        "name_tr": "Ki Dalgası",
+        "description_en": "Release a wave of ki in a 10m line, dealing 3d6 force damage and pushing enemies back 2m.",
+        "description_tr": "10m'lik bir hatta ki dalgası yayarak 3d6 güç hasarı verin ve düşmanları 2m geriye itin.",
+        "branch": "Ki Energy",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mk_ki_blast"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "3d6",
+          "knockback": "2m",
+          "aoe": "10m line"
+        }
+      },
+      {
+        "spell_key": "mk_sun_soul_beam",
+        "name_en": "Sun Soul Beam",
+        "name_tr": "Güneş Ruhu Işını",
+        "description_en": "Fire a blinding beam of radiant energy dealing 4d6 damage in a 15m line. Targets must save or be blinded for 1 turn.",
+        "description_tr": "15m'lik bir hatta 4d6 hasar veren kör edici bir parlak enerji ışını ateşleyin. Hedefler kurtarma zarı atamazsa 1 tur kör olur.",
+        "branch": "Ki Energy",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mk_spirit_dart"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "damage": "4d6",
+          "condition": "Blinded",
+          "duration": "1 turn",
+          "aoe": "15m line"
+        }
+      },
+      {
+        "spell_key": "mk_spirit_burst",
+        "name_en": "Spirit Burst",
+        "name_tr": "Ruh Patlaması",
+        "description_en": "Expel spiritual energy in all directions, dealing 3d8 force damage to all enemies within a 5m radius.",
+        "description_tr": "Ruhsal enerjiyi her yöne atarak 5m yarıçapındaki tüm düşmanlara 3d8 güç hasarı verin.",
+        "branch": "Ki Energy",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 275,
+        "prerequisites": [
+          "mk_ki_blast"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "damage": "3d8",
+          "aoe": "5m radius"
+        }
+      },
+      {
+        "spell_key": "mk_ki_healing",
+        "name_en": "Ki Healing",
+        "name_tr": "Ki Şifası",
+        "description_en": "Channel your life force to an ally within 10m, healing them for 3d8 HP.",
+        "description_tr": "Yaşam gücünüzü 10m içindeki bir müttefike yönlendirerek onları 3d8 Can Puanı iyileştirin.",
+        "branch": "Ki Energy",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mk_ki_shield"
+        ],
+        "icon": "💖",
+        "effects": {
+          "healing": "3d8",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mk_aura_sphere",
+        "name_en": "Aura Sphere",
+        "name_tr": "Aura Küresi",
+        "description_en": "Form a condensed sphere of aura and hurl it 20m. It explodes on impact, dealing 5d8 force damage in a 3m radius.",
+        "description_tr": "Yoğunlaştırılmış bir aura küresi oluşturup 20m fırlatın. Çarpma anında patlayarak 3m yarıçapında 5d8 güç hasarı verir.",
+        "branch": "Ki Energy",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mk_ki_wave"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "damage": "5d8",
+          "aoe": "3m radius",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mk_wind_stance",
+        "name_en": "Wind Stance",
+        "name_tr": "Rüzgar Duruşu",
+        "description_en": "Surround yourself with swirling winds. Ranged attacks have disadvantage against you, and your strikes deal 2d8 extra thunder damage for 3 turns.",
+        "description_tr": "Kendinizi dönen rüzgarlarla çevreleyin. Menzilli saldırılar size karşı dezavantajlı olur ve vuruşlarınız 3 tur boyunca ekstra 2d8 gök gürültüsü hasarı verir.",
+        "branch": "Ki Energy",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mk_elemental_fist"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "buff": "Ranged Disadvantage, +2d8 Thunder damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mk_ki_eruption",
+        "name_en": "Ki Eruption",
+        "name_tr": "Ki Püskürmesi",
+        "description_en": "Slam the ground, causing ki to erupt in a 10m radius. Deals 6d6 fire damage and leaves the ground burning for 2 turns.",
+        "description_tr": "Yere vurarak ki'nin 10m yarıçapında patlamasına neden olun. 6d6 ateş hasarı verir ve zemini 2 tur yanar halde bırakır.",
+        "branch": "Ki Energy",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mk_spirit_burst"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d6",
+          "dot": "Burning ground",
+          "duration": "2 turns",
+          "aoe": "10m radius"
+        }
+      },
+      {
+        "spell_key": "mk_meteor_strike",
+        "name_en": "Meteor Strike",
+        "name_tr": "Meteor Vuruşu",
+        "description_en": "Leap up to 20m into the air and crash down like a meteor, dealing 8d8 fire and bludgeoning damage in a 5m radius.",
+        "description_tr": "Havaya 20m'ye kadar sıçrayıp bir meteor gibi aşağı çakılın, 5m yarıçapında 8d8 ateş ve ezici hasar verin.",
+        "branch": "Ki Energy",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mk_ki_eruption",
+          "mk_wind_stance"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "8d8",
+          "aoe": "5m radius",
+          "range": "20m leap"
+        }
+      },
+      {
+        "spell_key": "mk_spirit_dragon",
+        "name_en": "Spirit Dragon",
+        "name_tr": "Ruh Ejderhası",
+        "description_en": "Summon a massive dragon made of ki that surges forward in a 20m line, dealing 8d8 force damage to all in its path.",
+        "description_tr": "Ki'den yapılmış devasa bir ejderha çağırın ve 20m'lik bir hatta ilerleyerek yolundaki herkese 8d8 güç hasarı verin.",
+        "branch": "Ki Energy",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mk_aura_sphere",
+          "mk_sun_soul_beam"
+        ],
+        "icon": "🐲",
+        "effects": {
+          "damage": "8d8",
+          "aoe": "20m line"
+        }
+      },
+      {
+        "spell_key": "mk_grand_ki_beam",
+        "name_en": "Grand Ki Beam",
+        "name_tr": "Yüce Ki Işını",
+        "description_en": "Ultimate Ki technique. Unleash a massive, sustained beam of pure energy in a 30m line and 4m width, obliterating everything for 12d10 force damage.",
+        "description_tr": "Nihai Ki tekniği. 30m uzunluğunda ve 4m genişliğinde devasa, sürekli bir saf enerji ışını serbest bırakarak her şeyi 12d10 güç hasarıyla yok edin.",
+        "branch": "Ki Energy",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mk_meteor_strike",
+          "mk_spirit_dragon"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "12d10",
+          "aoe": "30x4m line"
+        }
+      },
+      {
+        "spell_key": "mk_flowing_water_strike",
+        "name_en": "Flowing Water Strike",
+        "name_tr": "Akan Su Vuruşu",
+        "description_en": "A fluid strike blending martial arts and meditation. Deals 2d8 physical damage within 2m and heals you for half the damage dealt.",
+        "description_tr": "Dövüş sanatları ve meditasyonu harmanlayan akıcı bir vuruş. 2m içinde 2d8 fiziksel hasar verir ve verilen hasarın yarısı kadar sizi iyileştirir.",
+        "branch": "Martial Arts, Meditation",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mk_rapid_strikes",
+          "mk_inner_peace"
+        ],
+        "icon": "💧",
+        "effects": {
+          "damage": "2d8",
+          "lifesteal": "50%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_ki_infused_block",
+        "name_en": "Ki Infused Block",
+        "name_tr": "Ki Yüklü Blok",
+        "description_en": "Use your reaction to block an attack with concentrated ki. Reduce incoming damage by 3d10 and reflect 1d10 force damage back to the attacker.",
+        "description_tr": "Saldırıyı yoğunlaştırılmış ki ile engellemek için reaksiyonunuzu kullanın. Gelen hasarı 3d10 azaltın ve saldırgana 1d10 güç hasarı yansıtın.",
+        "branch": "Meditation, Ki Energy",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mk_iron_skin",
+          "mk_ki_shield"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "damage_reduction": "3d10",
+          "reflect": "1d10",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "mk_burning_soul_fist",
+        "name_en": "Burning Soul Fist",
+        "name_tr": "Yanan Ruh Yumruğu",
+        "description_en": "Ignite your fist with soul fire. Deals 4d8 fire and physical damage within 2m, and ignites the target for 1d8 fire damage per turn for 3 turns.",
+        "description_tr": "Yumruğunuzu ruh ateşiyle tutuşturun. 2m içinde 4d8 ateş ve fiziksel hasar verir ve hedefi 3 tur boyunca tur başına 1d8 ateş hasarıyla yakar.",
+        "branch": "Martial Arts, Ki Energy",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mk_flurry_of_blows",
+          "mk_elemental_fist"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "4d8",
+          "dot": "1d8/turn",
+          "duration": "3 turns",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "mk_tranquil_aura",
+        "name_en": "Tranquil Aura",
+        "name_tr": "Sakinlik Aurası",
+        "description_en": "Radiate an aura of profound peace up to 10m. Allies heal 2d6 HP per turn, while enemies lose 1d4 damage on their attacks. Lasts 3 turns.",
+        "description_tr": "10m'ye kadar derin bir barış aurası yayın. Müttefikler tur başına 2d6 Can Puanı iyileşirken, düşmanlar saldırılarında 1d4 hasar kaybeder. 3 tur sürer.",
+        "branch": "Meditation, Ki Energy",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mk_healing_trance",
+          "mk_ki_healing"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "aoe": "10m aura",
+          "healing": "2d6/turn",
+          "debuff": "-1d4 enemy damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mk_echoing_strikes",
+        "name_en": "Echoing Strikes",
+        "name_tr": "Yankılanan Vuruşlar",
+        "description_en": "Infuse your next 3 martial attacks with ki. Each strike deals an additional 3d8 force damage and projects a 5m cone of force behind the target.",
+        "description_tr": "Sonraki 3 dövüş saldırınızı ki ile doldurun. Her vuruş fazladan 3d8 güç hasarı verir ve hedefin arkasında 5m'lik bir güç konisi yansıtır.",
+        "branch": "Martial Arts, Ki Energy",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mk_dragon_punch",
+          "mk_aura_sphere"
+        ],
+        "icon": "🔊",
+        "effects": {
+          "buff": "+3d8 Force damage",
+          "aoe": "5m cone behind target",
+          "charges": "3 attacks"
+        }
+      },
+      {
+        "spell_key": "mk_shadow_step_strike",
+        "name_en": "Shadow Step Strike",
+        "name_tr": "Gölge Adımı Vuruşu",
+        "description_en": "Teleport instantly up to 15m to an enemy, striking them for 6d8 psychic and physical damage, then turn invisible for 1 turn.",
+        "description_tr": "Bir düşmana 15m'ye kadar anında ışınlanın, onlara 6d8 psişik ve fiziksel hasar verin, ardından 1 tur boyunca görünmez olun.",
+        "branch": "Martial Arts, Meditation",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "mk_flying_kick",
+          "mk_empty_body"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "damage": "6d8",
+          "range": "15m teleport",
+          "buff": "Invisibility",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "mk_radiant_soul_avatar",
+        "name_en": "Radiant Soul Avatar",
+        "name_tr": "Parlak Ruh Avatarı",
+        "description_en": "Manifest your ki as a radiant avatar for 3 turns. Gain 15m fly speed, emit 20m light, heal allies in light for 4d6 per turn, and burn enemies for 4d6 radiant damage.",
+        "description_tr": "Ki'nizi 3 tur boyunca parlak bir avatar olarak tezahür ettirin. 15m uçuş hızı kazanın, 20m ışık yayın, ışıktaki müttefikleri tur başına 4d6 iyileştirin ve düşmanları 4d6 parlak hasarla yakın.",
+        "branch": "Meditation, Ki Energy",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "mk_zen_state",
+          "mk_sun_soul_beam"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "buff": "15m Fly Speed",
+          "aoe": "20m aura",
+          "healing": "4d6/turn",
+          "damage": "4d6/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mk_asura_wrath",
+        "name_en": "Wrath of the Asura",
+        "name_tr": "Asura'nın Gazabı",
+        "description_en": "Grand Ultimate. Ascend to the fearsome Asura form for 5 turns. Grow ethereal arms, gaining +10m speed, 50 temporary HP, and every attack hits 3 times for an extra 6d10 force damage.",
+        "description_tr": "Görkemli Nihai. 5 tur boyunca korkunç Asura formuna yükselin. Ruhani kollar büyüterek +10m hız, 50 geçici Can Puanı kazanın ve her saldırı ekstra 6d10 güç hasarı için 3 kez vurur.",
+        "branch": "Martial Arts, Meditation, Ki Energy",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "mk_hundred_fists",
+          "mk_nirvana_incarnate",
+          "mk_grand_ki_beam"
+        ],
+        "icon": "👹",
+        "effects": {
+          "buff": "Asura Form",
+          "speed": "+10m",
+          "temp_hp": "50",
+          "damage_boost": "x3 hits, +6d10 Force",
+          "duration": "5 turns"
+        }
+      }
+    ]
+  }
+]

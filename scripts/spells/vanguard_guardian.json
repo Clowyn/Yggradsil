@@ -1,0 +1,993 @@
+[
+  {
+    "subclass_key": "vanguard_guardian",
+    "tree_name_en": "Aegis of the Vanguard",
+    "tree_name_tr": "Öncü Birliğin Kalkanı",
+    "tree_desc_en": "Stand as the unbreakable shield for your allies, absorbing their pain and fortifying your defenses to weather any storm.",
+    "tree_desc_tr": "Müttefikleriniz için kırılmaz bir kalkan olarak durun, onların acısını emin ve her türlü fırtınayı atlatmak için savunmanızı güçlendirin.",
+    "branches": [
+      "Shield Wall",
+      "Sacrifice",
+      "Fortification"
+    ],
+    "spells": [
+      {
+        "spell_key": "vg_shield_bash",
+        "name_en": "Shield Bash",
+        "name_tr": "Kalkan Darbesi",
+        "description_en": "Smash your shield into an enemy, dealing 1d6 bludgeoning damage and knocking them back 2 meters.",
+        "description_tr": "Kalkanınızı bir düşmana çarparak 1d6 ezme hasarı verin ve onları 2 metre geriye itin.",
+        "branch": "Shield Wall",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "damage": "1d6",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "vg_phalanx_stance",
+        "name_en": "Phalanx Stance",
+        "name_tr": "Falanks Duruşu",
+        "description_en": "Adopt a defensive stance, gaining +2 AC for 3 turns while holding a shield.",
+        "description_tr": "Bir savunma duruşu alarak kalkan tutarken 3 tur boyunca +2 ZS kazanın.",
+        "branch": "Shield Wall",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "vg_shield_bash"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "ac_bonus": "+2",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_warding_light",
+        "name_en": "Warding Light",
+        "name_tr": "Koruyucu Işık",
+        "description_en": "Project a beacon of light 10 meters away, granting an ally +2 AC for 2 turns.",
+        "description_tr": "10 metre uzağa bir ışık huzmesi yansıtarak bir müttefike 2 tur boyunca +2 ZS kazandırın.",
+        "branch": "Shield Wall",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "vg_phalanx_stance"
+        ],
+        "icon": "💫",
+        "effects": {
+          "range": "10m",
+          "ac_bonus": "+2",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vg_take_the_blow",
+        "name_en": "Take the Blow",
+        "name_tr": "Darbeyi Üstlenme",
+        "description_en": "Intercept an attack meant for an ally within 5 meters, taking half of the damage yourself instead.",
+        "description_tr": "5 metre içindeki bir müttefike yönelik bir saldırının arasına girerek hasarın yarısını siz alın.",
+        "branch": "Sacrifice",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "range": "5m",
+          "damage_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "vg_life_tether",
+        "name_en": "Life Tether",
+        "name_tr": "Yaşam Bağı",
+        "description_en": "Create a mystical link with an ally within 10 meters, transferring 25% of any damage they take to you for 3 turns.",
+        "description_tr": "10 metre içindeki bir müttefikle mistik bir bağ kurarak aldıkları herhangi bir hasarın %25'ini 3 tur boyunca kendinize aktarın.",
+        "branch": "Sacrifice",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [
+          "vg_take_the_blow"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "10m",
+          "damage_transfer": "25%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_martyrs_blood",
+        "name_en": "Martyr's Blood",
+        "name_tr": "Şehit Kanı",
+        "description_en": "Sacrifice 10 of your own HP to heal an ally for 20 HP. Range 5 meters.",
+        "description_tr": "Kendi Can Puanınızdan 10 feda ederek bir müttefiki 20 CP iyileştirin. Menzil 5 metre.",
+        "branch": "Sacrifice",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "vg_life_tether"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "cost": "10 HP",
+          "heal": "20 HP",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "vg_iron_skin",
+        "name_en": "Iron Skin",
+        "name_tr": "Demir Deri",
+        "description_en": "Harden your flesh, gaining +3 AC for 3 turns.",
+        "description_tr": "Etinizi sertleştirerek 3 tur boyunca +3 ZS kazanın.",
+        "branch": "Fortification",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪨",
+        "effects": {
+          "ac_bonus": "+3",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_endurance_boost",
+        "name_en": "Endurance Boost",
+        "name_tr": "Dayanıklılık Artışı",
+        "description_en": "Channel your inner stamina to immediately gain 15 Temporary HP.",
+        "description_tr": "İçsel dayanıklılığınızı yönlendirerek anında 15 Geçici Can Puanı kazanın.",
+        "branch": "Fortification",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 100,
+        "prerequisites": [
+          "vg_iron_skin"
+        ],
+        "icon": "💪",
+        "effects": {
+          "temp_hp": 15
+        }
+      },
+      {
+        "spell_key": "vg_steeled_mind",
+        "name_en": "Steeled Mind",
+        "name_tr": "Çelik Zihin",
+        "description_en": "Fortify your consciousness, granting yourself a +2 bonus to all mental saving throws for 10 minutes.",
+        "description_tr": "Bilincinizi güçlendirerek 10 dakika boyunca tüm zihinsel kurtarma zarlarına +2 bonus kazanın.",
+        "branch": "Fortification",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "vg_endurance_boost"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "saving_throw_bonus": "+2",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "vg_barrier_wave",
+        "name_en": "Barrier Wave",
+        "name_tr": "Bariyer Dalgası",
+        "description_en": "Push your shield forward, sending a wave of force in a 5-meter cone that deals 2d6 force damage and pushes enemies back 3 meters.",
+        "description_tr": "Kalkanınızı ileri doğru iterek 5 metrelik bir koni içinde 2d6 güç hasarı veren ve düşmanları 3 metre geriye iten bir kuvvet dalgası gönderin.",
+        "branch": "Shield Wall",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "vg_warding_light"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "area": "5m cone",
+          "damage": "2d6",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "vg_shield_charge",
+        "name_en": "Shield Charge",
+        "name_tr": "Kalkan Hücumu",
+        "description_en": "Dash up to 10 meters forward in a straight line, dealing 3d6 bludgeoning damage and knocking the first enemy struck prone.",
+        "description_tr": "Düz bir çizgide 10 metreye kadar ileri atılarak 3d6 ezme hasarı verin ve vurulan ilk düşmanı yere serin.",
+        "branch": "Shield Wall",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 230,
+        "prerequisites": [
+          "vg_barrier_wave"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "range": "10m dash",
+          "damage": "3d6",
+          "condition": "prone"
+        }
+      },
+      {
+        "spell_key": "vg_dome_of_protection",
+        "name_en": "Dome of Protection",
+        "name_tr": "Koruma Kubbesi",
+        "description_en": "Conjure a 5-meter radius dome around yourself. Allies inside gain +4 AC. Lasts 2 turns.",
+        "description_tr": "Kendinizin etrafında 5 metre yarıçapında bir kubbe oluşturun. İçerideki müttefikler +4 ZS kazanır. 2 tur sürer.",
+        "branch": "Shield Wall",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "vg_shield_charge"
+        ],
+        "icon": "⛺",
+        "effects": {
+          "radius": "5m",
+          "ac_bonus": "+4",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vg_pain_sharing",
+        "name_en": "Pain Sharing",
+        "name_tr": "Acı Paylaşımı",
+        "description_en": "When an ally within 10 meters is hit, distribute the damage equally among yourself and any willing allies within range.",
+        "description_tr": "10 metre içindeki bir müttefik vurulduğunda, hasarı kendiniz ve menzil içindeki gönüllü müttefikler arasında eşit olarak dağıtın.",
+        "branch": "Sacrifice",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 210,
+        "prerequisites": [
+          "vg_martyrs_blood"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "range": "10m",
+          "damage_distribution": "equal"
+        }
+      },
+      {
+        "spell_key": "vg_guardian_leap",
+        "name_en": "Guardian Leap",
+        "name_tr": "Muhafız Atlayışı",
+        "description_en": "Leap up to 15 meters to an ally's side, automatically absorbing the very next attack directed at them within 1 turn.",
+        "description_tr": "15 metreye kadar sıçrayarak bir müttefikin yanına gidin ve 1 tur içinde onlara yöneltilen ilk saldırıyı otomatik olarak emdirin.",
+        "branch": "Sacrifice",
+        "tier": 2,
+        "min_level": 29,
+        "xp_cost": 240,
+        "prerequisites": [
+          "vg_pain_sharing"
+        ],
+        "icon": "🦸",
+        "effects": {
+          "range": "15m",
+          "duration": "1 turn",
+          "intercept": "1 attack"
+        }
+      },
+      {
+        "spell_key": "vg_blood_shield",
+        "name_en": "Blood Shield",
+        "name_tr": "Kan Kalkanı",
+        "description_en": "Spend 20 HP to create a 40 HP temporary magical shield on an ally within 5 meters.",
+        "description_tr": "5 metre içindeki bir müttefik üzerinde 40 Geçici Can Puanlık büyülü bir kalkan oluşturmak için 20 CP harcayın.",
+        "branch": "Sacrifice",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "vg_guardian_leap"
+        ],
+        "icon": "🔴",
+        "effects": {
+          "cost": "20 HP",
+          "temp_hp": "40",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "vg_juggernaut_plating",
+        "name_en": "Juggernaut Plating",
+        "name_tr": "Juggernaut Zırhı",
+        "description_en": "Reinforce your armor, reducing all incoming physical damage by 5 for 5 turns.",
+        "description_tr": "Zırhınızı güçlendirerek 5 tur boyunca gelen tüm fiziksel hasarı 5 azaltın.",
+        "branch": "Fortification",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 220,
+        "prerequisites": [
+          "vg_steeled_mind"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "damage_reduction": 5,
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vg_second_wind",
+        "name_en": "Second Wind",
+        "name_tr": "İkinci Nefes",
+        "description_en": "Tap into your hidden reserves to instantly heal yourself for 3d10 HP.",
+        "description_tr": "Gizli rezervlerinize erişerek kendinizi anında 3d10 CP iyileştirin.",
+        "branch": "Fortification",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "vg_juggernaut_plating"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "heal": "3d10"
+        }
+      },
+      {
+        "spell_key": "vg_unstoppable_force",
+        "name_en": "Unstoppable Force",
+        "name_tr": "Durdurulamaz Güç",
+        "description_en": "Become completely immune to being pushed, pulled, or knocked prone for 3 turns.",
+        "description_tr": "3 tur boyunca itilmeye, çekilmeye veya yere serilmeye karşı tamamen bağışıklık kazanın.",
+        "branch": "Fortification",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "vg_second_wind"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "immunity": "push/pull/prone",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_shielding_surge",
+        "name_en": "Shielding Surge",
+        "name_tr": "Kalkan Dalgası",
+        "description_en": "Release a surge of defensive energy, gaining 20 Temporary HP. Your next Shield Bash deals an additional 2d6 damage.",
+        "description_tr": "Savunma enerjisi dalgası salarak 20 Geçici Can Puanı kazanın. Bir sonraki Kalkan Darbeniz fazladan 2d6 hasar verir.",
+        "branch": "Shield Wall, Fortification",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 270,
+        "prerequisites": [
+          "vg_shield_charge",
+          "vg_second_wind"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "temp_hp": 20,
+          "damage_bonus": "2d6"
+        }
+      },
+      {
+        "spell_key": "vg_blood_bulwark",
+        "name_en": "Blood Bulwark",
+        "name_tr": "Kan Siperi",
+        "description_en": "Sacrifice 15 HP to create a 5-meter wide barrier in front of you that blocks up to 50 points of incoming damage.",
+        "description_tr": "15 CP feda ederek önünüzde 50 puana kadar gelen hasarı engelleyen 5 metre genişliğinde bir bariyer oluşturun.",
+        "branch": "Shield Wall, Sacrifice",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 280,
+        "prerequisites": [
+          "vg_barrier_wave",
+          "vg_blood_shield"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "cost": "15 HP",
+          "barrier_hp": 50,
+          "width": "5m"
+        }
+      },
+      {
+        "spell_key": "vg_reflecting_shield",
+        "name_en": "Reflecting Shield",
+        "name_tr": "Yansıtan Kalkan",
+        "description_en": "Coat your shield in arcane energy, allowing you to reflect exactly one ranged spell or attack back at its sender.",
+        "description_tr": "Kalkanınızı gizemli enerjiyle kaplayarak tam olarak bir menzilli büyüyü veya saldırıyı gönderene geri yansıtmanızı sağlar.",
+        "branch": "Shield Wall",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "vg_dome_of_protection"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflect": "1 ranged attack"
+        }
+      },
+      {
+        "spell_key": "vg_shattering_bash",
+        "name_en": "Shattering Bash",
+        "name_tr": "Parçalayan Darbe",
+        "description_en": "Deliver a devastating shield blow that deals 4d6 damage and reduces the target's AC by 2 for 2 turns.",
+        "description_tr": "4d6 hasar veren ve hedefin ZS'sini 2 tur boyunca 2 azaltan yıkıcı bir kalkan darbesi vurun.",
+        "branch": "Shield Wall",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "vg_reflecting_shield"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d6",
+          "ac_reduction": 2,
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vg_mobile_fortress",
+        "name_en": "Mobile Fortress",
+        "name_tr": "Mobil Kale",
+        "description_en": "Lock your stance to become a moving fortress. Gain +5 AC, but your movement speed is halved for 3 turns.",
+        "description_tr": "Duruşunuzu kilitleyerek yürüyen bir kale olun. +5 ZS kazanın, ancak hareket hızınız 3 tur boyunca yarıya iner.",
+        "branch": "Shield Wall",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "vg_shattering_bash"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "ac_bonus": "+5",
+          "speed": "-50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_empathic_transfer",
+        "name_en": "Empathic Transfer",
+        "name_tr": "Empatik Aktarım",
+        "description_en": "Absorb 1 negative condition from an ally within 5 meters, transferring it to yourself, and heal them for 3d8 HP.",
+        "description_tr": "5 metre içindeki bir müttefikten 1 negatif durumu emerek kendinize aktarın ve onları 3d8 CP iyileştirin.",
+        "branch": "Sacrifice",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "vg_blood_shield"
+        ],
+        "icon": "🫂",
+        "effects": {
+          "condition_transfer": 1,
+          "heal": "3d8",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "vg_vanguard_provocation",
+        "name_en": "Vanguard Provocation",
+        "name_tr": "Öncü Kışkırtması",
+        "description_en": "Let out a booming taunt, forcing all enemies within 15 meters to target you for their next attack or suffer disadvantage.",
+        "description_tr": "Gürleyen bir kışkırtma ile 15 metre içindeki tüm düşmanları bir sonraki saldırılarında sizi hedef almaya veya dezavantaj yaşamaya zorlayın.",
+        "branch": "Sacrifice",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "vg_empathic_transfer"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "radius": "15m",
+          "taunt": "1 attack"
+        }
+      },
+      {
+        "spell_key": "vg_sacrificial_pact",
+        "name_en": "Sacrificial Pact",
+        "name_tr": "Kurban Anlaşması",
+        "description_en": "Bind your soul to an ally. If they drop to 0 HP, they remain at 1 HP, and you instantly take 50 necrotic damage.",
+        "description_tr": "Ruhunuzu bir müttefike bağlayın. Eğer 0 CP'ye düşerlerse, 1 CP'de kalırlar ve siz anında 50 nekrotik hasar alırsınız.",
+        "branch": "Sacrifice",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "vg_vanguard_provocation"
+        ],
+        "icon": "📜",
+        "effects": {
+          "prevent_death": "1 ally",
+          "self_damage": 50
+        }
+      },
+      {
+        "spell_key": "vg_adamantine_bones",
+        "name_en": "Adamantine Bones",
+        "name_tr": "Adamantiyum Kemikler",
+        "description_en": "Infuse your skeletal structure with mystical durability. You become immune to critical hits and gain 30% physical damage resistance.",
+        "description_tr": "İskelet yapınızı mistik dayanıklılıkla aşılayın. Kritik vuruşlara karşı bağışıklık kazanın ve %30 fiziksel hasar direnci elde edin.",
+        "branch": "Fortification",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 390,
+        "prerequisites": [
+          "vg_unstoppable_force"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "crit_immunity": true,
+          "resist": "30% physical"
+        }
+      },
+      {
+        "spell_key": "vg_titan_grip",
+        "name_en": "Titan Grip",
+        "name_tr": "Titan Tutuşu",
+        "description_en": "Your immense strength allows you to wield a heavy, two-handed weapon in one hand while still holding your shield.",
+        "description_tr": "Muazzam gücünüz, kalkanınızı tutarken bir elinizle ağır, çift elli bir silah kullanmanızı sağlar.",
+        "branch": "Fortification",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "vg_adamantine_bones"
+        ],
+        "icon": "✊",
+        "effects": {
+          "two_handed_in_one_hand": true
+        }
+      },
+      {
+        "spell_key": "vg_regenerative_tissue",
+        "name_en": "Regenerative Tissue",
+        "name_tr": "Yenilenen Doku",
+        "description_en": "Your cells regenerate rapidly, healing you for 10 HP at the start of each of your turns for 5 turns.",
+        "description_tr": "Hücreleriniz hızla yenilenerek, 5 tur boyunca her turunuzun başında sizi 10 CP iyileştirir.",
+        "branch": "Fortification",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "vg_titan_grip"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "regen": "10 HP/turn",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vg_martyrs_fortress",
+        "name_en": "Martyr's Fortress",
+        "name_tr": "Şehit Kalesi",
+        "description_en": "Your pain crystallizes into armor. For every 10 HP you are missing from your maximum, you gain +1 AC.",
+        "description_tr": "Acınız zırha dönüşür. Maksimum canınızdan eksik olan her 10 CP için +1 ZS kazanırsınız.",
+        "branch": "Sacrifice, Fortification",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "vg_empathic_transfer",
+          "vg_adamantine_bones"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "ac_scaling": "+1 per 10 missing HP"
+        }
+      },
+      {
+        "spell_key": "vg_deflective_bond",
+        "name_en": "Deflective Bond",
+        "name_tr": "Yansıtıcı Bağ",
+        "description_en": "When linked to an ally via Life Tether, that ally also gains +3 AC as phantom copies of your shield orbit them.",
+        "description_tr": "Yaşam Bağı ile bir müttefike bağlandığınızda, kalkanınızın hayalet kopyaları onların etrafında dönerek onlara +3 ZS kazandırır.",
+        "branch": "Shield Wall, Sacrifice",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "vg_reflecting_shield",
+          "vg_vanguard_provocation"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "linked_ally_ac_bonus": "+3"
+        }
+      },
+      {
+        "spell_key": "vg_aegis_throw",
+        "name_en": "Aegis Throw",
+        "name_tr": "Kalkan Fırlatma",
+        "description_en": "Hurl your shield up to 15 meters. It bounces between up to 3 enemies, dealing 5d6 bludgeoning damage to each before returning.",
+        "description_tr": "Kalkanınızı 15 metreye kadar fırlatın. En fazla 3 düşman arasında sekerek her birine 5d6 ezme hasarı verir ve geri döner.",
+        "branch": "Shield Wall",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "vg_mobile_fortress"
+        ],
+        "icon": "🥏",
+        "effects": {
+          "range": "15m",
+          "targets": 3,
+          "damage": "5d6"
+        }
+      },
+      {
+        "spell_key": "vg_wall_of_repulsion",
+        "name_en": "Wall of Repulsion",
+        "name_tr": "İtme Duvarı",
+        "description_en": "Erect a 10-meter wide magical barrier. Enemies attempting to pass through are violently pushed back 5 meters. Lasts 3 turns.",
+        "description_tr": "10 metre genişliğinde büyülü bir bariyer dikin. İçinden geçmeye çalışan düşmanlar şiddetle 5 metre geriye itilir. 3 tur sürer.",
+        "branch": "Shield Wall",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "vg_aegis_throw"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "width": "10m",
+          "knockback": "5m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_kinetic_absorption",
+        "name_en": "Kinetic Absorption",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "For 1 turn, completely absorb all physical damage taken. At the start of your next turn, release it as a 10m blast dealing half the absorbed damage.",
+        "description_tr": "1 tur boyunca alınan tüm fiziksel hasarı tamamen emin. Bir sonraki turunuzun başında, emilen hasarın yarısını veren 10 metrelik bir patlama olarak serbest bırakın.",
+        "branch": "Shield Wall",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "vg_wall_of_repulsion"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "absorb": "100% physical",
+          "blast_radius": "10m",
+          "blast_damage": "50% absorbed"
+        }
+      },
+      {
+        "spell_key": "vg_aura_of_absorption",
+        "name_en": "Aura of Absorption",
+        "name_tr": "Emilim Aurası",
+        "description_en": "Emit a 10-meter aura. You take 50% of all damage dealt to allies inside, but this transferred damage is reduced by your armor value.",
+        "description_tr": "10 metrelik bir aura yayın. İçerideki müttefiklere verilen tüm hasarın %50'sini alırsınız, ancak aktarılan bu hasar kendi zırh değeriniz kadar azalır.",
+        "branch": "Sacrifice",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "vg_sacrificial_pact"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "radius": "10m",
+          "damage_transfer": "50%",
+          "mitigate_with_armor": true
+        }
+      },
+      {
+        "spell_key": "vg_vital_redirection",
+        "name_en": "Vital Redirection",
+        "name_tr": "Hayati Yönlendirme",
+        "description_en": "Bend space to intercept an area-of-effect spell. You take the full damage of the spell, but all allies in its area take zero damage.",
+        "description_tr": "Alan etkili bir büyünün arasına girmek için uzayı bükün. Büyünün tüm hasarını siz alırsınız, ancak alanındaki tüm müttefikler sıfır hasar alır.",
+        "branch": "Sacrifice",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "vg_aura_of_absorption"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "redirect_aoe": "100% to self",
+          "allies_damage": 0
+        }
+      },
+      {
+        "spell_key": "vg_unyielding_martyr",
+        "name_en": "Unyielding Martyr",
+        "name_tr": "Boyun Eğmez Şehit",
+        "description_en": "Whenever you take damage on behalf of an ally, you gain a cumulative 5% damage reduction (up to 50%) for the rest of combat.",
+        "description_tr": "Bir müttefik adına hasar aldığınızda, savaşın geri kalanı için birikimli olarak %5 hasar azaltma (en fazla %50) kazanırsınız.",
+        "branch": "Sacrifice",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "vg_vital_redirection"
+        ],
+        "icon": "🦸‍♂️",
+        "effects": {
+          "stacking_reduction": "5% per absorb",
+          "max": "50%"
+        }
+      },
+      {
+        "spell_key": "vg_colossus_form",
+        "name_en": "Colossus Form",
+        "name_tr": "Kolezyum Formu",
+        "description_en": "Grow to a massive size for 5 turns. Gain +100 Max HP, +2 meters reach, and advantage on Strength checks.",
+        "description_tr": "5 tur boyunca devasa bir boyuta ulaşın. +100 Maksimum CP, +2 metre uzanma mesafesi ve Güç zarlarında avantaj kazanın.",
+        "branch": "Fortification",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "vg_regenerative_tissue"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "max_hp": "+100",
+          "reach": "+2m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vg_adaptive_armor",
+        "name_en": "Adaptive Armor",
+        "name_tr": "Adaptif Zırh",
+        "description_en": "Your armor learns from attacks. When hit by elemental damage, instantly gain 50% resistance to that element for 3 turns.",
+        "description_tr": "Zırhınız saldırılardan öğrenir. Element hasarı aldığınızda, o elemente karşı anında 3 tur boyunca %50 direnç kazanırsınız.",
+        "branch": "Fortification",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "vg_colossus_form"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "adapt_resist": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_indomitable_will",
+        "name_en": "Indomitable Will",
+        "name_tr": "Yılmaz İrade",
+        "description_en": "Your resolve is unbreakable. You automatically succeed your next 3 saving throws of any kind.",
+        "description_tr": "Kararlılığınız kırılamaz. Herhangi bir türdeki sonraki 3 kurtarma zarınızı otomatik olarak başarırsınız.",
+        "branch": "Fortification",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "vg_adaptive_armor"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "auto_succeed_saves": 3
+        }
+      },
+      {
+        "spell_key": "vg_titan_guard",
+        "name_en": "Titan Guard",
+        "name_tr": "Titan Koruması",
+        "description_en": "While in Colossus Form, your Dome of Protection expands to a 15-meter radius and provides +6 AC instead of +4.",
+        "description_tr": "Kolezyum Formundayken, Koruma Kubbeniz 15 metre yarıçapa genişler ve +4 yerine +6 ZS sağlar.",
+        "branch": "Shield Wall, Fortification",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "vg_kinetic_absorption",
+          "vg_colossus_form"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "radius_increase": "15m",
+          "ac_bonus": "+6"
+        }
+      },
+      {
+        "spell_key": "vg_pain_fueled_armor",
+        "name_en": "Pain-Fueled Armor",
+        "name_tr": "Acıyla Beslenen Zırh",
+        "description_en": "Taking damage for your allies fuels your regeneration. You heal for 25% of any damage you absorb from an ally.",
+        "description_tr": "Müttefikleriniz için hasar almak yenilenmenizi besler. Bir müttefikten emdiğiniz herhangi bir hasarın %25'i kadar iyileşirsiniz.",
+        "branch": "Sacrifice, Fortification",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 820,
+        "prerequisites": [
+          "vg_vital_redirection",
+          "vg_adaptive_armor"
+        ],
+        "icon": "❤️‍🩹",
+        "effects": {
+          "heal_from_absorb": "25%"
+        }
+      },
+      {
+        "spell_key": "vg_impenetrable_bulwark",
+        "name_en": "Impenetrable Bulwark",
+        "name_tr": "Aşılmaz Siper",
+        "description_en": "Dig your heels in and plant your shield. You become completely immune to all damage originating from your front arc for 3 turns.",
+        "description_tr": "Topuklarınızı yere gömün ve kalkanınızı dikin. 3 tur boyunca önünüzden gelen tüm hasarlara karşı tamamen bağışıklık kazanırsınız.",
+        "branch": "Shield Wall",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "vg_kinetic_absorption"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "frontal_immunity": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_ultimate_shield_wall",
+        "name_en": "Vanguard's Bastion",
+        "name_tr": "Öncü Birliğin Tabyası",
+        "description_en": "Ultimate: Create a massive 10m holy bastion. Allies inside gain +10 AC and take 0 damage from attacks originating outside the area for 3 turns.",
+        "description_tr": "Nihai: Devasa 10 metrelik kutsal bir tabya oluşturun. İçerideki müttefikler +10 ZS kazanır ve 3 tur boyunca alanın dışından gelen saldırılardan 0 hasar alır.",
+        "branch": "Shield Wall",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "vg_impenetrable_bulwark"
+        ],
+        "icon": "🏟️",
+        "effects": {
+          "radius": "10m",
+          "ac_bonus": "+10",
+          "outside_damage_immunity": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vg_soul_bind",
+        "name_en": "Soul Bind",
+        "name_tr": "Ruh Bağı",
+        "description_en": "Bind your soul to up to 3 allies. You take 100% of their incoming damage, but all damage transferred to you this way is reduced by 75%.",
+        "description_tr": "Ruhunuzu 3 müttefike kadar bağlayın. Onlara gelen hasarın %100'ünü siz alırsınız, ancak bu şekilde size aktarılan tüm hasar %75 oranında azalır.",
+        "branch": "Sacrifice",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "vg_unyielding_martyr"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "targets": 3,
+          "damage_transfer": "100%",
+          "transfer_reduction": "75%"
+        }
+      },
+      {
+        "spell_key": "vg_ultimate_sacrifice",
+        "name_en": "Ultimate Sacrifice",
+        "name_tr": "Nihai Fedakarlık",
+        "description_en": "Ultimate: If an ally within 20m dies, you instantly revive them to 100% HP. You drop to 1 HP, but gain Invulnerability for 1 turn.",
+        "description_tr": "Nihai: 20m içindeki bir müttefik ölürse, onları anında %100 CP ile diriltirsiniz. Siz 1 CP'ye düşersiniz, ancak 1 tur boyunca Yenilmezlik kazanırsınız.",
+        "branch": "Sacrifice",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "vg_soul_bind"
+        ],
+        "icon": "👼",
+        "effects": {
+          "revive": "100% HP",
+          "self_hp_set": 1,
+          "self_invulnerable": "1 turn",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "vg_avatar_of_defense",
+        "name_en": "Avatar of Defense",
+        "name_tr": "Savunma Avatarı",
+        "description_en": "Become the physical embodiment of defense. Your current AC is doubled, and you are immune to all negative status effects for 5 turns.",
+        "description_tr": "Savunmanın fiziksel vücut bulmuş hali olun. Mevcut ZS'niz ikiye katlanır ve 5 tur boyunca tüm negatif durum etkilerine karşı bağışıklık kazanırsınız.",
+        "branch": "Fortification",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "vg_indomitable_will"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "ac_multiplier": "x2",
+          "status_immunity": true,
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vg_ultimate_fortification",
+        "name_en": "Living Mountain",
+        "name_tr": "Yaşayan Dağ",
+        "description_en": "Ultimate: Transform into an immovable mountain. Gain +300 Max HP, +10 AC, and complete CC immunity for 5 turns, but you cannot move.",
+        "description_tr": "Nihai: Hareketsiz bir dağa dönüşün. 5 tur boyunca +300 Maksimum CP, +10 ZS ve tam Kitle Kontrol bağışıklığı kazanın, ancak hareket edemezsiniz.",
+        "branch": "Fortification",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "vg_avatar_of_defense"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "max_hp": "+300",
+          "ac_bonus": "+10",
+          "cc_immunity": true,
+          "speed": 0,
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vg_vanguards_legacy",
+        "name_en": "Vanguard's Legacy",
+        "name_tr": "Öncünün Mirası",
+        "description_en": "For 3 turns, all allies within 15 meters inherit your base AC, your resistances, and heal for 5% of their Max HP per turn.",
+        "description_tr": "3 tur boyunca, 15 metre içindeki tüm müttefikler temel ZS'nizi ve dirençlerinizi miras alır ve her tur Maksimum CP'lerinin %5'i kadar iyileşirler.",
+        "branch": "Shield Wall, Sacrifice, Fortification",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "vg_impenetrable_bulwark",
+          "vg_soul_bind",
+          "vg_avatar_of_defense"
+        ],
+        "icon": "👑",
+        "effects": {
+          "radius": "15m",
+          "share_ac": true,
+          "share_resist": true,
+          "ally_heal": "5% max HP"
+        }
+      },
+      {
+        "spell_key": "vg_grand_aegis_of_the_ancients",
+        "name_en": "Aegis of the Ancients",
+        "name_tr": "Kadimlerin Kalkanı",
+        "description_en": "Grand Ultimate: For 5 turns, you absorb ALL damage dealt to allies within 30 meters, but you only take 10% of that damage. Allies become completely immune to CC.",
+        "description_tr": "Büyük Nihai Büyü: 5 tur boyunca, 30 metre içindeki müttefiklere verilen TÜM hasarı emersiniz, ancak bu hasarın sadece %10'unu alırsınız. Müttefikler Kitle Kontrolüne karşı tamamen bağışıklık kazanır.",
+        "branch": "Grand Ultimate",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "vg_ultimate_shield_wall",
+          "vg_ultimate_sacrifice",
+          "vg_ultimate_fortification"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "30m",
+          "absorb_all_damage": true,
+          "self_damage_taken": "10%",
+          "ally_cc_immunity": true,
+          "duration": "5 turns"
+        }
+      }
+    ]
+  }
+]

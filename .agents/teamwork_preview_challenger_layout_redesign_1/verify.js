@@ -1,0 +1,117 @@
+const fs = require('fs');
+const path = require('path');
+
+// Resolve path relative to the workspace root
+const spellsDir = path.resolve(__dirname, '../../scripts/spells');
+const files = fs.readdirSync(spellsDir).filter(f => f.endsWith('.json') && f !== 'TEMPLATE_REFERENCE.json');
+
+let totalOverlaps = 0;
+let maxRelX = 0;
+
+files.forEach(f => {
+  const data = JSON.parse(fs.readFileSync(path.join(spellsDir, f), 'utf-8'));
+  const sub = Array.isArray(data) ? data[0] : data;
+  const spells = sub.spells;
+  const branches = sub.branches || [];
+  const P = branches.filter(b => !['Cross-Branch', 'Cross-branch', 'Grand Ultimate'].includes(b));
+  
+  const colMap = {};
+  P.forEach((b, idx) => colMap[b] = idx - (P.length - 1)/2);
+  
+  const getCol = (b) => {
+    if (!b || ['Cross-Branch', 'Cross-branch', 'Grand Ultimate'].includes(b)) return 0;
+    const parts = b.split(',').map(x => x.trim());
+    let sum = 0, count = 0;
+    parts.forEach(p => {
+      if (p in colMap) {
+        sum += colMap[p];
+        count++;
+      }
+    });
+    return count > 0 ? sum / count : 0;
+  };
+  
+  const depthMap = {};
+  const getDepth = (sKey) => {
+    if (sKey in depthMap) return depthMap[sKey];
+    const s = spells.find(x => x.spell_key === sKey);
+    if (!s) return 0;
+    if (!s.prerequisites || s.prerequisites.length === 0) {
+      depthMap[sKey] = 0;
+      return 0;
+    }
+    let maxD = 0;
+    s.prerequisites.forEach(pKey => {
+      const parent = spells.find(x => x.spell_key === pKey);
+      if (parent && parent.tier === s.tier) {
+        maxD = Math.max(maxD, getDepth(pKey) + 1);
+      }
+    });
+    depthMap[sKey] = maxD;
+    return maxD;
+  };
+  
+  const cellMap = {};
+  spells.forEach(s => {
+    const col = getCol(s.branch);
+    const d = getDepth(s.spell_key);
+    const x_base = col * 280;
+    const y_base = 120 + (s.tier - 1) * 220 + d * 70;
+    const cellKey = x_base + '_' + y_base;
+    if (!cellMap[cellKey]) cellMap[cellKey] = [];
+    cellMap[cellKey].push(s);
+  });
+  
+  const finalPositions = {};
+  Object.entries(cellMap).forEach(([cellKey, list]) => {
+    const [x_base_str, y_base_str] = cellKey.split('_');
+    const x_base = parseFloat(x_base_str);
+    const y_base = parseFloat(y_base_str);
+    const N = list.length;
+    if (N === 1) {
+      finalPositions[list[0].spell_key] = { x: x_base, y: y_base };
+    } else {
+      const getSortKey = (s) => {
+        if (!s.prerequisites || s.prerequisites.length === 0) return getCol(s.branch);
+        let sum = 0, count = 0;
+        s.prerequisites.forEach(pKey => {
+          const parent = spells.find(x => x.spell_key === pKey);
+          if (parent) {
+            sum += getCol(parent.branch);
+            count++;
+          }
+        });
+        return count > 0 ? sum / count : getCol(s.branch);
+      };
+      
+      const sorted = [...list].sort((a, b) => {
+        const skA = getSortKey(a);
+        const skB = getSortKey(b);
+        if (skA !== skB) return skA - skB;
+        return a.spell_key.localeCompare(b.spell_key);
+      });
+      
+      sorted.forEach((s, idx) => {
+        const x_final = x_base + (idx - (N - 1)/2) * 90;
+        finalPositions[s.spell_key] = { x: x_final, y: y_base };
+      });
+    }
+  });
+  
+  const posStrings = {};
+  Object.entries(finalPositions).forEach(([sKey, pos]) => {
+    const pStr = pos.x + '_' + pos.y;
+    if (!posStrings[pStr]) posStrings[pStr] = [];
+    posStrings[pStr].push(sKey);
+    maxRelX = Math.max(maxRelX, Math.abs(pos.x));
+  });
+  
+  const overlaps = Object.entries(posStrings).filter(([k, v]) => v.length > 1);
+  if (overlaps.length > 0) {
+    console.log(sub.subclass_key, 'has overlaps:', overlaps);
+    totalOverlaps += overlaps.length;
+  }
+});
+
+console.log('Total final overlaps:', totalOverlaps);
+console.log('Maximum relative X absolute value:', maxRelX);

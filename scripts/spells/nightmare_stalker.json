@@ -1,0 +1,1043 @@
+[
+  {
+    "subclass_key": "nightmare_stalker",
+    "tree_name_en": "Nightmare Stalker",
+    "tree_name_tr": "Kabus Avcısı",
+    "tree_desc_en": "Master of fear and sleep, this assassin strikes from the shadows of the mind. They summon shadow beasts, paralyze foes with terror, and execute those trapped in nightmares.",
+    "tree_desc_tr": "Korku ve uykunun efendisi olan bu suikastçı, zihnin gölgelerinden saldırır. Gölge canavarları çağırır, düşmanları dehşetle felç eder ve kabuslara hapsolmuş olanları infaz eder.",
+    "branches": [
+      "Fear",
+      "Dream",
+      "Terror"
+    ],
+    "spells": [
+      {
+        "spell_key": "ns_creeping_dread",
+        "name_en": "Creeping Dread",
+        "name_tr": "Sürünen Dehşet",
+        "description_en": "Instills a creeping sense of dread in a target, reducing their movement speed by 3m and attack rolls by 1d4 for 3 turns.",
+        "description_tr": "Hedefe yayılan bir dehşet hissi aşılayarak, hareket hızlarını 3m ve saldırı zarlarını 3 tur boyunca 1d4 düşürür.",
+        "branch": "Fear",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🕷️",
+        "effects": {
+          "range": "15m",
+          "duration": "3 turns",
+          "speed_reduction": "3m",
+          "attack_penalty": "-1d4"
+        }
+      },
+      {
+        "spell_key": "ns_spook",
+        "name_en": "Spook",
+        "name_tr": "Ürkütme",
+        "description_en": "A sudden scare that forces a target to move away from you at full speed for 1 turn.",
+        "description_tr": "Hedefi 1 tur boyunca sizden tam hızla uzaklaşmaya zorlayan ani bir korkutma.",
+        "branch": "Fear",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "👻",
+        "effects": {
+          "range": "10m",
+          "fear": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_paranoid_whispers",
+        "name_en": "Paranoid Whispers",
+        "name_tr": "Paranoyak Fısıltılar",
+        "description_en": "Fills the target's mind with paranoid whispers. They have a 25% chance to attack an ally instead of you for 2 turns.",
+        "description_tr": "Hedefin zihnini paranoyak fısıltılarla doldurur. Sizin yerinize bir müttefiğe saldırma ihtimalleri 2 tur boyunca %25'tir.",
+        "branch": "Fear",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "range": "20m",
+          "duration": "2 turns",
+          "misdirection_chance": "25%"
+        }
+      },
+      {
+        "spell_key": "ns_sudden_fright",
+        "name_en": "Sudden Fright",
+        "name_tr": "Ani Korku",
+        "description_en": "Deals 3d6 psychic damage and roots the target in place out of pure fear for 1 turn.",
+        "description_tr": "3d6 psişik hasar verir ve hedefi saf korkudan dolayı 1 tur boyunca olduğu yere sabitler.",
+        "branch": "Fear",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "ns_creeping_dread",
+          "ns_spook"
+        ],
+        "icon": "🙀",
+        "effects": {
+          "range": "15m",
+          "damage": "3d6",
+          "root": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_aura_of_unease",
+        "name_en": "Aura of Unease",
+        "name_tr": "Huzursuzluk Aurası",
+        "description_en": "Radiate an aura that reduces the defense by 2 and resistance by 10% of all enemies within 8 meters.",
+        "description_tr": "8 metre içindeki tüm düşmanların savunmasını 2 ve direncini %10 azaltan bir aura yayarsınız.",
+        "branch": "Fear",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ns_spook"
+        ],
+        "icon": "〰️",
+        "effects": {
+          "radius": "8m",
+          "defense_penalty": "-2",
+          "resistance_penalty": "-10%"
+        }
+      },
+      {
+        "spell_key": "ns_hallucination",
+        "name_en": "Hallucination",
+        "name_tr": "Halüsinasyon",
+        "description_en": "Causes the target to see horrifying hallucinations, making them miss 50% of their attacks for 2 turns.",
+        "description_tr": "Hedefin korkunç halüsinasyonlar görmesine neden olarak, 2 tur boyunca saldırılarını %50 ıskalamalarını sağlar.",
+        "branch": "Fear",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "ns_paranoid_whispers"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "range": "20m",
+          "duration": "2 turns",
+          "miss_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "ns_panic_attack",
+        "name_en": "Panic Attack",
+        "name_tr": "Panik Atak",
+        "description_en": "The target suffers a severe panic attack, taking 5d6 psychic damage and dropping their weapons for 1 turn.",
+        "description_tr": "Hedef şiddetli bir panik atak geçirir, 5d6 psişik hasar alır ve silahlarını 1 tur boyunca düşürür.",
+        "branch": "Fear",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "ns_sudden_fright"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "range": "15m",
+          "damage": "5d6",
+          "disarm": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_phobia_manifestation",
+        "name_en": "Phobia Manifestation",
+        "name_tr": "Fobi Tezahürü",
+        "description_en": "Manifests the target's deepest phobia. They take 4d8 psychic damage and are feared for 2 turns.",
+        "description_tr": "Hedefin en derin fobisini tezahür ettirir. 4d8 psişik hasar alırlar ve 2 tur boyunca korkutulurlar.",
+        "branch": "Fear",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "ns_aura_of_unease",
+          "ns_hallucination"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "range": "15m",
+          "damage": "4d8",
+          "fear": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ns_fear_toxin",
+        "name_en": "Fear Toxin",
+        "name_tr": "Korku Toksini",
+        "description_en": "Releases a 6m radius gas cloud. Enemies inside take 2d8 poison damage per turn and are afflicted with extreme paranoia for 3 turns.",
+        "description_tr": "6m yarıçapında bir gaz bulutu salar. İçindeki düşmanlar tur başına 2d8 zehir hasarı alır ve 3 tur boyunca aşırı paranoyaya yakalanır.",
+        "branch": "Fear",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ns_hallucination"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "range": "10m",
+          "radius": "6m",
+          "poison_damage": "2d8/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ns_mass_hysteria",
+        "name_en": "Mass Hysteria",
+        "name_tr": "Kitlesel Histeri",
+        "description_en": "Infects up to 5 targets with hysteria. They take 6d8 psychic damage and run randomly for 2 turns.",
+        "description_tr": "En fazla 5 hedefe histeri bulaştırır. 6d8 psişik hasar alırlar ve 2 tur boyunca rastgele koşarlar.",
+        "branch": "Fear",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "ns_panic_attack",
+          "ns_fear_toxin"
+        ],
+        "icon": "😵‍💫",
+        "effects": {
+          "range": "20m",
+          "targets": 5,
+          "damage": "6d8",
+          "fear": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ns_heart_stopping_gaze",
+        "name_en": "Heart-Stopping Gaze",
+        "name_tr": "Kalp Durduran Bakış",
+        "description_en": "A gaze so terrifying it can stop a heart. Deals 8d10 psychic damage and has a 10% chance to instakill non-boss targets.",
+        "description_tr": "Kalbi durduracak kadar korkunç bir bakış. 8d10 psişik hasar verir ve patron olmayan hedefleri %10 ihtimalle anında öldürür.",
+        "branch": "Fear",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ns_phobia_manifestation"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "range": "15m",
+          "damage": "8d10",
+          "instakill_chance": "10%"
+        }
+      },
+      {
+        "spell_key": "ns_shatter_courage",
+        "name_en": "Shatter Courage",
+        "name_tr": "Cesaret Kırma",
+        "description_en": "Permanently reduces the target's willpower and removes their immunity to fear effects. Deals 6d10 psychic damage.",
+        "description_tr": "Hedefin iradesini kalıcı olarak azaltır ve korku etkilerine karşı bağışıklıklarını ortadan kaldırır. 6d10 psişik hasar verir.",
+        "branch": "Fear",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "ns_phobia_manifestation"
+        ],
+        "icon": "💔",
+        "effects": {
+          "range": "15m",
+          "damage": "6d10",
+          "remove_immunity": "fear",
+          "duration": "permanent"
+        }
+      },
+      {
+        "spell_key": "ns_endless_dread",
+        "name_en": "Endless Dread",
+        "name_tr": "Sonsuz Dehşet",
+        "description_en": "Traps the target in an endless cycle of dread, dealing 10d10 psychic damage over 4 turns and paralyzing them.",
+        "description_tr": "Hedefi sonsuz bir dehşet döngüsüne hapseder, 4 tur boyunca 10d10 psişik hasar verir ve onları felç eder.",
+        "branch": "Fear",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ns_mass_hysteria",
+          "ns_shatter_courage"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "range": "20m",
+          "damage": "10d10 over 4 turns",
+          "paralysis": "4 turns"
+        }
+      },
+      {
+        "spell_key": "ns_avatar_of_fear",
+        "name_en": "Avatar of Fear",
+        "name_tr": "Korku Avatarı",
+        "description_en": "Transform into the Avatar of Fear for 3 turns. You are immune to damage, and enemies that look at you take 8d10 psychic damage and flee.",
+        "description_tr": "3 tur boyunca Korku Avatarına dönüşün. Hasara karşı bağışıksınız ve size bakan düşmanlar 8d10 psişik hasar alıp kaçarlar.",
+        "branch": "Fear",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "ns_heart_stopping_gaze",
+          "ns_endless_dread"
+        ],
+        "icon": "👿",
+        "effects": {
+          "duration": "3 turns",
+          "immunity": "all",
+          "aura_damage": "8d10",
+          "aura_fear": "true"
+        }
+      },
+      {
+        "spell_key": "ns_drowsy_dust",
+        "name_en": "Drowsy Dust",
+        "name_tr": "Uyku Tozu",
+        "description_en": "Blows magical dust into a target's face, making them drowsy. Reduces their action points by 1 for 2 turns.",
+        "description_tr": "Hedefin yüzüne sihirli bir toz üfleyerek onları uykulu hale getirir. 2 tur boyunca eylem puanlarını 1 azaltır.",
+        "branch": "Dream",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "✨",
+        "effects": {
+          "range": "5m",
+          "duration": "2 turns",
+          "ap_reduction": 1
+        }
+      },
+      {
+        "spell_key": "ns_lucid_strike",
+        "name_en": "Lucid Strike",
+        "name_tr": "Berrak Vuruş",
+        "description_en": "A strike infused with dream magic. Deals 2d6 psychic damage and ignores physical armor.",
+        "description_tr": "Rüya büyüsüyle aşılanmış bir vuruş. 2d6 psişik hasar verir ve fiziksel zırhı yok sayar.",
+        "branch": "Dream",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "💫",
+        "effects": {
+          "range": "Melee",
+          "damage": "2d6",
+          "ignore_armor": "true"
+        }
+      },
+      {
+        "spell_key": "ns_dream_whisper",
+        "name_en": "Dream Whisper",
+        "name_tr": "Rüya Fısıltısı",
+        "description_en": "Whispers into a sleeping target's mind to extract information or implant a suggestion for 24 hours.",
+        "description_tr": "Uyuyan bir hedefin zihnine fısıldayarak bilgi çıkarır veya 24 saatliğine bir telkin yerleştirir.",
+        "branch": "Dream",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "💭",
+        "effects": {
+          "range": "Touch",
+          "duration": "24 hours",
+          "utility": "true"
+        }
+      },
+      {
+        "spell_key": "ns_slumber_hex",
+        "name_en": "Slumber Hex",
+        "name_tr": "Uyku Laneti",
+        "description_en": "Curses a target to fall into a deep sleep for 2 turns. Any damage taken breaks the sleep.",
+        "description_tr": "Bir hedefi 2 tur boyunca derin bir uykuya dalması için lanetler. Alınan herhangi bir hasar uykuyu bozar.",
+        "branch": "Dream",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "ns_drowsy_dust"
+        ],
+        "icon": "💤",
+        "effects": {
+          "range": "15m",
+          "sleep": "2 turns",
+          "breaks_on_damage": "true"
+        }
+      },
+      {
+        "spell_key": "ns_somnambulism",
+        "name_en": "Somnambulism",
+        "name_tr": "Uyurgezerlik",
+        "description_en": "Forces a sleeping target to sleepwalk and perform a basic attack against an enemy of your choice.",
+        "description_tr": "Uyuyan bir hedefi uyurgezer olmaya ve seçtiğiniz bir düşmana temel bir saldırı yapmaya zorlar.",
+        "branch": "Dream",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 215,
+        "prerequisites": [
+          "ns_lucid_strike",
+          "ns_dream_whisper"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "range": "20m",
+          "control": "sleeping_target",
+          "duration": "1 action"
+        }
+      },
+      {
+        "spell_key": "ns_dream_walk",
+        "name_en": "Dream Walk",
+        "name_tr": "Rüya Yürüyüşü",
+        "description_en": "Step into the dream realm to teleport up to 15 meters to another location. Can pass through walls.",
+        "description_tr": "15 metreye kadar başka bir konuma ışınlanmak için rüya diyarına adım atın. Duvarların içinden geçebilir.",
+        "branch": "Dream",
+        "tier": 2,
+        "min_level": 33,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ns_dream_whisper"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "teleport": "15m",
+          "bypass_walls": "true"
+        }
+      },
+      {
+        "spell_key": "ns_night_terrors",
+        "name_en": "Night Terrors",
+        "name_tr": "Gece Terörü",
+        "description_en": "Haunts a sleeping target with nightmares. They take 6d6 psychic damage without waking up.",
+        "description_tr": "Uyuyan bir hedefi kabuslarla rahatsız eder. Uyanmadan 6d6 psişik hasar alırlar.",
+        "branch": "Dream",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 370,
+        "prerequisites": [
+          "ns_slumber_hex",
+          "ns_somnambulism"
+        ],
+        "icon": "🛌",
+        "effects": {
+          "range": "20m",
+          "damage": "6d6",
+          "does_not_wake": "true"
+        }
+      },
+      {
+        "spell_key": "ns_sleep_paralysis",
+        "name_en": "Sleep Paralysis",
+        "name_tr": "Uyku Felci",
+        "description_en": "Traps the target in sleep paralysis for 2 turns. They are awake, cannot move, and take double damage from all sources.",
+        "description_tr": "Hedefi 2 tur boyunca uyku felcine hapseder. Uyanıktırlar, hareket edemezler ve tüm kaynaklardan iki kat hasar alırlar.",
+        "branch": "Dream",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ns_slumber_hex"
+        ],
+        "icon": "🚷",
+        "effects": {
+          "range": "15m",
+          "duration": "2 turns",
+          "paralyze": "true",
+          "damage_multiplier": "2x"
+        }
+      },
+      {
+        "spell_key": "ns_mind_invader",
+        "name_en": "Mind Invader",
+        "name_tr": "Zihin İstilacısı",
+        "description_en": "Invade a target's mind. For 3 turns, you see what they see and can cast Dream spells originating from them.",
+        "description_tr": "Bir hedefin zihnini istila edin. 3 tur boyunca onların gördüğünü görürsünüz ve Rüya büyülerini onlardan kaynaklanıyormuş gibi yapabilirsiniz.",
+        "branch": "Dream",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ns_somnambulism",
+          "ns_dream_walk"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "20m",
+          "duration": "3 turns",
+          "proxy_casting": "true"
+        }
+      },
+      {
+        "spell_key": "ns_comatose",
+        "name_en": "Comatose",
+        "name_tr": "Komatöz",
+        "description_en": "Plunges the target into a comatose state for 3 turns. Only a dispel or the duration ending can wake them.",
+        "description_tr": "Hedefi 3 tur boyunca komatöz bir duruma sokar. Sadece bir büyü bozma veya sürenin bitmesi onları uyandırabilir.",
+        "branch": "Dream",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 640,
+        "prerequisites": [
+          "ns_night_terrors",
+          "ns_sleep_paralysis"
+        ],
+        "icon": "🏥",
+        "effects": {
+          "range": "15m",
+          "sleep": "3 turns",
+          "breaks_on_damage": "false"
+        }
+      },
+      {
+        "spell_key": "ns_dream_eater",
+        "name_en": "Dream Eater",
+        "name_tr": "Rüya Yiyen",
+        "description_en": "Devour the dreams of a sleeping target, dealing 8d8 psychic damage and healing yourself for 100% of the damage dealt.",
+        "description_tr": "Uyuyan bir hedefin rüyalarını yutarak 8d8 psişik hasar verir ve verilen hasarın %100'ü kadar kendinizi iyileştirirsiniz.",
+        "branch": "Dream",
+        "tier": 4,
+        "min_level": 71,
+        "xp_cost": 760,
+        "prerequisites": [
+          "ns_sleep_paralysis"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "range": "10m",
+          "damage": "8d8",
+          "lifesteal": "100%"
+        }
+      },
+      {
+        "spell_key": "ns_illusionary_realm",
+        "name_en": "Illusionary Realm",
+        "name_tr": "İllüzyon Diyarı",
+        "description_en": "Creates a 15m radius field of dreams. Enemies inside fall asleep after 1 turn and stay asleep as long as they remain inside. Lasts 4 turns.",
+        "description_tr": "15 metre yarıçapında bir rüya alanı yaratır. İçerdeki düşmanlar 1 tur sonra uykuya dalar ve içeride kaldıkları sürece uyumaya devam ederler. 4 tur sürer.",
+        "branch": "Dream",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 830,
+        "prerequisites": [
+          "ns_mind_invader"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "10m",
+          "radius": "15m",
+          "sleep_aura": "true",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "ns_eternal_slumber",
+        "name_en": "Eternal Slumber",
+        "name_tr": "Ebedi Uyku",
+        "description_en": "The target falls into an eternal slumber. They are considered dead unless a powerful restoration magic is used. Bosses resist.",
+        "description_tr": "Hedef ebedi bir uykuya dalar. Güçlü bir yenileme büyüsü kullanılmadığı sürece ölü kabul edilirler. Patronlar direnir.",
+        "branch": "Dream",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1080,
+        "prerequisites": [
+          "ns_comatose",
+          "ns_dream_eater"
+        ],
+        "icon": "⚰️",
+        "effects": {
+          "range": "Touch",
+          "instakill_sleep": "true",
+          "boss_resist": "true"
+        }
+      },
+      {
+        "spell_key": "ns_lord_of_dreams",
+        "name_en": "Lord of Dreams",
+        "name_tr": "Rüyaların Efendisi",
+        "description_en": "Take complete control over the dream realm. All enemies in 30 meters fall asleep for 3 turns. You can freely attack sleeping targets without waking them.",
+        "description_tr": "Rüya diyarının tam kontrolünü elinize alın. 30 metre içindeki tüm düşmanlar 3 tur boyunca uyur. Uyuyan hedeflere onları uyandırmadan özgürce saldırabilirsiniz.",
+        "branch": "Dream",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "ns_illusionary_realm",
+          "ns_eternal_slumber"
+        ],
+        "icon": "👑",
+        "effects": {
+          "radius": "30m",
+          "sleep": "3 turns",
+          "does_not_wake": "true",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ns_shadow_hound",
+        "name_en": "Shadow Hound",
+        "name_tr": "Gölge Tazısı",
+        "description_en": "Summons a Shadow Hound to attack an enemy. Deals 1d8 slashing and 1d6 necrotic damage.",
+        "description_tr": "Bir düşmana saldırması için bir Gölge Tazısı çağırır. 1d8 kesici ve 1d6 nekrotik hasar verir.",
+        "branch": "Terror",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 65,
+        "prerequisites": [],
+        "icon": "🐕‍🦺",
+        "effects": {
+          "range": "10m",
+          "damage": "1d8+1d6"
+        }
+      },
+      {
+        "spell_key": "ns_terror_strike",
+        "name_en": "Terror Strike",
+        "name_tr": "Terör Vuruşu",
+        "description_en": "A vicious melee strike that deals 2d8 physical damage. Deals 50% more damage if the target is frightened.",
+        "description_tr": "2d8 fiziksel hasar veren acımasız bir yakın dövüş saldırısı. Hedef korkmuşsa %50 daha fazla hasar verir.",
+        "branch": "Terror",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "range": "Melee",
+          "damage": "2d8",
+          "bonus_multiplier": "1.5x on fear"
+        }
+      },
+      {
+        "spell_key": "ns_predators_mark",
+        "name_en": "Predator's Mark",
+        "name_tr": "Yırtıcı İşareti",
+        "description_en": "Marks a target for 3 turns. You gain 5m extra movement speed when moving toward them and ignore their physical armor.",
+        "description_tr": "Bir hedefi 3 turluğuna işaretler. Onlara doğru hareket ederken 5m ekstra hareket hızı kazanırsınız ve fiziksel zırhlarını yok sayarsınız.",
+        "branch": "Terror",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 130,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "range": "20m",
+          "duration": "3 turns",
+          "bonus_speed": "5m",
+          "ignore_armor": "true"
+        }
+      },
+      {
+        "spell_key": "ns_summon_nightmare",
+        "name_en": "Summon Nightmare",
+        "name_tr": "Kabus Çağırma",
+        "description_en": "Summons a Nightmare Steed for 2 turns. It charges at enemies, dealing 3d8 bludgeoning damage and knocking them prone.",
+        "description_tr": "2 tur boyunca bir Kabus Atı çağırır. Düşmanlara hücum ederek 3d8 ezici hasar verir ve onları yere serer.",
+        "branch": "Terror",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "ns_shadow_hound"
+        ],
+        "icon": "🐎",
+        "effects": {
+          "range": "15m",
+          "summon": "nightmare",
+          "damage": "3d8",
+          "knockdown": "true",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ns_execute_the_weak",
+        "name_en": "Execute the Weak",
+        "name_tr": "Zayıfları İnfaz Et",
+        "description_en": "Instantly kills a sleeping or feared non-boss target if they are below 25% health. Otherwise, deals 4d8 damage.",
+        "description_tr": "Uyuyan veya korkmuş patron olmayan bir hedefi sağlığı %25'in altındaysa anında öldürür. Aksi takdirde 4d8 hasar verir.",
+        "branch": "Terror",
+        "tier": 2,
+        "min_level": 29,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ns_terror_strike",
+          "ns_predators_mark"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "range": "Melee",
+          "execute": "25%",
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "ns_beast_claws",
+        "name_en": "Beast Claws",
+        "name_tr": "Canavar Pençeleri",
+        "description_en": "Your hands transform into shadow claws for 3 turns. Melee attacks deal an extra 2d8 necrotic damage and inflict bleed.",
+        "description_tr": "Elleriniz 3 turluğuna gölge pençelerine dönüşür. Yakın dövüş saldırıları fazladan 2d8 nekrotik hasar verir ve kanama uygular.",
+        "branch": "Terror",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ns_terror_strike"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "duration": "3 turns",
+          "bonus_damage": "2d8",
+          "bleed": "1d6/turn"
+        }
+      },
+      {
+        "spell_key": "ns_shadow_swarm",
+        "name_en": "Shadow Swarm",
+        "name_tr": "Gölge Sürüsü",
+        "description_en": "Releases a swarm of shadowy bats that deal 4d6 necrotic damage to all enemies in a 10m cone and blind them for 1 turn.",
+        "description_tr": "10m'lik bir koni içindeki tüm düşmanlara 4d6 nekrotik hasar veren ve onları 1 tur kör eden gölge yarasaları sürüsü salar.",
+        "branch": "Terror",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "ns_summon_nightmare"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "aoe": "cone 10m",
+          "damage": "4d6",
+          "blind": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_feed_on_fear",
+        "name_en": "Feed on Fear",
+        "name_tr": "Korkuyla Beslen",
+        "description_en": "Consume the fear of enemies within 15 meters. For each feared enemy, heal 2d10 HP and gain +2 attack damage for 3 turns.",
+        "description_tr": "15 metre içindeki düşmanların korkusunu tüketin. Korkutulmuş her düşman için 2d10 HP iyileşin ve 3 tur boyunca +2 saldırı hasarı kazanın.",
+        "branch": "Terror",
+        "tier": 3,
+        "min_level": 51,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ns_summon_nightmare",
+          "ns_execute_the_weak"
+        ],
+        "icon": "🍽️",
+        "effects": {
+          "radius": "15m",
+          "heal": "2d10/target",
+          "buff": "+2 damage/target",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ns_terror_frenzy",
+        "name_en": "Terror Frenzy",
+        "name_tr": "Terör Çılgınlığı",
+        "description_en": "Enter a frenzy for 2 turns. You attack twice per action but cannot use defensive skills.",
+        "description_tr": "2 tur boyunca çılgınlığa girersiniz. Her eylemde iki kez saldırırsınız ancak savunma yeteneklerini kullanamazsınız.",
+        "branch": "Terror",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "ns_beast_claws"
+        ],
+        "icon": "💢",
+        "effects": {
+          "duration": "2 turns",
+          "double_attack": "true",
+          "lock_defense": "true"
+        }
+      },
+      {
+        "spell_key": "ns_behemoth_of_the_dark",
+        "name_en": "Behemoth of the Dark",
+        "name_tr": "Karanlığın Behemotu",
+        "description_en": "Summons a massive Shadow Behemoth for 3 turns. It has 200 HP and attacks deal 6d10 damage.",
+        "description_tr": "3 tur boyunca devasa bir Gölge Behemotu çağırır. 200 canı vardır ve saldırıları 6d10 hasar verir.",
+        "branch": "Terror",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 660,
+        "prerequisites": [
+          "ns_shadow_swarm",
+          "ns_feed_on_fear"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "duration": "3 turns",
+          "summon": "behemoth",
+          "summon_hp": 200,
+          "summon_damage": "6d10"
+        }
+      },
+      {
+        "spell_key": "ns_merciless_cull",
+        "name_en": "Merciless Cull",
+        "name_tr": "Acımasız İtlaf",
+        "description_en": "Leap up to 15m to a target. If they are CC'd (feared, sleeping, paralyzed), deal 10d8 physical damage automatically as a critical hit.",
+        "description_tr": "Bir hedefe doğru 15m'ye kadar sıçrayın. Eğer kitle kontrolü (korkmuş, uyuyan, felçli) altındalarsa, kritik vuruş olarak otomatik 10d8 fiziksel hasar verin.",
+        "branch": "Terror",
+        "tier": 4,
+        "min_level": 73,
+        "xp_cost": 780,
+        "prerequisites": [
+          "ns_feed_on_fear",
+          "ns_terror_frenzy"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "dash": "15m",
+          "damage": "10d8",
+          "auto_crit": "true on CC"
+        }
+      },
+      {
+        "spell_key": "ns_terror_nova",
+        "name_en": "Terror Nova",
+        "name_tr": "Terör Novası",
+        "description_en": "Explode with terrifying shadowy energy. Enemies within 10m take 8d8 necrotic damage and are knocked back 5 meters.",
+        "description_tr": "Korkunç gölge enerjisiyle patlayın. 10m içindeki düşmanlar 8d8 nekrotik hasar alır ve 5 metre geriye savrulurlar.",
+        "branch": "Terror",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ns_terror_frenzy"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "radius": "10m",
+          "damage": "8d8",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "ns_manifest_nightmare",
+        "name_en": "Manifest Nightmare",
+        "name_tr": "Kabus Tezahürü",
+        "description_en": "Pulls a target's worst nightmare into physical reality as a monstrous entity that attacks them for 4 turns, dealing 6d12 damage per turn.",
+        "description_tr": "Hedefin en kötü kabusunu fiziksel gerçekliğe çekerek onlara 4 tur boyunca saldıran ve tur başına 6d12 hasar veren korkunç bir varlığa dönüştürür.",
+        "branch": "Terror",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1120,
+        "prerequisites": [
+          "ns_behemoth_of_the_dark",
+          "ns_terror_nova"
+        ],
+        "icon": "🦑",
+        "effects": {
+          "range": "20m",
+          "duration": "4 turns",
+          "summon": "nightmare_entity",
+          "damage": "6d12/turn"
+        }
+      },
+      {
+        "spell_key": "ns_harbinger_of_terror",
+        "name_en": "Harbinger of Terror",
+        "name_tr": "Terör Müjdecisi",
+        "description_en": "Become the ultimate predator. For 3 turns, all your attacks are instant executions on targets below 30% health, and your movement speed is tripled.",
+        "description_tr": "Nihai yırtıcı olun. 3 tur boyunca tüm saldırılarınız sağlığı %30'un altındaki hedeflerde anında infazdır ve hareket hızınız üç katına çıkar.",
+        "branch": "Terror",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "ns_merciless_cull",
+          "ns_manifest_nightmare"
+        ],
+        "icon": "💀",
+        "effects": {
+          "duration": "3 turns",
+          "execute_threshold": "30%",
+          "speed_multiplier": "3x"
+        }
+      },
+      {
+        "spell_key": "ns_frightening_slumber",
+        "name_en": "Frightening Slumber",
+        "name_tr": "Korkutucu Uyku",
+        "description_en": "Forces the target to sleep for 2 turns. When they wake up, they are terrified and take 4d6 psychic damage.",
+        "description_tr": "Hedefi 2 tur boyunca uyumaya zorlar. Uyandıklarında dehşete düşerler ve 4d6 psişik hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 31,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ns_sudden_fright",
+          "ns_slumber_hex"
+        ],
+        "icon": "😱",
+        "effects": {
+          "range": "15m",
+          "sleep": "2 turns",
+          "wakeup_damage": "4d6",
+          "fear": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_beast_of_the_mind",
+        "name_en": "Beast of the Mind",
+        "name_tr": "Zihin Canavarı",
+        "description_en": "Spawns a phantom beast inside a sleeping target's dream. It deals 6d8 psychic damage and wakes them up screaming, silencing them for 1 turn.",
+        "description_tr": "Uyuyan bir hedefin rüyasında hayalet bir canavar yaratır. 6d8 psişik hasar verir ve onları çığlık atarak uyandırıp 1 tur susturur.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 53,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ns_night_terrors",
+          "ns_shadow_swarm"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "range": "20m",
+          "damage": "6d8",
+          "wakes_target": "true",
+          "silence": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_paralyzing_roar",
+        "name_en": "Paralyzing Roar",
+        "name_tr": "Felç Edici Kükreme",
+        "description_en": "Let out a monstrous roar. Enemies in a 15m radius take 5d6 sonic damage and are paralyzed with fear for 1 turn.",
+        "description_tr": "Korkunç bir kükreme salın. 15m yarıçapındaki düşmanlar 5d6 sonik hasar alır ve 1 tur boyunca korkuyla felç olurlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ns_panic_attack",
+          "ns_terror_frenzy"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "radius": "15m",
+          "damage": "5d6",
+          "paralyze": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ns_nightmare_execution",
+        "name_en": "Nightmare Execution",
+        "name_tr": "Kabus İnfazı",
+        "description_en": "Instantly teleport to a sleeping target and deal 12d10 damage. If this kills them, their body explodes into a shadow nova, dealing 6d8 damage to nearby enemies.",
+        "description_tr": "Uyuyan bir hedefe anında ışınlanın ve 12d10 hasar verin. Eğer bu onları öldürürse, vücutları bir gölge novasına dönüşerek yakındaki düşmanlara 6d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ns_comatose",
+          "ns_merciless_cull"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "range": "30m",
+          "teleport": "melee",
+          "damage": "12d10",
+          "on_kill_explosion": "6d8"
+        }
+      },
+      {
+        "spell_key": "ns_aura_of_despair",
+        "name_en": "Aura of Despair",
+        "name_tr": "Umutsuzluk Aurası",
+        "description_en": "Emit an aura of pure despair. Enemies within 10m cannot heal, and they take 4d8 psychic damage at the start of each of your turns.",
+        "description_tr": "Saf bir umutsuzluk aurası yayın. 10m içindeki düşmanlar iyileşemez ve her turunuzun başında 4d8 psişik hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "ns_mass_hysteria",
+          "ns_terror_nova"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "radius": "10m",
+          "heal_block": "true",
+          "damage": "4d8/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ns_dream_devourer",
+        "name_en": "Dream Devourer",
+        "name_tr": "Rüya Yokedici",
+        "description_en": "Unleash a massive entity that consumes the dreamscape. All enemies in 20m are forced into sleep, and immediately take 15d10 damage as their nightmares are ripped out.",
+        "description_tr": "Rüya diyarını tüketen devasa bir varlığı serbest bırakın. 20m içindeki tüm düşmanlar uykuya zorlanır ve kabusları sökülüp alındığı için anında 15d10 hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ns_endless_dread",
+          "ns_eternal_slumber",
+          "ns_manifest_nightmare"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "20m",
+          "sleep": "1 turn",
+          "damage": "15d10"
+        }
+      },
+      {
+        "spell_key": "ns_shadow_realm_ambush",
+        "name_en": "Shadow Realm Ambush",
+        "name_tr": "Gölge Diyarı Pususu",
+        "description_en": "Drag the target into the shadow realm for 2 turns. While there, they are attacked by all their fears, taking 20d8 psychic damage, while you vanish from the battlefield.",
+        "description_tr": "Hedefi 2 tur boyunca gölge diyarına sürükleyin. Oradayken tüm korkuları tarafından saldırıya uğrarlar ve 20d8 psişik hasar alırlar, siz ise savaş alanından kaybolursunuz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 89,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ns_endless_dread",
+          "ns_eternal_slumber",
+          "ns_manifest_nightmare"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "range": "15m",
+          "vanish": "2 turns",
+          "banish": "2 turns",
+          "damage": "20d8"
+        }
+      },
+      {
+        "spell_key": "ns_waking_nightmare",
+        "name_en": "Waking Nightmare",
+        "name_tr": "Uyanık Kabus",
+        "description_en": "Merge the dream realm with reality. For 5 turns, all enemies are constantly frightened, take 10d10 damage per turn, and your Shadow Beasts are summoned instantly without action cost. A domain expansion of terror.",
+        "description_tr": "Rüya diyarını gerçeklikle birleştirin. 5 tur boyunca tüm düşmanlar sürekli korkar, tur başına 10d10 hasar alır ve Gölge Canavarlarınız eylem puanı harcamadan anında çağrılır. Bir terör alanı genişlemesi.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ns_avatar_of_fear",
+          "ns_lord_of_dreams",
+          "ns_harbinger_of_terror"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "duration": "5 turns",
+          "global_fear": "true",
+          "damage": "10d10/turn",
+          "free_summons": "true"
+        }
+      }
+    ]
+  }
+]

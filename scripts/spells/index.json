@@ -1,0 +1,986 @@
+[
+  {
+    "subclass_key": "index",
+    "tree_name_en": "Index Marksman",
+    "tree_name_tr": "Endeks Nişancısı",
+    "tree_desc_en": "Master the art of the perfect kill. Mark your targets, track them relentlessly across any terrain, and mathematically analyze their weak points to ensure every shot is fatal.",
+    "tree_desc_tr": "Kusursuz cinayet sanatında ustalaş. Hedeflerini işaretle, onları her türlü arazide amansızca takip et ve her atışın ölümcül olmasını sağlamak için zayıf noktalarını matematiksel olarak analiz et.",
+    "branches": [
+      "Mark",
+      "Tracker",
+      "Analysis"
+    ],
+    "spells": [
+      {
+        "spell_key": "ix_basic_mark",
+        "name_en": "Basic Mark",
+        "name_tr": "Temel İşaret",
+        "description_en": "Mark a target up to 30m away. Your attacks against them have +1 to hit and deal an extra 1d4 damage. Lasts 1 minute.",
+        "description_tr": "30m'ye kadar uzaktaki bir hedefi işaretle. Onlara karşı saldırıların +1 isabet oranına sahip olur ve fazladan 1d4 hasar verir. 1 dakika sürer.",
+        "branch": "Mark",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "damage": "1d4",
+          "range": "30m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ix_homing_shot",
+        "name_en": "Homing Shot",
+        "name_tr": "Güdümlü Atış",
+        "description_en": "Fire a projectile that tracks a marked target within 40m, ignoring half and three-quarters cover. Deals 2d6 piercing damage.",
+        "description_tr": "40m içindeki işaretli bir hedefi takip eden, yarım ve üç çeyrek siperi yok sayan bir mermi ateşle. 2d6 delici hasar verir.",
+        "branch": "Mark",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "ix_basic_mark"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "damage": "2d6",
+          "range": "40m",
+          "ignore_cover": "75%"
+        }
+      },
+      {
+        "spell_key": "ix_extended_mark",
+        "name_en": "Extended Mark",
+        "name_tr": "Genişletilmiş İşaret",
+        "description_en": "Increases the maximum range of your marks by 30m and extends their duration to 5 minutes.",
+        "description_tr": "İşaretlerinizin maksimum menzilini 30m artırır ve sürelerini 5 dakikaya uzatır.",
+        "branch": "Mark",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ix_basic_mark"
+        ],
+        "icon": "🔭",
+        "effects": {
+          "range_increase": "30m",
+          "duration": "5 minutes"
+        }
+      },
+      {
+        "spell_key": "ix_multi_mark",
+        "name_en": "Multi Mark",
+        "name_tr": "Çoklu İşaret",
+        "description_en": "You can now maintain up to 3 active marks simultaneously. Each marked target takes 1d6 extra damage instead of 1d4.",
+        "description_tr": "Artık aynı anda 3 adede kadar aktif işareti koruyabilirsiniz. Her işaretli hedef 1d4 yerine fazladan 1d6 hasar alır.",
+        "branch": "Mark",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ix_extended_mark"
+        ],
+        "icon": "🎛️",
+        "effects": {
+          "max_marks": 3,
+          "damage": "1d6"
+        }
+      },
+      {
+        "spell_key": "ix_mark_detonation",
+        "name_en": "Mark Detonation",
+        "name_tr": "İşaret Patlaması",
+        "description_en": "Consume a mark on a target to cause a sudden explosion, dealing 3d6 force damage in a 5m radius around them.",
+        "description_tr": "Hedefteki bir işareti tüketerek etraflarında 5m yarıçapında 3d6 kuvvet hasarı veren ani bir patlamaya neden olun.",
+        "branch": "Mark",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ix_homing_shot"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ix_beacon_flare",
+        "name_en": "Beacon Flare",
+        "name_tr": "İşaret Fişeği",
+        "description_en": "Fire a flare at a target up to 100m away. For 1 minute, their exact location is visible to all allies, entirely negating invisibility.",
+        "description_tr": "100m'ye kadar uzaktaki bir hedefe fişek fırlat. 1 dakika boyunca kesin konumları tüm müttefikler tarafından görünür hale gelir ve görünmezliği tamamen iptal eder.",
+        "branch": "Mark",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ix_extended_mark"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "range": "100m",
+          "duration": "1 minute",
+          "negate_invisibility": true
+        }
+      },
+      {
+        "spell_key": "ix_inescapable_mark",
+        "name_en": "Inescapable Mark",
+        "name_tr": "Kaçınılmaz İşaret",
+        "description_en": "A specialized mark applied up to 40m away that prevents the target from using teleportation or planar travel for 30 seconds.",
+        "description_tr": "40m uzaklığa kadar uygulanan, hedefin 30 saniye boyunca ışınlanma veya düzlemsel seyahat kullanmasını engelleyen özel bir işaret.",
+        "branch": "Mark",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ix_multi_mark"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "range": "40m",
+          "duration": "30 seconds",
+          "prevent_teleport": true
+        }
+      },
+      {
+        "spell_key": "ix_curving_bullet",
+        "name_en": "Curving Bullet",
+        "name_tr": "Kavisli Mermi",
+        "description_en": "Your ranged attacks curve around obstacles. You completely ignore full cover if an open path exists to a marked target within 50m.",
+        "description_tr": "Menzilli atışlarınız engellerin etrafından kavis çizer. 50m içindeki işaretli bir hedefe açık bir yol varsa tam siperi tamamen yok sayarsınız.",
+        "branch": "Mark",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ix_mark_detonation"
+        ],
+        "icon": "↪️",
+        "effects": {
+          "range": "50m",
+          "ignore_cover": "100%"
+        }
+      },
+      {
+        "spell_key": "ix_mark_transfer",
+        "name_en": "Mark Transfer",
+        "name_tr": "İşaret Transferi",
+        "description_en": "When a marked target dies, their mark automatically transfers to the nearest enemy within 15m, refreshing its duration.",
+        "description_tr": "İşaretli bir hedef öldüğünde, işareti otomatik olarak 15m içindeki en yakın düşmana aktarılır ve süresi yenilenir.",
+        "branch": "Mark",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ix_multi_mark"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "range": "15m",
+          "duration": "refreshed"
+        }
+      },
+      {
+        "spell_key": "ix_death_mark",
+        "name_en": "Death Mark",
+        "name_tr": "Ölüm İşareti",
+        "description_en": "Apply a deadly mark up to 50m. Your first attack against this marked target is a guaranteed critical hit and deals an extra 5d8 necrotic damage.",
+        "description_tr": "50m'ye kadar ölümcül bir işaret uygula. Bu işaretli hedefe karşı ilk saldırınız kesinlikle kritik vurur ve fazladan 5d8 nekrotik hasar verir.",
+        "branch": "Mark",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ix_inescapable_mark"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "range": "50m",
+          "damage": "5d8",
+          "guaranteed_crit": true
+        }
+      },
+      {
+        "spell_key": "ix_swarm_homing",
+        "name_en": "Swarm Homing",
+        "name_tr": "Sürü Güdümü",
+        "description_en": "Fire a volley of 5 projectiles that aggressively seek out marked targets within 60m. Each projectile deals 2d8 damage.",
+        "description_tr": "60m içindeki işaretli hedefleri agresif bir şekilde arayan 5 mermilik bir yaylım ateşi açın. Her mermi 2d8 hasar verir.",
+        "branch": "Mark",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ix_curving_bullet"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "projectiles": 5,
+          "damage": "2d8",
+          "range": "60m"
+        }
+      },
+      {
+        "spell_key": "ix_soul_mark",
+        "name_en": "Soul Mark",
+        "name_tr": "Ruh İşareti",
+        "description_en": "Embed your mark into the target's soul for 24 hours. It cannot be removed by magical means, allowing cross-dimensional tracking.",
+        "description_tr": "İşaretinizi 24 saat boyunca hedefin ruhuna yerleştirin. Büyülü yollarla kaldırılamaz ve boyutlar arası takibe olanak tanır.",
+        "branch": "Mark",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ix_death_mark"
+        ],
+        "icon": "👻",
+        "effects": {
+          "duration": "24 hours",
+          "cross_dimensional": true
+        }
+      },
+      {
+        "spell_key": "ix_omni_mark",
+        "name_en": "Omni Mark",
+        "name_tr": "Mutlak İşaret",
+        "description_en": "Instantly mark all enemies within a 30m radius of yourself. All allies deal +2d6 damage against them.",
+        "description_tr": "Etrafınızdaki 30m yarıçapındaki tüm düşmanları anında işaretleyin. Tüm müttefikler onlara karşı +2d6 hasar verir.",
+        "branch": "Mark",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ix_soul_mark",
+          "ix_swarm_homing"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "radius": "30m",
+          "damage_bonus": "2d6",
+          "targets": "all enemies"
+        }
+      },
+      {
+        "spell_key": "ix_ultimate_execution",
+        "name_en": "Ultimate Execution",
+        "name_tr": "Nihai İnfaz",
+        "description_en": "Consume a Soul Mark to fire a devastating shot from anywhere within 500m. Deals 12d10 force damage and executes targets below 15% health.",
+        "description_tr": "500m içinde herhangi bir yerden yıkıcı bir atış yapmak için Ruh İşaretini tüket. 12d10 kuvvet hasarı verir ve sağlığı %15'in altındaki hedefleri infaz eder.",
+        "branch": "Mark",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ix_omni_mark"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "range": "500m",
+          "damage": "12d10",
+          "execute_threshold": "15%"
+        }
+      },
+      {
+        "spell_key": "ix_scent_trail",
+        "name_en": "Scent Trail",
+        "name_tr": "Koku İzi",
+        "description_en": "You can passively see glowing trails left by creatures that passed through the area within the last 1 hour. Range: 20m.",
+        "description_tr": "Bölgeden son 1 saat içinde geçen yaratıkların bıraktığı parlayan izleri pasif olarak görebilirsiniz. Menzil: 20m.",
+        "branch": "Tracker",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐾",
+        "effects": {
+          "range": "20m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ix_hunter_vision",
+        "name_en": "Hunter's Vision",
+        "name_tr": "Avcı Görüşü",
+        "description_en": "Gain darkvision up to 30m and advantage on all perception checks to locate hidden or disguised enemies.",
+        "description_tr": "30m'ye kadar karanlık görüşü kazanın ve gizlenmiş veya kılık değiştirmiş düşmanları bulmak için tüm algı zarlarında avantaj elde edin.",
+        "branch": "Tracker",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "ix_scent_trail"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "30m",
+          "advantage": "perception"
+        }
+      },
+      {
+        "spell_key": "ix_ignore_cover_1",
+        "name_en": "Ricochet Shot",
+        "name_tr": "Sekme Atışı",
+        "description_en": "Bounce your shot off a hard surface to hit enemies hiding behind cover within 25m. Deals 1d10 piercing damage.",
+        "description_tr": "25m içindeki siper arkasına saklanan düşmanları vurmak için atışınızı sert bir yüzeyden sektirin. 1d10 delici hasar verir.",
+        "branch": "Tracker",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ix_hunter_vision"
+        ],
+        "icon": "🎱",
+        "effects": {
+          "range": "25m",
+          "damage": "1d10"
+        }
+      },
+      {
+        "spell_key": "ix_sonar_pulse",
+        "name_en": "Sonar Pulse",
+        "name_tr": "Sonar Darbesi",
+        "description_en": "Emit a silent pulse that outlines all moving creatures within 40m through walls for 10 seconds.",
+        "description_tr": "40m içindeki hareket eden tüm yaratıkları 10 saniye boyunca duvarların arkasından çizen sessiz bir darbe yayın.",
+        "branch": "Tracker",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ix_hunter_vision"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "range": "40m",
+          "duration": "10 seconds"
+        }
+      },
+      {
+        "spell_key": "ix_thermal_scope",
+        "name_en": "Thermal Scope",
+        "name_tr": "Termal Dürbün",
+        "description_en": "Activate your scope to see heat signatures for 1 minute. Negates invisibility, fog, and magical darkness within 60m.",
+        "description_tr": "Isı izlerini 1 dakika boyunca görmek için dürbününüzü etkinleştirin. 60m içindeki görünmezliği, sisi ve büyülü karanlığı yok sayar.",
+        "branch": "Tracker",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ix_sonar_pulse"
+        ],
+        "icon": "🌡️",
+        "effects": {
+          "range": "60m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ix_relentless_pursuit",
+        "name_en": "Relentless Pursuit",
+        "name_tr": "Amansız Takip",
+        "description_en": "While moving towards a tracked target, your movement speed increases by 5m and you completely ignore difficult terrain.",
+        "description_tr": "Takip edilen bir hedefe doğru hareket ederken, hareket hızınız 5m artar ve zorlu araziyi tamamen yok sayarsınız.",
+        "branch": "Tracker",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ix_ignore_cover_1"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "speed": "+5m",
+          "ignore_terrain": true
+        }
+      },
+      {
+        "spell_key": "ix_wall_piercer",
+        "name_en": "Wall Piercer",
+        "name_tr": "Duvar Delici",
+        "description_en": "Fire a heavy shot that penetrates up to 1m of solid stone or metal, dealing 4d8 piercing damage to enemies caught behind it.",
+        "description_tr": "1m'ye kadar katı taş veya metali delen ağır bir atış yapın, arkasında kalan düşmanlara 4d8 delici hasar verir.",
+        "branch": "Tracker",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ix_thermal_scope"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "penetration": "1m",
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "ix_blood_tracker",
+        "name_en": "Blood Tracker",
+        "name_tr": "Kan Takipçisi",
+        "description_en": "Once you damage an enemy, you intrinsically know the exact distance and direction to them as long as they remain within 1000m.",
+        "description_tr": "Bir düşmana hasar verdiğinizde, 1000m içinde kaldıkları sürece onlara olan kesin mesafeyi ve yönü içgüdüsel olarak bilirsiniz.",
+        "branch": "Tracker",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ix_relentless_pursuit"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "range": "1000m",
+          "duration": "until target heals"
+        }
+      },
+      {
+        "spell_key": "ix_trap_sense",
+        "name_en": "Trap Sense",
+        "name_tr": "Tuzak Hissi",
+        "description_en": "Passively detects mechanical and magical traps within a 15m radius, illuminating them slightly.",
+        "description_tr": "15m yarıçapındaki mekanik ve büyülü tuzakları pasif olarak algılar ve onları hafifçe aydınlatır.",
+        "branch": "Tracker",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ix_sonar_pulse"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "range": "15m",
+          "passive": true
+        }
+      },
+      {
+        "spell_key": "ix_ghost_hunter",
+        "name_en": "Ghost Hunter",
+        "name_tr": "Hayalet Avcısı",
+        "description_en": "Your tracking and attacks ignore incorporeal evasion. You can hit ethereal targets for full damage.",
+        "description_tr": "Takibiniz ve saldırılarınız bedensiz kaçışı yok sayar. Ruhani hedeflere tam hasar verebilirsiniz.",
+        "branch": "Tracker",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ix_blood_tracker"
+        ],
+        "icon": "👻",
+        "effects": {
+          "hit_ethereal": true,
+          "passive": true
+        }
+      },
+      {
+        "spell_key": "ix_clairvoyant_shot",
+        "name_en": "Clairvoyant Shot",
+        "name_tr": "Görüş Ötesi Atış",
+        "description_en": "Fire blindly into a completely obscured area up to 100m away. Tracker magic guides the bullet to hit an enemy for 5d10 damage.",
+        "description_tr": "100m'ye kadar tamamen gizlenmiş bir alana körlemesine ateş et. Takipçi büyüsü mermiyi bir düşmana vurması için yönlendirir, 5d10 hasar verir.",
+        "branch": "Tracker",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ix_wall_piercer"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "100m",
+          "damage": "5d10"
+        }
+      },
+      {
+        "spell_key": "ix_no_escape",
+        "name_en": "No Escape",
+        "name_tr": "Kaçış Yok",
+        "description_en": "When a tracked enemy attempts to dash or disengage, take a reaction to make a free weapon attack against them with advantage.",
+        "description_tr": "Takip edilen bir düşman hızla koşmaya veya geri çekilmeye çalıştığında, avantajlı bir şekilde ücretsiz silah saldırısı yapmak için reaksiyon kullanın.",
+        "branch": "Tracker",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ix_ghost_hunter"
+        ],
+        "icon": "🚷",
+        "effects": {
+          "reaction": true,
+          "advantage": true
+        }
+      },
+      {
+        "spell_key": "ix_predator_instinct",
+        "name_en": "Predator Instinct",
+        "name_tr": "Yırtıcı İçgüdüsü",
+        "description_en": "For 1 minute, your senses elevate: you cannot be surprised, gain truesight up to 60m, and your movement speed is doubled.",
+        "description_tr": "1 dakika boyunca duyularınız yükselir: şaşırtılamazsınız, 60m'ye kadar gerçek görüş kazanırsınız ve hareket hızınız iki katına çıkar.",
+        "branch": "Tracker",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ix_no_escape",
+          "ix_clairvoyant_shot"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "truesight": "60m",
+          "duration": "1 minute",
+          "speed": "x2"
+        }
+      },
+      {
+        "spell_key": "ix_eye_of_the_tracker",
+        "name_en": "Eye of the Tracker",
+        "name_tr": "Takipçinin Gözü",
+        "description_en": "Designate a target anywhere on your current plane. For 24 hours, you see through their eyes, hear what they hear, and know their exact coordinates.",
+        "description_tr": "Mevcut düzleminizin herhangi bir yerindeki bir hedefi belirleyin. 24 saat boyunca onların gözünden görür, duyduklarını duyar ve kesin koordinatlarını bilirsiniz.",
+        "branch": "Tracker",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ix_predator_instinct"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "range": "infinite",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ix_scan_target",
+        "name_en": "Scan Target",
+        "name_tr": "Hedef Taraması",
+        "description_en": "As a bonus action, analyze a target within 30m. Instantly reveal its lowest saving throw and any damage vulnerabilities.",
+        "description_tr": "Bonus eylem olarak, 30m içindeki bir hedefi analiz edin. En düşük kurtarma zarını ve tüm hasar zafiyetlerini anında ortaya çıkarın.",
+        "branch": "Analysis",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔍",
+        "effects": {
+          "range": "30m",
+          "information": "vulnerabilities and low saves"
+        }
+      },
+      {
+        "spell_key": "ix_weak_point_strike",
+        "name_en": "Weak Point Strike",
+        "name_tr": "Zayıf Nokta Vuruşu",
+        "description_en": "Exploit a scanned target's structural flaw. The attack deals an extra 2d6 damage and ignores resistance to that damage type.",
+        "description_tr": "Taranmış hedefin yapısal bir kusurunu sömür. Saldırı fazladan 2d6 hasar verir ve bu hasar türüne olan direnci yok sayar.",
+        "branch": "Analysis",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "ix_scan_target"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2d6",
+          "ignore_resistance": true
+        }
+      },
+      {
+        "spell_key": "ix_armor_calc",
+        "name_en": "Armor Calculation",
+        "name_tr": "Zırh Hesaplaması",
+        "description_en": "Analyze an enemy's armor structure. Your attacks against them permanently gain +2 to hit and bypass 2 points of their Armor Class.",
+        "description_tr": "Düşmanın zırh yapısını analiz edin. Onlara karşı saldırılarınız kalıcı olarak +2 isabet kazanır ve Zırh Sınıflarının 2 puanını atlar.",
+        "branch": "Analysis",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ix_weak_point_strike"
+        ],
+        "icon": "📐",
+        "effects": {
+          "hit_bonus": "+2",
+          "armor_reduction": "2"
+        }
+      },
+      {
+        "spell_key": "ix_critical_focus",
+        "name_en": "Critical Focus",
+        "name_tr": "Kritik Odak",
+        "description_en": "Your precise weapon attacks against scanned targets now score a critical hit on a roll of 19 or 20.",
+        "description_tr": "Taranan hedeflere karşı kesin silah saldırılarınız artık 19 veya 20 zarda kritik vuruş yapar.",
+        "branch": "Analysis",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ix_weak_point_strike"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "crit_range": "19-20",
+          "passive": true
+        }
+      },
+      {
+        "spell_key": "ix_shatter_armor",
+        "name_en": "Shatter Armor",
+        "name_tr": "Zırh Parçala",
+        "description_en": "A precise shot that destroys a key weak point in armor, reducing the target's AC by 2 for 1 minute. Deals 3d8 damage.",
+        "description_tr": "Zırhtaki önemli bir zayıf noktayı yok eden, hedefin AC'sini 1 dakika boyunca 2 azaltan kesin bir atış. 3d8 hasar verir.",
+        "branch": "Analysis",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ix_armor_calc"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "damage": "3d8",
+          "ac_reduction": "2",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ix_predictive_aim",
+        "name_en": "Predictive Aim",
+        "name_tr": "Öngörülü Nişan",
+        "description_en": "Calculate a target's future path and pre-fire. If the target moves on their next turn, they automatically take 4d6 damage.",
+        "description_tr": "Hedefin gelecekteki yolunu hesapla ve önceden ateş et. Hedef bir sonraki turda hareket ederse, otomatik olarak 4d6 hasar alır.",
+        "branch": "Analysis",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ix_critical_focus"
+        ],
+        "icon": "🕰️",
+        "effects": {
+          "damage": "4d6",
+          "trigger": "movement"
+        }
+      },
+      {
+        "spell_key": "ix_anatomical_knowledge",
+        "name_en": "Anatomical Knowledge",
+        "name_tr": "Anatomik Bilgi",
+        "description_en": "Your deep understanding of biology allows you to deal 1d8 extra precision damage to all beasts, humanoids, and monsters.",
+        "description_tr": "Biyoloji konusundaki derin anlayışınız, tüm canavarlara, insansılara ve yaratıklara 1d8 ekstra hassasiyet hasarı vermenizi sağlar.",
+        "branch": "Analysis",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ix_critical_focus"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "damage": "1d8",
+          "passive": true
+        }
+      },
+      {
+        "spell_key": "ix_vital_shot",
+        "name_en": "Vital Shot",
+        "name_tr": "Hayati Atış",
+        "description_en": "Aim directly for a vital organ. Deals 5d8 piercing damage and forces a Constitution save. On fail, the target is stunned for 1 turn.",
+        "description_tr": "Doğrudan hayati bir organa nişan al. 5d8 delici hasar verir ve bir Dayanıklılık zarına zorlar. Başarısız olursa hedef 1 tur sersemler.",
+        "branch": "Analysis",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ix_anatomical_knowledge"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "damage": "5d8",
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ix_disarm_shot",
+        "name_en": "Disarm Shot",
+        "name_tr": "Silahsızlandırma Atışı",
+        "description_en": "Target an enemy's weapon hand. Deals 3d10 damage and forces them to drop what they hold, giving disadvantage on attacks for 1 turn.",
+        "description_tr": "Bir düşmanın silah elini hedef al. 3d10 hasar verir ve tuttukları şeyi düşürmeye zorlayarak saldırılarda 1 tur dezavantaj verir.",
+        "branch": "Analysis",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ix_shatter_armor"
+        ],
+        "icon": "🔫",
+        "effects": {
+          "damage": "3d10",
+          "drop_weapon": true,
+          "debuff": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ix_surgical_precision",
+        "name_en": "Surgical Precision",
+        "name_tr": "Cerrahi Hassasiyet",
+        "description_en": "Your critical hits against scanned targets now deal triple damage instead of double.",
+        "description_tr": "Taranan hedeflere karşı kritik vuruşlarınız artık iki katı yerine üç katı hasar verir.",
+        "branch": "Analysis",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ix_vital_shot"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "crit_multiplier": "x3"
+        }
+      },
+      {
+        "spell_key": "ix_flaw_exploitation",
+        "name_en": "Flaw Exploitation",
+        "name_tr": "Kusur Sömürüsü",
+        "description_en": "If an enemy misses an attack against you, your next attack against them has advantage and deals a massive +4d6 bonus damage.",
+        "description_tr": "Bir düşman sana karşı yaptığı saldırıyı ıskalarsa, ona karşı yapacağın bir sonraki saldırı avantajlı olur ve büyük bir +4d6 bonus hasar verir.",
+        "branch": "Analysis",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ix_anatomical_knowledge"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage": "+4d6",
+          "advantage": true,
+          "trigger": "enemy miss"
+        }
+      },
+      {
+        "spell_key": "ix_system_failure",
+        "name_en": "System Failure",
+        "name_tr": "Sistem Çöküşü",
+        "description_en": "Target the neural or magical core of a creature. Deals 6d10 damage and completely silences them (preventing casting) for 3 turns.",
+        "description_tr": "Bir yaratığın sinirsel veya büyülü çekirdeğini hedef al. 6d10 hasar verir ve onları 3 tur boyunca tamamen susturur (büyü yapmalarını engeller).",
+        "branch": "Analysis",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ix_disarm_shot"
+        ],
+        "icon": "🔌",
+        "effects": {
+          "damage": "6d10",
+          "silence": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ix_absolute_calculation",
+        "name_en": "Absolute Calculation",
+        "name_tr": "Mutlak Hesaplama",
+        "description_en": "Activate your highest cognitive functions. For 3 turns, treat all your attack rolls as if you rolled a 20.",
+        "description_tr": "En yüksek bilişsel işlevlerini etkinleştir. 3 tur boyunca tüm saldırı zarlarını sanki 20 atmışsın gibi değerlendir.",
+        "branch": "Analysis",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ix_surgical_precision",
+          "ix_flaw_exploitation"
+        ],
+        "icon": "🧮",
+        "effects": {
+          "duration": "3 turns",
+          "attack_roll": "20"
+        }
+      },
+      {
+        "spell_key": "ix_perfect_analysis",
+        "name_en": "Perfect Analysis",
+        "name_tr": "Kusursuz Analiz",
+        "description_en": "Ultimate Analysis. Instantly know all stats, resistances, and immunities. You ignore their resistances and treat immunities as resistances for 1 hour.",
+        "description_tr": "Nihai Analiz. Tüm istatistikleri, dirençleri ve bağışıklıkları anında bil. 1 saat boyunca dirençlerini yok sayar ve bağışıklıklarını direnç olarak kabul edersin.",
+        "branch": "Analysis",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ix_absolute_calculation"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "1 hour",
+          "ignore_resistance": true,
+          "reduce_immunity": true
+        }
+      },
+      {
+        "spell_key": "ix_marked_weakness",
+        "name_en": "Marked Weakness",
+        "name_tr": "İşaretli Zayıflık",
+        "description_en": "When you mark a target, they are automatically scanned, and they become vulnerable to your next attack's damage type.",
+        "description_tr": "Bir hedefi işaretlediğinde otomatik olarak taranır ve bir sonraki saldırının hasar türüne karşı savunmasız hale gelir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ix_basic_mark",
+          "ix_scan_target"
+        ],
+        "icon": "📌",
+        "effects": {
+          "vulnerability": "next attack"
+        }
+      },
+      {
+        "spell_key": "ix_tracking_mark",
+        "name_en": "Tracking Mark",
+        "name_tr": "Takip İşareti",
+        "description_en": "Your basic marks now provide the benefits of a tracker, revealing the target's exact location up to 1000m away.",
+        "description_tr": "Temel işaretleriniz artık bir takipçinin faydalarını sağlar ve 1000m uzağa kadar hedefin kesin konumunu ortaya çıkarır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ix_basic_mark",
+          "ix_hunter_vision"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "range": "1000m",
+          "location": "revealed"
+        }
+      },
+      {
+        "spell_key": "ix_analyzed_trail",
+        "name_en": "Analyzed Trail",
+        "name_tr": "Analiz Edilmiş İz",
+        "description_en": "When tracking a creature, you can mathematically deduce its exact HP, level, and creature type before engaging.",
+        "description_tr": "Bir yaratığı takip ederken, onunla çatışmaya girmeden önce kesin HP'sini, seviyesini ve yaratık türünü matematiksel olarak çıkarabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ix_sonar_pulse",
+          "ix_armor_calc"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "information": "hp, level, type"
+        }
+      },
+      {
+        "spell_key": "ix_homing_vital",
+        "name_en": "Homing Vital",
+        "name_tr": "Güdümlü Hayati Vuruş",
+        "description_en": "A perfect projectile that never misses. It seeks out a vital organ, dealing 4d8 damage and stunning the target for 1 turn.",
+        "description_tr": "Asla ıskalamayan kusursuz bir mermi. Hayati bir organı arar, 4d8 hasar verir ve hedefi 1 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ix_homing_shot",
+          "ix_vital_shot"
+        ],
+        "icon": "💘",
+        "effects": {
+          "damage": "4d8",
+          "stun": "1 turn",
+          "never_miss": true
+        }
+      },
+      {
+        "spell_key": "ix_omnipresent_sniper",
+        "name_en": "Omnipresent Sniper",
+        "name_tr": "Her Yerdeki Keskin Nişancı",
+        "description_en": "Teleport instantly to any marked or tracked target within 200m, firing a shot upon arrival that deals 6d8 force damage.",
+        "description_tr": "200m içindeki herhangi bir işaretli veya takip edilen hedefe anında ışınlanarak vardığınızda 6d8 kuvvet hasarı veren bir atış yapın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ix_death_mark",
+          "ix_wall_piercer"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "teleport": "200m",
+          "damage": "6d8"
+        }
+      },
+      {
+        "spell_key": "ix_calculated_ricochet",
+        "name_en": "Calculated Ricochet",
+        "name_tr": "Hesaplanmış Sekme",
+        "description_en": "Bounce a shot up to 5 times between walls and enemies in a scanned environment. Each enemy hit takes 3d10 damage.",
+        "description_tr": "Taranan bir ortamda duvarlar ve düşmanlar arasında bir atışı 5 defaya kadar sektirin. İsabet alan her düşman 3d10 hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ix_ignore_cover_1",
+          "ix_flaw_exploitation"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "bounces": 5,
+          "damage": "3d10 per hit"
+        }
+      },
+      {
+        "spell_key": "ix_hunter_killer_drone",
+        "name_en": "Hunter-Killer Drone",
+        "name_tr": "Avcı-Katil Dron",
+        "description_en": "Deploy a construct that automatically tracks, marks, and analyzes enemies within 50m for 1 minute, firing small lasers dealing 2d6 damage per turn.",
+        "description_tr": "50m içindeki düşmanları 1 dakika boyunca otomatik olarak takip eden, işaretleyen ve analiz eden, tur başına 2d6 hasar veren küçük lazerler ateşleyen bir yapı konuşlandır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ix_curving_bullet",
+          "ix_ghost_hunter",
+          "ix_surgical_precision"
+        ],
+        "icon": "🛸",
+        "effects": {
+          "duration": "1 minute",
+          "range": "50m",
+          "damage": "2d6/turn"
+        }
+      },
+      {
+        "spell_key": "ix_the_index",
+        "name_en": "The Index",
+        "name_tr": "Endeks",
+        "description_en": "The Grand Ultimate. Open your 'Index', halting time for 6 seconds. Perfectly analyze, mark, and fire at any targets. When time resumes, all shots hit simultaneously. Each target takes 10d12 damage and is stunned for 1 turn.",
+        "description_tr": "Büyük Nihai Yetenek. 'Endeks'ini açarak zamanı 6 saniye durdur. Tüm hedefleri kusursuzca analiz et, işaretle ve ateş et. Zaman devam ettiğinde, tüm atışlar aynı anda vurur. Her hedef 10d12 hasar alır ve 1 tur sersemler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ix_ultimate_execution",
+          "ix_eye_of_the_tracker",
+          "ix_perfect_analysis"
+        ],
+        "icon": "📖",
+        "effects": {
+          "time_stop": "6 seconds",
+          "damage": "10d12",
+          "stun": "1 turn"
+        }
+      }
+    ]
+  }
+]

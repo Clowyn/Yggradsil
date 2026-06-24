@@ -1,0 +1,998 @@
+[
+  {
+    "subclass_key": "mana_mage",
+    "tree_name_en": "Mana Weaving",
+    "tree_name_tr": "Mana Dokuma",
+    "tree_desc_en": "Anti-mage caster. Absorbs 50% of opponent spells and manipulates the flow of magic.",
+    "tree_desc_tr": "Anti-büyücü uzmanı. Rakip büyülerin %50'sini emer ve büyü akışını manipüle eder.",
+    "branches": [
+      "Absorption",
+      "Counterspell",
+      "Mana Manipulation"
+    ],
+    "spells": [
+      {
+        "spell_key": "mm_mana_drain",
+        "name_en": "Mana Drain",
+        "name_tr": "Mana Sömürüsü",
+        "description_en": "Drains magic from a target at range, restoring your own mana.",
+        "description_tr": "Menzilli bir hedeften büyü gücü çeker ve kendi mananızı yeniler.",
+        "branch": "Absorption",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d6",
+          "range": "10m",
+          "mana_steal": "1d6"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_sponge",
+        "name_en": "Arcane Sponge",
+        "name_tr": "Arkana Süngeri",
+        "description_en": "Passively reduces the damage of the next spell that hits you by 25%, absorbing it as mana.",
+        "description_tr": "Size isabet eden bir sonraki büyünün hasarını pasif olarak %25 azaltır ve mana olarak emer.",
+        "branch": "Absorption",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mm_mana_drain"
+        ],
+        "icon": "🧽",
+        "effects": {
+          "damage_reduction": "25%",
+          "mana_restore": "10%"
+        }
+      },
+      {
+        "spell_key": "mm_siphon_essence",
+        "name_en": "Siphon Essence",
+        "name_tr": "Öz Çekimi",
+        "description_en": "Channels a draining beam, continuously pulling health and mana from the target.",
+        "description_tr": "Sürekli bir sömürü ışını yönlendirerek hedeften sağlık ve mana çeker.",
+        "branch": "Absorption",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_mana_drain"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "damage": "1d4 per turn",
+          "range": "15m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mm_absorbing_barrier",
+        "name_en": "Absorbing Barrier",
+        "name_tr": "Emici Bariyer",
+        "description_en": "Creates a magical shield. Any magic damage dealt to the shield heals you for 50% of the damage absorbed.",
+        "description_tr": "Sihirli bir kalkan oluşturur. Kalkana verilen herhangi bir büyü hasarının %50'si sizi iyileştirir.",
+        "branch": "Absorption",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_arcane_sponge"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield_hp": "20",
+          "heal_conversion": "50%"
+        }
+      },
+      {
+        "spell_key": "mm_leeching_grasp",
+        "name_en": "Leeching Grasp",
+        "name_tr": "Sülük Dokunuşu",
+        "description_en": "A melee magic attack that tears mana out of the target and deals damage.",
+        "description_tr": "Hedefin manasını koparıp hasar veren yakın dövüş büyü saldırısı.",
+        "branch": "Absorption",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mm_siphon_essence"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "damage": "2d6",
+          "range": "Melee",
+          "mana_steal": "2d6"
+        }
+      },
+      {
+        "spell_key": "mm_spell_eater",
+        "name_en": "Spell Eater",
+        "name_tr": "Büyü Yiyen",
+        "description_en": "As a reaction to taking magic damage, absorb 50% of the impact to empower your next attack.",
+        "description_tr": "Büyü hasarı almaya tepki olarak etkinleşir, etkinin %50'sini emerek bir sonraki saldırınızı güçlendirir.",
+        "branch": "Absorption",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_absorbing_barrier"
+        ],
+        "icon": "🍽️",
+        "effects": {
+          "damage_reduction": "50%",
+          "next_attack_bonus": "+1d6"
+        }
+      },
+      {
+        "spell_key": "mm_mana_vacuum",
+        "name_en": "Mana Vacuum",
+        "name_tr": "Mana Vakumu",
+        "description_en": "Creates a localized vacuum that pulls mana from all enemies in an area.",
+        "description_tr": "Bölgedeki tüm düşmanlardan mana çeken yerel bir vakum oluşturur.",
+        "branch": "Absorption",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_leeching_grasp",
+          "mm_spell_eater"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "mana_drain": "2d4",
+          "radius": "5m",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mm_energy_conversion",
+        "name_en": "Energy Conversion",
+        "name_tr": "Enerji Dönüşümü",
+        "description_en": "Freely convert your mana into health, or health into mana.",
+        "description_tr": "Mananızı sağlığa veya sağlığınızı serbestçe manaya dönüştürün.",
+        "branch": "Absorption",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mm_mana_vacuum"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "conversion_ratio": "1:1",
+          "max_conversion": "20 points"
+        }
+      },
+      {
+        "spell_key": "mm_hunger_void",
+        "name_en": "Hunger of the Void",
+        "name_tr": "Hiçliğin Açlığı",
+        "description_en": "Summons a zone where spells cost double mana to cast, and you harvest the excess.",
+        "description_tr": "Büyülerin iki kat mana bedeline sahip olduğu bir bölge çağırır ve fazla manayı siz toplarsınız.",
+        "branch": "Absorption",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mm_energy_conversion"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "10m",
+          "mana_cost_multiplier": "2x",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mm_devour_magic",
+        "name_en": "Devour Magic",
+        "name_tr": "Büyü Yutma",
+        "description_en": "Instantly dispels a magical buff or debuff, restoring health to you.",
+        "description_tr": "Sihirli bir güçlendirmeyi veya zayıflatmayı anında dağıtarak size sağlık kazandırır.",
+        "branch": "Absorption",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mm_mana_vacuum"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "heal": "3d8",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mm_magical_parasite",
+        "name_en": "Magical Parasite",
+        "name_tr": "Büyülü Parazit",
+        "description_en": "Infects a target. Whenever they cast a spell, they take damage and you steal a portion of the mana cost.",
+        "description_tr": "Hedefe bulaşır. Büyü yaptıklarında hasar alırlar ve mana bedelinin bir kısmını siz çalarsınız.",
+        "branch": "Absorption",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mm_hunger_void"
+        ],
+        "icon": "🦠",
+        "effects": {
+          "damage": "2d8",
+          "mana_steal": "20%",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mm_nullification_field",
+        "name_en": "Nullification Field",
+        "name_tr": "İptal Alanı",
+        "description_en": "Projects an aura that reduces all incoming magic damage for you and your allies.",
+        "description_tr": "Sizin ve müttefikleriniz için gelen tüm büyü hasarını azaltan bir auro yansıtır.",
+        "branch": "Absorption",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "mm_devour_magic"
+        ],
+        "icon": "🚧",
+        "effects": {
+          "magic_damage_reduction": "30%",
+          "radius": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mm_black_hole_core",
+        "name_en": "Black Hole Core",
+        "name_tr": "Kara Delik Çekirdeği",
+        "description_en": "Summons a floating dark orb that absorbs the next 3 targeted spells cast near it.",
+        "description_tr": "Yakınında yapılan sonraki 3 hedefli büyüyü emen yüzen karanlık bir küre çağırır.",
+        "branch": "Absorption",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mm_magical_parasite"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "spell_absorption_charges": "3",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_gluttony",
+        "name_en": "Arcane Gluttony",
+        "name_tr": "Arkana Oburluğu",
+        "description_en": "For a short duration, you absorb 100% of the first spell that hits you each turn.",
+        "description_tr": "Kısa bir süre için her tur size isabet eden ilk büyünün %100'ünü emersiniz.",
+        "branch": "Absorption",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mm_nullification_field"
+        ],
+        "icon": "👄",
+        "effects": {
+          "duration": "3 turns",
+          "absorption_rate": "100%"
+        }
+      },
+      {
+        "spell_key": "mm_absolute_absorption",
+        "name_en": "Absolute Absorption",
+        "name_tr": "Mutlak Emilim",
+        "description_en": "You become an endless void. Absorbs all hostile magic nearby, gaining immense power for each spell consumed.",
+        "description_tr": "Sonsuz bir hiçliğe dönüşürsünüz. Yakındaki tüm düşman büyülerini emerek her yutulan büyü için muazzam güç kazanırsınız.",
+        "branch": "Absorption",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mm_black_hole_core",
+          "mm_arcane_gluttony"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "20m",
+          "duration": "5 turns",
+          "damage_bonus_per_spell": "+5"
+        }
+      },
+      {
+        "spell_key": "mm_minor_deflection",
+        "name_en": "Minor Deflection",
+        "name_tr": "Küçük Saptırma",
+        "description_en": "Reactively deflects a magic projectile, gaining a temporary armor class boost against it.",
+        "description_tr": "Büyülü bir mermiyi anında saptırarak ona karşı geçici bir zırh sınıfı artışı sağlar.",
+        "branch": "Counterspell",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🖐️",
+        "effects": {
+          "ac_bonus": "+2",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_disruption",
+        "name_en": "Arcane Disruption",
+        "name_tr": "Arkana Bozulması",
+        "description_en": "Scrambles the target's focus, increasing the mana cost of their next spell by 50%.",
+        "description_tr": "Hedefin odağını bozar ve bir sonraki büyülerinin mana bedelini %50 artırır.",
+        "branch": "Counterspell",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mm_minor_deflection"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "mana_cost_increase": "50%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "mm_silence",
+        "name_en": "Silence",
+        "name_tr": "Susturma",
+        "description_en": "Creates a spherical zone where no sound exists, preventing the casting of spells with verbal components.",
+        "description_tr": "Hiçbir sesin olmadığı, sözlü bileşenlere sahip büyülerin yapılmasını engelleyen küresel bir bölge oluşturur.",
+        "branch": "Counterspell",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_arcane_disruption"
+        ],
+        "icon": "🔇",
+        "effects": {
+          "radius": "5m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mm_rebuke",
+        "name_en": "Rebuke",
+        "name_tr": "Azarlama",
+        "description_en": "Punishes enemy spellcasting with a sudden jolt of psychic or magical feedback.",
+        "description_tr": "Düşman büyülerini ani bir psişik veya büyülü geri bildirim sarsıntısıyla cezalandırır.",
+        "branch": "Counterspell",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_arcane_disruption"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d6",
+          "range": "15m",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "mm_counterspell",
+        "name_en": "Counterspell",
+        "name_tr": "Karşı Büyü",
+        "description_en": "Instantly interrupts a creature in the process of casting a spell, causing it to fail.",
+        "description_tr": "Büyü yapma sürecindeki bir yaratığı anında kesintiye uğratarak büyünün başarısız olmasına neden olur.",
+        "branch": "Counterspell",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mm_silence"
+        ],
+        "icon": "❌",
+        "effects": {
+          "range": "18m",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "mm_spell_turning",
+        "name_en": "Spell Turning",
+        "name_tr": "Büyü Çevirme",
+        "description_en": "Reflects a single-target spell directly back at the caster.",
+        "description_tr": "Tek hedefli bir büyüyü doğrudan yapana geri yansıtır.",
+        "branch": "Counterspell",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_rebuke",
+          "mm_counterspell"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "trigger": "Reaction",
+          "reflection": "100%"
+        }
+      },
+      {
+        "spell_key": "mm_magical_feedback",
+        "name_en": "Magical Feedback",
+        "name_tr": "Büyülü Geri Bildirim",
+        "description_en": "Releases a wave that damages enemies based on how much mana they have spent recently.",
+        "description_tr": "Düşmanlara yakın zamanda ne kadar mana harcadıklarına bağlı olarak hasar veren bir dalga yayar.",
+        "branch": "Counterspell",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_counterspell"
+        ],
+        "icon": "📻",
+        "effects": {
+          "damage": "1d4 per mana spent",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "mm_dispelling_strike",
+        "name_en": "Dispelling Strike",
+        "name_tr": "Dağıtan Vuruş",
+        "description_en": "Imbues your melee attack with anti-magic, removing one positive magical effect from the target.",
+        "description_tr": "Yakın dövüş saldırınıza anti-büyü aşılar ve hedeften bir olumlu sihirli etkiyi kaldırır.",
+        "branch": "Counterspell",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mm_spell_turning"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "Weapon+1d8",
+          "buff_removal": "1 effect"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_reflection",
+        "name_en": "Arcane Reflection",
+        "name_tr": "Arkana Yansıması",
+        "description_en": "Summons a persistent mirror-like shield that automatically reflects the next spell directed at you.",
+        "description_tr": "Size yöneltilen bir sonraki büyüyü otomatik olarak yansıtan kalıcı, ayna benzeri bir kalkan çağırır.",
+        "branch": "Counterspell",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mm_spell_turning"
+        ],
+        "icon": "💎",
+        "effects": {
+          "duration": "1 minute",
+          "charges": "1"
+        }
+      },
+      {
+        "spell_key": "mm_mute",
+        "name_en": "Mute",
+        "name_tr": "Dilsiz Bırakma",
+        "description_en": "Completely seals the target's ability to cast spells for a short duration.",
+        "description_tr": "Hedefin büyü yapma yeteneğini kısa bir süre için tamamen mühürler.",
+        "branch": "Counterspell",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mm_silence",
+          "mm_magical_feedback"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "duration": "2 turns",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mm_spell_shatter",
+        "name_en": "Spell Shatter",
+        "name_tr": "Büyü Parçalama",
+        "description_en": "Destroys magical constructs, barriers, and summoned walls, causing them to explode and deal area damage.",
+        "description_tr": "Büyülü yapıları, bariyerleri ve çağrılmış duvarları yok ederek patlamalarına ve alan hasarı vermelerine neden olur.",
+        "branch": "Counterspell",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mm_dispelling_strike"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d6 force",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "mm_aura_denial",
+        "name_en": "Aura of Denial",
+        "name_tr": "Reddetme Aurası",
+        "description_en": "Projects an aura that forces enemies to struggle to focus. Failed concentration completely wastes their spell.",
+        "description_tr": "Düşmanları odaklanmakta zorlanmaya zorlayan bir auro yansıtır. Başarısız odaklanma büyüyü tamamen boşa harcar.",
+        "branch": "Counterspell",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "mm_arcane_reflection"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "radius": "10m",
+          "spell_failure_chance": "30%"
+        }
+      },
+      {
+        "spell_key": "mm_reflective_carapace",
+        "name_en": "Reflective Carapace",
+        "name_tr": "Yansıtıcı Kabuk",
+        "description_en": "Encases you and nearby allies in a reflective dome that bounces low-tier spells away.",
+        "description_tr": "Sizi ve yakındaki müttefikleri, düşük seviyeli büyüleri geri seken yansıtıcı bir kubbeye hapseder.",
+        "branch": "Counterspell",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mm_mute"
+        ],
+        "icon": "🐢",
+        "effects": {
+          "radius": "5m",
+          "duration": "1 minute",
+          "reflects": "Tier 1 & 2"
+        }
+      },
+      {
+        "spell_key": "mm_magic_seal",
+        "name_en": "Magic Seal",
+        "name_tr": "Büyü Mührü",
+        "description_en": "Temporarily locks a specific branch of magic for the target, rendering its most powerful spells useless.",
+        "description_tr": "Hedefin belirli bir büyü dalını geçici olarak kilitleyerek en güçlü büyülerini işe yaramaz hale getirir.",
+        "branch": "Counterspell",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mm_spell_shatter"
+        ],
+        "icon": "🔒",
+        "effects": {
+          "duration": "3 turns",
+          "target": "Highest Tier Branch"
+        }
+      },
+      {
+        "spell_key": "mm_anti_magic_dominion",
+        "name_en": "Anti-Magic Dominion",
+        "name_tr": "Anti-Büyü Hakimiyeti",
+        "description_en": "Creates a massive zone where no enemy can cast magic, and all active hostile effects are heavily suppressed.",
+        "description_tr": "Hiçbir düşmanın büyü yapamayacağı ve tüm aktif düşman etkilerinin büyük ölçüde bastırıldığı devasa bir bölge oluşturur.",
+        "branch": "Counterspell",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mm_aura_denial",
+          "mm_reflective_carapace",
+          "mm_magic_seal"
+        ],
+        "icon": "👑",
+        "effects": {
+          "radius": "30m",
+          "duration": "1 minute",
+          "suppression": "100%"
+        }
+      },
+      {
+        "spell_key": "mm_mana_dart",
+        "name_en": "Mana Dart",
+        "name_tr": "Mana Oku",
+        "description_en": "Fires a concentrated bolt of raw mana at the target.",
+        "description_tr": "Hedefe yoğunlaştırılmış saf mana oku fırlatır.",
+        "branch": "Mana Manipulation",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "damage": "1d4+1 force",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_flux",
+        "name_en": "Arcane Flux",
+        "name_tr": "Arkana Akısı",
+        "description_en": "Allows you to change the elemental damage type of any spell as it is being cast.",
+        "description_tr": "Yapılmakta olan herhangi bir büyünün temel hasar türünü değiştirmenizi sağlar.",
+        "branch": "Mana Manipulation",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mm_mana_dart"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage_type_change": "Any Element",
+          "duration": "1 spell"
+        }
+      },
+      {
+        "spell_key": "mm_transfer_mana",
+        "name_en": "Transfer Mana",
+        "name_tr": "Mana Aktarımı",
+        "description_en": "Transfers your own mana into an ally, restoring their magical reserves.",
+        "description_tr": "Kendi mananızı bir müttefike aktararak büyülü rezervlerini yeniler.",
+        "branch": "Mana Manipulation",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_mana_dart"
+        ],
+        "icon": "👐",
+        "effects": {
+          "mana_transfer": "Up to 10 points",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mm_mana_shield",
+        "name_en": "Mana Shield",
+        "name_tr": "Mana Kalkanı",
+        "description_en": "Diverts incoming damage directly to your mana pool instead of your health.",
+        "description_tr": "Gelen hasarı sağlığınız yerine doğrudan mana havuzunuza yönlendirir.",
+        "branch": "Mana Manipulation",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 150,
+        "prerequisites": [
+          "mm_transfer_mana"
+        ],
+        "icon": "💠",
+        "effects": {
+          "damage_to_mana": "2 damage per 1 mana",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "mm_mana_burn",
+        "name_en": "Mana Burn",
+        "name_tr": "Mana Yakma",
+        "description_en": "Ignites the target's mana pool, dealing damage equal to the mana destroyed.",
+        "description_tr": "Hedefin mana havuzunu tutuşturarak yok edilen mana kadar hasar verir.",
+        "branch": "Mana Manipulation",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mm_arcane_flux"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "2d6",
+          "mana_destroyed": "2d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mm_leyline_tap",
+        "name_en": "Leyline Tap",
+        "name_tr": "Ley Hattı Çekimi",
+        "description_en": "Taps into hidden magical currents in the earth, regenerating your mana rapidly over time.",
+        "description_tr": "Dünyadaki gizli büyülü akımlara dokunarak mananızı zamanla hızla yeniler.",
+        "branch": "Mana Manipulation",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_transfer_mana"
+        ],
+        "icon": "🛤️",
+        "effects": {
+          "mana_regen": "5 per turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mm_overcharge",
+        "name_en": "Overcharge",
+        "name_tr": "Aşırı Yükleme",
+        "description_en": "Empowers your next spell to deal massive damage, at the cost of damaging yourself from the unstable energy.",
+        "description_tr": "Bir sonraki büyünüzü devasa hasar verecek şekilde güçlendirir, ancak dengesiz enerjiden kendinize zarar verirsiniz.",
+        "branch": "Mana Manipulation",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_mana_shield",
+          "mm_mana_burn"
+        ],
+        "icon": "📈",
+        "effects": {
+          "damage_bonus": "50%",
+          "self_damage": "20% of total"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_infusion",
+        "name_en": "Arcane Infusion",
+        "name_tr": "Arkana İnfüzyonu",
+        "description_en": "Infuses an ally's weapon with raw magic, adding force damage to their strikes.",
+        "description_tr": "Bir müttefikin silahına saf büyü aşılayarak vuruşlarına güç hasarı ekler.",
+        "branch": "Mana Manipulation",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mm_leyline_tap"
+        ],
+        "icon": "🪄",
+        "effects": {
+          "bonus_damage": "1d6 force",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mm_mana_storm",
+        "name_en": "Mana Storm",
+        "name_tr": "Mana Fırtınası",
+        "description_en": "Summons a chaotic tempest of magic that damages enemies and breaks their concentration.",
+        "description_tr": "Düşmanlara hasar veren ve odaklarını bozan kaotik bir büyü fırtınası çağırır.",
+        "branch": "Mana Manipulation",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mm_overcharge"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d6 force",
+          "radius": "10m",
+          "concentration_break_DC": "15"
+        }
+      },
+      {
+        "spell_key": "mm_empowering_flow",
+        "name_en": "Empowering Flow",
+        "name_tr": "Güçlendirici Akış",
+        "description_en": "Passively increases the maximum mana of all allies near you by reinforcing their life force.",
+        "description_tr": "Yakınınızdaki tüm müttefiklerin yaşam gücünü pekiştirerek maksimum manalarını pasif olarak artırır.",
+        "branch": "Mana Manipulation",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mm_arcane_infusion"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "max_mana_bonus": "10%",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "mm_energy_severance",
+        "name_en": "Energy Severance",
+        "name_tr": "Enerji Koparması",
+        "description_en": "Temporarily severs the target's connection to magic, preventing mana regeneration and magical healing.",
+        "description_tr": "Hedefin büyü ile olan bağlantısını geçici olarak kopararak mana yenilenmesini ve sihirli iyileşmeyi engeller.",
+        "branch": "Mana Manipulation",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "mm_mana_storm"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "duration": "3 turns",
+          "heal_block": "100%",
+          "regen_block": "100%"
+        }
+      },
+      {
+        "spell_key": "mm_arcane_eruption",
+        "name_en": "Arcane Eruption",
+        "name_tr": "Arkana Patlaması",
+        "description_en": "Causes a violent geyser of pure mana to erupt, knocking enemies into the air.",
+        "description_tr": "Saf manadan oluşan şiddetli bir gayzerin patlamasına neden olarak düşmanları havaya savurur.",
+        "branch": "Mana Manipulation",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 650,
+        "prerequisites": [
+          "mm_empowering_flow"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d6 force",
+          "radius": "15m",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "mm_mana_weaver_trance",
+        "name_en": "Mana Weaver's Trance",
+        "name_tr": "Mana Dokumacısının Transı",
+        "description_en": "Enter a deep focus where your spells cost no mana and flow flawlessly into one another.",
+        "description_tr": "Büyülerinizin mana gerektirmediği ve birbirine kusursuzca aktığı derin bir odaklanmaya girin.",
+        "branch": "Mana Manipulation",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mm_energy_severance"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "mana_cost": "0",
+          "extra_spell_cast": "1 per turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mm_pure_energy_blast",
+        "name_en": "Pure Energy Blast",
+        "name_tr": "Saf Enerji Patlaması",
+        "description_en": "Fires a devastating beam of concentrated energy that pierces through enemies and obstacles.",
+        "description_tr": "Düşmanları ve engelleri delip geçen yoğunlaştırılmış enerjiden yıkıcı bir ışın fırlatır.",
+        "branch": "Mana Manipulation",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mm_arcane_eruption"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "8d8 force",
+          "area": "30m line",
+          "width": "2m"
+        }
+      },
+      {
+        "spell_key": "mm_omnipresent_mana",
+        "name_en": "Omnipresent Mana",
+        "name_tr": "Her Yerde Bulunan Mana",
+        "description_en": "Transform into an entity of pure magical energy. Gain immunity to physical attacks, limitless mana, and the ability to instantly teleport.",
+        "description_tr": "Saf büyülü enerji varlığına dönüşün. Fiziksel saldırılara karşı bağışıklık, sınırsız mana ve anında ışınlanma yeteneği kazanın.",
+        "branch": "Mana Manipulation",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mm_mana_weaver_trance",
+          "mm_pure_energy_blast"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "duration": "5 turns",
+          "immunity": "Physical",
+          "teleport": "20m bonus action"
+        }
+      },
+      {
+        "spell_key": "mm_reactive_shield",
+        "name_en": "Reactive Shield",
+        "name_tr": "Tepkisel Kalkan",
+        "description_en": "A dual-purpose barrier. If shattered by a spell, it automatically counters the rest of the spell's effect and refunds mana to you.",
+        "description_tr": "Çift amaçlı bir bariyer. Bir büyü tarafından parçalanırsa, büyünün geri kalan etkisini otomatik olarak engeller ve size mana iade eder.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mm_absorbing_barrier",
+          "mm_counterspell"
+        ],
+        "icon": "♻️",
+        "effects": {
+          "shield_hp": "20",
+          "counter_effect": "Automatic on break"
+        }
+      },
+      {
+        "spell_key": "mm_feedback_loop",
+        "name_en": "Feedback Loop",
+        "name_tr": "Geri Bildirim Döngüsü",
+        "description_en": "Curses a target so that whenever they cast a spell, they lose double the mana cost and take damage equal to the mana lost.",
+        "description_tr": "Bir hedefi lanetler; böylece büyü yaptıklarında iki kat mana bedeli kaybederler ve kaybedilen mana kadar hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mm_magical_feedback",
+          "mm_mana_burn"
+        ],
+        "icon": "🔁",
+        "effects": {
+          "mana_loss": "2x cost",
+          "damage": "Equal to mana lost",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "mm_siphoning_storm",
+        "name_en": "Siphoning Storm",
+        "name_tr": "Sömüren Fırtına",
+        "description_en": "Creates a swirling storm of magic that continuously drains enemies, feeding both your health and mana.",
+        "description_tr": "Düşmanları sürekli olarak tüketen, hem sağlığınızı hem de mananızı besleyen dönen bir büyü fırtınası oluşturur.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mm_devour_magic",
+          "mm_mana_storm"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5d6 per turn",
+          "radius": "15m",
+          "absorb_ratio": "50%"
+        }
+      },
+      {
+        "spell_key": "mm_mana_paradox",
+        "name_en": "Mana Paradox",
+        "name_tr": "Mana Paradoksu",
+        "description_en": "Alters the rules of magic in an area. Enemies lose maximum mana each turn, while allies can cast spells effortlessly.",
+        "description_tr": "Bir alandaki büyü kurallarını değiştirir. Düşmanlar her tur maksimum mana kaybederken, müttefikler zahmetsizce büyü yapabilir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mm_black_hole_core",
+          "mm_aura_denial",
+          "mm_mana_weaver_trance"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "radius": "20m",
+          "enemy_mana_loss": "10% max per turn",
+          "ally_mana_cost": "0"
+        }
+      },
+      {
+        "spell_key": "mm_source_singularity",
+        "name_en": "The Source Singularity",
+        "name_tr": "Kaynak Tekilliği",
+        "description_en": "Become the absolute center of magic. You automatically absorb all spells cast nearby and can instantly reflect or re-cast them without any mana cost.",
+        "description_tr": "Büyünün mutlak merkezi olun. Yakında yapılan tüm büyüleri otomatik olarak emersiniz ve bunları hiçbir mana bedeli olmadan anında yansıtabilir veya yeniden yapabilirsiniz.",
+        "branch": "Grand Ultimate",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "mm_absolute_absorption",
+          "mm_anti_magic_dominion",
+          "mm_omnipresent_mana"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "radius": "100m",
+          "duration": "1 minute",
+          "auto_absorb": "100%",
+          "free_cast": "Legendary Action"
+        }
+      }
+    ]
+  }
+]

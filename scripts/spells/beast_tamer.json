@@ -1,0 +1,989 @@
+[
+  {
+    "subclass_key": "beast_tamer",
+    "tree_name_en": "Beast Tamer",
+    "tree_name_tr": "Canavar Terbiyecisi",
+    "tree_desc_en": "Master the wilds by summoning beasts, buffing animal companions, and surviving through primal instincts.",
+    "tree_desc_tr": "Canavarları çağırarak, hayvan yoldaşlarını güçlendirerek ve ilkel içgüdülerle hayatta kalarak vahşi doğaya hükmet.",
+    "branches": [
+      "Companion",
+      "Beastmaster",
+      "Instinct"
+    ],
+    "spells": [
+      {
+        "spell_key": "bt_summon_companion",
+        "name_en": "Summon Companion",
+        "name_tr": "Yoldaş Çağırma",
+        "description_en": "Summons a loyal beast companion to fight by your side. Companion stats scale with your level.",
+        "description_tr": "Yanınızda savaşması için sadık bir canavar yoldaş çağırır. Yoldaşın istatistikleri seviyenizle artar.",
+        "branch": "Companion",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐺",
+        "effects": {
+          "duration": "Permanent",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "bt_mend_companion",
+        "name_en": "Mend Companion",
+        "name_tr": "Yoldaşı İyileştir",
+        "description_en": "Heals your companion using nature's magic.",
+        "description_tr": "Doğanın büyüsünü kullanarak yoldaşınızı iyileştirir.",
+        "branch": "Companion",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 75,
+        "prerequisites": [
+          "bt_summon_companion"
+        ],
+        "icon": "🩹",
+        "effects": {
+          "healing": "2d8 + WIS modifier",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "bt_guard_command",
+        "name_en": "Guard Command",
+        "name_tr": "Koruma Emri",
+        "description_en": "Commands your companion to intercept attacks against a nearby ally.",
+        "description_tr": "Yoldaşınıza yakındaki bir müttefike yönelik saldırıları engellemesini emreder.",
+        "branch": "Companion",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "bt_summon_companion"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "bonus_ac": 2,
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "bt_fetch",
+        "name_en": "Fetch",
+        "name_tr": "Getir",
+        "description_en": "Commands your companion to disarm enemies or retrieve items from afar.",
+        "description_tr": "Yoldaşınıza düşmanları silahsızlandırmasını veya uzaktan eşya getirmesini emreder.",
+        "branch": "Companion",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 120,
+        "prerequisites": [
+          "bt_summon_companion"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "range": "20m",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "bt_companion_fury",
+        "name_en": "Companion Fury",
+        "name_tr": "Yoldaş Öfkesi",
+        "description_en": "Incites your companion to attack with blinding speed.",
+        "description_tr": "Yoldaşınızı kör edici bir hızla saldırmaya kışkırtır.",
+        "branch": "Companion",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "bt_guard_command"
+        ],
+        "icon": "💢",
+        "effects": {
+          "attacks": 2,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bt_shared_senses",
+        "name_en": "Shared Senses",
+        "name_tr": "Ortak Duyular",
+        "description_en": "Allows you to see and hear through your companion's senses.",
+        "description_tr": "Yoldaşınızın duyuları aracılığıyla görmenizi ve duymanızı sağlar.",
+        "branch": "Companion",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "bt_summon_companion"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "1000m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_revive_companion",
+        "name_en": "Revive Companion",
+        "name_tr": "Yoldaşı Dirilt",
+        "description_en": "Brings a fallen companion back to life with a portion of its health.",
+        "description_tr": "Düşen bir yoldaşı sağlığının bir kısmıyla hayata döndürür.",
+        "branch": "Companion",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bt_mend_companion"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "healing": "50% Max HP",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bt_bestial_enlargement",
+        "name_en": "Bestial Enlargement",
+        "name_tr": "Vahşi Büyüme",
+        "description_en": "Temporarily increases your companion's size, granting massive damage and vitality.",
+        "description_tr": "Yoldaşınızın boyutunu geçici olarak büyüterek devasa hasar ve canlılık kazandırır.",
+        "branch": "Companion",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bt_companion_fury"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "bonus_damage": "2d6",
+          "temp_hp": 10,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_companion_armor",
+        "name_en": "Companion Armor",
+        "name_tr": "Yoldaş Zırhı",
+        "description_en": "Grants your companion thick, bark-like natural armor.",
+        "description_tr": "Yoldaşınıza kalın, ağaç kabuğu gibi doğal bir zırh kazandırır.",
+        "branch": "Companion",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 420,
+        "prerequisites": [
+          "bt_guard_command"
+        ],
+        "icon": "🪵",
+        "effects": {
+          "bonus_ac": 4,
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_coordinated_strike",
+        "name_en": "Coordinated Strike",
+        "name_tr": "Koordineli Saldırı",
+        "description_en": "When you hit a target, your companion instantly follows up with a free attack.",
+        "description_tr": "Bir hedefe vurduğunuzda, yoldaşınız anında ücretsiz bir saldırı ile takip eder.",
+        "branch": "Companion",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bt_companion_fury"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "bonus_damage": "3d6",
+          "range": "Weapon Range"
+        }
+      },
+      {
+        "spell_key": "bt_mythic_companion",
+        "name_en": "Mythic Companion",
+        "name_tr": "Efsanevi Yoldaş",
+        "description_en": "Evolves your companion into a mythic creature, granting elemental damage and increased health.",
+        "description_tr": "Yoldaşınızı efsanevi bir yaratığa evrimleştirerek elementsel hasar ve artırılmış sağlık kazandırır.",
+        "branch": "Companion",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "bt_bestial_enlargement"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "bonus_damage": "1d8 elemental",
+          "bonus_hp": 20,
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_soul_bond",
+        "name_en": "Soul Bond",
+        "name_tr": "Ruh Bağı",
+        "description_en": "You and your companion share a single life pool. Any damage taken is split evenly.",
+        "description_tr": "Siz ve yoldaşınız tek bir yaşam havuzunu paylaşırsınız. Alınan hasar eşit olarak bölünür.",
+        "branch": "Companion",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bt_revive_companion",
+          "bt_companion_armor"
+        ],
+        "icon": "💞",
+        "effects": {
+          "damage_split": "50%",
+          "range": "30m",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_ferocious_roar",
+        "name_en": "Ferocious Roar",
+        "name_tr": "Vahşi Kükreme",
+        "description_en": "Your companion unleashes a terrifying roar, frightening all enemies in a wide radius.",
+        "description_tr": "Yoldaşınız korkutucu bir kükreme salarak geniş bir yarıçaptaki tüm düşmanları korkutur.",
+        "branch": "Companion",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bt_bestial_enlargement"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "radius": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_alpha_predator",
+        "name_en": "Alpha Predator",
+        "name_tr": "Alfa Yırtıcı",
+        "description_en": "Ultimate. Your companion reaches its absolute pinnacle, growing massive, dealing devastating damage, and regenerating rapidly.",
+        "description_tr": "Nihai Yetenek. Yoldaşınız mutlak zirvesine ulaşır, devasa büyür, yıkıcı hasar verir ve hızla yenilenir.",
+        "branch": "Companion",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bt_mythic_companion",
+          "bt_soul_bond"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "bonus_damage": "5d10",
+          "regeneration": "20 HP/turn",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_animal_friendship",
+        "name_en": "Animal Friendship",
+        "name_tr": "Hayvan Dostluğu",
+        "description_en": "Charms a wild beast, preventing it from attacking and making it friendly to you.",
+        "description_tr": "Vahşi bir canavarı efsunlayarak saldırmasını engeller ve size dost olmasını sağlar.",
+        "branch": "Beastmaster",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🦌",
+        "effects": {
+          "max_cr": "User Level",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "bt_speak_with_animals",
+        "name_en": "Speak with Animals",
+        "name_tr": "Hayvanlarla Konuşma",
+        "description_en": "Grants the ability to understand and communicate with all natural beasts.",
+        "description_tr": "Tüm doğal canavarları anlama ve onlarla iletişim kurma yeteneği kazandırır.",
+        "branch": "Beastmaster",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_summon_swarm",
+        "name_en": "Summon Swarm",
+        "name_tr": "Sürü Çağırma",
+        "description_en": "Summons a swarm of insects or rats to bite and sting enemies in an area.",
+        "description_tr": "Bir alandaki düşmanları ısırmak ve sokmak için bir böcek veya fare sürüsü çağırır.",
+        "branch": "Beastmaster",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🐝",
+        "effects": {
+          "damage": "2d4 piercing",
+          "radius": "5m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_beast_lure",
+        "name_en": "Beast Lure",
+        "name_tr": "Vahşi Çekim",
+        "description_en": "Emits a pheromone that slowly attracts all nearby beasts to your location.",
+        "description_tr": "Yakındaki tüm canavarları yavaşça bulunduğunuz yere çeken bir feromon yayar.",
+        "branch": "Beastmaster",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🥩",
+        "effects": {
+          "radius": "500m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_call_of_the_wild",
+        "name_en": "Call of the Wild",
+        "name_tr": "Doğanın Çağrısı",
+        "description_en": "Summons 2 minor beasts from the wilderness to aid you in combat.",
+        "description_tr": "Savaşta size yardım etmeleri için vahşi doğadan 2 küçük canavar çağırır.",
+        "branch": "Beastmaster",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "bt_animal_friendship"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "summons": 2,
+          "max_cr": 1,
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_pack_tactics",
+        "name_en": "Pack Tactics",
+        "name_tr": "Sürü Taktikleri",
+        "description_en": "You and your allies gain advantage on attack rolls if an allied beast is near the target.",
+        "description_tr": "Siz ve müttefikleriniz, hedefin yakınında dost bir canavar varsa saldırı zarlarında avantaj kazanırsınız.",
+        "branch": "Beastmaster",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 240,
+        "prerequisites": [
+          "bt_summon_swarm"
+        ],
+        "icon": "👥",
+        "effects": {
+          "radius": "2m",
+          "advantage": true
+        }
+      },
+      {
+        "spell_key": "bt_calm_beast",
+        "name_en": "Calm Beast",
+        "name_tr": "Canavarı Sakinleştir",
+        "description_en": "Instantly pacifies any hostile beast, breaking its aggro and halting its attacks.",
+        "description_tr": "Düşman bir canavarı anında sakinleştirir, saldırganlığını kırar ve saldırılarını durdurur.",
+        "branch": "Beastmaster",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 260,
+        "prerequisites": [
+          "bt_animal_friendship"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "range": "18m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_stampede",
+        "name_en": "Stampede",
+        "name_tr": "İzdiham",
+        "description_en": "Summons a spectral herd of beasts to trample enemies in a long line.",
+        "description_tr": "Düşmanları uzun bir hat boyunca ezmek için hayalet bir canavar sürüsü çağırır.",
+        "branch": "Beastmaster",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bt_call_of_the_wild"
+        ],
+        "icon": "🦬",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "area": "10m x 30m line"
+        }
+      },
+      {
+        "spell_key": "bt_dominate_beast",
+        "name_en": "Dominate Beast",
+        "name_tr": "Canavara Hükmet",
+        "description_en": "Takes total telepathic control over a wild beast, commanding its every move.",
+        "description_tr": "Vahşi bir canavarın üzerinde tam telepatik kontrol kurarak her hareketine hükmeder.",
+        "branch": "Beastmaster",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bt_calm_beast"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "18m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_feral_frenzy",
+        "name_en": "Feral Frenzy",
+        "name_tr": "Vahşi Çılgınlık",
+        "description_en": "Drives all allied beasts into a frenzy, granting them haste and bonus damage.",
+        "description_tr": "Tüm dost canavarları çılgına çevirerek onlara hız ve ekstra hasar kazandırır.",
+        "branch": "Beastmaster",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bt_pack_tactics"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "bonus_damage": "2d4",
+          "haste": true,
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_summon_dire_beast",
+        "name_en": "Summon Dire Beast",
+        "name_tr": "Ulu Canavar Çağırma",
+        "description_en": "Calls forth a massive, incredibly powerful dire beast to crush your foes.",
+        "description_tr": "Düşmanlarınızı ezmek için devasa ve inanılmaz derecede güçlü ulu bir canavar çağırır.",
+        "branch": "Beastmaster",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "bt_call_of_the_wild"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "summons": 1,
+          "max_cr": 5,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_bestial_ward",
+        "name_en": "Bestial Ward",
+        "name_tr": "Vahşi Koruma",
+        "description_en": "Commands allied beasts to form a protective ring, halving incoming damage to you.",
+        "description_tr": "Dost canavarlara koruyucu bir çember oluşturmalarını emrederek size gelen hasarı yarıya indirir.",
+        "branch": "Beastmaster",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bt_dominate_beast"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "damage_reduction": "50%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "bt_call_avian_flock",
+        "name_en": "Call Avian Flock",
+        "name_tr": "Kuş Sürüsü Çağırma",
+        "description_en": "Summons a blinding flock of birds to peck and disorient enemies in a large area.",
+        "description_tr": "Geniş bir alandaki düşmanları gagalamak ve yönlerini şaşırtmak için kör edici bir kuş sürüsü çağırır.",
+        "branch": "Beastmaster",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bt_stampede"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "damage": "3d6 slashing",
+          "radius": "20m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bt_beast_lord",
+        "name_en": "Beast Lord",
+        "name_tr": "Canavar Lordu",
+        "description_en": "Ultimate. Summons a pack of elite beasts and passively commands all natural wildlife for kilometers.",
+        "description_tr": "Nihai Yetenek. Seçkin bir canavar sürüsü çağırır ve kilometrelerce uzaktaki tüm doğal vahşi yaşama pasif olarak hükmeder.",
+        "branch": "Beastmaster",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "bt_summon_dire_beast",
+          "bt_call_avian_flock"
+        ],
+        "icon": "👑",
+        "effects": {
+          "summons": "1d4+2 CR 5 beasts",
+          "control_radius": "1000m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_hunters_mark",
+        "name_en": "Hunter's Mark",
+        "name_tr": "Avcının İşareti",
+        "description_en": "Marks a target as your prey, dealing extra damage and making them impossible to lose track of.",
+        "description_tr": "Bir hedefi avınız olarak işaretler, ekstra hasar verir ve izini kaybetmeyi imkansız hale getirir.",
+        "branch": "Instinct",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "bonus_damage": "1d6",
+          "range": "30m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_keen_senses",
+        "name_en": "Keen Senses",
+        "name_tr": "Keskin Duyular",
+        "description_en": "Heightens your hearing and smell, granting the ability to detect invisible enemies nearby.",
+        "description_tr": "İşitmenizi ve koklama duyunuzu keskinleştirerek yakındaki görünmez düşmanları tespit etme yeteneği kazandırır.",
+        "branch": "Instinct",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "👃",
+        "effects": {
+          "detection_radius": "10m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_predators_stride",
+        "name_en": "Predator's Stride",
+        "name_tr": "Yırtıcının Adımı",
+        "description_en": "Increases your movement speed and allows you to pass through difficult terrain without slowing down.",
+        "description_tr": "Hareket hızınızı artırır ve yavaşlamadan zorlu arazilerden geçmenizi sağlar.",
+        "branch": "Instinct",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🐆",
+        "effects": {
+          "bonus_speed": "3m",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_survival_instinct",
+        "name_en": "Survival Instinct",
+        "name_tr": "Hayatta Kalma İçgüdüsü",
+        "description_en": "Grants natural resilience against extreme weather conditions and survival expertise.",
+        "description_tr": "Aşırı hava koşullarına karşı doğal dayanıklılık ve hayatta kalma uzmanlığı kazandırır.",
+        "branch": "Instinct",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🏕️",
+        "effects": {
+          "resistance": "Weather",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_aspect_of_the_bear",
+        "name_en": "Aspect of the Bear",
+        "name_tr": "Ayının Sureti",
+        "description_en": "Channels the spirit of the bear, granting immense strength and temporary hit points.",
+        "description_tr": "Ayının ruhunu kanalize ederek muazzam güç ve geçici sağlık puanı kazandırır.",
+        "branch": "Instinct",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 220,
+        "prerequisites": [
+          "bt_survival_instinct"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "bonus_str": 2,
+          "temp_hp": 20,
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_aspect_of_the_wolf",
+        "name_en": "Aspect of the Wolf",
+        "name_tr": "Kurdun Sureti",
+        "description_en": "Channels the spirit of the wolf, enhancing tracking and granting speed buffs to nearby allies.",
+        "description_tr": "Kurdun ruhunu kanalize ederek iz sürmeyi geliştirir ve yakındaki müttefiklere hız güçlendirmeleri kazandırır.",
+        "branch": "Instinct",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bt_hunters_mark",
+          "bt_predators_stride"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "bonus_speed": "2m for allies",
+          "radius": "5m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_aspect_of_the_cheetah",
+        "name_en": "Aspect of the Cheetah",
+        "name_tr": "Çitanın Sureti",
+        "description_en": "Channels the spirit of the cheetah, allowing rapid dashes and evading opportunity attacks.",
+        "description_tr": "Çitanın ruhunu kanalize ederek hızlı deparlar atmanızı ve fırsat saldırılarından kaçınmanızı sağlar.",
+        "branch": "Instinct",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 290,
+        "prerequisites": [
+          "bt_predators_stride"
+        ],
+        "icon": "🐆",
+        "effects": {
+          "bonus_action_dash": true,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_camouflage",
+        "name_en": "Camouflage",
+        "name_tr": "Kamuflaj",
+        "description_en": "Blends seamlessly into natural surroundings, rendering you invisible as long as you do not move.",
+        "description_tr": "Doğal çevreye kusursuz bir şekilde karışarak, hareket etmediğiniz sürece sizi görünmez kılar.",
+        "branch": "Instinct",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 420,
+        "prerequisites": [
+          "bt_keen_senses"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "invisibility": true,
+          "duration": "Until moved"
+        }
+      },
+      {
+        "spell_key": "bt_feral_leap",
+        "name_en": "Feral Leap",
+        "name_tr": "Vahşi Sıçrama",
+        "description_en": "Leaps a massive distance and slams the ground, damaging all nearby enemies.",
+        "description_tr": "Büyük bir mesafe sıçrar ve yere çarparak yakındaki tüm düşmanlara hasar verir.",
+        "branch": "Instinct",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 460,
+        "prerequisites": [
+          "bt_aspect_of_the_cheetah"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "damage": "3d8",
+          "jump_distance": "15m",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "bt_venom_resistance",
+        "name_en": "Venom Resistance",
+        "name_tr": "Zehir Direnci",
+        "description_en": "Your body develops complete immunity to poisons, venoms, and toxic environments.",
+        "description_tr": "Vücudunuz zehirlere ve toksik ortamlara karşı tam bir bağışıklık geliştirir.",
+        "branch": "Instinct",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "bt_aspect_of_the_bear"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "immunity": "Poison",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_apex_predator",
+        "name_en": "Apex Predator",
+        "name_tr": "Zirve Yırtıcı",
+        "description_en": "You become ruthless. Attacks against wounded targets deal critical damage more often.",
+        "description_tr": "Acımasızlaşırsınız. Yaralı hedeflere yönelik saldırılar daha sık kritik hasar verir.",
+        "branch": "Instinct",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bt_aspect_of_the_wolf",
+          "bt_hunters_mark"
+        ],
+        "icon": "🦈",
+        "effects": {
+          "bonus_damage": "3d8",
+          "crit_range": "19-20",
+          "threshold": "<50% HP"
+        }
+      },
+      {
+        "spell_key": "bt_bestial_regeneration",
+        "name_en": "Bestial Regeneration",
+        "name_tr": "Vahşi Yenilenme",
+        "description_en": "Your wounds heal rapidly in combat, recovering health continuously.",
+        "description_tr": "Savaşta yaralarınız hızla iyileşir ve sağlığınız sürekli olarak yenilenir.",
+        "branch": "Instinct",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bt_aspect_of_the_bear"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "regeneration": "10 HP/turn",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_eagle_eye",
+        "name_en": "Eagle Eye",
+        "name_tr": "Kartal Gözü",
+        "description_en": "Your vision becomes unmatched. Ranged attacks double in distance and ignore cover.",
+        "description_tr": "Görüşünüz eşsiz hale gelir. Menzilli saldırıların mesafesi iki katına çıkar ve siperleri yok sayar.",
+        "branch": "Instinct",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bt_keen_senses"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range_multiplier": 2,
+          "bonus_hit": 2,
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bt_primal_avatar",
+        "name_en": "Primal Avatar",
+        "name_tr": "İlkel Avatar",
+        "description_en": "Ultimate. Transform into a hybrid physical god of nature, maximizing speed, resilience, and damage.",
+        "description_tr": "Nihai Yetenek. Doğanın melez fiziksel bir tanrısına dönüşerek hızı, dayanıklılığı ve hasarı en üst düzeye çıkarır.",
+        "branch": "Instinct",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "bt_apex_predator",
+          "bt_bestial_regeneration"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "bonus_stats": "+6 STR/DEX/CON",
+          "bonus_damage": "4d10 force",
+          "bonus_speed": "30m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bt_pack_hunter",
+        "name_en": "Pack Hunter",
+        "name_tr": "Sürü Avcısı",
+        "description_en": "Synergy. You and your companion deal devastating bonus damage when assaulting the exact same target.",
+        "description_tr": "Sinerji. Siz ve yoldaşınız tam olarak aynı hedefe saldırdığınızda yıkıcı bonus hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bt_guard_command",
+          "bt_hunters_mark"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "bonus_damage": "1d6",
+          "condition": "Attacking same target"
+        }
+      },
+      {
+        "spell_key": "bt_wild_stampede",
+        "name_en": "Wild Stampede",
+        "name_tr": "Vahşi İzdiham",
+        "description_en": "Synergy. You physically dash forward enveloped in spectral beasts, trampling everything in your path.",
+        "description_tr": "Sinerji. Hayalet canavarlarla sarılı bir şekilde fiziksel olarak ileri atılır, yolunuzdaki her şeyi ezersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bt_call_of_the_wild",
+          "bt_feral_leap"
+        ],
+        "icon": "🐗",
+        "effects": {
+          "damage": "5d8",
+          "dash_distance": "20m",
+          "area": "Line"
+        }
+      },
+      {
+        "spell_key": "bt_bestial_telepathy",
+        "name_en": "Bestial Telepathy",
+        "name_tr": "Vahşi Telepati",
+        "description_en": "Synergy. Permanently link your mind with all allied beasts, commanding an army silently over vast distances.",
+        "description_tr": "Sinerji. Zihninizi kalıcı olarak tüm dost canavarlara bağlayarak geniş mesafeler boyunca bir orduyu sessizce yönetirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bt_shared_senses",
+          "bt_dominate_beast"
+        ],
+        "icon": "📡",
+        "effects": {
+          "radius": "1000m",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "bt_shared_frenzy",
+        "name_en": "Shared Frenzy",
+        "name_tr": "Ortak Çılgınlık",
+        "description_en": "Synergy. You, your companion, and all summoned beasts enter a bloodlust state, ignoring pain and striking relentlessly.",
+        "description_tr": "Sinerji. Siz, yoldaşınız ve çağrılan tüm canavarlar kan susuzluğu durumuna girer, acıyı görmezden gelir ve acımasızca saldırırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bt_feral_frenzy",
+          "bt_companion_fury",
+          "bt_apex_predator"
+        ],
+        "icon": "👹",
+        "effects": {
+          "bonus_attacks": 2,
+          "resistance": "All damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bt_nature_wrath",
+        "name_en": "Nature's Wrath",
+        "name_tr": "Doğanın Gazabı",
+        "description_en": "Synergy. The very flora and fauna in the area rise up to crush and entangle your enemies.",
+        "description_tr": "Sinerji. Bölgedeki flora ve fauna düşmanlarınızı ezmek ve dolaştırmak için ayaklanır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bt_stampede",
+          "bt_apex_predator"
+        ],
+        "icon": "🌲",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "radius": "50m",
+          "condition": "Restrained"
+        }
+      },
+      {
+        "spell_key": "bt_spirit_beast",
+        "name_en": "Spirit Beast",
+        "name_tr": "Ruhani Canavar",
+        "description_en": "Synergy. Your companion temporarily becomes an ethereal spirit, phasing through solid matter and resisting harm.",
+        "description_tr": "Sinerji. Yoldaşınız geçici olarak ruhani bir varlık haline gelir, katı maddelerden geçer ve zararlara direnir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "bt_mythic_companion",
+          "bt_camouflage"
+        ],
+        "icon": "👻",
+        "effects": {
+          "resistance": "Non-magical",
+          "ethereal": true,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_master_of_the_hunt",
+        "name_en": "Master of the Hunt",
+        "name_tr": "Avın Efendisi",
+        "description_en": "Synergy. Empowers all allies and beasts on the field with massive tracking precision, speed, and execute damage.",
+        "description_tr": "Sinerji. Sahadaki tüm müttefikleri ve canavarları muazzam iz sürme hassasiyeti, hızı ve infaz hasarıyla güçlendirir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 85,
+        "xp_cost": 950,
+        "prerequisites": [
+          "bt_soul_bond",
+          "bt_summon_dire_beast",
+          "bt_eagle_eye"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "bonus_speed": "+50%",
+          "bonus_damage": "2d8",
+          "see_invisibility": true,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bt_wild_gods_blessing",
+        "name_en": "Blessing of the Wild Gods",
+        "name_tr": "Vahşi Tanrıların Lütfu",
+        "description_en": "Grand Ultimate. You ascend as the chosen of the wilds. Summon 3 Ancient Beast Gods to ravage the battlefield while you and your allies gain total invulnerability.",
+        "description_tr": "Görkemli Nihai. Vahşi doğanın seçilmişi olarak yükselirsiniz. Siz ve müttefikleriniz tam dokunulmazlık kazanırken, savaş alanını kasıp kavurması için 3 Kadim Canavar Tanrısı çağırırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bt_alpha_predator",
+          "bt_beast_lord",
+          "bt_primal_avatar"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "invulnerability": "2 turns",
+          "summons": "3 Ancient Beast Gods",
+          "damage": "Maximized"
+        }
+      }
+    ]
+  }
+]

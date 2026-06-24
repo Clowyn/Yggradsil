@@ -1,0 +1,104 @@
+diff --git a/src/components/spell-tree/SpellTreeGraph.tsx b/src/components/spell-tree/SpellTreeGraph.tsx
+index 455be2a..ab2c5d1 100644
+--- a/src/components/spell-tree/SpellTreeGraph.tsx
++++ b/src/components/spell-tree/SpellTreeGraph.tsx
+@@ -95,9 +95,15 @@ font-semibold flex items-center gap-2 shadow-2xl backdrop-blur-md"
+   // Adjust nodes opacity based on selected path and school filter
+   const processedNodes = useMemo<Node[]>(() => {
+     return nodes.map(node => {
+       let opacity = 1.0;
++      let filter = 'none';
++
++      if (node.data?.isDimmed) {
++        opacity = 0.35;
++        filter = 'grayscale(80%) brightness(45%) contrast(85%)';
++      }
+ 
+       if (activePathIds) {
+         if (activePathIds.has(node.id)) {
+           opacity = 1.0;
+         } else {
+           opacity = 0.15;
+         }
+       }
+ 
+       if (activeBranchFilter) {
+         const spell = node.data.spell as any;
+         if (spell && spell.branch && spell.branch.toLowerCase() !== activeBranchFilter.toLowerCase()) {
+           opacity = 0.15;
+         }
+       }
+ 
+       return {
+         ...node,
+         style: {
+           opacity,
++          filter,
+         },
+       };
+     });
+   }, [nodes, activePathIds, activeBranchFilter]);
+ 
+   // Adjust edges opacity based on selected path and branch filter
+   const processedEdges = useMemo<Edge[]>(() => {
+     return edges.map(edge => {
+       let opacity = 1.0;
++      
++      const sourceNode = nodes.find(n => n.id === edge.source);
++      const targetNode = nodes.find(n => n.id === edge.target);
++      const isSourceDimmed = sourceNode?.data?.isDimmed;
++      const isTargetDimmed = targetNode?.data?.isDimmed;
++
++      if (isSourceDimmed || isTargetDimmed) {
++        opacity = 0.15;
++      }
+ 
+       if (activePathIds) {
+         if (activePathIds.has(edge.source) && activePathIds.has(edge.target)) {
+-          opacity = 1.0;
++          opacity = isSourceDimmed || isTargetDimmed ? 0.15 : 1.0;
+         } else {
+           opacity = 0.15;
+         }
+       }
+ 
+       if (activeBranchFilter) {
+-        const sourceNode = nodes.find(n => n.id === edge.source);
+-        const targetNode = nodes.find(n => n.id === edge.target);
+         const sourceSpell = sourceNode?.data.spell as any;
+         const targetSpell = targetNode?.data.spell as any;
+ 
+         const sourceMatches = sourceSpell?.branch && sourceSpell.branch.toLowerCase() === activeBranchFilter.toLowerCase();
+         const targetMatches = targetSpell?.branch && targetSpell.branch.toLowerCase() === activeBranchFilter.toLowerCase();
+ 
+         if (!sourceMatches || !targetMatches) {
+           opacity = 0.15;
+         }
+       }
+ 
+       return {
+         ...edge,
+         style: {
+           ...edge.style,
+           opacity,
+           transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+         },
+       };
+     });
+   }, [edges, nodes, activePathIds, activeBranchFilter]);
+ 
+   const handleNodeClick = useCallback(
+     (event: React.MouseEvent, node: Node) => {
++      if (node.data?.isDimmed) return; // Prevent clicks on dimmed sibling subclass trees
+       onNodeClick(event, node);
+       setSelectedNodeId(node.id);
+ 
+       // Center the viewport on selected node
+       const zoom = getZoom();
+       setCenter(node.position.x + 40, node.position.y + 40, {
+         zoom: Math.max(zoom, 1.2),
+         duration: 800,
+       });
+     },
+     [onNodeClick, setCenter, getZoom]
+   );

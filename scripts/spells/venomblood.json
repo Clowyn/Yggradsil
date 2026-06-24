@@ -1,0 +1,1000 @@
+[
+  {
+    "subclass_key": "venomblood",
+    "tree_name_en": "Venomblood Arts",
+    "tree_name_tr": "Zehirkan Sanatları",
+    "tree_desc_en": "Mastery over lethal poisons, toxic environments, and crippling afflictions.",
+    "tree_desc_tr": "Ölümcül zehirler, toksik ortamlar ve sakat bırakıcı hastalıklar üzerinde ustalık.",
+    "branches": [
+      "Toxic",
+      "Venom",
+      "Affliction",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "vb_toxic_fumes",
+        "name_en": "Toxic Fumes",
+        "name_tr": "Zehirli Duman",
+        "description_en": "Releases a small cloud of toxic fumes in a 2m radius, dealing 1d4 poison damage per turn to breathing creatures.",
+        "description_tr": "2 metre yarıçapında zehirli duman bulutu salarak nefes alan yaratıklara tur başına 1d4 zehir hasarı verir.",
+        "branch": "Toxic",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d4",
+          "range": "2m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vb_poison_spray",
+        "name_en": "Poison Spray",
+        "name_tr": "Zehir Püskürtme",
+        "description_en": "Sprays a cone of venomous mist up to 5m, dealing 2d6 poison damage.",
+        "description_tr": "5 metreye kadar zehirli sis püskürterek 2d6 zehir hasarı verir.",
+        "branch": "Toxic",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [
+          "vb_toxic_fumes"
+        ],
+        "icon": "💦",
+        "effects": {
+          "damage": "2d6",
+          "range": "5m cone"
+        }
+      },
+      {
+        "spell_key": "vb_toxic_puddle",
+        "name_en": "Toxic Puddle",
+        "name_tr": "Toksik Birikinti",
+        "description_en": "Creates a 3m puddle of toxic sludge on the ground. Enemies moving through it are slowed by 50% and take 1d6 acid damage.",
+        "description_tr": "Yerde 3 metrelik toksik bir çamur birikintisi oluşturur. İçinden geçen düşmanlar %50 yavaşlar ve 1d6 asit hasarı alır.",
+        "branch": "Toxic",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "vb_poison_spray"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "damage": "1d6",
+          "range": "3m",
+          "slow": "50%"
+        }
+      },
+      {
+        "spell_key": "vb_choking_gas",
+        "name_en": "Choking Gas",
+        "name_tr": "Boğucu Gaz",
+        "description_en": "Emits a thick 4m radius gas that silences enemies and deals 2d4 poison damage per turn.",
+        "description_tr": "Düşmanları susturan ve tur başına 2d4 zehir hasarı veren 4 metre yarıçapında kalın bir gaz yayar.",
+        "branch": "Toxic",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "vb_toxic_puddle"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "damage": "2d4",
+          "range": "4m",
+          "status": "Silence"
+        }
+      },
+      {
+        "spell_key": "vb_acid_flask",
+        "name_en": "Acid Flask",
+        "name_tr": "Asit Şişesi",
+        "description_en": "Throws a glass flask that shatters, dealing 3d6 acid damage in a 3m radius. Range 10m.",
+        "description_tr": "Kırılarak 3 metre yarıçapında 3d6 asit hasarı veren cam bir şişe fırlatır. Menzil 10m.",
+        "branch": "Toxic",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 220,
+        "prerequisites": [
+          "vb_choking_gas"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "vb_corrosive_mist",
+        "name_en": "Corrosive Mist",
+        "name_tr": "Aşındırıcı Sis",
+        "description_en": "Summons a 6m radius mist that corrodes armor, reducing it by 2 and dealing 2d6 acid damage per turn.",
+        "description_tr": "Zırhı aşındıran, 2 azaltan ve tur başına 2d6 asit hasarı veren 6 metrelik bir sis çağırır.",
+        "branch": "Toxic",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "vb_acid_flask"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "2d6",
+          "range": "6m",
+          "armor_reduction": "2"
+        }
+      },
+      {
+        "spell_key": "vb_poison_nova",
+        "name_en": "Poison Nova",
+        "name_tr": "Zehir Novası",
+        "description_en": "Unleashes a ring of poison in an 8m radius around you, dealing 4d8 poison damage and poisoning enemies.",
+        "description_tr": "Etrafınızda 8 metre yarıçapında bir zehir halkası serbest bırakarak 4d8 zehir hasarı verir ve düşmanları zehirler.",
+        "branch": "Toxic",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 380,
+        "prerequisites": [
+          "vb_corrosive_mist"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8",
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "vb_toxic_barrage",
+        "name_en": "Toxic Barrage",
+        "name_tr": "Toksik Yaylım",
+        "description_en": "Fires 3 concentrated toxic globes at targets within 15m, each dealing 2d6 poison damage.",
+        "description_tr": "15m içindeki hedeflere her biri 2d6 zehir hasarı veren 3 yoğun toksik küre ateşler.",
+        "branch": "Toxic",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 420,
+        "prerequisites": [
+          "vb_poison_nova"
+        ],
+        "icon": "🥎",
+        "effects": {
+          "damage": "3x 2d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "vb_lethal_spores",
+        "name_en": "Lethal Spores",
+        "name_tr": "Ölümcül Sporlar",
+        "description_en": "Fills a 5m radius with floating spores. Enemies taking actions within it take 3d6 poison damage.",
+        "description_tr": "5 metrelik bir alanı uçuşan sporlarla doldurur. İçinde eylem yapan düşmanlar 3d6 zehir hasarı alır.",
+        "branch": "Toxic",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "vb_toxic_barrage"
+        ],
+        "icon": "🍄",
+        "effects": {
+          "damage": "3d6 on action",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "vb_caustic_eruption",
+        "name_en": "Caustic Eruption",
+        "name_tr": "Kostik Patlama",
+        "description_en": "Causes the ground to erupt with acid in a 6m radius, dealing 5d8 acid damage and melting terrain.",
+        "description_tr": "Yerin 6 metre yarıçapında asitle patlamasına neden olarak 5d8 asit hasarı verir ve araziyi eritir.",
+        "branch": "Toxic",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "vb_lethal_spores"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "5d8",
+          "range": "6m"
+        }
+      },
+      {
+        "spell_key": "vb_miasma_field",
+        "name_en": "Miasma Field",
+        "name_tr": "Miasma Alanı",
+        "description_en": "Creates a 10m zone of pure decay. Prevents all healing and deals 3d8 necrotic-poison damage per turn.",
+        "description_tr": "10 metrelik bir çürüme bölgesi yaratır. Tüm iyileşmeyi engeller ve tur başına 3d8 nekrotik-zehir hasarı verir.",
+        "branch": "Toxic",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 720,
+        "prerequisites": [
+          "vb_caustic_eruption"
+        ],
+        "icon": "♨️",
+        "effects": {
+          "damage": "3d8",
+          "range": "10m",
+          "anti_heal": "100%"
+        }
+      },
+      {
+        "spell_key": "vb_plague_wind",
+        "name_en": "Plague Wind",
+        "name_tr": "Veba Rüzgarı",
+        "description_en": "Channels a 15m long, 4m wide gust of plagued wind. Pushes enemies back 5m and deals 6d6 poison damage.",
+        "description_tr": "15m uzunluğunda, 4m genişliğinde vebalı bir rüzgar estirir. Düşmanları 5m geri iter ve 6d6 zehir hasarı verir.",
+        "branch": "Toxic",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "vb_miasma_field"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "6d6",
+          "range": "15x4m line",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "vb_toxic_overload",
+        "name_en": "Toxic Overload",
+        "name_tr": "Toksik Aşırı Yükleme",
+        "description_en": "Forces all toxins in a 10m radius to detonate, consuming active poisons for 10d6 burst damage.",
+        "description_tr": "10 metre yarıçapındaki tüm toksinleri patlamaya zorlar, aktif zehirleri tüketerek 10d6 anlık hasar verir.",
+        "branch": "Toxic",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "vb_plague_wind"
+        ],
+        "icon": "🛢️",
+        "effects": {
+          "damage": "10d6",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "vb_chernobyl_cloud",
+        "name_en": "Chernobyl Cloud",
+        "name_tr": "Çernobil Bulutu",
+        "description_en": "Unleashes an ultimate radioactive and toxic cloud in a 20m radius. Deals 10d10 poison damage over 5 turns and ignores poison immunity.",
+        "description_tr": "20 metre yarıçapında devasa bir radyoaktif ve toksik bulut salar. 5 tur boyunca 10d10 zehir hasarı verir ve zehir bağışıklığını yok sayar.",
+        "branch": "Toxic",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "vb_toxic_overload"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "damage": "10d10",
+          "range": "20m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "vb_venom_strike",
+        "name_en": "Venom Strike",
+        "name_tr": "Zehirli Vuruş",
+        "description_en": "A precise melee strike with a poisoned blade, dealing weapon damage plus 1d4 poison damage per turn for 2 turns.",
+        "description_tr": "Zehirli bir bıçakla yapılan isabetli bir yakın dövüş vuruşu, silah hasarı ve 2 tur boyunca tur başına 1d4 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "Weapon + 1d4 DOT",
+          "range": "Melee",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vb_poisoned_dart",
+        "name_en": "Poisoned Dart",
+        "name_tr": "Zehirli Ok",
+        "description_en": "Shoots a quick dart up to 15m away, dealing 1d8 piercing damage and poisoning the target.",
+        "description_tr": "15m uzağa kadar hızlı bir dart atarak 1d8 delici hasar verir ve hedefi zehirler.",
+        "branch": "Venom",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 70,
+        "prerequisites": [
+          "vb_venom_strike"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage": "1d8",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "vb_serpent_sting",
+        "name_en": "Serpent Sting",
+        "name_tr": "Yılan Sokması",
+        "description_en": "A swift stab mimicking a snake bite. Deals 2d6 poison damage and reduces the target's movement speed by 2m.",
+        "description_tr": "Yılan ısırığını taklit eden hızlı bir saplama. 2d6 zehir hasarı verir ve hedefin hareket hızını 2m azaltır.",
+        "branch": "Venom",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [
+          "vb_poisoned_dart"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "damage": "2d6",
+          "range": "Melee",
+          "speed_reduction": "2m"
+        }
+      },
+      {
+        "spell_key": "vb_venom_coating",
+        "name_en": "Venom Coating",
+        "name_tr": "Zehir Kaplama",
+        "description_en": "Applies a fast-acting venom to your weapon. Your next 3 attacks deal an additional 1d6 poison damage.",
+        "description_tr": "Silahınıza hızlı etki eden bir zehir sürer. Sonraki 3 saldırınız fazladan 1d6 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "vb_serpent_sting"
+        ],
+        "icon": "🍯",
+        "effects": {
+          "damage": "+1d6",
+          "charges": "3 attacks"
+        }
+      },
+      {
+        "spell_key": "vb_toxic_slash",
+        "name_en": "Toxic Slash",
+        "name_tr": "Toksik Kesik",
+        "description_en": "A sweeping melee attack that leaves a trail of venom, dealing 3d6 poison damage to targets in a 3m arc.",
+        "description_tr": "Zehir izi bırakan geniş bir yakın dövüş saldırısı, 3m yay içindeki hedeflere 3d6 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 210,
+        "prerequisites": [
+          "vb_venom_coating"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3d6",
+          "range": "3m arc"
+        }
+      },
+      {
+        "spell_key": "vb_spider_bite",
+        "name_en": "Spider Bite",
+        "name_tr": "Örümcek Isırığı",
+        "description_en": "A specialized strike that paralyses local muscles. Roots the target in place for 1 turn and deals 2d8 poison damage.",
+        "description_tr": "Lokal kasları felç eden özel bir vuruş. Hedefi 1 tur yerine sabitler ve 2d8 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 260,
+        "prerequisites": [
+          "vb_toxic_slash"
+        ],
+        "icon": "🕷️",
+        "effects": {
+          "damage": "2d8",
+          "range": "Melee",
+          "status": "Root"
+        }
+      },
+      {
+        "spell_key": "vb_viper_fang",
+        "name_en": "Viper Fang",
+        "name_tr": "Engerek Dişi",
+        "description_en": "A lethal stab that pierces armor. Deals 4d6 poison damage and ignores 20% of the target's physical armor.",
+        "description_tr": "Zırhı delen ölümcül bir saplama. 4d6 zehir hasarı verir ve hedefin fiziksel zırhının %20'sini yok sayar.",
+        "branch": "Venom",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "vb_spider_bite"
+        ],
+        "icon": "🦷",
+        "effects": {
+          "damage": "4d6",
+          "range": "Melee",
+          "armor_penetration": "20%"
+        }
+      },
+      {
+        "spell_key": "vb_venomous_barrage",
+        "name_en": "Venomous Barrage",
+        "name_tr": "Zehirli Bıçak Yağmuru",
+        "description_en": "Throws 5 poisoned throwing knives at targets within 10m, each dealing 1d6 piercing and 1d6 poison damage.",
+        "description_tr": "10m içindeki hedeflere 5 adet zehirli fırlatma bıçağı atar, her biri 1d6 delici ve 1d6 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "vb_viper_fang"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "damage": "5x (1d6 + 1d6)",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "vb_paralyzing_toxin",
+        "name_en": "Paralyzing Toxin",
+        "name_tr": "Felç Edici Zehir",
+        "description_en": "Injects a potent neurotoxin via melee strike. Stuns the target for 1 turn and deals 3d6 poison damage.",
+        "description_tr": "Yakın dövüşte güçlü bir nörotoksin enjekte eder. Hedefi 1 tur sersemletir ve 3d6 zehir hasarı verir.",
+        "branch": "Venom",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "vb_venomous_barrage"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "3d6",
+          "range": "Melee",
+          "status": "Stun"
+        }
+      },
+      {
+        "spell_key": "vb_manticore_sting",
+        "name_en": "Manticore Sting",
+        "name_tr": "Mantikor İğnesi",
+        "description_en": "A heavy thrown barb with 10m range. Deals 5d8 poison damage and inflicts severe pain, causing disadvantage on attacks.",
+        "description_tr": "10m menzilli ağır bir fırlatma dikeni. 5d8 zehir hasarı verir ve şiddetli acı yaratarak saldırılarda dezavantaja neden olur.",
+        "branch": "Venom",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "vb_paralyzing_toxin"
+        ],
+        "icon": "🦂",
+        "effects": {
+          "damage": "5d8",
+          "range": "10m",
+          "debuff": "Disadvantage on attacks"
+        }
+      },
+      {
+        "spell_key": "vb_venom_surge",
+        "name_en": "Venom Surge",
+        "name_tr": "Zehir Dalgası",
+        "description_en": "Dashes through enemies up to 8m away, slashing all in your path for 4d8 poison damage.",
+        "description_tr": "8m uzağa kadar düşmanların içinden atılarak yolunuzun üzerindeki herkese 4d8 zehir hasarı veren kesikler atar.",
+        "branch": "Venom",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 680,
+        "prerequisites": [
+          "vb_manticore_sting"
+        ],
+        "icon": "〰️",
+        "effects": {
+          "damage": "4d8",
+          "range": "8m dash"
+        }
+      },
+      {
+        "spell_key": "vb_lethal_injection",
+        "name_en": "Lethal Injection",
+        "name_tr": "Ölümcül Enjeksiyon",
+        "description_en": "A devastating melee injection dealing 8d6 poison damage. Instantly kills targets below 20% HP.",
+        "description_tr": "8d6 zehir hasarı veren yıkıcı bir yakın dövüş enjeksiyonu. %20 Canın altındaki hedefleri anında öldürür.",
+        "branch": "Venom",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "vb_venom_surge"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "8d6",
+          "range": "Melee",
+          "execute": "20% HP"
+        }
+      },
+      {
+        "spell_key": "vb_neurotoxin_blade",
+        "name_en": "Neurotoxin Blade",
+        "name_tr": "Nörotoksin Bıçağı",
+        "description_en": "Strikes with a highly concentrated neurotoxin. Deals 6d8 damage and disables the target's ability to cast spells for 2 turns.",
+        "description_tr": "Yüksek konsantrasyonlu nörotoksinle vurur. 6d8 hasar verir ve hedefin 2 tur boyunca büyü yapma yeteneğini devre dışı bırakır.",
+        "branch": "Venom",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1050,
+        "prerequisites": [
+          "vb_lethal_injection"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "6d8",
+          "range": "Melee",
+          "status": "Silence"
+        }
+      },
+      {
+        "spell_key": "vb_hydra_fangs",
+        "name_en": "Hydra Fangs",
+        "name_tr": "Hydra Dişleri",
+        "description_en": "Delivers 5 incredibly rapid strikes, each dealing 3d10 poison damage with an un-curable venom.",
+        "description_tr": "Her biri iyileştirilemez bir zehirle 3d10 zehir hasarı veren 5 inanılmaz hızlı vuruş yapar.",
+        "branch": "Venom",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "vb_neurotoxin_blade"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "5x 3d10",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "vb_fever_touch",
+        "name_en": "Fever Touch",
+        "name_tr": "Ateşli Dokunuş",
+        "description_en": "A touch that induces a sudden fever. Reduces target's movement speed by 3m and deals 1d4 damage per turn.",
+        "description_tr": "Ani ateşe neden olan bir dokunuş. Hedefin hareket hızını 3m azaltır ve tur başına 1d4 hasar verir.",
+        "branch": "Affliction",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🤒",
+        "effects": {
+          "damage": "1d4",
+          "range": "Melee",
+          "speed_reduction": "3m"
+        }
+      },
+      {
+        "spell_key": "vb_weakening_sickness",
+        "name_en": "Weakening Sickness",
+        "name_tr": "Zayıflatan Hastalık",
+        "description_en": "Infects a target within 10m. They suffer disadvantage on Strength and Dexterity saving throws for 3 turns.",
+        "description_tr": "10m içindeki bir hedefi enfekte eder. 3 tur boyunca Güç ve Çeviklik kurtarma zarlarında dezavantaj yaşarlar.",
+        "branch": "Affliction",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 90,
+        "prerequisites": [
+          "vb_fever_touch"
+        ],
+        "icon": "🤢",
+        "effects": {
+          "range": "10m",
+          "duration": "3 turns",
+          "debuff": "Disadvantage on STR/DEX saves"
+        }
+      },
+      {
+        "spell_key": "vb_blood_rot",
+        "name_en": "Blood Rot",
+        "name_tr": "Kan Çürümesi",
+        "description_en": "Corrupts the blood of a target within 15m. Deals 2d4 necrotic damage per turn and halves all healing received.",
+        "description_tr": "15m içindeki bir hedefin kanını bozar. Tur başına 2d4 nekrotik hasar verir ve alınan tüm iyileştirmeyi yarıya indirir.",
+        "branch": "Affliction",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "vb_weakening_sickness"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "2d4",
+          "range": "15m",
+          "anti_heal": "50%"
+        }
+      },
+      {
+        "spell_key": "vb_blinding_venom",
+        "name_en": "Blinding Venom",
+        "name_tr": "Kör Edici Zehir",
+        "description_en": "Throws a venomous vial at the target's eyes (10m range). Blinds them for 2 turns.",
+        "description_tr": "Hedefin gözlerine zehirli bir şişe fırlatır (10m menzil). Onları 2 tur boyunca kör eder.",
+        "branch": "Affliction",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "vb_blood_rot"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "10m",
+          "status": "Blind",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "vb_flesh_decay",
+        "name_en": "Flesh Decay",
+        "name_tr": "Et Çürümesi",
+        "description_en": "Curses a target within 10m to slowly rot. Deals 3d4 necrotic damage per turn and reduces their maximum HP by the damage dealt.",
+        "description_tr": "10m içindeki bir hedefi yavaşça çürümesi için lanetler. Tur başına 3d4 nekrotik hasar verir ve maksimum canlarını verilen hasar kadar azaltır.",
+        "branch": "Affliction",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 240,
+        "prerequisites": [
+          "vb_blinding_venom"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "damage": "3d4",
+          "range": "10m",
+          "max_hp_reduction": "Equal to damage"
+        }
+      },
+      {
+        "spell_key": "vb_plague_bearer",
+        "name_en": "Plague Bearer",
+        "name_tr": "Veba Taşıyıcısı",
+        "description_en": "You become a host to disease. Enemies within a 3m aura take 1d6 poison damage per turn passively.",
+        "description_tr": "Hastalığa ev sahipliği yaparsınız. 3m aura içindeki düşmanlar pasif olarak tur başına 1d6 zehir hasarı alır.",
+        "branch": "Affliction",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 290,
+        "prerequisites": [
+          "vb_flesh_decay"
+        ],
+        "icon": "🐀",
+        "effects": {
+          "damage": "1d6",
+          "range": "3m aura"
+        }
+      },
+      {
+        "spell_key": "vb_wasting_disease",
+        "name_en": "Wasting Disease",
+        "name_tr": "Tüketen Hastalık",
+        "description_en": "Inflicts a wasting curse. Target loses 2d6 HP per turn and gains one level of exhaustion every 2 turns it persists.",
+        "description_tr": "Tüketen bir lanet uygular. Hedef tur başına 2d6 Can kaybeder ve devam ettiği her 2 turda bir yorgunluk seviyesi kazanır.",
+        "branch": "Affliction",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 390,
+        "prerequisites": [
+          "vb_plague_bearer"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage": "2d6",
+          "range": "10m",
+          "status": "Exhaustion"
+        }
+      },
+      {
+        "spell_key": "vb_contagion",
+        "name_en": "Contagion",
+        "name_tr": "Bulaşıcı Hastalık",
+        "description_en": "Infects a target with a highly contagious disease dealing 3d6 damage per turn. If the target dies, it spreads to the nearest enemy.",
+        "description_tr": "Hedefi tur başına 3d6 hasar veren oldukça bulaşıcı bir hastalıkla enfekte eder. Hedef ölürse, en yakın düşmana sıçrar.",
+        "branch": "Affliction",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 410,
+        "prerequisites": [
+          "vb_wasting_disease"
+        ],
+        "icon": "🦠",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m",
+          "mechanic": "Spreads on death"
+        }
+      },
+      {
+        "spell_key": "vb_mind_fog_toxin",
+        "name_en": "Mind Fog Toxin",
+        "name_tr": "Zihin Sisi Zehri",
+        "description_en": "Fogs the target's brain from 15m away. They become confused and attack random targets for 1 turn.",
+        "description_tr": "15m uzaktan hedefin beynini bulandırır. Kafaları karışır ve 1 tur boyunca rastgele hedeflere saldırırlar.",
+        "branch": "Affliction",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 460,
+        "prerequisites": [
+          "vb_contagion"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "15m",
+          "status": "Confusion",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "vb_organ_failure",
+        "name_en": "Organ Failure",
+        "name_tr": "Organ Yetmezliği",
+        "description_en": "Causes sudden internal collapse in a target within 10m. Deals 5d8 necrotic damage and stuns them for 1 turn.",
+        "description_tr": "10m içindeki bir hedefte ani iç çöküşe neden olur. 5d8 nekrotik hasar verir ve onları 1 tur sersemletir.",
+        "branch": "Affliction",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 640,
+        "prerequisites": [
+          "vb_mind_fog_toxin"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "damage": "5d8",
+          "range": "10m",
+          "status": "Stun"
+        }
+      },
+      {
+        "spell_key": "vb_epidemic",
+        "name_en": "Epidemic",
+        "name_tr": "Salgın",
+        "description_en": "Forces all afflictions and DOTs on a single target to instantly spread to all enemies within 10m of them.",
+        "description_tr": "Tek bir hedefteki tüm hastalıkların ve zamanla verilen hasarların 10m içindeki tüm düşmanlara anında yayılmasını sağlar.",
+        "branch": "Affliction",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "vb_organ_failure"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "range": "10m",
+          "mechanic": "AOE Spread"
+        }
+      },
+      {
+        "spell_key": "vb_black_blood",
+        "name_en": "Black Blood",
+        "name_tr": "Kara Kan",
+        "description_en": "Your blood turns to toxic sludge. When hit by a melee attack, you splash the attacker for 3d6 acid damage.",
+        "description_tr": "Kanınız toksik bir çamura dönüşür. Yakın dövüş saldırısıyla vurulduğunuzda saldırgana sıçrayarak 3d6 asit hasarı verir.",
+        "branch": "Affliction",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 780,
+        "prerequisites": [
+          "vb_epidemic"
+        ],
+        "icon": "🖤",
+        "effects": {
+          "damage": "3d6",
+          "trigger": "On melee hit"
+        }
+      },
+      {
+        "spell_key": "vb_necrotizing_fasciitis",
+        "name_en": "Necrotizing Fasciitis",
+        "name_tr": "Nekrotizan Fasiit",
+        "description_en": "A flesh-eating bacteria infects the target (15m range). Deals 8d6 necrotic damage and permanently destroys natural armor.",
+        "description_tr": "Et yiyen bir bakteri hedefi enfekte eder (15m menzil). 8d6 nekrotik hasar verir ve doğal zırhı kalıcı olarak yok eder.",
+        "branch": "Affliction",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1080,
+        "prerequisites": [
+          "vb_black_blood"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "damage": "8d6",
+          "range": "15m",
+          "armor_destruction": "Permanent"
+        }
+      },
+      {
+        "spell_key": "vb_crimson_plague",
+        "name_en": "Crimson Plague",
+        "name_tr": "Kızıl Veba",
+        "description_en": "The ultimate affliction. Deals 8d10 damage over 4 turns. Healing effects harm the target instead. Spreads rapidly on death.",
+        "description_tr": "Nihai hastalık. 4 tur boyunca 8d10 hasar verir. İyileştirme etkileri bunun yerine hedefe zarar verir. Ölüm durumunda hızla yayılır.",
+        "branch": "Affliction",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "vb_necrotizing_fasciitis"
+        ],
+        "icon": "🥀",
+        "effects": {
+          "damage": "8d10",
+          "duration": "4 turns",
+          "mechanic": "Anti-heal damage"
+        }
+      },
+      {
+        "spell_key": "vb_toxic_blood",
+        "name_en": "Toxic Blood",
+        "name_tr": "Toksik Kan",
+        "description_en": "Your body fully adapts to toxins. Grants immunity to poison damage and heals you for 10% of max HP when struck by poison.",
+        "description_tr": "Vücudunuz toksinlere tamamen uyum sağlar. Zehir hasarına bağışıklık kazandırır ve zehirle vurulduğunda maksimum Canınızın %10'u kadar iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 270,
+        "prerequisites": [
+          "vb_acid_flask",
+          "vb_spider_bite"
+        ],
+        "icon": "🫁",
+        "effects": {
+          "immunity": "Poison",
+          "healing": "10% Max HP from poison"
+        }
+      },
+      {
+        "spell_key": "vb_plague_daggers",
+        "name_en": "Plague Daggers",
+        "name_tr": "Veba Hançerleri",
+        "description_en": "Summons 3 ethereal poisoned daggers that seek out targets. Deals 3d6 damage each and applies a random disease.",
+        "description_tr": "Hedefleri arayan 3 ruhani zehirli hançer çağırır. Her biri 3d6 hasar verir ve rastgele bir hastalık uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 440,
+        "prerequisites": [
+          "vb_venomous_barrage",
+          "vb_wasting_disease"
+        ],
+        "icon": "📌",
+        "effects": {
+          "damage": "3x 3d6",
+          "status": "Random Disease"
+        }
+      },
+      {
+        "spell_key": "vb_miasma_coating",
+        "name_en": "Miasma Coating",
+        "name_tr": "Miasma Kaplama",
+        "description_en": "Coats your weapons in thick miasma. Attacks deal +2d6 poison damage and leave behind 2m clouds of decaying gas.",
+        "description_tr": "Silahlarınızı yoğun miasma ile kaplar. Saldırılar +2d6 zehir hasarı verir ve arkasında 2 metrelik çürüyen gaz bulutları bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 490,
+        "prerequisites": [
+          "vb_lethal_spores",
+          "vb_contagion"
+        ],
+        "icon": "🖌️",
+        "effects": {
+          "damage": "+2d6",
+          "cloud_radius": "2m"
+        }
+      },
+      {
+        "spell_key": "vb_venomous_explosion",
+        "name_en": "Venomous Explosion",
+        "name_tr": "Zehirli Patlama",
+        "description_en": "Striking a poisoned target triggers a volatile reaction, causing them to explode for 5d6 poison damage in a 4m radius.",
+        "description_tr": "Zehirli bir hedefe vurmak uçucu bir reaksiyonu tetikler ve 4 metre yarıçapında 5d6 zehir hasarıyla patlamalarına neden olur.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 740,
+        "prerequisites": [
+          "vb_venom_surge",
+          "vb_miasma_field"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "5d6",
+          "range": "4m radius"
+        }
+      },
+      {
+        "spell_key": "vb_pandemic_strike",
+        "name_en": "Pandemic Strike",
+        "name_tr": "Pandemi Vuruşu",
+        "description_en": "A catastrophic melee attack dealing 6d6 piercing damage and instantly infecting the target with 3 different afflictions.",
+        "description_tr": "6d6 delici hasar veren ve hedefi anında 3 farklı hastalıkla enfekte eden feci bir yakın dövüş saldırısı.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 880,
+        "prerequisites": [
+          "vb_lethal_injection",
+          "vb_epidemic"
+        ],
+        "icon": "😷",
+        "effects": {
+          "damage": "6d6",
+          "range": "Melee",
+          "afflictions": "3 random"
+        }
+      },
+      {
+        "spell_key": "vb_corrosive_rot",
+        "name_en": "Corrosive Rot",
+        "name_tr": "Aşındırıcı Çürüme",
+        "description_en": "Unleashes an 8m pool of acid and decay. Deals 4d8 acid damage and permanently halves the maximum HP of non-boss enemies.",
+        "description_tr": "8 metrelik asit ve çürüme havuzu salar. 4d8 asit hasarı verir ve patron olmayan düşmanların maksimum Canını kalıcı olarak yarıya indirir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "vb_toxic_overload",
+          "vb_necrotizing_fasciitis"
+        ],
+        "icon": "🫠",
+        "effects": {
+          "damage": "4d8",
+          "range": "8m",
+          "max_hp_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "vb_venomblood_avatar",
+        "name_en": "Venomblood Avatar",
+        "name_tr": "Zehirkan Avatarı",
+        "description_en": "Transform into the embodiment of toxicity. +50% poison damage, attacks cause AOE splashes, and complete immunity to all debuffs for 3 turns.",
+        "description_tr": "Toksisitenin vücut bulmuş haline dönüşün. +%50 zehir hasarı, saldırılar alan etkili sıçramalara neden olur ve 3 tur boyunca tüm zayıflatmalara tam bağışıklık sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "vb_chernobyl_cloud",
+          "vb_hydra_fangs",
+          "vb_crimson_plague"
+        ],
+        "icon": "🧌",
+        "effects": {
+          "buff": "+50% Poison Damage",
+          "immunity": "Debuffs",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "vb_apocalypse_toxin",
+        "name_en": "Apocalypse Toxin",
+        "name_tr": "Kıyamet Toksini",
+        "description_en": "Releases the ultimate biochemical weapon in a 30m radius. Deals 20d10 absolute poison damage, bypassing all immunities and converting the area into a wasteland.",
+        "description_tr": "30 metre yarıçapında nihai biyokimyasal silahı serbest bırakır. Tüm bağışıklıkları atlayarak 20d10 mutlak zehir hasarı verir ve alanı bir çorak araziye dönüştürür.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "vb_venomblood_avatar"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "damage": "20d10",
+          "range": "30m",
+          "mechanic": "Bypasses immunity"
+        }
+      }
+    ]
+  }
+]

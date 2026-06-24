@@ -1,0 +1,972 @@
+[
+  {
+    "subclass_key": "imposter",
+    "tree_name_en": "Path of the Imposter",
+    "tree_name_tr": "Sahtekar Yolu",
+    "tree_desc_en": "Master the arts of mimicry, disguise, and deception. Become anyone, steal any power, and backstab your enemies.",
+    "tree_desc_tr": "Taklit, kılık değiştirme ve hile sanatlarında ustalaşın. Herkes olun, her gücü çalın ve düşmanlarınızı sırtından bıçaklayın.",
+    "branches": [
+      "Mimicry",
+      "Disguise",
+      "Deception"
+    ],
+    "spells": [
+      {
+        "spell_key": "ip_copycat_strike",
+        "name_en": "Copycat Strike",
+        "name_tr": "Kopyacı Vuruşu",
+        "description_en": "Replicate the last physical attack made by a target within 10m.",
+        "description_tr": "10m içindeki bir hedefin yaptığı son fiziksel saldırıyı taklit eder.",
+        "branch": "Mimicry",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐒",
+        "effects": {
+          "damage": "100% of copied attack",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ip_echo_word",
+        "name_en": "Echo Word",
+        "name_tr": "Yankı Sözü",
+        "description_en": "Repeat a Tier 1 spell cast nearby in the last round.",
+        "description_tr": "Geçen tur yakında yapılan 1. Aşama bir büyüyü tekrarlar.",
+        "branch": "Mimicry",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "range": "15m",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "ip_borrow_skill",
+        "name_en": "Borrow Skill",
+        "name_tr": "Yetenek Ödünç Al",
+        "description_en": "Temporarily borrow a basic skill from a willing ally.",
+        "description_tr": "Gönüllü bir müttefikten geçici olarak temel bir yetenek ödünç alır.",
+        "branch": "Mimicry",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🤝",
+        "effects": {
+          "duration": "3 turns",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "ip_stolen_vigor",
+        "name_en": "Stolen Vigor",
+        "name_tr": "Çalınmış Canlılık",
+        "description_en": "Steal a beneficial buff from an enemy.",
+        "description_tr": "Bir düşmandan yararlı bir güçlendirmeyi çalar.",
+        "branch": "Mimicry",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ip_borrow_skill"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "range": "10m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "ip_mirror_stance",
+        "name_en": "Mirror Stance",
+        "name_tr": "Ayna Duruşu",
+        "description_en": "Mimic the attacker's stance to reflect 30% of incoming physical damage.",
+        "description_tr": "Gelen fiziksel hasarın %30'unu yansıtmak için saldıranın duruşunu taklit eder.",
+        "branch": "Mimicry",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ip_copycat_strike"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "damage_reflect": "30%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ip_spell_thief",
+        "name_en": "Spell Thief",
+        "name_tr": "Büyü Hırsızı",
+        "description_en": "Counter a Tier 1 or 2 spell and memorize it to cast once.",
+        "description_tr": "1. veya 2. Aşama bir büyüyü engeller ve bir kez yapmak için ezberler.",
+        "branch": "Mimicry",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ip_echo_word"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "range": "20m",
+          "memorize_duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ip_doppelganger_reflex",
+        "name_en": "Doppelganger Reflex",
+        "name_tr": "Doppelganger Refleksi",
+        "description_en": "Auto-dodge an attack by perfectly mimicking the attacker's movements.",
+        "description_tr": "Saldıranın hareketlerini kusursuz bir şekilde taklit ederek bir saldırıdan otomatik kaçınır.",
+        "branch": "Mimicry",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ip_mirror_stance"
+        ],
+        "icon": "🤸",
+        "effects": {
+          "dodge_chance": "100%",
+          "duration": "1 attack"
+        }
+      },
+      {
+        "spell_key": "ip_aura_theft",
+        "name_en": "Aura Theft",
+        "name_tr": "Aura Hırsızlığı",
+        "description_en": "Steal an active aura from an enemy, turning its benefits to yourself.",
+        "description_tr": "Bir düşmandan aktif bir aurayı çalarak faydalarını kendinize çevirir.",
+        "branch": "Mimicry",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ip_stolen_vigor"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "range": "15m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "ip_skill_drain",
+        "name_en": "Skill Drain",
+        "name_tr": "Yetenek Sömürüsü",
+        "description_en": "Disable an enemy's specific skill and gain its use for 3 turns.",
+        "description_tr": "Bir düşmanın belirli bir yeteneğini devre dışı bırakır ve 3 tur boyunca kullanımını kazanır.",
+        "branch": "Mimicry",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ip_spell_thief"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "range": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ip_mimic_mastery",
+        "name_en": "Mimic Mastery",
+        "name_tr": "Taklit Ustalığı",
+        "description_en": "Copy a target's passive ability for 1 hour.",
+        "description_tr": "Bir hedefin pasif yeteneğini 1 saatliğine kopyalar.",
+        "branch": "Mimicry",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ip_skill_drain"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "range": "20m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ip_grand_theft_spell",
+        "name_en": "Grand Theft Spell",
+        "name_tr": "Büyük Büyü Hırsızlığı",
+        "description_en": "Steal a Tier 3 or 4 spell from an enemy's mind, preventing them from casting it.",
+        "description_tr": "Bir düşmanın zihninden 3. veya 4. Aşama bir büyüyü çalarak, onların yapmasını engeller.",
+        "branch": "Mimicry",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ip_aura_theft"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "25m",
+          "cooldown": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ip_twin_cast",
+        "name_en": "Twin Cast",
+        "name_tr": "İkiz Büyü",
+        "description_en": "Dual cast any spell you have copied or stolen.",
+        "description_tr": "Kopyaladığınız veya çaldığınız herhangi bir büyüyü çift olarak atın.",
+        "branch": "Mimicry",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ip_doppelganger_reflex"
+        ],
+        "icon": "👯",
+        "effects": {
+          "multiplier": "2x effect",
+          "mana_cost": "1.5x"
+        }
+      },
+      {
+        "spell_key": "ip_essence_replica",
+        "name_en": "Essence Replica",
+        "name_tr": "Öz Kopyası",
+        "description_en": "Create an energy replica of an enemy's signature weapon with 80% of its power.",
+        "description_tr": "Bir düşmanın imza silahının %80 gücüyle enerjik bir kopyasını yaratır.",
+        "branch": "Mimicry",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ip_mimic_mastery"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "power": "80%",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "ip_perfect_imitation",
+        "name_en": "Perfect Imitation",
+        "name_tr": "Kusursuz Taklit",
+        "description_en": "Fully become the target mechanically. Gain their stats, skills, and spells for 10 minutes.",
+        "description_tr": "Mekanik olarak tamamen hedef olun. 10 dakika boyunca onların istatistiklerini, yeteneklerini ve büyülerini kazanın.",
+        "branch": "Mimicry",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ip_twin_cast",
+          "ip_grand_theft_spell",
+          "ip_essence_replica"
+        ],
+        "icon": "👥",
+        "effects": {
+          "range": "30m",
+          "duration": "10 minutes",
+          "stat_copy": "100%"
+        }
+      },
+      {
+        "spell_key": "ip_change_face",
+        "name_en": "Change Face",
+        "name_tr": "Yüz Değiştir",
+        "description_en": "Alter your facial features and hair to look like a generic person.",
+        "description_tr": "Yüz hatlarınızı ve saçınızı sıradan birine benzeyecek şekilde değiştirin.",
+        "branch": "Disguise",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🥸",
+        "effects": {
+          "duration": "24 hours",
+          "illusion_level": "Basic"
+        }
+      },
+      {
+        "spell_key": "ip_voice_mimic",
+        "name_en": "Voice Mimic",
+        "name_tr": "Ses Taklidi",
+        "description_en": "Perfectly replicate any voice you have heard for at least 1 minute.",
+        "description_tr": "En az 1 dakika duyduğunuz herhangi bir sesi kusursuz bir şekilde taklit edin.",
+        "branch": "Disguise",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🦜",
+        "effects": {
+          "duration": "1 hour",
+          "accuracy": "99%"
+        }
+      },
+      {
+        "spell_key": "ip_cloth_shift",
+        "name_en": "Cloth Shift",
+        "name_tr": "Kıyafet Değişimi",
+        "description_en": "Change the appearance of your clothing to match a desired style.",
+        "description_tr": "Kıyafetinizin görünümünü istenen bir tarza uyacak şekilde değiştirin.",
+        "branch": "Disguise",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🧥",
+        "effects": {
+          "duration": "24 hours",
+          "type": "Visual Illusion"
+        }
+      },
+      {
+        "spell_key": "ip_false_friend",
+        "name_en": "False Friend",
+        "name_tr": "Sahte Dost",
+        "description_en": "Appear as a trusted ally to a specific enemy.",
+        "description_tr": "Belirli bir düşmana güvenilir bir müttefik olarak görünün.",
+        "branch": "Disguise",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ip_change_face"
+        ],
+        "icon": "😊",
+        "effects": {
+          "range": "15m",
+          "duration": "10 minutes",
+          "mental_save": "Required"
+        }
+      },
+      {
+        "spell_key": "ip_chameleon_skin",
+        "name_en": "Chameleon Skin",
+        "name_tr": "Bukalemun Derisi",
+        "description_en": "Blend into your surroundings, gaining near invisibility while motionless.",
+        "description_tr": "Çevrenize karışarak hareketsizken neredeyse görünmezlik kazanın.",
+        "branch": "Disguise",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ip_cloth_shift"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "stealth_bonus": "+50",
+          "movement_penalty": "70%"
+        }
+      },
+      {
+        "spell_key": "ip_shadow_meld",
+        "name_en": "Shadow Meld",
+        "name_tr": "Gölge Bütünleşmesi",
+        "description_en": "Hide seamlessly within the shadow of another creature.",
+        "description_tr": "Başka bir yaratığın gölgesine kusursuz bir şekilde saklanın.",
+        "branch": "Disguise",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ip_voice_mimic"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "duration": "1 hour",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "ip_impersonate",
+        "name_en": "Impersonate",
+        "name_tr": "Kılığına Gir",
+        "description_en": "Disguise as a specific individual, fooling low-level magic detection.",
+        "description_tr": "Belirli bir kişinin kılığına girerek düşük seviyeli büyü algılamalarını kandırın.",
+        "branch": "Disguise",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ip_false_friend"
+        ],
+        "icon": "🕵️",
+        "effects": {
+          "duration": "12 hours",
+          "magic_resistance": "Tier 3"
+        }
+      },
+      {
+        "spell_key": "ip_flesh_sculpt",
+        "name_en": "Flesh Sculpt",
+        "name_tr": "Et Şekillendirme",
+        "description_en": "Physically alter your height, weight, and race temporarily.",
+        "description_tr": "Boyunuzu, kilonuzu ve ırkınızı geçici olarak fiziksel olarak değiştirin.",
+        "branch": "Disguise",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ip_chameleon_skin"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "duration": "4 hours",
+          "physical_change": "True"
+        }
+      },
+      {
+        "spell_key": "ip_faceless_one",
+        "name_en": "Faceless One",
+        "name_tr": "Yüzsüz Olan",
+        "description_en": "Erase your identity, becoming completely immune to tracking and scrying.",
+        "description_tr": "Kimliğinizi silerek, izleme ve kehanet büyülerine karşı tamamen bağışık olun.",
+        "branch": "Disguise",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ip_shadow_meld"
+        ],
+        "icon": "😶",
+        "effects": {
+          "duration": "24 hours",
+          "immunity": "Scrying & Tracking"
+        }
+      },
+      {
+        "spell_key": "ip_doppelganger_shift",
+        "name_en": "Doppelganger Shift",
+        "name_tr": "Doppelganger Dönüşümü",
+        "description_en": "Assume the physical stats (STR, DEX, CON) of the creature you are disguised as.",
+        "description_tr": "Kılığına girdiğiniz yaratığın fiziksel istatistiklerini (GÜÇ, ÇVK, DYN) üstlenin.",
+        "branch": "Disguise",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ip_flesh_sculpt"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "duration": "1 hour",
+          "stat_override": "Physical"
+        }
+      },
+      {
+        "spell_key": "ip_mass_disguise",
+        "name_en": "Mass Disguise",
+        "name_tr": "Toplu Kılık Değiştirme",
+        "description_en": "Cast an intricate disguise over your entire party.",
+        "description_tr": "Tüm grubunuzun üzerine karmaşık bir kılık değiştirme büyüsü yapın.",
+        "branch": "Disguise",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ip_impersonate"
+        ],
+        "icon": "🎪",
+        "effects": {
+          "radius": "10m",
+          "targets": "Up to 6",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "ip_infiltrator",
+        "name_en": "Infiltrator",
+        "name_tr": "Sızmacı",
+        "description_en": "Your disguise lets you bypass magical wards and alarms keyed to the impersonated target.",
+        "description_tr": "Kılık değiştirmeniz, taklit edilen hedefe ayarlı büyülü korumaları ve alarmları atlatmanızı sağlar.",
+        "branch": "Disguise",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ip_faceless_one"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "ward_bypass": "100%",
+          "duration": "Passive during disguise"
+        }
+      },
+      {
+        "spell_key": "ip_steal_identity",
+        "name_en": "Steal Identity",
+        "name_tr": "Kimlik Hırsızlığı",
+        "description_en": "Send the target to a pocket dimension and replace them seamlessly in reality.",
+        "description_tr": "Hedefi bir cep boyutuna gönderin ve gerçeklikte onların yerini kusursuz bir şekilde alın.",
+        "branch": "Disguise",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ip_doppelganger_shift"
+        ],
+        "icon": "👤",
+        "effects": {
+          "range": "5m",
+          "banishment_duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ip_many_faced_god",
+        "name_en": "Many-Faced God",
+        "name_tr": "Çok Yüzlü Tanrı",
+        "description_en": "Instantly swap between multiple stolen identities, accessing their full powers.",
+        "description_tr": "Birden fazla çalınmış kimlik arasında anında geçiş yaparak onların tam güçlerine erişin.",
+        "branch": "Disguise",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ip_mass_disguise",
+          "ip_infiltrator",
+          "ip_steal_identity"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "identities": "Up to 5",
+          "swap_action": "Free Action",
+          "duration": "Permanent until discarded"
+        }
+      },
+      {
+        "spell_key": "ip_feint_attack",
+        "name_en": "Feint Attack",
+        "name_tr": "Şaşırtma Saldırısı",
+        "description_en": "Fake an attack to lower the target's defense by 20% for their next turn.",
+        "description_tr": "Hedefin savunmasını bir sonraki tur için %20 düşürmek amacıyla sahte bir saldırı yapın.",
+        "branch": "Deception",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🤺",
+        "effects": {
+          "range": "5m",
+          "defense_reduction": "20%"
+        }
+      },
+      {
+        "spell_key": "ip_distraction",
+        "name_en": "Distraction",
+        "name_tr": "Dikkat Dağıtma",
+        "description_en": "Create a loud noise or flash of light at a point within 20m.",
+        "description_tr": "20m içindeki bir noktada yüksek bir ses veya ışık parlaması yaratın.",
+        "branch": "Deception",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🎇",
+        "effects": {
+          "range": "20m",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ip_minor_illusion",
+        "name_en": "Minor Illusion",
+        "name_tr": "Küçük İllüzyon",
+        "description_en": "Create a small visual or auditory illusion.",
+        "description_tr": "Küçük bir görsel veya işitsel illüzyon yaratın.",
+        "branch": "Deception",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🦋",
+        "effects": {
+          "range": "15m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "ip_backstab",
+        "name_en": "Backstab",
+        "name_tr": "Sırtından Bıçaklama",
+        "description_en": "Deal 3d6 extra damage when striking an unaware or deceived target.",
+        "description_tr": "Habersiz veya kandırılmış bir hedefe vururken fazladan 3d6 hasar verin.",
+        "branch": "Deception",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 210,
+        "prerequisites": [
+          "ip_feint_attack"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "3d6 piercing",
+          "condition": "Unaware or Deceived"
+        }
+      },
+      {
+        "spell_key": "ip_false_target",
+        "name_en": "False Target",
+        "name_tr": "Sahte Hedef",
+        "description_en": "Force enemies in an area to attack an illusionary duplicate instead of you.",
+        "description_tr": "Bir alandaki düşmanları sizin yerinize illüzyon bir kopyaya saldırmaya zorlayın.",
+        "branch": "Deception",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 240,
+        "prerequisites": [
+          "ip_distraction"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "range": "15m",
+          "duration": "2 turns",
+          "aggro": "High"
+        }
+      },
+      {
+        "spell_key": "ip_phantom_pain",
+        "name_en": "Phantom Pain",
+        "name_tr": "Hayalet Acı",
+        "description_en": "An illusionary attack that bypasses armor, dealing 2d8 mental damage.",
+        "description_tr": "Zırhı aşan ve 2d8 zihinsel hasar veren illüzyon bir saldırı.",
+        "branch": "Deception",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ip_minor_illusion"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "2d8 psychic",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ip_smoke_and_mirrors",
+        "name_en": "Smoke and Mirrors",
+        "name_tr": "Duman ve Aynalar",
+        "description_en": "Teleport up to 15m away, leaving a convincing illusion behind.",
+        "description_tr": "Arkanızda inandırıcı bir illüzyon bırakarak 15m'ye kadar ışınlanın.",
+        "branch": "Deception",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 410,
+        "prerequisites": [
+          "ip_false_target"
+        ],
+        "icon": "💨",
+        "effects": {
+          "teleport_range": "15m",
+          "illusion_duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ip_treachery",
+        "name_en": "Treachery",
+        "name_tr": "İhanet",
+        "description_en": "Make an enemy perceive their closest ally as you, causing them to attack.",
+        "description_tr": "Bir düşmanın en yakın müttefikini siz olarak algılamasını sağlayarak saldırtın.",
+        "branch": "Deception",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ip_phantom_pain"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "range": "20m",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ip_betrayer_strike",
+        "name_en": "Betrayer's Strike",
+        "name_tr": "Hainin Vuruşu",
+        "description_en": "A massive strike that deals double damage if the target considered you an ally.",
+        "description_tr": "Hedef sizi bir müttefik olarak görüyorsa iki kat hasar veren devasa bir vuruş.",
+        "branch": "Deception",
+        "tier": 3,
+        "min_level": 47,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ip_backstab"
+        ],
+        "icon": "💔",
+        "effects": {
+          "base_damage": "4d8",
+          "multiplier": "2x against allies"
+        }
+      },
+      {
+        "spell_key": "ip_gaslight",
+        "name_en": "Gaslight",
+        "name_tr": "Akıl Oyunu",
+        "description_en": "Alter a target's recent memories (up to 1 hour), making them doubt reality.",
+        "description_tr": "Bir hedefin yakın zamandaki anılarını (1 saate kadar) değiştirerek gerçeklikten şüphe etmesini sağlayın.",
+        "branch": "Deception",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 720,
+        "prerequisites": [
+          "ip_treachery"
+        ],
+        "icon": "🕯️",
+        "effects": {
+          "range": "10m",
+          "memory_alteration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ip_hallucinatory_terrain",
+        "name_en": "Hallucinatory Terrain",
+        "name_tr": "Halüsinatif Arazi",
+        "description_en": "Change the appearance, sound, and smell of a 50m area to deceive enemies.",
+        "description_tr": "Düşmanları kandırmak için 50m'lik bir alanın görünümünü, sesini ve kokusunu değiştirin.",
+        "branch": "Deception",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 760,
+        "prerequisites": [
+          "ip_smoke_and_mirrors"
+        ],
+        "icon": "🏜️",
+        "effects": {
+          "radius": "50m",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ip_puppet_strings",
+        "name_en": "Puppet Strings",
+        "name_tr": "Kukla İpleri",
+        "description_en": "Subtly control the movements of a deceived target for 3 turns.",
+        "description_tr": "Kandırılmış bir hedefin hareketlerini 3 tur boyunca kurnazca kontrol edin.",
+        "branch": "Deception",
+        "tier": 4,
+        "min_level": 67,
+        "xp_cost": 810,
+        "prerequisites": [
+          "ip_gaslight"
+        ],
+        "icon": "🧶",
+        "effects": {
+          "range": "20m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ip_fatal_ruse",
+        "name_en": "Fatal Ruse",
+        "name_tr": "Ölümcül Hile",
+        "description_en": "Lure an enemy into a deadly, invisible illusionary trap dealing 8d10 damage.",
+        "description_tr": "Bir düşmanı 8d10 hasar veren ölümcül, görünmez bir illüzyon tuzağına çekin.",
+        "branch": "Deception",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 860,
+        "prerequisites": [
+          "ip_betrayer_strike"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "damage": "8d10 force",
+          "trigger_radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ip_master_of_lies",
+        "name_en": "Master of Lies",
+        "name_tr": "Yalanların Efendisi",
+        "description_en": "Reality bends to your lies; an illusion of your choice becomes solid and real for 1 hour.",
+        "description_tr": "Gerçeklik yalanlarınıza boyun eğer; seçtiğiniz bir illüzyon 1 saatliğine katı ve gerçek olur.",
+        "branch": "Deception",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ip_hallucinatory_terrain",
+          "ip_puppet_strings",
+          "ip_fatal_ruse"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "1 hour",
+          "reality_warp": "True Form"
+        }
+      },
+      {
+        "spell_key": "ip_phantom_thief",
+        "name_en": "Phantom Thief",
+        "name_tr": "Hayalet Hırsız",
+        "description_en": "Steal an item from 20m away using an invisible illusionary hand.",
+        "description_tr": "Görünmez bir illüzyon el kullanarak 20m uzaktan bir eşya çalın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ip_minor_illusion",
+          "ip_borrow_skill"
+        ],
+        "icon": "🧤",
+        "effects": {
+          "range": "20m",
+          "item_weight": "Max 5kg"
+        }
+      },
+      {
+        "spell_key": "ip_illusory_copy",
+        "name_en": "Illusory Copy",
+        "name_tr": "İllüzyon Kopya",
+        "description_en": "Create a perfect, tangible clone of yourself that can act independently for 5 minutes.",
+        "description_tr": "5 dakika boyunca bağımsız hareket edebilen kusursuz, somut bir kopyanızı yaratın.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ip_impersonate",
+          "ip_smoke_and_mirrors"
+        ],
+        "icon": "🪆",
+        "effects": {
+          "duration": "5 minutes",
+          "hp": "20% of Max HP"
+        }
+      },
+      {
+        "spell_key": "ip_memory_parasite",
+        "name_en": "Memory Parasite",
+        "name_tr": "Hafıza Paraziti",
+        "description_en": "Absorb the surface memories and mannerisms of a target to perfect your disguise.",
+        "description_tr": "Kılığınızı kusursuzlaştırmak için bir hedefin yüzeysel anılarını ve tavırlarını emin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 490,
+        "prerequisites": [
+          "ip_aura_theft",
+          "ip_flesh_sculpt"
+        ],
+        "icon": "🦠",
+        "effects": {
+          "range": "Touch",
+          "disguise_bonus": "+100"
+        }
+      },
+      {
+        "spell_key": "ip_traitor_blade",
+        "name_en": "Traitor's Blade",
+        "name_tr": "Hainin Bıçağı",
+        "description_en": "A strike that mimics the target's elemental weakness and bypasses illusionary defenses.",
+        "description_tr": "Hedefin element zayıflığını taklit eden ve illüzyon savunmalarını aşan bir vuruş.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 880,
+        "prerequisites": [
+          "ip_betrayer_strike",
+          "ip_essence_replica"
+        ],
+        "icon": "🦂",
+        "effects": {
+          "damage": "6d8 adaptive",
+          "defense_bypass": "True"
+        }
+      },
+      {
+        "spell_key": "ip_legion_of_one",
+        "name_en": "Legion of One",
+        "name_tr": "Tek Kişilik Ordu",
+        "description_en": "Create 4 clones, each disguised as a different enemy and mimicking their skills.",
+        "description_tr": "Her biri farklı bir düşman kılığında ve onların yeteneklerini taklit eden 4 kopya yaratın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 890,
+        "prerequisites": [
+          "ip_mass_disguise",
+          "ip_twin_cast"
+        ],
+        "icon": "👨‍👨‍👦‍👦",
+        "effects": {
+          "clones": 4,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ip_false_reality",
+        "name_en": "False Reality",
+        "name_tr": "Sahte Gerçeklik",
+        "description_en": "Trap up to 5 targets in a localized illusionary world where you control their perceptions.",
+        "description_tr": "En fazla 5 hedefi, algılarını kontrol ettiğiniz yerel bir illüzyon dünyasına hapsedin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ip_hallucinatory_terrain",
+          "ip_steal_identity"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "radius": "30m",
+          "duration": "1 minute",
+          "targets": 5
+        }
+      },
+      {
+        "spell_key": "ip_ultimate_betrayal",
+        "name_en": "Ultimate Betrayal",
+        "name_tr": "Nihai İhanet",
+        "description_en": "Infiltrate enemy ranks disguised, mimic their leader's ultimate, and execute an AoE backstab.",
+        "description_tr": "Düşman saflarına kılık değiştirerek sızın, liderlerinin nihai yeteneğini taklit edin ve alan etkili bir sırtından bıçaklama gerçekleştirin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 950,
+        "prerequisites": [
+          "ip_traitor_blade",
+          "ip_legion_of_one",
+          "ip_false_reality"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "10d10",
+          "radius": "20m",
+          "condition": "Requires Disguise"
+        }
+      },
+      {
+        "spell_key": "ip_absolute_fraud",
+        "name_en": "Absolute Fraud",
+        "name_tr": "Mutlak Sahtekarlık",
+        "description_en": "Grand Ultimate. Rewrite reality to assert you are the rightful ruler or victor. Steal the enemy's entire existence and powers permanently (NPCs) or for 24 hours (Players).",
+        "description_tr": "Büyük Nihai. Haklı hükümdar veya galip olduğunuzu iddia etmek için gerçekliği yeniden yazın. Düşmanın tüm varlığını ve güçlerini kalıcı olarak (NPC'ler) veya 24 saatliğine (Oyuncular) çalın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 99,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ip_perfect_imitation",
+          "ip_many_faced_god",
+          "ip_master_of_lies"
+        ],
+        "icon": "👑",
+        "effects": {
+          "reality_rewrite": "Total",
+          "duration": "Permanent or 24h",
+          "range": "100m"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,994 @@
+[
+  {
+    "subclass_key": "dark_mage",
+    "tree_name_en": "Dark Mage",
+    "tree_name_tr": "Karanlık Büyücü",
+    "tree_desc_en": "Masters of shadows, deadly curses, and forbidden necrotic knowledge. They manipulate the dark to crush their foes.",
+    "tree_desc_tr": "Gölgelerin, ölümcül lanetlerin ve yasaklı nekrotik bilginin efendileri. Düşmanlarını ezmek için karanlığı kullanırlar.",
+    "branches": [
+      "Shadow",
+      "Curse",
+      "Forbidden"
+    ],
+    "spells": [
+      {
+        "spell_key": "dm_shadow_bolt",
+        "name_en": "Shadow Bolt",
+        "name_tr": "Gölge Mermisi",
+        "description_en": "Hurls a bolt of pure shadow, dealing necrotic damage.",
+        "description_tr": "Saf gölgeden bir mermi fırlatarak nekrotik hasar verir.",
+        "branch": "Shadow",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔮",
+        "effects": {
+          "damage": "1d10 necrotic",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dm_cloak_of_shadows",
+        "name_en": "Cloak of Shadows",
+        "name_tr": "Gölgeler Pelerini",
+        "description_en": "Wreathes the caster in shadows, increasing AC and granting stealth advantage.",
+        "description_tr": "Büyücüyü gölgelerle sararak Zırh Sınıfını artırır ve gizlilik avantajı sağlar.",
+        "branch": "Shadow",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "dm_shadow_bolt"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "bonus_ac": "+2",
+          "duration": "10 min"
+        }
+      },
+      {
+        "spell_key": "dm_shadow_step",
+        "name_en": "Shadow Step",
+        "name_tr": "Gölge Adımı",
+        "description_en": "Instantly teleport from one shadow to another within range.",
+        "description_tr": "Menzil içindeki bir gölgeden diğerine anında ışınlanmayı sağlar.",
+        "branch": "Shadow",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "dm_cloak_of_shadows"
+        ],
+        "icon": "👣",
+        "effects": {
+          "range": "15m",
+          "type": "teleportation"
+        }
+      },
+      {
+        "spell_key": "dm_creeping_darkness",
+        "name_en": "Creeping Darkness",
+        "name_tr": "Sürünen Karanlık",
+        "description_en": "Dark energy spreads across the ground, damaging all enemies in the area.",
+        "description_tr": "Karanlık enerji yere yayılarak alandaki tüm düşmanlara hasar verir.",
+        "branch": "Shadow",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "dm_shadow_step"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "3d6 necrotic",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "dm_shadow_tendrils",
+        "name_en": "Shadow Tendrils",
+        "name_tr": "Gölge Dokungaçları",
+        "description_en": "Shadowy tentacles burst from the ground to restrain and crush enemies.",
+        "description_tr": "Gölgemsi dokungaçlar yerden fırlayarak düşmanları sarar ve ezer.",
+        "branch": "Shadow",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "dm_creeping_darkness"
+        ],
+        "icon": "🦑",
+        "effects": {
+          "range": "15m",
+          "duration": "2 turns",
+          "status": "restrained"
+        }
+      },
+      {
+        "spell_key": "dm_umbral_blast",
+        "name_en": "Umbral Blast",
+        "name_tr": "Karanlık Patlama",
+        "description_en": "Unleashes a devastating cone of shadow magic that damages and knocks back foes.",
+        "description_tr": "Düşmanlara hasar veren ve onları geri savuran yıkıcı bir gölge büyüsü konisi serbest bırakır.",
+        "branch": "Shadow",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "dm_shadow_tendrils"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "5d8 necrotic",
+          "cone_size": "10m",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "dm_shadow_clone",
+        "name_en": "Shadow Clone",
+        "name_tr": "Gölge Kopyası",
+        "description_en": "Creates an illusory duplicate that casts weaker versions of your spells.",
+        "description_tr": "Büyülerinizin daha zayıf versiyonlarını yapan illüzyon bir kopya yaratır.",
+        "branch": "Shadow",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "dm_umbral_blast"
+        ],
+        "icon": "👯",
+        "effects": {
+          "spell_power": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "dm_nightfall",
+        "name_en": "Nightfall",
+        "name_tr": "Gece Çöküşü",
+        "description_en": "Summons an area of magical darkness that blinds all enemies inside.",
+        "description_tr": "İçindeki tüm düşmanları kör eden büyülü bir karanlık alanı çağırır.",
+        "branch": "Shadow",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "dm_shadow_clone"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "20m",
+          "status": "blinded",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "dm_engulfing_shadows",
+        "name_en": "Engulfing Shadows",
+        "name_tr": "Yutan Gölgeler",
+        "description_en": "Shadows engulf the target, dealing heavy damage and healing the caster.",
+        "description_tr": "Gölgeler hedefi yutarak ağır hasar verir ve büyücüyü iyileştirir.",
+        "branch": "Shadow",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "dm_nightfall"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "damage": "8d6 necrotic",
+          "healing": "50% of damage dealt",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dm_shadow_fiend",
+        "name_en": "Shadow Fiend",
+        "name_tr": "Gölge İblisi",
+        "description_en": "Summons a ferocious fiend forged from shadows to fight for you.",
+        "description_tr": "Sizin için savaşması adına gölgelerden dövülmüş vahşi bir iblis çağırır.",
+        "branch": "Shadow",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "dm_engulfing_shadows"
+        ],
+        "icon": "👿",
+        "effects": {
+          "summon_hp": "150",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "dm_eclipse",
+        "name_en": "Eclipse",
+        "name_tr": "Tutulma",
+        "description_en": "Plunges the battlefield into a sudden eclipse, dealing massive damage and stopping healing.",
+        "description_tr": "Savaş alanını ani bir tutulmaya sokarak devasa hasar verir ve iyileşmeyi durdurur.",
+        "branch": "Shadow",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dm_shadow_fiend"
+        ],
+        "icon": "🌖",
+        "effects": {
+          "damage": "12d8 necrotic",
+          "radius": "30m",
+          "healing_reduction": "100%"
+        }
+      },
+      {
+        "spell_key": "dm_domain_of_shadows",
+        "name_en": "Domain of Shadows",
+        "name_tr": "Gölgeler Hükümdarlığı",
+        "description_en": "Transforms a large area into a shadowy domain where enemies take continuous damage.",
+        "description_tr": "Geniş bir alanı, düşmanların sürekli hasar aldığı gölgeli bir bölgeye dönüştürür.",
+        "branch": "Shadow",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dm_eclipse"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "radius": "50m",
+          "damage_per_turn": "4d6 necrotic",
+          "caster_buff": "advantage on attacks"
+        }
+      },
+      {
+        "spell_key": "dm_avatar_of_shadow",
+        "name_en": "Avatar of Shadow",
+        "name_tr": "Gölge Avatarı",
+        "description_en": "Transform into a being of pure shadow, gaining immunity to non-magical attacks.",
+        "description_tr": "Saf gölgeden bir varlığa dönüşerek büyülü olmayan saldırılara karşı bağışıklık kazandırır.",
+        "branch": "Shadow",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dm_domain_of_shadows"
+        ],
+        "icon": "👤",
+        "effects": {
+          "immunity": "non-magical damage",
+          "duration": "10 min"
+        }
+      },
+      {
+        "spell_key": "dm_eternal_night",
+        "name_en": "Eternal Night",
+        "name_tr": "Sonsuz Gece",
+        "description_en": "The ultimate shadow spell. Covers a massive area in permanent darkness, devastating all foes.",
+        "description_tr": "Nihai gölge büyüsü. Devasa bir alanı kalıcı karanlığa gömerek tüm düşmanları mahveder.",
+        "branch": "Shadow",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "dm_avatar_of_shadow"
+        ],
+        "icon": "🌃",
+        "effects": {
+          "damage": "20d10 necrotic",
+          "radius": "100m",
+          "status": "permanent blindness"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_weakness",
+        "name_en": "Curse of Weakness",
+        "name_tr": "Zayıflık Laneti",
+        "description_en": "Curses the target, reducing their physical damage output.",
+        "description_tr": "Hedefi lanetleyerek fiziksel hasar çıkışını azaltır.",
+        "branch": "Curse",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "📉",
+        "effects": {
+          "damage_reduction": "50%",
+          "duration": "3 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dm_hex",
+        "name_en": "Hex",
+        "name_tr": "Uğursuzluk",
+        "description_en": "Places a minor hex that causes the target to take extra necrotic damage from attacks.",
+        "description_tr": "Hedefin saldırılardan fazladan nekrotik hasar almasına neden olan küçük bir uğursuzluk yerleştirir.",
+        "branch": "Curse",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [
+          "dm_curse_of_weakness"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "extra_damage": "1d6 necrotic per attack",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_pain",
+        "name_en": "Curse of Pain",
+        "name_tr": "Acı Laneti",
+        "description_en": "Afflicts the target with excruciating pain, dealing damage over time.",
+        "description_tr": "Hedefe dayanılmaz bir acı vererek zamanla hasar almasını sağlar.",
+        "branch": "Curse",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "dm_hex"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage_per_turn": "2d6 necrotic",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "dm_mark_of_doom",
+        "name_en": "Mark of Doom",
+        "name_tr": "Kıyamet İşareti",
+        "description_en": "Marks a target for doom, doubling the damage they take from the next attack.",
+        "description_tr": "Bir hedefi kıyamet için işaretler, bir sonraki saldırıdan aldıkları hasarı iki katına çıkarır.",
+        "branch": "Curse",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "dm_curse_of_pain"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage_multiplier": "2x for next attack",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dm_leeching_curse",
+        "name_en": "Leeching Curse",
+        "name_tr": "Sömürücü Lanet",
+        "description_en": "A draining curse that steals health from the target and gives it to the caster.",
+        "description_tr": "Hedeften sağlık çalan ve onu büyücüye aktaran sömürücü bir lanet.",
+        "branch": "Curse",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 240,
+        "prerequisites": [
+          "dm_mark_of_doom"
+        ],
+        "icon": "🩺",
+        "effects": {
+          "damage": "3d6 necrotic",
+          "healing": "100% of damage dealt"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_blindness",
+        "name_en": "Curse of Blindness",
+        "name_tr": "Körlük Laneti",
+        "description_en": "Curses the target's eyes, plunging them into sudden blindness.",
+        "description_tr": "Hedefin gözlerini lanetleyerek onları ani bir körlüğe mahkum eder.",
+        "branch": "Curse",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "dm_leeching_curse"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "status": "blinded",
+          "duration": "3 turns",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dm_voodoo_doll",
+        "name_en": "Voodoo Doll",
+        "name_tr": "Vudu Bebeği",
+        "description_en": "Creates a magical link, sharing a portion of damage you take with the target.",
+        "description_tr": "Büyülü bir bağ yaratarak aldığınız hasarın bir kısmını hedefle paylaşır.",
+        "branch": "Curse",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "dm_curse_of_blindness"
+        ],
+        "icon": "🎎",
+        "effects": {
+          "shared_damage": "50%",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_silence",
+        "name_en": "Curse of Silence",
+        "name_tr": "Sessizlik Laneti",
+        "description_en": "Seals the target's mouth, preventing them from casting spells.",
+        "description_tr": "Hedefin ağzını mühürleyerek büyü yapmasını engeller.",
+        "branch": "Curse",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "dm_voodoo_doll"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "status": "silenced",
+          "duration": "2 turns",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "dm_chain_curse",
+        "name_en": "Chain Curse",
+        "name_tr": "Zincir Laneti",
+        "description_en": "Binds enemies together, spreading a painful curse among multiple targets.",
+        "description_tr": "Düşmanları birbirine bağlayarak acı verici bir laneti birden fazla hedefe yayar.",
+        "branch": "Curse",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "dm_curse_of_silence"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "targets": "3 enemies within 10m",
+          "damage_per_turn": "3d6 necrotic"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_aging",
+        "name_en": "Curse of Aging",
+        "name_tr": "Yaşlandırma Laneti",
+        "description_en": "Rapidly ages the target, slowing their movement and dealing heavy necrotic damage.",
+        "description_tr": "Hedefi hızla yaşlandırarak hareketini yavaşlatır ve ağır nekrotik hasar verir.",
+        "branch": "Curse",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "dm_chain_curse"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "damage": "6d8 necrotic",
+          "speed_reduction": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "dm_soul_bind",
+        "name_en": "Soul Bind",
+        "name_tr": "Ruh Bağı",
+        "description_en": "Binds the souls of two targets, causing damage dealt to one to affect the other.",
+        "description_tr": "İki hedefin ruhunu birbirine bağlayarak, birine verilen hasarın diğerini de etkilemesini sağlar.",
+        "branch": "Curse",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 780,
+        "prerequisites": [
+          "dm_curse_of_aging"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "targets": "2 enemies",
+          "shared_damage": "100%",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "dm_aura_of_despair",
+        "name_en": "Aura of Despair",
+        "name_tr": "Dehşet Aurası",
+        "description_en": "Emits an aura of pure dread that weakens enemy defenses and attacks.",
+        "description_tr": "Düşman savunmasını ve saldırılarını zayıflatan saf bir dehşet aurası yayar.",
+        "branch": "Curse",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "dm_soul_bind"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "radius": "15m",
+          "debuff": "disadvantage on attacks and saves"
+        }
+      },
+      {
+        "spell_key": "dm_curse_of_the_damned",
+        "name_en": "Curse of the Damned",
+        "name_tr": "Lanetlilerin Laneti",
+        "description_en": "A lethal curse. If the target dies while cursed, they rise as a zombie minion.",
+        "description_tr": "Ölümcül bir lanet. Hedef lanetliyken ölürse, zombi bir köle olarak dirilir.",
+        "branch": "Curse",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dm_aura_of_despair"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "damage": "10d10 necrotic",
+          "on_death": "resurrects as allied zombie"
+        }
+      },
+      {
+        "spell_key": "dm_word_of_death",
+        "name_en": "Word of Death",
+        "name_tr": "Ölüm Sözcüğü",
+        "description_en": "Speaks the ultimate word of doom, instantly killing weakened foes or dealing massive damage.",
+        "description_tr": "Nihai kıyamet sözcüğünü fısıldayarak zayıflamış düşmanları anında öldürür veya devasa hasar verir.",
+        "branch": "Curse",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "dm_curse_of_the_damned"
+        ],
+        "icon": "🪦",
+        "effects": {
+          "instakill_threshold": "100 HP",
+          "damage_if_survives": "15d12 necrotic"
+        }
+      },
+      {
+        "spell_key": "dm_blood_tribute",
+        "name_en": "Blood Tribute",
+        "name_tr": "Kan Kurbanı",
+        "description_en": "Sacrifice a small amount of health to restore a spell slot.",
+        "description_tr": "Bir büyü yuvasını yenilemek için az miktarda sağlığı feda eder.",
+        "branch": "Forbidden",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "self_damage": "1d6",
+          "restore": "1 spell slot"
+        }
+      },
+      {
+        "spell_key": "dm_dark_whispers",
+        "name_en": "Dark Whispers",
+        "name_tr": "Karanlık Fısıltılar",
+        "description_en": "Injects maddening whispers into a target's mind, causing fear.",
+        "description_tr": "Bir hedefin zihnine çıldırtıcı fısıltılar yerleştirerek korkuya neden olur.",
+        "branch": "Forbidden",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "dm_blood_tribute"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "status": "frightened",
+          "duration": "2 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dm_necrotic_touch",
+        "name_en": "Necrotic Touch",
+        "name_tr": "Nekrotik Dokunuş",
+        "description_en": "A deadly melee touch that channels raw necrotic energy.",
+        "description_tr": "Saf nekrotik enerjiyi yönlendiren ölümcül bir yakın dövüş dokunuşu.",
+        "branch": "Forbidden",
+        "tier": 1,
+        "min_level": 20,
+        "xp_cost": 150,
+        "prerequisites": [
+          "dm_dark_whispers"
+        ],
+        "icon": "🧟‍♂️",
+        "effects": {
+          "damage": "3d10 necrotic",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "dm_soul_harvest",
+        "name_en": "Soul Harvest",
+        "name_tr": "Ruh Hasadı",
+        "description_en": "Harvests the fleeting soul of a dying enemy to grant yourself temporary health.",
+        "description_tr": "Kendinize geçici sağlık kazandırmak için ölen bir düşmanın ruhunu hasat eder.",
+        "branch": "Forbidden",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 210,
+        "prerequisites": [
+          "dm_necrotic_touch"
+        ],
+        "icon": "🌾",
+        "effects": {
+          "temp_hp": "20",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dm_defile_ground",
+        "name_en": "Defile Ground",
+        "name_tr": "Toprağı Yozlaştırma",
+        "description_en": "Corrupts the earth itself, damaging enemies and creating difficult terrain.",
+        "description_tr": "Toprağı yozlaştırarak düşmanlara hasar verir ve zorlu arazi yaratır.",
+        "branch": "Forbidden",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "dm_soul_harvest"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "radius": "10m",
+          "damage_per_turn": "2d8 necrotic",
+          "terrain": "difficult"
+        }
+      },
+      {
+        "spell_key": "dm_forbidden_pact",
+        "name_en": "Forbidden Pact",
+        "name_tr": "Yasak Anlaşma",
+        "description_en": "Make a dark pact for immense power at the cost of your own life force.",
+        "description_tr": "Kendi yaşam gücünüz pahasına devasa bir güç için karanlık bir anlaşma yapar.",
+        "branch": "Forbidden",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dm_defile_ground"
+        ],
+        "icon": "📜",
+        "effects": {
+          "buff": "advantage on next 3 attacks",
+          "self_damage": "10 per turn for 3 turns"
+        }
+      },
+      {
+        "spell_key": "dm_blood_boil",
+        "name_en": "Blood Boil",
+        "name_tr": "Kan Kaynatma",
+        "description_en": "Boils the target's blood, dealing severe damage and reducing maximum health.",
+        "description_tr": "Hedefin kanını kaynatarak ciddi hasar verir ve maksimum sağlığını azaltır.",
+        "branch": "Forbidden",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dm_forbidden_pact"
+        ],
+        "icon": "🌡️",
+        "effects": {
+          "damage": "6d6 necrotic",
+          "max_hp_reduction": "equal to damage dealt"
+        }
+      },
+      {
+        "spell_key": "dm_necrotic_wave",
+        "name_en": "Necrotic Wave",
+        "name_tr": "Nekrotik Dalga",
+        "description_en": "Releases a wide wave of death magic that damages and repels foes.",
+        "description_tr": "Düşmanlara hasar veren ve onları geri iten geniş bir ölüm büyüsü dalgası salar.",
+        "branch": "Forbidden",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 460,
+        "prerequisites": [
+          "dm_blood_boil"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "8d6 necrotic",
+          "line": "30m",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "dm_sacrifice",
+        "name_en": "Sacrifice",
+        "name_tr": "Kurban",
+        "description_en": "Detonates a summoned ally, causing a powerful necrotic explosion.",
+        "description_tr": "Çağırılmış bir müttefiki patlatarak güçlü bir nekrotik patlamaya neden olur.",
+        "branch": "Forbidden",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dm_necrotic_wave"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "radius": "10m",
+          "damage": "equal to minion's max HP"
+        }
+      },
+      {
+        "spell_key": "dm_lich_form",
+        "name_en": "Lich Form",
+        "name_tr": "Lich Formu",
+        "description_en": "Temporarily assume the form of a Lich, gaining undead immunities and temporary health.",
+        "description_tr": "Geçici olarak bir Lich formuna bürünerek ölümsüz bağışıklıkları ve geçici sağlık kazanır.",
+        "branch": "Forbidden",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dm_sacrifice"
+        ],
+        "icon": "💀",
+        "effects": {
+          "temp_hp": "40",
+          "immunity": "poison and charm",
+          "duration": "10 min"
+        }
+      },
+      {
+        "spell_key": "dm_soul_shatter",
+        "name_en": "Soul Shatter",
+        "name_tr": "Ruh Parçalama",
+        "description_en": "Cracks the target's soul, dealing immense damage and preventing all healing.",
+        "description_tr": "Hedefin ruhunu çatlatarak devasa hasar verir ve tüm iyileşmeleri engeller.",
+        "branch": "Forbidden",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dm_lich_form"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "10d8 necrotic",
+          "debuff": "cannot be healed",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "dm_forbidden_ritual",
+        "name_en": "Forbidden Ritual",
+        "name_tr": "Yasak Ritüel",
+        "description_en": "Perform a dangerous blood ritual to summon a powerful demon.",
+        "description_tr": "Güçlü bir iblis çağırmak için tehlikeli bir kan ritüeli gerçekleştirir.",
+        "branch": "Forbidden",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dm_soul_shatter"
+        ],
+        "icon": "🕯️",
+        "effects": {
+          "self_damage": "25% max HP",
+          "summon": "greater demon",
+          "duration": "5 min"
+        }
+      },
+      {
+        "spell_key": "dm_gate_of_the_abyss",
+        "name_en": "Gate of the Abyss",
+        "name_tr": "Hiçliğin Kapısı",
+        "description_en": "Tears open a portal to the abyss, devastating anything caught nearby.",
+        "description_tr": "Hiçliğe bir portal açarak yakında yakalanan her şeyi mahveder.",
+        "branch": "Forbidden",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "dm_forbidden_ritual"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "damage": "12d10 necrotic",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "dm_apocalypse",
+        "name_en": "Apocalypse",
+        "name_tr": "Kıyamet",
+        "description_en": "The ultimate forbidden spell. Calls down meteors of necrotic fire to decimate a massive area.",
+        "description_tr": "Nihai yasaklı büyü. Devasa bir alanı yok etmek için nekrotik ateş meteorları yağdırır.",
+        "branch": "Forbidden",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dm_gate_of_the_abyss"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "4x 10d6 necrotic fire",
+          "radius": "50m"
+        }
+      },
+      {
+        "spell_key": "dm_shadow_curse",
+        "name_en": "Shadow Curse",
+        "name_tr": "Gölge Laneti",
+        "description_en": "Curses the target from the safety of the shadows, dealing damage and blinding them.",
+        "description_tr": "Hedefi gölgelerin güvenliğinden lanetleyerek hasar verir ve onları kör eder.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dm_shadow_step",
+          "dm_curse_of_pain"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "damage": "4d6 necrotic",
+          "status": "blinded",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "dm_necrotic_shadow",
+        "name_en": "Necrotic Shadow",
+        "name_tr": "Nekrotik Gölge",
+        "description_en": "Creates a volatile shadow duplicate that runs to a target and explodes.",
+        "description_tr": "Bir hedefe koşan ve patlayan istikrarsız bir gölge kopyası yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "dm_umbral_blast",
+          "dm_defile_ground"
+        ],
+        "icon": "👥",
+        "effects": {
+          "damage": "6d6 necrotic",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "dm_forbidden_hex",
+        "name_en": "Forbidden Hex",
+        "name_tr": "Yasaklı Uğursuzluk",
+        "description_en": "A sinister hex that drains the target's life and instills pure terror.",
+        "description_tr": "Hedefin hayatını emen ve saf dehşet aşılayan uğursuz bir lanet.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dm_voodoo_doll",
+          "dm_blood_boil"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "damage": "8d6 necrotic",
+          "healing": "50% of damage dealt",
+          "status": "frightened"
+        }
+      },
+      {
+        "spell_key": "dm_phantom_pain",
+        "name_en": "Phantom Pain",
+        "name_tr": "Hayalet Acı",
+        "description_en": "Inflicts illusory but lethal pain directly to the target's mind and soul.",
+        "description_tr": "Doğrudan hedefin zihnine ve ruhuna illüzyon ama ölümcül bir acı verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "dm_engulfing_shadows",
+          "dm_chain_curse"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "damage": "10d6 psychic/necrotic",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "dm_abyssal_chains",
+        "name_en": "Abyssal Chains",
+        "name_tr": "Hiçlik Zincirleri",
+        "description_en": "Dark chains shoot from the abyss, pulling multiple enemies into a crushing center.",
+        "description_tr": "Hiçlikten fırlayan karanlık zincirler, birden fazla düşmanı ezici bir merkeze çeker.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "dm_shadow_fiend",
+          "dm_soul_shatter"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "damage": "8d8 necrotic",
+          "radius": "20m",
+          "effect": "pulls to center"
+        }
+      },
+      {
+        "spell_key": "dm_soul_plague",
+        "name_en": "Soul Plague",
+        "name_tr": "Ruh Vebası",
+        "description_en": "Unleashes a highly contagious necrotic plague that spreads upon the victim's death.",
+        "description_tr": "Kurbanın ölümü üzerine yayılan son derece bulaşıcı bir nekrotik veba salar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dm_aura_of_despair",
+          "dm_soul_shatter"
+        ],
+        "icon": "🦠",
+        "effects": {
+          "damage_per_turn": "5d8 necrotic",
+          "radius": "15m",
+          "spread": "on death"
+        }
+      },
+      {
+        "spell_key": "dm_trinity_of_darkness",
+        "name_en": "Trinity of Darkness",
+        "name_tr": "Karanlık Üçleme",
+        "description_en": "Combines the three dark arts to devastate a single target with damage, blindness, and silence.",
+        "description_tr": "Üç karanlık sanatı birleştirerek tek bir hedefi hasar, körlük ve sessizlikle mahveder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dm_avatar_of_shadow",
+          "dm_curse_of_the_damned",
+          "dm_gate_of_the_abyss"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "damage": "15d10 necrotic",
+          "status": "blinded, silenced",
+          "max_hp_reduction": "equal to damage"
+        }
+      },
+      {
+        "spell_key": "dm_absolute_void",
+        "name_en": "Absolute Void",
+        "name_tr": "Mutlak Hiçlik",
+        "description_en": "The grand ultimate. Creates a terrifying void that absorbs all light and instantly annihilates the weak.",
+        "description_tr": "Büyük nihai büyü. Tüm ışığı emen ve zayıfları anında yok eden korkutucu bir hiçlik yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dm_eternal_night",
+          "dm_word_of_death",
+          "dm_apocalypse"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "30d12 necrotic",
+          "radius": "100m",
+          "instakill_threshold": "15% max HP"
+        }
+      }
+    ]
+  }
+]

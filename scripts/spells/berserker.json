@@ -1,0 +1,1005 @@
+[
+  {
+    "subclass_key": "berserker",
+    "tree_name_en": "Path of the Berserker",
+    "tree_name_tr": "Vahşinin Yolu",
+    "tree_desc_en": "The Path of the Berserker harnesses raw fury, primal instincts, and unyielding bloodlust. By trading health for devastating power, they become unstoppable forces of destruction on the battlefield.",
+    "tree_desc_tr": "Vahşinin Yolu saf öfkeyi, ilkel içgüdüleri ve boyun eğmez kan susuzluğunu kullanır. Yıkıcı güç için sağlıktan feragat ederek, savaş alanında durdurulamaz yıkım güçlerine dönüşürler.",
+    "branches": [
+      "Rage",
+      "Bloodlust",
+      "Primal",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "bk_furious_strike",
+        "name_en": "Furious Strike",
+        "name_tr": "Öfkeli Vuruş",
+        "description_en": "A powerful, anger-fueled strike that deals 1d10 physical damage. Generates 10 Rage.",
+        "description_tr": "1d10 fiziksel hasar veren, öfke dolu güçlü bir vuruş. 10 Öfke üretir.",
+        "branch": "Rage",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💢",
+        "effects": {
+          "damage": "1d10",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "bk_adrenaline_rush",
+        "name_en": "Adrenaline Rush",
+        "name_tr": "Adrenalin Patlaması",
+        "description_en": "Gain a burst of adrenaline, increasing movement speed by 5m and attack speed by 15% for 3 turns.",
+        "description_tr": "Adrenalin patlaması yaşayarak 3 tur boyunca hareket hızını 5m, saldırı hızını ise %15 artırır.",
+        "branch": "Rage",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "💨",
+        "effects": {
+          "buff": "+5m speed, +15% attack speed",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_reckless_swing",
+        "name_en": "Reckless Swing",
+        "name_tr": "Pervasız Savurma",
+        "description_en": "Attack with no regard for defense. Deals 2d8 physical damage in a 3m arc, but reduces your Armor by 10 for 1 turn.",
+        "description_tr": "Savunmayı hiçe sayarak saldırın. 3m'lik bir kavis içinde 2d8 fiziksel hasar verir, ancak 1 tur boyunca Zırhınızı 10 azaltır.",
+        "branch": "Rage",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🪓",
+        "effects": {
+          "damage": "2d8",
+          "range": "3m arc",
+          "debuff": "-10 Armor",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "bk_enrage",
+        "name_en": "Enrage",
+        "name_tr": "Hiddet",
+        "description_en": "Enter a state of pure anger. For 5 turns, your physical damage is increased by 25% but you take 15% more damage from all sources.",
+        "description_tr": "Saf bir öfke durumuna girin. 5 tur boyunca fiziksel hasarınız %25 artar ancak tüm kaynaklardan %15 daha fazla hasar alırsınız.",
+        "branch": "Rage",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 180,
+        "prerequisites": [
+          "bk_adrenaline_rush"
+        ],
+        "icon": "🤬",
+        "effects": {
+          "buff": "+25% physical damage",
+          "debuff": "+15% damage taken",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bk_frenzy",
+        "name_en": "Frenzy",
+        "name_tr": "Cinnet",
+        "description_en": "Unleash a flurry of wild attacks. Strike a target 3 times, each dealing 1d8 physical damage. Costs 20 Rage.",
+        "description_tr": "Vahşi saldırılar serbest bırakın. Bir hedefe her biri 1d8 fiziksel hasar veren 3 vuruş yapın. 20 Öfke tüketir.",
+        "branch": "Rage",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "bk_reckless_swing"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3x 1d8",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "bk_pain_tolerance",
+        "name_en": "Pain Tolerance",
+        "name_tr": "Acı Toleransı",
+        "description_en": "Ignore the pain of wounds. Reduce incoming physical damage by 20% for 4 turns. Effect increases to 40% if your HP is below 30%.",
+        "description_tr": "Yaraların acısını görmezden gelin. 4 tur boyunca alınan fiziksel hasarı %20 azaltır. Canınız %30'un altındaysa etki %40'a çıkar.",
+        "branch": "Rage",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bk_enrage"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "20-40% damage reduction",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "bk_wrathful_blow",
+        "name_en": "Wrathful Blow",
+        "name_tr": "Gazap Darbesi",
+        "description_en": "Concentrate your anger into a single, devastating hit dealing 4d10 physical damage. Stuns the target for 1 turn.",
+        "description_tr": "Öfkenizi 4d10 fiziksel hasar veren yıkıcı tek bir vuruşta yoğunlaştırın. Hedefi 1 tur sersemletir.",
+        "branch": "Rage",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 360,
+        "prerequisites": [
+          "bk_frenzy"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d10",
+          "range": "2m",
+          "status": "Stun 1 turn"
+        }
+      },
+      {
+        "spell_key": "bk_blind_rage",
+        "name_en": "Blind Rage",
+        "name_tr": "Kör Öfke",
+        "description_en": "Lose control to your fury. For 3 turns, your attacks deal critical hits automatically, but you must attack the nearest target (friend or foe).",
+        "description_tr": "Kontrolünüzü öfkenize kaptırın. 3 tur boyunca saldırılarınız otomatik olarak kritik hasar verir, ancak en yakındaki hedefe (dost veya düşman) saldırmak zorundasınızdır.",
+        "branch": "Rage",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "bk_pain_tolerance"
+        ],
+        "icon": "😵",
+        "effects": {
+          "buff": "100% Critical Chance",
+          "debuff": "Forced targeting",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_unyielding_anger",
+        "name_en": "Unyielding Anger",
+        "name_tr": "Boyun Eğmez Öfke",
+        "description_en": "Passive: Whenever you take damage, you gain 5 Rage and your next attack deals an additional 1d6 damage.",
+        "description_tr": "Pasif: Hasar aldığınızda 5 Öfke kazanırsınız ve bir sonraki saldırınız fazladan 1d6 hasar verir.",
+        "branch": "Rage",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bk_wrathful_blow"
+        ],
+        "icon": "😤",
+        "effects": {
+          "passive": "+5 Rage on hit taken",
+          "damage": "+1d6 next attack"
+        }
+      },
+      {
+        "spell_key": "bk_seismic_slam",
+        "name_en": "Seismic Slam",
+        "name_tr": "Sismik Çarpma",
+        "description_en": "Smash the ground with incredible force. Deals 6d8 physical damage to all enemies within a 6m radius and knocks them prone.",
+        "description_tr": "Yere inanılmaz bir güçle vurun. 6m yarıçapındaki tüm düşmanlara 6d8 fiziksel hasar verir ve onları yere serer.",
+        "branch": "Rage",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "bk_unyielding_anger"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d8",
+          "radius": "6m",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "bk_death_defiance",
+        "name_en": "Death Defiance",
+        "name_tr": "Ölüme Meydan Okuma",
+        "description_en": "When your HP drops to 0, you instead drop to 1 HP and become invulnerable for 2 turns. Usable once per battle.",
+        "description_tr": "Canınız 0'a düştüğünde, bunun yerine 1 Cana düşersiniz ve 2 tur boyunca hasar görmez olursunuz. Savaş başına bir kez kullanılabilir.",
+        "branch": "Rage",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bk_blind_rage"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "buff": "Invulnerable",
+          "duration": "2 turns",
+          "limit": "Once per battle"
+        }
+      },
+      {
+        "spell_key": "bk_avatar_of_wrath",
+        "name_en": "Avatar of Wrath",
+        "name_tr": "Gazabın Avatarı",
+        "description_en": "Transform into the embodiment of anger for 5 turns. Your size increases, attacks deal double damage, and you gain 100 temporary HP.",
+        "description_tr": "5 tur boyunca öfkenin tecessümüne dönüşün. Boyutunuz büyür, saldırılarınız iki kat hasar verir ve 100 geçici Can kazanırsınız.",
+        "branch": "Rage",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "bk_seismic_slam"
+        ],
+        "icon": "👹",
+        "effects": {
+          "buff": "+100 Temp HP, x2 Damage",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bk_raging_juggernaut",
+        "name_en": "Raging Juggernaut",
+        "name_tr": "Öfkeli İlah",
+        "description_en": "Become an unstoppable force. Charge up to 15m in a straight line, destroying all obstacles and dealing 10d10 physical damage to anyone in the path. Targets cannot evade.",
+        "description_tr": "Durdurulamaz bir güce dönüşün. Düz bir çizgide 15m'ye kadar hücum ederek tüm engelleri yok edin ve yolunuzdaki herkese 10d10 fiziksel hasar verin. Hedefler bundan kaçınamaz.",
+        "branch": "Rage",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "bk_avatar_of_wrath",
+          "bk_death_defiance"
+        ],
+        "icon": "🚂",
+        "effects": {
+          "damage": "10d10",
+          "range": "15m line",
+          "special": "Unavoidable, destroys terrain"
+        }
+      },
+      {
+        "spell_key": "bk_blood_slash",
+        "name_en": "Blood Slash",
+        "name_tr": "Kanlı Kesiş",
+        "description_en": "Sacrifice 5% of your max HP to deal 1d12 physical damage to a target. Applies a bleed effect dealing 1d4 damage per turn for 3 turns.",
+        "description_tr": "Maksimum canınızın %5'ini feda ederek hedefe 1d12 fiziksel hasar verin. 3 tur boyunca tur başına 1d4 hasar veren bir kanama etkisi uygular.",
+        "branch": "Bloodlust",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d12",
+          "status": "1d4 Bleed",
+          "cost": "5% HP",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_vampiric_thirst",
+        "name_en": "Vampiric Thirst",
+        "name_tr": "Vampirik Susuzluk",
+        "description_en": "Passive: Your melee attacks heal you for 10% of the physical damage dealt.",
+        "description_tr": "Pasif: Yakın dövüş saldırılarınız, verdiğiniz fiziksel hasarın %10'u kadar sizi iyileştirir.",
+        "branch": "Bloodlust",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🦇",
+        "effects": {
+          "passive": "10% Lifesteal"
+        }
+      },
+      {
+        "spell_key": "bk_crimson_cleave",
+        "name_en": "Crimson Cleave",
+        "name_tr": "Kızıl Yarma",
+        "description_en": "A sweeping strike that deals 2d6 physical damage to enemies in a 4m cone. Restores 5 HP for each enemy hit.",
+        "description_tr": "4m'lik bir koni içindeki düşmanlara 2d6 fiziksel hasar veren geniş açılı bir vuruş. Vurulan her düşman için 5 Can yeniler.",
+        "branch": "Bloodlust",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 140,
+        "prerequisites": [],
+        "icon": "🔪",
+        "effects": {
+          "damage": "2d6",
+          "area": "4m cone",
+          "heal": "5 HP per target"
+        }
+      },
+      {
+        "spell_key": "bk_hemorrhage",
+        "name_en": "Hemorrhage",
+        "name_tr": "Kanamalı Yara",
+        "description_en": "Strike a target's vital vein, dealing 2d8 physical damage and causing them to bleed for 2d6 damage per turn for 4 turns.",
+        "description_tr": "Hedefin hayati damarına vurarak 2d8 fiziksel hasar verin ve 4 tur boyunca tur başına 2d6 hasar alarak kanamalarına neden olun.",
+        "branch": "Bloodlust",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 190,
+        "prerequisites": [
+          "bk_blood_slash"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "2d8",
+          "status": "2d6 Bleed",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "bk_blood_sacrifice",
+        "name_en": "Blood Sacrifice",
+        "name_tr": "Kan Kurbanı",
+        "description_en": "Instantly consume 20% of your current HP to grant yourself a 50% damage boost on your next 2 attacks.",
+        "description_tr": "Anında mevcut canınızın %20'sini tüketerek sonraki 2 saldırınız için %50 hasar artışı kazanın.",
+        "branch": "Bloodlust",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bk_crimson_cleave"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "cost": "20% current HP",
+          "buff": "+50% Damage",
+          "duration": "2 attacks"
+        }
+      },
+      {
+        "spell_key": "bk_sanguine_feast",
+        "name_en": "Sanguine Feast",
+        "name_tr": "Kan Ziyafeti",
+        "description_en": "Bite a bleeding target, consuming their bleed stacks to instantly heal yourself for 20 HP per stack and dealing 3d8 physical damage.",
+        "description_tr": "Kanayan bir hedefe ısırık atın, kanama yüklerini tüketerek yük başına anında kendinizi 20 Can iyileştirin ve 3d8 fiziksel hasar verin.",
+        "branch": "Bloodlust",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bk_vampiric_thirst"
+        ],
+        "icon": "🍷",
+        "effects": {
+          "damage": "3d8",
+          "heal": "20 HP per bleed stack",
+          "range": "1m"
+        }
+      },
+      {
+        "spell_key": "bk_vital_strike",
+        "name_en": "Vital Strike",
+        "name_tr": "Hayati Vuruş",
+        "description_en": "Target an enemy's weak point. Deals 4d8 physical damage. If the target is bleeding, this attack ignores 50% of their Armor.",
+        "description_tr": "Bir düşmanın zayıf noktasına nişan alın. 4d8 fiziksel hasar verir. Hedef kanıyorsa, bu saldırı hedefin Zırhının %50'sini yok sayar.",
+        "branch": "Bloodlust",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 380,
+        "prerequisites": [
+          "bk_hemorrhage"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage": "4d8",
+          "special": "Ignores 50% Armor if bleeding"
+        }
+      },
+      {
+        "spell_key": "bk_gore_spatter",
+        "name_en": "Gore Spatter",
+        "name_tr": "Kan Sıçraması",
+        "description_en": "Rip through an enemy, dealing 5d6 physical damage. The resulting spray of blood blinds all enemies within 3m of the target for 1 turn.",
+        "description_tr": "Bir düşmanı parçalayarak 5d6 fiziksel hasar verin. Ortaya çıkan kan sıçraması, hedefin 3m yakınındaki tüm düşmanları 1 tur kör eder.",
+        "branch": "Bloodlust",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bk_blood_sacrifice"
+        ],
+        "icon": "🥀",
+        "effects": {
+          "damage": "5d6",
+          "status": "Blind 3m AoE",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "bk_blood_frenzy",
+        "name_en": "Blood Frenzy",
+        "name_tr": "Kan Cinneti",
+        "description_en": "Passive: For every bleeding enemy within 10m, you gain +5% attack speed and +2m movement speed.",
+        "description_tr": "Pasif: 10m içindeki her kanayan düşman için +%5 saldırı hızı ve +2m hareket hızı kazanırsınız.",
+        "branch": "Bloodlust",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bk_sanguine_feast"
+        ],
+        "icon": "🦈",
+        "effects": {
+          "passive": "+5% ATK Speed and +2m Speed per bleeding foe"
+        }
+      },
+      {
+        "spell_key": "bk_life_drain_aura",
+        "name_en": "Life Drain Aura",
+        "name_tr": "Yaşam Emişi Aurası",
+        "description_en": "Emit a pulsing aura of blood magic for 4 turns. All enemies within 5m take 3d6 necrotic damage per turn, and you heal for 100% of the damage dealt.",
+        "description_tr": "4 tur boyunca nabız gibi atan bir kan büyüsü aurası yayın. 5m içindeki tüm düşmanlar tur başına 3d6 nekrotik hasar alır ve siz verilen hasarın %100'ü kadar iyileşirsiniz.",
+        "branch": "Bloodlust",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 680,
+        "prerequisites": [
+          "bk_gore_spatter"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "3d6 necrotic/turn",
+          "heal": "100% of damage",
+          "radius": "5m",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "bk_crimson_storm",
+        "name_en": "Crimson Storm",
+        "name_tr": "Kızıl Fırtına",
+        "description_en": "Spin in a whirlwind of blades, creating a tornado of blood. Deals 8d6 physical damage to all enemies within an 8m radius and applies 2 stacks of bleeding.",
+        "description_tr": "Bıçaklardan oluşan bir girdapta dönerek bir kan kasırgası yaratın. 8m yarıçapındaki tüm düşmanlara 8d6 fiziksel hasar verir ve 2 kanama yükü uygular.",
+        "branch": "Bloodlust",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bk_vital_strike",
+          "bk_blood_frenzy"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "8d6",
+          "radius": "8m",
+          "status": "2 Bleed stacks"
+        }
+      },
+      {
+        "spell_key": "bk_blood_lord",
+        "name_en": "Blood Lord",
+        "name_tr": "Kan Lordu",
+        "description_en": "Master your sanguine nature. For 5 turns, your max HP is doubled, and all your attacks deal an additional 2d10 necrotic damage that heals you.",
+        "description_tr": "Kanlı doğanızda ustalaşın. 5 tur boyunca maksimum canınız iki katına çıkar ve tüm saldırılarınız sizi iyileştiren fazladan 2d10 nekrotik hasar verir.",
+        "branch": "Bloodlust",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "bk_life_drain_aura"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "buff": "Max HP x2, +2d10 lifesteal damage",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bk_carnage_incarnate",
+        "name_en": "Carnage Incarnate",
+        "name_tr": "Katliam Tecessümü",
+        "description_en": "Sacrifice 50% of your current HP to unleash total devastation. Deals 15d10 physical damage to a single target. If the target dies, the excess damage chains to all enemies within 10m and heals you fully.",
+        "description_tr": "Tam bir yıkım açığa çıkarmak için mevcut canınızın %50'sini feda edin. Tek bir hedefe 15d10 fiziksel hasar verir. Hedef ölürse, fazla hasar 10m içindeki tüm düşmanlara zincirleme sıçrar ve sizi tamamen iyileştirir.",
+        "branch": "Bloodlust",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "bk_blood_lord",
+          "bk_crimson_storm"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "cost": "50% current HP",
+          "damage": "15d10",
+          "special": "Chain on death, Full Heal"
+        }
+      },
+      {
+        "spell_key": "bk_savage_pounce",
+        "name_en": "Savage Pounce",
+        "name_tr": "Vahşi Atılım",
+        "description_en": "Leap up to 6m onto a target, dealing 2d6 physical damage. If the target is smaller than you, they are knocked prone.",
+        "description_tr": "Bir hedefin üzerine 6m'ye kadar atlayarak 2d6 fiziksel hasar verin. Hedef sizden küçükse yere serilir.",
+        "branch": "Primal",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🐅",
+        "effects": {
+          "damage": "2d6",
+          "range": "6m",
+          "status": "Prone if smaller"
+        }
+      },
+      {
+        "spell_key": "bk_primal_howl",
+        "name_en": "Primal Howl",
+        "name_tr": "İlkel Uluma",
+        "description_en": "Let out a terrifying roar. Enemies within 5m must succeed on a Will save or be frightened for 2 turns, reducing their attack rolls by 2.",
+        "description_tr": "Korkunç bir kükreme salın. 5m içindeki düşmanlar bir İrade zarı başarmalıdır, aksi takdirde 2 tur boyunca korkarlar ve saldırı zarları 2 azalır.",
+        "branch": "Primal",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🐺",
+        "effects": {
+          "radius": "5m",
+          "status": "Frightened (-2 ATK)",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "bk_feral_instincts",
+        "name_en": "Feral Instincts",
+        "name_tr": "Vahşi İçgüdüler",
+        "description_en": "Passive: Your senses heighten. You gain +3 to Initiative rolls and cannot be surprised. You detect invisible enemies within 5m.",
+        "description_tr": "Pasif: Duyularınız keskinleşir. İnisiyatif zarlarına +3 kazanırsınız ve gafil avlanamazsınız. 5m içindeki görünmez düşmanları tespit edersiniz.",
+        "branch": "Primal",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "passive": "+3 Initiative, Unsurprisable, Truesight 5m"
+        }
+      },
+      {
+        "spell_key": "bk_beast_charge",
+        "name_en": "Beast Charge",
+        "name_tr": "Canavar Hücumu",
+        "description_en": "Dash forward up to 8m. The first enemy hit takes 3d6 physical damage and is pushed back 3m.",
+        "description_tr": "8m'ye kadar ileri atılın. Vurulan ilk düşman 3d6 fiziksel hasar alır ve 3m geriye itilir.",
+        "branch": "Primal",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "bk_savage_pounce"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "damage": "3d6",
+          "range": "8m",
+          "status": "Push 3m"
+        }
+      },
+      {
+        "spell_key": "bk_rending_claws",
+        "name_en": "Rending Claws",
+        "name_tr": "Parçalayan Pençeler",
+        "description_en": "Grow spectral claws to slash an enemy twice. Each strike deals 1d10 physical damage and shreds 5 Armor for 3 turns.",
+        "description_tr": "Bir düşmanı iki kez kesmek için hayalet pençeler büyütün. Her vuruş 1d10 fiziksel hasar verir ve 3 tur boyunca 5 Zırh parçalar.",
+        "branch": "Primal",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "bk_feral_instincts"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "damage": "2x 1d10",
+          "debuff": "-10 Armor total",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_intimidating_roar",
+        "name_en": "Intimidating Roar",
+        "name_tr": "Gözdağı Veren Kükreme",
+        "description_en": "A deafening roar that damages morale. Enemies within 8m take 2d8 thunder damage and are slowed by 50% for 2 turns.",
+        "description_tr": "Moralleri bozan sağır edici bir kükreme. 8m içindeki düşmanlar 2d8 gök gürültüsü hasarı alır ve 2 tur boyunca %50 yavaşlar.",
+        "branch": "Primal",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 290,
+        "prerequisites": [
+          "bk_primal_howl"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "damage": "2d8 thunder",
+          "radius": "8m",
+          "status": "50% Slow",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "bk_wild_leap",
+        "name_en": "Wild Leap",
+        "name_tr": "Yabani Sıçrayış",
+        "description_en": "Jump to a location up to 12m away. Upon landing, create a shockwave that deals 4d6 physical damage to all enemies within 4m.",
+        "description_tr": "12m'ye kadar uzaklıktaki bir konuma zıplayın. Yere inerken 4m içindeki tüm düşmanlara 4d6 fiziksel hasar veren bir şok dalgası yaratın.",
+        "branch": "Primal",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bk_beast_charge"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "damage": "4d6",
+          "range": "12m jump",
+          "radius": "4m"
+        }
+      },
+      {
+        "spell_key": "bk_animalistic_vitality",
+        "name_en": "Animalistic Vitality",
+        "name_tr": "Hayvani Zindelik",
+        "description_en": "Tap into the resilience of nature. Instantly remove all poisons and diseases, and regenerate 10% of your max HP per turn for 3 turns.",
+        "description_tr": "Doğanın direncinden faydalanın. Tüm zehirleri ve hastalıkları anında temizleyin ve 3 tur boyunca tur başına maksimum canınızın %10'unu yenileyin.",
+        "branch": "Primal",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "bk_rending_claws"
+        ],
+        "icon": "🌿",
+        "effects": {
+          "heal": "10% Max HP/turn",
+          "status": "Cure poison/disease",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_predator_strike",
+        "name_en": "Predator Strike",
+        "name_tr": "Yırtıcı Vuruşu",
+        "description_en": "Exploit a weakened foe. Deals 5d8 physical damage. If the target is below 50% HP, this attack is an automatic critical hit.",
+        "description_tr": "Zayıflamış bir düşmandan faydalanın. 5d8 fiziksel hasar verir. Hedefin Canı %50'nin altındaysa, bu saldırı otomatik bir kritik vuruştur.",
+        "branch": "Primal",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 490,
+        "prerequisites": [
+          "bk_intimidating_roar"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "damage": "5d8",
+          "special": "Auto-crit if HP < 50%"
+        }
+      },
+      {
+        "spell_key": "bk_apex_predator",
+        "name_en": "Apex Predator",
+        "name_tr": "Zirve Yırtıcı",
+        "description_en": "Passive: You deal 20% more damage to enemies that are frightened, bleeding, or prone. Your movement ignores difficult terrain.",
+        "description_tr": "Pasif: Korkan, kanayan veya yere serilmiş düşmanlara %20 daha fazla hasar verirsiniz. Hareketleriniz zorlu arazileri yok sayar.",
+        "branch": "Primal",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "bk_predator_strike"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "passive": "+20% Damage to debuffed foes",
+          "buff": "Ignore difficult terrain"
+        }
+      },
+      {
+        "spell_key": "bk_savage_stampede",
+        "name_en": "Savage Stampede",
+        "name_tr": "Vahşi İzdiham",
+        "description_en": "Summon the spirits of a beast herd. A wave of spirit beasts charges forward 15m, dealing 6d10 physical damage and knocking all enemies prone.",
+        "description_tr": "Bir canavar sürüsünün ruhlarını çağırın. Bir ruh canavarı dalgası 15m ileri hücum ederek 6d10 fiziksel hasar verir ve tüm düşmanları yere serer.",
+        "branch": "Primal",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 880,
+        "prerequisites": [
+          "bk_wild_leap",
+          "bk_animalistic_vitality"
+        ],
+        "icon": "🐗",
+        "effects": {
+          "damage": "6d10",
+          "range": "15m line",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "bk_behemoth_form",
+        "name_en": "Behemoth Form",
+        "name_tr": "Behemoth Formu",
+        "description_en": "Transform into a towering prehistoric beast for 4 turns. You gain +10 Strength, +5m reach, and your attacks deal splash damage to enemies within 3m of your target.",
+        "description_tr": "4 tur boyunca devasa bir tarih öncesi canavara dönüşün. +10 Güç, +5m menzil kazanırsınız ve saldırılarınız hedefinizin 3m yakınındaki düşmanlara sıçrama hasarı verir.",
+        "branch": "Primal",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bk_savage_stampede"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "buff": "+10 STR, +5m Reach",
+          "damage": "Splash 3m",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "bk_primal_aspect",
+        "name_en": "Primal Aspect",
+        "name_tr": "İlkel Suret",
+        "description_en": "Embody the ultimate spirit of the wild. For 5 turns, you are immune to all crowd control, your movement speed is doubled, and every attack applies a stacking 10% defense reduction to the target.",
+        "description_tr": "Vahşi doğanın nihai ruhunu cisimleştirin. 5 tur boyunca tüm kitle kontrollerine karşı bağışık olursunuz, hareket hızınız iki katına çıkar ve her saldırı hedefe biriken %10'luk bir savunma düşüşü uygular.",
+        "branch": "Primal",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1480,
+        "prerequisites": [
+          "bk_behemoth_form",
+          "bk_apex_predator"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "buff": "CC Immunity, 2x Speed",
+          "debuff": "10% Def shred/hit",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bk_bloody_rage",
+        "name_en": "Bloody Rage",
+        "name_tr": "Kanlı Öfke",
+        "description_en": "Combine your anger and thirst. You sacrifice 10% HP to instantly gain 30 Rage and apply a 2d4 bleed to all enemies within 3m.",
+        "description_tr": "Öfkenizi ve susuzluğunuzu birleştirin. Anında 30 Öfke kazanmak ve 3m içindeki tüm düşmanlara 2d4 kanama uygulamak için %10 Can feda edersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bk_frenzy",
+          "bk_blood_sacrifice"
+        ],
+        "icon": "👺",
+        "effects": {
+          "cost": "10% HP",
+          "buff": "+30 Rage",
+          "status": "2d4 Bleed (3m AoE)"
+        }
+      },
+      {
+        "spell_key": "bk_furious_roar",
+        "name_en": "Furious Roar",
+        "name_tr": "Öfkeli Kükreme",
+        "description_en": "A roar that channels your rage outward. Deals 3d6 thunder damage in a 6m cone and generates 10 Rage for each enemy hit.",
+        "description_tr": "Öfkenizi dışa vuran bir kükreme. 6m'lik bir koni içinde 3d6 gök gürültüsü hasarı verir ve vurulan her düşman için 10 Öfke üretir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 290,
+        "prerequisites": [
+          "bk_frenzy",
+          "bk_intimidating_roar"
+        ],
+        "icon": "🗯️",
+        "effects": {
+          "damage": "3d6 thunder",
+          "area": "6m cone",
+          "buff": "+10 Rage per hit"
+        }
+      },
+      {
+        "spell_key": "bk_feral_thirst",
+        "name_en": "Feral Thirst",
+        "name_tr": "Vahşi Susuzluk",
+        "description_en": "Your animalistic nature craves blood. Passive: Whenever you kill a bleeding enemy, you instantly heal for 15% of your max HP and reset the cooldown of your leap/charge abilities.",
+        "description_tr": "Hayvani doğanız kan arzular. Pasif: Kanayan bir düşmanı öldürdüğünüzde, anında maksimum canınızın %15'i kadar iyileşirsiniz ve sıçrama/hücum yeteneklerinizin bekleme süresini sıfırlarsınız.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "bk_sanguine_feast",
+          "bk_animalistic_vitality"
+        ],
+        "icon": "🤤",
+        "effects": {
+          "passive": "Heal 15% Max HP on kill",
+          "special": "Reset mobility CDs"
+        }
+      },
+      {
+        "spell_key": "bk_berserkers_trance",
+        "name_en": "Berserker's Trance",
+        "name_tr": "Vahşinin Transı",
+        "description_en": "Enter a trance that blends rage, bloodlust, and primal instinct. For 3 turns, you ignore 50% of incoming damage, and 50% of the damage you deal is returned as HP.",
+        "description_tr": "Öfke, kan susuzluğu ve ilkel içgüdüyü harmanlayan bir transa girin. 3 tur boyunca gelen hasarın %50'sini yok sayarsınız ve verdiğiniz hasarın %50'si Can olarak geri döner.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bk_unyielding_anger",
+          "bk_blood_frenzy",
+          "bk_predator_strike"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "buff": "50% Damage Reduction, 50% Lifesteal",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bk_wrathful_blood_eruption",
+        "name_en": "Wrathful Blood Eruption",
+        "name_tr": "Gazaplı Kan Patlaması",
+        "description_en": "Slam the ground, causing spikes of crystallized blood to erupt in a 6m radius. Deals 7d8 physical damage and applies 3 stacks of bleeding. Consumes 30 Rage.",
+        "description_tr": "Yere vurarak 6m yarıçapında kristalize kan dikenlerinin fışkırmasına neden olun. 7d8 fiziksel hasar verir ve 3 kanama yükü uygular. 30 Öfke tüketir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bk_seismic_slam",
+          "bk_life_drain_aura"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "7d8",
+          "status": "3 Bleed stacks",
+          "radius": "6m",
+          "cost": "30 Rage"
+        }
+      },
+      {
+        "spell_key": "bk_earthshattering_leap",
+        "name_en": "Earthshattering Leap",
+        "name_tr": "Dünyayı Sarsan Sıçrayış",
+        "description_en": "Jump up to 15m and crash down with apocalyptic force. Deals 8d8 physical damage in an 8m radius and leaves a crater that counts as difficult terrain.",
+        "description_tr": "15m'ye kadar zıplayın ve kıyamet gibi bir güçle yere çarpın. 8m yarıçapında 8d8 fiziksel hasar verir ve zorlu arazi sayılan bir krater bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 820,
+        "prerequisites": [
+          "bk_death_defiance",
+          "bk_apex_predator"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "8d8",
+          "range": "15m jump",
+          "radius": "8m",
+          "special": "Creates difficult terrain"
+        }
+      },
+      {
+        "spell_key": "bk_crimson_beast_slash",
+        "name_en": "Crimson Beast Slash",
+        "name_tr": "Kızıl Canavar Kesişi",
+        "description_en": "Unleash a massive wave of blood in the shape of a beast's claw, traveling forward 10m. Deals 6d10 physical damage and heals you for 50% of the damage dealt.",
+        "description_tr": "İleriye doğru 10m ilerleyen, canavar pençesi şeklinde devasa bir kan dalgası serbest bırakın. 6d10 fiziksel hasar verir ve verilen hasarın %50'si kadar sizi iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 860,
+        "prerequisites": [
+          "bk_crimson_storm",
+          "bk_savage_stampede"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "6d10",
+          "range": "10m line",
+          "heal": "50% of damage"
+        }
+      },
+      {
+        "spell_key": "bk_immortal_carnage",
+        "name_en": "Immortal Carnage",
+        "name_tr": "Ölümsüz Katliam",
+        "description_en": "Passive: While your HP is below 20%, you cannot be killed by any attack that deals less than 30% of your max HP. Additionally, your melee attacks cleave up to 3 nearby enemies.",
+        "description_tr": "Pasif: Canınız %20'nin altındayken, maksimum canınızın %30'undan daha az hasar veren hiçbir saldırıyla öldürülemezsiniz. Ayrıca, yakın dövüş saldırılarınız yakındaki 3 düşmana kadar biçer.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "bk_avatar_of_wrath",
+          "bk_blood_lord"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "passive": "Death resist (<30% Max HP attacks)",
+          "buff": "Melee cleaves 3 targets"
+        }
+      },
+      {
+        "spell_key": "bk_sanguine_behemoth",
+        "name_en": "Sanguine Behemoth",
+        "name_tr": "Kanlı Behemoth",
+        "description_en": "Transform into a massive beast made of boiling blood for 4 turns. You gain 200 temporary HP, your attacks apply severe bleeding (4d6 per turn), and you absorb all blood spilled to extend the duration.",
+        "description_tr": "4 tur boyunca kaynayan kandan yapılmış devasa bir canavara dönüşün. 200 geçici Can kazanırsınız, saldırılarınız şiddetli kanama (tur başına 4d6) uygular ve süreyi uzatmak için dökülen tüm kanı emersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "bk_blood_lord",
+          "bk_behemoth_form"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "buff": "+200 Temp HP",
+          "status": "4d6 Bleed on hit",
+          "duration": "4 turns (extendable)"
+        }
+      },
+      {
+        "spell_key": "bk_juggernaut_stampede",
+        "name_en": "Juggernaut Stampede",
+        "name_tr": "İlahın İzdihamı",
+        "description_en": "Charge wildly for up to 20m, leaving a trail of destruction. Anyone in the path takes 12d10 physical damage and is stunned for 2 turns. If you hit a wall, it shatters.",
+        "description_tr": "20m'ye kadar vahşice hücum ederek bir yıkım izi bırakın. Yoldaki herkes 12d10 fiziksel hasar alır ve 2 tur sersemler. Bir duvara çarparsanız, duvar paramparça olur.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "bk_avatar_of_wrath",
+          "bk_behemoth_form"
+        ],
+        "icon": "🐘",
+        "effects": {
+          "damage": "12d10",
+          "range": "20m line",
+          "status": "Stun 2 turns"
+        }
+      },
+      {
+        "spell_key": "bk_world_ender",
+        "name_en": "World Ender",
+        "name_tr": "Dünya Yıkan",
+        "description_en": "The pinnacle of berserker fury. Leap into the sky and crash down, destroying everything within a 20m radius. Deals 20d12 physical damage and 10d12 necrotic damage. You are reduced to 1 HP but gain immunity to all damage for 3 turns.",
+        "description_tr": "Vahşi öfkenin zirvesi. Gökyüzüne sıçrayıp yere çarparak 20m yarıçapındaki her şeyi yok edin. 20d12 fiziksel hasar ve 10d12 nekrotik hasar verir. Canınız 1'e düşer ancak 3 tur boyunca tüm hasarlara karşı bağışıklık kazanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bk_raging_juggernaut",
+          "bk_carnage_incarnate",
+          "bk_primal_aspect"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "20d12 physical, 10d12 necrotic",
+          "radius": "20m",
+          "cost": "Reduce to 1 HP",
+          "buff": "Immunity for 3 turns"
+        }
+      }
+    ]
+  }
+]

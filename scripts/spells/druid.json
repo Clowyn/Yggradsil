@@ -1,0 +1,1021 @@
+[
+  {
+    "subclass_key": "druid",
+    "tree_name_en": "Druidic Arts",
+    "tree_name_tr": "Druid Sanatları",
+    "tree_desc_en": "Harness the ancient power of nature to command beasts, manipulate flora, and shapeshift into formidable animal forms.",
+    "tree_desc_tr": "Canavarları yönetmek, bitki örtüsünü yönlendirmek ve güçlü hayvan formlarına dönüşmek için doğanın kadim gücünü kontrol edin.",
+    "branches": [
+      "Animal",
+      "Nature",
+      "Form",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "dr_summon_wolf",
+        "name_en": "Summon Wolf",
+        "name_tr": "Kurt Çağır",
+        "description_en": "Summons a loyal wolf companion to fight alongside you. Deals 1d8 physical damage per attack within a 20m command range.",
+        "description_tr": "Sizinle birlikte savaşması için sadık bir kurt yoldaşı çağırır. 20m komuta menzili içerisinde her saldırıda 1d8 fiziksel hasar verir.",
+        "branch": "Animal",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐺",
+        "effects": {
+          "damage": "1d8 physical",
+          "range": "20m",
+          "duration": "Until dead"
+        }
+      },
+      {
+        "spell_key": "dr_eagle_eye",
+        "name_en": "Eagle Eye",
+        "name_tr": "Kartal Gözü",
+        "description_en": "Grants the vision of a bird of prey. Adds +5 to Perception checks and extends clear vision up to 100m for 1 hour.",
+        "description_tr": "Bir yırtıcı kuşun görüş yeteneğini bağışlar. Algı zarlarına +5 bonus ekler ve 1 saat boyunca net görüşü 100m'ye kadar uzatır.",
+        "branch": "Animal",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "dr_summon_wolf"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "bonus": "+5 Perception",
+          "range": "100m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "dr_beast_speech",
+        "name_en": "Beast Speech",
+        "name_tr": "Canavar Dili",
+        "description_en": "Allows you to comprehend and communicate with beasts for 1 hour, enabling peaceful negotiations or gathering information.",
+        "description_tr": "1 saat boyunca hayvanlarla iletişim kurmanızı ve onları anlamanızı sağlayarak barışçıl müzakerelere veya bilgi toplamaya olanak tanır.",
+        "branch": "Animal",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "dr_eagle_eye"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "range": "Self",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "dr_swarm_of_bees",
+        "name_en": "Swarm of Bees",
+        "name_tr": "Arı Sürüsü",
+        "description_en": "Summons a buzzing swarm of bees in a 10m radius, dealing 2d6 piercing damage to enemies within.",
+        "description_tr": "10m yarıçaplı bir alanda vızıldayan bir arı sürüsü çağırarak içerideki düşmanlara 2d6 delici hasar verir.",
+        "branch": "Animal",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "dr_beast_speech"
+        ],
+        "icon": "🐝",
+        "effects": {
+          "damage": "2d6 piercing",
+          "radius": "10m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dr_bear_strength",
+        "name_en": "Bear Strength",
+        "name_tr": "Ayı Gücü",
+        "description_en": "Infuses an ally with the raw power of a bear, granting a +4 bonus to Strength and advantage on Athletics checks for 10 minutes.",
+        "description_tr": "Bir müttefiki ayının ham gücüyle doldurarak 10 dakika boyunca Güç değerine +4 bonus ve Atletizm zarlarında avantaj sağlar.",
+        "branch": "Animal",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dr_swarm_of_bees"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "buff": "+4 Strength",
+          "duration": "10 minutes",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "dr_summon_panther",
+        "name_en": "Summon Panther",
+        "name_tr": "Panter Çağır",
+        "description_en": "Calls forth a stealthy panther that can turn invisible and execute surprise attacks dealing 2x 1d10 slashing damage.",
+        "description_tr": "Görünmez olabilen ve sürpriz saldırılar yaparak 2x 1d10 kesici hasar veren sinsi bir panter çağırır.",
+        "branch": "Animal",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dr_bear_strength"
+        ],
+        "icon": "🐆",
+        "effects": {
+          "damage": "2x 1d10 slashing",
+          "stealth": "+8",
+          "duration": "Until dead"
+        }
+      },
+      {
+        "spell_key": "dr_animal_bond",
+        "name_en": "Animal Bond",
+        "name_tr": "Hayvan Bağı",
+        "description_en": "Forges a mystic link with a summoned beast up to 30m away, sharing half of the damage taken and sharing sensory inputs.",
+        "description_tr": "30m uzaklığa kadar çağrılmış bir canavarla mistik bir bağ kurarak alınan hasarın yarısını ve duyusal girdileri paylaşır.",
+        "branch": "Animal",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dr_summon_panther"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "range": "30m",
+          "damage_share": "50%",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "dr_summon_dire_wolf",
+        "name_en": "Summon Dire Wolf",
+        "name_tr": "Ulu Kurt Çağır",
+        "description_en": "Summons a massive dire wolf to the battlefield. Its bite deals 3d8 piercing damage and forces a Strength save to avoid being knocked prone.",
+        "description_tr": "Savaş alanına devasa bir ulu kurt çağırır. Isırığı 3d8 delici hasar verir ve hedefin yere düşmemek için Güç kurtarış zarı atmasını gerektirir.",
+        "branch": "Animal",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dr_animal_bond"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "damage": "3d8 piercing",
+          "condition": "Prone on failed save",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dr_pack_tactics",
+        "name_en": "Pack Tactics",
+        "name_tr": "Sürü Taktikleri",
+        "description_en": "Allies within 15m gain advantage on melee attack rolls against a creature if at least one of their allies is within 2m of the target.",
+        "description_tr": "15m menzil içindeki müttefikler, hedefin 2m yakınında en az bir müttefikleri varsa o hedefe karşı yakın dövüş saldırılarında avantaj kazanır.",
+        "branch": "Animal",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dr_summon_dire_wolf"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "radius": "15m",
+          "buff": "Advantage on melee attacks",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "dr_call_of_the_wild",
+        "name_en": "Call of the Wild",
+        "name_tr": "Yabani Çağrı",
+        "description_en": "Releases a resonant howl, summoning 1d4 spectral wolves that relentlessly hunt your enemies for 5 minutes.",
+        "description_tr": "Yankılanan bir uluma salıvererek düşmanlarınızı 5 dakika boyunca durmaksızın avlayacak 1d4 ruhani kurt çağırır.",
+        "branch": "Animal",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dr_pack_tactics"
+        ],
+        "icon": "🌕",
+        "effects": {
+          "summons": "1d4 wolves",
+          "duration": "5 minutes",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "dr_summon_grizzly",
+        "name_en": "Summon Grizzly",
+        "name_tr": "Bozayı Çağır",
+        "description_en": "Calls a terrifying grizzly bear with 250 HP. Its ferocious maul attacks deal 4d10 slashing damage.",
+        "description_tr": "250 HP'ye sahip korkutucu bir bozayı çağırır. Vahşi pençe saldırıları 4d10 kesici hasar verir.",
+        "branch": "Animal",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dr_call_of_the_wild"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "damage": "4d10 slashing",
+          "hp": "250",
+          "duration": "Until dead"
+        }
+      },
+      {
+        "spell_key": "dr_beast_frenzy",
+        "name_en": "Beast Frenzy",
+        "name_tr": "Canavar Çılgınlığı",
+        "description_en": "Sends all your summoned beasts into a bloodthirsty frenzy, granting them +2 AC, double movement speed, and an extra attack per turn.",
+        "description_tr": "Tüm çağrılmış canavarlarınızı kana susamış bir çılgınlığa sokarak onlara +2 Zırh Sınıfı, iki kat hareket hızı ve tur başına ekstra bir saldırı sağlar.",
+        "branch": "Animal",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dr_summon_grizzly"
+        ],
+        "icon": "💢",
+        "effects": {
+          "buff": "+2 AC, 2x speed, +1 attack",
+          "duration": "1 minute",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "dr_stampede",
+        "name_en": "Stampede",
+        "name_tr": "İzdiham",
+        "description_en": "Summons a phantom herd of spectral rhinos that charge in a 30m long line, dealing 8d10 bludgeoning damage and knocking targets prone.",
+        "description_tr": "30m uzunluğunda bir hatta hücum eden hayalet bir gergedan sürüsü çağırarak 8d10 ezici hasar verir ve hedefleri yere serer.",
+        "branch": "Animal",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dr_beast_frenzy"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "damage": "8d10 bludgeoning",
+          "area": "30m line",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "dr_apex_predator_ult",
+        "name_en": "Apex Predator",
+        "name_tr": "Zirve Avcısı",
+        "description_en": "Summons a legendary beast of myth with 500 HP. Its attacks strike fear into enemies and deal 6d12 damage per turn.",
+        "description_tr": "500 HP'ye sahip efsanevi bir mitolojik canavar çağırır. Saldırıları düşmanlara korku salar ve tur başına 6d12 hasar verir.",
+        "branch": "Animal",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "dr_stampede"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "hp": "500",
+          "damage": "6d12 mixed",
+          "duration": "Until dead"
+        }
+      },
+      {
+        "spell_key": "dr_entangling_vines",
+        "name_en": "Entangling Vines",
+        "name_tr": "Dolanmayan Sarmaşıklar",
+        "description_en": "Causes vines to erupt from the ground in a 5m radius up to 20m away, restraining targets and dealing 1d6 damage per turn.",
+        "description_tr": "20m uzağa kadar 5m yarıçaplı bir alanda yerden sarmaşıklar fışkırtarak hedefleri kısıtlar ve tur başına 1d6 hasar verir.",
+        "branch": "Nature",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌿",
+        "effects": {
+          "damage": "1d6/turn",
+          "radius": "5m",
+          "range": "20m",
+          "condition": "Restrained"
+        }
+      },
+      {
+        "spell_key": "dr_poison_spores",
+        "name_en": "Poison Spores",
+        "name_tr": "Zehirli Sporlar",
+        "description_en": "Releases a cloud of toxic spores in a 4m radius. Enemies suffer 2d8 poison damage and are poisoned for 1 minute.",
+        "description_tr": "4m yarıçapında zehirli spor bulutu salar. Düşmanlar 2d8 zehir hasarı alır ve 1 dakika boyunca zehirlenir.",
+        "branch": "Nature",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 75,
+        "prerequisites": [
+          "dr_entangling_vines"
+        ],
+        "icon": "🍄",
+        "effects": {
+          "damage": "2d8 poison",
+          "radius": "4m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "dr_healing_bloom",
+        "name_en": "Healing Bloom",
+        "name_tr": "İyileştiren Çiçek",
+        "description_en": "Causes a magical flower to bloom, radiating restorative magic that heals allies within a 6m radius for 1d8 + Wisdom modifier HP.",
+        "description_tr": "Büyülü bir çiçeğin açmasını sağlayarak 6m yarıçapındaki müttefikleri 1d8 + Bilgelik değiştiricisi kadar HP iyileştiren yenileyici bir büyü yayar.",
+        "branch": "Nature",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [
+          "dr_poison_spores"
+        ],
+        "icon": "🌸",
+        "effects": {
+          "healing": "1d8 + Wisdom",
+          "radius": "6m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dr_razor_leaf",
+        "name_en": "Razor Leaf",
+        "name_tr": "Jilet Yaprak",
+        "description_en": "Hurls a barrage of magically hardened leaves that slice through targets, dealing 3d6 slashing damage up to 25m away.",
+        "description_tr": "Büyüyle sertleştirilmiş yaprak yağmuru fırlatarak hedefleri keser ve 25m uzağa kadar 3d6 kesici hasar verir.",
+        "branch": "Nature",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 125,
+        "prerequisites": [
+          "dr_healing_bloom"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "damage": "3d6 slashing",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "dr_bark_shield",
+        "name_en": "Bark Shield",
+        "name_tr": "Ağaç Kabuğu Kalkanı",
+        "description_en": "Encrusts the target's skin in thick magical bark, granting a +3 bonus to Armor Class for 1 hour.",
+        "description_tr": "Hedefin derisini kalın büyülü bir ağaç kabuğu ile kaplayarak 1 saat boyunca Zırh Sınıfına +3 bonus sağlar.",
+        "branch": "Nature",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dr_razor_leaf"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "+3 AC",
+          "duration": "1 hour",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "dr_strangling_roots",
+        "name_en": "Strangling Roots",
+        "name_tr": "Boğan Kökler",
+        "description_en": "Roots burst from the earth to crush a single target within 10m, dealing 3d8 bludgeoning damage and rooting them in place.",
+        "description_tr": "Topraktan fırlayan kökler 10m içindeki tek bir hedefi ezerek 3d8 ezici hasar verir ve onları yere sabitler.",
+        "branch": "Nature",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dr_bark_shield"
+        ],
+        "icon": "🌳",
+        "effects": {
+          "damage": "3d8 bludgeoning",
+          "range": "10m",
+          "condition": "Rooted"
+        }
+      },
+      {
+        "spell_key": "dr_nature_bounty",
+        "name_en": "Nature's Bounty",
+        "name_tr": "Doğanın Lütfu",
+        "description_en": "Conjures fresh food and pure water sufficient for 10 people. Eating this magical feast heals 2d8 HP outside of combat.",
+        "description_tr": "10 kişi için yeterli taze yiyecek ve saf su yaratır. Bu büyülü ziyafeti yemek, savaş dışında 2d8 HP iyileştirir.",
+        "branch": "Nature",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dr_strangling_roots"
+        ],
+        "icon": "🍎",
+        "effects": {
+          "healing": "2d8",
+          "capacity": "10 people",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "dr_thorn_burst",
+        "name_en": "Thorn Burst",
+        "name_tr": "Diken Patlaması",
+        "description_en": "Causes a violent explosion of vicious thorns in a 10m radius, inflicting 4d8 piercing damage to all enemies caught within.",
+        "description_tr": "10m yarıçaplı bir alanda acımasız dikenlerin şiddetli bir patlamasına neden olarak içerideki tüm düşmanlara 4d8 delici hasar verir.",
+        "branch": "Nature",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dr_nature_bounty"
+        ],
+        "icon": "🌵",
+        "effects": {
+          "damage": "4d8 piercing",
+          "radius": "10m",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "dr_toxic_miasma",
+        "name_en": "Toxic Miasma",
+        "name_tr": "Zehirli Miasma",
+        "description_en": "Creates a thick, deadly fog in a 15m radius that deals 5d6 poison damage per turn to breathing enemies for 1 minute.",
+        "description_tr": "15m yarıçaplı bir alanda nefes alan düşmanlara 1 dakika boyunca tur başına 5d6 zehir hasarı veren kalın, ölümcül bir sis yaratır.",
+        "branch": "Nature",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dr_thorn_burst"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "damage": "5d6 poison/turn",
+          "radius": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "dr_living_wall",
+        "name_en": "Living Wall",
+        "name_tr": "Yaşayan Duvar",
+        "description_en": "Sprouts a 15m long, 3m thick impenetrable wall of dense thorny vines. Each 3m section has 100 HP.",
+        "description_tr": "15m uzunluğunda, 3m kalınlığında aşılmaz, yoğun dikenli sarmaşıklardan oluşan bir duvar filizlendirir. Her 3m'lik bölüm 100 HP'ye sahiptir.",
+        "branch": "Nature",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dr_toxic_miasma"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "hp": "100 per 3m section",
+          "dimensions": "15m x 3m",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "dr_earthquake",
+        "name_en": "Earthquake",
+        "name_tr": "Deprem",
+        "description_en": "Fractures the ground in a 30m radius. Deals 8d6 bludgeoning damage, turns the area into difficult terrain, and knocks targets prone.",
+        "description_tr": "30m yarıçaplı bir alanda yeri çatlatır. 8d6 ezici hasar verir, alanı zorlu araziye dönüştürür ve hedefleri yere serer.",
+        "branch": "Nature",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dr_living_wall"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "damage": "8d6 bludgeoning",
+          "radius": "30m",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "dr_wrath_of_the_forest",
+        "name_en": "Wrath of the Forest",
+        "name_tr": "Ormanın Öfkesi",
+        "description_en": "Animates 3 massive trees into furious protectors. Each tree has 150 HP and attacks nearby foes for 4d10 bludgeoning damage.",
+        "description_tr": "3 devasa ağacı öfkeli koruyucular olarak canlandırır. Her ağaç 150 HP'ye sahiptir ve yakındaki düşmanlara 4d10 ezici hasarla saldırır.",
+        "branch": "Nature",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dr_earthquake"
+        ],
+        "icon": "🌲",
+        "effects": {
+          "summons": "3 trees",
+          "hp": "150 each",
+          "damage": "4d10 bludgeoning"
+        }
+      },
+      {
+        "spell_key": "dr_tree_of_life",
+        "name_en": "Tree of Life",
+        "name_tr": "Hayat Ağacı",
+        "description_en": "Manifests a glorious magical tree that pulses with restorative light, healing all allies in a 20m radius for 5d10 HP per turn for 1 minute.",
+        "description_tr": "Yenileyici bir ışıkla atan görkemli, büyülü bir ağaç ortaya çıkararak 20m yarıçapındaki tüm müttefikleri 1 dakika boyunca tur başına 5d10 HP iyileştirir.",
+        "branch": "Nature",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dr_wrath_of_the_forest"
+        ],
+        "icon": "🌳",
+        "effects": {
+          "healing": "5d10/turn",
+          "radius": "20m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "dr_nature_domain_ult",
+        "name_en": "Nature's Domain",
+        "name_tr": "Doğanın Hükmü",
+        "description_en": "Transforms a 50m area into an enchanted primordial forest. Enemies within take 10d10 damage per turn while allies regenerate 50 HP per turn.",
+        "description_tr": "50m'lik bir alanı büyülü, ilkel bir ormana dönüştürür. İçerideki düşmanlar tur başına 10d10 hasar alırken müttefikler tur başına 50 HP yeniler.",
+        "branch": "Nature",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "dr_tree_of_life"
+        ],
+        "icon": "🏞️",
+        "effects": {
+          "damage": "10d10/turn",
+          "healing": "50/turn",
+          "radius": "50m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "dr_shape_cat",
+        "name_en": "Shape: Cat",
+        "name_tr": "Form: Kedi",
+        "description_en": "Shapeshift into an agile feline. Grants a +10 bonus to Stealth checks, perfect balance, and a 15m movement speed.",
+        "description_tr": "Çevik bir kediye dönüşür. Gizlilik zarlarına +10 bonus, kusursuz denge ve 15m hareket hızı sağlar.",
+        "branch": "Form",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐈",
+        "effects": {
+          "buff": "+10 Stealth",
+          "speed": "15m",
+          "duration": "Until dismissed"
+        }
+      },
+      {
+        "spell_key": "dr_wild_senses",
+        "name_en": "Wild Senses",
+        "name_tr": "Vahşi Duyular",
+        "description_en": "Enhances your senses to an animalistic degree. Gain advantage on Perception checks and 20m blindsight for 10 minutes.",
+        "description_tr": "Duyularınızı hayvani bir dereceye kadar geliştirir. 10 dakika boyunca Algı zarlarında avantaj ve 20m kör görüş kazandırır.",
+        "branch": "Form",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 75,
+        "prerequisites": [
+          "dr_shape_cat"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "buff": "Advantage Perception",
+          "blindsight": "20m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "dr_swift_paws",
+        "name_en": "Swift Paws",
+        "name_tr": "Çevik Patiler",
+        "description_en": "Infuses your limbs with the speed of a cheetah, granting an additional 10m to your movement speed for 1 hour.",
+        "description_tr": "Uzuvlarınızı bir çitanın hızıyla doldurarak 1 saat boyunca hareket hızınıza 10m ekler.",
+        "branch": "Form",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 100,
+        "prerequisites": [
+          "dr_wild_senses"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "buff": "+10m speed",
+          "duration": "1 hour",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "dr_shape_wolf",
+        "name_en": "Shape: Wolf",
+        "name_tr": "Form: Kurt",
+        "description_en": "Shapeshift into a swift wolf. Your movement speed becomes 20m, and your bite deals 1d8 piercing damage.",
+        "description_tr": "Hızlı bir kurda dönüşür. Hareket hızınız 20m olur ve ısırığınız 1d8 delici hasar verir.",
+        "branch": "Form",
+        "tier": 1,
+        "min_level": 20,
+        "xp_cost": 125,
+        "prerequisites": [
+          "dr_swift_paws"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "damage": "1d8 piercing",
+          "speed": "20m",
+          "duration": "Until dismissed"
+        }
+      },
+      {
+        "spell_key": "dr_feral_claws",
+        "name_en": "Feral Claws",
+        "name_tr": "Vahşi Pençeler",
+        "description_en": "Your hands transform into deadly claws for 10 minutes. Your unarmed strikes deal 2d6 slashing damage and count as magical.",
+        "description_tr": "Elleriniz 10 dakika boyunca ölümcül pençelere dönüşür. Silahsız saldırılarınız 2d6 kesici hasar verir ve büyülü sayılır.",
+        "branch": "Form",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dr_shape_wolf"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "damage": "2d6 slashing",
+          "duration": "10 minutes",
+          "type": "Magical unarmed"
+        }
+      },
+      {
+        "spell_key": "dr_shape_bear",
+        "name_en": "Shape: Bear",
+        "name_tr": "Form: Ayı",
+        "description_en": "Shapeshift into a massive bear. You gain 50 Temporary HP and a devastating claw attack that deals 2d8 damage.",
+        "description_tr": "Devasa bir ayıya dönüşür. 50 Geçici HP ve 2d8 hasar veren yıkıcı bir pençe saldırısı kazanırsınız.",
+        "branch": "Form",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dr_feral_claws"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "hp_temp": "50",
+          "damage": "2d8 slashing",
+          "duration": "Until dismissed"
+        }
+      },
+      {
+        "spell_key": "dr_thick_hide",
+        "name_en": "Thick Hide",
+        "name_tr": "Kalın Deri",
+        "description_en": "Your skin hardens like old leather. You gain resistance to non-magical bludgeoning, piercing, and slashing damage for 1 hour.",
+        "description_tr": "Cildiniz eski deri gibi sertleşir. 1 saat boyunca büyülü olmayan ezici, delici ve kesici hasarlara karşı direnç kazanırsınız.",
+        "branch": "Form",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dr_shape_bear"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "resistance": "Non-magical physical",
+          "duration": "1 hour",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "dr_shape_eagle",
+        "name_en": "Shape: Eagle",
+        "name_tr": "Form: Kartal",
+        "description_en": "Shapeshift into a giant eagle. You gain a flying speed of 30m and your razor-sharp talons deal 2d6 damage.",
+        "description_tr": "Dev bir kartala dönüşür. 30m uçuş hızı kazanırsınız ve jilet gibi keskin pençeleriniz 2d6 hasar verir.",
+        "branch": "Form",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dr_thick_hide"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "speed_fly": "30m",
+          "damage": "2d6 slashing",
+          "duration": "Until dismissed"
+        }
+      },
+      {
+        "spell_key": "dr_savage_bite",
+        "name_en": "Savage Bite",
+        "name_tr": "Vahşi Isırık",
+        "description_en": "Deliver a brutal, flesh-rending bite that deals 4d10 piercing damage and heals you for half the damage dealt.",
+        "description_tr": "4d10 delici hasar veren ve verilen hasarın yarısı kadar sizi iyileştiren vahşi, et parçalayan bir ısırık gerçekleştirir.",
+        "branch": "Form",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dr_shape_eagle"
+        ],
+        "icon": "🦷",
+        "effects": {
+          "damage": "4d10 piercing",
+          "healing": "50% of damage",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "dr_predator_instinct",
+        "name_en": "Predator Instinct",
+        "name_tr": "Avcı İçgüdüsü",
+        "description_en": "Awaken your inner apex predator. For 1 minute, you have advantage on all attack rolls made against wounded targets.",
+        "description_tr": "İçinizdeki zirve avcısını uyandırır. 1 dakika boyunca yaralı hedeflere karşı yapılan tüm saldırı zarlarında avantaj sağlarsınız.",
+        "branch": "Form",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dr_savage_bite"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "buff": "Advantage vs wounded",
+          "duration": "1 minute",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "dr_shape_tiger",
+        "name_en": "Shape: Tiger",
+        "name_tr": "Form: Kaplan",
+        "description_en": "Shapeshift into a ferocious tiger. You gain 80 Temporary HP and a pounce attack dealing 4d10 damage that knocks targets prone.",
+        "description_tr": "Vahşi bir kaplana dönüşür. 80 Geçici HP ve hedefleri yere seren, 4d10 hasar veren bir atılma saldırısı kazanırsınız.",
+        "branch": "Form",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dr_predator_instinct"
+        ],
+        "icon": "🐅",
+        "effects": {
+          "hp_temp": "80",
+          "damage": "4d10 slashing",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "dr_primal_roar",
+        "name_en": "Primal Roar",
+        "name_tr": "İlkel Kükreme",
+        "description_en": "Unleash a terrifying roar in a 30m cone. Enemies within are frightened, while your allies are bolstered, gaining 20 Temporary HP.",
+        "description_tr": "30m koni şeklinde korkunç bir kükreme salıverir. İçerideki düşmanlar korkar, müttefikleriniz ise güçlenerek 20 Geçici HP kazanır.",
+        "branch": "Form",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dr_shape_tiger"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "area": "30m cone",
+          "condition": "Frightened",
+          "hp_temp": "20 to allies"
+        }
+      },
+      {
+        "spell_key": "dr_shape_dragon",
+        "name_en": "Shape: Dragon",
+        "name_tr": "Form: Ejderha",
+        "description_en": "Shapeshift into a legendary green dragon. Gain a 40m flying speed, 200 Temporary HP, and a devastating 10d8 breath weapon.",
+        "description_tr": "Efsanevi yeşil bir ejderhaya dönüşür. 40m uçuş hızı, 200 Geçici HP ve 10d8 hasar veren yıkıcı bir nefes silahı kazanırsınız.",
+        "branch": "Form",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dr_primal_roar"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "speed_fly": "40m",
+          "hp_temp": "200",
+          "damage": "10d8 poison/nature"
+        }
+      },
+      {
+        "spell_key": "dr_chimera_form_ult",
+        "name_en": "Chimera Form",
+        "name_tr": "Kimera Formu",
+        "description_en": "Take on the horrifying form of a three-headed chimera. Gain 300 Temporary HP and make three attacks per turn, each dealing 6d12 damage.",
+        "description_tr": "Üç başlı korkunç bir kimera formuna bürünür. 300 Geçici HP kazanırsınız ve tur başına her biri 6d12 hasar veren üç saldırı yaparsınız.",
+        "branch": "Form",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "dr_shape_dragon"
+        ],
+        "icon": "🐲",
+        "effects": {
+          "hp_temp": "300",
+          "damage": "3x 6d12",
+          "duration": "Until dismissed or HP depleted"
+        }
+      },
+      {
+        "spell_key": "dr_spirit_bear",
+        "name_en": "Spirit Bear",
+        "name_tr": "Ruh Ayı",
+        "description_en": "Summons a glowing spectral bear that mimics your melee attacks, effectively doubling your melee damage output for 1 minute.",
+        "description_tr": "Yakın dövüş saldırılarınızı taklit eden parlayan ruhani bir ayı çağırarak 1 dakika boyunca yakın dövüş hasarınızı etkili bir şekilde ikiye katlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dr_shape_bear",
+          "dr_summon_panther"
+        ],
+        "icon": "🐻‍❄️",
+        "effects": {
+          "buff": "Double melee damage",
+          "duration": "1 minute",
+          "summons": "1 Spirit Bear"
+        }
+      },
+      {
+        "spell_key": "dr_thorned_beast",
+        "name_en": "Thorned Beast",
+        "name_tr": "Dikenli Canavar",
+        "description_en": "Infuses your summoned animals with an aura of sharp briars. Any enemy hitting them with a melee attack takes 2d6 piercing damage.",
+        "description_tr": "Çağrılmış hayvanlarınızı keskin dikenli bir aurayla doldurur. Onlara yakın dövüş saldırısıyla vuran herhangi bir düşman 2d6 delici hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dr_summon_dire_wolf",
+          "dr_bark_shield"
+        ],
+        "icon": "🦔",
+        "effects": {
+          "damage": "2d6 piercing retaliation",
+          "duration": "1 hour",
+          "target": "Summoned beasts"
+        }
+      },
+      {
+        "spell_key": "dr_forest_strider",
+        "name_en": "Forest Strider",
+        "name_tr": "Orman Gezgini",
+        "description_en": "Merge seamlessly with nature. You can move through magical plants without penalty and become invisible while within natural forest terrain.",
+        "description_tr": "Doğayla kusursuz bir şekilde bütünleşir. Büyülü bitkilerin arasından ceza almadan geçebilir ve doğal orman arazisindeyken görünmez olursunuz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dr_living_wall",
+          "dr_thick_hide"
+        ],
+        "icon": "🧝",
+        "effects": {
+          "buff": "Invisibility in forests, ignore difficult plant terrain",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "dr_furious_swarm",
+        "name_en": "Furious Swarm",
+        "name_tr": "Öfkeli Sürü",
+        "description_en": "Summons a massive swarm of furious, earth-burrowing insects in a 20m radius that blinds enemies and deals 6d8 piercing damage per turn.",
+        "description_tr": "20m yarıçaplı bir alanda, düşmanları kör eden ve tur başına 6d8 delici hasar veren, toprağı kazan devasa ve öfkeli bir böcek sürüsü çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dr_beast_frenzy",
+          "dr_earthquake"
+        ],
+        "icon": "🦗",
+        "effects": {
+          "damage": "6d8 piercing/turn",
+          "radius": "20m",
+          "condition": "Blinded"
+        }
+      },
+      {
+        "spell_key": "dr_treant_form",
+        "name_en": "Treant Form",
+        "name_tr": "Ağaç Adam Formu",
+        "description_en": "Shapeshift into a colossal Treant. You gain 250 Temporary HP and your massive slam attacks deal 6d10 damage with double damage to structures.",
+        "description_tr": "Devasa bir Ağaç Adama dönüşür. 250 Geçici HP kazanırsınız ve devasa vurma saldırılarınız 6d10 hasar verir (yapılara iki kat hasar).",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dr_wrath_of_the_forest",
+          "dr_primal_roar"
+        ],
+        "icon": "🌲",
+        "effects": {
+          "hp_temp": "250",
+          "damage": "6d10 bludgeoning (x2 to structures)",
+          "duration": "Until dismissed"
+        }
+      },
+      {
+        "spell_key": "dr_pack_leader_form",
+        "name_en": "Pack Leader Form",
+        "name_tr": "Sürü Lideri Formu",
+        "description_en": "While shapeshifted in a beast form, you exude dominant energy, passively summoning two spirit wolves to fight alongside you unconditionally.",
+        "description_tr": "Bir canavar formundayken baskın bir enerji yayar, yanınızda koşulsuz olarak savaşmaları için pasif olarak iki ruh kurdu çağırırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dr_summon_grizzly",
+          "dr_shape_tiger"
+        ],
+        "icon": "👑",
+        "effects": {
+          "summons": "2 Spirit Wolves",
+          "condition": "Requires beast form"
+        }
+      },
+      {
+        "spell_key": "dr_avatar_of_the_wild",
+        "name_en": "Avatar of the Wild",
+        "name_tr": "Yabanın Avatarı",
+        "description_en": "Transform into a towering beast made entirely of thick vines and roots. Gain 400 Temporary HP, deal 12d12 damage per strike, and root all enemies within 30m.",
+        "description_tr": "Tamamen kalın sarmaşıklardan ve köklerden oluşan devasa bir canavara dönüşür. 400 Geçici HP kazanır, vuruş başına 12d12 hasar verir ve 30m içindeki tüm düşmanları yere sabitlersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dr_stampede",
+          "dr_tree_of_life",
+          "dr_shape_dragon"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "hp_temp": "400",
+          "damage": "12d12 mixed",
+          "radius": "30m",
+          "condition": "Rooted"
+        }
+      },
+      {
+        "spell_key": "dr_world_tree_incarnate",
+        "name_en": "World Tree Incarnate",
+        "name_tr": "Dünya Ağacı Vücut Bulmuş",
+        "description_en": "You become the earthly vessel of the World Tree for 1 minute. Allies within 100m are immune to death and regenerate 100 HP per turn. Enemies in the area take 20d10 radiant and nature damage.",
+        "description_tr": "1 dakika boyunca Dünya Ağacı'nın dünyevi damarı olursunuz. 100m içindeki müttefikler ölüme karşı bağışıklık kazanır ve tur başına 100 HP yeniler. Alandaki düşmanlar 20d10 parlak ve doğa hasarı alır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dr_apex_predator_ult",
+          "dr_nature_domain_ult",
+          "dr_chimera_form_ult"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "healing": "100 HP/turn",
+          "damage": "20d10 radiant/nature",
+          "radius": "100m",
+          "immunity": "Death for allies"
+        }
+      }
+    ]
+  }
+]

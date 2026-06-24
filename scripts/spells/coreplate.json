@@ -1,0 +1,987 @@
+[
+  {
+    "subclass_key": "coreplate",
+    "tree_name_en": "Coreplate",
+    "tree_name_tr": "Coreplate",
+    "tree_desc_en": "Mastery of defensive auras, energy barriers, and physical reinforcement, turning the caster into an impenetrable fortress for their allies.",
+    "tree_desc_tr": "Defansif auralar, enerji bariyerleri ve fiziksel güçlendirme ustalığı; büyücüyü müttefikleri için aşılmaz bir kaleye dönüştürür.",
+    "branches": [
+      "Defense Aura",
+      "Core Shield",
+      "Reinforcement",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "cp_aura_initiation",
+        "name_en": "Core Aura Initiation",
+        "name_tr": "Çekirdek Aurası Başlatma",
+        "description_en": "Activates the basic Coreplate aura, providing a 10m radius where allies gain +5 Defense.",
+        "description_tr": "Temel Coreplate aurasını aktifleştirerek 10 metrelik yarıçaptaki müttefiklere +5 Defans sağlar.",
+        "branch": "Defense Aura",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌀",
+        "effects": {
+          "radius": "10m",
+          "defense": "+5"
+        }
+      },
+      {
+        "spell_key": "cp_aura_expansion",
+        "name_en": "Expanding Presence",
+        "name_tr": "Genişleyen Varlık",
+        "description_en": "Expands the defense aura radius by 5m and grants allies an additional +2 Defense.",
+        "description_tr": "Defans aurasının yarıçapını 5 metre genişletir ve müttefiklere fazladan +2 Defans kazandırır.",
+        "branch": "Defense Aura",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "cp_aura_initiation"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "radius": "+5m",
+          "defense": "+2"
+        }
+      },
+      {
+        "spell_key": "cp_healing_resonance",
+        "name_en": "Healing Resonance",
+        "name_tr": "İyileştirici Rezonans",
+        "description_en": "The defense aura now grants 1d4 healing per turn to all allies within 15m.",
+        "description_tr": "Defans aurası artık 15 metre içindeki tüm müttefiklere tur başına 1d4 iyileşme sağlar.",
+        "branch": "Defense Aura",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cp_aura_expansion"
+        ],
+        "icon": "💖",
+        "effects": {
+          "radius": "15m",
+          "healing": "1d4/turn"
+        }
+      },
+      {
+        "spell_key": "cp_elemental_ward",
+        "name_en": "Elemental Ward",
+        "name_tr": "Element Kalkanı",
+        "description_en": "The aura reduces incoming elemental damage by 15% for all allies within range.",
+        "description_tr": "Aura, menzil içindeki tüm müttefiklerin aldığı element hasarını %15 azaltır.",
+        "branch": "Defense Aura",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cp_aura_expansion"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "elemental_reduction": "15%",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "cp_thorny_presence",
+        "name_en": "Thorny Presence",
+        "name_tr": "Dikenli Varlık",
+        "description_en": "Enemies within the 15m aura take 1d6 piercing damage each turn they attack an ally.",
+        "description_tr": "15 metrelik aura içindeki düşmanlar, bir müttefike saldırdıkları her tur 1d6 delici hasar alırlar.",
+        "branch": "Defense Aura",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "cp_elemental_ward"
+        ],
+        "icon": "🌵",
+        "effects": {
+          "damage": "1d6 piercing",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "cp_aura_density",
+        "name_en": "Aura Density",
+        "name_tr": "Aura Yoğunluğu",
+        "description_en": "Increases the core defense bonus of the aura to +10, making the air feel heavy for enemies, reducing their speed by 2m.",
+        "description_tr": "Auranın çekirdek defans bonusunu +10'a çıkarır ve havayı düşmanlar için ağırlaştırarak hızlarını 2 metre düşürür.",
+        "branch": "Defense Aura",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "cp_elemental_ward"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "defense": "+10",
+          "enemy_speed": "-2m"
+        }
+      },
+      {
+        "spell_key": "cp_suppression_field",
+        "name_en": "Suppression Field",
+        "name_tr": "Baskılama Alanı",
+        "description_en": "The aura emits a 20m suppression field, giving enemies disadvantage on attack rolls.",
+        "description_tr": "Aura, 20 metrelik bir baskılama alanı yayarak düşmanların saldırı zarlarında dezavantaj almasına neden olur.",
+        "branch": "Defense Aura",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cp_aura_density"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "radius": "20m",
+          "debuff": "disadvantage"
+        }
+      },
+      {
+        "spell_key": "cp_cleansing_aura",
+        "name_en": "Cleansing Aura",
+        "name_tr": "Arındırıcı Aura",
+        "description_en": "Every 3 turns, the aura automatically removes one negative status effect from all allies within 20m.",
+        "description_tr": "Aura, her 3 turda bir 20 metre içindeki tüm müttefiklerden otomatik olarak bir negatif durum etkisini kaldırır.",
+        "branch": "Defense Aura",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cp_suppression_field"
+        ],
+        "icon": "✨",
+        "effects": {
+          "radius": "20m",
+          "cleanse": "1 effect/3 turns"
+        }
+      },
+      {
+        "spell_key": "cp_unyielding_presence",
+        "name_en": "Unyielding Presence",
+        "name_tr": "Boyun Eğmez Varlık",
+        "description_en": "Allies in the 20m aura cannot be knocked prone or moved against their will.",
+        "description_tr": "20 metrelik aura içindeki müttefikler yere düşürülemez ve kendi istekleri dışında hareket ettirilemez.",
+        "branch": "Defense Aura",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cp_suppression_field"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "radius": "20m",
+          "immunity": "prone/forced movement"
+        }
+      },
+      {
+        "spell_key": "cp_aura_overcharge",
+        "name_en": "Aura Overcharge",
+        "name_tr": "Aura Aşırı Yüklemesi",
+        "description_en": "Overcharges the aura for 3 turns. The defense bonus doubles to +20, and allies gain temporary HP equal to your level.",
+        "description_tr": "Aurayı 3 turluğuna aşırı yükler. Defans bonusu +20'ye katlanır ve müttefikler seviyenize eşit geçici HP kazanır.",
+        "branch": "Defense Aura",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cp_unyielding_presence"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "duration": "3 turns",
+          "defense": "+20",
+          "temp_hp": "caster_level"
+        }
+      },
+      {
+        "spell_key": "cp_sanctuary_field",
+        "name_en": "Sanctuary Field",
+        "name_tr": "Sığınak Alanı",
+        "description_en": "Creates a 25m zone of absolute safety. Enemies taking actions within it suffer 3d8 radiant damage.",
+        "description_tr": "25 metrelik mutlak bir güvenlik bölgesi yaratır. Bölge içinde eylem yapan düşmanlar 3d8 parlak hasar alır.",
+        "branch": "Defense Aura",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cp_aura_overcharge"
+        ],
+        "icon": "⛩️",
+        "effects": {
+          "radius": "25m",
+          "damage": "3d8 radiant"
+        }
+      },
+      {
+        "spell_key": "cp_repelling_aura",
+        "name_en": "Repelling Aura",
+        "name_tr": "İtici Aura",
+        "description_en": "The aura constantly pushes enemies 5m away at the end of their turn if they fail a strength save.",
+        "description_tr": "Düşmanlar güç kurtarışında başarısız olursa, aura her turun sonunda onları sürekli olarak 5 metre uzağa iter.",
+        "branch": "Defense Aura",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cp_aura_overcharge"
+        ],
+        "icon": "💨",
+        "effects": {
+          "push": "5m",
+          "save": "strength"
+        }
+      },
+      {
+        "spell_key": "cp_aura_mastery",
+        "name_en": "Aura Mastery",
+        "name_tr": "Aura Ustalığı",
+        "description_en": "The defense aura becomes passive and permanent without costing mana. Its radius increases to 30m.",
+        "description_tr": "Defans aurası mana harcamadan pasif ve kalıcı hale gelir. Yarıçapı 30 metreye çıkar.",
+        "branch": "Defense Aura",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "cp_sanctuary_field",
+          "cp_repelling_aura"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "cost": "0 mana",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "cp_ultimate_aegis_aura",
+        "name_en": "Ultimate Aegis Aura",
+        "name_tr": "Nihai Kalkan Aurası",
+        "description_en": "Grand manifestation of the aura. For 5 turns, all allies in 40m become immune to non-magical damage and heal 4d10 HP per turn.",
+        "description_tr": "Auranın ulu tezahürü. 5 turluğuna 40 metre içindeki tüm müttefikler büyüsel olmayan hasarlara karşı bağışıklık kazanır ve tur başına 4d10 HP iyileşir.",
+        "branch": "Defense Aura",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cp_aura_mastery"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "duration": "5 turns",
+          "radius": "40m",
+          "healing": "4d10/turn",
+          "immunity": "non-magical"
+        }
+      },
+      {
+        "spell_key": "cp_core_barrier",
+        "name_en": "Core Barrier",
+        "name_tr": "Çekirdek Bariyeri",
+        "description_en": "Summons a personal magical barrier with 30 HP that intercepts incoming attacks.",
+        "description_tr": "Gelen saldırıları kesen 30 HP'ye sahip kişisel, büyüsel bir bariyer çağırır.",
+        "branch": "Core Shield",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💠",
+        "effects": {
+          "shield_hp": "30"
+        }
+      },
+      {
+        "spell_key": "cp_shield_bash",
+        "name_en": "Shield Bash",
+        "name_tr": "Kalkan Darbesi",
+        "description_en": "Uses the Core Barrier to slam an enemy in 2m, dealing 1d8 bludgeoning damage and pushing them back 3m.",
+        "description_tr": "Çekirdek Bariyerini kullanarak 2 metredeki bir düşmana çarpar, 1d8 ezici hasar verir ve onları 3 metre geri iter.",
+        "branch": "Core Shield",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "cp_core_barrier"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "range": "2m",
+          "damage": "1d8 bludgeoning",
+          "push": "3m"
+        }
+      },
+      {
+        "spell_key": "cp_quick_recharge",
+        "name_en": "Quick Recharge",
+        "name_tr": "Hızlı Yenilenme",
+        "description_en": "Instantly restores 15 HP to your active Core Barrier as a bonus action.",
+        "description_tr": "Bir bonus eylem olarak aktif Çekirdek Bariyerinize anında 15 HP yeniler.",
+        "branch": "Core Shield",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cp_core_barrier"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "heal_shield": "15 HP"
+        }
+      },
+      {
+        "spell_key": "cp_deflection_grid",
+        "name_en": "Deflection Grid",
+        "name_tr": "Saptırma Ağı",
+        "description_en": "Enhances the barrier to reflect projectiles back at attackers, dealing 50% of the original damage.",
+        "description_tr": "Bariyeri, füzeleri saldıranlara geri yansıtacak şekilde güçlendirir ve orijinal hasarın %50'sini verir.",
+        "branch": "Core Shield",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cp_quick_recharge"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflect": "50%"
+        }
+      },
+      {
+        "spell_key": "cp_reactive_plating",
+        "name_en": "Reactive Plating",
+        "name_tr": "Reaktif Kaplama",
+        "description_en": "When the barrier is struck by melee, it explodes outward dealing 2d6 force damage to enemies within 3m.",
+        "description_tr": "Bariyer yakın dövüş saldırısı aldığında dışa doğru patlayarak 3 metre içindeki düşmanlara 2d6 güç hasarı verir.",
+        "branch": "Core Shield",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "cp_deflection_grid"
+        ],
+        "icon": "💥",
+        "effects": {
+          "radius": "3m",
+          "damage": "2d6 force"
+        }
+      },
+      {
+        "spell_key": "cp_shield_shatter",
+        "name_en": "Shield Shatter",
+        "name_tr": "Kalkan Parçalama",
+        "description_en": "Detonates your current Core Barrier intentionally, dealing force damage equal to its remaining HP to all enemies in 5m.",
+        "description_tr": "Mevcut Çekirdek Bariyerinizi kasıtlı olarak patlatarak, kalan HP'sine eşit güç hasarını 5 metre içindeki tüm düşmanlara verir.",
+        "branch": "Core Shield",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "cp_reactive_plating"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "radius": "5m",
+          "damage": "remaining_shield_hp"
+        }
+      },
+      {
+        "spell_key": "cp_kinetic_absorber",
+        "name_en": "Kinetic Absorber",
+        "name_tr": "Kinetik Emici",
+        "description_en": "The Core Barrier now absorbs kinetic energy from attacks, increasing your next melee attack's damage by 1d10.",
+        "description_tr": "Çekirdek Bariyeri artık saldırılardan kinetik enerji emerek bir sonraki yakın dövüş saldırınızın hasarını 1d10 artırır.",
+        "branch": "Core Shield",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cp_reactive_plating"
+        ],
+        "icon": "📥",
+        "effects": {
+          "buff": "next melee +1d10"
+        }
+      },
+      {
+        "spell_key": "cp_heavy_core",
+        "name_en": "Heavy Core",
+        "name_tr": "Ağır Çekirdek",
+        "description_en": "Increases Core Barrier base HP to 100. It now slows your movement by 3m but makes you immune to crits.",
+        "description_tr": "Çekirdek Bariyerinin temel HP'sini 100'e çıkarır. Hareket hızınızı 3 metre düşürür ancak kritik vuruşlara karşı bağışıklık sağlar.",
+        "branch": "Core Shield",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cp_kinetic_absorber"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "shield_hp": "100",
+          "speed": "-3m",
+          "immunity": "critical hits"
+        }
+      },
+      {
+        "spell_key": "cp_ally_tether",
+        "name_en": "Shield Tether",
+        "name_tr": "Kalkan Bağı",
+        "description_en": "Projects a portion of your Core Barrier to an ally within 15m, granting them a 40 HP shield.",
+        "description_tr": "Çekirdek Bariyerinizin bir kısmını 15 metre içindeki bir müttefike yansıtarak onlara 40 HP'lik bir kalkan sağlar.",
+        "branch": "Core Shield",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cp_kinetic_absorber"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "15m",
+          "shield": "40 HP"
+        }
+      },
+      {
+        "spell_key": "cp_perfect_guard",
+        "name_en": "Perfect Guard",
+        "name_tr": "Kusursuz Koruma",
+        "description_en": "As a reaction, completely negate the damage of a single attack. 3 turn cooldown.",
+        "description_tr": "Bir reaksiyon olarak tek bir saldırının hasarını tamamen yok eder. 3 tur bekleme süresi.",
+        "branch": "Core Shield",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cp_heavy_core"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "negate": "1 attack",
+          "cooldown": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cp_energy_discharge",
+        "name_en": "Energy Discharge",
+        "name_tr": "Enerji Deşarjı",
+        "description_en": "Release accumulated energy from the Core Barrier in a 15m cone, dealing 6d6 lightning damage.",
+        "description_tr": "Çekirdek Bariyerinde biriken enerjiyi 15 metrelik bir koni şeklinde serbest bırakarak 6d6 yıldırım hasarı verir.",
+        "branch": "Core Shield",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cp_perfect_guard"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "shape": "15m cone",
+          "damage": "6d6 lightning"
+        }
+      },
+      {
+        "spell_key": "cp_core_overload",
+        "name_en": "Core Overload",
+        "name_tr": "Çekirdek Aşırı Yüklemesi",
+        "description_en": "Overloads your shield. For 3 turns, any damage you take is reduced to 0, but your shield breaks entirely afterward.",
+        "description_tr": "Kalkanınızı aşırı yükler. 3 turluğuna aldığınız tüm hasarlar 0'a iner, ancak sonrasında kalkanınız tamamen kırılır.",
+        "branch": "Core Shield",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cp_perfect_guard"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "duration": "3 turns",
+          "damage_reduction": "100%",
+          "penalty": "shield break"
+        }
+      },
+      {
+        "spell_key": "cp_shield_mastery",
+        "name_en": "Shield Mastery",
+        "name_tr": "Kalkan Ustalığı",
+        "description_en": "Your Core Barrier regenerates 20 HP per turn automatically and grants resistance to all damage types.",
+        "description_tr": "Çekirdek Bariyeriniz tur başına otomatik olarak 20 HP yenilenir ve tüm hasar türlerine karşı direnç sağlar.",
+        "branch": "Core Shield",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "cp_energy_discharge",
+          "cp_core_overload"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "regen": "20 HP/turn",
+          "resistance": "all"
+        }
+      },
+      {
+        "spell_key": "cp_ultimate_core_bastion",
+        "name_en": "Ultimate Core Bastion",
+        "name_tr": "Nihai Çekirdek Kalesi",
+        "description_en": "You become a living fortress. Core Barrier HP becomes 500, and all allies within 10m share this massive shield pool.",
+        "description_tr": "Yaşayan bir kaleye dönüşürsünüz. Çekirdek Bariyeri HP'si 500 olur ve 10 metre içindeki tüm müttefikler bu devasa kalkan havuzunu paylaşır.",
+        "branch": "Core Shield",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cp_shield_mastery"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "shield_hp": "500",
+          "radius": "10m",
+          "share": "allies"
+        }
+      },
+      {
+        "spell_key": "cp_iron_reinforcement",
+        "name_en": "Iron Reinforcement",
+        "name_tr": "Demir Güçlendirme",
+        "description_en": "Reinforces your physical armor with magical iron, granting +3 AC for 10 minutes.",
+        "description_tr": "Fiziksel zırhınızı büyüsel demirle güçlendirerek 10 dakika boyunca +3 Zırh Sınıfı sağlar.",
+        "branch": "Reinforcement",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🦾",
+        "effects": {
+          "duration": "10 mins",
+          "ac": "+3"
+        }
+      },
+      {
+        "spell_key": "cp_ground_anchor",
+        "name_en": "Ground Anchor",
+        "name_tr": "Zemin Çapası",
+        "description_en": "You anchor yourself to the ground. You cannot be moved, and you gain advantage on all strength checks.",
+        "description_tr": "Kendinizi yere sabitlersiniz. Hareket ettirilemezsiniz ve tüm güç kontrollerinde avantaj kazanırsınız.",
+        "branch": "Reinforcement",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "cp_iron_reinforcement"
+        ],
+        "icon": "⬇️",
+        "effects": {
+          "immunity": "forced movement",
+          "advantage": "strength checks"
+        }
+      },
+      {
+        "spell_key": "cp_minor_barricade",
+        "name_en": "Minor Barricade",
+        "name_tr": "Küçük Barikat",
+        "description_en": "Summons a 2m wide, 1m tall stone barricade with 50 HP that provides half cover.",
+        "description_tr": "Yarım siper sağlayan, 50 HP'ye sahip 2 metre genişliğinde ve 1 metre yüksekliğinde taştan bir barikat çağırır.",
+        "branch": "Reinforcement",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cp_iron_reinforcement"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "size": "2mx1m",
+          "hp": "50",
+          "cover": "half"
+        }
+      },
+      {
+        "spell_key": "cp_steel_infusion",
+        "name_en": "Steel Infusion",
+        "name_tr": "Çelik İnfüzyonu",
+        "description_en": "Upgrades physical reinforcement to steel, granting +5 AC and resistance to slashing damage.",
+        "description_tr": "Fiziksel güçlendirmeyi çeliğe yükselterek +5 Zırh Sınıfı ve kesici hasarlara karşı direnç sağlar.",
+        "branch": "Reinforcement",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cp_ground_anchor"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "ac": "+5",
+          "resistance": "slashing"
+        }
+      },
+      {
+        "spell_key": "cp_guardian_wall",
+        "name_en": "Guardian Wall",
+        "name_tr": "Muhafız Duvarı",
+        "description_en": "Summons a 5m wide, 3m tall magical wall with 150 HP that provides full cover.",
+        "description_tr": "Tam siper sağlayan, 150 HP'ye sahip 5 metre genişliğinde ve 3 metre yüksekliğinde büyüsel bir duvar çağırır.",
+        "branch": "Reinforcement",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "cp_minor_barricade"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "size": "5mx3m",
+          "hp": "150",
+          "cover": "full"
+        }
+      },
+      {
+        "spell_key": "cp_crushing_weight",
+        "name_en": "Crushing Weight",
+        "name_tr": "Ezici Ağırlık",
+        "description_en": "Increases your mass dramatically. Your melee attacks deal an extra 1d10 damage, and jumping creates a 3m shockwave.",
+        "description_tr": "Kütlenizi dramatik bir şekilde artırır. Yakın dövüş saldırılarınız fazladan 1d10 hasar verir ve zıplamak 3 metrelik bir şok dalgası yaratır.",
+        "branch": "Reinforcement",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "cp_steel_infusion"
+        ],
+        "icon": "🐘",
+        "effects": {
+          "bonus_damage": "1d10",
+          "shockwave_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "cp_titanium_plating",
+        "name_en": "Titanium Plating",
+        "name_tr": "Titanyum Kaplama",
+        "description_en": "Your armor is reinforced with titanium. You gain immunity to critical hits and reduce all incoming physical damage by 10.",
+        "description_tr": "Zırhınız titanyum ile güçlendirilir. Kritik vuruşlara karşı bağışıklık kazanırsınız ve alınan tüm fiziksel hasarları 10 azaltırsınız.",
+        "branch": "Reinforcement",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cp_crushing_weight"
+        ],
+        "icon": "🔘",
+        "effects": {
+          "immunity": "critical hits",
+          "damage_reduction": "10 physical"
+        }
+      },
+      {
+        "spell_key": "cp_tremor_stomp",
+        "name_en": "Tremor Stomp",
+        "name_tr": "Deprem Ezmesi",
+        "description_en": "Stomp the ground with immense force, knocking all enemies within 8m prone and dealing 3d8 bludgeoning damage.",
+        "description_tr": "Yere muazzam bir güçle basarak 8 metre içindeki tüm düşmanları yere serer ve 3d8 ezici hasar verir.",
+        "branch": "Reinforcement",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cp_titanium_plating"
+        ],
+        "icon": "🥾",
+        "effects": {
+          "radius": "8m",
+          "damage": "3d8 bludgeoning",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "cp_siege_defense",
+        "name_en": "Siege Defense",
+        "name_tr": "Kuşatma Savunması",
+        "description_en": "Barricades and walls you summon now reflect 20% of damage taken back to the attacker and have double HP.",
+        "description_tr": "Çağırdığınız barikatlar ve duvarlar artık aldıkları hasarın %20'sini saldırgana geri yansıtır ve iki kat HP'ye sahip olur.",
+        "branch": "Reinforcement",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cp_guardian_wall"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "reflect": "20%",
+          "hp_multiplier": "2x"
+        }
+      },
+      {
+        "spell_key": "cp_unbreakable_bulwark",
+        "name_en": "Unbreakable Bulwark",
+        "name_tr": "Kırılmaz Siper",
+        "description_en": "For 1 minute, your AC cannot drop below 25, and you automatically succeed on constitution saving throws.",
+        "description_tr": "1 dakika boyunca Zırh Sınıfınız 25'in altına düşemez ve dayanıklılık kurtarma zarlarında otomatik olarak başarılı olursunuz.",
+        "branch": "Reinforcement",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cp_titanium_plating"
+        ],
+        "icon": "🕋",
+        "effects": {
+          "duration": "1 min",
+          "min_ac": "25",
+          "save": "auto-success CON"
+        }
+      },
+      {
+        "spell_key": "cp_mass_fortification",
+        "name_en": "Mass Fortification",
+        "name_tr": "Toplu Güçlendirme",
+        "description_en": "Reinforces the armor of all allies within 20m, granting them +4 AC and resistance to bludgeoning damage.",
+        "description_tr": "20 metre içindeki tüm müttefiklerin zırhını güçlendirerek onlara +4 Zırh Sınıfı ve ezici hasarlara karşı direnç sağlar.",
+        "branch": "Reinforcement",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cp_unbreakable_bulwark"
+        ],
+        "icon": "👥",
+        "effects": {
+          "radius": "20m",
+          "ac": "+4",
+          "resistance": "bludgeoning"
+        }
+      },
+      {
+        "spell_key": "cp_fortified_core",
+        "name_en": "Fortified Core",
+        "name_tr": "Güçlendirilmiş Çekirdek",
+        "description_en": "Your very soul is fortified. You become immune to mind-altering effects and gain advantage against spells.",
+        "description_tr": "Ruhunuz güçlendirilir. Zihin değiştiren etkilere karşı bağışıklık kazanırsınız ve büyülere karşı avantaj elde edersiniz.",
+        "branch": "Reinforcement",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cp_unbreakable_bulwark"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "immunity": "mind-altering",
+          "advantage": "vs spells"
+        }
+      },
+      {
+        "spell_key": "cp_reinforcement_mastery",
+        "name_en": "Reinforcement Mastery",
+        "name_tr": "Güçlendirme Ustalığı",
+        "description_en": "Your physical form is perfectly reinforced. Base AC increases by +5 permanently, and your weight cannot be shifted by magic.",
+        "description_tr": "Fiziksel formunuz kusursuz bir şekilde güçlendirilir. Temel Zırh Sınıfı kalıcı olarak +5 artar ve ağırlığınız büyüyle kaydırılamaz.",
+        "branch": "Reinforcement",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "cp_mass_fortification",
+          "cp_fortified_core"
+        ],
+        "icon": "👑",
+        "effects": {
+          "ac": "+5 permanent",
+          "immunity": "magical push"
+        }
+      },
+      {
+        "spell_key": "cp_ultimate_impenetrable_fortress",
+        "name_en": "Ultimate Impenetrable Fortress",
+        "name_tr": "Nihai Aşılmaz Kale",
+        "description_en": "Transforms the battlefield within 50m into a heavily fortified zone. Allies gain +10 AC, take 50% less damage, and enemies' speed is halved.",
+        "description_tr": "50 metrelik savaş alanını ağır tahkimatlı bir bölgeye çevirir. Müttefikler +10 ZS kazanır, %50 daha az hasar alır ve düşmanların hızı yarıya iner.",
+        "branch": "Reinforcement",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cp_reinforcement_mastery"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "radius": "50m",
+          "ac": "+10",
+          "damage_reduction": "50%",
+          "enemy_speed": "halved"
+        }
+      },
+      {
+        "spell_key": "cp_shining_core_aura",
+        "name_en": "Shining Core Aura",
+        "name_tr": "Parlayan Çekirdek Aurası",
+        "description_en": "Merges Core Barrier energy with your aura. Allies within 15m gain a small regenerating shield of 10 HP per turn.",
+        "description_tr": "Çekirdek Bariyeri enerjisini auranızla birleştirir. 15 metre içindeki müttefikler tur başına 10 HP yenilenen küçük bir kalkan kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cp_aura_expansion",
+          "cp_core_barrier"
+        ],
+        "icon": "💫",
+        "effects": {
+          "radius": "15m",
+          "shield_regen": "10 HP/turn"
+        }
+      },
+      {
+        "spell_key": "cp_shielded_barricade",
+        "name_en": "Shielded Barricade",
+        "name_tr": "Kalkanlı Barikat",
+        "description_en": "Imbues your physical walls with Core Shield energy. The wall gains a 100 HP energy shield that regenerates 20 HP per turn.",
+        "description_tr": "Fiziksel duvarlarınızı Çekirdek Kalkanı enerjisiyle doldurur. Duvar, tur başına 20 HP yenilenen 100 HP'lik bir enerji kalkanı kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cp_reactive_plating",
+          "cp_guardian_wall"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "shield_hp": "100",
+          "shield_regen": "20 HP/turn"
+        }
+      },
+      {
+        "spell_key": "cp_reinforced_aura",
+        "name_en": "Reinforced Aura",
+        "name_tr": "Güçlendirilmiş Aura",
+        "description_en": "Your defense aura now also grants physical weight to allies, making them immune to forced movement within 20m.",
+        "description_tr": "Defans aurası artık müttefiklere fiziksel ağırlık da sağlayarak onları 20 metre içinde zorunlu harekete karşı bağışık hale getirir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cp_aura_density",
+          "cp_steel_infusion"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "radius": "20m",
+          "immunity": "forced movement"
+        }
+      },
+      {
+        "spell_key": "cp_core_pulse_shield",
+        "name_en": "Core Pulse Shield",
+        "name_tr": "Çekirdek Nabız Kalkanı",
+        "description_en": "Whenever your Core Barrier takes damage, your aura pulses, healing all allies within 20m for 2d6 HP.",
+        "description_tr": "Çekirdek Bariyeriniz hasar aldığında auranız nabız atarak 20 metre içindeki tüm müttefikleri 2d6 HP iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cp_suppression_field",
+          "cp_ally_tether"
+        ],
+        "icon": "💓",
+        "effects": {
+          "radius": "20m",
+          "healing": "2d6 HP"
+        }
+      },
+      {
+        "spell_key": "cp_wall_of_core_energy",
+        "name_en": "Wall of Core Energy",
+        "name_tr": "Çekirdek Enerjisi Duvarı",
+        "description_en": "Summons a massive 20m long, 5m high barrier of pure core energy that blocks line of sight, spells, and physical attacks.",
+        "description_tr": "Görüş hattını, büyüleri ve fiziksel saldırıları engelleyen, 20 metre uzunluğunda ve 5 metre yüksekliğinde devasa saf çekirdek enerjisi bariyeri çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cp_perfect_guard",
+          "cp_unbreakable_bulwark"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "size": "20mx5m",
+          "blocks": "sight, spells, physical"
+        }
+      },
+      {
+        "spell_key": "cp_fortress_aura",
+        "name_en": "Fortress Aura",
+        "name_tr": "Kale Aurası",
+        "description_en": "Allies within your 25m aura treat the open ground as full cover, gaining +5 AC and advantage on dexterity saves.",
+        "description_tr": "25 metrelik auranızdaki müttefikler açık alanı tam siper olarak değerlendirir, +5 ZS ve çeviklik kurtarışlarında avantaj kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cp_unyielding_presence",
+          "cp_mass_fortification"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "radius": "25m",
+          "cover": "full",
+          "ac": "+5"
+        }
+      },
+      {
+        "spell_key": "cp_coreplate_juggernaut",
+        "name_en": "Coreplate Juggernaut",
+        "name_tr": "Coreplate Juggernaut",
+        "description_en": "For 1 minute, you become a giant avatar of defense. You gain 500 Temp HP, +10 AC, and your aura radius doubles.",
+        "description_tr": "1 dakika boyunca devasa bir savunma avatarı olursunuz. 500 Geçici HP, +10 ZS kazanırsınız ve aura yarıçapınız iki katına çıkar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "cp_aura_overcharge",
+          "cp_core_overload",
+          "cp_fortified_core"
+        ],
+        "icon": "🤖",
+        "effects": {
+          "duration": "1 min",
+          "temp_hp": "500",
+          "ac": "+10"
+        }
+      },
+      {
+        "spell_key": "cp_absolute_core_defense",
+        "name_en": "Absolute Core Defense",
+        "name_tr": "Mutlak Çekirdek Savunması",
+        "description_en": "The pinnacle of Coreplate magic. For 3 turns, you and all allies within 100m take exactly 0 damage from any source. You cannot act during this time.",
+        "description_tr": "Coreplate büyüsünün zirvesi. 3 tur boyunca siz ve 100 metre içindeki tüm müttefikler hiçbir kaynaktan hasar almaz (0 hasar). Bu sürede hareket edemezsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cp_ultimate_aegis_aura",
+          "cp_ultimate_core_bastion",
+          "cp_ultimate_impenetrable_fortress"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "duration": "3 turns",
+          "radius": "100m",
+          "damage_reduction": "100%"
+        }
+      }
+    ]
+  }
+]

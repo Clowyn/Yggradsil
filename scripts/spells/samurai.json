@@ -1,0 +1,984 @@
+[
+  {
+    "subclass_key": "samurai",
+    "tree_name_en": "Path of the Samurai",
+    "tree_name_tr": "Samurayın Yolu",
+    "tree_desc_en": "The Path of the Samurai focuses on unparalleled katana mastery, honorable bushido, and lightning-fast iaijutsu. The Samurai strikes with absolute precision, often hitting their chosen targets 2X with devastating consecutive strikes.",
+    "tree_desc_tr": "Samurayın Yolu; eşsiz katana ustalığına, onurlu bushido felsefesine ve yıldırım hızında iaijutsu tekniklerine odaklanır. Samuray mutlak bir hassasiyetle saldırır, çoğu zaman seçilen hedeflere peş peşe 2X (iki kat) yıkıcı vuruşlar yapar.",
+    "branches": [
+      "Iaijutsu",
+      "Bushido",
+      "Katana Mastery"
+    ],
+    "spells": [
+      {
+        "spell_key": "sm_iai_draw",
+        "name_en": "Quick Draw",
+        "name_tr": "Hızlı Çekiş",
+        "description_en": "Perform a lightning-fast quick draw from the scabbard, hitting the target 2X. Each hit deals 1d8 slashing damage.",
+        "description_tr": "Kından yıldırım hızında bir çekiş yaparak hedefe 2X (iki kez) vurur. Her vuruş 1d8 kesici hasar verir.",
+        "branch": "Iaijutsu",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2x 1d8",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "sm_iai_step",
+        "name_en": "Flash Step",
+        "name_tr": "Flaş Adımı",
+        "description_en": "Dash up to 5m instantaneously and deliver a swift strike dealing 1d6 slashing damage.",
+        "description_tr": "Anında 5m ileri atılır ve 1d6 kesici hasar veren hızlı bir vuruş yapar.",
+        "branch": "Iaijutsu",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d6",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "sm_iai_sheathe",
+        "name_en": "Resheathing Focus",
+        "name_tr": "Kılıç Kınlama Odağı",
+        "description_en": "Calmly resheathe your blade. Your next attack within 1 minute deals an additional 1d6 damage and has advantage.",
+        "description_tr": "Kılıcınızı sakince kınına koyarsınız. 1 dakika içindeki bir sonraki saldırınız ekstra 1d6 hasar verir ve avantajlı olur.",
+        "branch": "Iaijutsu",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sm_iai_draw"
+        ],
+        "icon": "🎴",
+        "effects": {
+          "damage_bonus": "1d6",
+          "buff": "Advantage"
+        }
+      },
+      {
+        "spell_key": "sm_iai_gale",
+        "name_en": "Gale Strike",
+        "name_tr": "Fırtına Vuruşu",
+        "description_en": "Unleash a fierce wind-infused slash. The strike hits 2X, dealing 1d10 slashing damage per hit.",
+        "description_tr": "Rüzgarla aşılanmış şiddetli bir kesik savurur. Vuruş 2X vurur ve her isabet 1d10 kesici hasar verir.",
+        "branch": "Iaijutsu",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sm_iai_draw"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "2x 1d10",
+          "range": "3m"
+        }
+      },
+      {
+        "spell_key": "sm_iai_phantom",
+        "name_en": "Phantom Draw",
+        "name_tr": "Hayalet Çekiş",
+        "description_en": "Dash up to 15m as a phantom image, passing through enemies and dealing 2d8 slashing damage to all passed through.",
+        "description_tr": "Hayalet bir silüet olarak 15m'ye kadar atılır, düşmanların içinden geçerek onlara 2d8 kesici hasar verir.",
+        "branch": "Iaijutsu",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sm_iai_step"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "2d8",
+          "range": "15m line"
+        }
+      },
+      {
+        "spell_key": "sm_iai_counter",
+        "name_en": "Iai Counter",
+        "name_tr": "İai Karşı Saldırısı",
+        "description_en": "Adopt a counter stance. If attacked in melee, negate the hit and instantly retaliate for 2d6 slashing damage.",
+        "description_tr": "Bir karşı saldırı duruşu alır. Yakın dövüşte saldırıya uğrarsa, hasarı yok sayar ve anında 2d6 kesici hasarla misilleme yapar.",
+        "branch": "Iaijutsu",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sm_iai_sheathe"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "2d6",
+          "mechanic": "Parry & Counter"
+        }
+      },
+      {
+        "spell_key": "sm_iai_blossom",
+        "name_en": "Cherry Blossom Strike",
+        "name_tr": "Kiraz Çiçeği Vuruşu",
+        "description_en": "A flurry of beautiful strikes. Deals 3x 1d8 slashing damage to all enemies within a 3m radius.",
+        "description_tr": "Güzel ve peş peşe vuruşlar. 3m yarıçaptaki tüm düşmanlara 3x 1d8 kesici hasar verir.",
+        "branch": "Iaijutsu",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sm_iai_gale"
+        ],
+        "icon": "🌸",
+        "effects": {
+          "damage": "3x 1d8",
+          "aoe": "3m radius"
+        }
+      },
+      {
+        "spell_key": "sm_iai_vacuum",
+        "name_en": "Vacuum Slash",
+        "name_tr": "Vakum Kesik",
+        "description_en": "Draw the blade so fast it creates a vacuum. Deals 3d8 slashing damage in a 10m line, pulling enemies 2m towards you.",
+        "description_tr": "Kılıcı o kadar hızlı çeker ki bir vakum oluşturur. 10m'lik bir hatta 3d8 kesici hasar verir ve düşmanları size doğru 2m çeker.",
+        "branch": "Iaijutsu",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sm_iai_gale"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "3d8",
+          "range": "10m line",
+          "pull": "2m"
+        }
+      },
+      {
+        "spell_key": "sm_iai_blink",
+        "name_en": "Blink Strike",
+        "name_tr": "Göz Kırpma Vuruşu",
+        "description_en": "Teleport up to 10m directly behind an enemy and strike for 3d6 slashing damage. Leaves the enemy surprised.",
+        "description_tr": "10m'ye kadar ışınlanıp doğrudan bir düşmanın arkasına geçer ve 3d6 kesici hasar vurur. Düşmanı şaşkına çevirir.",
+        "branch": "Iaijutsu",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sm_iai_phantom"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m teleport"
+        }
+      },
+      {
+        "spell_key": "sm_iai_thousand",
+        "name_en": "Thousand Cuts",
+        "name_tr": "Bin Kesik",
+        "description_en": "Deliver an overwhelming barrage of strikes against a single target. Hits 5 times for 1d8 slashing damage each.",
+        "description_tr": "Tek bir hedefe ezici bir vuruş yağmuru yapar. Her biri 1d8 kesici hasar veren 5 isabet sağlar.",
+        "branch": "Iaijutsu",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sm_iai_blossom"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "5x 1d8",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "sm_iai_swallow",
+        "name_en": "Swallow Return",
+        "name_tr": "Kırlangıç Dönüşü",
+        "description_en": "The legendary technique. An unavoidable attack that hits 2X, dealing 4d10 damage per hit. Ignores evasion.",
+        "description_tr": "Efsanevi teknik. Kaçınılmaz bir saldırı olarak 2X vurur, isabet başına 4d10 hasar verir. Savunmaları ve kaçınmayı yok sayar.",
+        "branch": "Iaijutsu",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sm_iai_counter",
+          "sm_iai_vacuum"
+        ],
+        "icon": "🐦",
+        "effects": {
+          "damage": "2x 4d10",
+          "range": "2m",
+          "unavoidable": true
+        }
+      },
+      {
+        "spell_key": "sm_iai_void",
+        "name_en": "Void Draw",
+        "name_tr": "Hiçlik Çekişi",
+        "description_en": "Draw your blade through the fabric of space. Deals 5d10 damage, completely ignoring armor and magical barriers.",
+        "description_tr": "Kılıcınızı uzay dokusunun içinden çekersiniz. Zırhı ve büyülü bariyerleri tamamen yok sayarak 5d10 hasar verir.",
+        "branch": "Iaijutsu",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sm_iai_vacuum"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "5d10",
+          "armor_pierce": "100%"
+        }
+      },
+      {
+        "spell_key": "sm_iai_time",
+        "name_en": "Time Splitter",
+        "name_tr": "Zaman Yaran",
+        "description_en": "Move so fast time seems to stop. Instantly deliver 8 hits of 2d8 slashing damage to a single target.",
+        "description_tr": "O kadar hızlı hareket eder ki zaman durmuş gibi görünür. Tek bir hedefe anında 2d8 kesici hasar veren 8 vuruş yapar.",
+        "branch": "Iaijutsu",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sm_iai_thousand",
+          "sm_iai_blink"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "damage": "8x 2d8",
+          "speed": "Instant"
+        }
+      },
+      {
+        "spell_key": "sm_iai_dimension",
+        "name_en": "Dimensional Severance",
+        "name_tr": "Boyutsal Koparma",
+        "description_en": "Ultimate Iaijutsu. A single draw that severs dimensions. Deals 10d10 force/slashing damage to all enemies in a 15m line. Reality takes 1 turn to catch up.",
+        "description_tr": "Nihai İaijutsu. Boyutları koparan tek bir kılıç çekişi. 15m'lik bir hattaki tüm düşmanlara 10d10 güç/kesici hasar verir. Gerçekliğin bunu kavraması 1 tur sürer.",
+        "branch": "Iaijutsu",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sm_iai_swallow",
+          "sm_iai_void"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "10d10",
+          "aoe": "15m line"
+        }
+      },
+      {
+        "spell_key": "sm_bus_honor",
+        "name_en": "Aura of Honor",
+        "name_tr": "Onur Halesi",
+        "description_en": "Emanate an aura of pure resolve. You and allies within 5m gain +2 AC and advantage against charm effects.",
+        "description_tr": "Saf bir irade halesi yayarsınız. 5m içindeki müttefikler ve siz +2 Zırh Sınıfı ve cezbetme etkilerine karşı avantaj kazanırsınız.",
+        "branch": "Bushido",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+2",
+          "range": "5m aura"
+        }
+      },
+      {
+        "spell_key": "sm_bus_resolve",
+        "name_en": "Iron Resolve",
+        "name_tr": "Demir İrade",
+        "description_en": "Focus your mind, gaining 10 temporary Hit Points and ignoring the first instance of damage below 5.",
+        "description_tr": "Zihninizi odaklayarak 10 geçici Darbe Puanı kazanırsınız ve 5'in altındaki ilk hasarı yok sayarsınız.",
+        "branch": "Bushido",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "😤",
+        "effects": {
+          "temp_hp": "10",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "sm_bus_challenge",
+        "name_en": "Honorable Challenge",
+        "name_tr": "Onurlu Meydan Okuma",
+        "description_en": "Challenge an enemy within 10m to a duel. They have disadvantage on attacks against anyone other than you for 1 turn.",
+        "description_tr": "10m içindeki bir düşmanı düelloya davet eder. Düşman, 1 tur boyunca sizden başkasına yaptığı saldırılarda dezavantajlı olur.",
+        "branch": "Bushido",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "range": "10m",
+          "taunt": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sm_bus_spirit",
+        "name_en": "Spirit of the Samurai",
+        "name_tr": "Samuray Ruhu",
+        "description_en": "Your indomitable spirit makes you permanently immune to fear. Gain a +1d4 bonus to all saving throws.",
+        "description_tr": "Boyun eğmez ruhunuz sizi korkuya karşı kalıcı olarak bağışık yapar. Tüm kurtarma zarlarına +1d4 bonus kazandırır.",
+        "branch": "Bushido",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sm_bus_honor"
+        ],
+        "icon": "👻",
+        "effects": {
+          "save_bonus": "+1d4",
+          "immune": "Fear"
+        }
+      },
+      {
+        "spell_key": "sm_bus_stance",
+        "name_en": "Mountain Stance",
+        "name_tr": "Dağ Duruşu",
+        "description_en": "Adopt a firm stance. For 3 turns, you cannot be moved or knocked prone, and gain resistance to physical damage.",
+        "description_tr": "Sağlam bir duruş alır. 3 tur boyunca hareket ettirilemez veya yere serilemezsiniz, ayrıca fiziksel hasara karşı direnç kazanırsınız.",
+        "branch": "Bushido",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sm_bus_resolve"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "resist": "Physical",
+          "immovable": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sm_bus_clarity",
+        "name_en": "Mind of Clarity",
+        "name_tr": "Berrak Zihin",
+        "description_en": "Clear your mind of all distractions. Once per rest, reroll a failed saving throw with a +5 bonus.",
+        "description_tr": "Zihninizi tüm dikkat dağıtıcılardan arındırın. Her dinlenmede bir kez, başarısız bir kurtarma zarını +5 bonusla yeniden atın.",
+        "branch": "Bushido",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sm_bus_challenge"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "reroll": "Save",
+          "bonus": "+5"
+        }
+      },
+      {
+        "spell_key": "sm_bus_ancestor",
+        "name_en": "Ancestral Echo",
+        "name_tr": "Ataların Yankısı",
+        "description_en": "Call upon your samurai ancestors. For the next 2 turns, all your chosen attacks hit 2X automatically.",
+        "description_tr": "Samuray atalarınızı yardıma çağırın. Sonraki 2 tur boyunca, seçtiğiniz tüm saldırılar otomatik olarak 2X (iki kez) vurur.",
+        "branch": "Bushido",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sm_bus_spirit"
+        ],
+        "icon": "📿",
+        "effects": {
+          "buff": "Attacks hit 2X",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sm_bus_sacrifice",
+        "name_en": "Selfless Sacrifice",
+        "name_tr": "Bencil Olmayan Fedakarlık",
+        "description_en": "Instantly swap places with an ally within 5m who is about to take damage, taking the blow yourself with 50% damage reduction.",
+        "description_tr": "Hasar almak üzere olan 5m içindeki bir müttefikle anında yer değiştirir ve %50 hasar azaltmasıyla darbeyi kendiniz alırsınız.",
+        "branch": "Bushido",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sm_bus_stance"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "range": "5m",
+          "absorb_damage": "50% reduction"
+        }
+      },
+      {
+        "spell_key": "sm_bus_kiai",
+        "name_en": "Kiai Shout",
+        "name_tr": "Kiai Çığlığı",
+        "description_en": "Release a terrifying warrior's shout. Enemies in a 10m cone must make a Wisdom save or become Frightened and drop their weapons.",
+        "description_tr": "Korkutucu bir savaşçı çığlığı atar. 10m'lik konideki düşmanlar Bilgelik zarı atmalıdır, aksi takdirde Korkmuş duruma düşer ve silahlarını düşürürler.",
+        "branch": "Bushido",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sm_bus_clarity"
+        ],
+        "icon": "🗯️",
+        "effects": {
+          "aoe": "10m cone",
+          "status": "Frightened, Disarmed"
+        }
+      },
+      {
+        "spell_key": "sm_bus_unyielding",
+        "name_en": "Unyielding Spirit",
+        "name_tr": "Boyun Eğmez Ruh",
+        "description_en": "When an attack would reduce you to 0 HP, you instead drop to 1 HP and immediately make a free melee attack. Usable once per long rest.",
+        "description_tr": "Bir saldırı sizi 0 HP'ye düşüreceğinde, bunun yerine 1 HP'de kalırsınız ve anında ücretsiz bir yakın dövüş saldırısı yaparsınız. Uzun dinlenme başına bir kez kullanılabilir.",
+        "branch": "Bushido",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sm_bus_sacrifice",
+          "sm_bus_spirit"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "survive": "1 HP",
+          "reaction": "Free Attack"
+        }
+      },
+      {
+        "spell_key": "sm_bus_aura",
+        "name_en": "Aura of the Warlord",
+        "name_tr": "Savaş Beyi Halesi",
+        "description_en": "Your commanding presence inspires. Allies within 10m deal an extra 1d8 damage on all their attacks and gain +3m movement speed.",
+        "description_tr": "Liderliğiniz ilham verir. 10m içindeki müttefikler tüm saldırılarında ekstra 1d8 hasar verir ve +3m hareket hızı kazanır.",
+        "branch": "Bushido",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sm_bus_kiai",
+          "sm_bus_honor"
+        ],
+        "icon": "👑",
+        "effects": {
+          "range": "10m",
+          "damage_bonus": "1d8",
+          "speed_bonus": "+3m"
+        }
+      },
+      {
+        "spell_key": "sm_bus_immortal",
+        "name_en": "Immortal Will",
+        "name_tr": "Ölümsüz İrade",
+        "description_en": "Your sheer will rejects death. Once per week, if killed, you instantly revive with 100% HP and 2X damage for your next turn.",
+        "description_tr": "Saf iradeniz ölümü reddeder. Haftada bir kez, eğer öldürülürseniz, anında %100 HP ile dirilirsiniz ve sonraki turunuz için 2X hasar kazanırsınız.",
+        "branch": "Bushido",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sm_bus_unyielding"
+        ],
+        "icon": "🌅",
+        "effects": {
+          "heal": "100%",
+          "trigger": "On Death"
+        }
+      },
+      {
+        "spell_key": "sm_bus_avatar",
+        "name_en": "Avatar of Bushido",
+        "name_tr": "Bushido Avatarı",
+        "description_en": "Ultimate Bushido. For 1 minute, you embody the perfect warrior: +5 AC, +20m speed, advantage on all attacks, and immunity to all status conditions.",
+        "description_tr": "Nihai Bushido. 1 dakika boyunca mükemmel savaşçıyı temsil edersiniz: +5 ZS, +20m hız, tüm saldırılarda avantaj ve tüm durum etkilerine bağışıklık.",
+        "branch": "Bushido",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sm_bus_aura",
+          "sm_bus_ancestor"
+        ],
+        "icon": "👺",
+        "effects": {
+          "ac_bonus": "+5",
+          "speed": "+20m",
+          "advantage": "All attacks",
+          "immune": "All Statuses",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "sm_kat_slash",
+        "name_en": "Twin Slash",
+        "name_tr": "İkiz Kesik",
+        "description_en": "A fundamental katana strike that deliberately hits 2X. Each hit deals 1d10 slashing damage.",
+        "description_tr": "Kasıtlı olarak 2X (iki kez) vuran temel bir katana saldırısı. Her vuruş 1d10 kesici hasar verir.",
+        "branch": "Katana Mastery",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2x 1d10",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "sm_kat_bleed",
+        "name_en": "Lacerating Edge",
+        "name_tr": "Yırtıcı Kenar",
+        "description_en": "A precise cut that causes the target to bleed for 1d4 damage per turn for 3 turns.",
+        "description_tr": "Hedefin 3 tur boyunca her tur 1d4 hasar kanamasına neden olan hassas bir kesik.",
+        "branch": "Katana Mastery",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d4 bleed/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sm_kat_parry",
+        "name_en": "Blade Parry",
+        "name_tr": "Kılıç Savuşturması",
+        "description_en": "Use your reaction to deflect an incoming melee attack, gaining a +3 bonus to AC against it.",
+        "description_tr": "Gelen bir yakın dövüş saldırısını saptırmak için reaksiyonunuzu kullanın, o saldırıya karşı ZS'ye +3 bonus kazanırsınız.",
+        "branch": "Katana Mastery",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+3 vs melee",
+          "reaction": true
+        }
+      },
+      {
+        "spell_key": "sm_kat_cleave",
+        "name_en": "Sweeping Cleave",
+        "name_tr": "Süpürücü Yarma",
+        "description_en": "Swing your katana in a wide arc, dealing 2d8 slashing damage to all enemies in a 3m cone.",
+        "description_tr": "Katananızı geniş bir kavisle savurarak 3m'lik bir koni içindeki tüm düşmanlara 2d8 kesici hasar verir.",
+        "branch": "Katana Mastery",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sm_kat_slash"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "2d8",
+          "aoe": "3m cone"
+        }
+      },
+      {
+        "spell_key": "sm_kat_pierce",
+        "name_en": "Armor Piercer",
+        "name_tr": "Zırh Delici",
+        "description_en": "A thrusting attack aimed at weak points. Deals 2d10 piercing damage and ignores 5 points of target AC.",
+        "description_tr": "Zayıf noktalara hedeflenen bir saplama saldırısı. 2d10 delici hasar verir ve hedefin ZS'sinden 5 puanı yok sayar.",
+        "branch": "Katana Mastery",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sm_kat_slash"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage": "2d10",
+          "armor_pierce": "5 AC"
+        }
+      },
+      {
+        "spell_key": "sm_kat_flow",
+        "name_en": "Flowing Water",
+        "name_tr": "Akan Su",
+        "description_en": "If your attack reduces an enemy to 0 HP, you may immediately make another melee attack against a different target nearby.",
+        "description_tr": "Eğer saldırınız bir düşmanı 0 HP'ye düşürürse, hemen yakındaki başka bir hedefe yakın dövüş saldırısı yapabilirsiniz.",
+        "branch": "Katana Mastery",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sm_kat_bleed"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "mechanic": "Extra attack on kill"
+        }
+      },
+      {
+        "spell_key": "sm_kat_dragon",
+        "name_en": "Dragon Fang",
+        "name_tr": "Ejderha Dişi",
+        "description_en": "A powerful overhead swing dealing 3d10 slashing damage and knocking the target Prone.",
+        "description_tr": "3d10 kesici hasar veren ve hedefi Yere Seren güçlü bir baş üstü savurması.",
+        "branch": "Katana Mastery",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sm_kat_cleave"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "3d10",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "sm_kat_blood",
+        "name_en": "Bloodletting",
+        "name_tr": "Kan Akıtma",
+        "description_en": "Exploit open wounds. Deals 2d8 damage and increases all existing bleed damage on the target by 1d8 permanently.",
+        "description_tr": "Açık yaralardan faydalanır. 2d8 hasar verir ve hedefteki mevcut tüm kanama hasarını kalıcı olarak 1d8 artırır.",
+        "branch": "Katana Mastery",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sm_kat_flow"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "2d8",
+          "buff": "Bleed +1d8"
+        }
+      },
+      {
+        "spell_key": "sm_kat_whirlwind",
+        "name_en": "Steel Whirlwind",
+        "name_tr": "Çelik Kasırga",
+        "description_en": "Spin with lethal grace. Deals 3d8 slashing damage to all enemies within a 5m radius.",
+        "description_tr": "Ölümcül bir zarafetle döner. 5m yarıçaptaki tüm düşmanlara 3d8 kesici hasar verir.",
+        "branch": "Katana Mastery",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sm_kat_parry",
+          "sm_kat_cleave"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d8",
+          "aoe": "5m radius"
+        }
+      },
+      {
+        "spell_key": "sm_kat_sever",
+        "name_en": "Severing Strike",
+        "name_tr": "Koparan Vuruş",
+        "description_en": "A targeted strike to cripple. Deals 4d12 slashing damage and has a 25% chance to sever a non-fatal limb.",
+        "description_tr": "Sakat bırakmak için hedeflenmiş bir vuruş. 4d12 kesici hasar verir ve %25 şansla ölümcül olmayan bir uzvu koparır.",
+        "branch": "Katana Mastery",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sm_kat_dragon",
+          "sm_kat_pierce"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "damage": "4d12",
+          "status": "Limb Sever (25%)"
+        }
+      },
+      {
+        "spell_key": "sm_kat_twin",
+        "name_en": "Twin Dragons",
+        "name_tr": "İkiz Ejderhalar",
+        "description_en": "A devastating dual-stance attack. Hits the target 2X, dealing 3d12 slashing damage per hit.",
+        "description_tr": "Yıkıcı bir çift-duruş saldırısı. Hedefe 2X vurur, isabet başına 3d12 kesici hasar verir.",
+        "branch": "Katana Mastery",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sm_kat_dragon",
+          "sm_kat_whirlwind"
+        ],
+        "icon": "🐲",
+        "effects": {
+          "damage": "2x 3d12",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "sm_kat_execution",
+        "name_en": "Flawless Execution",
+        "name_tr": "Kusursuz İnfaz",
+        "description_en": "Deliver an executioner's blow. Deals 10d12 damage, but instantly kills any target below 20% HP.",
+        "description_tr": "Bir cellat darbesi indirir. 10d12 hasar verir, ancak %20 HP'nin altındaki herhangi bir hedefi anında öldürür.",
+        "branch": "Katana Mastery",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sm_kat_sever",
+          "sm_kat_blood"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "10d12",
+          "execute": "<20% HP"
+        }
+      },
+      {
+        "spell_key": "sm_kat_mastery",
+        "name_en": "Absolute Mastery",
+        "name_tr": "Mutlak Ustalık",
+        "description_en": "Ultimate Katana Mastery. Passive: All your katana attacks deal 2X damage, and you critically hit on an 18-20.",
+        "description_tr": "Nihai Katana Ustalığı. Pasif: Tüm katana saldırılarınız 2X hasar verir ve zarlarda 18-20 attığınızda kritik vurursunuz.",
+        "branch": "Katana Mastery",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sm_kat_twin",
+          "sm_kat_sever"
+        ],
+        "icon": "🎖️",
+        "effects": {
+          "passive": "Katana 2X Damage",
+          "crit_range": "18-20"
+        }
+      },
+      {
+        "spell_key": "sm_cb_focus",
+        "name_en": "Focused Strike",
+        "name_tr": "Odaklı Vuruş",
+        "description_en": "A carefully aimed blow combining stance and technique. Deals 2d10 damage and is a guaranteed hit if the target is Challenged.",
+        "description_tr": "Duruş ve tekniği birleştiren özenle hedeflenmiş bir darbe. 2d10 hasar verir ve eğer hedefe Meydan Okunmuşsa (Challenged) garantili isabet sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sm_bus_challenge",
+          "sm_kat_slash"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "damage": "2d10",
+          "mechanic": "Guaranteed hit on challenged"
+        }
+      },
+      {
+        "spell_key": "sm_cb_dance",
+        "name_en": "Blade Dance",
+        "name_tr": "Kılıç Dansı",
+        "description_en": "Dash up to 10m, attacking up to 3 enemies along the path. Each enemy is hit for 1d8 slashing damage.",
+        "description_tr": "10m'ye kadar atılır ve yol boyunca 3 düşmana kadar saldırır. Her düşmana 1d8 kesici hasar verilir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sm_iai_step",
+          "sm_kat_cleave"
+        ],
+        "icon": "🩰",
+        "effects": {
+          "damage": "3x 1d8",
+          "dash": "10m"
+        }
+      },
+      {
+        "spell_key": "sm_cb_guard",
+        "name_en": "Honorable Guard",
+        "name_tr": "Onurlu Koruma",
+        "description_en": "Protect an ally. If an ally within 2m is attacked, you instantly parry and counterattack the aggressor for 2d8 damage.",
+        "description_tr": "Bir müttefiki korur. 2m içindeki bir müttefik saldırıya uğrarsa, saldırıyı anında savuşturur ve saldırgana 2d8 hasarla karşı saldırı yaparsınız.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sm_bus_honor",
+          "sm_iai_counter"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "range": "2m",
+          "mechanic": "Counterattack for ally"
+        }
+      },
+      {
+        "spell_key": "sm_cb_storm",
+        "name_en": "Storm of Steel",
+        "name_tr": "Çelik Fırtınası",
+        "description_en": "Unleash 5 rapid strikes dealing 1d8 damage each, applying 1d4 bleed for each strike that connects.",
+        "description_tr": "Her biri 1d8 hasar veren 5 hızlı vuruş başlatır, isabet eden her vuruş için 1d4 kanama uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sm_iai_gale",
+          "sm_kat_whirlwind"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5x 1d8",
+          "status": "Bleed 1d4 per hit"
+        }
+      },
+      {
+        "spell_key": "sm_cb_lightning",
+        "name_en": "Lightning Challenge",
+        "name_tr": "Yıldırım Meydan Okuması",
+        "description_en": "Taunt an enemy within 15m and instantly dash to them, delivering a 3d8 strike in the blink of an eye.",
+        "description_tr": "15m içindeki bir düşmana meydan okur ve anında onlara doğru atılarak göz açıp kapayıncaya kadar 3d8 hasar veren bir vuruş yapar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sm_iai_phantom",
+          "sm_bus_challenge"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "3d8",
+          "dash": "15m",
+          "taunt": true
+        }
+      },
+      {
+        "spell_key": "sm_cb_will",
+        "name_en": "Will of the Blade",
+        "name_tr": "Kılıcın İradesi",
+        "description_en": "Passive: Your resolve turns enemy blood into vitality. You heal for 50% of all Bleed damage dealt to your enemies.",
+        "description_tr": "Pasif: İradeniz düşman kanını canlılığa çevirir. Düşmanlarınıza verdiğiniz tüm Kanama hasarının %50'si kadar iyileşirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sm_bus_sacrifice",
+          "sm_kat_blood"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "heal": "50% of Bleed damage",
+          "passive": true
+        }
+      },
+      {
+        "spell_key": "sm_cb_judgment",
+        "name_en": "Judgment Cut",
+        "name_tr": "Hüküm Kesiği",
+        "description_en": "A 10m ranged slash dealing 5d10 damage immediately, and leaving a dimensional tear that explodes for 3d10 damage next turn.",
+        "description_tr": "Anında 5d10 hasar veren ve bir sonraki tur 3d10 hasar için patlayan boyutsal bir yırtık bırakan 10m menzilli bir kesik.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sm_iai_vacuum",
+          "sm_kat_sever"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "5d10 + 3d10 delay",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "sm_cb_shogun",
+        "name_en": "Shogun's Decree",
+        "name_tr": "Şogun'un Fermanı",
+        "description_en": "Release your ultimate authority. All enemies in a 15m radius take 4d8 psychic damage and are frightened for 2 turns.",
+        "description_tr": "Nihai otoritenizi serbest bırakın. 15m yarıçaptaki tüm düşmanlar 4d8 psişik hasar alır ve 2 tur boyunca korkarlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sm_bus_aura",
+          "sm_kat_twin",
+          "sm_iai_thousand"
+        ],
+        "icon": "🎌",
+        "effects": {
+          "damage": "4d8",
+          "aoe": "15m",
+          "status": "Frightened"
+        }
+      },
+      {
+        "spell_key": "sm_cb_mirror",
+        "name_en": "Mirror Force",
+        "name_tr": "Ayna Gücü",
+        "description_en": "Use your reaction to perfectly reflect the next spell or attack directed at you back at the attacker with double power.",
+        "description_tr": "Size yöneltilen bir sonraki büyüyü veya saldırıyı, saldırgana çifte güçle mükemmel bir şekilde geri yansıtmak için reaksiyonunuzu kullanın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sm_iai_time",
+          "sm_bus_immortal"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "mechanic": "Perfect Reflect (2X damage)",
+          "reaction": true
+        }
+      },
+      {
+        "spell_key": "sm_grand_samurai",
+        "name_en": "The True Samurai",
+        "name_tr": "Gerçek Samuray",
+        "description_en": "GRAND ULTIMATE. For 1 minute, you become the God of the Blade. All your damage is multiplied by 2, your AC increases by +5, and your speed increases by 30m. You can attack twice per action.",
+        "description_tr": "BÜYÜK NİHAİ. 1 dakika boyunca Kılıcın Tanrısı olursunuz. Tüm hasarınız 2 ile çarpılır, ZS'niz +5 artar ve hızınız 30m artar. Eylem başına iki kez saldırabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sm_iai_dimension",
+          "sm_bus_avatar",
+          "sm_kat_mastery"
+        ],
+        "icon": "⛩️",
+        "effects": {
+          "damage_multiplier": "2X Everything",
+          "duration": "1 min",
+          "ac_bonus": "+5",
+          "speed_bonus": "+30m",
+          "extra_attacks": true
+        }
+      }
+    ]
+  }
+]

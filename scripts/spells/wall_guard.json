@@ -1,0 +1,1007 @@
+[
+  {
+    "subclass_key": "wall_guard",
+    "tree_name_en": "Wall Guard",
+    "tree_name_tr": "Duvar Muhafızı",
+    "tree_desc_en": "A legendary tank subclass that transforms the user into an immovable fortress. Specializes in extreme defense, ignoring massive hits, and anchoring to the battlefield.",
+    "tree_desc_tr": "Kullanıcıyı sarsılmaz bir kaleye dönüştüren efsanevi bir tank alt sınıfı. Aşırı savunma, devasa hasarları yok sayma ve savaş alanına demir atma konularında uzmanlaşmıştır.",
+    "branches": [
+      "Iron Wall",
+      "Endurance",
+      "Immovable",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "wg_shield_block",
+        "name_en": "Shield Block",
+        "name_tr": "Kalkan Bloğu",
+        "description_en": "Block an incoming physical attack, adding +50 to your defense for that hit.",
+        "description_tr": "Gelen fiziksel bir saldırıyı engeller ve o vuruş için savunmanıza +50 ekler.",
+        "branch": "Iron Wall",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "bonus_defense": 50,
+          "duration": "1 hit"
+        }
+      },
+      {
+        "spell_key": "wg_iron_plating",
+        "name_en": "Iron Plating",
+        "name_tr": "Demir Kaplama",
+        "description_en": "Passive. Grants a flat +20 bonus to your base defense.",
+        "description_tr": "Pasif. Temel savunmanıza sabit +20 bonus sağlar.",
+        "branch": "Iron Wall",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [
+          "wg_shield_block"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "defense": "+20",
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "wg_deflect_strike",
+        "name_en": "Deflect Strike",
+        "name_tr": "Darbe Saptırma",
+        "description_en": "Parry a melee attack and deflect 50% of its damage back to the attacker. Range: 2m.",
+        "description_tr": "Bir yakın dövüş saldırısını savuşturur ve hasarının %50'sini saldırgana geri yansıtır. Menzil: 2m.",
+        "branch": "Iron Wall",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "wg_iron_plating"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "reflect": "50%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "wg_heavy_stance",
+        "name_en": "Heavy Stance",
+        "name_tr": "Ağır Duruş",
+        "description_en": "Adopt a low stance, reducing knockback distances by 50% and gaining +10 defense.",
+        "description_tr": "Alçak bir duruşa geçerek savrulma mesafelerini %50 azaltır ve +10 savunma kazanırsınız.",
+        "branch": "Iron Wall",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wg_deflect_strike"
+        ],
+        "icon": "🏋️",
+        "effects": {
+          "knockback_reduction": "50%",
+          "bonus_defense": 10
+        }
+      },
+      {
+        "spell_key": "wg_steel_barricade",
+        "name_en": "Steel Barricade",
+        "name_tr": "Çelik Barikat",
+        "description_en": "Summon a 3m wide steel wall that blocks projectiles and movement for 10 seconds.",
+        "description_tr": "10 saniye boyunca mermileri ve hareketi engelleyen 3m genişliğinde çelik bir duvar çağırır.",
+        "branch": "Iron Wall",
+        "tier": 2,
+        "min_level": 20,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wg_heavy_stance"
+        ],
+        "icon": "🚧",
+        "effects": {
+          "wall_width": "3m",
+          "duration": "10s",
+          "hp": 500
+        }
+      },
+      {
+        "spell_key": "wg_phalanx_guard",
+        "name_en": "Phalanx Guard",
+        "name_tr": "Falanks Koruması",
+        "description_en": "Share 30% of your defense with allies within a 5m radius for 15 seconds.",
+        "description_tr": "Savunmanızın %30'unu 15 saniye boyunca 5m içindeki müttefiklerinizle paylaşırsınız.",
+        "branch": "Iron Wall",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wg_steel_barricade"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "radius": "5m",
+          "defense_share": "30%",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "wg_shatter_proof",
+        "name_en": "Shatterproof",
+        "name_tr": "Kırılmaz",
+        "description_en": "Passive. You become immune to armor penetration effects below 30%.",
+        "description_tr": "Pasif. %30'un altındaki zırh delme etkilerine karşı bağışıklık kazanırsınız.",
+        "branch": "Iron Wall",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wg_phalanx_guard"
+        ],
+        "icon": "💎",
+        "effects": {
+          "armor_pen_immunity": "30%",
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "wg_titanium_shell",
+        "name_en": "Titanium Shell",
+        "name_tr": "Titanyum Kabuk",
+        "description_en": "Coat yourself in titanium, doubling your base defense for 10 seconds.",
+        "description_tr": "Kendinizi titanyumla kaplayarak 10 saniye boyunca temel savunmanızı ikiye katlarsınız.",
+        "branch": "Iron Wall",
+        "tier": 3,
+        "min_level": 40,
+        "xp_cost": 400,
+        "prerequisites": [
+          "wg_shatter_proof"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "defense_multiplier": 2.0,
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "wg_kinetic_absorption",
+        "name_en": "Kinetic Absorption",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "Absorb physical damage for 5 seconds, then release 50% of absorbed damage as a 5m shockwave.",
+        "description_tr": "5 saniye boyunca fiziksel hasarı emer, ardından emilen hasarın %50'sini 5m çapında bir şok dalgası olarak salarsınız.",
+        "branch": "Iron Wall",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 450,
+        "prerequisites": [
+          "wg_titanium_shell"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "duration": "5s",
+          "absorb": "100%",
+          "release_damage": "50%",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "wg_bastion_of_steel",
+        "name_en": "Bastion of Steel",
+        "name_tr": "Çelik Kale",
+        "description_en": "Create an 8m zone where allies gain +50 defense and 20% damage reduction.",
+        "description_tr": "Müttefiklerin +50 savunma ve %20 hasar azaltımı kazandığı 8 metrelik bir alan yaratırsınız.",
+        "branch": "Iron Wall",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wg_kinetic_absorption"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "radius": "8m",
+          "bonus_defense": 50,
+          "damage_reduction": "20%",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "wg_adamantine_armor",
+        "name_en": "Adamantine Armor",
+        "name_tr": "Adamantiyum Zırh",
+        "description_en": "Passive. Critical hits against you are treated as normal hits, and your armor cannot be degraded.",
+        "description_tr": "Pasif. Size karşı yapılan kritik vuruşlar normal vuruş sayılır ve zırhınız aşındırılamaz.",
+        "branch": "Iron Wall",
+        "tier": 4,
+        "min_level": 60,
+        "xp_cost": 650,
+        "prerequisites": [
+          "wg_bastion_of_steel"
+        ],
+        "icon": "💠",
+        "effects": {
+          "crit_immunity": true,
+          "armor_degrade_immunity": true
+        }
+      },
+      {
+        "spell_key": "wg_impenetrable_dome",
+        "name_en": "Impenetrable Dome",
+        "name_tr": "Geçilmez Kubbe",
+        "description_en": "Project a 15m protective dome that blocks all magical and physical projectiles for 8 seconds.",
+        "description_tr": "8 saniye boyunca tüm büyülü ve fiziksel mermileri engelleyen 15 metrelik koruyucu bir kubbe yansıtırsınız.",
+        "branch": "Iron Wall",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "wg_adamantine_armor"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "radius": "15m",
+          "duration": "8s",
+          "projectile_block": "100%"
+        }
+      },
+      {
+        "spell_key": "wg_fortress_manifestation",
+        "name_en": "Fortress Manifestation",
+        "name_tr": "Kale Tezahürü",
+        "description_en": "Grow in size by 50%, gaining +150 defense and extending your melee reach by 2m for 20 seconds.",
+        "description_tr": "Boyutunuz %50 büyür, +150 savunma kazanırsınız ve yakın dövüş menziliniz 20 saniye boyunca 2m artar.",
+        "branch": "Iron Wall",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 900,
+        "prerequisites": [
+          "wg_impenetrable_dome"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "size": "+50%",
+          "bonus_defense": 150,
+          "reach": "+2m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "wg_ultimate_aegis",
+        "name_en": "Ultimate Aegis",
+        "name_tr": "Nihai Kalkan",
+        "description_en": "Ultimate. Become completely invulnerable for 10 seconds. All attacks aimed at allies within 20m are redirected to you.",
+        "description_tr": "Nihai. 10 saniye boyunca tamamen zarar göremez hale gelirsiniz. 20m içindeki müttefiklere yönelik tüm saldırılar size yönlendirilir.",
+        "branch": "Iron Wall",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wg_fortress_manifestation"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "invulnerability": "10s",
+          "taunt_radius": "20m",
+          "redirect_damage": "100%"
+        }
+      },
+      {
+        "spell_key": "wg_vitality_surge",
+        "name_en": "Vitality Surge",
+        "name_tr": "Canlılık Dalgası",
+        "description_en": "Instantly recover 15% of your maximum HP.",
+        "description_tr": "Maksimum HP'nizin %15'ini anında iyileştirir.",
+        "branch": "Endurance",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💖",
+        "effects": {
+          "heal": "15% max_hp",
+          "cooldown": "30s"
+        }
+      },
+      {
+        "spell_key": "wg_pain_tolerance",
+        "name_en": "Pain Tolerance",
+        "name_tr": "Acı Toleransı",
+        "description_en": "Passive. Reduce all incoming damage by a flat 5 points before defense is applied.",
+        "description_tr": "Pasif. Savunma uygulanmadan önce gelen tüm hasarı sabit 5 puan azaltır.",
+        "branch": "Endurance",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "wg_vitality_surge"
+        ],
+        "icon": "🩹",
+        "effects": {
+          "flat_damage_reduction": 5,
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "wg_thick_skin",
+        "name_en": "Thick Skin",
+        "name_tr": "Kalın Deri",
+        "description_en": "Passive. Increases your maximum HP by 10%.",
+        "description_tr": "Pasif. Maksimum HP'nizi %10 artırır.",
+        "branch": "Endurance",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 110,
+        "prerequisites": [
+          "wg_pain_tolerance"
+        ],
+        "icon": "🐘",
+        "effects": {
+          "max_hp": "+10%",
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "wg_endless_stamina",
+        "name_en": "Endless Stamina",
+        "name_tr": "Sonsuz Dayanıklılık",
+        "description_en": "Instantly clear 1 stack of exhaustion and recover 50 stamina.",
+        "description_tr": "Anında 1 bitkinlik yükünü temizler ve 50 dayanıklılık yenilersiniz.",
+        "branch": "Endurance",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wg_thick_skin"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "exhaustion_clear": 1,
+          "stamina_heal": 50
+        }
+      },
+      {
+        "spell_key": "wg_shrug_it_off",
+        "name_en": "Shrug It Off",
+        "name_tr": "Umursamazlık",
+        "description_en": "Passive. Any instance of damage that is less than 5% of your max HP is reduced by half.",
+        "description_tr": "Pasif. Maksimum HP'nizin %5'inden daha az olan herhangi bir hasar yarı yarıya azaltılır.",
+        "branch": "Endurance",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 220,
+        "prerequisites": [
+          "wg_endless_stamina"
+        ],
+        "icon": "🤷",
+        "effects": {
+          "damage_threshold": "5% max_hp",
+          "reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "wg_second_wind",
+        "name_en": "Second Wind",
+        "name_tr": "İkinci Nefes",
+        "description_en": "When dropping below 30% HP, automatically heal for 20% of your missing HP.",
+        "description_tr": "HP %30'un altına düştüğünde, otomatik olarak eksik HP'nizin %20'sini iyileştirirsiniz.",
+        "branch": "Endurance",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 260,
+        "prerequisites": [
+          "wg_shrug_it_off"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "trigger": "30% hp",
+          "heal": "20% missing_hp",
+          "cooldown": "60s"
+        }
+      },
+      {
+        "spell_key": "wg_hardened_flesh",
+        "name_en": "Hardened Flesh",
+        "name_tr": "Sertleşmiş Et",
+        "description_en": "Gain 20% resistance to fire, cold, and lightning damage.",
+        "description_tr": "Ateş, soğuk ve yıldırım hasarlarına karşı %20 direnç kazanırsınız.",
+        "branch": "Endurance",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wg_second_wind"
+        ],
+        "icon": "🥩",
+        "effects": {
+          "elemental_resist": "20%",
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "wg_indomitable_spirit",
+        "name_en": "Indomitable Spirit",
+        "name_tr": "Boyun Eğmez Ruh",
+        "description_en": "Once per day, when you would be reduced to 0 HP, you instead drop to 1 HP and become immune to damage for 3 seconds.",
+        "description_tr": "Günde bir kez, 0 HP'ye düşecekken bunun yerine 1 HP'ye düşer ve 3 saniye boyunca hasara karşı bağışıklık kazanırsınız.",
+        "branch": "Endurance",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 420,
+        "prerequisites": [
+          "wg_hardened_flesh"
+        ],
+        "icon": "👼",
+        "effects": {
+          "death_defy": 1,
+          "immunity": "3s",
+          "charges": "1/day"
+        }
+      },
+      {
+        "spell_key": "wg_rapid_regeneration",
+        "name_en": "Rapid Regeneration",
+        "name_tr": "Hızlı Yenilenme",
+        "description_en": "Regenerate 2% of your max HP every second for 15 seconds.",
+        "description_tr": "15 saniye boyunca her saniye maksimum HP'nizin %2'sini yenilersiniz.",
+        "branch": "Endurance",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 480,
+        "prerequisites": [
+          "wg_indomitable_spirit"
+        ],
+        "icon": "🌿",
+        "effects": {
+          "regen": "2%/s",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "wg_pain_is_power",
+        "name_en": "Pain is Power",
+        "name_tr": "Acı Güçtür",
+        "description_en": "Passive. For every 10% HP you are missing, gain +15 defense and +5% physical damage.",
+        "description_tr": "Pasif. Eksik olan her %10 HP için +15 savunma ve +%5 fiziksel hasar kazanırsınız.",
+        "branch": "Endurance",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wg_rapid_regeneration"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "hp_missing_trigger": "10%",
+          "bonus_defense": 15,
+          "bonus_damage": "5%"
+        }
+      },
+      {
+        "spell_key": "wg_juggernaut_vitality",
+        "name_en": "Juggernaut Vitality",
+        "name_tr": "Juggernaut Canlılığı",
+        "description_en": "Temporarily increase your maximum HP by 50% and heal for the same amount. Lasts 30 seconds.",
+        "description_tr": "Maksimum HP'nizi geçici olarak %50 artırır ve aynı miktarda iyileşirsiniz. 30 saniye sürer.",
+        "branch": "Endurance",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "wg_pain_is_power"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "max_hp_bonus": "50%",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "wg_colossus_blood",
+        "name_en": "Colossus Blood",
+        "name_tr": "Dev Kanı",
+        "description_en": "Passive. Your base health regeneration is permanently increased by +50 HP per minute, and poisons deal 50% less damage.",
+        "description_tr": "Pasif. Temel can yenilenmeniz kalıcı olarak dakikada +50 HP artar ve zehirler %50 daha az hasar verir.",
+        "branch": "Endurance",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wg_juggernaut_vitality"
+        ],
+        "icon": "💉",
+        "effects": {
+          "regen": "50/min",
+          "poison_resist": "50%"
+        }
+      },
+      {
+        "spell_key": "wg_unyielding_flesh",
+        "name_en": "Unyielding Flesh",
+        "name_tr": "Sarsılmaz Et",
+        "description_en": "Remove all bleeds, burns, and damage-over-time effects, healing 5% max HP for each effect removed.",
+        "description_tr": "Tüm kanama, yanma ve zamanla hasar veren etkileri kaldırır, kaldırılan her etki için maksimum HP'nin %5'ini iyileştirir.",
+        "branch": "Endurance",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "wg_colossus_blood"
+        ],
+        "icon": "🧴",
+        "effects": {
+          "cleanse": "DoTs",
+          "heal_per_dot": "5% max_hp"
+        }
+      },
+      {
+        "spell_key": "wg_ultimate_undying",
+        "name_en": "Ultimate Undying",
+        "name_tr": "Nihai Ölümsüzlük",
+        "description_en": "Ultimate. For 20 seconds, your HP cannot drop below 1. When the effect ends, heal for 50% of all damage taken during the duration.",
+        "description_tr": "Nihai. 20 saniye boyunca HP'niz 1'in altına düşemez. Etki sona erdiğinde, bu süre zarfında alınan tüm hasarın %50'si kadar iyileşirsiniz.",
+        "branch": "Endurance",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wg_unyielding_flesh"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "duration": "20s",
+          "immortality": true,
+          "post_heal": "50% damage_taken"
+        }
+      },
+      {
+        "spell_key": "wg_rooted_stance",
+        "name_en": "Rooted Stance",
+        "name_tr": "Köklü Duruş",
+        "description_en": "Root yourself in place for 5 seconds, becoming immune to all push, pull, and knockup effects.",
+        "description_tr": "Kendinizi 5 saniye boyunca yere sabitler, tüm itme, çekme ve havaya savurma etkilerine karşı bağışıklık kazanırsınız.",
+        "branch": "Immovable",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🌳",
+        "effects": {
+          "root_self": true,
+          "cc_immunity": "displacement",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "wg_heavy_steps",
+        "name_en": "Heavy Steps",
+        "name_tr": "Ağır Adımlar",
+        "description_en": "Passive. Your movement speed is reduced by 10%, but every step causes a micro-tremor, making it 20% harder for enemies within 3m to dodge.",
+        "description_tr": "Pasif. Hareket hızınız %10 azalır, ancak her adım bir mikro sarsıntıya neden olarak 3m içindeki düşmanların kaçınmasını %20 zorlaştırır.",
+        "branch": "Immovable",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [
+          "wg_rooted_stance"
+        ],
+        "icon": "👣",
+        "effects": {
+          "move_speed": "-10%",
+          "enemy_dodge_penalty": "20%",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "wg_gravity_anchor",
+        "name_en": "Gravity Anchor",
+        "name_tr": "Yerçekimi Çapası",
+        "description_en": "Strike an enemy, attaching a gravity anchor that prevents them from moving further than 5m from that spot for 6 seconds.",
+        "description_tr": "Bir düşmana vurarak ona bir yerçekimi çapası takarsınız; bu çapa 6 saniye boyunca o noktadan 5m uzağa gitmelerini engeller.",
+        "branch": "Immovable",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [
+          "wg_heavy_steps"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "tether_range": "5m",
+          "duration": "6s"
+        }
+      },
+      {
+        "spell_key": "wg_staggering_blow",
+        "name_en": "Staggering Blow",
+        "name_tr": "Sarsıcı Darbe",
+        "description_en": "A heavy shield bash that deals 2d8 bludgeoning damage and stuns the target for 1.5 seconds. Range: 2m.",
+        "description_tr": "2d8 ezici hasar veren ve hedefi 1.5 saniye sersemleten ağır bir kalkan darbesi. Menzil: 2m.",
+        "branch": "Immovable",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wg_gravity_anchor"
+        ],
+        "icon": "🥊",
+        "effects": {
+          "damage": "2d8",
+          "stun": "1.5s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "wg_earth_bind",
+        "name_en": "Earth Bind",
+        "name_tr": "Toprak Bağı",
+        "description_en": "Stomp the ground, rooting all enemies within a 5m radius for 3 seconds.",
+        "description_tr": "Yere şiddetle basarak 5m içindeki tüm düşmanları 3 saniye boyunca yere sabitlersiniz.",
+        "branch": "Immovable",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 240,
+        "prerequisites": [
+          "wg_staggering_blow"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "radius": "5m",
+          "root": "3s"
+        }
+      },
+      {
+        "spell_key": "wg_mountain_stance",
+        "name_en": "Mountain Stance",
+        "name_tr": "Dağ Duruşu",
+        "description_en": "Gain immunity to all crowd control effects for 8 seconds, but your movement speed is halved.",
+        "description_tr": "8 saniye boyunca tüm kitle kontrol etkilerine karşı bağışıklık kazanırsınız, ancak hareket hızınız yarıya iner.",
+        "branch": "Immovable",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "wg_earth_bind"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "cc_immunity": "all",
+          "move_speed": "-50%",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "wg_bulwark_charge",
+        "name_en": "Bulwark Charge",
+        "name_tr": "Siper Hücumu",
+        "description_en": "Charge forward 10m in a straight line. Enemies in your path are knocked aside and take 4d6 bludgeoning damage.",
+        "description_tr": "Düz bir çizgide 10m ileri hücum edin. Yolunuzdaki düşmanlar kenara savrulur ve 4d6 ezici hasar alır.",
+        "branch": "Immovable",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wg_mountain_stance"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "range": "10m",
+          "damage": "4d6",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "wg_gravity_well",
+        "name_en": "Gravity Well",
+        "name_tr": "Yerçekimi Kuyusu",
+        "description_en": "Generate a strong gravitational pull, dragging all enemies within 15m towards you.",
+        "description_tr": "Güçlü bir yerçekimi çekimi yaratarak 15m içindeki tüm düşmanları kendinize doğru sürüklersiniz.",
+        "branch": "Immovable",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 440,
+        "prerequisites": [
+          "wg_bulwark_charge"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "pull_radius": "15m",
+          "pull_center": "self"
+        }
+      },
+      {
+        "spell_key": "wg_unstoppable_force",
+        "name_en": "Unstoppable Force",
+        "name_tr": "Durdurulamaz Güç",
+        "description_en": "For 6 seconds, you can walk through physical barriers, walls, and magical forcefields, destroying them if they are breakable.",
+        "description_tr": "6 saniye boyunca fiziksel engellerden, duvarlardan ve büyülü güç alanlarından geçebilir, eğer kırılabilirlerse onları yok edebilirsiniz.",
+        "branch": "Immovable",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 490,
+        "prerequisites": [
+          "wg_gravity_well"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "duration": "6s",
+          "barrier_destruction": true
+        }
+      },
+      {
+        "spell_key": "wg_seismic_slam",
+        "name_en": "Seismic Slam",
+        "name_tr": "Sismik Çarpma",
+        "description_en": "Leap up to 8m and slam the ground. Enemies in a 10m radius take 6d8 damage and are knocked prone.",
+        "description_tr": "8m'ye kadar sıçrar ve yere sertçe çarparsınız. 10m yarıçapındaki düşmanlar 6d8 hasar alır ve yere serilir.",
+        "branch": "Immovable",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wg_unstoppable_force"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "leap": "8m",
+          "radius": "10m",
+          "damage": "6d8",
+          "knock_prone": true
+        }
+      },
+      {
+        "spell_key": "wg_petrify_self",
+        "name_en": "Petrify Self",
+        "name_tr": "Kendini Taşlaştırma",
+        "description_en": "Turn into solid stone for 5 seconds. You cannot act, take 90% reduced damage, and heal 10% max HP per second.",
+        "description_tr": "5 saniye boyunca katı taşa dönüşürsünüz. Hareket edemezsiniz, %90 daha az hasar alırsınız ve saniyede %10 max HP iyileşirsiniz.",
+        "branch": "Immovable",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 720,
+        "prerequisites": [
+          "wg_seismic_slam"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "duration": "5s",
+          "stun_self": true,
+          "damage_reduction": "90%",
+          "heal": "10%/s"
+        }
+      },
+      {
+        "spell_key": "wg_weight_of_the_world",
+        "name_en": "Weight of the World",
+        "name_tr": "Dünyanın Yükü",
+        "description_en": "Increase gravity in a 30m radius for 10 seconds. Enemies are slowed by 80% and flying creatures are grounded.",
+        "description_tr": "10 saniye boyunca 30m yarıçapta yerçekimini artırır. Düşmanlar %80 yavaşlar ve uçan yaratıklar yere indirilir.",
+        "branch": "Immovable",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 820,
+        "prerequisites": [
+          "wg_petrify_self"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "radius": "30m",
+          "duration": "10s",
+          "slow": "80%",
+          "ground_flyers": true
+        }
+      },
+      {
+        "spell_key": "wg_tectonic_shift",
+        "name_en": "Tectonic Shift",
+        "name_tr": "Tektonik Kayma",
+        "description_en": "Manipulate the earth in a 20m area, creating 4m high walls and deep trenches to trap enemies or protect allies. Lasts 1 minute.",
+        "description_tr": "20 metrelik bir alanda toprağı manipüle ederek düşmanları tuzağa düşürmek veya müttefikleri korumak için 4m yüksekliğinde duvarlar ve derin hendekler oluşturursunuz. 1 dakika sürer.",
+        "branch": "Immovable",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "wg_weight_of_the_world"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "radius": "20m",
+          "wall_height": "4m",
+          "duration": "60s"
+        }
+      },
+      {
+        "spell_key": "wg_ultimate_mountain",
+        "name_en": "Ultimate Mountain",
+        "name_tr": "Nihai Dağ",
+        "description_en": "Ultimate. Become a living mountain for 15 seconds. You have infinite mass, cannot be moved, and your basic attacks deal an AoE earthquake in 10m.",
+        "description_tr": "Nihai. 15 saniye boyunca yaşayan bir dağa dönüşürsünüz. Sonsuz kütleye sahipsiniz, hareket ettirilemezsiniz ve temel saldırılarınız 10m içinde alan etkili deprem yaratır.",
+        "branch": "Immovable",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wg_tectonic_shift"
+        ],
+        "icon": "🗻",
+        "effects": {
+          "duration": "15s",
+          "mass": "infinite",
+          "attack_aoe": "10m",
+          "cc_immunity": "all"
+        }
+      },
+      {
+        "spell_key": "wg_iron_lungs",
+        "name_en": "Iron Lungs",
+        "name_tr": "Demir Akciğerler",
+        "description_en": "Let out a booming roar that taunts enemies within 15m for 4 seconds and increases your health regeneration.",
+        "description_tr": "Gürleyen bir kükreme ile 15m içindeki düşmanları 4 saniye boyunca kışkırtır ve can yenilenmenizi artırırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wg_heavy_stance",
+          "wg_endless_stamina"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "taunt_radius": "15m",
+          "duration": "4s",
+          "bonus_regen": "1% max_hp/s"
+        }
+      },
+      {
+        "spell_key": "wg_entrenched_bastion",
+        "name_en": "Entrenched Bastion",
+        "name_tr": "Hendekli Siper",
+        "description_en": "Dig into the ground, creating a 5m defensive perimeter. While inside, you and allies gain +40 defense and are immune to knockbacks.",
+        "description_tr": "Yere kazarak 5 metrelik bir savunma çevresi oluşturursunuz. İçerideyken siz ve müttefikleriniz +40 savunma kazanır ve savrulmalara karşı bağışıklık kazanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wg_heavy_stance",
+          "wg_staggering_blow"
+        ],
+        "icon": "🏕️",
+        "effects": {
+          "radius": "5m",
+          "bonus_defense": 40,
+          "knockback_immunity": true
+        }
+      },
+      {
+        "spell_key": "wg_enduring_mountain",
+        "name_en": "Enduring Mountain",
+        "name_tr": "Dayanıklı Dağ",
+        "description_en": "Passive. For every 2 seconds you remain stationary, you gain a stack of 2% max HP and +5 defense (max 10 stacks). Resets upon moving.",
+        "description_tr": "Pasif. Hareketsiz kaldığınız her 2 saniye için %2 max HP ve +5 savunma yükü kazanırsınız (en fazla 10 yük). Hareket edince sıfırlanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wg_hardened_flesh",
+          "wg_bulwark_charge"
+        ],
+        "icon": "⛺",
+        "effects": {
+          "stack_timer": "2s",
+          "max_stacks": 10,
+          "hp_per_stack": "2%",
+          "defense_per_stack": 5
+        }
+      },
+      {
+        "spell_key": "wg_reflective_carapace",
+        "name_en": "Reflective Carapace",
+        "name_tr": "Yansıtıcı Kabuk",
+        "description_en": "For 8 seconds, reflect physical damage back to attackers. The reflection amount equals your missing HP percentage.",
+        "description_tr": "8 saniye boyunca fiziksel hasarı saldıranlara geri yansıtırsınız. Yansıtma miktarı eksik HP yüzdenize eşittir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wg_shatter_proof",
+          "wg_hardened_flesh"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "duration": "8s",
+          "reflect_scaling": "missing_hp_%"
+        }
+      },
+      {
+        "spell_key": "wg_gravity_shield",
+        "name_en": "Gravity Shield",
+        "name_tr": "Yerçekimi Kalkanı",
+        "description_en": "Create a shield that actively pulls enemy projectiles within 10m into itself, absorbing their impact and granting you 10 stamina per projectile.",
+        "description_tr": "10m içindeki düşman mermilerini aktif olarak kendine çeken, darbelerini emen ve mermi başına size 10 dayanıklılık veren bir kalkan yaratırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wg_bastion_of_steel",
+          "wg_seismic_slam"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "pull_radius": "10m",
+          "stamina_per_projectile": 10,
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "wg_unstoppable_juggernaut",
+        "name_en": "Unstoppable Juggernaut",
+        "name_tr": "Durdurulamaz Juggernaut",
+        "description_en": "A reckless 15m charge. For every enemy you collide with, you heal 5% max HP and gain +10 defense.",
+        "description_tr": "Pervasızca 15m'lik bir hücum. Çarpıştığınız her düşman için %5 max HP iyileşir ve +10 savunma kazanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wg_pain_is_power",
+          "wg_seismic_slam"
+        ],
+        "icon": "🚄",
+        "effects": {
+          "range": "15m",
+          "heal_per_target": "5%",
+          "defense_per_target": 10
+        }
+      },
+      {
+        "spell_key": "wg_absolute_threshold",
+        "name_en": "Absolute Threshold",
+        "name_tr": "Mutlak Eşik",
+        "description_en": "Passive. The core tenet of the Wall Guard. If an incoming attack's raw damage exceeds 150% of your Defense, the hit is entirely ignored, dealing 0 damage.",
+        "description_tr": "Pasif. Duvar Muhafızı'nın temel prensibi. Eğer gelen bir saldırının ham hasarı Savunmanızın %150'sini aşarsa, darbe tamamen yok sayılır ve 0 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "wg_adamantine_armor",
+          "wg_juggernaut_vitality",
+          "wg_weight_of_the_world"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "ignore_threshold": "1.5x defense",
+          "damage_taken": 0
+        }
+      },
+      {
+        "spell_key": "wg_grand_ultimate_world_shield",
+        "name_en": "Grand Ultimate: World Shield",
+        "name_tr": "Yüce Nihai: Dünya Kalkanı",
+        "description_en": "Grand Ultimate. Protect all allies in a 100m radius. You absorb 100% of all damage they would take for 15 seconds. If this damage triggers Absolute Threshold, you heal instead of taking damage.",
+        "description_tr": "Yüce Nihai. 100m içindeki tüm müttefikleri korursunuz. 15 saniye boyunca alacakları tüm hasarın %100'ünü emersiniz. Eğer bu hasar Mutlak Eşik'i tetiklerse, hasar almak yerine iyileşirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "wg_ultimate_aegis",
+          "wg_ultimate_undying",
+          "wg_ultimate_mountain"
+        ],
+        "icon": "🛡️🌍",
+        "effects": {
+          "radius": "100m",
+          "absorb_ally_damage": "100%",
+          "duration": "15s",
+          "threshold_heal": true
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1009 @@
+[
+  {
+    "subclass_key": "stormshot",
+    "tree_name_en": "Stormshot Arsenal",
+    "tree_name_tr": "Fırtına Atıcısı Cephaneliği",
+    "tree_desc_en": "Mastery of lightning arrows, thunderous blasts, and wind manipulation to dominate the battlefield with extreme mobility.",
+    "tree_desc_tr": "Savaş alanına aşırı hareketlilikle hükmetmek için yıldırım okları, gök gürültülü patlamalar ve rüzgar manipülasyonunda ustalık.",
+    "branches": [
+      "Lightning",
+      "Thunder",
+      "Wind",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "sts_static_shot",
+        "name_en": "Static Shot",
+        "name_tr": "Statik Atış",
+        "description_en": "Fires an arrow charged with static electricity, dealing 1d8 piercing and 1d6 lightning damage. Targets hit have their movement speed reduced by 2m for 1 turn.",
+        "description_tr": "Statik elektrikle yüklü bir ok fırlatarak 1d8 delici ve 1d6 yıldırım hasarı verir. Vurulan hedeflerin hareket hızı 1 tur boyunca 2m azalır.",
+        "branch": "Lightning",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "1d8 piercing + 1d6 lightning",
+          "range": "30m",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_arc_arrow",
+        "name_en": "Arc Arrow",
+        "name_tr": "Ark Oku",
+        "description_en": "An arrow that jumps to one additional target within 5m of the primary target, dealing 2d6 lightning damage to both.",
+        "description_tr": "Ana hedefin 5m yakınındaki ek bir hedefe atlayan, her ikisine de 2d6 yıldırım hasarı veren bir ok.",
+        "branch": "Lightning",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sts_static_shot"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "damage": "2d6 lightning",
+          "range": "40m",
+          "jump_range": "5m"
+        }
+      },
+      {
+        "spell_key": "sts_lightning_reflexes",
+        "name_en": "Lightning Reflexes",
+        "name_tr": "Yıldırım Refleksleri",
+        "description_en": "Passive. Your base movement speed increases by 3m, and you gain a +2 bonus to Dexterity saving throws.",
+        "description_tr": "Pasif. Temel hareket hızınız 3m artar ve Çeviklik kurtarma zarlarına +2 bonus kazanırsınız.",
+        "branch": "Lightning",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sts_static_shot"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "passive": "true",
+          "movement_bonus": "3m",
+          "save_bonus": "+2 Dex"
+        }
+      },
+      {
+        "spell_key": "sts_chain_lightning_arrow",
+        "name_en": "Chain Lightning Arrow",
+        "name_tr": "Zincirleme Yıldırım Oku",
+        "description_en": "The arrow splinters upon impact, chaining lightning up to 3 targets within 10m. Deals 3d8 lightning damage to each.",
+        "description_tr": "Ok çarpma anında parçalanır ve 10m içindeki 3 hedefe kadar yıldırım zincirler. Her birine 3d8 yıldırım hasarı verir.",
+        "branch": "Lightning",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_arc_arrow"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "3d8 lightning",
+          "range": "40m",
+          "chain_range": "10m",
+          "targets": "3"
+        }
+      },
+      {
+        "spell_key": "sts_voltage_trap",
+        "name_en": "Voltage Trap",
+        "name_tr": "Voltaj Tuzağı",
+        "description_en": "Places an invisible electrical trap on the ground. When triggered, it explodes in a 5m radius, dealing 4d6 lightning damage and paralyzing for 1 turn.",
+        "description_tr": "Yere görünmez bir elektrik tuzağı kurar. Tetiklendiğinde 5m yarıçapta patlayarak 4d6 yıldırım hasarı verir ve 1 tur felç eder.",
+        "branch": "Lightning",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_lightning_reflexes"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "damage": "4d6 lightning",
+          "aoe": "5m radius",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_overcharge",
+        "name_en": "Overcharge",
+        "name_tr": "Aşırı Yükleme",
+        "description_en": "Temporarily overcharges your bow, causing your next 3 attacks to deal an additional 2d8 lightning damage and ignore lightning resistance.",
+        "description_tr": "Yayınızı geçici olarak aşırı yükleyerek sonraki 3 saldırınızın ek 2d8 yıldırım hasarı vermesini ve yıldırım direncini yok saymasını sağlar.",
+        "branch": "Lightning",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sts_chain_lightning_arrow"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "damage_bonus": "2d8 lightning",
+          "attacks": "3",
+          "buff": "ignore resistance"
+        }
+      },
+      {
+        "spell_key": "sts_plasma_piercer",
+        "name_en": "Plasma Piercer",
+        "name_tr": "Plazma Delici",
+        "description_en": "Fires a superheated plasma arrow that travels in a 30m line, passing through all targets and dealing 5d8 lightning damage.",
+        "description_tr": "30m'lik bir hat boyunca ilerleyen, tüm hedeflerin içinden geçen ve 5d8 yıldırım hasarı veren aşırı ısınmış bir plazma oku fırlatır.",
+        "branch": "Lightning",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_overcharge"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "5d8 lightning",
+          "area": "30m line"
+        }
+      },
+      {
+        "spell_key": "sts_storm_step",
+        "name_en": "Storm Step",
+        "name_tr": "Fırtına Adımı",
+        "description_en": "Instantly teleport to any location within 15m, leaving a spark that deals 2d10 lightning damage to enemies within 3m of your starting point.",
+        "description_tr": "Anında 15m içindeki herhangi bir konuma ışınlanarak, başlangıç noktanızın 3m içindeki düşmanlara 2d10 yıldırım hasarı veren bir kıvılcım bırakır.",
+        "branch": "Lightning",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_voltage_trap"
+        ],
+        "icon": "⚡️",
+        "effects": {
+          "teleport": "15m",
+          "damage": "2d10 lightning",
+          "aoe": "3m"
+        }
+      },
+      {
+        "spell_key": "sts_paralytic_shock",
+        "name_en": "Paralytic Shock",
+        "name_tr": "Felç Edici Şok",
+        "description_en": "A highly charged arrow that deals 4d10 lightning damage. The target must succeed on a Constitution saving throw or be stunned for 1 turn.",
+        "description_tr": "4d10 yıldırım hasarı veren yüksek yüklü bir ok. Hedef Dayanıklılık kurtarma zarında başarısız olursa 1 tur sersemler.",
+        "branch": "Lightning",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sts_plasma_piercer"
+        ],
+        "icon": "😵",
+        "effects": {
+          "damage": "4d10 lightning",
+          "range": "50m",
+          "status": "stun 1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_thundergods_bolt",
+        "name_en": "Thundergod's Bolt",
+        "name_tr": "Yıldırım Tanrısının Oku",
+        "description_en": "Calls down a massive bolt of lightning at the impact site of your arrow, dealing 8d8 lightning damage in a 10m radius.",
+        "description_tr": "Okunuzun çarptığı noktaya devasa bir yıldırım çağırarak 10m yarıçapta 8d8 yıldırım hasarı verir.",
+        "branch": "Lightning",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_paralytic_shock"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "8d8 lightning",
+          "aoe": "10m radius",
+          "range": "60m"
+        }
+      },
+      {
+        "spell_key": "sts_lightning_rod",
+        "name_en": "Lightning Rod",
+        "name_tr": "Paratoner",
+        "description_en": "Fires an arrow into the ground or a target that acts as a beacon. For 3 turns, any lightning damage dealt within 20m is amplified by 50%.",
+        "description_tr": "Yere veya bir hedefe işaret fişeği görevi gören bir ok atar. 3 tur boyunca 20m içinde verilen herhangi bir yıldırım hasarı %50 artar.",
+        "branch": "Lightning",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_storm_step"
+        ],
+        "icon": "🗼",
+        "effects": {
+          "buff": "+50% lightning damage",
+          "aoe": "20m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sts_ball_lightning_strike",
+        "name_en": "Ball Lightning Strike",
+        "name_tr": "Top Yıldırım Vuruşu",
+        "description_en": "Fires a slow-moving orb of lightning that travels 20m over 2 turns, zapping enemies within 5m for 3d12 lightning damage each turn.",
+        "description_tr": "2 tur boyunca 20m ilerleyen, her tur 5m içindeki düşmanları çarparak 3d12 yıldırım hasarı veren yavaş hareket eden bir yıldırım küresi fırlatır.",
+        "branch": "Lightning",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sts_thundergods_bolt"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "damage": "3d12 lightning/turn",
+          "area": "5m radius around orb",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sts_wrath_of_the_storm",
+        "name_en": "Wrath of the Storm",
+        "name_tr": "Fırtınanın Gazabı",
+        "description_en": "Infuses your being with pure electricity. For 1 minute, your arrows deal an extra 4d8 lightning damage and your movement speed is doubled.",
+        "description_tr": "Varlığınızı saf elektrikle doldurur. 1 dakika boyunca oklarınız fazladan 4d8 yıldırım hasarı verir ve hareket hızınız iki katına çıkar.",
+        "branch": "Lightning",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sts_ball_lightning_strike"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage_bonus": "4d8 lightning",
+          "movement": "x2",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "sts_raijins_judgment",
+        "name_en": "Raijin's Judgment",
+        "name_tr": "Raijin'in Hükmü",
+        "description_en": "Ultimate. Fires an arrow into the sky, summoning a catastrophic lightning storm. Strikes 5 times randomly in a 30m radius, each strike dealing 10d10 lightning damage.",
+        "description_tr": "Nihai Yetenek. Gökyüzüne bir ok fırlatarak felaket getiren bir yıldırım fırtınası çağırır. 30m yarıçap içinde rastgele 5 kez vurur, her vuruş 10d10 yıldırım hasarı verir.",
+        "branch": "Lightning",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sts_wrath_of_the_storm"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5x 10d10 lightning",
+          "aoe": "30m radius",
+          "strikes": "5"
+        }
+      },
+      {
+        "spell_key": "sts_sonic_arrow",
+        "name_en": "Sonic Arrow",
+        "name_tr": "Sonik Ok",
+        "description_en": "Fires a vibrating arrow that deals 1d8 piercing and 1d6 thunder damage. Emits a loud ring that prevents the target from using stealth.",
+        "description_tr": "1d8 delici ve 1d6 gök gürültüsü hasarı veren titreşen bir ok fırlatır. Yüksek bir çınlama yayarak hedefin gizlilik kullanmasını engeller.",
+        "branch": "Thunder",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔉",
+        "effects": {
+          "damage": "1d8 piercing + 1d6 thunder",
+          "range": "30m",
+          "debuff": "no stealth"
+        }
+      },
+      {
+        "spell_key": "sts_echoing_boom",
+        "name_en": "Echoing Boom",
+        "name_tr": "Yankılanan Patlama",
+        "description_en": "An arrow that explodes with concussive force. Deals 2d8 thunder damage in a 3m radius and pushes enemies back 2m.",
+        "description_tr": "Sarsıcı bir kuvvetle patlayan bir ok. 3m yarıçapta 2d8 gök gürültüsü hasarı verir ve düşmanları 2m geriye iter.",
+        "branch": "Thunder",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sts_sonic_arrow"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "2d8 thunder",
+          "aoe": "3m radius",
+          "push": "2m"
+        }
+      },
+      {
+        "spell_key": "sts_concussive_shot",
+        "name_en": "Concussive Shot",
+        "name_tr": "Sarsıcı Atış",
+        "description_en": "A heavy arrow designed to disorient. Deals 2d6 bludgeoning damage and applies a -2 penalty to the target's attack rolls for 1 turn.",
+        "description_tr": "Yön şaşırtmak için tasarlanmış ağır bir ok. 2d6 ezici hasar verir ve 1 tur boyunca hedefin saldırı zarlarına -2 ceza uygular.",
+        "branch": "Thunder",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sts_sonic_arrow"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "debuff": "-2 to attacks",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_thunderclap_trap",
+        "name_en": "Thunderclap Trap",
+        "name_tr": "Gök Gürültüsü Tuzağı",
+        "description_en": "Places a sonic mine. When triggered, it releases a deafening boom dealing 4d6 thunder damage, deafening enemies for 2 turns.",
+        "description_tr": "Sonik bir mayın yerleştirir. Tetiklendiğinde sağır edici bir patlama yayarak 4d6 gök gürültüsü hasarı verir ve düşmanları 2 tur sağır eder.",
+        "branch": "Thunder",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_concussive_shot"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "4d6 thunder",
+          "status": "deafened 2 turns",
+          "aoe": "5m radius"
+        }
+      },
+      {
+        "spell_key": "sts_resonance_wave",
+        "name_en": "Resonance Wave",
+        "name_tr": "Rezonans Dalgası",
+        "description_en": "Plucks the bowstring to send a wave of sound 15m forward. Deals 3d8 thunder damage to all enemies in the cone and shatters fragile objects.",
+        "description_tr": "15m ileriye bir ses dalgası göndermek için yay kirişini çeker. Konideki tüm düşmanlara 3d8 gök gürültüsü hasarı verir ve kırılgan nesneleri parçalar.",
+        "branch": "Thunder",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_echoing_boom"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "3d8 thunder",
+          "area": "15m cone"
+        }
+      },
+      {
+        "spell_key": "sts_blast_back",
+        "name_en": "Blast Back",
+        "name_tr": "Geri Tepme",
+        "description_en": "Fires an explosive arrow at your feet while leaping backward. You travel 10m back, while enemies within 5m take 3d6 thunder damage.",
+        "description_tr": "Geriye doğru sıçrarken ayaklarınızın dibine patlayıcı bir ok atarsınız. 10m geriye gidersiniz ve 5m içindeki düşmanlar 3d6 gök gürültüsü hasarı alır.",
+        "branch": "Thunder",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sts_resonance_wave"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "damage": "3d6 thunder",
+          "movement": "10m backwards",
+          "aoe": "5m"
+        }
+      },
+      {
+        "spell_key": "sts_thundercrash",
+        "name_en": "Thundercrash",
+        "name_tr": "Gök Gürlemesi",
+        "description_en": "A powerful shot that creates a massive sonic boom on impact. Deals 5d8 thunder damage in a 10m radius and knocks targets prone.",
+        "description_tr": "Çarpma anında devasa bir sonik patlama yaratan güçlü bir atış. 10m yarıçapta 5d8 gök gürültüsü hasarı verir ve hedefleri yere serer.",
+        "branch": "Thunder",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_blast_back"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5d8 thunder",
+          "aoe": "10m radius",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "sts_deafening_roar",
+        "name_en": "Deafening Roar",
+        "name_tr": "Sağır Edici Kükreme",
+        "description_en": "Fires an arrow that screams through the air. Any enemy within 5m of its flight path takes 4d8 thunder damage and cannot cast spells with verbal components for 1 turn.",
+        "description_tr": "Havada çığlık atarak ilerleyen bir ok fırlatır. Uçuş yolunun 5m içindeki herhangi bir düşman 4d8 gök gürültüsü hasarı alır ve 1 tur boyunca sözlü bileşenli büyü yapamaz.",
+        "branch": "Thunder",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_thunderclap_trap"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "damage": "4d8 thunder",
+          "area": "line + 5m radius",
+          "debuff": "silence 1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_tremor_shot",
+        "name_en": "Tremor Shot",
+        "name_tr": "Sarsıntı Atışı",
+        "description_en": "Pins an arrow into the ground, causing localized earthquakes. For 3 turns, the 15m area around it is difficult terrain, and enemies take 2d8 bludgeoning damage per turn.",
+        "description_tr": "Yere bir ok saplayarak yerel depremlere neden olur. 3 tur boyunca etrafındaki 15m'lik alan zorlu arazidir ve düşmanlar tur başına 2d8 ezici hasar alır.",
+        "branch": "Thunder",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sts_thundercrash"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "2d8 bludgeoning/turn",
+          "aoe": "15m radius",
+          "duration": "3 turns",
+          "terrain": "difficult"
+        }
+      },
+      {
+        "spell_key": "sts_sonic_boom_blast",
+        "name_en": "Sonic Boom Blast",
+        "name_tr": "Sonik Patlama Vuruşu",
+        "description_en": "Breaks the sound barrier with an arrow. Deals 8d8 thunder damage to a single target and forces them back 10m.",
+        "description_tr": "Bir okla ses bariyerini aşar. Tek bir hedefe 8d8 gök gürültüsü hasarı verir ve onları 10m geriye iter.",
+        "branch": "Thunder",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_tremor_shot"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "damage": "8d8 thunder",
+          "push": "10m",
+          "range": "60m"
+        }
+      },
+      {
+        "spell_key": "sts_mjolnirs_impact",
+        "name_en": "Mjölnir's Impact",
+        "name_tr": "Mjölnir'in Etkisi",
+        "description_en": "An arrow carrying the weight of thunder. Deals 6d10 bludgeoning and thunder damage, ignoring temporary hit points and shields.",
+        "description_tr": "Gök gürültüsünün ağırlığını taşıyan bir ok. Geçici can puanlarını ve kalkanları yok sayarak 6d10 ezici ve gök gürültüsü hasarı verir.",
+        "branch": "Thunder",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_deafening_roar"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "6d10 bludgeoning/thunder",
+          "pierce": "ignores shields"
+        }
+      },
+      {
+        "spell_key": "sts_disruptive_frequency",
+        "name_en": "Disruptive Frequency",
+        "name_tr": "Bozucu Frekans",
+        "description_en": "Fires a specialized arrow that emits a cancelling frequency. Removes all magical buffs from targets within a 10m radius.",
+        "description_tr": "İptal edici bir frekans yayan özel bir ok fırlatır. 10m yarıçapındaki hedeflerin üzerindeki tüm büyüsel güçlendirmeleri kaldırır.",
+        "branch": "Thunder",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sts_sonic_boom_blast"
+        ],
+        "icon": "📻",
+        "effects": {
+          "utility": "dispel magic",
+          "aoe": "10m radius"
+        }
+      },
+      {
+        "spell_key": "sts_cataclysmic_roar",
+        "name_en": "Cataclysmic Roar",
+        "name_tr": "Yıkıcı Kükreme",
+        "description_en": "Unleashes a shockwave that deals 10d8 thunder damage in a 20m cone. Structures and constructs take double damage.",
+        "description_tr": "20m'lik bir konide 10d8 gök gürültüsü hasarı veren bir şok dalgası serbest bırakır. Yapılar ve golem benzeri yaratıklar iki kat hasar alır.",
+        "branch": "Thunder",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sts_disruptive_frequency"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "10d8 thunder",
+          "area": "20m cone",
+          "multiplier": "x2 vs structures"
+        }
+      },
+      {
+        "spell_key": "sts_sky_shatter",
+        "name_en": "Sky Shatter",
+        "name_tr": "Gökyüzü Parçalayan",
+        "description_en": "Ultimate. Fires a massive thundering arrow that cracks the sky. Drops a 40m radius soundwave that deals 15d10 thunder damage, knocking everyone prone and stunning them for 1 turn.",
+        "description_tr": "Nihai Yetenek. Gökyüzünü çatlatan devasa gök gürültülü bir ok fırlatır. 40m yarıçaplı bir ses dalgası indirerek 15d10 gök gürültüsü hasarı verir, herkesi yere serer ve 1 tur sersemletir.",
+        "branch": "Thunder",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sts_cataclysmic_roar"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "15d10 thunder",
+          "aoe": "40m radius",
+          "status": "prone + stun 1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_zephyr_arrow",
+        "name_en": "Zephyr Arrow",
+        "name_tr": "Zefir Oku",
+        "description_en": "An arrow guided by the wind, ignoring half cover and three-quarters cover. Deals 1d10 piercing damage.",
+        "description_tr": "Rüzgar tarafından yönlendirilen, yarım ve üç çeyrek siperi yok sayan bir ok. 1d10 delici hasar verir.",
+        "branch": "Wind",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🍃",
+        "effects": {
+          "damage": "1d10 piercing",
+          "utility": "ignores cover",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "sts_tailwind_walk",
+        "name_en": "Tailwind Walk",
+        "name_tr": "Kuyruk Rüzgarı Yürüyüşü",
+        "description_en": "The wind pushes you from behind. For 3 turns, your movement speed increases by 5m, and opportunity attacks against you have disadvantage.",
+        "description_tr": "Rüzgar sizi arkadan iter. 3 tur boyunca hareket hızınız 5m artar ve size karşı yapılan fırsat saldırıları dezavantajlı olur.",
+        "branch": "Wind",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sts_zephyr_arrow"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "buff": "+5m movement, disadvantage on opp. attacks",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sts_gust_push",
+        "name_en": "Gust Push",
+        "name_tr": "Rüzgar İtişi",
+        "description_en": "Fires an arrow of compressed air. Deals 2d6 bludgeoning damage and pushes the target 5m in any direction.",
+        "description_tr": "Sıkıştırılmış havadan bir ok fırlatır. 2d6 ezici hasar verir ve hedefi herhangi bir yöne 5m iter.",
+        "branch": "Wind",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sts_zephyr_arrow"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "push": "5m"
+        }
+      },
+      {
+        "spell_key": "sts_gale_force_shot",
+        "name_en": "Gale Force Shot",
+        "name_tr": "Fırtına Gücünde Atış",
+        "description_en": "A shot that creates a linear gale. Deals 3d8 piercing damage to all enemies in a 20m line and knocks away incoming projectiles.",
+        "description_tr": "Doğrusal bir fırtına yaratan bir atış. 20m'lik bir hattaki tüm düşmanlara 3d8 delici hasar verir ve gelen mermileri savuşturur.",
+        "branch": "Wind",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_gust_push"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d8 piercing",
+          "area": "20m line",
+          "utility": "deflects projectiles"
+        }
+      },
+      {
+        "spell_key": "sts_wind_wall",
+        "name_en": "Wind Wall",
+        "name_tr": "Rüzgar Duvarı",
+        "description_en": "Shoots an arrow that expands into a 10m wide wall of wind for 2 turns. Deflects all non-magical ranged attacks crossing it.",
+        "description_tr": "2 tur boyunca 10m genişliğinde bir rüzgar duvarına dönüşen bir ok atar. İçinden geçen tüm büyüsel olmayan menzilli saldırıları savuşturur.",
+        "branch": "Wind",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sts_tailwind_walk"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "utility": "blocks ranged attacks",
+          "area": "10m wall",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sts_aerodynamic_flight",
+        "name_en": "Aerodynamic Flight",
+        "name_tr": "Aerodinamik Uçuş",
+        "description_en": "Surrounds yourself with swirling winds, granting you a flying speed of 12m for 3 turns.",
+        "description_tr": "Kendinizi dönen rüzgarlarla çevreleyerek 3 tur boyunca 12m uçma hızı kazandırır.",
+        "branch": "Wind",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sts_gale_force_shot"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "buff": "fly speed 12m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sts_tornado_arrow",
+        "name_en": "Tornado Arrow",
+        "name_tr": "Hortum Oku",
+        "description_en": "Fires a spinning arrow that generates a mini-tornado. Deals 4d8 bludgeoning damage in a 5m radius and lifts targets 3m into the air.",
+        "description_tr": "Mini bir hortum oluşturan dönen bir ok fırlatır. 5m yarıçapta 4d8 ezici hasar verir ve hedefleri havaya 3m kaldırır.",
+        "branch": "Wind",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_aerodynamic_flight"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "aoe": "5m radius",
+          "status": "lifted 3m"
+        }
+      },
+      {
+        "spell_key": "sts_slipstream",
+        "name_en": "Slipstream",
+        "name_tr": "Hava Akımı",
+        "description_en": "Creates a path of swirling air for 20m. Allies moving along this path gain doubled movement speed and ignore difficult terrain. Lasts 2 turns.",
+        "description_tr": "20m boyunca dönen bir hava yolu yaratır. Bu yolda hareket eden müttefikler iki kat hareket hızı kazanır ve zorlu araziyi yok sayar. 2 tur sürer.",
+        "branch": "Wind",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sts_wind_wall"
+        ],
+        "icon": "🛤️",
+        "effects": {
+          "buff": "x2 movement, ignore terrain",
+          "area": "20m line",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sts_razor_wind",
+        "name_en": "Razor Wind",
+        "name_tr": "Jilet Rüzgarı",
+        "description_en": "Shoots three invisible wind blades. Make three separate ranged attacks, each dealing 2d10 slashing damage.",
+        "description_tr": "Üç görünmez rüzgar bıçağı fırlatır. Her biri 2d10 kesici hasar veren üç ayrı menzilli saldırı yapın.",
+        "branch": "Wind",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sts_tornado_arrow"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "3x 2d10 slashing",
+          "attacks": "3"
+        }
+      },
+      {
+        "spell_key": "sts_hurricane_volley",
+        "name_en": "Hurricane Volley",
+        "name_tr": "Kasırga Yaylımı",
+        "description_en": "Fires dozens of arrows caught in a hurricane. Affects a 15m radius area, dealing 6d8 piercing damage and halving enemy movement speeds.",
+        "description_tr": "Bir kasırgaya yakalanmış düzinelerce ok fırlatır. 15m yarıçaplı bir alanı etkileyerek 6d8 delici hasar verir ve düşman hareket hızlarını yarıya indirir.",
+        "branch": "Wind",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_razor_wind"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "6d8 piercing",
+          "aoe": "15m radius",
+          "debuff": "1/2 movement"
+        }
+      },
+      {
+        "spell_key": "sts_vacuum_strike",
+        "name_en": "Vacuum Strike",
+        "name_tr": "Vakum Vuruşu",
+        "description_en": "An arrow that removes all air from a 5m radius area upon impact. Enemies take 5d10 force damage and begin suffocating, unable to speak or cast verbal spells.",
+        "description_tr": "Çarpma anında 5m yarıçaplı bir alandaki tüm havayı boşaltan bir ok. Düşmanlar 5d10 güç hasarı alır ve boğulmaya başlar, konuşamaz veya sözlü büyü yapamazlar.",
+        "branch": "Wind",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sts_slipstream"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "5d10 force",
+          "aoe": "5m radius",
+          "status": "suffocating + silence"
+        }
+      },
+      {
+        "spell_key": "sts_cloud_runner",
+        "name_en": "Cloud Runner",
+        "name_tr": "Bulut Koşucusu",
+        "description_en": "Passive. You leave no physical tracks, can walk on water or thin air (up to 5m high), and gain advantage on all Dexterity saving throws.",
+        "description_tr": "Pasif. Hiçbir fiziksel iz bırakmazsınız, suda veya havada (5m yüksekliğe kadar) yürüyebilirsiniz ve tüm Çeviklik kurtarma zarlarında avantaj kazanırsınız.",
+        "branch": "Wind",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sts_hurricane_volley"
+        ],
+        "icon": "☁️",
+        "effects": {
+          "passive": "true",
+          "utility": "walk on water/air, trackless",
+          "buff": "advantage Dex saves"
+        }
+      },
+      {
+        "spell_key": "sts_eye_of_the_storm",
+        "name_en": "Eye of the Storm",
+        "name_tr": "Fırtınanın Gözü",
+        "description_en": "Creates a 20m zone of calm around you while a violent storm rages on the edges. Enemies entering or leaving the zone take 8d10 slashing damage.",
+        "description_tr": "Kenarlarında şiddetli bir fırtına koparken etrafınızda 20m'lik sakin bir alan yaratır. Alana giren veya çıkan düşmanlar 8d10 kesici hasar alır.",
+        "branch": "Wind",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sts_cloud_runner"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "damage": "8d10 slashing",
+          "area": "20m radius border"
+        }
+      },
+      {
+        "spell_key": "sts_tempest_barrage",
+        "name_en": "Tempest Barrage",
+        "name_tr": "Fırtına Yaylım Ateşi",
+        "description_en": "Ultimate. Leaps into the air, raining down wind-infused arrows over a massive 40m area. Deals 12d10 piercing damage and permanently creates a tornado hazard in the center for 3 turns.",
+        "description_tr": "Nihai Yetenek. Havaya sıçrayarak 40m'lik devasa bir alana rüzgarla aşılanmış oklar yağdırır. 12d10 delici hasar verir ve merkezde 3 tur boyunca kalıcı bir hortum tehlikesi yaratır.",
+        "branch": "Wind",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sts_eye_of_the_storm"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "12d10 piercing",
+          "aoe": "40m radius",
+          "hazard": "tornado for 3 turns"
+        }
+      },
+      {
+        "spell_key": "sts_thunderstorm_shot",
+        "name_en": "Thunderstorm Shot",
+        "name_tr": "Gök Gürültülü Fırtına Atışı",
+        "description_en": "Combines lightning and thunder. Fires an arrow that deals 3d6 lightning and 3d6 thunder damage, stunning the target for 1 turn.",
+        "description_tr": "Yıldırım ve gök gürültüsünü birleştirir. 3d6 yıldırım ve 3d6 gök gürültüsü hasarı veren ve hedefi 1 tur sersemleten bir ok fırlatır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sts_chain_lightning_arrow",
+          "sts_resonance_wave"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "3d6 lightning + 3d6 thunder",
+          "status": "stun 1 turn"
+        }
+      },
+      {
+        "spell_key": "sts_electric_gale",
+        "name_en": "Electric Gale",
+        "name_tr": "Elektrikli Fırtına",
+        "description_en": "Combines lightning and wind. Shoots an arrow that creates a 10m wide electrified tornado, dealing 4d8 lightning and 4d8 slashing damage.",
+        "description_tr": "Yıldırım ve rüzgarı birleştirir. 10m genişliğinde elektrikli bir hortum yaratan, 4d8 yıldırım ve 4d8 kesici hasar veren bir ok atar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sts_storm_step",
+          "sts_slipstream"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "4d8 lightning + 4d8 slashing",
+          "aoe": "10m tornado"
+        }
+      },
+      {
+        "spell_key": "sts_sonic_wind",
+        "name_en": "Sonic Wind",
+        "name_tr": "Sonik Rüzgar",
+        "description_en": "Combines thunder and wind. Sends a fast gust of wind that carries a concussive blast. Deals 5d8 thunder damage in a 25m line, pushing everyone back 10m.",
+        "description_tr": "Gök gürültüsü ve rüzgarı birleştirir. Sarsıcı bir patlama taşıyan hızlı bir rüzgar esintisi gönderir. 25m'lik bir hatta 5d8 gök gürültüsü hasarı verir ve herkesi 10m geriye iter.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sts_thundercrash",
+          "sts_tornado_arrow"
+        ],
+        "icon": "🔊",
+        "effects": {
+          "damage": "5d8 thunder",
+          "area": "25m line",
+          "push": "10m"
+        }
+      },
+      {
+        "spell_key": "sts_supercell_trap",
+        "name_en": "Supercell Trap",
+        "name_tr": "Süper Hücre Tuzağı",
+        "description_en": "A master trap that seeds a localized supercell. When triggered, it blasts a 15m radius with 8d8 lightning and 8d8 thunder damage, leaving a lingering storm cloud.",
+        "description_tr": "Yerel bir süper hücre eken usta işi bir tuzak. Tetiklendiğinde 15m yarıçaplı bir alanı 8d8 yıldırım ve 8d8 gök gürültüsü hasarıyla patlatır, geriye kalıcı bir fırtına bulutu bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sts_lightning_rod",
+          "sts_mjolnirs_impact"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "damage": "8d8 lightning + 8d8 thunder",
+          "aoe": "15m radius"
+        }
+      },
+      {
+        "spell_key": "sts_stormriders_vault",
+        "name_en": "Stormrider's Vault",
+        "name_tr": "Fırtına Binicisinin Atlayışı",
+        "description_en": "You vault 30m into the air using wind, then crash down with a lightning strike. Deals 10d8 lightning and thunder damage in a 15m radius upon landing.",
+        "description_tr": "Rüzgarı kullanarak 30m havaya sıçrar, ardından bir yıldırım çarpmasıyla yere inersiniz. İnişte 15m yarıçapta 10d8 yıldırım ve gök gürültüsü hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sts_thundergods_bolt",
+          "sts_cloud_runner"
+        ],
+        "icon": "🤸‍♂️",
+        "effects": {
+          "movement": "30m jump",
+          "damage": "10d8 lightning/thunder",
+          "aoe": "15m radius"
+        }
+      },
+      {
+        "spell_key": "sts_plasma_cyclone",
+        "name_en": "Plasma Cyclone",
+        "name_tr": "Plazma Siklonu",
+        "description_en": "Fires an arrow that spawns a cyclone of superheated plasma. Pulls enemies within 20m toward the center, dealing 10d10 lightning/fire damage.",
+        "description_tr": "Aşırı ısınmış plazmadan oluşan bir siklon yaratan bir ok fırlatır. 20m içindeki düşmanları merkeze çekerek 10d10 yıldırım/ateş hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sts_wrath_of_the_storm",
+          "sts_eye_of_the_storm"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "10d10 lightning/fire",
+          "aoe": "20m radius pull"
+        }
+      },
+      {
+        "spell_key": "sts_roaring_typhoon",
+        "name_en": "Roaring Typhoon",
+        "name_tr": "Kükreyen Tayfun",
+        "description_en": "Creates a massive hurricane centered on a targeted point. For 3 turns, it deals 10d8 thunder damage and 10d8 bludgeoning damage to anyone inside the 30m area.",
+        "description_tr": "Hedeflenen bir noktayı merkez alan devasa bir kasırga yaratır. 3 tur boyunca 30m'lik alanın içindeki herkese 10d8 gök gürültüsü ve 10d8 ezici hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sts_cataclysmic_roar",
+          "sts_eye_of_the_storm"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "10d8 thunder + 10d8 bludgeoning/turn",
+          "aoe": "30m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sts_aspect_of_the_storm",
+        "name_en": "Aspect of the Storm",
+        "name_tr": "Fırtınanın Sureti",
+        "description_en": "Grand Ultimate. You become the living embodiment of the storm. For 1 minute, you gain flying speed 20m, immunity to lightning and thunder damage, and your bow attacks deal an extra 3d10 lightning, 3d10 thunder, and 3d10 piercing damage. Every shot causes a miniature sonic boom.",
+        "description_tr": "Görkemli Nihai Yetenek. Fırtınanın canlı bir tezahürü olursunuz. 1 dakika boyunca 20m uçma hızı, yıldırım ve gök gürültüsü hasarına bağışıklık kazanırsınız ve yay saldırılarınız fazladan 3d10 yıldırım, 3d10 gök gürültüsü ve 3d10 delici hasar verir. Her atış mini bir sonik patlamaya neden olur.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sts_raijins_judgment",
+          "sts_sky_shatter",
+          "sts_tempest_barrage"
+        ],
+        "icon": "👑",
+        "effects": {
+          "buff": "fly 20m, immune lightning/thunder",
+          "damage_bonus": "3d10 lightning + 3d10 thunder + 3d10 piercing",
+          "duration": "1 minute"
+        }
+      }
+    ]
+  }
+]

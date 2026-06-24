@@ -1,0 +1,989 @@
+[
+  {
+    "subclass_key": "psychomage",
+    "tree_name_en": "Psionic Mastery",
+    "tree_name_tr": "Psiyonik Ustalık",
+    "tree_desc_en": "The Psychomage harnesses the boundless power of the mind, wielding telepathy, telekinesis, and impenetrable psychic shields to manipulate both matter and thought.",
+    "tree_desc_tr": "Psikobüyücü zihnin sınırsız gücünü dizginleyerek, telepati, telekinezi ve aşılmaz psişik kalkanları kullanarak hem maddeyi hem de düşünceyi manipüle eder.",
+    "branches": [
+      "Telepathy",
+      "Telekinesis",
+      "Psychic Shield",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "pm_minor_telepathy",
+        "name_en": "Minor Telepathy",
+        "name_tr": "Küçük Telepati",
+        "description_en": "Establish a minor mental link with a creature, allowing basic communication.",
+        "description_tr": "Bir yaratıkla küçük bir zihinsel bağ kurarak temel iletişim sağlar.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧠",
+        "effects": {
+          "range": "30m",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_push",
+        "name_en": "Kinetic Push",
+        "name_tr": "Kinetik İtiş",
+        "description_en": "Emit a burst of kinetic energy to push a target away.",
+        "description_tr": "Bir hedefi uzağa itmek için kinetik enerji patlaması yayar.",
+        "branch": "Telekinesis",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🌬️",
+        "effects": {
+          "damage": "1d8",
+          "range": "15m",
+          "push": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_mental_barrier",
+        "name_en": "Mental Barrier",
+        "name_tr": "Zihinsel Bariyer",
+        "description_en": "Form a basic mental barrier that absorbs minor damage.",
+        "description_tr": "Küçük hasarları emen temel bir zihinsel bariyer oluşturur.",
+        "branch": "Psychic Shield",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "temporary_hp": "15",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "pm_mind_spike",
+        "name_en": "Mind Spike",
+        "name_tr": "Zihin Dikeni",
+        "description_en": "Pierce a target's mind with psychic energy, dealing damage.",
+        "description_tr": "Bir hedefin zihnini psişik enerjiyle delerek hasar verir.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 90,
+        "prerequisites": [
+          "pm_minor_telepathy"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d6",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "pm_levitation",
+        "name_en": "Levitation",
+        "name_tr": "Levitasyon",
+        "description_en": "Lift yourself or a light object into the air.",
+        "description_tr": "Kendinizi veya hafif bir nesneyi havaya kaldırırsınız.",
+        "branch": "Telekinesis",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pm_kinetic_push"
+        ],
+        "icon": "🪶",
+        "effects": {
+          "height": "10m",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_force_ward",
+        "name_en": "Force Ward",
+        "name_tr": "Güç Kalkanı",
+        "description_en": "Surround an ally with a ward that reduces incoming damage.",
+        "description_tr": "Bir müttefiki gelen hasarı azaltan bir koruma ile çevreler.",
+        "branch": "Psychic Shield",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 110,
+        "prerequisites": [
+          "pm_mental_barrier"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "damage_reduction": "3",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_thought_steal",
+        "name_en": "Thought Steal",
+        "name_tr": "Düşünce Çalma",
+        "description_en": "Peek into a target's mind to glean a single recent memory or thought.",
+        "description_tr": "Hedefin zihnine girerek yakın zamandaki bir anıyı veya düşünceyi çalar.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 130,
+        "prerequisites": [
+          "pm_mind_spike"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "5m",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "pm_force_projectile",
+        "name_en": "Force Projectile",
+        "name_tr": "Güç Mermisi",
+        "description_en": "Condense kinetic energy into a fast-moving projectile.",
+        "description_tr": "Kinetik enerjiyi hızlı hareket eden bir mermiye dönüştürür.",
+        "branch": "Telekinesis",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 140,
+        "prerequisites": [
+          "pm_levitation"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "3d6",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "pm_pain_dampener",
+        "name_en": "Pain Dampener",
+        "name_tr": "Acı Bastırıcı",
+        "description_en": "Block pain receptors, granting high resistance to damage for a short time.",
+        "description_tr": "Acı reseptörlerini bloke ederek kısa süreliğine hasara karşı yüksek direnç sağlar.",
+        "branch": "Psychic Shield",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 150,
+        "prerequisites": [
+          "pm_force_ward"
+        ],
+        "icon": "💊",
+        "effects": {
+          "resistance": "50%",
+          "duration": "3m"
+        }
+      },
+      {
+        "spell_key": "pm_confusion_wave",
+        "name_en": "Confusion Wave",
+        "name_tr": "Kafa Karışıklığı Dalgası",
+        "description_en": "Send out a wave of static that disorients enemies.",
+        "description_tr": "Düşmanların yönelimini bozan bir parazit dalgası gönderir.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pm_thought_steal"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "radius": "15m",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "pm_telekinetic_grasp",
+        "name_en": "Telekinetic Grasp",
+        "name_tr": "Telekinetik Kavrama",
+        "description_en": "Seize a target with a spectral hand, holding them in place.",
+        "description_tr": "Bir hedefi hayalet bir el ile kavrayarak yerinde tutar.",
+        "branch": "Telekinesis",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 210,
+        "prerequisites": [
+          "pm_force_projectile"
+        ],
+        "icon": "✊",
+        "effects": {
+          "range": "20m",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_reflection",
+        "name_en": "Kinetic Reflection",
+        "name_tr": "Kinetik Yansıma",
+        "description_en": "Create a shield that has a chance to reflect projectiles back at attackers.",
+        "description_tr": "Mermileri saldırganlara geri yansıtma şansı olan bir kalkan oluşturur.",
+        "branch": "Psychic Shield",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 220,
+        "prerequisites": [
+          "pm_pain_dampener"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflect_chance": "30%",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_mental_agony",
+        "name_en": "Mental Agony",
+        "name_tr": "Zihinsel Izdırap",
+        "description_en": "Inflict immense psychological pain, crippling the target.",
+        "description_tr": "Hedefi sakat bırakacak kadar büyük bir psikolojik acı verir.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 240,
+        "prerequisites": [
+          "pm_confusion_wave"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_slam",
+        "name_en": "Kinetic Slam",
+        "name_tr": "Kinetik Çarpma",
+        "description_en": "Crush a telekinetically held target into the ground or a wall.",
+        "description_tr": "Telekinetik olarak tutulan bir hedefi yere veya duvara çarpar.",
+        "branch": "Telekinesis",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pm_telekinetic_grasp"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "5d6",
+          "range": "15m",
+          "stun": "1s"
+        }
+      },
+      {
+        "spell_key": "pm_mind_blank",
+        "name_en": "Mind Blank",
+        "name_tr": "Zihin Boşluğu",
+        "description_en": "Clear your mind completely, becoming immune to mind-altering effects.",
+        "description_tr": "Zihninizi tamamen boşaltarak zihin değiştiren etkilere karşı bağışıklık kazanırsınız.",
+        "branch": "Psychic Shield",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 260,
+        "prerequisites": [
+          "pm_kinetic_reflection"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "immunity": "mind_control",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "pm_memory_alteration",
+        "name_en": "Memory Alteration",
+        "name_tr": "Hafıza Değiştirme",
+        "description_en": "Permanently alter or erase a specific memory in a target's mind.",
+        "description_tr": "Bir hedefin zihnindeki belirli bir anıyı kalıcı olarak değiştirir veya siler.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "pm_mental_agony"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "range": "5m",
+          "duration": "permanent"
+        }
+      },
+      {
+        "spell_key": "pm_weapon_animation",
+        "name_en": "Weapon Animation",
+        "name_tr": "Silah Canlandırma",
+        "description_en": "Animate weapons with your mind, making them fight alongside you.",
+        "description_tr": "Silahları zihninizle canlandırarak sizinle birlikte savaşmalarını sağlar.",
+        "branch": "Telekinesis",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 290,
+        "prerequisites": [
+          "pm_kinetic_slam"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "duration": "10m",
+          "damage_bonus": "1d8 per weapon"
+        }
+      },
+      {
+        "spell_key": "pm_psionic_fortitude",
+        "name_en": "Psionic Fortitude",
+        "name_tr": "Psiyonik Metanet",
+        "description_en": "Reinforce your body with psionic energy, increasing your vitality.",
+        "description_tr": "Vücudunuzu psiyonik enerjiyle güçlendirerek canlılığınızı artırır.",
+        "branch": "Psychic Shield",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pm_mind_blank"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "max_hp_bonus": "25%",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "pm_telekinetic_mindblade",
+        "name_en": "Telekinetic Mindblade",
+        "name_tr": "Telekinetik Zihin Bıçağı",
+        "description_en": "Forge a blade of pure kinetic energy and psychic force to slice enemies.",
+        "description_tr": "Düşmanları kesmek için saf kinetik enerji ve psişik güçten oluşan bir bıçak döver.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pm_mental_agony",
+          "pm_weapon_animation"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "4d10",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_force_bubble",
+        "name_en": "Force Bubble",
+        "name_tr": "Güç Balonu",
+        "description_en": "Encase yourself and allies in a protective bubble of force.",
+        "description_tr": "Kendinizi ve müttefiklerinizi koruyucu bir güç balonunun içine alır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pm_weapon_animation",
+          "pm_psionic_fortitude"
+        ],
+        "icon": "🫧",
+        "effects": {
+          "radius": "5m",
+          "temporary_hp": "50",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_psionic_domination",
+        "name_en": "Psionic Domination",
+        "name_tr": "Psiyonik Tahakküm",
+        "description_en": "Take complete control of a target's actions and thoughts.",
+        "description_tr": "Bir hedefin eylemlerini ve düşüncelerini tamamen kontrol altına alır.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 380,
+        "prerequisites": [
+          "pm_memory_alteration"
+        ],
+        "icon": "👑",
+        "effects": {
+          "range": "20m",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_gravity_well",
+        "name_en": "Gravity Well",
+        "name_tr": "Yerçekimi Kuyusu",
+        "description_en": "Create a localized point of intense gravity that pulls enemies inward.",
+        "description_tr": "Düşmanları içeri çeken yoğun bir yerçekimi noktası oluşturur.",
+        "branch": "Telekinesis",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 390,
+        "prerequisites": [
+          "pm_weapon_animation"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "10m",
+          "pull_strength": "high",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "pm_impenetrable_sphere",
+        "name_en": "Impenetrable Sphere",
+        "name_tr": "Aşılmaz Küre",
+        "description_en": "Form a perfect sphere of force that blocks all incoming attacks briefly.",
+        "description_tr": "Gelen tüm saldırıları kısaca engelleyen kusursuz bir güç küresi oluşturur.",
+        "branch": "Psychic Shield",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pm_psionic_fortitude"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "radius": "3m",
+          "immunity": "all",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "pm_mass_hallucination",
+        "name_en": "Mass Hallucination",
+        "name_tr": "Toplu Halüsinasyon",
+        "description_en": "Plunge multiple targets into a shared, terrifying illusion.",
+        "description_tr": "Birden fazla hedefi ortak ve korkutucu bir illüzyona sürükler.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 420,
+        "prerequisites": [
+          "pm_psionic_domination"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "radius": "30m",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "pm_matter_rend",
+        "name_en": "Matter Rend",
+        "name_tr": "Madde Yırtılması",
+        "description_en": "Tear objects or enemies apart using opposing kinetic forces.",
+        "description_tr": "Zıt kinetik güçler kullanarak nesneleri veya düşmanları parçalar.",
+        "branch": "Telekinesis",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 430,
+        "prerequisites": [
+          "pm_gravity_well"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "damage": "6d10",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "pm_feedback_loop",
+        "name_en": "Feedback Loop",
+        "name_tr": "Geri Bildirim Döngüsü",
+        "description_en": "Surround yourself with energy that damages attackers when you are hit.",
+        "description_tr": "Vurulduğunuzda saldırganlara hasar veren bir enerji ile kendinizi çevreler.",
+        "branch": "Psychic Shield",
+        "tier": 3,
+        "min_level": 47,
+        "xp_cost": 440,
+        "prerequisites": [
+          "pm_impenetrable_sphere"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "reflect_damage": "50%",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "pm_brain_scramble",
+        "name_en": "Brain Scramble",
+        "name_tr": "Beyin Karıştırma",
+        "description_en": "Violently scramble the neural pathways of a target, causing severe damage and stun.",
+        "description_tr": "Hedefin sinir yollarını şiddetle karıştırarak ağır hasar ve sersemletme yaratır.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 460,
+        "prerequisites": [
+          "pm_mass_hallucination"
+        ],
+        "icon": "🍳",
+        "effects": {
+          "damage": "5d8",
+          "stun": "3s",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_storm",
+        "name_en": "Kinetic Storm",
+        "name_tr": "Kinetik Fırtına",
+        "description_en": "Unleash a maelstrom of telekinetic energy, tossing debris and enemies around.",
+        "description_tr": "Etrafa moloz ve düşman fırlatan bir telekinetik enerji girdabı serbest bırakır.",
+        "branch": "Telekinesis",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 480,
+        "prerequisites": [
+          "pm_matter_rend"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "radius": "20m",
+          "damage": "4d10",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "pm_thought_shield",
+        "name_en": "Thought Shield",
+        "name_tr": "Düşünce Kalkanı",
+        "description_en": "Project a shield that specifically blocks mental and psychic damage.",
+        "description_tr": "Zihinsel ve psişik hasarı özel olarak engelleyen bir kalkan yansıtır.",
+        "branch": "Psychic Shield",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pm_feedback_loop"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "resistance": "mental",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "pm_psionic_vortex",
+        "name_en": "Psionic Vortex",
+        "name_tr": "Psiyonik Girdap",
+        "description_en": "Combine mental distortion and kinetic pull into a deadly vortex.",
+        "description_tr": "Zihinsel çarpıtma ve kinetik çekimi ölümcül bir girdapta birleştirir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pm_mass_hallucination",
+          "pm_matter_rend"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "15m",
+          "damage": "5d10",
+          "confusion": "5s"
+        }
+      },
+      {
+        "spell_key": "pm_mirrored_mind",
+        "name_en": "Mirrored Mind",
+        "name_tr": "Aynalı Zihin",
+        "description_en": "Reflect all mental intrusions and psychic attacks back to their source.",
+        "description_tr": "Tüm zihinsel müdahaleleri ve psişik saldırıları kaynağına geri yansıtır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pm_mass_hallucination",
+          "pm_feedback_loop"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "duration": "5m",
+          "reflect_spells": "100% mental"
+        }
+      },
+      {
+        "spell_key": "pm_mind_shatter",
+        "name_en": "Mind Shatter",
+        "name_tr": "Zihin Parçalama",
+        "description_en": "Break a target's psyche completely, dealing devastating damage.",
+        "description_tr": "Bir hedefin psişesini tamamen kırarak yıkıcı hasar verir.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 650,
+        "prerequisites": [
+          "pm_brain_scramble"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "8d10",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "pm_crushing_singularity",
+        "name_en": "Crushing Singularity",
+        "name_tr": "Ezen Tekillik",
+        "description_en": "Summon a singularity that crushes everything within its radius.",
+        "description_tr": "Kendi yarıçapı içindeki her şeyi ezen bir tekillik çağırır.",
+        "branch": "Telekinesis",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 670,
+        "prerequisites": [
+          "pm_kinetic_storm"
+        ],
+        "icon": "🗜️",
+        "effects": {
+          "radius": "10m",
+          "damage": "10d8",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_absorb",
+        "name_en": "Kinetic Absorb",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "Convert incoming kinetic energy into healing for yourself.",
+        "description_tr": "Gelen kinetik enerjiyi kendiniz için iyileşmeye dönüştürür.",
+        "branch": "Psychic Shield",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 690,
+        "prerequisites": [
+          "pm_thought_shield"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "heal_from_damage": "30%",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "pm_psychic_vampirism",
+        "name_en": "Psychic Vampirism",
+        "name_tr": "Psişik Vampirlik",
+        "description_en": "Drain the mental energy of a target to restore your own health.",
+        "description_tr": "Kendi sağlığınızı geri kazanmak için hedefin zihinsel enerjisini sömürür.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 720,
+        "prerequisites": [
+          "pm_mind_shatter"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "damage": "6d10",
+          "heal": "100% of damage",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "pm_mass_telekinesis",
+        "name_en": "Mass Telekinesis",
+        "name_tr": "Toplu Telekinezi",
+        "description_en": "Lift and manipulate enormous weights or multiple heavy targets.",
+        "description_tr": "Muazzam ağırlıkları veya birden fazla ağır hedefi kaldırıp manipüle eder.",
+        "branch": "Telekinesis",
+        "tier": 4,
+        "min_level": 67,
+        "xp_cost": 750,
+        "prerequisites": [
+          "pm_crushing_singularity"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "radius": "30m",
+          "lift_weight": "10 tons",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_aegis_of_will",
+        "name_en": "Aegis of Will",
+        "name_tr": "İrade Kalkanı",
+        "description_en": "Manifest your willpower into a massive, enduring protective shield.",
+        "description_tr": "İradenizi devasa ve kalıcı bir koruyucu kalkana dönüştürür.",
+        "branch": "Psychic Shield",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 780,
+        "prerequisites": [
+          "pm_kinetic_absorb"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "temporary_hp": "200",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_collective_unconscious",
+        "name_en": "Collective Unconscious",
+        "name_tr": "Kolektif Bilinçdışı",
+        "description_en": "Link the minds of allies, sharing damage and mental resistance evenly.",
+        "description_tr": "Müttefiklerin zihinlerini bağlayarak hasarı ve zihinsel direnci eşit olarak paylaşır.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 71,
+        "xp_cost": 810,
+        "prerequisites": [
+          "pm_psychic_vampirism"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "radius": "50m",
+          "share_damage": "allies",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_flight",
+        "name_en": "Kinetic Flight",
+        "name_tr": "Kinetik Uçuş",
+        "description_en": "Propel yourself through the air at high speeds using constant telekinesis.",
+        "description_tr": "Sürekli telekinezi kullanarak havada yüksek hızlarda kendinizi itersiniz.",
+        "branch": "Telekinesis",
+        "tier": 4,
+        "min_level": 73,
+        "xp_cost": 840,
+        "prerequisites": [
+          "pm_mass_telekinesis"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "speed": "20m/s",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "pm_psychic_bastion",
+        "name_en": "Psychic Bastion",
+        "name_tr": "Psişik Tabya",
+        "description_en": "Establish a fortified aura that drastically reduces damage to all inside.",
+        "description_tr": "İçerideki herkesin aldığı hasarı büyük ölçüde azaltan güçlendirilmiş bir aura kurur.",
+        "branch": "Psychic Shield",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 860,
+        "prerequisites": [
+          "pm_aegis_of_will"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "aura_radius": "15m",
+          "damage_reduction": "10",
+          "duration": "5m"
+        }
+      },
+      {
+        "spell_key": "pm_ego_whip",
+        "name_en": "Ego Whip",
+        "name_tr": "Ego Kırbacı",
+        "description_en": "Strike with a whip of pure mental energy, suppressing the target's sense of self.",
+        "description_tr": "Saf zihinsel enerjiden oluşan bir kırbaçla vurarak hedefin benlik algısını bastırır.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 880,
+        "prerequisites": [
+          "pm_collective_unconscious"
+        ],
+        "icon": "🦑",
+        "effects": {
+          "damage": "10d10",
+          "range": "40m",
+          "stun": "3s"
+        }
+      },
+      {
+        "spell_key": "pm_earth_uproot",
+        "name_en": "Earth Uproot",
+        "name_tr": "Toprak Sökme",
+        "description_en": "Tear massive chunks of earth from the ground and hurl them at enemies.",
+        "description_tr": "Yerden devasa toprak parçaları koparır ve onları düşmanlara fırlatır.",
+        "branch": "Telekinesis",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pm_kinetic_flight"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "radius": "20m",
+          "damage": "12d8",
+          "terrain_alteration": "severe"
+        }
+      },
+      {
+        "spell_key": "pm_absolute_ward",
+        "name_en": "Absolute Ward",
+        "name_tr": "Mutlak Koruma",
+        "description_en": "Cast a ward that completely negates the next few incoming attacks.",
+        "description_tr": "Gelen sonraki birkaç saldırıyı tamamen etkisiz hale getiren bir koruma yapar.",
+        "branch": "Psychic Shield",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pm_psychic_bastion"
+        ],
+        "icon": "⛩️",
+        "effects": {
+          "block_attacks": "next 3",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_kinetic_mind_bomb",
+        "name_en": "Kinetic Mind Bomb",
+        "name_tr": "Kinetik Zihin Bombası",
+        "description_en": "Detonate a sphere of physical force and psychic disruption simultaneously.",
+        "description_tr": "Fiziksel güç ve psişik bozulma küresini aynı anda patlatır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 82,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pm_psychic_vampirism",
+          "pm_mass_telekinesis",
+          "pm_aegis_of_will"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "15d8",
+          "radius": "25m",
+          "stun": "5s"
+        }
+      },
+      {
+        "spell_key": "pm_reactive_telekinesis",
+        "name_en": "Reactive Telekinesis",
+        "name_tr": "Reaktif Telekinezi",
+        "description_en": "Automatically lash out with telekinetic force when attacked.",
+        "description_tr": "Saldırıya uğradığınızda otomatik olarak telekinetik güçle karşılık verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 85,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pm_mass_telekinesis",
+          "pm_aegis_of_will"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "auto_retaliate_damage": "4d10",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "pm_telepathic_overlord",
+        "name_en": "Telepathic Overlord",
+        "name_tr": "Telepatik Derebeyi",
+        "description_en": "Expand your mind to dominate multiple lesser minds simultaneously across a vast area.",
+        "description_tr": "Zihninizi genişleterek geniş bir alandaki birden fazla zayıf zihne aynı anda hükmeder.",
+        "branch": "Telepathy",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pm_ego_whip"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "control_targets": "5",
+          "duration": "1h",
+          "range": "100m"
+        }
+      },
+      {
+        "spell_key": "pm_telekinetic_sovereign",
+        "name_en": "Telekinetic Sovereign",
+        "name_tr": "Telekinetik Hükümdar",
+        "description_en": "Become a god of force, manipulating entire structures and crushing armies.",
+        "description_tr": "Güç tanrısı olun; tüm yapıları manipüle edin ve orduları ezin.",
+        "branch": "Telekinesis",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pm_earth_uproot"
+        ],
+        "icon": "🪐",
+        "effects": {
+          "lift_weight": "1000 tons",
+          "damage": "20d10",
+          "radius": "100m"
+        }
+      },
+      {
+        "spell_key": "pm_shield_of_the_mind_god",
+        "name_en": "Shield of the Mind God",
+        "name_tr": "Zihin Tanrısının Kalkanı",
+        "description_en": "Erect an ultimate, unbreakable barrier of pure willpower.",
+        "description_tr": "Saf iradeden oluşan, kırılmaz ve nihai bir bariyer inşa eder.",
+        "branch": "Psychic Shield",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pm_absolute_ward"
+        ],
+        "icon": "💠",
+        "effects": {
+          "immunity": "all damage",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "pm_psionic_avatar",
+        "name_en": "Psionic Avatar",
+        "name_tr": "Psiyonik Avatar",
+        "description_en": "Transcending physical limits, becoming a being of pure psionic energy.",
+        "description_tr": "Fiziksel sınırları aşarak saf psiyonik enerjiden oluşan bir varlığa dönüşür.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "pm_telepathic_overlord",
+          "pm_telekinetic_sovereign",
+          "pm_shield_of_the_mind_god"
+        ],
+        "icon": "👤",
+        "effects": {
+          "all_stats_bonus": "+50%",
+          "duration": "3m"
+        }
+      },
+      {
+        "spell_key": "pm_psionic_singularity",
+        "name_en": "Psionic Singularity",
+        "name_tr": "Psiyonik Tekillik",
+        "description_en": "Collapse the minds and bodies of your enemies into a single point of non-existence.",
+        "description_tr": "Düşmanlarınızın zihinlerini ve bedenlerini tek bir hiçlik noktasına çökertir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "pm_psionic_avatar"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "200m",
+          "damage": "instant kill below 20% HP",
+          "rewrite_reality": "1 action"
+        }
+      }
+    ]
+  }
+]

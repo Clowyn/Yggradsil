@@ -1,0 +1,1002 @@
+[
+  {
+    "subclass_key": "gambler",
+    "tree_name_en": "High Roller",
+    "tree_name_tr": "Büyük Oyuncu",
+    "tree_desc_en": "A volatile path of chance, fate, and high stakes. Masters of this tree manipulate probabilities, draw mystical cards, and roll fate-altering dice to swing the odds in their favor.",
+    "tree_desc_tr": "Şans, kader ve yüksek bahislerin değişken yolu. Bu ağacın ustaları olasılıkları manipüle eder, mistik kartlar çeker ve oranları kendi lehlerine çevirmek için kader değiştiren zarlar atarlar.",
+    "branches": [
+      "Cards",
+      "Dice",
+      "Luck"
+    ],
+    "spells": [
+      {
+        "spell_key": "gb_card_dart",
+        "name_en": "Card Dart",
+        "name_tr": "Kart Dartı",
+        "description_en": "Throws a sharp playing card that deals 1d4 slashing damage with a 15m range.",
+        "description_tr": "15m menzile sahip, 1d4 kesici hasar veren keskin bir oyun kartı fırlatır.",
+        "branch": "Cards",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🃏",
+        "effects": {
+          "damage": "1d4",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_shuffle",
+        "name_en": "Shuffle",
+        "name_tr": "Karıştır",
+        "description_en": "Instantly shuffles your physical location, teleporting you up to 5m in a random safe direction.",
+        "description_tr": "Fiziksel konumunuzu anında karıştırarak sizi rastgele güvenli bir yöne 5m'ye kadar ışınlar.",
+        "branch": "Cards",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔀",
+        "effects": {
+          "range": "5m",
+          "mobility": "teleport"
+        }
+      },
+      {
+        "spell_key": "gb_draw_heart",
+        "name_en": "Draw: Heart",
+        "name_tr": "Çekiliş: Kupa",
+        "description_en": "Draws a magical Heart card, restoring 1d6+2 HP to you or an ally within 10m.",
+        "description_tr": "Büyülü bir Kupa kartı çeker, 10m içindeki size veya bir müttefike 1d6+2 Can yeniler.",
+        "branch": "Cards",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "♥️",
+        "effects": {
+          "healing": "1d6+2",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_draw_spade",
+        "name_en": "Draw: Spade",
+        "name_tr": "Çekiliş: Maça",
+        "description_en": "Draws a razor-sharp Spade card that strikes for 2d6 piercing damage up to 15m away.",
+        "description_tr": "15m'ye kadar uzaktan 2d6 delici hasar vuran jilet gibi keskin bir Maça kartı çeker.",
+        "branch": "Cards",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_card_dart"
+        ],
+        "icon": "♠️",
+        "effects": {
+          "damage": "2d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_dealers_choice",
+        "name_en": "Dealer's Choice",
+        "name_tr": "Dağıtıcının Seçimi",
+        "description_en": "Grants a 1d8 bonus to your next attack roll or spell damage, chosen randomly.",
+        "description_tr": "Rastgele seçilerek bir sonraki saldırı zarına veya büyü hasarına 1d8 bonus sağlar.",
+        "branch": "Cards",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_shuffle"
+        ],
+        "icon": "🎩",
+        "effects": {
+          "buff": "+1d8",
+          "duration": "1 attack"
+        }
+      },
+      {
+        "spell_key": "gb_exploding_deck",
+        "name_en": "Exploding Deck",
+        "name_tr": "Patlayan Deste",
+        "description_en": "Throws three volatile cards that explode in a 3m radius, each dealing 1d6 fire damage.",
+        "description_tr": "3m yarıçapında patlayan ve her biri 1d6 ateş hasarı veren üç uçucu kart fırlatır.",
+        "branch": "Cards",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_draw_spade"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3x 1d6",
+          "radius": "3m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_draw_club",
+        "name_en": "Draw: Club",
+        "name_tr": "Çekiliş: Sinek",
+        "description_en": "Draws a heavy Club card, dealing 4d6 bludgeoning damage and knocking the target back 5m.",
+        "description_tr": "Ağır bir Sinek kartı çeker, 4d6 ezici hasar verir ve hedefi 5m geriye savurur.",
+        "branch": "Cards",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_draw_spade"
+        ],
+        "icon": "♣️",
+        "effects": {
+          "damage": "4d6",
+          "knockback": "5m",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_illusionary_hand",
+        "name_en": "Illusionary Hand",
+        "name_tr": "İllüzyon El",
+        "description_en": "Summons spectral floating cards that perfectly block the next 2 attacks within 3 turns.",
+        "description_tr": "3 tur içinde gelecek olan sonraki 2 saldırıyı mükemmel bir şekilde engelleyen hayalet yüzen kartlar çağırır.",
+        "branch": "Cards",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_dealers_choice"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "defense": "Block 2 attacks",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_stack_deck",
+        "name_en": "Stack the Deck",
+        "name_tr": "Desteyi Ayarla",
+        "description_en": "Manipulates fate so your next 3 'Draw' spells are guaranteed to yield their maximum possible rolls.",
+        "description_tr": "Kaderi manipüle ederek sonraki 3 'Çekiliş' büyünüzün mümkün olan maksimum zarları vermesini garanti eder.",
+        "branch": "Cards",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_exploding_deck"
+        ],
+        "icon": "📑",
+        "effects": {
+          "buff": "Max roll",
+          "duration": "Next 3 Draw spells"
+        }
+      },
+      {
+        "spell_key": "gb_draw_diamond",
+        "name_en": "Draw: Diamond",
+        "name_tr": "Çekiliş: Karo",
+        "description_en": "Fires a brilliant Diamond beam in a 20m line, dealing 6d6 radiant piercing damage to all hit.",
+        "description_tr": "20m'lik bir hatta parlak bir Karo ışını ateşler ve vurduğu herkese 6d6 parlak delici hasar verir.",
+        "branch": "Cards",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_draw_club"
+        ],
+        "icon": "♦️",
+        "effects": {
+          "damage": "6d6",
+          "range": "20m line"
+        }
+      },
+      {
+        "spell_key": "gb_royal_flush",
+        "name_en": "Royal Flush",
+        "name_tr": "Floş Royal",
+        "description_en": "Unleashes the five highest cards at a target. Each deals 2d6 arcane damage, ignoring 50% of armor.",
+        "description_tr": "Bir hedefe en yüksek beş kartı serbest bırakır. Her biri zırhın %50'sini görmezden gelerek 2d6 gizem hasarı verir.",
+        "branch": "Cards",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_stack_deck"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage": "5x 2d6",
+          "armor_penetration": "50%",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_house_of_cards",
+        "name_en": "Ultimate: House of Cards",
+        "name_tr": "Ulti: İskambil Evi",
+        "description_en": "Traps enemies in a 10m radius within a collapsing card dimension. They take 12d6 force damage and are stunned for 2 turns.",
+        "description_tr": "10m yarıçapındaki düşmanları çöken bir kart boyutu içine hapseder. 12d6 güç hasarı alırlar ve 2 tur sersemlerler.",
+        "branch": "Cards",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gb_draw_diamond",
+          "gb_royal_flush"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "damage": "12d6",
+          "radius": "10m",
+          "status": "Stun",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gb_roll_bones",
+        "name_en": "Roll the Bones",
+        "name_tr": "Zar At",
+        "description_en": "Rolls a magical 1d6. Evens heal you for 1d6 HP, odds deal 1d6 force damage to a target within 10m.",
+        "description_tr": "Büyülü bir 1d6 atar. Çiftler sizi 1d6 Can iyileştirir, tekler 10m içindeki bir hedefe 1d6 güç hasarı verir.",
+        "branch": "Dice",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🎲",
+        "effects": {
+          "healing": "1d6 (Even)",
+          "damage": "1d6 (Odd)",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_loaded_dice",
+        "name_en": "Loaded Dice",
+        "name_tr": "Hileli Zar",
+        "description_en": "Tilts probability, granting you advantage on your next attack or saving throw.",
+        "description_tr": "Olasılığı eğerek bir sonraki saldırınızda veya kurtarma zarınızda size avantaj sağlar.",
+        "branch": "Dice",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🎱",
+        "effects": {
+          "buff": "Advantage",
+          "duration": "Next roll"
+        }
+      },
+      {
+        "spell_key": "gb_snake_eyes",
+        "name_en": "Snake Eyes",
+        "name_tr": "Hepyek",
+        "description_en": "Rolling two 1s manifests twin venomous snakes that strike a target up to 10m away for 2d4 poison damage.",
+        "description_tr": "İki tane 1 atmak, 10m'ye kadar uzaktaki bir hedefe 2d4 zehir hasarı veren ikiz zehirli yılanları ortaya çıkarır.",
+        "branch": "Dice",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🐍",
+        "effects": {
+          "damage": "2d4",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_lucky_sevens",
+        "name_en": "Lucky Sevens",
+        "name_tr": "Şanslı Yediler",
+        "description_en": "Deals exactly 7 true damage to up to 7 targets within a 15m radius.",
+        "description_tr": "15m yarıçapındaki en fazla 7 hedefe tam olarak 7 gerçek hasar verir.",
+        "branch": "Dice",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_roll_bones"
+        ],
+        "icon": "🎰",
+        "effects": {
+          "damage": "7 true",
+          "targets": 7,
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_weighted_roll",
+        "name_en": "Weighted Roll",
+        "name_tr": "Ağırlıklı Zar",
+        "description_en": "Drops an incredibly heavy phantom die on a target, rooting them for 1d4 turns and dealing 2d6 damage.",
+        "description_tr": "Bir hedefin üzerine inanılmaz derecede ağır bir hayalet zar düşürür, onları 1d4 tur boyunca sabitler ve 2d6 hasar verir.",
+        "branch": "Dice",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_loaded_dice"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "damage": "2d6",
+          "status": "Root",
+          "duration": "1d4 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_boxcars",
+        "name_en": "Boxcars",
+        "name_tr": "Düşeş",
+        "description_en": "Rolls 2d6. Deals damage equal to the total, but if you roll doubles, the damage is multiplied by 3.",
+        "description_tr": "2d6 atar. Toplam kadar hasar verir, ancak eğer çift atarsanız hasar 3 ile çarpılır.",
+        "branch": "Dice",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_snake_eyes"
+        ],
+        "icon": "📦",
+        "effects": {
+          "damage": "2d6 (x3 on doubles)",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_dice_bomb",
+        "name_en": "Dice Bomb",
+        "name_tr": "Zar Bombası",
+        "description_en": "Throws an explosive 6-sided die into a 5m area. Deals area damage equal to (1d6) x (1d6) fire damage.",
+        "description_tr": "5m'lik bir alana patlayıcı 6 yüzlü bir zar fırlatır. (1d6) x (1d6) ateş hasarına eşit alan hasarı verir.",
+        "branch": "Dice",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_lucky_sevens"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "1d6 x 1d6",
+          "radius": "5m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_re_roll",
+        "name_en": "Re-Roll",
+        "name_tr": "Yeniden At",
+        "description_en": "Rewinds time to negate the last instance of damage you took within the previous round.",
+        "description_tr": "Önceki tur içinde aldığınız son hasar durumunu iptal etmek için zamanı geri sarar.",
+        "branch": "Dice",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_weighted_roll"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "healing": "Negate last damage",
+          "duration": "1 round memory"
+        }
+      },
+      {
+        "spell_key": "gb_critical_roll",
+        "name_en": "Critical Roll",
+        "name_tr": "Kritik Zar",
+        "description_en": "Sacrifices 20% of your maximum HP to guarantee that your next attack within 2 turns is a critical hit.",
+        "description_tr": "2 tur içindeki bir sonraki saldırınızın kritik vuruş olmasını garanti etmek için maksimum Canınızın %20'sini feda eder.",
+        "branch": "Dice",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_boxcars"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "cost": "20% Max HP",
+          "buff": "Guaranteed Critical",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gb_d20_destiny",
+        "name_en": "D20 of Destiny",
+        "name_tr": "Kaderin 20'liği",
+        "description_en": "Roll a d20. 1-10: Take 3d6 damage. 11-19: Deal 6d6 damage to a 15m target. 20: Deal 10d6 damage and stun.",
+        "description_tr": "Bir 20'lik zar atın. 1-10: 3d6 hasar alın. 11-19: 15m içindeki bir hedefe 6d6 hasar verin. 20: 10d6 hasar verip sersemletin.",
+        "branch": "Dice",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_dice_bomb"
+        ],
+        "icon": "💎",
+        "effects": {
+          "damage_taken": "3d6 (on 1-10)",
+          "damage": "6d6 (on 11-19) / 10d6 (on 20)",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_crapshoot",
+        "name_en": "Crapshoot",
+        "name_tr": "Barbut",
+        "description_en": "Roll 2d6. If 7 or 11, heal 50% HP. If 2, 3, or 12, take 30% HP damage. Otherwise, gain armor equal to roll for 3 turns.",
+        "description_tr": "2d6 atın. Eğer 7 veya 11 ise, %50 Can iyileşin. Eğer 2, 3 veya 12 ise, %30 Can hasarı alın. Aksi takdirde, 3 tur boyunca zırh kazanın.",
+        "branch": "Dice",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_critical_roll"
+        ],
+        "icon": "📉",
+        "effects": {
+          "healing": "50% (on 7, 11)",
+          "damage_taken": "30% (on 2, 3, 12)",
+          "armor": "Roll total (otherwise)",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_gamblers_fallacy",
+        "name_en": "Ultimate: The Gambler's Fallacy",
+        "name_tr": "Ulti: Kumarbazın Yanılgısı",
+        "description_en": "For 3 turns, every missed attack or low roll cumulatively buffs your damage by 50%. Your final attack releases 15d6 arcane damage.",
+        "description_tr": "3 tur boyunca, kaçırılan her saldırı veya düşük zar hasarınızı kümülatif olarak %50 artırır. Son saldırınız 15d6 gizem hasarı yayar.",
+        "branch": "Dice",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gb_d20_destiny",
+          "gb_crapshoot"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "buff": "+50% Damage per miss/low roll",
+          "damage": "15d6",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_beginners_luck",
+        "name_en": "Beginner's Luck",
+        "name_tr": "Acemi Şansı",
+        "description_en": "Innocent fortune completely nullifies the very first attack that hits you in combat.",
+        "description_tr": "Masum şans, çatışmada size vuran ilk saldırıyı tamamen geçersiz kılar.",
+        "branch": "Luck",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🍀",
+        "effects": {
+          "defense": "Nullify first attack",
+          "duration": "Passive / Once per combat"
+        }
+      },
+      {
+        "spell_key": "gb_coin_flip",
+        "name_en": "Coin Flip",
+        "name_tr": "Yazı Tura",
+        "description_en": "Flips a coin. Heads grants +2 AC, Tails grants +2 Attack modifier. Lasts for 3 turns.",
+        "description_tr": "Bir madeni para atar. Yazı +2 Zırh Sınıfı, Tura +2 Saldırı değiştiricisi sağlar. 3 tur sürer.",
+        "branch": "Luck",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🪙",
+        "effects": {
+          "buff": "+2 AC or +2 Attack",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_misfortune",
+        "name_en": "Misfortune",
+        "name_tr": "Talihsizlik",
+        "description_en": "Curses a target within 10m, forcing them to take disadvantage on their next attack or saving throw.",
+        "description_tr": "10m içindeki bir hedefi lanetler ve bir sonraki saldırı veya kurtarma zarında dezavantaj almalarını sağlar.",
+        "branch": "Luck",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🐈‍⬛",
+        "effects": {
+          "debuff": "Disadvantage",
+          "duration": "Next roll",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_fortunes_favor",
+        "name_en": "Fortune's Favor",
+        "name_tr": "Şansın Lütfu",
+        "description_en": "Heals for 3d6 HP with a 50% chance to also completely cleanse one negative status effect.",
+        "description_tr": "3d6 Can iyileştirir ve %50 şansla bir olumsuz durum etkisini tamamen temizler.",
+        "branch": "Luck",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_beginners_luck"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "healing": "3d6",
+          "cleanse": "50% chance",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "gb_dodge_fate",
+        "name_en": "Dodge Fate",
+        "name_tr": "Kaderden Kaçış",
+        "description_en": "When targeted by an attack, instantly teleport up to 10m to a random safe location, avoiding the hit.",
+        "description_tr": "Bir saldırı tarafından hedeflendiğinde, anında 10m'ye kadar rastgele güvenli bir konuma ışınlanarak vuruştan kaçın.",
+        "branch": "Luck",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_coin_flip"
+        ],
+        "icon": "💨",
+        "effects": {
+          "evasion": "100%",
+          "mobility": "10m random teleport"
+        }
+      },
+      {
+        "spell_key": "gb_jinx",
+        "name_en": "Jinx",
+        "name_tr": "Uğursuzluk",
+        "description_en": "Jinxes a target, causing them to take an additional 1d6 damage from all incoming attacks for 2 turns.",
+        "description_tr": "Bir hedefi uğursuzlaştırarak, 2 tur boyunca gelen tüm saldırılardan fazladan 1d6 hasar almalarına neden olur.",
+        "branch": "Luck",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_misfortune"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "debuff": "+1d6 damage taken",
+          "duration": "2 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_karma",
+        "name_en": "Karma",
+        "name_tr": "Karma",
+        "description_en": "For 1 turn, 50% of all damage you take is violently reflected back to the original attackers.",
+        "description_tr": "1 tur boyunca, aldığınız tüm hasarın %50'si şiddetli bir şekilde asıl saldıranlara geri yansıtılır.",
+        "branch": "Luck",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_fortunes_favor"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "reflection": "50%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gb_serendipity",
+        "name_en": "Serendipity",
+        "name_tr": "Tesadüf",
+        "description_en": "Triggers a happy accident, instantly granting you a random potion effect or minor combat buff.",
+        "description_tr": "Mutlu bir kazayı tetikler ve anında size rastgele bir iksir etkisi veya küçük bir savaş güçlendirmesi verir.",
+        "branch": "Luck",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_dodge_fate"
+        ],
+        "icon": "🎁",
+        "effects": {
+          "buff": "Random potion effect",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "gb_bad_omen",
+        "name_en": "Bad Omen",
+        "name_tr": "Kötü Alâmet",
+        "description_en": "Casts a dark shadow in a 10m area. Enemies inside have a 25% chance to automatically miss their attacks for 3 turns.",
+        "description_tr": "10m'lik bir alana karanlık bir gölge düşürür. İçerideki düşmanların 3 tur boyunca saldırılarını otomatik olarak ıskalama şansı %25'tir.",
+        "branch": "Luck",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_jinx"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "debuff": "25% Miss chance",
+          "radius": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_defy_odds",
+        "name_en": "Defy Odds",
+        "name_tr": "Olasılıklara Meydan Oku",
+        "description_en": "Survive what would be a fatal blow, dropping to exactly 1 HP and becoming invincible for 1 turn.",
+        "description_tr": "Ölümcül olacak bir darbeden kurtulun, tam olarak 1 Can'a düşün ve 1 tur boyunca yenilmez olun.",
+        "branch": "Luck",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_karma"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "survival": "Drop to 1 HP",
+          "buff": "Invincibility",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gb_lady_lucks_kiss",
+        "name_en": "Lady Luck's Kiss",
+        "name_tr": "Şans Meleğinin Öpücüğü",
+        "description_en": "Grants you and allies within 15m advantage on all ability checks and attack rolls for 2 turns.",
+        "description_tr": "Size ve 15m içindeki müttefiklerinize 2 tur boyunca tüm yetenek kontrollerinde ve saldırı zarlarında avantaj sağlar.",
+        "branch": "Luck",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_bad_omen"
+        ],
+        "icon": "💋",
+        "effects": {
+          "buff": "Advantage on everything",
+          "radius": "15m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gb_wheel_of_fortune",
+        "name_en": "Ultimate: Wheel of Fortune",
+        "name_tr": "Ulti: Çarkıfelek",
+        "description_en": "Spins a cosmic wheel affecting a 50m radius. Applies massive buffs to allies and devastating debuffs to enemies based on 4 random outcomes.",
+        "description_tr": "50m yarıçapı etkileyen kozmik bir çarkı döndürür. 4 rastgele sonuca bağlı olarak müttefiklere devasa güçlendirmeler ve düşmanlara yıkıcı zayıflatmalar uygular.",
+        "branch": "Luck",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gb_defy_odds",
+          "gb_lady_lucks_kiss"
+        ],
+        "icon": "🎡",
+        "effects": {
+          "radius": "50m",
+          "buff": "Random massive buff (Allies)",
+          "debuff": "Random devastating debuff (Enemies)"
+        }
+      },
+      {
+        "spell_key": "gb_trick_sleeve",
+        "name_en": "Trick Sleeve",
+        "name_tr": "Yen Numarası",
+        "description_en": "Draw a random card from your deck, but manipulate luck so it is guaranteed to be a beneficial suit.",
+        "description_tr": "Destenizden rastgele bir kart çekin, ancak şansı manipüle ederek faydalı bir seri olmasını garanti altına alın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_shuffle",
+          "gb_coin_flip"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "buff": "Beneficial Draw",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "gb_crap_out",
+        "name_en": "Crap Out",
+        "name_tr": "Dışarı At",
+        "description_en": "Forces a cursed enemy within 15m to critically fail (roll a 1) on their next attack or ability use.",
+        "description_tr": "15m içindeki lanetli bir düşmanı bir sonraki saldırılarında veya yetenek kullanımlarında kritik başarısızlığa (1 atmaya) zorlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_loaded_dice",
+          "gb_misfortune"
+        ],
+        "icon": "🗑️",
+        "effects": {
+          "debuff": "Critical Fail",
+          "range": "15m",
+          "duration": "Next roll"
+        }
+      },
+      {
+        "spell_key": "gb_poker_dice",
+        "name_en": "Poker Dice",
+        "name_tr": "Poker Zarı",
+        "description_en": "Roll 5 dice and draw 5 cards. Deals 3d6 damage plus a random elemental effect based on the best hand.",
+        "description_tr": "5 zar atın ve 5 kart çekin. En iyi ele bağlı olarak 3d6 hasar artı rastgele bir temel element etkisi verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gb_draw_heart",
+          "gb_roll_bones"
+        ],
+        "icon": "🎳",
+        "effects": {
+          "damage": "3d6",
+          "status": "Random elemental effect",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_russian_roulette",
+        "name_en": "Russian Roulette",
+        "name_tr": "Rus Ruleti",
+        "description_en": "Fires a phantom revolver. 1 in 6 chance to deal a massive 10d6 damage, otherwise deals only 1d6 damage.",
+        "description_tr": "Hayalet bir tabanca ateşler. 6'da 1 şansla devasa 10d6 hasar verir, aksi takdirde sadece 1d6 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_snake_eyes",
+          "gb_jinx"
+        ],
+        "icon": "🔫",
+        "effects": {
+          "damage": "10d6 (1/6 chance) or 1d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_fortune_teller",
+        "name_en": "Fortune Teller",
+        "name_tr": "Falcı",
+        "description_en": "Draws 3 Tarot cards, applying 3 random potent buffs to allies or curses to enemies within 15m.",
+        "description_tr": "3 Tarot kartı çeker ve 15m içindeki müttefiklere 3 rastgele güçlü güçlendirme veya düşmanlara lanet uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_dealers_choice",
+          "gb_fortunes_favor"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "buff": "3 Random Buffs (Allies)",
+          "debuff": "3 Random Curses (Enemies)",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "gb_high_roller",
+        "name_en": "High Roller",
+        "name_tr": "Yüksek Oynayan",
+        "description_en": "Bet up to 50% of your HP. 50% chance to double it as temporary HP, 50% chance to lose it instantly.",
+        "description_tr": "Canınızın %50'sine kadarını bahse koyun. %50 şansla bunu geçici Can olarak ikiye katlarsınız, %50 şansla anında kaybedersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_boxcars",
+          "gb_dodge_fate"
+        ],
+        "icon": "💰",
+        "effects": {
+          "cost": "Up to 50% HP",
+          "shield": "Double bet HP (50% chance)",
+          "damage_taken": "Lose bet HP (50% chance)"
+        }
+      },
+      {
+        "spell_key": "gb_blackjack",
+        "name_en": "Blackjack",
+        "name_tr": "Yirmibir",
+        "description_en": "Deals 2d10 damage. If the damage rolled equals exactly 21, the target takes double damage and is stunned.",
+        "description_tr": "2d10 hasar verir. Eğer atılan hasar tam olarak 21'e eşitse, hedef iki kat hasar alır ve sersemler.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gb_draw_spade",
+          "gb_lucky_sevens"
+        ],
+        "icon": "🏴‍☠️",
+        "effects": {
+          "damage": "2d10",
+          "status": "Stun and Double Damage (if 21)",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_dead_mans_hand",
+        "name_en": "Dead Man's Hand",
+        "name_tr": "Ölü Adamın Eli",
+        "description_en": "A passive effect: Upon falling below 10% HP, automatically throw 5 spectral cards dealing 5d6 necrotic damage each.",
+        "description_tr": "Pasif bir etki: %10 Can'ın altına düştüğünüzde, her biri 5d6 nekrotik hasar veren 5 hayalet kartı otomatik olarak fırlatır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_exploding_deck",
+          "gb_bad_omen"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "5x 5d6",
+          "trigger": "<10% HP",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gb_yahtzee",
+        "name_en": "Yahtzee",
+        "name_tr": "Yahtzee",
+        "description_en": "Roll 5d6. If all match, deal an earth-shattering 20d6 damage. Otherwise, deal 5d6 area damage in 10m.",
+        "description_tr": "5d6 atın. Hepsi eşleşirse, dünyayı sarsan 20d6 hasar verin. Aksi takdirde, 10m içinde 5d6 alan hasarı verin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_dice_bomb",
+          "gb_serendipity"
+        ],
+        "icon": "🎊",
+        "effects": {
+          "damage": "20d6 (all match) or 5d6",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "gb_deck_of_many_things",
+        "name_en": "Deck of Many Things",
+        "name_tr": "Birçok Şeyin Destesi",
+        "description_en": "Draw 1 legendary card. Triggers one of 10 extreme effects, ranging from full party heal to massive meteor strikes.",
+        "description_tr": "1 efsanevi kart çekin. Tam grup iyileştirmesinden devasa meteor çarpmalarına kadar değişen 10 aşırı etkiden birini tetikler.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_stack_deck",
+          "gb_critical_roll",
+          "gb_karma"
+        ],
+        "icon": "🎴",
+        "effects": {
+          "special": "1 of 10 Extreme Effects",
+          "range": "Variable"
+        }
+      },
+      {
+        "spell_key": "gb_jackpot",
+        "name_en": "Jackpot",
+        "name_tr": "Büyük İkramiye",
+        "description_en": "Every attack has a 5% chance to trigger a jackpot, raining golden coins that deal 8d6 crushing damage in a 5m radius.",
+        "description_tr": "Her saldırının büyük ikramiyeyi tetikleme şansı %5'tir; 5m yarıçapında 8d6 ezici hasar veren altın sikkeler yağdırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gb_re_roll",
+          "gb_lady_lucks_kiss"
+        ],
+        "icon": "🤑",
+        "effects": {
+          "damage": "8d6",
+          "radius": "5m",
+          "trigger": "5% per attack"
+        }
+      },
+      {
+        "spell_key": "gb_all_in",
+        "name_en": "All In",
+        "name_tr": "Hepsi İçeri",
+        "description_en": "Expend all remaining Mana. Deal 1d6 magical damage per 10 points expended in a massive 20m cone.",
+        "description_tr": "Kalan tüm Manayı harcayın. Devasa 20m'lik bir konide harcanan her 10 puan için 1d6 büyü hasarı verin.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gb_draw_diamond",
+          "gb_d20_destiny",
+          "gb_defy_odds"
+        ],
+        "icon": "💸",
+        "effects": {
+          "damage": "1d6 per 10 Mana",
+          "range": "20m cone"
+        }
+      },
+      {
+        "spell_key": "gb_house_always_wins",
+        "name_en": "The House Always Wins",
+        "name_tr": "Kasa Her Zaman Kazanır",
+        "description_en": "Create a 30m casino zone for 3 turns. Inside, enemy crits heal you, and your misses deal 50% damage.",
+        "description_tr": "3 tur boyunca 30m'lik bir kumarhane bölgesi oluşturun. İçeride, düşman kritikleri sizi iyileştirir ve ıskalarınız %50 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gb_royal_flush",
+          "gb_crapshoot",
+          "gb_lady_lucks_kiss"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "radius": "30m",
+          "healing": "From enemy crits",
+          "damage": "50% on miss",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gb_jackpot_of_cosmos",
+        "name_en": "Grand Ultimate: Jackpot of the Cosmos",
+        "name_tr": "Büyük Ulti: Kozmosun İkramiyesi",
+        "description_en": "Reality becomes your casino. Freeze time for 3 turns. You have unlimited resources, max rolls, and enemies automatically roll 1s.",
+        "description_tr": "Gerçeklik sizin kumarhaneniz olur. Zamanı 3 tur boyunca dondurun. Sınırsız kaynağınız ve maksimum zarlarınız olur, düşmanlar otomatik olarak 1 atar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "gb_house_of_cards",
+          "gb_gamblers_fallacy",
+          "gb_wheel_of_fortune"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "3 turns",
+          "status": "Time Stop",
+          "buff": "Max rolls & Infinite resources",
+          "debuff": "Enemies roll 1s"
+        }
+      }
+    ]
+  }
+]

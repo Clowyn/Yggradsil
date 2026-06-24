@@ -1,0 +1,1014 @@
+[
+  {
+    "subclass_key": "mindhunter",
+    "tree_name_en": "Mindhunter",
+    "tree_name_tr": "Zihin Avcısı",
+    "tree_desc_en": "A deadly assassin who uses psychic powers to track targets, read their minds, and strike their very nervous systems.",
+    "tree_desc_tr": "Hedeflerini takip etmek, zihinlerini okumak ve doğrudan sinir sistemlerini vurmak için psişik güçler kullanan ölümcül bir suikastçı.",
+    "branches": [
+      "Psychic",
+      "Telepathy",
+      "Mind Strike"
+    ],
+    "spells": [
+      {
+        "spell_key": "mh_psychic_push",
+        "name_en": "Psychic Push",
+        "name_tr": "Zihinsel İtiş",
+        "description_en": "Push a target 5m away using mental force, dealing 1d6 psychic damage.",
+        "description_tr": "Zihinsel bir güçle hedefi 5m uzağa iter ve 1d6 psişik hasar verirsiniz.",
+        "branch": "Psychic",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🫸",
+        "effects": {
+          "damage": "1d6",
+          "damage_type": "psychic",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "mh_mind_shield",
+        "name_en": "Mind Shield",
+        "name_tr": "Zihin Kalkanı",
+        "description_en": "Surround your mind with an invisible barrier, gaining +2 AC against mental attacks for 10 minutes.",
+        "description_tr": "Zihninizi görünmez bir bariyerle sararak 10 dakika boyunca zihinsel saldırılara karşı +2 Zırh Sınıfı kazanırsınız.",
+        "branch": "Psychic",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "mh_psychic_push"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "bonus_ac": 2,
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "mh_telekinetic_pebble",
+        "name_en": "Telekinetic Pebble",
+        "name_tr": "Telekinetik Taş",
+        "description_en": "Hurl a small object with your mind up to 15m, dealing 2d4 bludgeoning damage.",
+        "description_tr": "Zihninizle küçük bir nesneyi 15m'ye kadar fırlatarak 2d4 ezici hasar verirsiniz.",
+        "branch": "Psychic",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mh_mind_shield"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "damage": "2d4",
+          "damage_type": "bludgeoning",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_wave",
+        "name_en": "Psychic Wave",
+        "name_tr": "Zihinsel Dalga",
+        "description_en": "Unleash a 10m cone of psychic energy. Enemies take 3d6 psychic damage and are pushed 3m.",
+        "description_tr": "10m'lik bir koni şeklinde psişik enerji serbest bırakırsınız. Düşmanlar 3d6 psişik hasar alır ve 3m geri itilir.",
+        "branch": "Psychic",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mh_telekinetic_pebble"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "3d6",
+          "damage_type": "psychic",
+          "area": "10m cone",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "mh_levitate",
+        "name_en": "Levitate",
+        "name_tr": "Yükselme",
+        "description_en": "Float up to 5m in the air using telekinesis, lasting for 1 minute.",
+        "description_tr": "Telekinezi kullanarak 1 dakika boyunca havada 5m'ye kadar yükselirsiniz.",
+        "branch": "Psychic",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "mh_psychic_wave"
+        ],
+        "icon": "🪶",
+        "effects": {
+          "height": "5m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mh_brain_static",
+        "name_en": "Brain Static",
+        "name_tr": "Beyin Paraziti",
+        "description_en": "Disrupt a target's thoughts. They take 2d8 psychic damage and have disadvantage on their next attack.",
+        "description_tr": "Hedefin düşüncelerini bozarsınız. 2d8 psişik hasar alırlar ve bir sonraki saldırılarında dezavantajlı olurlar.",
+        "branch": "Psychic",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "mh_levitate"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d8",
+          "damage_type": "psychic",
+          "debuff": "Disadvantage on next attack"
+        }
+      },
+      {
+        "spell_key": "mh_telekinetic_grasp",
+        "name_en": "Telekinetic Grasp",
+        "name_tr": "Telekinetik Kavrama",
+        "description_en": "Hold a target in the air with telekinesis up to 15m away. They are restrained for 2 rounds.",
+        "description_tr": "Bir hedefi telekinezi ile 15m uzaktan havada tutarsınız. 2 tur boyunca kısıtlanırlar.",
+        "branch": "Psychic",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "mh_brain_static"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "range": "15m",
+          "status": "Restrained",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_blast",
+        "name_en": "Psychic Blast",
+        "name_tr": "Psikolojik Patlama",
+        "description_en": "Fire a 20m line of concentrated mental force, dealing 6d6 psychic damage to all in its path.",
+        "description_tr": "20m uzunluğunda yoğunlaştırılmış zihinsel güç ateşlersiniz, yolundaki herkese 6d6 psişik hasar verirsiniz.",
+        "branch": "Psychic",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mh_telekinetic_grasp"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d6",
+          "damage_type": "psychic",
+          "area": "20m line"
+        }
+      },
+      {
+        "spell_key": "mh_mind_barrier",
+        "name_en": "Mind Barrier",
+        "name_tr": "Zihinsel Bariyer",
+        "description_en": "Create a 5m radius dome of hard light and psychic energy. Blocks physical projectiles for 3 rounds.",
+        "description_tr": "5m yarıçapında sert ışık ve psişik enerjiden oluşan bir kubbe yaratırsınız. 3 tur boyunca fiziksel mermileri engeller.",
+        "branch": "Psychic",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mh_psychic_blast"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "radius": "5m",
+          "duration": "3 rounds",
+          "utility": "Blocks projectiles"
+        }
+      },
+      {
+        "spell_key": "mh_telekinetic_crush",
+        "name_en": "Telekinetic Crush",
+        "name_tr": "Telekinetik Ezme",
+        "description_en": "Crush a restrained target with invisible pressure, dealing 8d8 bludgeoning damage.",
+        "description_tr": "Kısıtlanmış bir hedefi görünmez bir basınçla ezerek 8d8 ezici hasar verirsiniz.",
+        "branch": "Psychic",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mh_mind_barrier"
+        ],
+        "icon": "🗜️",
+        "effects": {
+          "damage": "8d8",
+          "damage_type": "bludgeoning",
+          "requirement": "Target must be restrained"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_storm",
+        "name_en": "Psychic Storm",
+        "name_tr": "Zihinsel Fırtına",
+        "description_en": "Conjure a 15m radius storm of mental static. Enemies inside take 10d6 psychic damage. Lasts 1 minute.",
+        "description_tr": "15m yarıçapında zihinsel bir parazit fırtınası yaratırsınız. İçindeki düşmanlar 10d6 psişik hasar alır. 1 dakika sürer.",
+        "branch": "Psychic",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mh_telekinetic_crush"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "10d6",
+          "damage_type": "psychic",
+          "radius": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mh_mind_maelstrom",
+        "name_en": "Mind Maelstrom",
+        "name_tr": "Zihin Girdabı",
+        "description_en": "Form a 20m radius psychic vortex. Enemies take 12d8 psychic damage and are pulled 10m to the center.",
+        "description_tr": "20m yarıçapında psişik bir girdap oluşturursunuz. Düşmanlar 12d8 psişik hasar alır ve 10m merkeze çekilir.",
+        "branch": "Psychic",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "mh_psychic_storm"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "12d8",
+          "damage_type": "psychic",
+          "radius": "20m",
+          "pull": "10m"
+        }
+      },
+      {
+        "spell_key": "mh_astral_singularity",
+        "name_en": "Astral Singularity",
+        "name_tr": "Astral Tekillik",
+        "description_en": "Create a black hole of psychic energy. Deals 15d10 psychic damage and stuns enemies in a 15m radius for 2 rounds.",
+        "description_tr": "Psişik enerjiden bir kara delik yaratırsınız. 15m yarıçapındaki düşmanlara 15d10 psişik hasar verir ve 2 tur sersemletir.",
+        "branch": "Psychic",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "mh_mind_maelstrom"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "15d10",
+          "damage_type": "psychic",
+          "radius": "15m",
+          "status": "Stunned",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_sense_minds",
+        "name_en": "Sense Minds",
+        "name_tr": "Zihin Sezgisi",
+        "description_en": "Detect the presence and exact location of intelligent creatures within 30m for 10 minutes.",
+        "description_tr": "30m içindeki zeki yaratıkların varlığını ve tam konumunu 10 dakika boyunca algılarsınız.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "📡",
+        "effects": {
+          "radius": "30m",
+          "duration": "10 minutes",
+          "utility": "Detect intelligent creatures"
+        }
+      },
+      {
+        "spell_key": "mh_whisper",
+        "name_en": "Whisper",
+        "name_tr": "Fısıltı",
+        "description_en": "Send a telepathic message directly into a target's mind up to 100m away.",
+        "description_tr": "100m uzaklığa kadar bir hedefin zihnine doğrudan telepatik bir mesaj gönderirsiniz.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "mh_sense_minds"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "range": "100m",
+          "utility": "Telepathic communication"
+        }
+      },
+      {
+        "spell_key": "mh_read_surface_thoughts",
+        "name_en": "Read Surface Thoughts",
+        "name_tr": "Yüzeysel Düşünce Okuma",
+        "description_en": "Read the immediate thoughts of a target within 15m for 1 minute.",
+        "description_tr": "15m içindeki bir hedefin anlık düşüncelerini 1 dakika boyunca okursunuz.",
+        "branch": "Telepathy",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "mh_whisper"
+        ],
+        "icon": "📖",
+        "effects": {
+          "range": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mh_mind_track",
+        "name_en": "Mind Track",
+        "name_tr": "Zihinsel Takip",
+        "description_en": "Mentally mark a target. You always know their location and distance for 24 hours.",
+        "description_tr": "Bir hedefi zihinsel olarak işaretlersiniz. 24 saat boyunca konumunu ve mesafesini her zaman bilirsiniz.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "mh_read_surface_thoughts"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "duration": "24 hours",
+          "utility": "Perfect tracking"
+        }
+      },
+      {
+        "spell_key": "mh_false_memory",
+        "name_en": "False Memory",
+        "name_tr": "Sahte Anı",
+        "description_en": "Implant a harmless memory up to 5 minutes long in a target's mind.",
+        "description_tr": "Bir hedefin zihnine 5 dakikaya kadar süren zararsız bir sahte anı yerleştirirsiniz.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 240,
+        "prerequisites": [
+          "mh_mind_track"
+        ],
+        "icon": "💭",
+        "effects": {
+          "utility": "Implant 5 minute memory"
+        }
+      },
+      {
+        "spell_key": "mh_confusion",
+        "name_en": "Confusion",
+        "name_tr": "Kafa Karışıklığı",
+        "description_en": "Scramble a target's senses. They move randomly and attack the nearest creature for 2 rounds.",
+        "description_tr": "Hedefin duyularını karıştırırsınız. 2 tur boyunca rastgele hareket ederler ve en yakın yaratığa saldırırlar.",
+        "branch": "Telepathy",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 290,
+        "prerequisites": [
+          "mh_false_memory"
+        ],
+        "icon": "💫",
+        "effects": {
+          "status": "Confused",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_probe_mind",
+        "name_en": "Probe Mind",
+        "name_tr": "Zihin Sondası",
+        "description_en": "Extract a specific deep memory from a target. They take 3d6 psychic damage per round of probing.",
+        "description_tr": "Hedefin zihninden derin ve belirli bir anıyı çıkarırsınız. Sonda yaptığınız her tur başına 3d6 psişik hasar alırlar.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "mh_confusion"
+        ],
+        "icon": "🪛",
+        "effects": {
+          "damage": "3d6 per round",
+          "damage_type": "psychic",
+          "utility": "Extract deep memory"
+        }
+      },
+      {
+        "spell_key": "mh_illusory_reality",
+        "name_en": "Illusory Reality",
+        "name_tr": "Yanılsamalı Gerçeklik",
+        "description_en": "Create profound sensory illusions in a target's mind. They see, hear, and feel things that aren't there for 1 minute.",
+        "description_tr": "Hedefin zihninde derin duyusal yanılsamalar yaratırsınız. 1 dakika boyunca orada olmayan şeyleri görür, duyar ve hissederler.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "mh_probe_mind"
+        ],
+        "icon": "🌈",
+        "effects": {
+          "duration": "1 minute",
+          "utility": "Complete sensory illusion"
+        }
+      },
+      {
+        "spell_key": "mh_mass_paranoia",
+        "name_en": "Mass Paranoia",
+        "name_tr": "Kitle Paranoyası",
+        "description_en": "Instill intense paranoia in a 10m radius. Enemies treat each other as hostile for 3 rounds.",
+        "description_tr": "10m yarıçapında yoğun bir paranoya aşılarsınız. Düşmanlar 3 tur boyunca birbirlerini düşman olarak görürler.",
+        "branch": "Telepathy",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "mh_illusory_reality"
+        ],
+        "icon": "👀",
+        "effects": {
+          "radius": "10m",
+          "status": "Paranoia",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_dominate_will",
+        "name_en": "Dominate Will",
+        "name_tr": "İrade Hâkimiyeti",
+        "description_en": "Take total mental control of a target for 1 minute. You can issue commands telepathically.",
+        "description_tr": "1 dakika boyunca hedefin zihnini tamamen kontrol edersiniz. Telepatik olarak emirler verebilirsiniz.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 720,
+        "prerequisites": [
+          "mh_mass_paranoia"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "1 minute",
+          "status": "Mind Controlled"
+        }
+      },
+      {
+        "spell_key": "mh_memory_wipe",
+        "name_en": "Memory Wipe",
+        "name_tr": "Hafıza Silme",
+        "description_en": "Erase up to 24 hours of memory from a target. The target suffers 5d10 psychic damage from the trauma.",
+        "description_tr": "Hedefin hafızasından 24 saate kadar olan bir süreyi silersiniz. Hedef travma nedeniyle 5d10 psişik hasar alır.",
+        "branch": "Telepathy",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "mh_dominate_will"
+        ],
+        "icon": "🧽",
+        "effects": {
+          "damage": "5d10",
+          "damage_type": "psychic",
+          "utility": "Erase 24 hours of memory"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_lobotomy",
+        "name_en": "Psychic Lobotomy",
+        "name_tr": "Zihinsel Lobotomi",
+        "description_en": "Devastate a target's mind. They permanently lose 1d4 Intelligence and take 10d10 psychic damage.",
+        "description_tr": "Hedefin zihnini mahvedersiniz. Kalıcı olarak 1d4 Zeka kaybederler ve 10d10 psişik hasar alırlar.",
+        "branch": "Telepathy",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mh_memory_wipe"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "damage": "10d10",
+          "damage_type": "psychic",
+          "debuff": "-1d4 Intelligence permanently"
+        }
+      },
+      {
+        "spell_key": "mh_hive_mind_control",
+        "name_en": "Hive Mind Control",
+        "name_tr": "Kovan Zihni Kontrolü",
+        "description_en": "Dominate up to 5 targets within 30m for 1 hour. They act as a synchronized hive mind under your command.",
+        "description_tr": "30m içindeki en fazla 5 hedefi 1 saat boyunca kontrol edersiniz. Sizin emriniz altında senkronize bir kovan zihni gibi hareket ederler.",
+        "branch": "Telepathy",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "mh_psychic_lobotomy"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "radius": "30m",
+          "targets": 5,
+          "duration": "1 hour",
+          "status": "Mind Controlled"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_blade",
+        "name_en": "Psychic Blade",
+        "name_tr": "Psişik Bıçak",
+        "description_en": "Infuse your weapon with mental energy. It deals an additional 1d4 psychic damage for 1 minute.",
+        "description_tr": "Silahınızı zihinsel enerjiyle aşılarsınız. 1 dakika boyunca ek 1d4 psişik hasar verir.",
+        "branch": "Mind Strike",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "✨",
+        "effects": {
+          "bonus_damage": "1d4 psychic",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "mh_nerve_strike",
+        "name_en": "Nerve Strike",
+        "name_tr": "Sinir Vuruşu",
+        "description_en": "A precision melee attack that damages the nervous system, reducing the target's movement speed by 5m for 1 round.",
+        "description_tr": "Sinir sistemine zarar veren hassas bir yakın dövüş saldırısı; hedefin hareket hızını 1 tur boyunca 5m azaltır.",
+        "branch": "Mind Strike",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 85,
+        "prerequisites": [
+          "mh_psychic_blade"
+        ],
+        "icon": "🥢",
+        "effects": {
+          "debuff": "-5m movement",
+          "duration": "1 round"
+        }
+      },
+      {
+        "spell_key": "mh_phantom_dagger",
+        "name_en": "Phantom Dagger",
+        "name_tr": "Hayalet Hançer",
+        "description_en": "Throw a dagger made of pure thought up to 15m. Deals 1d8 psychic damage and ignores physical armor.",
+        "description_tr": "Saf düşünceden oluşan bir hançeri 15m'ye kadar fırlatırsınız. 1d8 psişik hasar verir ve fiziksel zırhı yok sayar.",
+        "branch": "Mind Strike",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "mh_nerve_strike"
+        ],
+        "icon": "🪒",
+        "effects": {
+          "damage": "1d8",
+          "damage_type": "psychic",
+          "range": "15m",
+          "utility": "Ignores Armor"
+        }
+      },
+      {
+        "spell_key": "mh_synapse_overload",
+        "name_en": "Synapse Overload",
+        "name_tr": "Sinaps Aşırı Yüklemesi",
+        "description_en": "Strike a target's nerves. They take an extra 2d6 psychic damage and cannot take reactions until your next turn.",
+        "description_tr": "Hedefin sinirlerine vurursunuz. Ek 2d6 psişik hasar alırlar ve bir sonraki turunuza kadar tepki veremezler.",
+        "branch": "Mind Strike",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 210,
+        "prerequisites": [
+          "mh_phantom_dagger"
+        ],
+        "icon": "🔌",
+        "effects": {
+          "bonus_damage": "2d6 psychic",
+          "debuff": "Cannot take reactions"
+        }
+      },
+      {
+        "spell_key": "mh_blinding_strike",
+        "name_en": "Blinding Strike",
+        "name_tr": "Kör Eden Vuruş",
+        "description_en": "A sharp mental strike to the visual cortex. On a hit, the target is blinded for 1 round.",
+        "description_tr": "Görsel kortekse keskin bir zihinsel vuruş. İsabet ettiğinde hedef 1 tur boyunca kör olur.",
+        "branch": "Mind Strike",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mh_synapse_overload"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "status": "Blinded",
+          "duration": "1 round"
+        }
+      },
+      {
+        "spell_key": "mh_mind_rend",
+        "name_en": "Mind Rend",
+        "name_tr": "Zihin Yırtılması",
+        "description_en": "Tear at a target's psyche. Your weapon deals +2d6 psychic damage and reduces their mental saving throws by 2.",
+        "description_tr": "Hedefin zihnini yırtarsınız. Silahınız +2d6 psişik hasar verir ve zihinsel kurtarma zarlarını 2 azaltır.",
+        "branch": "Mind Strike",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "mh_blinding_strike"
+        ],
+        "icon": "💔",
+        "effects": {
+          "bonus_damage": "2d6 psychic",
+          "debuff": "-2 to mental saves"
+        }
+      },
+      {
+        "spell_key": "mh_paralyzing_blow",
+        "name_en": "Paralyzing Blow",
+        "name_tr": "Felç Eden Darbe",
+        "description_en": "A devastating strike to the spinal cord. The target must save or be paralyzed for 1 round.",
+        "description_tr": "Omuriliğe yıkıcı bir darbe. Hedef zar atıp başaramazsa 1 tur boyunca felç olur.",
+        "branch": "Mind Strike",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "mh_mind_rend"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "status": "Paralyzed",
+          "duration": "1 round"
+        }
+      },
+      {
+        "spell_key": "mh_echo_strike",
+        "name_en": "Echo Strike",
+        "name_tr": "Yankı Vuruşu",
+        "description_en": "Your strike leaves a psychic imprint. One round later, the target takes the exact same damage again as psychic damage.",
+        "description_tr": "Vuruşunuz psişik bir iz bırakır. Bir tur sonra, hedef tam olarak aynı hasarı tekrar psişik hasar olarak alır.",
+        "branch": "Mind Strike",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "mh_paralyzing_blow"
+        ],
+        "icon": "🔔",
+        "effects": {
+          "utility": "Repeat damage after 1 round",
+          "damage_type": "psychic"
+        }
+      },
+      {
+        "spell_key": "mh_brain_hemorrhage",
+        "name_en": "Brain Hemorrhage",
+        "name_tr": "Beyin Kanaması",
+        "description_en": "Rupture a blood vessel in the brain. The target takes 3d8 psychic damage at the start of their next 3 turns.",
+        "description_tr": "Beyindeki bir kan damarını patlatırsınız. Hedef sonraki 3 turunun başında 3d8 psişik hasar alır.",
+        "branch": "Mind Strike",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "mh_echo_strike"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "3d8 per turn",
+          "damage_type": "psychic",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_decapitating_thought",
+        "name_en": "Decapitating Thought",
+        "name_tr": "Baş Kesen Düşünce",
+        "description_en": "A 20m ranged mental attack. Deals 8d8 psychic damage. If the target drops below 50 HP, they must make an instant death save.",
+        "description_tr": "20m menzilli zihinsel bir saldırı. 8d8 psişik hasar verir. Hedefin Can Puanı 50'nin altına düşerse, anında ölüm zarı atmalıdır.",
+        "branch": "Mind Strike",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mh_brain_hemorrhage"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "8d8",
+          "damage_type": "psychic",
+          "range": "20m",
+          "utility": "Death save if under 50 HP"
+        }
+      },
+      {
+        "spell_key": "mh_nervous_system_collapse",
+        "name_en": "Nervous System Collapse",
+        "name_tr": "Sinir Sistemi Çöküşü",
+        "description_en": "Sweep your weapon in a 5m cone. All targets take 6d8 psychic damage and are knocked prone by intense pain.",
+        "description_tr": "Silahınızı 5m'lik bir koni şeklinde savurursunuz. Tüm hedefler 6d8 psişik hasar alır ve yoğun acı nedeniyle yere serilir.",
+        "branch": "Mind Strike",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 860,
+        "prerequisites": [
+          "mh_decapitating_thought"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage": "6d8",
+          "damage_type": "psychic",
+          "area": "5m cone",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "mh_psychic_execution",
+        "name_en": "Psychic Execution",
+        "name_tr": "Psişik İnfaz",
+        "description_en": "Deal 12d10 psychic damage to a target. If this kills them, their head explodes, dealing 4d6 damage to adjacent enemies.",
+        "description_tr": "Bir hedefe 12d10 psişik hasar verirsiniz. Bu onları öldürürse, kafaları patlar ve bitişik düşmanlara 4d6 hasar verir.",
+        "branch": "Mind Strike",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "mh_nervous_system_collapse"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "12d10",
+          "damage_type": "psychic",
+          "on_kill": "4d6 damage to adjacent enemies"
+        }
+      },
+      {
+        "spell_key": "mh_cerebral_assassination",
+        "name_en": "Cerebral Assassination",
+        "name_tr": "Serebral Suikast",
+        "description_en": "Teleport to a target within 50m and strike instantly. Deals 20d10 psychic damage, ignoring all resistances.",
+        "description_tr": "50m içindeki bir hedefe ışınlanır ve anında vurursunuz. Tüm dirençleri yok sayarak 20d10 psişik hasar verir.",
+        "branch": "Mind Strike",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1480,
+        "prerequisites": [
+          "mh_psychic_execution"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "damage": "20d10",
+          "damage_type": "psychic",
+          "range": "50m teleport",
+          "utility": "Ignores resistances"
+        }
+      },
+      {
+        "spell_key": "mh_telekinetic_weapon",
+        "name_en": "Telekinetic Weapon",
+        "name_tr": "Telekinetik Silah",
+        "description_en": "Animate a weapon with telekinesis. It fights autonomously up to 10m away from you for 1 minute.",
+        "description_tr": "Telekinezi ile bir silahı canlandırırsınız. 1 dakika boyunca sizden 10m uzağa kadar otonom olarak savaşır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 230,
+        "prerequisites": [
+          "mh_telekinetic_pebble",
+          "mh_psychic_blade"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "range": "10m",
+          "duration": "1 minute",
+          "utility": "Autonomous attacks"
+        }
+      },
+      {
+        "spell_key": "mh_read_intentions",
+        "name_en": "Read Intentions",
+        "name_tr": "Niyet Okuma",
+        "description_en": "Read a target's combat moves. Gain advantage on all attack rolls against a tracked target for 3 rounds.",
+        "description_tr": "Hedefin dövüş hamlelerini okursunuz. Takip edilen bir hedefe karşı 3 tur boyunca tüm saldırı zarlarında avantaj kazanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 270,
+        "prerequisites": [
+          "mh_sense_minds",
+          "mh_nerve_strike"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "buff": "Advantage on attack rolls",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_illusory_decoy",
+        "name_en": "Illusory Decoy",
+        "name_tr": "Yanılsamalı Hedef",
+        "description_en": "Create a levitating physical clone. If attacked, it explodes, dealing 4d6 psychic damage to the attacker.",
+        "description_tr": "Havaya yükselen fiziksel bir kopya yaratırsınız. Saldırıya uğrarsa patlar ve saldırgana 4d6 psişik hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "mh_false_memory",
+          "mh_levitate"
+        ],
+        "icon": "👥",
+        "effects": {
+          "damage": "4d6",
+          "damage_type": "psychic",
+          "utility": "Explodes on hit"
+        }
+      },
+      {
+        "spell_key": "mh_mind_tether",
+        "name_en": "Mind Tether",
+        "name_tr": "Zihin Bağı",
+        "description_en": "Form a mental link with a target up to 20m away. Any damage you take, they take half of it.",
+        "description_tr": "20m uzağa kadar bir hedefle zihinsel bir bağ kurarsınız. Aldığınız her hasarın yarısını onlar da alır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "mh_mind_track",
+          "mh_mind_shield"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "20m",
+          "utility": "Shared damage"
+        }
+      },
+      {
+        "spell_key": "mh_neurological_sabotage",
+        "name_en": "Neurological Sabotage",
+        "name_tr": "Nörolojik Sabotaj",
+        "description_en": "Strike to confuse the nervous system. Deals 3d6 psychic damage and applies Confusion for 2 rounds.",
+        "description_tr": "Sinir sistemini karıştırmak için vurursunuz. 3d6 psişik hasar verir ve 2 tur boyunca Kafa Karışıklığı uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 470,
+        "prerequisites": [
+          "mh_confusion",
+          "mh_synapse_overload"
+        ],
+        "icon": "🕹️",
+        "effects": {
+          "damage": "3d6",
+          "damage_type": "psychic",
+          "status": "Confused",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_astral_projection_strike",
+        "name_en": "Astral Projection Strike",
+        "name_tr": "Astral Projeksiyon Vuruşu",
+        "description_en": "Project your spirit up to 30m, strike an enemy for 10d8 psychic damage, then instantly snap back to your body.",
+        "description_tr": "Ruhunuzu 30m'ye kadar yansıtıp bir düşmana 10d8 psişik hasar veren bir vuruş yapar ve ardından anında vücudunuza geri dönersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 710,
+        "prerequisites": [
+          "mh_telekinetic_grasp",
+          "mh_echo_strike"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "10d8",
+          "damage_type": "psychic",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "mh_mass_mind_wipe",
+        "name_en": "Mass Mind Wipe",
+        "name_tr": "Toplu Zihin Silme",
+        "description_en": "Release a wave of amnesia in a 15m radius. Enemies forget who they are fighting for 1d4 rounds, stopping all attacks.",
+        "description_tr": "15m yarıçapında bir amnezi dalgası yayarsınız. Düşmanlar 1d4 tur boyunca kiminle savaştıklarını unutur ve tüm saldırıları durdururlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 820,
+        "prerequisites": [
+          "mh_mass_paranoia",
+          "mh_psychic_blast"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "radius": "15m",
+          "status": "Amnesia",
+          "duration": "1d4 rounds"
+        }
+      },
+      {
+        "spell_key": "mh_cerebral_tracking",
+        "name_en": "Cerebral Tracking",
+        "name_tr": "Serebral Takip",
+        "description_en": "Once you probe a target's mind, every attack against them deals double damage on critical hits. Lasts 10 minutes.",
+        "description_tr": "Bir hedefin zihnini sondaladığınızda, onlara karşı yapılan her saldırı kritik vuruşlarda iki kat hasar verir. 10 dakika sürer.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 890,
+        "prerequisites": [
+          "mh_probe_mind",
+          "mh_mind_rend"
+        ],
+        "icon": "🔎",
+        "effects": {
+          "buff": "Double crit damage",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "mh_telekinetic_execution",
+        "name_en": "Telekinetic Execution",
+        "name_tr": "Telekinetik İnfaz",
+        "description_en": "Lift a target high into the air, crush them for 10d10 bludgeoning damage, then violently drop them.",
+        "description_tr": "Bir hedefi havaya kaldırırsınız, 10d10 ezici hasarla ezer ve sonra onları şiddetle yere düşürürsünüz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "mh_telekinetic_crush",
+          "mh_paralyzing_blow"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "10d10",
+          "damage_type": "bludgeoning",
+          "utility": "Fall damage applied"
+        }
+      },
+      {
+        "spell_key": "mh_master_of_puppets",
+        "name_en": "Master of Puppets",
+        "name_tr": "Kukla Efendisi",
+        "description_en": "Seize control of 3 enemies and force them to cast their most powerful abilities on their own allies.",
+        "description_tr": "3 düşmanın kontrolünü ele geçirir ve onları kendi müttefiklerine karşı en güçlü yeteneklerini kullanmaya zorlarsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 89,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "mh_dominate_will",
+          "mh_telekinetic_grasp"
+        ],
+        "icon": "🧵",
+        "effects": {
+          "targets": 3,
+          "utility": "Forced friendly fire"
+        }
+      },
+      {
+        "spell_key": "mh_mindscape_collapse",
+        "name_en": "Mindscape Collapse",
+        "name_tr": "Zihin Boyutu Çöküşü",
+        "description_en": "Drag all enemies within 50m into your mental realm for 1 minute. Inside, you deal double damage and they take 5d10 psychic damage per round.",
+        "description_tr": "50m içindeki tüm düşmanları 1 dakika boyunca kendi zihinsel boyutunuza çekersiniz. İçeride iki kat hasar verirsiniz ve onlar her tur 5d10 psişik hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "mh_astral_singularity",
+          "mh_hive_mind_control",
+          "mh_cerebral_assassination"
+        ],
+        "icon": "🤯",
+        "effects": {
+          "radius": "50m",
+          "damage": "5d10 per round",
+          "damage_type": "psychic",
+          "buff": "Double damage dealt",
+          "duration": "1 minute"
+        }
+      }
+    ]
+  }
+]

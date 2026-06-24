@@ -1,0 +1,971 @@
+[
+  {
+    "subclass_key": "oracle_mage",
+    "tree_name_en": "Oracle Arts",
+    "tree_name_tr": "Kâhin Sanatları",
+    "tree_desc_en": "Mastery over time, destiny, and hidden knowledge, allowing the mage to outwit and outmaneuver any opponent.",
+    "tree_desc_tr": "Zaman, kader ve gizli bilgi üzerinde ustalık, büyücünün herhangi bir rakibi alt etmesini ve zekasıyla aşmasını sağlar.",
+    "branches": [
+      "Prophecy",
+      "Fate",
+      "Divination",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "om_prophecy_glimpse",
+        "name_en": "Glimpse of Tomorrow",
+        "name_tr": "Yarından Bir Bakış",
+        "description_en": "See a glimpse of the immediate future to avoid an incoming attack. Increases dodge chance by 15% for 1 turn.",
+        "description_tr": "Gelecekten bir anlık kesit görerek yaklaşan bir saldırıdan kaçının. 1 tur boyunca kaçınma şansını %15 artırır.",
+        "branch": "Prophecy",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔮",
+        "effects": {
+          "buff": "Dodge +15%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_strike",
+        "name_en": "Prophetic Strike",
+        "name_tr": "Kehanet Vuruşu",
+        "description_en": "Predict the enemy's evasive movements and strike exactly where they will be. Deals 2d6 arcane damage up to 10m.",
+        "description_tr": "Düşmanın kaçış hareketlerini tahmin edin ve tam olarak olacakları yere vurun. 10m'ye kadar 2d6 arkana hasarı verir.",
+        "branch": "Prophecy",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "2d6 arcane",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_warning",
+        "name_en": "Omen of Danger",
+        "name_tr": "Tehlike Alâmeti",
+        "description_en": "Shout a warning of a predicted ambush or trap. Grants allies in a 15m radius +2 to their next saving throw.",
+        "description_tr": "Öngörülen bir pusu veya tuzağa karşı uyarıda bulunun. 15m yarıçapındaki müttefiklere bir sonraki kurtarma zarlarında +2 kazandırır.",
+        "branch": "Prophecy",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "⚠️",
+        "effects": {
+          "radius": "15m",
+          "buff": "+2 Saving Throw"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_echo",
+        "name_en": "Echoes of the Future",
+        "name_tr": "Geleceğin Yankıları",
+        "description_en": "Strike a target with a blast of arcane energy that echoes into the future, dealing 3d8 damage. The same damage repeats on their next turn.",
+        "description_tr": "Bir hedefe gelecekte yankılanan arkana enerjisiyle vurarak 3d8 hasar verin. Aynı hasar bir sonraki turlarında tekrarlanır.",
+        "branch": "Prophecy",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "om_prophecy_strike"
+        ],
+        "icon": "⏱️",
+        "effects": {
+          "damage": "3d8 arcane (x2)",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_delay",
+        "name_en": "Delayed Destiny",
+        "name_tr": "Gecikmiş Kader",
+        "description_en": "Delay an incoming spell or effect targeting you or an ally by 1 turn, allowing time to prepare. Range 20m.",
+        "description_tr": "Size veya bir müttefikinize yönelen bir büyüyü veya etkiyi 1 tur geciktirerek hazırlanmak için zaman kazanın. Menzil 20m.",
+        "branch": "Prophecy",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [],
+        "icon": "⏳",
+        "effects": {
+          "range": "20m",
+          "duration": "1 turn delay"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_shield",
+        "name_en": "Shield of Foresight",
+        "name_tr": "Öngörü Kalkanı",
+        "description_en": "Create a predictive shield that moves to intercept attacks. Absorbs up to 40 damage. Duration: 3 turns.",
+        "description_tr": "Saldırıları önlemek için hareket eden öngörüsel bir kalkan oluşturun. 40 hasara kadar emer. Süre: 3 tur.",
+        "branch": "Prophecy",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "om_prophecy_glimpse"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield": "40 HP",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_vision",
+        "name_en": "True Vision",
+        "name_tr": "Gerçek Görüş",
+        "description_en": "Read the immediate tactical intent of enemies within 30m. Their next attacks have disadvantage.",
+        "description_tr": "30m içindeki düşmanların yakın taktiksel niyetlerini okuyun. Bir sonraki saldırıları dezavantajlı olur.",
+        "branch": "Prophecy",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "om_prophecy_echo"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "radius": "30m",
+          "debuff": "Disadvantage on next attack"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_paradox",
+        "name_en": "Minor Paradox",
+        "name_tr": "Küçük Paradoks",
+        "description_en": "Cause a localized time paradox, forcing an enemy to repeat their last action exactly, but with a 50% chance to fail.",
+        "description_tr": "Bölgesel bir zaman paradoksu yaratarak düşmanı son eylemini birebir tekrarlamaya zorlayın, ancak %50 başarısız olma ihtimaliyle.",
+        "branch": "Prophecy",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [],
+        "icon": "🌀",
+        "effects": {
+          "range": "20m",
+          "debuff": "Repeat action (50% fail)"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_convergence",
+        "name_en": "Convergence",
+        "name_tr": "Yakınsama",
+        "description_en": "Align multiple future timelines so that your next spell is guaranteed to deal maximum damage. Lasts 1 turn.",
+        "description_tr": "Birden fazla gelecek zaman çizelgesini hizalayarak bir sonraki büyünüzün kesinlikle maksimum hasar vermesini sağlayın. 1 tur sürer.",
+        "branch": "Prophecy",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "om_prophecy_delay"
+        ],
+        "icon": "✨",
+        "effects": {
+          "buff": "Max spell damage",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_inevitable",
+        "name_en": "Inevitable Ruin",
+        "name_tr": "Kaçınılmaz Yıkım",
+        "description_en": "Call down a ruinous strike that cannot be avoided. Deals 6d10 arcane damage to a single target up to 40m away.",
+        "description_tr": "Kaçınılması imkansız yıkıcı bir vuruş çağırın. 40m uzaklığa kadar tek bir hedefe 6d10 arkana hasarı verir.",
+        "branch": "Prophecy",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 650,
+        "prerequisites": [
+          "om_prophecy_vision"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "6d10 arcane",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_clairvoyant",
+        "name_en": "Clairvoyant Stance",
+        "name_tr": "Basiret Duruşu",
+        "description_en": "Enter a trance where you perceive attacks before they happen. Gain 30% evasion and advantage on all saves for 3 turns.",
+        "description_tr": "Saldırıları gerçekleşmeden önce algıladığınız bir transa girin. 3 tur boyunca %30 kaçınma ve tüm kurtarma zarlarında avantaj kazanın.",
+        "branch": "Prophecy",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [],
+        "icon": "🧘",
+        "effects": {
+          "buff": "+30% Evasion, Advantage on saves",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_rewind",
+        "name_en": "Time's Ebb",
+        "name_tr": "Zamanın Geri Sarımı",
+        "description_en": "Rewind time for a single ally up to 20m away, restoring their HP and removing conditions applied in the last turn.",
+        "description_tr": "20m uzaklığa kadar tek bir müttefik için zamanı geri alarak HP'lerini yenileyin ve son turda uygulanan durumları kaldırın.",
+        "branch": "Prophecy",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "om_prophecy_paradox"
+        ],
+        "icon": "⏪",
+        "effects": {
+          "range": "20m",
+          "healing": "1 turn revert",
+          "cleanse": "Yes"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_oracle",
+        "name_en": "Words of the Oracle",
+        "name_tr": "Kâhinin Sözleri",
+        "description_en": "Speak words of prophetic power. Enemies in a 15m radius take 5d8 psychic damage and are silenced for 1 turn.",
+        "description_tr": "Kehanet gücüyle dolu sözler söyleyin. 15m yarıçapındaki düşmanlar 5d8 psişik hasar alır ve 1 tur susturulur.",
+        "branch": "Prophecy",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [],
+        "icon": "📜",
+        "effects": {
+          "radius": "15m",
+          "damage": "5d8 psychic",
+          "debuff": "Silence 1 turn"
+        }
+      },
+      {
+        "spell_key": "om_prophecy_ultimate",
+        "name_en": "Absolute Prophecy",
+        "name_tr": "Mutlak Kehanet",
+        "description_en": "Lock the battlefield into an absolute prophecy. For 3 turns, all allied attacks hit and all enemy saves fail. Range: 50m.",
+        "description_tr": "Savaş alanını mutlak bir kehanete kilitleyin. 3 tur boyunca tüm müttefik saldırıları isabet eder ve tüm düşman kurtarma zarları başarısız olur. Menzil: 50m.",
+        "branch": "Prophecy",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "om_prophecy_inevitable",
+          "om_prophecy_rewind"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "50m",
+          "duration": "3 turns",
+          "buff": "Guaranteed hits",
+          "debuff": "Guaranteed save fails"
+        }
+      },
+      {
+        "spell_key": "om_fate_thread",
+        "name_en": "Thread of Fate",
+        "name_tr": "Kader İpliği",
+        "description_en": "See the thread of fate binding an enemy and pull it. Deals 1d8 damage and reduces their movement speed by 3m for 2 turns.",
+        "description_tr": "Bir düşmanı bağlayan kader ipliğini görün ve çekin. 1d8 hasar verir ve 2 tur boyunca hareket hızlarını 3m azaltır.",
+        "branch": "Fate",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧵",
+        "effects": {
+          "damage": "1d8",
+          "range": "20m",
+          "debuff": "-3m speed",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_jinx",
+        "name_en": "Jinx",
+        "name_tr": "Uğursuzluk",
+        "description_en": "Curse an enemy's luck. They must subtract 1d4 from their attack rolls and saving throws for 3 turns. Range 20m.",
+        "description_tr": "Bir düşmanın şansını lanetleyin. 3 tur boyunca saldırı ve kurtarma zarlarından 1d4 çıkarmaları gerekir. Menzil 20m.",
+        "branch": "Fate",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🐈‍⬛",
+        "effects": {
+          "range": "20m",
+          "debuff": "-1d4 to rolls",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_boon",
+        "name_en": "Fortune's Boon",
+        "name_tr": "Talihin Lütfu",
+        "description_en": "Bless an ally with good fortune. They gain advantage on their next attack roll or saving throw within 2 turns.",
+        "description_tr": "Bir müttefiki iyi şansla kutsayın. 2 tur içinde bir sonraki saldırı veya kurtarma zarında avantaj kazanırlar.",
+        "branch": "Fate",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🍀",
+        "effects": {
+          "range": "20m",
+          "buff": "Advantage next roll",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_link",
+        "name_en": "Karmic Link",
+        "name_tr": "Karmik Bağ",
+        "description_en": "Bind the fates of two enemies within 15m. When one takes damage, the other takes 50% of that damage. Lasts 3 turns.",
+        "description_tr": "15m içindeki iki düşmanın kaderini bağlayın. Biri hasar aldığında, diğeri bu hasarın %50'sini alır. 3 tur sürer.",
+        "branch": "Fate",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "om_fate_thread"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "15m",
+          "debuff": "Shared Damage (50%)",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_twist",
+        "name_en": "Twist of Fate",
+        "name_tr": "Kaderin Cilvesi",
+        "description_en": "Reverse the outcome of a recent event. Turn a critical hit against an ally into a normal hit, or vice versa for an enemy.",
+        "description_tr": "Yakın zamandaki bir olayın sonucunu tersine çevirin. Bir müttefike yapılan kritik vuruşu normal bir vuruşa, veya bir düşman için tam tersine çevirin.",
+        "branch": "Fate",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "om_fate_jinx"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "range": "30m",
+          "effect": "Reverse outcome"
+        }
+      },
+      {
+        "spell_key": "om_fate_sever",
+        "name_en": "Sever the Thread",
+        "name_tr": "İpliği Koparmak",
+        "description_en": "Sever the thread of fate of a wounded enemy. If they are below 20% HP, they instantly take 4d10 necrotic damage.",
+        "description_tr": "Yaralı bir düşmanın kader ipliğini koparın. Eğer HP'leri %20'nin altındaysa, anında 4d10 nekrotik hasar alırlar.",
+        "branch": "Fate",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "om_fate_link"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "range": "10m",
+          "damage": "4d10 necrotic (if <20% HP)"
+        }
+      },
+      {
+        "spell_key": "om_fate_scales",
+        "name_en": "Scales of Destiny",
+        "name_tr": "Kaderin Terazisi",
+        "description_en": "Balance the scales of destiny. Average the HP of all allies and enemies in a 10m radius. Range 30m.",
+        "description_tr": "Kaderin terazisini dengeleyin. 10m yarıçapındaki tüm müttefiklerin ve düşmanların HP'sini ortalayın. Menzil 30m.",
+        "branch": "Fate",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [],
+        "icon": "⚖️",
+        "effects": {
+          "range": "30m",
+          "radius": "10m",
+          "effect": "Average HP"
+        }
+      },
+      {
+        "spell_key": "om_fate_weavers",
+        "name_en": "Weaver's Touch",
+        "name_tr": "Dokumacının Dokunuşu",
+        "description_en": "Summon ethereal threads to control the battlefield. Creates a 20m zone where enemies move at half speed and take 3d6 damage.",
+        "description_tr": "Savaş alanını kontrol etmek için ruhani iplikler çağırın. Düşmanların yarı hızda hareket ettiği ve 3d6 hasar aldığı 20m'lik bir alan yaratır.",
+        "branch": "Fate",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "om_fate_twist"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "radius": "20m",
+          "damage": "3d6",
+          "debuff": "Half speed"
+        }
+      },
+      {
+        "spell_key": "om_fate_doom",
+        "name_en": "Impending Doom",
+        "name_tr": "Yaklaşan Kıyamet",
+        "description_en": "Mark an enemy with impending doom. After 3 turns, they take 8d8 arcane damage. Can be cleansed.",
+        "description_tr": "Bir düşmanı yaklaşan kıyametle işaretleyin. 3 tur sonra 8d8 arkana hasarı alırlar. Temizlenebilir.",
+        "branch": "Fate",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "om_fate_sever"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "range": "20m",
+          "damage": "8d8 arcane after 3 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_puppet",
+        "name_en": "Puppet of Destiny",
+        "name_tr": "Kaderin Kuklası",
+        "description_en": "Take control of an enemy's fate. Force them to move up to 10m and make a basic attack against a target of your choice.",
+        "description_tr": "Bir düşmanın kaderinin kontrolünü elinize alın. Onları 10m'ye kadar hareket etmeye ve seçtiğiniz bir hedefe temel saldırı yapmaya zorlayın.",
+        "branch": "Fate",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 650,
+        "prerequisites": [
+          "om_fate_weavers"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "range": "20m",
+          "effect": "Forced movement & attack"
+        }
+      },
+      {
+        "spell_key": "om_fate_rewrite",
+        "name_en": "Rewrite History",
+        "name_tr": "Tarihi Yeniden Yazmak",
+        "description_en": "Rewrite history slightly. Choose a missed spell from the last turn and cast it again without consuming resources.",
+        "description_tr": "Tarihi hafifçe yeniden yazın. Son turda kaçırılan bir büyüyü seçin ve kaynak harcamadan tekrar yapın.",
+        "branch": "Fate",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "om_fate_scales"
+        ],
+        "icon": "✒️",
+        "effects": {
+          "effect": "Free recast of missed spell"
+        }
+      },
+      {
+        "spell_key": "om_fate_chain",
+        "name_en": "Chains of Destiny",
+        "name_tr": "Kader Zincirleri",
+        "description_en": "Chain up to 4 enemies together. Any status effect applied to one spreads to the others. Duration 3 turns, 20m range.",
+        "description_tr": "4 düşmana kadar birbirine zincirleyin. Birine uygulanan herhangi bir durum etkisi diğerlerine yayılır. Süre 3 tur, 20m menzil.",
+        "branch": "Fate",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [],
+        "icon": "⛓️",
+        "effects": {
+          "range": "20m",
+          "effect": "Link up to 4 targets",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "om_fate_ward",
+        "name_en": "Ward of Fortune",
+        "name_tr": "Talih Tılsımı",
+        "description_en": "Place a ward of absolute fortune on an ally. The next instance of damage that would drop them below 1 HP leaves them at 1 HP instead.",
+        "description_tr": "Bir müttefikin üzerine mutlak talih tılsımı yerleştirin. Onları 1 HP'nin altına düşürecek bir sonraki hasar durumu, bunun yerine 1 HP'de bırakır.",
+        "branch": "Fate",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "om_fate_doom"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "range": "15m",
+          "buff": "Survive at 1 HP"
+        }
+      },
+      {
+        "spell_key": "om_fate_ultimate",
+        "name_en": "Master of Destinies",
+        "name_tr": "Kaderlerin Efendisi",
+        "description_en": "Become the Master of Destinies. For 4 turns, you decide the outcome of all coin flips, dice rolls, and random effects in a 40m radius.",
+        "description_tr": "Kaderlerin Efendisi olun. 4 tur boyunca 40m yarıçapındaki tüm yazı tura, zar atışları ve rastgele etkilerin sonucuna siz karar verirsiniz.",
+        "branch": "Fate",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "om_fate_puppet",
+          "om_fate_rewrite"
+        ],
+        "icon": "👑",
+        "effects": {
+          "radius": "40m",
+          "duration": "4 turns",
+          "effect": "Control RNG"
+        }
+      },
+      {
+        "spell_key": "om_divination_sense",
+        "name_en": "Aura Sense",
+        "name_tr": "Aura Sezisi",
+        "description_en": "Sense the presence of magic and living beings through walls within 20m. Reveals hidden or invisible entities.",
+        "description_tr": "20m içinde duvarların ardındaki büyü ve canlı varlıkların mevcudiyetini hissedin. Gizlenmiş veya görünmez varlıkları ortaya çıkarır.",
+        "branch": "Divination",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "📡",
+        "effects": {
+          "radius": "20m",
+          "effect": "Detect magic & entities"
+        }
+      },
+      {
+        "spell_key": "om_divination_scrying",
+        "name_en": "Scrying Eye",
+        "name_tr": "Gözlem Gözü",
+        "description_en": "Summon an invisible sensor up to 100m away to see and hear from that location for up to 10 minutes.",
+        "description_tr": "100m uzağa kadar görünmez bir sensör çağırarak o konumdan 10 dakikaya kadar görüp duyun.",
+        "branch": "Divination",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔮",
+        "effects": {
+          "range": "100m",
+          "duration": "10 minutes",
+          "effect": "Invisible sensor"
+        }
+      },
+      {
+        "spell_key": "om_divination_truth",
+        "name_en": "Zone of Truth",
+        "name_tr": "Doğruluk Alanı",
+        "description_en": "Create a 10m zone. Entities within cannot speak deliberate lies. Lasts 5 minutes.",
+        "description_tr": "10m'lik bir alan yaratın. İçindeki varlıklar kasıtlı olarak yalan söyleyemez. 5 dakika sürer.",
+        "branch": "Divination",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "⚖️",
+        "effects": {
+          "radius": "10m",
+          "duration": "5 minutes",
+          "effect": "No lies"
+        }
+      },
+      {
+        "spell_key": "om_divination_reveal",
+        "name_en": "Reveal the Hidden",
+        "name_tr": "Gizleneni Açığa Çıkar",
+        "description_en": "Reveal the weak points of an enemy. The next attack against them ignores all armor and resistances. Range 30m.",
+        "description_tr": "Bir düşmanın zayıf noktalarını açığa çıkarın. Onlara karşı yapılacak bir sonraki saldırı tüm zırh ve dirençleri yok sayar. Menzil 30m.",
+        "branch": "Divination",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🔦",
+        "effects": {
+          "range": "30m",
+          "debuff": "Ignore armor/resist next attack"
+        }
+      },
+      {
+        "spell_key": "om_divination_mind",
+        "name_en": "Mind Probe",
+        "name_tr": "Zihin Sondası",
+        "description_en": "Probe the surface thoughts of an enemy within 15m. Gain insight into their next move, granting you advantage against them.",
+        "description_tr": "15m içindeki bir düşmanın yüzeysel düşüncelerini sondalayın. Bir sonraki hamlelerine dair içgörü kazanarak onlara karşı avantaj elde edin.",
+        "branch": "Divination",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "om_divination_sense"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "15m",
+          "buff": "Advantage next turn"
+        }
+      },
+      {
+        "spell_key": "om_divination_path",
+        "name_en": "Pathfinder",
+        "name_tr": "Yol Bulucu",
+        "description_en": "Find the safest or fastest path to a location. Grants +20% movement speed to all allies for 2 turns.",
+        "description_tr": "Bir konuma giden en güvenli veya en hızlı yolu bulun. 2 tur boyunca tüm müttefiklere +%20 hareket hızı kazandırır.",
+        "branch": "Divination",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "om_divination_scrying"
+        ],
+        "icon": "🧭",
+        "effects": {
+          "radius": "30m",
+          "buff": "+20% Move Speed",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "om_divination_pierce",
+        "name_en": "Piercing Gaze",
+        "name_tr": "Delici Bakış",
+        "description_en": "Your gaze pierces illusions and magical disguises within 40m. Deals 2d8 psychic damage to targets using such magic.",
+        "description_tr": "Bakışlarınız 40m içindeki illüzyonları ve büyülü kılıkları delip geçer. Bu tür büyüleri kullanan hedeflere 2d8 psişik hasar verir.",
+        "branch": "Divination",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 300,
+        "prerequisites": [
+          "om_divination_truth"
+        ],
+        "icon": "🔭",
+        "effects": {
+          "range": "40m",
+          "damage": "2d8 psychic",
+          "effect": "Dispels illusions"
+        }
+      },
+      {
+        "spell_key": "om_divination_omniscience",
+        "name_en": "Flashes of Omniscience",
+        "name_tr": "Her Şeyi Bilme Parıltıları",
+        "description_en": "Experience a flash of omniscience. Identify all vulnerabilities, resistances, and current HP of all enemies within 30m.",
+        "description_tr": "Her şeyi bilme parıltısı yaşayın. 30m içindeki tüm düşmanların zayıflıklarını, dirençlerini ve mevcut HP'lerini tanımlayın.",
+        "branch": "Divination",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "om_divination_mind"
+        ],
+        "icon": "💡",
+        "effects": {
+          "radius": "30m",
+          "effect": "Reveal stats/weaknesses"
+        }
+      },
+      {
+        "spell_key": "om_divination_soul",
+        "name_en": "Read the Soul",
+        "name_tr": "Ruhu Okumak",
+        "description_en": "Read the target's soul, learning their deepest fears. They must make a Wisdom save or become Frightened for 2 turns. Range 25m.",
+        "description_tr": "Hedefin ruhunu okuyarak en derin korkularını öğrenin. Bilgelik kurtarma zarı atmalıdırlar, aksi takdirde 2 tur boyunca Korkmuş olurlar. Menzil 25m.",
+        "branch": "Divination",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "om_divination_pierce"
+        ],
+        "icon": "👻",
+        "effects": {
+          "range": "25m",
+          "debuff": "Frightened",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "om_divination_map",
+        "name_en": "Astral Map",
+        "name_tr": "Astral Harita",
+        "description_en": "Project an astral map of the battlefield. Allies can teleport up to 10m to any visible location on their next turn.",
+        "description_tr": "Savaş alanının astral bir haritasını yansıtın. Müttefikler bir sonraki turlarında görünür herhangi bir konuma 10m'ye kadar ışınlanabilirler.",
+        "branch": "Divination",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 500,
+        "prerequisites": [
+          "om_divination_path"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "radius": "50m",
+          "effect": "Teleport up to 10m next turn"
+        }
+      },
+      {
+        "spell_key": "om_divination_secrets",
+        "name_en": "Whispers of Secrets",
+        "name_tr": "Sırların Fısıltıları",
+        "description_en": "Uncover hidden knowledge about the area or an item. Also dispels any traps or magical locks within a 15m radius.",
+        "description_tr": "Bölge veya bir eşya hakkındaki gizli bilgileri ortaya çıkarın. Ayrıca 15m yarıçapındaki tüm tuzakları veya büyülü kilitleri dağıtır.",
+        "branch": "Divination",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 650,
+        "prerequisites": [
+          "om_divination_soul"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "radius": "15m",
+          "effect": "Dispel traps/locks, uncover secrets"
+        }
+      },
+      {
+        "spell_key": "om_divination_eye",
+        "name_en": "The All-Seeing Eye",
+        "name_tr": "Her Şeyi Gören Göz",
+        "description_en": "Summon the All-Seeing Eye above the battlefield. It fires beams at enemies who attempt to cast spells, dealing 4d6 damage.",
+        "description_tr": "Savaş alanının üzerinde Her Şeyi Gören Göz'ü çağırın. Büyü yapmaya çalışan düşmanlara ışınlar ateşleyerek 4d6 hasar verir.",
+        "branch": "Divination",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "om_divination_omniscience"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "radius": "40m",
+          "damage": "4d6 arcane",
+          "effect": "Counter-attack casters"
+        }
+      },
+      {
+        "spell_key": "om_divination_judgment",
+        "name_en": "Eye of Judgment",
+        "name_tr": "Yargı Gözü",
+        "description_en": "Judge a target based on their past sins. Deals 1d10 radiant damage for every enemy they have killed in the encounter. Range 30m.",
+        "description_tr": "Bir hedefi geçmiş günahlarına göre yargılayın. Karşılaşmada öldürdükleri her düşman için 1d10 parlak hasar verir. Menzil 30m.",
+        "branch": "Divination",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [],
+        "icon": "🌩️",
+        "effects": {
+          "range": "30m",
+          "damage": "1d10 radiant per kill"
+        }
+      },
+      {
+        "spell_key": "om_divination_ultimate",
+        "name_en": "Omniscient Presence",
+        "name_tr": "Mutlak Bilgelik Varlığı",
+        "description_en": "Become an Omniscient Presence. For 3 turns, the map is fully revealed, invisibility is nullified, and you can cast spells through walls. Range: Global.",
+        "description_tr": "Mutlak Bilgelik Varlığı olun. 3 tur boyunca harita tamamen açılır, görünmezlik iptal olur ve duvarların arkasından büyü yapabilirsiniz. Menzil: Küresel.",
+        "branch": "Divination",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "om_divination_secrets",
+          "om_divination_eye"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "range": "Global",
+          "duration": "3 turns",
+          "effect": "Full vision, cast through walls"
+        }
+      },
+      {
+        "spell_key": "om_cross_clairvoyant_strike",
+        "name_en": "Clairvoyant Strike",
+        "name_tr": "Basiretli Vuruş",
+        "description_en": "Combine foresight with omniscience. Strike an enemy's precise weak point before they expose it. Deals 4d8 damage, ignoring shields.",
+        "description_tr": "Öngörü ve bilgeliği birleştirin. Bir düşmanın zayıf noktasına o daha açığa çıkarmadan vurun. Kalkanları yok sayarak 4d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "om_prophecy_strike",
+          "om_divination_sense"
+        ],
+        "icon": "⚔️👁️",
+        "effects": {
+          "damage": "4d8",
+          "range": "Weapon/Spell",
+          "effect": "Ignores shields"
+        }
+      },
+      {
+        "spell_key": "om_cross_fated_vision",
+        "name_en": "Fated Vision",
+        "name_tr": "Kaderin Görüsü",
+        "description_en": "See the intertwining threads of destiny and intent. All allies gain a 20% critical hit chance against enemies with lower HP.",
+        "description_tr": "Kaderin ve niyetin iç içe geçen ipliklerini görün. Tüm müttefikler, daha düşük HP'ye sahip düşmanlara karşı %20 kritik vuruş şansı kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "om_fate_twist",
+          "om_divination_pierce"
+        ],
+        "icon": "🔮🧵",
+        "effects": {
+          "radius": "50m",
+          "buff": "+20% Crit vs lower HP targets"
+        }
+      },
+      {
+        "spell_key": "om_cross_prophetic_link",
+        "name_en": "Prophetic Link",
+        "name_tr": "Kehanet Bağı",
+        "description_en": "Link an ally's fate to a future event. If they die within 2 turns, time rewinds 1 turn and they are restored to full health.",
+        "description_tr": "Bir müttefikin kaderini gelecekteki bir olaya bağlayın. Eğer 2 tur içinde ölürlerse, zaman 1 tur geri alınır ve tam sağlığa kavuşurlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "om_prophecy_delay",
+          "om_fate_link"
+        ],
+        "icon": "🔗⏳",
+        "effects": {
+          "range": "30m",
+          "duration": "2 turns",
+          "effect": "Auto-revive via time rewind"
+        }
+      },
+      {
+        "spell_key": "om_cross_thread_viewer",
+        "name_en": "Thread Viewer",
+        "name_tr": "İplik Görücü",
+        "description_en": "See the literal threads of connection between enemies. Deal 5d6 damage to a target; this damage cascades to anyone they have buffed.",
+        "description_tr": "Düşmanlar arasındaki somut bağlantı ipliklerini görün. Bir hedefe 5d6 hasar verin; bu hasar onların güçlendirdiği herkese sıçrar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "om_fate_weavers",
+          "om_divination_map"
+        ],
+        "icon": "👁️🕸️",
+        "effects": {
+          "range": "30m",
+          "damage": "5d6",
+          "effect": "Damage cascades to buffed targets"
+        }
+      },
+      {
+        "spell_key": "om_cross_time_weaver",
+        "name_en": "Time Weaver",
+        "name_tr": "Zaman Dokuyucu",
+        "description_en": "Weave time and fate together. Freeze enemies in a 15m radius for 1 turn while permanently altering their fate to increase damage taken by 15%.",
+        "description_tr": "Zamanı ve kaderi birlikte dokuyun. 15m yarıçapındaki düşmanları 1 tur dondururken, aldıkları hasarı kalıcı olarak %15 artıracak şekilde kaderlerini değiştirin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "om_prophecy_paradox",
+          "om_fate_scales"
+        ],
+        "icon": "🕰️✂️",
+        "effects": {
+          "radius": "15m",
+          "duration": "1 turn",
+          "debuff": "Freeze & +15% Damage Taken"
+        }
+      },
+      {
+        "spell_key": "om_cross_all_knowing_strike",
+        "name_en": "All-Knowing Strike",
+        "name_tr": "Her Şeyi Bilen Vuruş",
+        "description_en": "A mental attack that exploits every future mistake the target will make. Deals 8d8 psychic damage and stuns for 1 turn.",
+        "description_tr": "Hedefin gelecekte yapacağı her hatayı sömüren zihinsel bir saldırı. 8d8 psişik hasar verir ve 1 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "om_prophecy_vision",
+          "om_divination_omniscience"
+        ],
+        "icon": "⚡🧠",
+        "effects": {
+          "range": "20m",
+          "damage": "8d8 psychic",
+          "debuff": "Stun 1 turn"
+        }
+      },
+      {
+        "spell_key": "om_cross_reality_shift",
+        "name_en": "Reality Shift",
+        "name_tr": "Gerçeklik Kayması",
+        "description_en": "Shift reality to an alternate timeline where your team is winning. Heal all allies for 30% of max HP and reduce all cooldowns by 1.",
+        "description_tr": "Gerçekliği takımınızın kazandığı alternatif bir zaman çizelgesine kaydırın. Tüm müttefikleri maks HP'lerinin %30'u kadar iyileştirin ve tüm bekleme sürelerini 1 azaltın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "om_prophecy_rewind",
+          "om_fate_rewrite"
+        ],
+        "icon": "🌌🔄",
+        "effects": {
+          "radius": "Global",
+          "healing": "30% Max HP",
+          "effect": "Reduce cooldowns by 1"
+        }
+      },
+      {
+        "spell_key": "om_grand_ultimate",
+        "name_en": "The Akashic Record",
+        "name_tr": "Akaşik Kayıtlar",
+        "description_en": "Access the Akashic Record, the archive of all pasts, presents, and futures. For 5 turns, you control the flow of battle: enemies take double damage, allies take half damage, and you predict all enemy actions. Range: 100m.",
+        "description_tr": "Tüm geçmişlerin, bugünlerin ve geleceklerin arşivi olan Akaşik Kayıtlara erişin. 5 tur boyunca savaşın akışını kontrol edersiniz: düşmanlar iki kat hasar alır, müttefikler yarı hasar alır ve tüm düşman eylemlerini tahmin edersiniz. Menzil: 100m.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "om_prophecy_ultimate",
+          "om_fate_ultimate",
+          "om_divination_ultimate"
+        ],
+        "icon": "💠",
+        "effects": {
+          "range": "100m",
+          "duration": "5 turns",
+          "effect": "Double enemy dmg taken, half ally dmg taken, predict actions"
+        }
+      }
+    ]
+  }
+]

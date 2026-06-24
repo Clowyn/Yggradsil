@@ -1,0 +1,996 @@
+[
+  {
+    "subclass_key": "echoblade",
+    "tree_name_en": "Echoblade",
+    "tree_name_tr": "Yankı Kılıcı",
+    "tree_desc_en": "Masters of sound and vibration. Echoblades weave sonic waves, delayed echoes, and molecular vibrations into their deadly assassinations.",
+    "tree_desc_tr": "Ses ve titreşim ustaları. Yankı Kılıçları; sonik dalgaları, gecikmeli yankıları ve moleküler titreşimleri ölümcül suikastlerine işlerler.",
+    "branches": [
+      "Sonic",
+      "Echo",
+      "Vibration"
+    ],
+    "spells": [
+      {
+        "spell_key": "eb_sonic_slash",
+        "name_en": "Sonic Slash",
+        "name_tr": "Sonik Kesik",
+        "description_en": "Melee attack that releases a small 3m sound blade dealing 1d8 sonic damage.",
+        "description_tr": "3m ilerleyen küçük bir ses bıçağı fırlatan ve 1d8 sonik hasar veren yakın dövüş saldırısı.",
+        "branch": "Sonic",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d8",
+          "range": "3m",
+          "damage_type": "sonic"
+        }
+      },
+      {
+        "spell_key": "eb_sound_dart",
+        "name_en": "Sound Dart",
+        "name_tr": "Ses Oku",
+        "description_en": "Throws a condensed ball of sound 15m away dealing 1d6 damage.",
+        "description_tr": "15m uzağa fırlatılan ve 1d6 hasar veren yoğunlaştırılmış bir ses topu.",
+        "branch": "Sonic",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "damage": "1d6",
+          "range": "15m",
+          "damage_type": "sonic"
+        }
+      },
+      {
+        "spell_key": "eb_deafening_ring",
+        "name_en": "Deafening Ring",
+        "name_tr": "Sağır Edici Çınlama",
+        "description_en": "Enemies within 5m take 1d4 damage and are deafened for 1 round.",
+        "description_tr": "5m içindeki düşmanlar 1d4 hasar alır ve 1 tur boyunca sağır olurlar.",
+        "branch": "Sonic",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔔",
+        "effects": {
+          "damage": "1d4",
+          "range": "5m",
+          "duration": "1 round",
+          "status": "deafened"
+        }
+      },
+      {
+        "spell_key": "eb_sonic_step",
+        "name_en": "Sonic Step",
+        "name_tr": "Sonik Adım",
+        "description_en": "Dash 10m instantly using sound propulsion.",
+        "description_tr": "Ses itiş gücünü kullanarak anında 10m ileri atılır.",
+        "branch": "Sonic",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "eb_sonic_slash"
+        ],
+        "icon": "👟",
+        "effects": {
+          "range": "10m",
+          "type": "movement"
+        }
+      },
+      {
+        "spell_key": "eb_screeching_blade",
+        "name_en": "Screeching Blade",
+        "name_tr": "Çığlık Atan Kılıç",
+        "description_en": "Infuses weapon with screeching sound, adding 2d6 sonic damage and a 20% chance to fear.",
+        "description_tr": "Silahı çığlık atan bir sesle doldurarak 2d6 sonik hasar ve %20 korkutma şansı ekler.",
+        "branch": "Sonic",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "eb_sonic_slash"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "bonus_damage": "2d6",
+          "status_chance": "20%",
+          "status": "fear"
+        }
+      },
+      {
+        "spell_key": "eb_sonic_boom",
+        "name_en": "Sonic Boom",
+        "name_tr": "Sonik Patlama",
+        "description_en": "Jump and crash down, dealing 3d6 sonic damage in a 6m radius.",
+        "description_tr": "Zıplayıp yere çarparak 6m yarıçapında 3d6 sonik hasar verir.",
+        "branch": "Sonic",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "eb_deafening_ring"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6",
+          "range": "6m radius",
+          "damage_type": "sonic"
+        }
+      },
+      {
+        "spell_key": "eb_soundwave_pulse",
+        "name_en": "Soundwave Pulse",
+        "name_tr": "Ses Dalgası Vuruşu",
+        "description_en": "Releases a 10m cone of sound pushing enemies back 3m and dealing 2d8 damage.",
+        "description_tr": "Düşmanları 3m geriye iten ve 2d8 hasar veren 10m'lik bir ses konisi serbest bırakır.",
+        "branch": "Sonic",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "eb_sound_dart"
+        ],
+        "icon": "📢",
+        "effects": {
+          "damage": "2d8",
+          "range": "10m cone",
+          "push_distance": "3m"
+        }
+      },
+      {
+        "spell_key": "eb_shatter_pitch",
+        "name_en": "Shatter Pitch",
+        "name_tr": "Parçalayan Frekans",
+        "description_en": "A high-pitch sound that shatters glass and deals 4d8 damage to constructs/crystalline enemies (3d8 normal).",
+        "description_tr": "Camı parçalayan ve yapay/kristal düşmanlara 4d8 (diğerlerine 3d8) hasar veren tiz bir ses.",
+        "branch": "Sonic",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "eb_screeching_blade"
+        ],
+        "icon": "🎼",
+        "effects": {
+          "damage": "3d8",
+          "conditional_damage": "4d8",
+          "condition": "constructs/crystalline"
+        }
+      },
+      {
+        "spell_key": "eb_sonic_tornado",
+        "name_en": "Sonic Tornado",
+        "name_tr": "Sonik Kasırga",
+        "description_en": "Creates a 5m wide tornado of sound that deals 4d6 damage per turn for 3 turns.",
+        "description_tr": "3 tur boyunca tur başına 4d6 hasar veren 5m genişliğinde bir ses kasırgası yaratır.",
+        "branch": "Sonic",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "eb_sonic_boom"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d6",
+          "range": "5m width",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "eb_piercing_whistle",
+        "name_en": "Piercing Whistle",
+        "name_tr": "Delici Islık",
+        "description_en": "A targeted whistle dealing 5d6 sonic damage and stunning for 1 round at 20m.",
+        "description_tr": "20m mesafeden hedefi hedef alan, 5d6 sonik hasar veren ve 1 tur sersemleten delici bir ıslık.",
+        "branch": "Sonic",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "eb_soundwave_pulse"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "damage": "5d6",
+          "range": "20m",
+          "duration": "1 round",
+          "status": "stunned"
+        }
+      },
+      {
+        "spell_key": "eb_banshee_wail",
+        "name_en": "Banshee Wail",
+        "name_tr": "Ölüm Perisi Feryadı",
+        "description_en": "Emits a wail in a 15m radius dealing 8d6 damage; enemies failing a save are paralyzed.",
+        "description_tr": "15m yarıçapında 8d6 hasar veren bir feryat yayar; kurtarma zarında başarısız olan düşmanlar felç olur.",
+        "branch": "Sonic",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "eb_shatter_pitch"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "8d6",
+          "range": "15m radius",
+          "status": "paralyzed"
+        }
+      },
+      {
+        "spell_key": "eb_speed_of_sound",
+        "name_en": "Speed of Sound",
+        "name_tr": "Ses Hızı",
+        "description_en": "Buffs self: move speed tripled, attacks deal extra 3d8 sonic damage for 3 rounds.",
+        "description_tr": "Kendini güçlendirir: 3 tur boyunca hareket hızı 3 katına çıkar ve saldırılar fazladan 3d8 sonik hasar verir.",
+        "branch": "Sonic",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 800,
+        "prerequisites": [
+          "eb_sonic_step"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "buff": "3x move speed",
+          "bonus_damage": "3d8",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "eb_sonic_barrage",
+        "name_en": "Sonic Barrage",
+        "name_tr": "Sonik Yaylım Ateşi",
+        "description_en": "Fires 10 sonic darts, each dealing 2d6 damage to random enemies in 20m.",
+        "description_tr": "20m içindeki rastgele düşmanlara her biri 2d6 hasar veren 10 adet sonik ok fırlatır.",
+        "branch": "Sonic",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "eb_sonic_tornado"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "projectiles": 10,
+          "damage_per_projectile": "2d6",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "eb_symphony_of_destruction",
+        "name_en": "Symphony of Destruction",
+        "name_tr": "Yıkım Senfonisi",
+        "description_en": "A massive 30m AOE dealing 12d10 sonic damage, deafening and pushing all enemies 10m away.",
+        "description_tr": "Tüm düşmanları sağır eden, 10m geriye iten ve 12d10 sonik hasar veren devasa 30m'lik bir alan saldırısı.",
+        "branch": "Sonic",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "eb_banshee_wail",
+          "eb_sonic_barrage"
+        ],
+        "icon": "🎵",
+        "effects": {
+          "damage": "12d10",
+          "range": "30m AOE",
+          "push_distance": "10m",
+          "status": "deafened"
+        }
+      },
+      {
+        "spell_key": "eb_echo_strike",
+        "name_en": "Echo Strike",
+        "name_tr": "Yankı Vuruşu",
+        "description_en": "After hitting an enemy, an echo hits them again next turn for 50% damage.",
+        "description_tr": "Bir düşmana vurduktan sonra, sonraki tur bir yankı ona %50 hasarla tekrar vurur.",
+        "branch": "Echo",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔄",
+        "effects": {
+          "delay": "1 turn",
+          "echo_damage": "50%"
+        }
+      },
+      {
+        "spell_key": "eb_phantom_sound",
+        "name_en": "Phantom Sound",
+        "name_tr": "Hayalet Ses",
+        "description_en": "Creates illusory footsteps or sounds up to 30m away to distract enemies.",
+        "description_tr": "Düşmanları dikkatini dağıtmak için 30m uzağa kadar yanılsamalı ayak sesleri veya sesler yaratır.",
+        "branch": "Echo",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "range": "30m",
+          "effect": "distraction"
+        }
+      },
+      {
+        "spell_key": "eb_repeating_edge",
+        "name_en": "Repeating Edge",
+        "name_tr": "Tekrarlayan Kenar",
+        "description_en": "The next 3 attacks gain a 1d4 damage echo effect.",
+        "description_tr": "Sonraki 3 saldırı 1d4 hasarlık bir yankı etkisi kazanır.",
+        "branch": "Echo",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔁",
+        "effects": {
+          "charges": 3,
+          "bonus_damage": "1d4"
+        }
+      },
+      {
+        "spell_key": "eb_delay_cut",
+        "name_en": "Delay Cut",
+        "name_tr": "Gecikmeli Kesik",
+        "description_en": "A strike that deals no damage initially, but deals 3d6 damage after 2 rounds.",
+        "description_tr": "Başlangıçta hasar vermeyen ancak 2 tur sonra 3d6 hasar veren bir vuruş.",
+        "branch": "Echo",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "eb_echo_strike"
+        ],
+        "icon": "⏱️",
+        "effects": {
+          "damage": "3d6",
+          "delay": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "eb_double_echo",
+        "name_en": "Double Echo",
+        "name_tr": "Çifte Yankı",
+        "description_en": "Echo strikes now hit twice, dealing 30% damage each.",
+        "description_tr": "Yankı vuruşları artık iki kez vurur ve her biri %30 hasar verir.",
+        "branch": "Echo",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "eb_echo_strike"
+        ],
+        "icon": "👯",
+        "effects": {
+          "hits": 2,
+          "echo_damage": "30% each"
+        }
+      },
+      {
+        "spell_key": "eb_echo_decoy",
+        "name_en": "Echo Decoy",
+        "name_tr": "Yankı Yemi",
+        "description_en": "Creates a clone made of sound that takes 1 hit and explodes for 2d6 damage in 3m.",
+        "description_tr": "Sesten yapılmış, 1 vuruş alabilen ve yok olduğunda 3m içinde 2d6 hasarla patlayan bir kopya yaratır.",
+        "branch": "Echo",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "eb_phantom_sound"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "hp": "1 hit",
+          "explosion_damage": "2d6",
+          "explosion_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "eb_resounding_parry",
+        "name_en": "Resounding Parry",
+        "name_tr": "Çınlayan Savuşturma",
+        "description_en": "Parry an attack; the blocked damage echoes back to the attacker as 2d8 sonic damage.",
+        "description_tr": "Bir saldırıyı savuşturur; engellenen hasar saldırgana 2d8 sonik hasar olarak yankılanır.",
+        "branch": "Echo",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "eb_repeating_edge"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "type": "reaction",
+          "reflection_damage": "2d8"
+        }
+      },
+      {
+        "spell_key": "eb_phantom_assault",
+        "name_en": "Phantom Assault",
+        "name_tr": "Hayalet Saldırı",
+        "description_en": "Summons 3 echo clones that each strike a target for 3d6 damage and vanish.",
+        "description_tr": "Hedefe her biri 3d6 hasar verip kaybolan 3 adet yankı kopyası çağırır.",
+        "branch": "Echo",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "eb_echo_decoy"
+        ],
+        "icon": "👥",
+        "effects": {
+          "clones": 3,
+          "damage_per_clone": "3d6"
+        }
+      },
+      {
+        "spell_key": "eb_reverberating_wounds",
+        "name_en": "Reverberating Wounds",
+        "name_tr": "Yankılanan Yaralar",
+        "description_en": "Curses a target: every time they take damage, they take an extra 2d6 echo damage for 3 rounds.",
+        "description_tr": "Hedefi lanetler: 3 tur boyunca hasar aldıklarında ekstra 2d6 yankı hasarı alırlar.",
+        "branch": "Echo",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "eb_double_echo"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "bonus_damage": "2d6",
+          "trigger": "on taking damage",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "eb_echo_chamber",
+        "name_en": "Echo Chamber",
+        "name_tr": "Yankı Odası",
+        "description_en": "Traps an enemy in a 4m zone. Any damage they take inside bounces off walls, hitting them again for 50%.",
+        "description_tr": "Bir düşmanı 4m'lik bir alana hapseder. İçeride aldıkları herhangi bir hasar duvarlardan sekerek onlara %50 güçle tekrar çarpar.",
+        "branch": "Echo",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "eb_resounding_parry"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "range": "4m zone",
+          "echo_damage": "50%"
+        }
+      },
+      {
+        "spell_key": "eb_infinite_echo",
+        "name_en": "Infinite Echo",
+        "name_tr": "Sonsuz Yankı",
+        "description_en": "A strike dealing 6d6 damage. If it kills, the damage echoes to a nearby enemy, repeating infinitely until it doesn't kill.",
+        "description_tr": "6d6 hasar veren bir vuruş. Eğer öldürürse, hasar yakındaki bir düşmana yankılanır ve öldürmeyene kadar sonsuz kez tekrarlanır.",
+        "branch": "Echo",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "eb_reverberating_wounds"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "damage": "6d6",
+          "chain_condition": "on kill"
+        }
+      },
+      {
+        "spell_key": "eb_mirror_of_sound",
+        "name_en": "Mirror of Sound",
+        "name_tr": "Ses Aynası",
+        "description_en": "Reflects all ranged projectile attacks back at attackers for 2 turns.",
+        "description_tr": "Tüm menzilli mermi saldırılarını 2 tur boyunca saldırganlara geri yansıtır.",
+        "branch": "Echo",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 800,
+        "prerequisites": [
+          "eb_echo_chamber"
+        ],
+        "icon": "🪩",
+        "effects": {
+          "effect": "projectile reflection",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "eb_temporal_echo",
+        "name_en": "Temporal Echo",
+        "name_tr": "Zamansal Yankı",
+        "description_en": "Resets your position and health to what it was 1 turn ago.",
+        "description_tr": "Konumunuzu ve sağlığınızı 1 tur önceki haline sıfırlar.",
+        "branch": "Echo",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "eb_phantom_assault"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "effect": "time rewind",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "eb_endless_crescendo",
+        "name_en": "Endless Crescendo",
+        "name_tr": "Sonsuz Kreşendo",
+        "description_en": "Places a mark. Every attack on the target adds an echo. After 3 rounds, all echoes detonate at once for 100% accumulated damage as true damage.",
+        "description_tr": "Bir işaret koyar. Hedefe yapılan her saldırı bir yankı ekler. 3 tur sonra, tüm yankılar birikmiş hasarın %100'ü kadar gerçek hasar vermek üzere aynı anda patlar.",
+        "branch": "Echo",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "eb_infinite_echo",
+          "eb_temporal_echo"
+        ],
+        "icon": "🎻",
+        "effects": {
+          "duration": "3 rounds",
+          "detonation_damage": "100% accumulated",
+          "damage_type": "true damage"
+        }
+      },
+      {
+        "spell_key": "eb_vibrating_blade",
+        "name_en": "Vibrating Blade",
+        "name_tr": "Titreşen Kılıç",
+        "description_en": "Weapon ignores 2 points of armor, adding 1d6 damage.",
+        "description_tr": "Silah 2 zırh puanını görmezden gelir ve 1d6 hasar ekler.",
+        "branch": "Vibration",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "〰️",
+        "effects": {
+          "armor_pierce": 2,
+          "bonus_damage": "1d6"
+        }
+      },
+      {
+        "spell_key": "eb_tremor_sense",
+        "name_en": "Tremor Sense",
+        "name_tr": "Sismik His",
+        "description_en": "Gain 15m tremorsense for 1 hour.",
+        "description_tr": "1 saat boyunca 15m sismik his kazanırsınız.",
+        "branch": "Vibration",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "range": "15m",
+          "duration": "1 hour",
+          "sense": "tremorsense"
+        }
+      },
+      {
+        "spell_key": "eb_shattering_strike",
+        "name_en": "Shattering Strike",
+        "name_tr": "Parçalayan Vuruş",
+        "description_en": "Hits a shield or armor, reducing enemy AC by 1.",
+        "description_tr": "Bir kalkana veya zırha vurarak düşmanın Zırh Sınıfını (AC) 1 azaltır.",
+        "branch": "Vibration",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "ac_reduction": 1
+        }
+      },
+      {
+        "spell_key": "eb_resonance_touch",
+        "name_en": "Resonance Touch",
+        "name_tr": "Rezonans Dokunuşu",
+        "description_en": "A melee touch dealing 1d10 internal damage.",
+        "description_tr": "1d10 içsel hasar veren yakın dövüş dokunuşu.",
+        "branch": "Vibration",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "eb_vibrating_blade"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "damage": "1d10",
+          "damage_type": "internal"
+        }
+      },
+      {
+        "spell_key": "eb_internal_rupture",
+        "name_en": "Internal Rupture",
+        "name_tr": "İçsel Yırtılma",
+        "description_en": "Hits enemy organs. 2d8 damage, target bleeds 1d4 per turn for 3 turns.",
+        "description_tr": "Düşmanın organlarına vurur. 2d8 hasar, hedef 3 tur boyunca tur başına 1d4 kanar.",
+        "branch": "Vibration",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "eb_resonance_touch"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "damage": "2d8",
+          "bleed_damage": "1d4 per turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "eb_quake_step",
+        "name_en": "Quake Step",
+        "name_tr": "Deprem Adımı",
+        "description_en": "Every step shakes the ground, making a 3m radius difficult terrain around you.",
+        "description_tr": "Her adım yeri sarsarak etrafınızdaki 3m'lik yarıçapı zorlu araziye dönüştürür.",
+        "branch": "Vibration",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "eb_tremor_sense"
+        ],
+        "icon": "🥾",
+        "effects": {
+          "range": "3m radius",
+          "effect": "difficult terrain"
+        }
+      },
+      {
+        "spell_key": "eb_armor_bypass",
+        "name_en": "Armor Bypass",
+        "name_tr": "Zırh Delme",
+        "description_en": "Next attack completely ignores physical armor and deals true damage.",
+        "description_tr": "Sonraki saldırı fiziksel zırhı tamamen görmezden gelir ve gerçek hasar verir.",
+        "branch": "Vibration",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "eb_shattering_strike"
+        ],
+        "icon": "🔓",
+        "effects": {
+          "effect": "ignore armor",
+          "damage_type": "true damage"
+        }
+      },
+      {
+        "spell_key": "eb_high_frequency_blade",
+        "name_en": "High Frequency Blade",
+        "name_tr": "Yüksek Frekanslı Kılıç",
+        "description_en": "Weapon vibrates at high frequency. Deals 4d8 damage and easily cuts through steel.",
+        "description_tr": "Silah yüksek frekansta titreşir. 4d8 hasar verir ve çeliği kolayca keser.",
+        "branch": "Vibration",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "eb_armor_bypass"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "4d8",
+          "material_bypass": "steel"
+        }
+      },
+      {
+        "spell_key": "eb_seismic_wave",
+        "name_en": "Seismic Wave",
+        "name_tr": "Sismik Dalga",
+        "description_en": "Strikes the ground, sending a 15m line of trembling earth dealing 4d6 damage and knocking prone.",
+        "description_tr": "Yere vurarak 15m'lik sarsılan bir toprak hattı gönderir, 4d6 hasar verir ve yere serer.",
+        "branch": "Vibration",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "eb_quake_step"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "4d6",
+          "range": "15m line",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "eb_disrupting_rhythm",
+        "name_en": "Disrupting Rhythm",
+        "name_tr": "Bozan Ritim",
+        "description_en": "Hits the target, disrupting their internal rhythm and giving disadvantage on attacks for 2 turns.",
+        "description_tr": "Hedefe vurarak iç ritmini bozar ve 2 tur boyunca saldırılarda dezavantaj verir.",
+        "branch": "Vibration",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "eb_internal_rupture"
+        ],
+        "icon": "💓",
+        "effects": {
+          "status": "disadvantage on attacks",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "eb_molecular_shatter",
+        "name_en": "Molecular Shatter",
+        "name_tr": "Moleküler Parçalanma",
+        "description_en": "Vibrates the target's molecules. 8d8 damage, destroying non-magical worn armor.",
+        "description_tr": "Hedefin moleküllerini titreştirir. 8d8 hasar, büyülü olmayan giyilen zırhı yok eder.",
+        "branch": "Vibration",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "eb_high_frequency_blade"
+        ],
+        "icon": "⚛️",
+        "effects": {
+          "damage": "8d8",
+          "effect": "destroy non-magical armor"
+        }
+      },
+      {
+        "spell_key": "eb_tectonic_shift",
+        "name_en": "Tectonic Shift",
+        "name_tr": "Tektonik Kayma",
+        "description_en": "Creates a massive 20m earthquake dealing 6d10 damage and creating fissures.",
+        "description_tr": "Fay hatları yaratan ve 6d10 hasar veren devasa 20m'lik bir deprem yaratır.",
+        "branch": "Vibration",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 800,
+        "prerequisites": [
+          "eb_seismic_wave"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "6d10",
+          "range": "20m radius",
+          "effect": "fissures"
+        }
+      },
+      {
+        "spell_key": "eb_heart_resonance",
+        "name_en": "Heart Resonance",
+        "name_tr": "Kalp Rezonansı",
+        "description_en": "Targets the heart. Deals 5d10 damage; if target is below 20% HP, instant death.",
+        "description_tr": "Kalbi hedefler. 5d10 hasar verir; hedef %20 Canın altındaysa anında ölüm gerçekleşir.",
+        "branch": "Vibration",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "eb_disrupting_rhythm"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "5d10",
+          "condition": "< 20% HP",
+          "effect": "instant death"
+        }
+      },
+      {
+        "spell_key": "eb_absolute_vibration",
+        "name_en": "Absolute Vibration",
+        "name_tr": "Mutlak Titreşim",
+        "description_en": "Vibrates your entire body, making you immune to physical damage and allowing attacks to phase through all defenses, dealing 10d12 true damage for 3 turns.",
+        "description_tr": "Tüm bedeninizi titreştirerek fiziksel hasara bağışıklık kazandırır ve saldırıların tüm savunmalardan geçerek 3 tur boyunca 10d12 gerçek hasar vermesini sağlar.",
+        "branch": "Vibration",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "eb_molecular_shatter",
+          "eb_heart_resonance"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "buff": "physical immunity",
+          "attack_effect": "ignore all defenses",
+          "damage": "10d12 true damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "eb_echolocating_dart",
+        "name_en": "Echolocating Dart",
+        "name_tr": "Yankıyla Yönelen Ok",
+        "description_en": "Fires a dart (1d8). If it hits, the target is tracked, and the next attack against them has advantage and deals +1d8.",
+        "description_tr": "Bir ok (1d8) fırlatır. Vurursa, hedef izlenir ve onlara karşı yapılan sonraki saldırı avantajlı olup +1d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "eb_sound_dart",
+          "eb_phantom_sound"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "damage": "1d8",
+          "status": "tracked",
+          "next_attack": "advantage + 1d8 damage"
+        }
+      },
+      {
+        "spell_key": "eb_tremor_echo",
+        "name_en": "Tremor Echo",
+        "name_tr": "Sismik Yankı",
+        "description_en": "An earthquake (2d6, 5m) that repeats itself 1 turn later in the same spot for the same damage.",
+        "description_tr": "Aynı noktada 1 tur sonra aynı hasarla kendini tekrarlayan bir deprem (2d6, 5m).",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "eb_double_echo",
+          "eb_quake_step"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "2d6",
+          "range": "5m radius",
+          "delay": "1 turn echo"
+        }
+      },
+      {
+        "spell_key": "eb_resonating_boom",
+        "name_en": "Resonating Boom",
+        "name_tr": "Rezonans Patlaması",
+        "description_en": "A sonic boom (3d6) that also reduces enemy armor by 2 in a 6m radius.",
+        "description_tr": "6m yarıçapında 3d6 hasar veren ve düşman zırhını 2 azaltan bir sonik patlama.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "eb_shattering_strike",
+          "eb_sonic_boom"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "3d6",
+          "ac_reduction": 2,
+          "range": "6m radius"
+        }
+      },
+      {
+        "spell_key": "eb_phantom_siren",
+        "name_en": "Phantom Siren",
+        "name_tr": "Hayalet Siren",
+        "description_en": "Creates an illusory siren that wails, dealing 3d6 sonic damage per turn and pulling enemies toward it (10m pull).",
+        "description_tr": "Tur başına 3d6 sonik hasar veren ve düşmanları kendine doğru çeken (10m çekim) yanılsamalı bir siren yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "eb_piercing_whistle",
+          "eb_phantom_assault"
+        ],
+        "icon": "🧜‍♀️",
+        "effects": {
+          "damage": "3d6 per turn",
+          "pull_distance": "10m"
+        }
+      },
+      {
+        "spell_key": "eb_shattering_reflection",
+        "name_en": "Shattering Reflection",
+        "name_tr": "Parçalayan Yansıma",
+        "description_en": "When hit, your echo shatters, dealing 4d6 piercing damage to the attacker and ignoring their armor.",
+        "description_tr": "Vurulduğunuzda yankınız parçalanır, saldırgana 4d6 delici hasar verir ve zırhlarını görmezden gelir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "eb_resounding_parry",
+          "eb_high_frequency_blade"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "trigger": "on hit",
+          "damage": "4d6 piercing",
+          "effect": "ignore armor"
+        }
+      },
+      {
+        "spell_key": "eb_sonic_earthquake",
+        "name_en": "Sonic Earthquake",
+        "name_tr": "Sonik Deprem",
+        "description_en": "A 15m radius quake dealing 5d6 damage and deafening targets for 2 rounds.",
+        "description_tr": "15m yarıçapında 5d6 hasar veren ve hedefleri 2 tur boyunca sağır eden bir sarsıntı.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "eb_seismic_wave",
+          "eb_sonic_tornado"
+        ],
+        "icon": "🫨",
+        "effects": {
+          "damage": "5d6",
+          "range": "15m radius",
+          "status": "deafened",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "eb_harmonic_convergence",
+        "name_en": "Harmonic Convergence",
+        "name_tr": "Harmonik Kavuşum",
+        "description_en": "Combines all 3 principles. Deals 8d8 damage to a target, ignores armor, deafens them, and echoes 50% damage next turn.",
+        "description_tr": "3 prensibi birleştirir. Hedefe 8d8 hasar verir, zırhı yoksayar, onları sağır eder ve sonraki tur hasarın %50'sini yankılar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "eb_banshee_wail",
+          "eb_infinite_echo",
+          "eb_molecular_shatter"
+        ],
+        "icon": "✨",
+        "effects": {
+          "damage": "8d8",
+          "effect": "ignore armor",
+          "status": "deafened",
+          "delay": "1 turn",
+          "echo_damage": "50%"
+        }
+      },
+      {
+        "spell_key": "eb_omega_frequency",
+        "name_en": "Omega Frequency",
+        "name_tr": "Omega Frekansı",
+        "description_en": "The perfect frequency. Erases the target's matter using pure sound. 20d12 true damage. If they survive, their armor is permanently 0 and they are permanently deafened. Range 10m.",
+        "description_tr": "Kusursuz frekans. Saf ses kullanarak hedefin maddesini siler. 20d12 gerçek hasar. Eğer hayatta kalırlarsa, zırhları kalıcı olarak 0 olur ve kalıcı olarak sağır kalırlar. Menzil 10m.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "eb_symphony_of_destruction",
+          "eb_endless_crescendo",
+          "eb_absolute_vibration"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "20d12 true damage",
+          "range": "10m",
+          "effect_if_survive": "armor becomes 0, permanent deafness"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,998 @@
+[
+  {
+    "subclass_key": "sniper",
+    "tree_name_en": "Sniper Arts",
+    "tree_name_tr": "Keskin Nişancı Sanatları",
+    "tree_desc_en": "Mastery of extreme range, precise single shots, camouflage, and deadly nest setups.",
+    "tree_desc_tr": "Aşırı menzil, hassas tekli atışlar, kamuflaj ve ölümcül yuva kurulumlarında ustalık.",
+    "branches": [
+      "Precision",
+      "Nest",
+      "Camouflage"
+    ],
+    "spells": [
+      {
+        "spell_key": "sn_take_aim",
+        "name_en": "Take Aim",
+        "name_tr": "Nişan Al",
+        "description_en": "Focuses to gain advantage on the next attack and increase range by 20m.",
+        "description_tr": "Sonraki saldırıda avantaj kazanmak ve menzili 20m artırmak için odaklanır.",
+        "branch": "Precision",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "advantage": true,
+          "range_bonus": "20m"
+        }
+      },
+      {
+        "spell_key": "sn_eagle_eye",
+        "name_en": "Eagle Eye",
+        "name_tr": "Kartal Gözü",
+        "description_en": "Passive. Increases base attack range by 50m and vision range by 100m.",
+        "description_tr": "Pasif. Temel saldırı menzilini 50m ve görüş menzilini 100m artırır.",
+        "branch": "Precision",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "sn_take_aim"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "base_range": "+50m",
+          "vision": "+100m"
+        }
+      },
+      {
+        "spell_key": "sn_vital_strike",
+        "name_en": "Vital Strike",
+        "name_tr": "Hayati Vuruş",
+        "description_en": "Target a weak point. +20% crit chance and adds 2d8 piercing damage.",
+        "description_tr": "Zayıf bir noktayı hedef al. %+20 kritik şansı ve 2d8 delici hasar ekler.",
+        "branch": "Precision",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [
+          "sn_take_aim"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "crit_chance": "+20%",
+          "bonus_damage": "2d8"
+        }
+      },
+      {
+        "spell_key": "sn_wind_reader",
+        "name_en": "Wind Reader",
+        "name_tr": "Rüzgar Okuyucu",
+        "description_en": "Ignore penalties from wind and half-cover. Shots curve to hit targets behind obstacles.",
+        "description_tr": "Rüzgar ve yarım siper cezalarını yok sayar. Atışlar engellerin arkasındaki hedefleri vurmak için kavis çizer.",
+        "branch": "Precision",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sn_eagle_eye"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "ignore_cover": "half",
+          "ignore_wind": true
+        }
+      },
+      {
+        "spell_key": "sn_piercing_shot",
+        "name_en": "Piercing Shot",
+        "name_tr": "Delici Atış",
+        "description_en": "The shot passes through the target in a 30m line, dealing damage to all enemies behind.",
+        "description_tr": "Atış 30m'lik bir hatta hedefin içinden geçerek arkasındaki tüm düşmanlara hasar verir.",
+        "branch": "Precision",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 230,
+        "prerequisites": [
+          "sn_vital_strike"
+        ],
+        "icon": "🪡",
+        "effects": {
+          "aoe": "30m line",
+          "piercing": true
+        }
+      },
+      {
+        "spell_key": "sn_headshot",
+        "name_en": "Headshot",
+        "name_tr": "Kafadan Vuruş",
+        "description_en": "A precise shot aiming for the head. Deals 4d10 damage and stuns the target for 1 turn on critical hits.",
+        "description_tr": "Kafayı hedefleyen hassas bir atış. 4d10 hasar verir ve kritik vuruşlarda hedefi 1 tur sersemletir.",
+        "branch": "Precision",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 280,
+        "prerequisites": [
+          "sn_vital_strike"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "4d10",
+          "stun_on_crit": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sn_heart_seeker",
+        "name_en": "Heart Seeker",
+        "name_tr": "Kalp Arayan",
+        "description_en": "A homing bullet that cannot miss. Deals 6d10 damage and causes severe bleeding (2d6 per turn).",
+        "description_tr": "Kaçıramayan güdümlü bir mermi. 6d10 hasar verir ve şiddetli kanamaya (tur başına 2d6) neden olur.",
+        "branch": "Precision",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "sn_wind_reader",
+          "sn_headshot"
+        ],
+        "icon": "💘",
+        "effects": {
+          "damage": "6d10",
+          "auto_hit": true,
+          "bleed": "2d6/turn"
+        }
+      },
+      {
+        "spell_key": "sn_armor_bane",
+        "name_en": "Armor Bane",
+        "name_tr": "Zırh Düşmanı",
+        "description_en": "Fires a tungsten-core round that ignores all physical armor and reduces target AC by 4.",
+        "description_tr": "Tüm fiziksel zırhları yok sayan ve hedefin AC'sini 4 düşüren tungsten çekirdekli bir mermi ateşler.",
+        "branch": "Precision",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "sn_piercing_shot"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "armor_penetration": "100%",
+          "ac_reduction": 4
+        }
+      },
+      {
+        "spell_key": "sn_ricochet_shot",
+        "name_en": "Ricochet Shot",
+        "name_tr": "Seken Atış",
+        "description_en": "The bullet bounces from the primary target to up to 3 enemies within 15m of each other.",
+        "description_tr": "Mermi birincil hedeften sekerek birbirinden en fazla 15m uzaktaki 3 düşmana kadar çarpar.",
+        "branch": "Precision",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sn_piercing_shot"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "bounces": 3,
+          "bounce_range": "15m"
+        }
+      },
+      {
+        "spell_key": "sn_lethal_trajectory",
+        "name_en": "Lethal Trajectory",
+        "name_tr": "Ölümcül Yörünge",
+        "description_en": "Take a full turn to calculate the perfect shot. Next attack deals +200% damage and knocks the target back 10m.",
+        "description_tr": "Kusursuz atışı hesaplamak için tam bir tur harca. Sonraki saldırı %+200 hasar verir ve hedefi 10m geriye savurur.",
+        "branch": "Precision",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sn_heart_seeker"
+        ],
+        "icon": "📐",
+        "effects": {
+          "damage_multiplier": "3.0x",
+          "knockback": "10m",
+          "cast_time": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sn_shatter_shot",
+        "name_en": "Shatter Shot",
+        "name_tr": "Parçalayan Atış",
+        "description_en": "Destroys magical barriers, physical shields, and heavily damages limbs, crippling movement.",
+        "description_tr": "Büyülü bariyerleri ve fiziksel kalkanları yok eder, uzuvlara ağır hasar vererek hareketi kısıtlar.",
+        "branch": "Precision",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sn_armor_bane"
+        ],
+        "icon": "💥",
+        "effects": {
+          "destroy_shields": true,
+          "cripple_movement": true
+        }
+      },
+      {
+        "spell_key": "sn_horizon_piercer",
+        "name_en": "Horizon Piercer",
+        "name_tr": "Ufuk Delen",
+        "description_en": "An extreme-range shot (up to 1000m). Deals massive 10d10 damage and bypasses all non-magical cover.",
+        "description_tr": "Aşırı uzun menzilli bir atış (1000m'ye kadar). Devasa 10d10 hasar verir ve tüm büyüsel olmayan siperleri aşar.",
+        "branch": "Precision",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sn_lethal_trajectory"
+        ],
+        "icon": "🌅",
+        "effects": {
+          "range": "1000m",
+          "damage": "10d10",
+          "ignore_cover": "all"
+        }
+      },
+      {
+        "spell_key": "sn_death_mark",
+        "name_en": "Death Mark",
+        "name_tr": "Ölüm İşareti",
+        "description_en": "Marks a target for execution. All attacks against this target by the sniper have 100% critical hit chance.",
+        "description_tr": "Bir hedefi infaz için işaretler. Keskin nişancının bu hedefe yapacağı tüm saldırılar %100 kritik vuruş şansına sahip olur.",
+        "branch": "Precision",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "sn_horizon_piercer",
+          "sn_shatter_shot"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "mark": "execution",
+          "crit_chance": "100%"
+        }
+      },
+      {
+        "spell_key": "sn_gods_eye",
+        "name_en": "God's Eye",
+        "name_tr": "Tanrı'nın Gözü",
+        "description_en": "Ultimate precision. Shoot a target anywhere on the same plane of existence. Deals 20d12 true damage.",
+        "description_tr": "Nihai hassasiyet. Aynı varoluş düzlemindeki herhangi bir yerdeki hedefi vur. 20d12 gerçek hasar verir.",
+        "branch": "Precision",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "sn_death_mark"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "infinite",
+          "damage": "20d12 true",
+          "ignore_invulnerability": true
+        }
+      },
+      {
+        "spell_key": "sn_entrench",
+        "name_en": "Entrench",
+        "name_tr": "Siper Al",
+        "description_en": "Set up a bipod. Movement becomes 0, but attack range increases by 30m and recoil is negated.",
+        "description_tr": "Bir çatal ayak kur. Hareket 0 olur ancak saldırı menzili 30m artar ve geri tepme sıfırlanır.",
+        "branch": "Nest",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧱",
+        "effects": {
+          "speed": 0,
+          "range_bonus": "30m",
+          "recoil": 0
+        }
+      },
+      {
+        "spell_key": "sn_tripwire",
+        "name_en": "Tripwire",
+        "name_tr": "Bubi Tuzağı",
+        "description_en": "Place a trap in a 5m line. Enemies crossing it take 2d6 explosive damage and are rooted for 1 turn.",
+        "description_tr": "5m'lik bir hatta tuzak kur. Üzerinden geçen düşmanlar 2d6 patlayıcı hasar alır ve 1 tur yerine sabitlenir.",
+        "branch": "Nest",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [
+          "sn_entrench"
+        ],
+        "icon": "🪢",
+        "effects": {
+          "damage": "2d6",
+          "root": "1 turn",
+          "length": "5m"
+        }
+      },
+      {
+        "spell_key": "sn_scout_drone",
+        "name_en": "Scout Drone",
+        "name_tr": "Keşif Dronu",
+        "description_en": "Deploy a mechanical bird to scout the area within 200m, revealing enemies and traps.",
+        "description_tr": "200m içindeki alanı keşfetmek, düşmanları ve tuzakları ortaya çıkarmak için mekanik bir kuş konuşlandır.",
+        "branch": "Nest",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 130,
+        "prerequisites": [
+          "sn_entrench"
+        ],
+        "icon": "🚁",
+        "effects": {
+          "scout_radius": "200m",
+          "reveal_stealth": true
+        }
+      },
+      {
+        "spell_key": "sn_smoke_canister",
+        "name_en": "Smoke Canister",
+        "name_tr": "Sis Kutusu",
+        "description_en": "Deploy a smoke screen covering a 10m radius. Blocks line of sight for enemies, but you can see through it.",
+        "description_tr": "10m yarıçaplı bir sis perdesi konuşlandır. Düşmanların görüşünü engeller ancak sen içinden görebilirsin.",
+        "branch": "Nest",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "sn_tripwire"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "radius": "10m",
+          "block_los": true,
+          "see_through": true
+        }
+      },
+      {
+        "spell_key": "sn_bouncing_betty",
+        "name_en": "Bouncing Betty",
+        "name_tr": "Sıçrayan Mayın",
+        "description_en": "Place a proximity mine. When triggered, it jumps up and explodes for 4d8 fire damage in a 6m radius.",
+        "description_tr": "Yakınlık mayını yerleştir. Tetiklendiğinde havaya sıçrar ve 6m yarıçapta 4d8 ateş hasarı vererek patlar.",
+        "branch": "Nest",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sn_tripwire"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "4d8",
+          "radius": "6m",
+          "trigger": "proximity"
+        }
+      },
+      {
+        "spell_key": "sn_decoy_target",
+        "name_en": "Decoy Target",
+        "name_tr": "Hedef Şaşırtmaca",
+        "description_en": "Deploy a lifelike dummy of yourself. Enemies have a high chance to attack it instead of you.",
+        "description_tr": "Kendinin gerçekçi bir maketini konuşlandır. Düşmanların senin yerine ona saldırma ihtimali çok yüksektir.",
+        "branch": "Nest",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 290,
+        "prerequisites": [
+          "sn_scout_drone"
+        ],
+        "icon": "🧍",
+        "effects": {
+          "decoy_health": "50hp",
+          "taunt_chance": "75%"
+        }
+      },
+      {
+        "spell_key": "sn_nest_fortification",
+        "name_en": "Nest Fortification",
+        "name_tr": "Yuva Tahkimatı",
+        "description_en": "While entrenched, gain +5 AC and resistance to all ranged attacks.",
+        "description_tr": "Siper almışken, +5 AC ve tüm menzilli saldırılara karşı direnç kazan.",
+        "branch": "Nest",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sn_smoke_canister"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "ac_bonus": 5,
+          "ranged_resistance": true
+        }
+      },
+      {
+        "spell_key": "sn_grapple_hook",
+        "name_en": "Grapple Hook",
+        "name_tr": "Kanca",
+        "description_en": "Shoot a grapple to instantly pull yourself to a vantage point up to 30m away.",
+        "description_tr": "Kendini 30m'ye kadar uzaklıktaki bir görüş noktasına anında çekmek için kanca fırlat.",
+        "branch": "Nest",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "sn_decoy_target"
+        ],
+        "icon": "🪝",
+        "effects": {
+          "movement": "30m",
+          "action_type": "bonus"
+        }
+      },
+      {
+        "spell_key": "sn_spotter_turret",
+        "name_en": "Spotter Turret",
+        "name_tr": "Gözcü Tareti",
+        "description_en": "Deploy an automated turret that marks enemies with lasers, granting you advantage against them.",
+        "description_tr": "Düşmanları lazerle işaretleyerek onlara karşı sana avantaj sağlayan otomatik bir taret konuşlandır.",
+        "branch": "Nest",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 490,
+        "prerequisites": [
+          "sn_bouncing_betty",
+          "sn_scout_drone"
+        ],
+        "icon": "🔭",
+        "effects": {
+          "mark_target": true,
+          "advantage_on_marked": true
+        }
+      },
+      {
+        "spell_key": "sn_kill_zone",
+        "name_en": "Kill Zone",
+        "name_tr": "Ölüm Bölgesi",
+        "description_en": "Designate a 20m radius area. You deal +50% damage to all enemies inside this zone.",
+        "description_tr": "20m yarıçaplı bir alan belirle. Bu bölge içindeki tüm düşmanlara %+50 hasar verirsin.",
+        "branch": "Nest",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 680,
+        "prerequisites": [
+          "sn_spotter_turret"
+        ],
+        "icon": "❌",
+        "effects": {
+          "zone_radius": "20m",
+          "damage_bonus": "50%"
+        }
+      },
+      {
+        "spell_key": "sn_spider_mines",
+        "name_en": "Spider Mines",
+        "name_tr": "Örümcek Mayınlar",
+        "description_en": "Deploy 3 mobile mines that chase enemies within 15m and explode for 3d8 damage each.",
+        "description_tr": "15m içindeki düşmanları kovalayan ve her biri 3d8 hasarla patlayan 3 hareketli mayın konuşlandır.",
+        "branch": "Nest",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sn_bouncing_betty"
+        ],
+        "icon": "🕷️",
+        "effects": {
+          "count": 3,
+          "damage": "3d8 each",
+          "chase_range": "15m"
+        }
+      },
+      {
+        "spell_key": "sn_overwatch",
+        "name_en": "Overwatch",
+        "name_tr": "Gözetleme",
+        "description_en": "Enter a defensive stance. Automatically shoot the first 3 enemies that move within your line of sight.",
+        "description_tr": "Savunma duruşuna geç. Görüş alanında hareket eden ilk 3 düşmana otomatik olarak ateş et.",
+        "branch": "Nest",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sn_kill_zone",
+          "sn_nest_fortification"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "auto_shots": 3,
+          "trigger": "enemy movement"
+        }
+      },
+      {
+        "spell_key": "sn_perfect_vantage",
+        "name_en": "Perfect Vantage",
+        "name_tr": "Kusursuz Görüş",
+        "description_en": "You cannot be displaced while in your nest. Range is doubled, and damage increases over time up to +100%.",
+        "description_tr": "Yuvandayken yerinden edilemezsin. Menzil iki katına çıkar ve hasar zamanla %+100'e kadar artar.",
+        "branch": "Nest",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "sn_overwatch",
+          "sn_grapple_hook"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "immune_displacement": true,
+          "range_multiplier": 2.0,
+          "scaling_damage": "up to 100%"
+        }
+      },
+      {
+        "spell_key": "sn_fortress_of_solitude",
+        "name_en": "Fortress of Solitude",
+        "name_tr": "Yalnızlık Kalesi",
+        "description_en": "Transform your location into an impenetrable fortress with auto-repairing barriers and automated counter-fire.",
+        "description_tr": "Bulunduğun yeri kendi kendini onaran bariyerler ve otomatik karşı ateş ile aşılmaz bir kaleye dönüştür.",
+        "branch": "Nest",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "sn_perfect_vantage",
+          "sn_spider_mines"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "barrier_health": "500hp",
+          "auto_repair": "50hp/turn",
+          "counter_attack": "4d10"
+        }
+      },
+      {
+        "spell_key": "sn_ghillie_suit",
+        "name_en": "Ghillie Suit",
+        "name_tr": "Kamuflaj Kıyafeti",
+        "description_en": "Blend into natural environments, gaining +10 to stealth checks.",
+        "description_tr": "Doğal ortamlara karışarak gizlilik zarlarına +10 kazan.",
+        "branch": "Camouflage",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🌿",
+        "effects": {
+          "stealth_bonus": "+10",
+          "environment": "natural"
+        }
+      },
+      {
+        "spell_key": "sn_silent_step",
+        "name_en": "Silent Step",
+        "name_tr": "Sessiz Adım",
+        "description_en": "Move completely silently. You cannot be detected by tremorsense or hearing.",
+        "description_tr": "Tamamen sessiz hareket et. Titreşim sezgisi veya duyma ile tespit edilemezsin.",
+        "branch": "Camouflage",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sn_ghillie_suit"
+        ],
+        "icon": "🧦",
+        "effects": {
+          "silent_movement": true,
+          "immune_tremorsense": true
+        }
+      },
+      {
+        "spell_key": "sn_breath_control",
+        "name_en": "Breath Control",
+        "name_tr": "Nefes Kontrolü",
+        "description_en": "Hold your breath to become invisible for 2 turns while remaining perfectly still.",
+        "description_tr": "Tamamen hareketsiz kalırken 2 tur boyunca görünmez olmak için nefesini tut.",
+        "branch": "Camouflage",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 140,
+        "prerequisites": [
+          "sn_ghillie_suit"
+        ],
+        "icon": "🫁",
+        "effects": {
+          "invisibility": "2 turns",
+          "condition": "stationary"
+        }
+      },
+      {
+        "spell_key": "sn_chameleon_skin",
+        "name_en": "Chameleon Skin",
+        "name_tr": "Bukalemun Derisi",
+        "description_en": "Magically alter your appearance to match any surface, becoming nearly invisible.",
+        "description_tr": "Görünümünü herhangi bir yüzeyle eşleşecek şekilde sihirli bir şekilde değiştirerek neredeyse görünmez ol.",
+        "branch": "Camouflage",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sn_silent_step"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "camouflage": "any surface",
+          "stealth_advantage": true
+        }
+      },
+      {
+        "spell_key": "sn_suppressor",
+        "name_en": "Suppressor",
+        "name_tr": "Susturucu",
+        "description_en": "Equip a magical suppressor. If your shot kills a target, your stealth is not broken.",
+        "description_tr": "Büyülü bir susturucu kuşan. Atışın bir hedefi öldürürse gizliliğin bozulmaz.",
+        "branch": "Camouflage",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 260,
+        "prerequisites": [
+          "sn_breath_control"
+        ],
+        "icon": "🔇",
+        "effects": {
+          "silent_kill": true,
+          "stealth_maintained": true
+        }
+      },
+      {
+        "spell_key": "sn_thermal_mask",
+        "name_en": "Thermal Mask",
+        "name_tr": "Termal Maske",
+        "description_en": "Hide your body heat and magical signature, becoming immune to thermal vision.",
+        "description_tr": "Vücut ısını ve büyüsel imzanı gizleyerek termal görüşe karşı bağışık ol.",
+        "branch": "Camouflage",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sn_chameleon_skin"
+        ],
+        "icon": "🥽",
+        "effects": {
+          "immune_thermal": true,
+          "immune_detect_magic": true
+        }
+      },
+      {
+        "spell_key": "sn_vanish",
+        "name_en": "Vanish",
+        "name_tr": "Gözden Kaybolma",
+        "description_en": "Instantly turn invisible and dash 15m in any direction. Leaves behind a puff of dust.",
+        "description_tr": "Anında görünmez ol ve herhangi bir yöne 15m atıl. Arkanda bir toz bulutu bırakır.",
+        "branch": "Camouflage",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 410,
+        "prerequisites": [
+          "sn_chameleon_skin"
+        ],
+        "icon": "💨",
+        "effects": {
+          "invisibility": "instant",
+          "dash": "15m"
+        }
+      },
+      {
+        "spell_key": "sn_ghost_walk",
+        "name_en": "Ghost Walk",
+        "name_tr": "Hayalet Yürüyüşü",
+        "description_en": "Move through difficult terrain and thin walls (up to 1m) without breaking stealth.",
+        "description_tr": "Zorlu arazilerden ve ince duvarlardan (1m'ye kadar) gizliliği bozmadan geç.",
+        "branch": "Camouflage",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sn_silent_step",
+          "sn_thermal_mask"
+        ],
+        "icon": "👻",
+        "effects": {
+          "ignore_terrain": true,
+          "wall_phasing": "1m"
+        }
+      },
+      {
+        "spell_key": "sn_mirage",
+        "name_en": "Mirage",
+        "name_tr": "Serap",
+        "description_en": "Create 2 illusory copies of yourself when you move, confusing enemies.",
+        "description_tr": "Hareket ettiğinde kendinin 2 illüzyon kopyasını yaratarak düşmanları şaşırt.",
+        "branch": "Camouflage",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sn_vanish"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "clones": 2,
+          "confuse_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "sn_shadow_sniper",
+        "name_en": "Shadow Sniper",
+        "name_tr": "Gölge Keskin Nişancı",
+        "description_en": "Attacks made from stealth deal an extra 6d6 necrotic damage and blind the target for 1 turn.",
+        "description_tr": "Gizlilikten yapılan saldırılar fazladan 6d6 nekrotik hasar verir ve hedefi 1 tur kör eder.",
+        "branch": "Camouflage",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sn_suppressor",
+          "sn_vanish"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "bonus_damage": "6d6 necrotic",
+          "blind": "1 turn"
+        }
+      },
+      {
+        "spell_key": "sn_untraceable",
+        "name_en": "Untraceable",
+        "name_tr": "İz Bırakmayan",
+        "description_en": "Become entirely immune to magical scrying, tracking, and all forms of tracking debuffs.",
+        "description_tr": "Büyülü gözetleme, iz sürme ve tüm izleme zayıflatmalarına karşı tamamen bağışık ol.",
+        "branch": "Camouflage",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "sn_ghost_walk"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "immune_scrying": true,
+          "immune_tracking": true
+        }
+      },
+      {
+        "spell_key": "sn_assassins_shroud",
+        "name_en": "Assassin's Shroud",
+        "name_tr": "Suikastçı Örtüsü",
+        "description_en": "Gain permanent invisibility that only breaks after firing 3 consecutive shots.",
+        "description_tr": "Yalnızca art arda 3 el ateş ettikten sonra bozulan kalıcı görünmezlik kazan.",
+        "branch": "Camouflage",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sn_mirage",
+          "sn_untraceable"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "permanent_invisibility": true,
+          "break_condition": "3 shots"
+        }
+      },
+      {
+        "spell_key": "sn_phantom_presence",
+        "name_en": "Phantom Presence",
+        "name_tr": "Fantom Varlığı",
+        "description_en": "Enemies simply forget you are there. Even if they see you shoot, their memory is wiped.",
+        "description_tr": "Düşmanlar orada olduğunu unutur. Ateş ettiğini görseler bile hafızaları silinir.",
+        "branch": "Camouflage",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sn_assassins_shroud"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "memory_wipe": true,
+          "aggro_drop": "instant"
+        }
+      },
+      {
+        "spell_key": "sn_invisible_death",
+        "name_en": "Invisible Death",
+        "name_tr": "Görünmez Ölüm",
+        "description_en": "You cannot be revealed by any means, and your shots are perfectly silent and invisible until they strike.",
+        "description_tr": "Hiçbir şekilde açığa çıkarılamazsın ve atışların isabet edene kadar tamamen sessiz ve görünmezdir.",
+        "branch": "Camouflage",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "sn_phantom_presence",
+          "sn_shadow_sniper"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "absolute_invisibility": true,
+          "invisible_shots": true
+        }
+      },
+      {
+        "spell_key": "sn_ambush_predator",
+        "name_en": "Ambush Predator",
+        "name_tr": "Pusu Avcısı",
+        "description_en": "Your first shot from stealth automatically hits the target's weakest point, dealing triple damage.",
+        "description_tr": "Gizlilikten yaptığın ilk atış otomatik olarak hedefin en zayıf noktasını vurarak üç kat hasar verir.",
+        "branch": "Precision, Camouflage",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 290,
+        "prerequisites": [
+          "sn_headshot",
+          "sn_suppressor"
+        ],
+        "icon": "🐅",
+        "effects": {
+          "auto_crit": true,
+          "damage_multiplier": "3.0x",
+          "condition": "first shot from stealth"
+        }
+      },
+      {
+        "spell_key": "sn_booby_trapped_decoy",
+        "name_en": "Booby-Trapped Decoy",
+        "name_tr": "Tuzaklı Şaşırtmaca",
+        "description_en": "Your decoy is now invisible and explodes violently for 8d8 damage when an enemy gets within 3m.",
+        "description_tr": "Maketin artık görünmezdir ve bir düşman 3m yaklaştığında şiddetle patlayarak 8d8 hasar verir.",
+        "branch": "Nest, Camouflage",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "sn_decoy_target",
+          "sn_mirage"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "invisible_decoy": true,
+          "explosion_damage": "8d8",
+          "trigger_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "sn_calculated_ricochet",
+        "name_en": "Calculated Ricochet",
+        "name_tr": "Hesaplanmış Sekme",
+        "description_en": "Bounce your shots off your deployables to hit enemies in cover with +30% damage.",
+        "description_tr": "Siperdeki düşmanları %+30 hasarla vurmak için atışlarını kendi konuşlandırdığın ekipmanlardan sektir.",
+        "branch": "Precision, Nest",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sn_ricochet_shot",
+          "sn_spotter_turret"
+        ],
+        "icon": "🎱",
+        "effects": {
+          "bounce_off_deployables": true,
+          "damage_bonus": "30%",
+          "ignore_cover": true
+        }
+      },
+      {
+        "spell_key": "sn_phantom_nest",
+        "name_en": "Phantom Nest",
+        "name_tr": "Fantom Yuvası",
+        "description_en": "Your entire nest, including traps and turrets, becomes completely invisible to enemies.",
+        "description_tr": "Tuzaklar ve taretler dahil olmak üzere tüm yuvan düşmanlar için tamamen görünmez hale gelir.",
+        "branch": "Nest, Camouflage",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sn_nest_fortification",
+          "sn_untraceable"
+        ],
+        "icon": "🏕️",
+        "effects": {
+          "invisible_nest": true,
+          "stealth_traps": true
+        }
+      },
+      {
+        "spell_key": "sn_executioners_overwatch",
+        "name_en": "Executioner's Overwatch",
+        "name_tr": "Cellat Gözetlemesi",
+        "description_en": "Your overwatch shots now target the head, scoring automatic critical hits.",
+        "description_tr": "Gözetleme atışların artık kafayı hedefler ve otomatik kritik vuruşlar yapar.",
+        "branch": "Precision, Nest",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sn_overwatch",
+          "sn_shatter_shot"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "overwatch_crit": true,
+          "headshot_priority": true
+        }
+      },
+      {
+        "spell_key": "sn_wraith_bullet",
+        "name_en": "Wraith Bullet",
+        "name_tr": "Hayalet Mermi",
+        "description_en": "Fire a bullet that travels through up to 50m of solid walls and ignores all armor.",
+        "description_tr": "50m'ye kadar katı duvarların içinden geçen ve tüm zırhları yok sayan bir mermi ateşle.",
+        "branch": "Precision, Camouflage",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sn_horizon_piercer",
+          "sn_shadow_sniper"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "wall_penetration": "50m",
+          "armor_penetration": "100%",
+          "silent_shot": true
+        }
+      },
+      {
+        "spell_key": "sn_apex_predator",
+        "name_en": "Apex Predator",
+        "name_tr": "Zirve Avcısı",
+        "description_en": "For 5 turns, you are fully invisible, entrenched with massive defenses, and every shot is a critical hit.",
+        "description_tr": "5 tur boyunca tamamen görünmezsin, devasa savunmalarla siper almışsın ve her atışın kritik vuruştur.",
+        "branch": "Precision, Nest, Camouflage",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sn_death_mark",
+          "sn_perfect_vantage",
+          "sn_phantom_presence"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "duration": "5 turns",
+          "absolute_stealth": true,
+          "auto_crit": true,
+          "entrenched": true
+        }
+      },
+      {
+        "spell_key": "sn_one_shot_one_kill",
+        "name_en": "One Shot One Kill",
+        "name_tr": "Tek Atış Tek Ölüm",
+        "description_en": "Fire a reality-piercing bullet with infinite range. The target takes 100d100 damage and is erased from history.",
+        "description_tr": "Sonsuz menzilli, gerçekliği delen bir mermi ateşle. Hedef 100d100 hasar alır ve tarihten silinir.",
+        "branch": "Precision, Nest, Camouflage",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sn_gods_eye",
+          "sn_fortress_of_solitude",
+          "sn_invisible_death"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "range": "infinite",
+          "damage": "100d100",
+          "existence_erasure": true
+        }
+      }
+    ]
+  }
+]

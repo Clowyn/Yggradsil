@@ -1,0 +1,1031 @@
+[
+  {
+    "subclass_key": "shaman",
+    "tree_name_en": "Totemic Ancestry",
+    "tree_name_tr": "Totemik Soy",
+    "tree_desc_en": "Mastery of totemic magic, the power of ancestral spirits, and the ability to permanently harvest and utilize traits from defeated monsters.",
+    "tree_desc_tr": "Totemik büyü, atasal ruhların gücü ve yenilmiş canavarlardan özellikleri kalıcı olarak toplayıp kullanma yeteneğinin ustalığı.",
+    "branches": [
+      "Totem",
+      "Spirit",
+      "Ancestral"
+    ],
+    "spells": [
+      {
+        "spell_key": "sh_healing_totem",
+        "name_en": "Healing Totem",
+        "name_tr": "Şifa Totemi",
+        "description_en": "Summons a totem that heals allies for 1d4 HP per second within a 5m radius.",
+        "description_tr": "5m yarıçapındaki müttefikleri saniyede 1d4 HP iyileştiren bir totem çağırır.",
+        "branch": "Totem",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚕️",
+        "effects": {
+          "healing": "1d4/sec",
+          "range": "5m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sh_searing_totem",
+        "name_en": "Searing Totem",
+        "name_tr": "Kavurucu Totem",
+        "description_en": "Summons a fire totem that deals 1d6 fire damage per second to a target within 10m.",
+        "description_tr": "10m içindeki bir hedefe saniyede 1d6 ateş hasarı veren bir ateş totemi çağırır.",
+        "branch": "Totem",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 70,
+        "prerequisites": [
+          "sh_healing_totem"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "1d6/sec",
+          "range": "10m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_earthbind_totem",
+        "name_en": "Earthbind Totem",
+        "name_tr": "Toprakbağı Totemi",
+        "description_en": "Summons an earth totem that slows enemy movement speed by 30% within an 8m radius.",
+        "description_tr": "8m yarıçapındaki düşmanların hareket hızını %30 yavaşlatan bir toprak totemi çağırır.",
+        "branch": "Totem",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 95,
+        "prerequisites": [
+          "sh_healing_totem"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "slow": "30%",
+          "range": "8m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_totemic_recall",
+        "name_en": "Totemic Recall",
+        "name_tr": "Totemik Geri Çağrı",
+        "description_en": "Instantly destroys all your active totems, refunding 50% of their mana cost.",
+        "description_tr": "Tüm aktif totemlerinizi anında yok ederek mana bedellerinin %50'sini iade eder.",
+        "branch": "Totem",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "sh_searing_totem",
+          "sh_earthbind_totem"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "mana_refund": "50%",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "sh_stoneclaw_totem",
+        "name_en": "Stoneclaw Totem",
+        "name_tr": "Taşpençe Totemi",
+        "description_en": "Summons a stone totem with 100 HP that taunts all enemies within a 10m radius.",
+        "description_tr": "10m yarıçapındaki tüm düşmanları kışkırtan 100 HP'li bir taş totem çağırır.",
+        "branch": "Totem",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sh_earthbind_totem"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "hp": "100",
+          "taunt": "True",
+          "range": "10m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_windfury_totem",
+        "name_en": "Windfury Totem",
+        "name_tr": "Rüzgar Hiddeti Totemi",
+        "description_en": "Summons an air totem that increases the attack speed of allies within 8m by 20%.",
+        "description_tr": "8m içindeki müttefiklerin saldırı hızını %20 artıran bir hava totemi çağırır.",
+        "branch": "Totem",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sh_searing_totem"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "attack_speed": "+20%",
+          "range": "8m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_cleansing_totem",
+        "name_en": "Cleansing Totem",
+        "name_tr": "Arındırma Totemi",
+        "description_en": "Summons a water totem that removes 1 poison or disease from allies within 5m every 3 seconds.",
+        "description_tr": "5m içindeki müttefiklerden her 3 saniyede 1 zehir veya hastalığı kaldıran bir su totemi çağırır.",
+        "branch": "Totem",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sh_healing_totem"
+        ],
+        "icon": "💧",
+        "effects": {
+          "cleanse": "1 debuff/3sec",
+          "range": "5m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_magma_totem",
+        "name_en": "Magma Totem",
+        "name_tr": "Magma Totemi",
+        "description_en": "Summons a magma totem that erupts every 2 seconds, dealing 3d6 fire damage to enemies within 6m.",
+        "description_tr": "Her 2 saniyede bir patlayarak 6m içindeki düşmanlara 3d6 ateş hasarı veren bir magma totemi çağırır.",
+        "branch": "Totem",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "sh_stoneclaw_totem",
+          "sh_searing_totem"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "3d6/2sec",
+          "range": "6m",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "sh_grounding_totem",
+        "name_en": "Grounding Totem",
+        "name_tr": "Topraklama Totemi",
+        "description_en": "Summons an air totem that absorbs 1 hostile spell aimed at an ally within 10m before shattering.",
+        "description_tr": "Kırılmadan önce 10m içindeki bir müttefike yöneltilen 1 düşman büyüsünü emen bir hava totemi çağırır.",
+        "branch": "Totem",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 415,
+        "prerequisites": [
+          "sh_cleansing_totem"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "absorb": "1 spell",
+          "range": "10m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_totemic_projection",
+        "name_en": "Totemic Projection",
+        "name_tr": "Totemik Yansıtma",
+        "description_en": "Relocates all your active totems to a targeted location within 30m.",
+        "description_tr": "Tüm aktif totemlerinizi 30m içinde hedeflenen bir konuma taşır.",
+        "branch": "Totem",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 465,
+        "prerequisites": [
+          "sh_totemic_recall"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "relocate": "True",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_link_totem",
+        "name_en": "Spirit Link Totem",
+        "name_tr": "Ruh Bağı Totemi",
+        "description_en": "Summons a totem that equalizes the health percentages of all allies within 10m every second, reducing damage taken by 10%.",
+        "description_tr": "10m içindeki tüm müttefiklerin sağlık yüzdelerini her saniye eşitleyen ve alınan hasarı %10 azaltan bir totem çağırır.",
+        "branch": "Totem",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 615,
+        "prerequisites": [
+          "sh_grounding_totem"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "health_equalize": "1/sec",
+          "damage_reduction": "10%",
+          "range": "10m",
+          "duration": "6s"
+        }
+      },
+      {
+        "spell_key": "sh_tremor_totem",
+        "name_en": "Tremor Totem",
+        "name_tr": "Sarsıntı Totemi",
+        "description_en": "Summons an earth totem that shakes the ground, removing fear, charm, and sleep effects from allies within 15m every 2 seconds.",
+        "description_tr": "Yeri sarsarak 15m içindeki müttefiklerden her 2 saniyede bir korku, cazibe ve uyku etkilerini kaldıran bir toprak totemi çağırır.",
+        "branch": "Totem",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sh_magma_totem"
+        ],
+        "icon": "📳",
+        "effects": {
+          "cleanse_cc": "1/2sec",
+          "range": "15m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sh_storm_totem",
+        "name_en": "Storm Totem",
+        "name_tr": "Fırtına Totemi",
+        "description_en": "Summons a storm totem that shoots chain lightning for 4d8 lightning damage at enemies within 15m every 3 seconds.",
+        "description_tr": "Her 3 saniyede bir 15m içindeki düşmanlara 4d8 yıldırım hasarı vuran zincirleme yıldırım atan bir fırtına totemi çağırır.",
+        "branch": "Totem",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sh_windfury_totem"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "4d8/3sec",
+          "range": "15m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_totem_of_the_ancients",
+        "name_en": "Totem of the Ancients",
+        "name_tr": "Kadimlerin Totemi",
+        "description_en": "Summons a colossal totem. Grants +50% to all stats, heals 5d8 HP/sec, and deals 10d10 nature damage/sec to enemies in a 20m radius.",
+        "description_tr": "Devasa bir totem çağırır. 20m yarıçapında tüm istatistiklere +%50 verir, saniyede 5d8 HP iyileştirir ve düşmanlara saniyede 10d10 doğa hasarı verir.",
+        "branch": "Totem",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sh_spirit_link_totem",
+          "sh_tremor_totem",
+          "sh_storm_totem"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "stat_boost": "+50%",
+          "healing": "5d8/sec",
+          "damage": "10d10/sec",
+          "range": "20m",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_vision",
+        "name_en": "Spirit Vision",
+        "name_tr": "Ruhsal Görüş",
+        "description_en": "Passively allows you to see invisible entities and identify the soul types of monsters within 30m.",
+        "description_tr": "Görünmez varlıkları görmenizi ve 30m içindeki canavarların ruh türlerini tanımlamanızı pasif olarak sağlar.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 55,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "true_sight": "True",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "sh_soul_harvest",
+        "name_en": "Soul Harvest",
+        "name_tr": "Ruh Hasadı",
+        "description_en": "Extracts the soul of a monster killed within 5m. You can store up to 3 souls at a time.",
+        "description_tr": "5m içinde öldürülen bir canavarın ruhunu çıkarır. Aynı anda en fazla 3 ruh depolayabilirsiniz.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 85,
+        "prerequisites": [
+          "sh_spirit_vision"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "soul_capacity": "3",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "sh_bestial_trait_minor",
+        "name_en": "Minor Bestial Trait",
+        "name_tr": "Küçük Hayvani Özellik",
+        "description_en": "Permanently consumes a stored soul to grant a +1 bonus to a stat related to the monster type. Max 5 minor traits.",
+        "description_tr": "Depolanan bir ruhu kalıcı olarak tüketerek canavar türüyle ilgili bir istatistiğe +1 bonus verir. Maksimum 5 küçük özellik.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 105,
+        "prerequisites": [
+          "sh_soul_harvest"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "stat_bonus": "+1",
+          "max_stacks": "5",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_bolt",
+        "name_en": "Spirit Bolt",
+        "name_tr": "Ruh Mermisi",
+        "description_en": "Fires a bolt of concentrated soul energy, dealing 2d8 force damage to a target up to 20m away.",
+        "description_tr": "Yoğunlaştırılmış ruh enerjisinden oluşan bir mermi ateşleyerek 20m'ye kadar uzaklıktaki bir hedefe 2d8 güç hasarı verir.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "sh_spirit_vision"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "2d8",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "sh_consume_essence",
+        "name_en": "Consume Essence",
+        "name_tr": "Öz Tüketimi",
+        "description_en": "Consumes a stored soul to instantly heal 4d8 HP and restore 20% of your maximum mana.",
+        "description_tr": "Depolanan bir ruhu tüketerek anında 4d8 HP iyileştirir ve maksimum mananızın %20'sini yeniler.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 195,
+        "prerequisites": [
+          "sh_soul_harvest"
+        ],
+        "icon": "🍷",
+        "effects": {
+          "healing": "4d8",
+          "mana_restore": "20%",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_wolves",
+        "name_en": "Spirit Wolves",
+        "name_tr": "Ruh Kurtları",
+        "description_en": "Summons 2 ethereal wolves for 30 seconds. They deal 2d6 physical damage per hit and heal you for 50% of the damage dealt.",
+        "description_tr": "30 saniyeliğine 2 ruhani kurt çağırır. Vuruş başına 2d6 fiziksel hasar verir ve verilen hasarın %50'si kadar sizi iyileştirir.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 235,
+        "prerequisites": [
+          "sh_spirit_bolt"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "summons": "2",
+          "damage": "2d6/hit",
+          "lifesteal": "50%",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "sh_bestial_trait_moderate",
+        "name_en": "Moderate Bestial Trait",
+        "name_tr": "Orta Hayvani Özellik",
+        "description_en": "Permanently consumes a medium monster soul to gain +10% resistance to a specific element. Max 3 moderate traits.",
+        "description_tr": "Orta boy bir canavar ruhunu kalıcı olarak tüketerek belirli bir elemente karşı +%10 direnç kazandırır. Maksimum 3 orta özellik.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 285,
+        "prerequisites": [
+          "sh_bestial_trait_minor"
+        ],
+        "icon": "🐅",
+        "effects": {
+          "resistance": "+10%",
+          "max_stacks": "3",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "sh_hex",
+        "name_en": "Hex",
+        "name_tr": "Uğursuzluk",
+        "description_en": "Transforms a targeted enemy into a harmless frog for 10 seconds. Range 15m. Any damage breaks the effect.",
+        "description_tr": "Hedeflenen bir düşmanı 10 saniyeliğine zararsız bir kurbağaya dönüştürür. Menzil 15m. Herhangi bir hasar etkiyi bozar.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "sh_spirit_wolves"
+        ],
+        "icon": "🐸",
+        "effects": {
+          "polymorph": "True",
+          "range": "15m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_walk",
+        "name_en": "Spirit Walk",
+        "name_tr": "Ruh Yürüyüşü",
+        "description_en": "Shifts you into the spirit realm for 8 seconds, granting 50% movement speed and the ability to pass through physical objects.",
+        "description_tr": "Sizi 8 saniyeliğine ruhani aleme geçirerek %50 hareket hızı ve fiziksel nesnelerin içinden geçme yeteneği verir.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "sh_consume_essence"
+        ],
+        "icon": "👻",
+        "effects": {
+          "movement_speed": "+50%",
+          "phase": "True",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "sh_bestial_adaptation",
+        "name_en": "Bestial Adaptation",
+        "name_tr": "Hayvani Adaptasyon",
+        "description_en": "Permanently consumes a large monster soul to gain a passive ability (e.g., water breathing, darkvision). Max 2 adaptations.",
+        "description_tr": "Büyük bir canavar ruhunu kalıcı olarak tüketerek pasif bir yetenek (örn. suda nefes alma, karanlık görüş) kazandırır. Maksimum 2 adaptasyon.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 485,
+        "prerequisites": [
+          "sh_bestial_trait_moderate"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "passive_trait": "1",
+          "max_stacks": "2",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_mend",
+        "name_en": "Spirit Mend",
+        "name_tr": "Ruh Onarımı",
+        "description_en": "Channels spiritual energy to heal an ally for 8d8 HP and removes all curses. Range 15m.",
+        "description_tr": "Ruhsal enerjiyi yönlendirerek bir müttefiki 8d8 HP iyileştirir ve tüm lanetleri kaldırır. Menzil 15m.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 640,
+        "prerequisites": [
+          "sh_spirit_walk"
+        ],
+        "icon": "🩹",
+        "effects": {
+          "healing": "8d8",
+          "cleanse": "All Curses",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "sh_soul_sever",
+        "name_en": "Soul Sever",
+        "name_tr": "Ruh Koparma",
+        "description_en": "Strikes the target, separating their soul from their body. Stuns for 3 seconds and deals 6d10 necrotic damage.",
+        "description_tr": "Hedefe vurarak ruhunu bedeninden ayırır. 3 saniye sersemletir ve 6d10 nekrotik hasar verir.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 725,
+        "prerequisites": [
+          "sh_hex"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "damage": "6d10",
+          "stun": "3s",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "sh_apex_predator_trait",
+        "name_en": "Apex Predator Trait",
+        "name_tr": "Zirve Avcı Özelliği",
+        "description_en": "Permanently consumes a boss monster's soul to gain a major trait (e.g., flight, fast regeneration). Max 1 apex trait.",
+        "description_tr": "Bir patron canavarın ruhunu kalıcı olarak tüketerek büyük bir özellik (örn. uçma, hızlı yenilenme) kazandırır. Maksimum 1 zirve özellik.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sh_bestial_adaptation"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "major_trait": "1",
+          "max_stacks": "1",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "sh_chimaera_soul",
+        "name_en": "Chimaera Soul",
+        "name_tr": "Kimera Ruhu",
+        "description_en": "Activates all your permanent monster traits at 300% effectiveness for 1 minute, turning you into a terrifying spirit chimaera.",
+        "description_tr": "Tüm kalıcı canavar özelliklerinizi 1 dakikalığına %300 etkinlikle aktifleştirerek sizi korkunç bir ruh kimerasına dönüştürür.",
+        "branch": "Spirit",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "sh_spirit_mend",
+          "sh_soul_sever",
+          "sh_apex_predator_trait"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "trait_multiplier": "300%",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_strike",
+        "name_en": "Ancestral Strike",
+        "name_tr": "Atasal Vuruş",
+        "description_en": "Infuses your weapon with ancestral power. Your next melee attack deals an additional 1d8 force damage.",
+        "description_tr": "Silahınızı atasal güçle aşılar. Sonraki yakın dövüş saldırınız fazladan 1d8 güç hasarı verir.",
+        "branch": "Ancestral",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "damage": "1d8",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "sh_lightning_shield",
+        "name_en": "Lightning Shield",
+        "name_tr": "Yıldırım Kalkanı",
+        "description_en": "Surrounds you with 3 charges of lightning. Attackers take 1d6 lightning damage per hit, consuming a charge.",
+        "description_tr": "Sizi 3 yıldırım yüküyle çevreler. Saldıranlar vuruş başına 1d6 yıldırım hasarı alır ve bir yük tüketilir.",
+        "branch": "Ancestral",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 80,
+        "prerequisites": [
+          "sh_ancestral_strike"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "damage": "1d6/hit",
+          "charges": "3",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_guidance",
+        "name_en": "Ancestral Guidance",
+        "name_tr": "Atasal Rehberlik",
+        "description_en": "For 15 seconds, 20% of your damage dealt is converted into healing for up to 3 nearby allies within 10m.",
+        "description_tr": "15 saniye boyunca, verdiğiniz hasarın %20'si 10m içindeki en fazla 3 müttefik için iyileştirmeye dönüştürülür.",
+        "branch": "Ancestral",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 115,
+        "prerequisites": [
+          "sh_ancestral_strike"
+        ],
+        "icon": "🧭",
+        "effects": {
+          "lifesteal_aura": "20%",
+          "targets": "3",
+          "range": "10m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_bloodlust",
+        "name_en": "Bloodlust",
+        "name_tr": "Kan Hırsı",
+        "description_en": "Inspires allies within 20m, increasing their attack and casting speed by 25% for 20 seconds.",
+        "description_tr": "20m içindeki müttefiklere ilham vererek saldırı ve büyü yapma hızlarını 20 saniyeliğine %25 artırır.",
+        "branch": "Ancestral",
+        "tier": 1,
+        "min_level": 20,
+        "xp_cost": 150,
+        "prerequisites": [
+          "sh_lightning_shield"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "speed_boost": "+25%",
+          "range": "20m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_chain_lightning",
+        "name_en": "Chain Lightning",
+        "name_tr": "Zincirleme Yıldırım",
+        "description_en": "Hurls a lightning bolt that deals 3d8 lightning damage, jumping to 3 additional targets within 8m of the previous one.",
+        "description_tr": "3d8 yıldırım hasarı veren ve bir öncekinin 8m içindeki 3 ek hedefe sıçrayan bir yıldırım fırlatır.",
+        "branch": "Ancestral",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sh_lightning_shield"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "3d8",
+          "jumps": "3",
+          "jump_range": "8m",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_fortitude",
+        "name_en": "Ancestral Fortitude",
+        "name_tr": "Atasal İrade",
+        "description_en": "Blesses a target, increasing their maximum HP by 15% and armor by +2 for 1 hour.",
+        "description_tr": "Bir hedefi kutsayarak maksimum HP'sini %15 ve zırhını 1 saatliğine +2 artırır.",
+        "branch": "Ancestral",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sh_ancestral_guidance"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "max_hp": "+15%",
+          "armor": "+2",
+          "range": "10m",
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_weapons",
+        "name_en": "Spirit Weapons",
+        "name_tr": "Ruh Silahları",
+        "description_en": "Enchants your party's weapons. They deal an extra 1d6 spiritual damage and ignore 10% of enemy armor for 10 minutes.",
+        "description_tr": "Grubunuzun silahlarını efsunlar. 10 dakika boyunca fazladan 1d6 ruhsal hasar verirler ve düşman zırhının %10'unu yok sayarlar.",
+        "branch": "Ancestral",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 295,
+        "prerequisites": [
+          "sh_bloodlust"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "+1d6",
+          "armor_pen": "10%",
+          "range": "15m",
+          "duration": "10m"
+        }
+      },
+      {
+        "spell_key": "sh_earth_shock",
+        "name_en": "Earth Shock",
+        "name_tr": "Toprak Şoku",
+        "description_en": "Instantly shocks the target with concussive force, dealing 4d8 nature damage and interrupting spellcasting. Range 15m.",
+        "description_tr": "Hedefi anında sarsıcı bir güçle şok ederek 4d8 doğa hasarı verir ve büyü yapmayı keser. Menzil 15m.",
+        "branch": "Ancestral",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "sh_chain_lightning"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8",
+          "interrupt": "True",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_awakening",
+        "name_en": "Ancestral Awakening",
+        "name_tr": "Atasal Uyanış",
+        "description_en": "Whenever you critically heal, an ancestral spirit appears to heal the lowest HP ally within 15m for 30% of the critical amount.",
+        "description_tr": "Ne zaman kritik bir iyileştirme yapsanız, atasal bir ruh belirerek 15m içindeki en düşük HP'li müttefiki kritik miktarın %30'u kadar iyileştirir.",
+        "branch": "Ancestral",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 445,
+        "prerequisites": [
+          "sh_ancestral_fortitude"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "trigger": "Critical Heal",
+          "healing": "30%",
+          "range": "15m",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sh_feral_spirit_call",
+        "name_en": "Feral Spirit Call",
+        "name_tr": "Vahşi Ruh Çağrısı",
+        "description_en": "Summons an ancient bear spirit for 15 seconds that redirects 50% of the damage you take to itself.",
+        "description_tr": "Sizin aldığınız hasarın %50'sini kendisine yönlendiren kadim bir ayı ruhunu 15 saniyeliğine çağırır.",
+        "branch": "Ancestral",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sh_spirit_weapons"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "damage_redirect": "50%",
+          "range": "Self",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_thunderstorm",
+        "name_en": "Thunderstorm",
+        "name_tr": "Gök Gürültüsü Fırtınası",
+        "description_en": "Summons a blast of thunder that knocks all enemies within 10m back by 8m, dealing 5d8 lightning damage.",
+        "description_tr": "10m içindeki tüm düşmanları 8m geriye savuran ve 5d8 yıldırım hasarı veren bir gök gürültüsü patlaması çağırır.",
+        "branch": "Ancestral",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 655,
+        "prerequisites": [
+          "sh_earth_shock"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "damage": "5d8",
+          "knockback": "8m",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_guardian",
+        "name_en": "Ancestral Guardian",
+        "name_tr": "Atasal Muhafız",
+        "description_en": "Summons a powerful ancestral warrior for 30 seconds. It deals 4d10 physical damage and taunts enemies within 10m.",
+        "description_tr": "30 saniyeliğine güçlü bir atasal savaşçı çağırır. 4d10 fiziksel hasar verir ve 10m içindeki düşmanları kışkırtır.",
+        "branch": "Ancestral",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sh_feral_spirit_call"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "4d10",
+          "taunt": "True",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "sh_elemental_ascendance",
+        "name_en": "Elemental Ascendance",
+        "name_tr": "Elementel Yükseliş",
+        "description_en": "Transforms you into a being of pure elemental energy for 20 seconds. Your spells have no cooldown and cost half mana.",
+        "description_tr": "Sizi 20 saniyeliğine saf elementel enerjiden oluşan bir varlığa dönüştürür. Büyülerinizin bekleme süresi yoktur ve yarı mana harcar.",
+        "branch": "Ancestral",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sh_ancestral_awakening",
+          "sh_bloodlust"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "cooldown": "0s",
+          "mana_cost": "-50%",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_wrath_of_the_ancestors",
+        "name_en": "Wrath of the Ancestors",
+        "name_tr": "Ataların Gazabı",
+        "description_en": "Calls down the fury of generations. Summons a storm of spiritual weapons in a 30m radius for 15 seconds, dealing 12d10 force damage per second.",
+        "description_tr": "Nesillerin öfkesini çağırır. 15 saniyeliğine 30m yarıçapında saniyede 12d10 güç hasarı veren ruhsal silahlar fırtınası çağırır.",
+        "branch": "Ancestral",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "sh_thunderstorm",
+          "sh_ancestral_guardian",
+          "sh_elemental_ascendance"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "12d10/sec",
+          "range": "30m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sh_totemic_spirit_link",
+        "name_en": "Totemic Spirit Link",
+        "name_tr": "Totemik Ruh Bağı",
+        "description_en": "Drops a totem that consumes a stored soul to resurrect a recently dead ally with 20% HP. Range 5m.",
+        "description_tr": "Depolanan bir ruhu tüketerek yakın zamanda ölmüş bir müttefiki %20 HP ile dirilten bir totem bırakır. Menzil 5m.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sh_cleansing_totem",
+          "sh_consume_essence"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "resurrect": "20% HP",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "sh_ancestral_totem",
+        "name_en": "Ancestral Totem",
+        "name_tr": "Atasal Totem",
+        "description_en": "Summons a totem that casts Ancestral Strike at random enemies within 15m every 2 seconds.",
+        "description_tr": "Her 2 saniyede bir 15m içindeki rastgele düşmanlara Atasal Vuruş yapan bir totem çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "sh_magma_totem",
+          "sh_chain_lightning"
+        ],
+        "icon": "🛖",
+        "effects": {
+          "damage": "Auto-cast Ancestral Strike",
+          "range": "15m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sh_soul_imbued_weapon",
+        "name_en": "Soul-Imbued Weapon",
+        "name_tr": "Ruhla Bütünleşmiş Silah",
+        "description_en": "Infuses your weapon with a stored monster soul. For 1 minute, attacks have a chance to trigger the monster's signature ability.",
+        "description_tr": "Silahınızı depolanan bir canavar ruhuyla aşılar. 1 dakika boyunca saldırıların canavarın imza yeteneğini tetikleme şansı vardır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 465,
+        "prerequisites": [
+          "sh_bestial_trait_moderate",
+          "sh_spirit_weapons"
+        ],
+        "icon": "🪄",
+        "effects": {
+          "proc": "Monster Ability",
+          "range": "Self",
+          "duration": "1m"
+        }
+      },
+      {
+        "spell_key": "sh_monster_totem",
+        "name_en": "Monster Totem",
+        "name_tr": "Canavar Totemi",
+        "description_en": "Crafts a totem using a stored soul. The totem projects the monster's aura (e.g., fear, regeneration) in a 15m radius.",
+        "description_tr": "Depolanan bir ruhu kullanarak bir totem üretir. Totem, canavarın aurasını (örn. korku, yenilenme) 15m yarıçapında yansıtır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 655,
+        "prerequisites": [
+          "sh_totemic_projection",
+          "sh_bestial_adaptation"
+        ],
+        "icon": "👹",
+        "effects": {
+          "aura": "Monster Aura",
+          "range": "15m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sh_primal_ancestor_trait",
+        "name_en": "Primal Ancestor Trait",
+        "name_tr": "İlkel Ata Özelliği",
+        "description_en": "Passively boosts the effectiveness of your Bestial Traits by 50% while under the effect of Bloodlust or Elemental Ascendance.",
+        "description_tr": "Kan Hırsı veya Elementel Yükseliş etkisi altındayken Hayvani Özelliklerinizin etkinliğini pasif olarak %50 artırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sh_bestial_adaptation",
+          "sh_elemental_ascendance"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "trait_boost": "50%",
+          "trigger": "Buff active",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sh_totem_of_the_apex",
+        "name_en": "Totem of the Apex",
+        "name_tr": "Zirve Totemi",
+        "description_en": "Consumes an Apex Predator soul to create a permanent living totem that follows you, casting Tier 3 and Tier 4 spells autonomously.",
+        "description_tr": "Bir Zirve Avcı ruhunu tüketerek sizi takip eden ve Seviye 3 ile 4 büyülerini otonom olarak yapan kalıcı bir canlı totem yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1050,
+        "prerequisites": [
+          "sh_totem_of_the_ancients",
+          "sh_apex_predator_trait"
+        ],
+        "icon": "👑",
+        "effects": {
+          "auto_cast": "T3/T4 Spells",
+          "range": "20m",
+          "duration": "Permanent"
+        }
+      },
+      {
+        "spell_key": "sh_spirit_echoes",
+        "name_en": "Spirit Echoes",
+        "name_tr": "Ruh Yankıları",
+        "description_en": "Whenever you use a Bestial Trait ability or Ancestral spell, a spirit echo repeats the effect at 50% power.",
+        "description_tr": "Ne zaman bir Hayvani Özellik yeteneği veya Atasal büyü kullansanız, bir ruh yankısı etkiyi %50 güçle tekrarlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "sh_chimaera_soul",
+          "sh_wrath_of_the_ancestors"
+        ],
+        "icon": "👥",
+        "effects": {
+          "echo": "50% Power",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sh_manifestation_of_the_primal_gods",
+        "name_en": "Manifestation of the Primal Gods",
+        "name_tr": "İlkel Tanrıların Tezahürü",
+        "description_en": "Merges you with the ultimate ancestral spirit, your totems, and all absorbed monster traits into a 15m tall avatar. For 3 mins, you gain +500% HP, deal 50d10 mixed damage in 30m, emit all monster auras, and totems have global range.",
+        "description_tr": "Sizi nihai atasal ruh, totemleriniz ve tüm emilen canavar özellikleriyle birleştirerek 15m boyunda bir avatara dönüştürür. 3 dakika boyunca +%500 HP kazanırsınız, 30m'de 50d10 karma hasar verirsiniz, tüm auraları yayarsınız ve totemler küresel menzile sahip olur.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sh_totem_of_the_ancients",
+          "sh_chimaera_soul",
+          "sh_wrath_of_the_ancestors",
+          "sh_totem_of_the_apex"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "hp": "+500%",
+          "damage": "50d10",
+          "range": "Global",
+          "duration": "3m"
+        }
+      }
+    ]
+  }
+]

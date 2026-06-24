@@ -1,0 +1,1023 @@
+[
+  {
+    "subclass_key": "life_guardian",
+    "tree_name_en": "Life Guardian",
+    "tree_name_tr": "Yaşam Muhafızı",
+    "tree_desc_en": "A heavy armor healer that specializes in life sacrifice, massive vitality auras, and absolute protection. They wield their own life force as a shield and weapon to ensure their allies never fall.",
+    "tree_desc_tr": "Yaşam fedakarlığı, devasa zindelik haleleri ve mutlak koruma üzerine uzmanlaşmış ağır zırhlı bir şifacı. Müttefiklerinin asla düşmemesi için kendi yaşam güçlerini bir kalkan ve silah olarak kullanırlar.",
+    "branches": [
+      "Life",
+      "Mending",
+      "Vitality",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "lg_blood_pact",
+        "name_en": "Blood Pact",
+        "name_tr": "Kan Anlaşması",
+        "description_en": "Sacrifice 10% of your current HP to heal an ally for 2d8 plus the sacrificed amount.",
+        "description_tr": "Mevcut canınızın %10'unu feda ederek bir müttefikinizi 2d8 artı feda edilen miktar kadar iyileştirirsiniz.",
+        "branch": "Life",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "healing": "2d8 + sacrificed HP",
+          "cost": "10% HP",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "lg_life_tether",
+        "name_en": "Life Tether",
+        "name_tr": "Yaşam Bağı",
+        "description_en": "Link your life force to an ally. For 1 minute, 20% of the damage they take is redirected to you.",
+        "description_tr": "Yaşam gücünüzü bir müttefike bağlarsınız. 1 dakika boyunca onların aldığı hasarın %20'si size yönlendirilir.",
+        "branch": "Life",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🫀",
+        "effects": {
+          "range": "10m",
+          "duration": "1 minute",
+          "redirect": "20% damage"
+        }
+      },
+      {
+        "spell_key": "lg_martyrs_strike",
+        "name_en": "Martyr's Strike",
+        "name_tr": "Şehit Vuruşu",
+        "description_en": "A heavy melee attack that deals an extra 1d8 radiant damage. You are healed for half the total damage dealt.",
+        "description_tr": "Ekstra 1d8 parlak hasar veren ağır bir yakın dövüş saldırısı. Verilen toplam hasarın yarısı kadar iyileşirsiniz.",
+        "branch": "Life",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "1d8 radiant",
+          "healing": "50% of damage",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "lg_sanguine_shield",
+        "name_en": "Sanguine Shield",
+        "name_tr": "Kan Kalkanı",
+        "description_en": "Sacrifice 15% of your max HP to grant an ally a shield equal to 30% of your max HP for 1 minute.",
+        "description_tr": "Maksimum canınızın %15'ini feda ederek bir müttefike kendi maksimum canınızın %30'u kadar bir kalkan sağlarsınız.",
+        "branch": "Life",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "lg_blood_pact"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield": "30% of caster's Max HP",
+          "cost": "15% Max HP",
+          "duration": "1 minute",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "lg_draw_life",
+        "name_en": "Draw Life",
+        "name_tr": "Yaşam Çekimi",
+        "description_en": "Drain 3d6 HP from an enemy within 5m, healing yourself for the same amount to sustain your frontline presence.",
+        "description_tr": "Ön saflardaki varlığınızı korumak için 5m içindeki bir düşmandan 3d6 can çeker ve kendinizi aynı miktarda iyileştirirsiniz.",
+        "branch": "Life",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "lg_martyrs_strike"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "damage": "3d6 necrotic",
+          "healing": "100% of damage",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "lg_shared_burden",
+        "name_en": "Shared Burden",
+        "name_tr": "Paylaşılan Yük",
+        "description_en": "Transfer a negative condition (poison, paralyze, fear, etc.) from an ally to yourself, gaining resistance to its effects for 1 turn.",
+        "description_tr": "Bir müttefikin üzerindeki olumsuz durumu (zehir, felç, korku vb.) kendinize aktarır ve etkilerine karşı 1 turluğuna direnç kazanırsınız.",
+        "branch": "Life",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "lg_life_tether"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "range": "15m",
+          "condition_transfer": "1 negative effect",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "lg_crimson_aura",
+        "name_en": "Crimson Aura",
+        "name_tr": "Kızıl Hale",
+        "description_en": "Emit a 10m aura. You lose 2d4 HP at the start of your turn, but all allies in the aura heal for 3d4 HP.",
+        "description_tr": "10m'lik bir hale yayarsınız. Turunuzun başında 2d4 can kaybedersiniz, ancak haledeki tüm müttefikler 3d4 can iyileşir.",
+        "branch": "Life",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "lg_sanguine_shield"
+        ],
+        "icon": "🔴",
+        "effects": {
+          "aura_range": "10m",
+          "self_damage": "2d4 per turn",
+          "ally_healing": "3d4 per turn"
+        }
+      },
+      {
+        "spell_key": "lg_life_surge",
+        "name_en": "Life Surge",
+        "name_tr": "Yaşam Dalgası",
+        "description_en": "Expend up to 50% of your current HP. Release a burst of energy within 10m, distributing double the expended HP among chosen allies.",
+        "description_tr": "Mevcut canınızın %50'sine kadarını harcarsınız. 10m içinde bir enerji patlaması yayarak, harcanan canın iki katını seçilen müttefiklere dağıtırsınız.",
+        "branch": "Life",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "lg_draw_life"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "healing": "200% of expended HP",
+          "range": "10m",
+          "cost": "Up to 50% HP"
+        }
+      },
+      {
+        "spell_key": "lg_sacrificial_pact",
+        "name_en": "Sacrificial Pact",
+        "name_tr": "Kurban Yemini",
+        "description_en": "When an ally within 10m drops to 0 HP, you automatically drop to 1 HP to heal them for the exact amount of HP you lost.",
+        "description_tr": "10m içindeki bir müttefik 0 cana düştüğünde, otomatik olarak 1 cana düşer ve kaybettiğiniz can miktarı kadar onları iyileştirirsiniz.",
+        "branch": "Life",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "lg_shared_burden"
+        ],
+        "icon": "💔",
+        "effects": {
+          "trigger": "Ally reaches 0 HP",
+          "self_hp": "Drops to 1",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "lg_blood_barricade",
+        "name_en": "Blood Barricade",
+        "name_tr": "Kanlı Barikat",
+        "description_en": "Create a 5m wide wall of crystallized blood by spending 20% of your max HP. The wall absorbs up to 500 damage.",
+        "description_tr": "Maksimum canınızın %20'sini harcayarak 5m genişliğinde kristalleşmiş kandan bir duvar yaratırsınız. Duvar 500 hasara kadar emer.",
+        "branch": "Life",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "lg_crimson_aura"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "wall_hp": 500,
+          "width": "5m",
+          "cost": "20% Max HP"
+        }
+      },
+      {
+        "spell_key": "lg_undying_vow",
+        "name_en": "Undying Vow",
+        "name_tr": "Ölümsüzlük Yemini",
+        "description_en": "You cannot drop below 1 HP for 3 turns. Any healing you would receive during this time is automatically redirected to the lowest HP ally within 20m.",
+        "description_tr": "3 tur boyunca 1 canın altına düşemezsiniz. Bu süre zarfında alacağınız tüm iyileştirmeler otomatik olarak 20m içindeki en düşük canlı müttefike yönlendirilir.",
+        "branch": "Life",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "lg_sacrificial_pact"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "duration": "3 turns",
+          "effect": "Immortality at 1 HP",
+          "redirect_range": "20m"
+        }
+      },
+      {
+        "spell_key": "lg_vital_transfer",
+        "name_en": "Vital Transfer",
+        "name_tr": "Hayati Aktarım",
+        "description_en": "Swap HP percentages with an ally within 5m. Immediately after, you take 3d10 necrotic damage that cannot be reduced.",
+        "description_tr": "5m içindeki bir müttefikle can yüzdelerinizi takas edersiniz. Hemen ardından azaltılamaz 3d10 nekrotik hasar alırsınız.",
+        "branch": "Life",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "lg_life_surge"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "range": "5m",
+          "recoil_damage": "3d10 necrotic",
+          "effect": "Swap HP %"
+        }
+      },
+      {
+        "spell_key": "lg_martyrs_apotheosis",
+        "name_en": "Martyr's Apotheosis",
+        "name_tr": "Şehidin Yükselişi",
+        "description_en": "Ultimate. Instantly revive and fully heal all allies within 30m. You immediately fall unconscious, drop to 0 HP, and cannot be revived or healed for 3 turns.",
+        "description_tr": "Nihai Yetenek. 30m içindeki tüm müttefikleri anında diriltir ve tamamen iyileştirirsiniz. Derhal bilincinizi kaybedip 0 cana düşersiniz ve 3 tur boyunca diriltilemez veya iyileştirilemezsiniz.",
+        "branch": "Life",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "lg_blood_barricade",
+          "lg_undying_vow",
+          "lg_vital_transfer"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "range": "30m",
+          "ally_effect": "Mass Revive + 100% Heal",
+          "self_effect": "Unconscious, unhealable for 3 turns"
+        }
+      },
+      {
+        "spell_key": "lg_healing_touch",
+        "name_en": "Healing Touch",
+        "name_tr": "Şifa Dokunuşu",
+        "description_en": "A fundamental mending spell. Touch an ally to heal them for 1d8 + Wisdom modifier.",
+        "description_tr": "Temel bir onarım büyüsü. Bir müttefike dokunarak onu 1d8 + Bilgelik değiştiricisi kadar iyileştirirsiniz.",
+        "branch": "Mending",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "✨",
+        "effects": {
+          "healing": "1d8 + WIS",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_cleanse_wounds",
+        "name_en": "Cleanse Wounds",
+        "name_tr": "Yara Temizliği",
+        "description_en": "Touch an ally to cure one poison or bleed effect and heal them for 1d4.",
+        "description_tr": "Bir müttefike dokunarak bir zehir veya kanama etkisini iyileştirir ve ona 1d4 can verirsiniz.",
+        "branch": "Mending",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🧪",
+        "effects": {
+          "healing": "1d4",
+          "cure": "1 poison or bleed",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_mending_pulse",
+        "name_en": "Mending Pulse",
+        "name_tr": "Şifa Nabzı",
+        "description_en": "Release a 5m pulse of restorative magic. All allies in the area heal for 1d6.",
+        "description_tr": "5m'lik bir yenileyici büyü nabzı yayarsınız. Alandaki tüm müttefikler 1d6 can iyileşir.",
+        "branch": "Mending",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🪄",
+        "effects": {
+          "healing": "1d6",
+          "range": "5m AOE"
+        }
+      },
+      {
+        "spell_key": "lg_soothing_mist",
+        "name_en": "Soothing Mist",
+        "name_tr": "Yatıştırıcı Sis",
+        "description_en": "Create a 10m cloud of mist for 3 turns. Allies inside heal 1d4 per turn and gain advantage on Constitution saving throws.",
+        "description_tr": "3 tur boyunca 10m'lik bir sis bulutu yaratırsınız. İçerdeki müttefikler tur başına 1d4 iyileşir ve Dayanıklılık kurtarma zarlarında avantaj kazanır.",
+        "branch": "Mending",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "lg_mending_pulse"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "healing": "1d4 per turn",
+          "buff": "Advantage on CON saves",
+          "range": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lg_knit_bone",
+        "name_en": "Knit Bone",
+        "name_tr": "Kemik Kaynatma",
+        "description_en": "Heal a target for 3d8. Also instantly removes the 'Broken Bone', 'Crippled', or similar severe physical conditions.",
+        "description_tr": "Bir hedefi 3d8 iyileştirir. Ayrıca 'Kırık Kemik', 'Sakatlanma' veya benzeri ağır fiziksel durumları anında ortadan kaldırır.",
+        "branch": "Mending",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "lg_cleanse_wounds"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "healing": "3d8",
+          "cure": "Physical injuries/cripples",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_burst_of_mending",
+        "name_en": "Burst of Mending",
+        "name_tr": "Şifa Patlaması",
+        "description_en": "Send a rapid burst of concentrated magic to an ally within 15m, healing them instantly for 4d6.",
+        "description_tr": "15m içindeki bir müttefike hızlı ve yoğun bir büyü patlaması göndererek onları anında 4d6 iyileştirirsiniz.",
+        "branch": "Mending",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "lg_healing_touch"
+        ],
+        "icon": "💥",
+        "effects": {
+          "healing": "4d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "lg_regenerative_plating",
+        "name_en": "Regenerative Plating",
+        "name_tr": "Yenileyici Zırh",
+        "description_en": "Enchant a set of heavy armor. The wearer regenerates 2d6 HP at the start of their turn for 1 minute.",
+        "description_tr": "Ağır bir zırhı efsunlarsınız. Giyen kişi 1 dakika boyunca turunun başında 2d6 can yeniler.",
+        "branch": "Mending",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "lg_knit_bone"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "healing": "2d6 per turn",
+          "duration": "1 minute",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_mass_cleanse",
+        "name_en": "Mass Cleanse",
+        "name_tr": "Toplu Arınma",
+        "description_en": "Remove all negative status effects, diseases, and curses from all allies within 15m.",
+        "description_tr": "15m içindeki tüm müttefiklerin üzerindeki olumsuz durum etkilerini, hastalıkları ve lanetleri kaldırırsınız.",
+        "branch": "Mending",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "lg_soothing_mist"
+        ],
+        "icon": "🚿",
+        "effects": {
+          "range": "15m",
+          "effect": "Remove all debuffs"
+        }
+      },
+      {
+        "spell_key": "lg_healing_ward",
+        "name_en": "Healing Ward",
+        "name_tr": "Şifa Totemi",
+        "description_en": "Place a magical ward on the ground. Every turn for 5 turns, it heals the lowest HP ally within 10m for 3d8.",
+        "description_tr": "Yere sihirli bir totem yerleştirirsiniz. 5 tur boyunca her tur, 10m içindeki en düşük canlı müttefiki 3d8 iyileştirir.",
+        "branch": "Mending",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "lg_burst_of_mending"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "healing": "3d8 per turn",
+          "target": "Lowest HP ally",
+          "range": "10m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "lg_breath_of_life",
+        "name_en": "Breath of Life",
+        "name_tr": "Yaşam Nefesi",
+        "description_en": "Exhale a 10m cone of pure mending energy. Heals allies for 6d8 and grants them 2d8 temporary HP.",
+        "description_tr": "Saf şifa enerjisinden oluşan 10m'lik bir koni üflersiniz. Müttefikleri 6d8 iyileştirir ve onlara 2d8 geçici can verir.",
+        "branch": "Mending",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 650,
+        "prerequisites": [
+          "lg_mass_cleanse"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "healing": "6d8",
+          "temp_hp": "2d8",
+          "range": "10m cone"
+        }
+      },
+      {
+        "spell_key": "lg_reconstruct",
+        "name_en": "Reconstruct",
+        "name_tr": "Yeniden İnşa",
+        "description_en": "Channel for 1 minute to reattach severed limbs or restore completely ruined organs, healing the target for 10d10 HP in the process.",
+        "description_tr": "Kopmuş uzuvları yeniden takmak veya tamamen parçalanmış organları onarmak için 1 dakika boyunca odaklanırsınız. Bu süreçte hedefi 10d10 can iyileştirirsiniz.",
+        "branch": "Mending",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 750,
+        "prerequisites": [
+          "lg_regenerative_plating"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "healing": "10d10",
+          "effect": "Restore limbs/organs",
+          "cast_time": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_panacea",
+        "name_en": "Panacea",
+        "name_tr": "Her Derde Deva",
+        "description_en": "A target ally becomes immune to all conditions and heals 5d8 per turn for 3 turns.",
+        "description_tr": "Hedef bir müttefik tüm durumlara karşı bağışıklık kazanır ve 3 tur boyunca tur başına 5d8 iyileşir.",
+        "branch": "Mending",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 850,
+        "prerequisites": [
+          "lg_healing_ward"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "healing": "5d8 per turn",
+          "immunity": "All conditions",
+          "duration": "3 turns",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "lg_fountain_of_mending",
+        "name_en": "Fountain of Mending",
+        "name_tr": "Şifa Pınarı",
+        "description_en": "Ultimate. For 1 minute, you become an unstoppable fountain of mending. Any ally within 20m that starts their turn is healed for 5d10 HP and cleansed of all debuffs.",
+        "description_tr": "Nihai Yetenek. 1 dakika boyunca durdurulamaz bir şifa pınarına dönüşürsünüz. 20m içindeki herhangi bir müttefik turuna başladığında 5d10 can iyileşir ve tüm zayıflatmalardan arınır.",
+        "branch": "Mending",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "lg_breath_of_life",
+          "lg_reconstruct",
+          "lg_panacea"
+        ],
+        "icon": "⛲",
+        "effects": {
+          "healing": "5d10 per turn per ally",
+          "cleanse": "All debuffs",
+          "duration": "1 minute",
+          "range": "20m aura"
+        }
+      },
+      {
+        "spell_key": "lg_vitality_aura",
+        "name_en": "Vitality Aura",
+        "name_tr": "Zindelik Halesi",
+        "description_en": "Project a 5m aura of sheer endurance. Allies within gain a +2 bonus to Constitution saving throws.",
+        "description_tr": "5m'lik saf bir dayanıklılık halesi yansıtırsınız. İçerdeki müttefikler Dayanıklılık kurtarma zarlarına +2 bonus kazanır.",
+        "branch": "Vitality",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💚",
+        "effects": {
+          "buff": "+2 CON saves",
+          "range": "5m aura"
+        }
+      },
+      {
+        "spell_key": "lg_bolster_health",
+        "name_en": "Bolster Health",
+        "name_tr": "Sağlık Takviyesi",
+        "description_en": "Touch an ally to increase their maximum HP by 10 for 1 hour.",
+        "description_tr": "Bir müttefike dokunarak onun maksimum canını 1 saatliğine 10 artırırsınız.",
+        "branch": "Vitality",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "📈",
+        "effects": {
+          "max_hp": "+10",
+          "duration": "1 hour",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_iron_endurance",
+        "name_en": "Iron Endurance",
+        "name_tr": "Demir Dayanıklılığı",
+        "description_en": "Grant yourself or an ally resistance to bludgeoning, piercing, or slashing damage for 3 turns.",
+        "description_tr": "Kendinize veya bir müttefike 3 tur boyunca ezici, delici veya kesici hasara karşı direnç sağlarsınız.",
+        "branch": "Vitality",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "resistance": "Physical types",
+          "duration": "3 turns",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_thick_skin",
+        "name_en": "Thick Skin",
+        "name_tr": "Kalın Deri",
+        "description_en": "A target ally gains +2 AC and ignores the first 5 damage of any incoming physical attack for 1 minute.",
+        "description_tr": "Hedef bir müttefik +2 Zırh Sınıfı kazanır ve 1 dakika boyunca gelen herhangi bir fiziksel saldırının ilk 5 hasarını yok sayar.",
+        "branch": "Vitality",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "lg_iron_endurance"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "ac_bonus": "+2",
+          "damage_reduction": "5 physical",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_aura_of_fortitude",
+        "name_en": "Aura of Fortitude",
+        "name_tr": "İrade Halesi",
+        "description_en": "10m aura. Allies inside cannot have their max HP reduced by enemy effects and are immune to diseases.",
+        "description_tr": "10m'lik hale. İçerdeki müttefiklerin maksimum canı düşman etkileriyle azaltılamaz ve hastalıklara karşı bağışıklık kazanırlar.",
+        "branch": "Vitality",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "lg_vitality_aura"
+        ],
+        "icon": "⚕️",
+        "effects": {
+          "immunity": "Max HP reduction, Disease",
+          "range": "10m aura"
+        }
+      },
+      {
+        "spell_key": "lg_invigorating_shout",
+        "name_en": "Invigorating Shout",
+        "name_tr": "Canlandırıcı Nida",
+        "description_en": "Shout with immense life force. Allies within 15m gain 2d10 temporary HP and +3m movement speed for 1 minute.",
+        "description_tr": "Muazzam bir yaşam gücüyle bağırırsınız. 15m içindeki müttefikler 1 dakika boyunca 2d10 geçici can ve +3m hareket hızı kazanır.",
+        "branch": "Vitality",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "lg_bolster_health"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "temp_hp": "2d10",
+          "movement": "+3m",
+          "range": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_giants_vitality",
+        "name_en": "Giant's Vitality",
+        "name_tr": "Dev Zindeliği",
+        "description_en": "Increase an ally's size by one category. They gain +50 Max HP and Advantage on Strength checks for 10 minutes.",
+        "description_tr": "Bir müttefikin boyutunu bir kategori büyütürsünüz. 10 dakika boyunca +50 Maksimum Can ve Güç zarlarında Avantaj kazanırlar.",
+        "branch": "Vitality",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 380,
+        "prerequisites": [
+          "lg_bolster_health"
+        ],
+        "icon": "🧗",
+        "effects": {
+          "size": "+1 Category",
+          "max_hp": "+50",
+          "buff": "Advantage on STR",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "lg_damage_dampener",
+        "name_en": "Damage Dampener",
+        "name_tr": "Hasar Sönümleyici",
+        "description_en": "Create a 10m zone of dense vitality magic. All damage dealt by enemies inside the zone is reduced by 20%.",
+        "description_tr": "10m'lik yoğun bir zindelik büyüsü alanı yaratırsınız. Alandaki düşmanların verdiği tüm hasar %20 azalır.",
+        "branch": "Vitality",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 420,
+        "prerequisites": [
+          "lg_thick_skin"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage_reduction": "20% from enemies",
+          "range": "10m zone"
+        }
+      },
+      {
+        "spell_key": "lg_relentless_vitality",
+        "name_en": "Relentless Vitality",
+        "name_tr": "Amansız Zindelik",
+        "description_en": "Passive buff. When you are reduced to 0 HP, you can channel your massive vitality to drop to 1 HP instead. Usable once per long rest.",
+        "description_tr": "Pasif güçlendirme. 0 cana düştüğünüzde, devasa zindeliğinizi yönlendirerek bunun yerine 1 cana düşebilirsiniz. Uzun dinlenme başına bir kez kullanılabilir.",
+        "branch": "Vitality",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "lg_aura_of_fortitude"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "survive": "Drop to 1 HP instead of 0",
+          "cooldown": "1/Long Rest",
+          "type": "Passive"
+        }
+      },
+      {
+        "spell_key": "lg_aegis_of_health",
+        "name_en": "Aegis of Health",
+        "name_tr": "Sağlık Kalkanı",
+        "description_en": "Grant an ally a powerful buff that adds +20% to their max HP and gives them permanent resistance to necrotic damage until dispelled.",
+        "description_tr": "Bir müttefike maksimum canlarına %+20 ekleyen ve bozulana kadar nekrotik hasara karşı kalıcı direnç sağlayan güçlü bir etki verirsiniz.",
+        "branch": "Vitality",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 650,
+        "prerequisites": [
+          "lg_giants_vitality"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "max_hp": "+20%",
+          "resistance": "Necrotic",
+          "duration": "Until dispelled"
+        }
+      },
+      {
+        "spell_key": "lg_indomitable_aura",
+        "name_en": "Indomitable Aura",
+        "name_tr": "Boyun Eğmez Hale",
+        "description_en": "Expand your presence into a 15m aura. Allies inside have resistance to all magical damage types.",
+        "description_tr": "Varlığınızı 15m'lik bir haleye genişletirsiniz. İçerdeki müttefikler tüm büyülü hasar türlerine karşı direnç kazanır.",
+        "branch": "Vitality",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 750,
+        "prerequisites": [
+          "lg_damage_dampener"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "resistance": "All magical damage",
+          "range": "15m aura"
+        }
+      },
+      {
+        "spell_key": "lg_vital_anchor",
+        "name_en": "Vital Anchor",
+        "name_tr": "Hayati Çıpa",
+        "description_en": "Anchor an ally's soul to their body. If they die within the next 10 minutes, they immediately resurrect with 50% HP.",
+        "description_tr": "Bir müttefikin ruhunu bedenine çıpalarsınız. Önümüzdeki 10 dakika içinde ölürlerse, anında %50 canla dirilirler.",
+        "branch": "Vitality",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "lg_relentless_vitality"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "resurrection": "50% HP on death",
+          "duration": "10 minutes",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "lg_avatar_of_vitality",
+        "name_en": "Avatar of Vitality",
+        "name_tr": "Zindelik Avatarı",
+        "description_en": "Ultimate. For 3 turns, your max HP is tripled. You draw aggro from all enemies within 30m, and take 75% reduced damage from all sources.",
+        "description_tr": "Nihai Yetenek. 3 tur boyunca maksimum canınız üç katına çıkar. 30m içindeki tüm düşmanların dikkatini (aggro) üzerinize çekersiniz ve tüm kaynaklardan %75 daha az hasar alırsınız.",
+        "branch": "Vitality",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "lg_aegis_of_health",
+          "lg_indomitable_aura",
+          "lg_vital_anchor"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "max_hp": "x3",
+          "damage_reduction": "75%",
+          "taunt_range": "30m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lg_mending_tether",
+        "name_en": "Mending Tether",
+        "name_tr": "Şifa Bağı",
+        "description_en": "Link to an ally within 15m. Any direct healing you receive also heals them for 50% of the amount.",
+        "description_tr": "15m içindeki bir müttefike bağlanırsınız. Aldığınız tüm doğrudan iyileştirmeler onları da bu miktarın %50'si kadar iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "lg_life_tether",
+          "lg_healing_touch"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "healing_share": "50% to target",
+          "range": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_blood_fortitude",
+        "name_en": "Blood Fortitude",
+        "name_tr": "Kan İradesi",
+        "description_en": "Sacrifice 15% HP to grant all allies within 10m a 20% Max HP boost for 1 minute.",
+        "description_tr": "10m içindeki tüm müttefiklere 1 dakika boyunca %20 Maksimum Can artışı sağlamak için %15 canınızı feda edersiniz.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "lg_blood_pact",
+          "lg_bolster_health"
+        ],
+        "icon": "💪",
+        "effects": {
+          "max_hp": "+20%",
+          "cost": "15% HP",
+          "range": "10m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_vital_pulse",
+        "name_en": "Vital Pulse",
+        "name_tr": "Zindelik Nabzı",
+        "description_en": "Release a wave that heals allies for 3d8 and converts any overhealing into temporary HP up to a maximum of 30.",
+        "description_tr": "Müttefikleri 3d8 iyileştiren ve fazladan yapılan tüm iyileştirmeleri maksimum 30 olacak şekilde geçici cana dönüştüren bir dalga yayarsınız.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 500,
+        "prerequisites": [
+          "lg_mending_pulse",
+          "lg_invigorating_shout"
+        ],
+        "icon": "💓",
+        "effects": {
+          "healing": "3d8",
+          "overheal_conversion": "Temp HP (Max 30)",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "lg_sacrificial_cleanse",
+        "name_en": "Sacrificial Cleanse",
+        "name_tr": "Kurban Arınması",
+        "description_en": "Take 2d8 damage yourself to instantly dispel all curses, diseases, and poisons from a target ally within 10m.",
+        "description_tr": "10m içindeki hedef bir müttefikten tüm lanetleri, hastalıkları ve zehirleri anında kaldırmak için kendinize 2d8 hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 57,
+        "xp_cost": 500,
+        "prerequisites": [
+          "lg_shared_burden",
+          "lg_cleanse_wounds"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "self_damage": "2d8",
+          "cleanse": "All debuffs",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "lg_aura_of_the_martyr",
+        "name_en": "Aura of the Martyr",
+        "name_tr": "Şehit Halesi",
+        "description_en": "10m aura. Allies gain 50 temporary HP. Whenever an ally's temporary HP from this spell is depleted by damage, you take 5 damage.",
+        "description_tr": "10m'lik hale. Müttefikler 50 geçici can kazanır. Bir müttefikin bu büyüden kazandığı geçici canı hasar alarak her tükendiğinde, siz 5 hasar alırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "lg_crimson_aura",
+          "lg_aura_of_fortitude"
+        ],
+        "icon": "🕯️",
+        "effects": {
+          "temp_hp": "50",
+          "backlash_damage": "5 when depleted",
+          "range": "10m aura"
+        }
+      },
+      {
+        "spell_key": "lg_healing_phalanx",
+        "name_en": "Healing Phalanx",
+        "name_tr": "Şifa Falanksı",
+        "description_en": "Summon ethereal shields around allies within 15m. For 3 turns, every time they block or take physical damage, they are healed for 2d8 HP.",
+        "description_tr": "15m içindeki müttefiklerin etrafında ruhani kalkanlar çağırırsınız. 3 tur boyunca her blok yaptıklarında veya fiziksel hasar aldıklarında 2d8 can iyileşirler.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 71,
+        "xp_cost": 900,
+        "prerequisites": [
+          "lg_healing_ward",
+          "lg_damage_dampener"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "trigger_heal": "2d8 on hit/block",
+          "duration": "3 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "lg_life_conduit",
+        "name_en": "Life Conduit",
+        "name_tr": "Yaşam İletkeni",
+        "description_en": "Connect up to 4 allies. All damage taken by any member is distributed evenly among the group, and all healing applied to one is distributed evenly.",
+        "description_tr": "4 müttefike kadar bağlantı kurarsınız. Gruptan herhangi birinin aldığı tüm hasar grup arasında eşit olarak paylaştırılır ve birine uygulanan tüm iyileştirme eşit olarak dağıtılır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "lg_life_surge",
+          "lg_mass_cleanse"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "targets": "Up to 4 allies",
+          "damage_share": "Evenly split",
+          "healing_share": "Evenly split",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_blood_titan",
+        "name_en": "Blood Titan",
+        "name_tr": "Kan Titanı",
+        "description_en": "Drain 10% HP from all willing allies within 20m. You grow in size, gaining Max HP equal to the drained amount and dealing +2d10 damage on all attacks.",
+        "description_tr": "20m içindeki tüm gönüllü müttefiklerin canının %10'unu çekersiniz. Boyutunuz büyür, çekilen miktar kadar Maksimum Can kazanırsınız ve tüm saldırılarda +2d10 hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "lg_blood_barricade",
+          "lg_giants_vitality"
+        ],
+        "icon": "👹",
+        "effects": {
+          "ally_cost": "10% HP",
+          "self_max_hp": "+ Drained Amount",
+          "damage_bonus": "+2d10",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "lg_bastion_of_renewal",
+        "name_en": "Bastion of Renewal",
+        "name_tr": "Yenilenme Kalesi",
+        "description_en": "Create a 20m zone of ultimate sanctuary. Allies inside are immune to critical hits, heal 4d10 per turn, and their max HP cannot be reduced. Lasts 1 minute.",
+        "description_tr": "20m'lik mutlak bir sığınak alanı yaratırsınız. İçerdeki müttefikler kritik vuruşlara karşı bağışıklıdır, tur başına 4d10 iyileşir ve maksimum canları azaltılamaz. 1 dakika sürer.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "lg_panacea",
+          "lg_indomitable_aura"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "healing": "4d10 per turn",
+          "immunity": "Critical hits, Max HP reduction",
+          "duration": "1 minute",
+          "range": "20m zone"
+        }
+      },
+      {
+        "spell_key": "lg_vampiric_aegis",
+        "name_en": "Vampiric Aegis",
+        "name_tr": "Vampir Kalkanı",
+        "description_en": "Grant an ally a bloody shield with 100 temporary HP. While the shield holds, 50% of the damage they deal is returned to them as healing.",
+        "description_tr": "Bir müttefike 100 geçici canı olan kanlı bir kalkan verirsiniz. Kalkan dayandığı sürece, verdikleri hasarın %50'si onlara iyileştirme olarak geri döner.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "lg_vital_transfer",
+          "lg_vital_anchor"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "temp_hp": 100,
+          "lifesteal": "50% of damage dealt",
+          "duration": "Until Temp HP breaks",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "lg_domain_of_the_life_guardian",
+        "name_en": "Domain of the Life Guardian",
+        "name_tr": "Yaşam Muhafızının Alanı",
+        "description_en": "Grand Ultimate. Expand your aura to 50m. For 5 turns, all allies are immortal (cannot drop below 1 HP). At the end of the duration, all allies are fully healed, but you become exhausted and cannot cast spells for 24 hours.",
+        "description_tr": "Büyük Nihai Yetenek. Halenizi 50m'ye genişletirsiniz. 5 tur boyunca tüm müttefikler ölümsüzdür (1 canın altına düşemez). Süre sonunda tüm müttefikler tamamen iyileşir, ancak siz bitkin düşersiniz ve 24 saat boyunca büyü yapamazsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "lg_martyrs_apotheosis",
+          "lg_fountain_of_mending",
+          "lg_avatar_of_vitality"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "range": "50m aura",
+          "duration": "5 turns",
+          "ally_effect": "Immortal (1 HP min) then 100% Heal",
+          "self_penalty": "Exhausted, 24h silence"
+        }
+      }
+    ]
+  }
+]

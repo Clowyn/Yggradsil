@@ -1,0 +1,1004 @@
+[
+  {
+    "subclass_key": "guardian_of_faith",
+    "tree_name_en": "Guardian of Faith",
+    "tree_name_tr": "İnanç Muhafızı",
+    "tree_desc_en": "A divine protector specializing in holy magic barriers, team sanctuary, and righteous retribution.",
+    "tree_desc_tr": "Kutsal büyü bariyerleri, takım sığınağı ve haklı intikam konusunda uzmanlaşmış ilahi bir koruyucu.",
+    "branches": [
+      "Faith",
+      "Sanctuary",
+      "Divine Aegis"
+    ],
+    "spells": [
+      {
+        "spell_key": "gof_holy_strike",
+        "name_en": "Holy Strike",
+        "name_tr": "Kutsal Vuruş",
+        "description_en": "Strikes a single target with a weapon infused with holy light, dealing 1d8 physical and 1d6 holy damage.",
+        "description_tr": "Kutsal ışıkla aşılanmış bir silahla tek bir hedefe vurarak 1d8 fiziksel ve 1d6 kutsal hasar verir.",
+        "branch": "Faith",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "1d8 physical + 1d6 holy",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "gof_minor_sanctuary",
+        "name_en": "Minor Sanctuary",
+        "name_tr": "Küçük Sığınak",
+        "description_en": "Creates a small 3m safe zone. Allies inside regenerate 2 HP per second for 10s.",
+        "description_tr": "3m'lik küçük bir güvenli bölge oluşturur. İçerideki müttefikler 10 saniye boyunca saniyede 2 HP yeniler.",
+        "branch": "Sanctuary",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🏕️",
+        "effects": {
+          "healing": "2 HP/sec",
+          "duration": "10s",
+          "range": "3m"
+        }
+      },
+      {
+        "spell_key": "gof_aegis_shield",
+        "name_en": "Aegis Shield",
+        "name_tr": "Himaye Kalkanı",
+        "description_en": "Grants a 50 HP protective shield to yourself or an ally within 8m. Lasts until broken or 1 minute passes.",
+        "description_tr": "Kendinize veya 8m içindeki bir müttefike 50 HP'lik koruyucu bir kalkan verir. Kırılana veya 1 dakika geçene kadar sürer.",
+        "branch": "Divine Aegis",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔰",
+        "effects": {
+          "shield": "50 HP",
+          "duration": "60s",
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "gof_righteous_provoke",
+        "name_en": "Righteous Provoke",
+        "name_tr": "Haklı Kışkırtma",
+        "description_en": "Taunts all enemies within 8m to attack you, granting yourself +15% armor for 6s.",
+        "description_tr": "8m içindeki tüm düşmanları size saldırmaları için kışkırtır ve kendinize 6 saniye boyunca +%15 zırh sağlar.",
+        "branch": "Faith",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "taunt": "8m",
+          "armor_buff": "+15%",
+          "duration": "6s"
+        }
+      },
+      {
+        "spell_key": "gof_word_of_comfort",
+        "name_en": "Word of Comfort",
+        "name_tr": "Teselli Sözü",
+        "description_en": "Speaks a divine word, healing a single ally within 10m for 1d8+2 HP and removing minor debuffs.",
+        "description_tr": "İlahi bir söz söyleyerek 10m içindeki bir müttefiki 1d8+2 HP iyileştirir ve küçük zayıflatmaları kaldırır.",
+        "branch": "Sanctuary",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "🕊️",
+        "effects": {
+          "healing": "1d8+2",
+          "range": "10m",
+          "cleanse": "1 minor debuff"
+        }
+      },
+      {
+        "spell_key": "gof_holy_ward",
+        "name_en": "Holy Ward",
+        "name_tr": "Kutsal Koğuş",
+        "description_en": "Surrounds a target with holy energy, reducing all magic damage taken by 15% for 10s.",
+        "description_tr": "Bir hedefi kutsal enerjiyle sararak, 10 saniye boyunca alınan tüm büyü hasarını %15 azaltır.",
+        "branch": "Divine Aegis",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🧿",
+        "effects": {
+          "magic_reduction": "15%",
+          "duration": "10s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gof_blessed_weapon",
+        "name_en": "Blessed Weapon",
+        "name_tr": "Kutsanmış Silah",
+        "description_en": "Infuses your weapon with divine light for 30s. Your attacks deal an additional 1d4 holy damage and illuminate the area for 5m.",
+        "description_tr": "Silahınızı 30 saniye boyunca ilahi ışıkla doldurur. Saldırılarınız fazladan 1d4 kutsal hasar verir ve 5m'lik alanı aydınlatır.",
+        "branch": "Faith",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🌟",
+        "effects": {
+          "damage_bonus": "1d4 holy",
+          "light_radius": "5m",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "gof_intercepting_light",
+        "name_en": "Intercepting Light",
+        "name_tr": "Araya Giren Işık",
+        "description_en": "Dash to an ally within 8m at the speed of light, absorbing the next single attack meant for them within 3s.",
+        "description_tr": "8m içindeki bir müttefike ışık hızında atılarak, 3 saniye içinde onlara yönelik bir sonraki saldırıyı emer.",
+        "branch": "Divine Aegis",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 130,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "range": "8m",
+          "duration": "3s",
+          "absorb": "1 attack"
+        }
+      },
+      {
+        "spell_key": "gof_hallowed_ground",
+        "name_en": "Hallowed Ground",
+        "name_tr": "Kutsal Zemin",
+        "description_en": "Blesses a 5m area for 12s. Enemies taking a step inside suffer 1d4 holy damage per second, while allies gain +10% physical defense.",
+        "description_tr": "5m'lik bir alanı 12 saniyeliğine kutsar. İçeri adım atan düşmanlar saniyede 1d4 kutsal hasar alırken, müttefikler +%10 fiziksel savunma kazanır.",
+        "branch": "Sanctuary",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [],
+        "icon": "🔆",
+        "effects": {
+          "range": "5m",
+          "duration": "12s",
+          "damage": "1d4 holy/sec",
+          "defense_buff": "+10%"
+        }
+      },
+      {
+        "spell_key": "gof_devotion_aura",
+        "name_en": "Aura of Devotion",
+        "name_tr": "Bağlılık Aurası",
+        "description_en": "Emanates a 10m aura. All allies within range gain +10% holy resistance and +5% physical damage.",
+        "description_tr": "10m'lik bir aura yayar. Menzil içindeki tüm müttefikler +%10 kutsal direnç ve +%5 fiziksel hasar kazanır.",
+        "branch": "Cross-branch",
+        "tier": 1,
+        "min_level": 20,
+        "xp_cost": 150,
+        "prerequisites": [
+          "gof_blessed_weapon",
+          "gof_minor_sanctuary"
+        ],
+        "icon": "💫",
+        "effects": {
+          "range": "10m",
+          "holy_resistance": "+10%",
+          "physical_damage": "+5%"
+        }
+      },
+      {
+        "spell_key": "gof_blinding_smite",
+        "name_en": "Blinding Smite",
+        "name_tr": "Kör Eden Çarpma",
+        "description_en": "Strikes the enemy with a brilliant flash, dealing 2d8 holy damage and blinding them for 3s.",
+        "description_tr": "Düşmana parlak bir parlamayla vurarak 2d8 kutsal hasar verir ve onları 3 saniyeliğine kör eder.",
+        "branch": "Faith",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "gof_holy_strike"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "damage": "2d8 holy",
+          "blind": "3s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "gof_healing_pulse",
+        "name_en": "Healing Pulse",
+        "name_tr": "İyileştirici Nabız",
+        "description_en": "Releases a sudden wave of light in an 8m radius, instantly healing all allies for 2d6 HP.",
+        "description_tr": "8m yarıçapında ani bir ışık dalgası yayarak tüm müttefikleri anında 2d6 HP iyileştirir.",
+        "branch": "Sanctuary",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "gof_word_of_comfort"
+        ],
+        "icon": "💖",
+        "effects": {
+          "healing": "2d6",
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "gof_shimmering_armor",
+        "name_en": "Shimmering Armor",
+        "name_tr": "Parıldayan Zırh",
+        "description_en": "Covers your armor in blinding light. The next 3 physical attacks against you deal 50% less damage.",
+        "description_tr": "Zırhınızı kör edici bir ışıkla kaplar. Size karşı yapılan sonraki 3 fiziksel saldırı %50 daha az hasar verir.",
+        "branch": "Divine Aegis",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "gof_holy_ward"
+        ],
+        "icon": "✨",
+        "effects": {
+          "reduction": "50%",
+          "stacks": "3 attacks"
+        }
+      },
+      {
+        "spell_key": "gof_zealous_charge",
+        "name_en": "Zealous Charge",
+        "name_tr": "Gayretli Hücum",
+        "description_en": "Charge up to 10m forward, knocking back the first enemy hit and dealing 2d6 bludgeoning damage.",
+        "description_tr": "10m ileri hücum ederek, vurulan ilk düşmanı geri savurur ve 2d6 ezici hasar verir.",
+        "branch": "Faith",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "gof_righteous_provoke"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "2d6",
+          "knockback": "Yes",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gof_cleansing_flame",
+        "name_en": "Cleansing Flame",
+        "name_tr": "Arındırıcı Alev",
+        "description_en": "Ignites allies in a 5m radius with harmless holy fire, purging 1 negative status effect from each.",
+        "description_tr": "5m yarıçapındaki müttefikleri zararsız kutsal ateşle tutuşturarak her birinden 1 olumsuz durum etkisini temizler.",
+        "branch": "Sanctuary",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 240,
+        "prerequisites": [
+          "gof_hallowed_ground"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "range": "5m",
+          "cleanse": "1 negative effect"
+        }
+      },
+      {
+        "spell_key": "gof_guardian_mantle",
+        "name_en": "Guardian's Mantle",
+        "name_tr": "Muhafızın Örtüsü",
+        "description_en": "Wrap an ally within 10m in a protective cloak, granting a shield equal to 15% of your maximum HP for 15s.",
+        "description_tr": "10m içindeki bir müttefiki koruyucu bir pelerine sararak, 15 saniyeliğine maksimum HP'nizin %15'ine eşit bir kalkan verir.",
+        "branch": "Divine Aegis",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gof_aegis_shield"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "shield": "15% Max HP",
+          "duration": "15s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gof_beacon_of_light",
+        "name_en": "Beacon of Light",
+        "name_tr": "Işık Feneri",
+        "description_en": "Marks an ally within 15m. For 30s, they automatically receive 30% of any healing you cast on other targets.",
+        "description_tr": "15m içindeki bir müttefiki işaretler. 30 saniye boyunca, diğer hedeflere yaptığınız herhangi bir iyileştirmenin %30'unu otomatik olarak alırlar.",
+        "branch": "Cross-branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "gof_healing_pulse",
+          "gof_guardian_mantle"
+        ],
+        "icon": "🏮",
+        "effects": {
+          "range": "15m",
+          "healing_share": "30%",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "gof_vow_of_enmity",
+        "name_en": "Vow of Enmity",
+        "name_tr": "Düşmanlık Yemini",
+        "description_en": "Mark an enemy within 15m. For 20s, you take 10% less damage from them and deal 15% more damage to them.",
+        "description_tr": "15m içindeki bir düşmanı işaretler. 20 saniye boyunca onlardan %10 daha az hasar alır ve onlara %15 daha fazla hasar verirsiniz.",
+        "branch": "Faith",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "gof_zealous_charge"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "15m",
+          "damage_taken": "-10%",
+          "damage_dealt": "+15%",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "gof_sanctified_barrier",
+        "name_en": "Sanctified Barrier",
+        "name_tr": "Kutsanmış Bariyer",
+        "description_en": "Creates a 6x3m wall of solid light for 8s that blocks all hostile projectiles.",
+        "description_tr": "Tüm düşman mermilerini engelleyen, 8 saniye süren 6x3m boyutunda katı ışıktan bir duvar oluşturur.",
+        "branch": "Sanctuary",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "gof_cleansing_flame"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "size": "6x3m",
+          "duration": "8s",
+          "projectile_block": "Yes"
+        }
+      },
+      {
+        "spell_key": "gof_divine_rebuke",
+        "name_en": "Divine Rebuke",
+        "name_tr": "İlahi Kınama",
+        "description_en": "When your shield breaks, it detonates in a 4m radius, dealing 3d6 holy damage to nearby enemies.",
+        "description_tr": "Kalkanınız kırıldığında 4m yarıçapında patlayarak yakındaki düşmanlara 3d6 kutsal hasar verir.",
+        "branch": "Divine Aegis",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "gof_intercepting_light"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 holy",
+          "range": "4m",
+          "trigger": "Shield break"
+        }
+      },
+      {
+        "spell_key": "gof_judgement_wave",
+        "name_en": "Judgement Wave",
+        "name_tr": "Yargı Dalgası",
+        "description_en": "Unleashes a 15m frontal wave of holy energy. Enemies hit take 3d6 holy damage, while allies gain a 40 HP shield.",
+        "description_tr": "15m'lik öncü bir kutsal enerji dalgası serbest bırakır. Vurulan düşmanlar 3d6 kutsal hasar alırken, müttefikler 40 HP'lik bir kalkan kazanır.",
+        "branch": "Cross-branch",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "gof_zealous_charge",
+          "gof_shimmering_armor"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "3d6 holy",
+          "shield": "40 HP",
+          "range": "15m wave"
+        }
+      },
+      {
+        "spell_key": "gof_wrath_of_the_heavens",
+        "name_en": "Wrath of the Heavens",
+        "name_tr": "Göklerin Gazabı",
+        "description_en": "Calls down a pillar of light on a 5m area, dealing 4d8 holy damage to all enemies inside.",
+        "description_tr": "5m'lik bir alana bir ışık sütunu indirerek içerideki tüm düşmanlara 4d8 kutsal hasar verir.",
+        "branch": "Faith",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "gof_blinding_smite"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "4d8 holy",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "gof_circle_of_protection",
+        "name_en": "Circle of Protection",
+        "name_tr": "Koruma Çemberi",
+        "description_en": "Draws an 8m circle on the ground for 10s. Allies standing inside cannot be critically hit by enemies.",
+        "description_tr": "Yere 10 saniyeliğine 8m'lik bir çember çizer. İçinde duran müttefikler düşmanlar tarafından kritik vuruş alamaz.",
+        "branch": "Sanctuary",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "gof_healing_pulse"
+        ],
+        "icon": "⭕",
+        "effects": {
+          "range": "8m",
+          "duration": "10s",
+          "immunity": "Critical hits"
+        }
+      },
+      {
+        "spell_key": "gof_bulwark_of_light",
+        "name_en": "Bulwark of Light",
+        "name_tr": "Işık Siperi",
+        "description_en": "Summons a massive ethereal shield in front of you for 5s, blocking 80% of all incoming frontal damage.",
+        "description_tr": "Önünüzde 5 saniyeliğine devasa uhrevi bir kalkan çağırarak önden gelen tüm hasarın %80'ini engeller.",
+        "branch": "Divine Aegis",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "gof_guardian_mantle"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "reduction": "80% frontal",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "gof_unyielding_faith",
+        "name_en": "Unyielding Faith",
+        "name_tr": "Sarsılmaz İnanç",
+        "description_en": "Passive: Whenever your HP falls below 30%, you gain 20% damage reduction and immunity to fear and charm.",
+        "description_tr": "Pasif: HP'niz %30'un altına düştüğünde, %20 hasar azaltma ile korku ve çekicilik etkilerine bağışıklık kazanırsınız.",
+        "branch": "Faith",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "gof_vow_of_enmity"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "threshold": "30% HP",
+          "reduction": "20%",
+          "immunity": "Fear/Charm"
+        }
+      },
+      {
+        "spell_key": "gof_mass_restoration",
+        "name_en": "Mass Restoration",
+        "name_tr": "Toplu Yenilenme",
+        "description_en": "Channels divine energy, healing all allies within a 15m radius for 4d8 + 10 HP.",
+        "description_tr": "İlahi enerjiyi yönlendirerek, 15m yarıçapındaki tüm müttefikleri 4d8 + 10 HP iyileştirir.",
+        "branch": "Sanctuary",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "gof_circle_of_protection"
+        ],
+        "icon": "🌸",
+        "effects": {
+          "healing": "4d8+10",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gof_soul_link",
+        "name_en": "Soul Link",
+        "name_tr": "Ruh Bağı",
+        "description_en": "Links your soul with an ally within 15m for 20s. 30% of the damage they take is redirected to you instead.",
+        "description_tr": "Ruhunuzu 20 saniyeliğine 15m içindeki bir müttefikle bağlar. Aldıkları hasarın %30'u bunun yerine size yönlendirilir.",
+        "branch": "Divine Aegis",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "gof_divine_rebuke"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "redirect": "30%",
+          "duration": "20s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gof_crusader_strike",
+        "name_en": "Crusader's Strike",
+        "name_tr": "Haçlı Vuruşu",
+        "description_en": "A devastating melee attack dealing 5d6 physical damage, healing you for 50% of the damage dealt.",
+        "description_tr": "5d6 fiziksel hasar veren ve sizi verilen hasarın %50'si kadar iyileştiren yıkıcı bir yakın dövüş saldırısı.",
+        "branch": "Faith",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "gof_wrath_of_the_heavens"
+        ],
+        "icon": "⚒️",
+        "effects": {
+          "damage": "5d6 physical",
+          "lifesteal": "50%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "gof_martyrs_grace",
+        "name_en": "Martyr's Grace",
+        "name_tr": "Şehidin Lütfu",
+        "description_en": "Sacrifices 20% of your current HP to instantly grant all allies within 10m a shield equal to double the sacrificed amount.",
+        "description_tr": "Mevcut HP'nizin %20'sini feda ederek 10m içindeki tüm müttefiklere anında feda edilen miktarın iki katına eşit bir kalkan verir.",
+        "branch": "Cross-branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "gof_unyielding_faith",
+          "gof_soul_link"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "sacrifice": "20% HP",
+          "shield_multiplier": "2x",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gof_angelic_presence",
+        "name_en": "Angelic Presence",
+        "name_tr": "Meleksi Varlık",
+        "description_en": "Radiates a 12m aura of awe. Enemies within the aura have a 20% chance to miss their attacks.",
+        "description_tr": "12m'lik bir huşu aurası yayar. Aura içindeki düşmanların saldırılarını ıskalama ihtimali %20'dir.",
+        "branch": "Sanctuary",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "gof_sanctified_barrier"
+        ],
+        "icon": "👼",
+        "effects": {
+          "miss_chance": "20%",
+          "range": "12m"
+        }
+      },
+      {
+        "spell_key": "gof_aegis_of_retribution",
+        "name_en": "Aegis of Retribution",
+        "name_tr": "İntikam Himayesi",
+        "description_en": "Allies protected by your shields reflect 20% of received melee damage back to the attacker as holy damage.",
+        "description_tr": "Kalkanlarınızla korunan müttefikler, aldıkları yakın dövüş hasarının %20'sini kutsal hasar olarak saldırgana yansıtır.",
+        "branch": "Divine Aegis",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 500,
+        "prerequisites": [
+          "gof_bulwark_of_light"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflect": "20% melee",
+          "damage_type": "Holy"
+        }
+      },
+      {
+        "spell_key": "gof_divine_storm",
+        "name_en": "Divine Storm",
+        "name_tr": "İlahi Fırtına",
+        "description_en": "Creates a swirling holy storm 8m around you, dealing 3d8 holy damage to enemies and healing allies for the same amount.",
+        "description_tr": "Etrafınızda 8m'lik dönen kutsal bir fırtına yaratarak düşmanlara 3d8 kutsal hasar verir ve müttefikleri aynı miktarda iyileştirir.",
+        "branch": "Cross-branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "gof_wrath_of_the_heavens",
+          "gof_mass_restoration"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d8 holy",
+          "healing": "3d8",
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "gof_heavenly_sword",
+        "name_en": "Heavenly Sword",
+        "name_tr": "Cennet Kılıcı",
+        "description_en": "Summons a giant ethereal sword that crashes down in a 10x2m line, dealing 6d8 holy damage and stunning for 2s.",
+        "description_tr": "10x2m'lik bir hatta yere çakılan devasa uhrevi bir kılıç çağırarak 6d8 kutsal hasar verir ve 2 saniyeliğine sersemletir.",
+        "branch": "Faith",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "gof_crusader_strike"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "6d8 holy",
+          "stun": "2s",
+          "area": "10x2m line"
+        }
+      },
+      {
+        "spell_key": "gof_sanctuary_of_the_ancients",
+        "name_en": "Sanctuary of the Ancients",
+        "name_tr": "Kadimlerin Sığınağı",
+        "description_en": "Blesses a 15m radius for 6s. Allies inside are completely immune to crowd control and negative status effects.",
+        "description_tr": "15m yarıçapı 6 saniyeliğine kutsar. İçerideki müttefikler kitle kontrolüne ve olumsuz durum etkilerine karşı tamamen bağışıktır.",
+        "branch": "Sanctuary",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 680,
+        "prerequisites": [
+          "gof_mass_restoration"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "range": "15m",
+          "duration": "6s",
+          "immunity": "CC & Debuffs"
+        }
+      },
+      {
+        "spell_key": "gof_impervious_bastion",
+        "name_en": "Impervious Bastion",
+        "name_tr": "Aşılamaz Tabya",
+        "description_en": "Turn into an immovable object for 8s. You gain 90% damage reduction, cannot be moved, and taunt all enemies within 15m.",
+        "description_tr": "8 saniyeliğine taşınmaz bir nesneye dönüşürsünüz. %90 hasar azaltma kazanırsınız, hareket ettirilemezsiniz ve 15m içindeki tüm düşmanları kışkırtırsınız.",
+        "branch": "Divine Aegis",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "gof_soul_link"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "reduction": "90%",
+          "duration": "8s",
+          "range": "15m",
+          "taunt": "Yes"
+        }
+      },
+      {
+        "spell_key": "gof_fervent_zeal",
+        "name_en": "Fervent Zeal",
+        "name_tr": "Hararetli Şevk",
+        "description_en": "Infuses yourself with zeal for 12s. Gain +30% attack speed, +20% movement speed, and your attacks splash holy damage to nearby enemies.",
+        "description_tr": "Kendinizi 12 saniyeliğine şevkle doldurur. +%30 saldırı hızı, +%20 hareket hızı kazanırsınız ve saldırılarınız yakındaki düşmanlara kutsal hasar sıçratır.",
+        "branch": "Faith",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "gof_heavenly_sword"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "attack_speed": "+30%",
+          "movement_speed": "+20%",
+          "splash_damage": "Yes",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "gof_breath_of_life",
+        "name_en": "Breath of Life",
+        "name_tr": "Hayat Nefesi",
+        "description_en": "Breathes divine energy into a recently fallen ally within 5m, reviving them instantly with 30% of their maximum HP.",
+        "description_tr": "5m içinde yeni düşmüş bir müttefike ilahi enerji üfleyerek onları anında maksimum HP'lerinin %30'u ile canlandırır.",
+        "branch": "Sanctuary",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "gof_angelic_presence"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "revive": "30% HP",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "gof_wings_of_protection",
+        "name_en": "Wings of Protection",
+        "name_tr": "Koruma Kanatları",
+        "description_en": "Sprout golden wings for 15s, allowing flight. Every 3s, all allies within 20m receive a refreshing 100 HP shield.",
+        "description_tr": "15 saniyeliğine uçmayı sağlayan altın kanatlar çıkarır. Her 3 saniyede bir, 20m içindeki tüm müttefikler yenilenen 100 HP'lik bir kalkan alır.",
+        "branch": "Divine Aegis",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 820,
+        "prerequisites": [
+          "gof_aegis_of_retribution"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "shield": "100 HP every 3s",
+          "flight": "Yes",
+          "range": "20m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "gof_purgatory_flames",
+        "name_en": "Purgatory Flames",
+        "name_tr": "Araf Alevleri",
+        "description_en": "Summons a 12m ring of holy fire. Enemies passing through take 5d10 damage; allies passing through gain 30% movement speed.",
+        "description_tr": "12m'lik kutsal ateşten bir halka çağırır. İçinden geçen düşmanlar 5d10 hasar alır; içinden geçen müttefikler %30 hareket hızı kazanır.",
+        "branch": "Cross-branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 840,
+        "prerequisites": [
+          "gof_fervent_zeal",
+          "gof_sanctuary_of_the_ancients"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "5d10 holy",
+          "movement_buff": "+30%",
+          "range": "12m ring"
+        }
+      },
+      {
+        "spell_key": "gof_divine_execution",
+        "name_en": "Divine Execution",
+        "name_tr": "İlahi İnfaz",
+        "description_en": "A mighty blow dealing 8d10 holy damage. If the target is below 20% HP, this attack ignores all armor and shields.",
+        "description_tr": "8d10 kutsal hasar veren kudretli bir darbe. Hedef %20 HP'nin altındaysa, bu saldırı tüm zırh ve kalkanları yok sayar.",
+        "branch": "Faith",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "gof_fervent_zeal"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "8d10 holy",
+          "execute_threshold": "20% HP",
+          "armor_pierce": "Yes"
+        }
+      },
+      {
+        "spell_key": "gof_blessed_communion",
+        "name_en": "Blessed Communion",
+        "name_tr": "Kutsanmış Birlik",
+        "description_en": "Connects the life force of up to 4 allies for 20s. Any healing received by one ally heals the others by 40% of that amount.",
+        "description_tr": "En fazla 4 müttefikin yaşam gücünü 20 saniyeliğine birbirine bağlar. Bir müttefikin aldığı herhangi bir iyileştirme, diğerlerini bu miktarın %40'ı kadar iyileştirir.",
+        "branch": "Sanctuary",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "gof_sanctuary_of_the_ancients"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "targets": "4 allies",
+          "healing_share": "40%",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "gof_heavenly_reflection",
+        "name_en": "Heavenly Reflection",
+        "name_tr": "Cennet Yansıması",
+        "description_en": "Creates a 5m mirror shield for 4s that perfectly bounces 1 targeted spell back to its original caster.",
+        "description_tr": "1 hedeflenmiş büyüyü orijinal atanına mükemmel bir şekilde geri yansıtan, 4 saniye süren 5m'lik ayna bir kalkan oluşturur.",
+        "branch": "Divine Aegis",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 890,
+        "prerequisites": [
+          "gof_impervious_bastion"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "reflect": "1 spell",
+          "duration": "4s",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "gof_aegis_of_the_fallen",
+        "name_en": "Aegis of the Fallen",
+        "name_tr": "Düşmüşlerin Himayesi",
+        "description_en": "When you take fatal damage, become invulnerable for 4s, fully restore your HP, and explode with holy energy. Triggers once per long rest.",
+        "description_tr": "Ölümcül hasar aldığınızda, 4 saniyeliğine hasar görmez olursunuz, HP'nizi tamamen yeniler ve kutsal enerjiyle patlarsınız. Uzun dinlenme başına bir kez tetiklenir.",
+        "branch": "Cross-branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "gof_divine_execution",
+          "gof_impervious_bastion"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "invulnerability": "4s",
+          "heal": "100%",
+          "trigger": "Fatal damage"
+        }
+      },
+      {
+        "spell_key": "gof_avatar_of_conquest",
+        "name_en": "Avatar of Conquest",
+        "name_tr": "Fetih Avatarı",
+        "description_en": "Transform into an avatar of war for 20s. Gain +50% holy damage, and all your attacks strike in a 5m wide cleave.",
+        "description_tr": "20 saniyeliğine bir savaş avatarına dönüşürsünüz. +%50 kutsal hasar kazanırsınız ve tüm saldırılarınız 5m genişliğinde bir yarma ile vurur.",
+        "branch": "Faith",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "gof_divine_execution"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage_bonus": "+50% holy",
+          "cleave": "5m",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "gof_eden_garden",
+        "name_en": "Garden of Eden",
+        "name_tr": "Cennet Bahçesi",
+        "description_en": "Creates a 20m paradise zone for 15s. Allies inside heal 5% max HP per second and their HP cannot drop below 1.",
+        "description_tr": "15 saniyeliğine 20m'lik bir cennet bölgesi oluşturur. İçerideki müttefikler saniyede %5 maksimum HP iyileşir ve HP'leri 1'in altına düşemez.",
+        "branch": "Sanctuary",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gof_blessed_communion"
+        ],
+        "icon": "🏞️",
+        "effects": {
+          "healing": "5% max HP/sec",
+          "immortality": "Yes",
+          "duration": "15s",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gof_shield_of_the_creator",
+        "name_en": "Shield of the Creator",
+        "name_tr": "Yaratıcının Kalkanı",
+        "description_en": "Passive: Grants a permanent shield equal to 50% of your max HP. It regenerates by 5% per second while out of combat.",
+        "description_tr": "Pasif: Maksimum HP'nizin %50'sine eşit kalıcı bir kalkan verir. Çatışma dışındayken saniyede %5 oranında yenilenir.",
+        "branch": "Divine Aegis",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "gof_heavenly_reflection"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "shield": "50% max HP",
+          "regen": "5%/sec OOC"
+        }
+      },
+      {
+        "spell_key": "gof_judgement_day",
+        "name_en": "Judgement Day",
+        "name_tr": "Kıyamet Günü",
+        "description_en": "Summons a colossal hammer of light that crashes into a 20m area, dealing 15d10 holy damage and obliterating weak unholy entities.",
+        "description_tr": "20m'lik bir alana çakılan devasa bir ışık çekici çağırarak 15d10 kutsal hasar verir ve zayıf şeytani varlıkları yok eder.",
+        "branch": "Faith",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "gof_avatar_of_conquest"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "15d10 holy",
+          "obliterate": "Weak undead",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gof_divine_intervention",
+        "name_en": "Divine Intervention",
+        "name_tr": "İlahi Müdahale",
+        "description_en": "Calls upon a deity to fully heal and cleanse all allies on the battlefield, restoring all their spell slots and removing all curses.",
+        "description_tr": "Savaş alanındaki tüm müttefikleri tamamen iyileştirmek ve arındırmak, tüm büyü yuvalarını yenilemek ve tüm lanetleri kaldırmak için bir tanrıya yakarır.",
+        "branch": "Sanctuary",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "gof_eden_garden"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "heal": "100%",
+          "cleanse": "All",
+          "restore_slots": "Yes",
+          "range": "Global"
+        }
+      },
+      {
+        "spell_key": "gof_absolute_aegis",
+        "name_en": "Absolute Aegis",
+        "name_tr": "Mutlak Himaye",
+        "description_en": "Erects a massive 30m dome of solid light for 15s. No enemy can enter, and no hostile projectile or spell can pass through.",
+        "description_tr": "15 saniyeliğine katı ışıktan devasa 30m'lik bir kubbe diker. Hiçbir düşman giremez ve hiçbir düşman mermisi veya büyüsü içinden geçemez.",
+        "branch": "Divine Aegis",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1480,
+        "prerequisites": [
+          "gof_shield_of_the_creator"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "dome_size": "30m",
+          "duration": "15s",
+          "impenetrable": "Yes"
+        }
+      },
+      {
+        "spell_key": "gof_guardian_of_faith_ascension",
+        "name_en": "Guardian of Faith Ascension",
+        "name_tr": "İnanç Muhafızı Yükselişi",
+        "description_en": "Ascend to godhood for 30s. All your auras become global. Allies become totally invulnerable. Your attacks deal 300% holy damage and heal all allies globally for the damage dealt.",
+        "description_tr": "30 saniyeliğine tanrılığa yükselirsiniz. Tüm auralarınız küresel hale gelir. Müttefikler tamamen hasar görmez olur. Saldırılarınız %300 kutsal hasar verir ve tüm müttefikleri verilen hasar kadar küresel olarak iyileştirir.",
+        "branch": "Cross-branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "gof_judgement_day",
+          "gof_divine_intervention",
+          "gof_absolute_aegis"
+        ],
+        "icon": "🔱",
+        "effects": {
+          "damage_bonus": "300% holy",
+          "invulnerability": "Allies",
+          "global_auras": "Yes",
+          "duration": "30s"
+        }
+      }
+    ]
+  }
+]

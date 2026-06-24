@@ -1,0 +1,1000 @@
+[
+  {
+    "subclass_key": "stoneheart",
+    "tree_name_en": "Stoneheart",
+    "tree_name_tr": "Taşyürek",
+    "tree_desc_en": "Masters of earth magic, unmatched petrification defense, and unbreakable combat resolve.",
+    "tree_desc_tr": "Toprak büyüsü, eşsiz taşlaştırma savunması ve sarsılmaz savaş kararlılığı ustaları.",
+    "branches": [
+      "Earthbound",
+      "Petrification",
+      "Stone Resolve",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "sth_rock_toss",
+        "name_en": "Rock Toss",
+        "name_tr": "Taş Fırlatma",
+        "description_en": "Throws a jagged rock at an enemy, dealing 1d10 bludgeoning damage.",
+        "description_tr": "Düşmana sivri bir taş fırlatarak 1d10 ezici hasar verir.",
+        "branch": "Earthbound",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪨",
+        "effects": {
+          "damage": "1d10 bludgeoning",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "sth_tremor_step",
+        "name_en": "Tremor Step",
+        "name_tr": "Sarsıntı Adımı",
+        "description_en": "Stomps the ground, creating a small localized tremor. Enemies within 3m take 1d6 damage and must save or fall prone.",
+        "description_tr": "Yere sertçe basarak küçük bölgesel bir sarsıntı yaratır. 3m içindeki düşmanlar 1d6 hasar alır ve kurtarma zarı atamazlarsa yere düşerler.",
+        "branch": "Earthbound",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "sth_rock_toss"
+        ],
+        "icon": "🦶",
+        "effects": {
+          "damage": "1d6",
+          "range": "3m",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "sth_earth_wall",
+        "name_en": "Earth Wall",
+        "name_tr": "Toprak Duvar",
+        "description_en": "Summons a 3m wide, 2m high wall of dirt to block attacks and line of sight. Lasts 2 turns.",
+        "description_tr": "Saldırıları ve görüşü engellemek için 3m genişliğinde, 2m yüksekliğinde topraktan bir duvar çağırır. 2 tur sürer.",
+        "branch": "Earthbound",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sth_tremor_step"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "duration": "2 turns",
+          "size": "3m x 2m"
+        }
+      },
+      {
+        "spell_key": "sth_boulder_crash",
+        "name_en": "Boulder Crash",
+        "name_tr": "Kaya Çarpması",
+        "description_en": "Drops a massive boulder on a target. Deals 3d8 bludgeoning damage in a 4m radius.",
+        "description_tr": "Bir hedefin üzerine devasa bir kaya düşürür. 4m yarıçapta 3d8 ezici hasar verir.",
+        "branch": "Earthbound",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "sth_earth_wall"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "3d8 bludgeoning",
+          "range": "4m radius"
+        }
+      },
+      {
+        "spell_key": "sth_seismic_wave",
+        "name_en": "Seismic Wave",
+        "name_tr": "Sismik Dalga",
+        "description_en": "Sends a shockwave through the ground in a 10m cone. Deals 2d8 damage and pushes targets back 2m.",
+        "description_tr": "Yerde 10m'lik bir koni şeklinde şok dalgası gönderir. 2d8 hasar verir ve hedefleri 2m geriye iter.",
+        "branch": "Earthbound",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sth_boulder_crash"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "2d8",
+          "range": "10m cone",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "sth_quicksand_trap",
+        "name_en": "Quicksand Trap",
+        "name_tr": "Bataklık Tuzağı",
+        "description_en": "Turns a 5m radius area into quicksand. Enemies inside move at half speed and take 1d4 damage per turn. Lasts 3 turns.",
+        "description_tr": "5m yarıçapındaki bir alanı bataklığa çevirir. İçerideki düşmanlar yarı hızda hareket eder ve tur başına 1d4 hasar alır. 3 tur sürer.",
+        "branch": "Earthbound",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sth_seismic_wave"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "damage": "1d4/turn",
+          "range": "5m radius",
+          "duration": "3 turns",
+          "speed": "-50%"
+        }
+      },
+      {
+        "spell_key": "sth_earthen_pillars",
+        "name_en": "Earthen Pillars",
+        "name_tr": "Toprak Sütunları",
+        "description_en": "Erupts 3 sharp stone pillars from beneath targets. Each pillar deals 4d6 piercing damage and launches targets 2m into the air.",
+        "description_tr": "Hedeflerin altından 3 keskin taş sütun patlatır. Her sütun 4d6 delici hasar verir ve hedefleri 2m havaya fırlatır.",
+        "branch": "Earthbound",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "sth_quicksand_trap"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "damage": "4d6 piercing",
+          "knockup": "2m"
+        }
+      },
+      {
+        "spell_key": "sth_meteor_strike",
+        "name_en": "Meteor Strike",
+        "name_tr": "Meteor Saldırısı",
+        "description_en": "Pulls a flaming rock from the sky, crashing it into an 8m area. Deals 5d8 fire and bludgeoning damage.",
+        "description_tr": "Gökyüzünden alevli bir kayayı 8m'lik bir alana düşürür. 5d8 ateş ve ezici hasar verir.",
+        "branch": "Earthbound",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sth_earthen_pillars"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "5d8 fire/bludgeoning",
+          "range": "8m radius"
+        }
+      },
+      {
+        "spell_key": "sth_tectonic_shift",
+        "name_en": "Tectonic Shift",
+        "name_tr": "Tektonik Kayma",
+        "description_en": "Alters the battlefield terrain up to 20m away, creating elevated platforms or deep trenches up to 5m in size.",
+        "description_tr": "Savaş alanı arazisini 20m'ye kadar uzaktan değiştirerek 5m boyutuna kadar yükseltilmiş platformlar veya derin hendekler yaratır.",
+        "branch": "Earthbound",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sth_meteor_strike"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "range": "20m",
+          "size": "5m"
+        }
+      },
+      {
+        "spell_key": "sth_earthshatter",
+        "name_en": "Earthshatter",
+        "name_tr": "Yer Yaran",
+        "description_en": "Slams a weapon into the earth, fracturing the ground in a 15m line. Enemies take 6d10 damage and are stunned for 1 turn.",
+        "description_tr": "Bir silahı yere vurarak zemini 15m'lik bir hat boyunca parçalar. Düşmanlar 6d10 hasar alır ve 1 tur sersemler.",
+        "branch": "Earthbound",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "sth_tectonic_shift"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d10",
+          "range": "15m line",
+          "status": "stunned"
+        }
+      },
+      {
+        "spell_key": "sth_gravity_well",
+        "name_en": "Gravity Well",
+        "name_tr": "Yerçekimi Kuyusu",
+        "description_en": "Increases gravity in a 10m radius. Flying enemies fall, and ground enemies cannot move or dash for 2 turns.",
+        "description_tr": "10m yarıçapta yerçekimini artırır. Uçan düşmanlar düşer ve yerdeki düşmanlar 2 tur boyunca hareket edemez veya atılamaz.",
+        "branch": "Earthbound",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sth_earthshatter"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "range": "10m radius",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sth_mountain_maker",
+        "name_en": "Mountain Maker",
+        "name_tr": "Dağ Yapan",
+        "description_en": "Raises a massive 10m tall peak from the earth under your feet, granting you high ground advantage and 50 temporary HP.",
+        "description_tr": "Ayaklarınızın altından 10m yüksekliğinde devasa bir zirve yükseltir, size yüksek zemin avantajı ve 50 geçici HP sağlar.",
+        "branch": "Earthbound",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sth_gravity_well"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "size": "10m tall",
+          "temp_hp": "50"
+        }
+      },
+      {
+        "spell_key": "sth_world_tremor",
+        "name_en": "World Tremor",
+        "name_tr": "Dünya Sarsıntısı",
+        "description_en": "Triggers a massive continuous earthquake. All enemies within 50m take 4d10 damage each turn and are knocked prone. Lasts 3 turns.",
+        "description_tr": "Devasa, sürekli bir deprem tetikler. 50m içindeki tüm düşmanlar her tur 4d10 hasar alır ve yere düşer. 3 tur sürer.",
+        "branch": "Earthbound",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "sth_mountain_maker"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "4d10/turn",
+          "range": "50m",
+          "duration": "3 turns",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "sth_wrath_of_titans",
+        "name_en": "Wrath of the Titans",
+        "name_tr": "Titanların Öfkesi",
+        "description_en": "Summons the astral arms of a primordial titan to smash the battlefield. Deals 15d12 bludgeoning damage in a 30m radius and destroys all structures.",
+        "description_tr": "Savaş alanını parçalamak için ilkel bir titanın astral kollarını çağırır. 30m yarıçapta 15d12 ezici hasar verir ve tüm yapıları yok eder.",
+        "branch": "Earthbound",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sth_world_tremor"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "15d12 bludgeoning",
+          "range": "30m radius"
+        }
+      },
+      {
+        "spell_key": "sth_stiffening_touch",
+        "name_en": "Stiffening Touch",
+        "name_tr": "Sertleştiren Dokunuş",
+        "description_en": "A melee touch attack that partially calcifies a target's joints, reducing their movement speed by 3m for 2 turns.",
+        "description_tr": "Hedefin eklemlerini kısmen kireçlendiren, hareket hızını 2 tur boyunca 3m azaltan bir yakın dövüş dokunuş saldırısı.",
+        "branch": "Petrification",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🤌",
+        "effects": {
+          "range": "Melee",
+          "duration": "2 turns",
+          "speed": "-3m"
+        }
+      },
+      {
+        "spell_key": "sth_fossil_dust",
+        "name_en": "Fossil Dust",
+        "name_tr": "Fosil Tozu",
+        "description_en": "Blows ancient dust in a 4m cone. Enemies must save or have a 10% chance to fail casting spells for 1 turn.",
+        "description_tr": "4m'lik bir koniye kadim bir toz üfler. Düşmanlar kurtarma zarı atamazsa 1 tur boyunca büyü yapmada %10 başarısız olma ihtimali kazanır.",
+        "branch": "Petrification",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [
+          "sth_stiffening_touch"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "range": "4m cone",
+          "duration": "1 turn",
+          "spell_failure": "10%"
+        }
+      },
+      {
+        "spell_key": "sth_heavy_limbs",
+        "name_en": "Heavy Limbs",
+        "name_tr": "Ağır Uzuvlar",
+        "description_en": "Curses a target up to 10m away. Their arms turn heavy as stone, giving them disadvantage on attack rolls for 2 turns.",
+        "description_tr": "10m'ye kadar uzaktaki bir hedefi lanetler. Kolları taş gibi ağırlaşır ve 2 tur boyunca saldırı zarlarında dezavantaj verir.",
+        "branch": "Petrification",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "sth_fossil_dust"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "range": "10m",
+          "duration": "2 turns",
+          "status": "disadvantage"
+        }
+      },
+      {
+        "spell_key": "sth_stone_gaze",
+        "name_en": "Stone Gaze",
+        "name_tr": "Taş Bakışı",
+        "description_en": "Focuses on a single target within 15m. Target must save or be paralyzed (partially turned to stone) for 1 turn.",
+        "description_tr": "15m içindeki tek bir hedefe odaklanır. Hedef kurtarma zarı atamazsa 1 tur boyunca felç olur (kısmen taşa dönüşür).",
+        "branch": "Petrification",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sth_heavy_limbs"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "15m",
+          "duration": "1 turn",
+          "status": "paralyzed"
+        }
+      },
+      {
+        "spell_key": "sth_calcify_armor",
+        "name_en": "Calcify Armor",
+        "name_tr": "Zırh Kireçlendirme",
+        "description_en": "Hardens an enemy's armor against their will, locking its joints. Target takes 2d8 crushing damage and loses 2 AC for 3 turns.",
+        "description_tr": "Bir düşmanın zırhını isteği dışında sertleştirerek eklemlerini kilitler. Hedef 2d8 ezici hasar alır ve 3 tur boyunca 2 Zırh Sınıfı kaybeder.",
+        "branch": "Petrification",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sth_stone_gaze"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "damage": "2d8 crushing",
+          "ac_reduction": "2",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sth_petrifying_strike",
+        "name_en": "Petrifying Strike",
+        "name_tr": "Taşlaştıran Vuruş",
+        "description_en": "Infuses your weapon with petrification magic. The next strike deals extra 3d6 damage and slows the target's actions by 20%.",
+        "description_tr": "Silahınıza taşlaştırma büyüsü aşılar. Sonraki vuruş fazladan 3d6 hasar verir ve hedefin eylemlerini %20 yavaşlatır.",
+        "branch": "Petrification",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "sth_calcify_armor"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "+3d6",
+          "speed": "-20%"
+        }
+      },
+      {
+        "spell_key": "sth_gorgons_breath",
+        "name_en": "Gorgon's Breath",
+        "name_tr": "Gorgon'un Nefesi",
+        "description_en": "Exhales a toxic green mist in a 10m cone. Targets take 4d8 poison damage and are restrained by stone creeping up their legs.",
+        "description_tr": "10m'lik bir koniye zehirli yeşil bir sis üfler. Hedefler 4d8 zehir hasarı alır ve bacaklarına tırmanan taşlar tarafından kısıtlanır.",
+        "branch": "Petrification",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "sth_petrifying_strike"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "damage": "4d8 poison",
+          "range": "10m cone",
+          "status": "restrained"
+        }
+      },
+      {
+        "spell_key": "sth_statue_shatter",
+        "name_en": "Statue Shatter",
+        "name_tr": "Heykel Parçalama",
+        "description_en": "Strikes a petrified, restrained, or paralyzed target, detonating the stone on them for 6d8 damage.",
+        "description_tr": "Taşlaşmış, kısıtlanmış veya felç olmuş bir hedefe vurarak üzerlerindeki taşı patlatır ve 6d8 hasar verir.",
+        "branch": "Petrification",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 420,
+        "prerequisites": [
+          "sth_gorgons_breath"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "6d8"
+        }
+      },
+      {
+        "spell_key": "sth_geode_trap",
+        "name_en": "Geode Trap",
+        "name_tr": "Jeot Tuzağı",
+        "description_en": "Places a hidden rune. When triggered, it encases the victim in a crystal geode, stunning them for 2 turns and dealing 3d10 damage over time.",
+        "description_tr": "Gizli bir rün yerleştirir. Tetiklendiğinde kurbanı kristal bir jeodun içine hapseder, 2 tur sersemletir ve zamanla 3d10 hasar verir.",
+        "branch": "Petrification",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sth_statue_shatter"
+        ],
+        "icon": "💎",
+        "effects": {
+          "damage": "3d10/turn",
+          "duration": "2 turns",
+          "status": "stunned"
+        }
+      },
+      {
+        "spell_key": "sth_medusas_curse",
+        "name_en": "Medusa's Curse",
+        "name_tr": "Medusa'nın Laneti",
+        "description_en": "Fires a beam of petrifying energy at a target up to 20m. If they fail a save, they are permanently turned to stone until cured.",
+        "description_tr": "20m'ye kadar uzaktaki bir hedefe taşlaştırıcı bir enerji ışını ateşler. Kurtarma zarında başarısız olurlarsa iyileştirilene kadar kalıcı olarak taşa dönüşürler.",
+        "branch": "Petrification",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sth_geode_trap"
+        ],
+        "icon": "👱‍♀️",
+        "effects": {
+          "range": "20m",
+          "status": "permanently petrified"
+        }
+      },
+      {
+        "spell_key": "sth_fossilize_blood",
+        "name_en": "Fossilize Blood",
+        "name_tr": "Kan Fosilize Etme",
+        "description_en": "Boils the minerals in enemies' blood within 15m. Deals 5d10 necrotic damage and causes severe internal bleeding, reducing healing by 50%.",
+        "description_tr": "15m içindeki düşmanların kanındaki mineralleri kaynatır. 5d10 nekrotik hasar verir ve şiddetli iç kanamaya neden olarak iyileşmeyi %50 azaltır.",
+        "branch": "Petrification",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sth_medusas_curse"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "5d10 necrotic",
+          "range": "15m",
+          "healing_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "sth_basilisk_eye",
+        "name_en": "Basilisk Eye",
+        "name_tr": "Basilisk Gözü",
+        "description_en": "Creates a magical eye that sweeps a 15m area. Anyone caught in its gaze takes 6d8 psychic damage and is heavily petrified (cannot act for 2 turns).",
+        "description_tr": "15m'lik bir alanı tarayan sihirli bir göz yaratır. Bakışına yakalanan herkes 6d8 psişik hasar alır ve ağır şekilde taşlaşır (2 tur hareket edemez).",
+        "branch": "Petrification",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sth_fossilize_blood"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "damage": "6d8 psychic",
+          "range": "15m area",
+          "status": "heavy petrification",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "sth_mass_petrification",
+        "name_en": "Mass Petrification",
+        "name_tr": "Toplu Taşlaştırma",
+        "description_en": "Releases a 20m burst of gorgon magic. All enemies inside must pass a strict save or become stone statues for 3 turns.",
+        "description_tr": "20m'lik bir gorgon büyüsü patlaması yayar. İçerideki tüm düşmanlar zorlu bir kurtarma zarını geçemezse 3 tur boyunca taş heykellere dönüşür.",
+        "branch": "Petrification",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "sth_basilisk_eye"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "range": "20m burst",
+          "status": "petrified",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sth_gorgons_garden",
+        "name_en": "The Gorgon's Garden",
+        "name_tr": "Gorgon'un Bahçesi",
+        "description_en": "Transforms a 40m radius into a dead stone wasteland. Enemies turn into stone statues permanently if under 20% HP. Others take 10d10 damage per turn.",
+        "description_tr": "40m yarıçapını ölü bir taş çorak araziye dönüştürür. %20 HP altındaki düşmanlar kalıcı olarak taş heykellere dönüşür. Diğerleri tur başına 10d10 hasar alır.",
+        "branch": "Petrification",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sth_mass_petrification"
+        ],
+        "icon": "🥀",
+        "effects": {
+          "range": "40m radius",
+          "damage": "10d10/turn",
+          "status": "permanent petrification < 20% HP"
+        }
+      },
+      {
+        "spell_key": "sth_pebble_skin",
+        "name_en": "Pebble Skin",
+        "name_tr": "Çakıl Derisi",
+        "description_en": "Hardens your skin temporarily, gaining +2 AC and reducing incoming physical damage by 2 for 3 turns.",
+        "description_tr": "Derinizi geçici olarak sertleştirerek +2 Zırh Sınıfı kazandırır ve 3 tur boyunca gelen fiziksel hasarı 2 azaltır.",
+        "branch": "Stone Resolve",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔘",
+        "effects": {
+          "ac_bonus": "2",
+          "damage_reduction": "2",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "sth_rooted_stance",
+        "name_en": "Rooted Stance",
+        "name_tr": "Köklü Duruş",
+        "description_en": "Plants your feet firmly into the ground. You cannot be pushed or knocked prone for 3 turns, but your movement speed is halved.",
+        "description_tr": "Ayaklarınızı yere sıkıca basarsınız. 3 tur boyunca itilemez veya yere düşürülemezsiniz, ancak hareket hızınız yarıya iner.",
+        "branch": "Stone Resolve",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [
+          "sth_pebble_skin"
+        ],
+        "icon": "🌳",
+        "effects": {
+          "duration": "3 turns",
+          "speed": "-50%",
+          "status": "immune to prone/push"
+        }
+      },
+      {
+        "spell_key": "sth_unflinching_guard",
+        "name_en": "Unflinching Guard",
+        "name_tr": "Sarsılmaz Koruma",
+        "description_en": "Crosses your arms, absorbing up to 20 damage from the next attack. Reflects 50% of the absorbed damage back as force.",
+        "description_tr": "Kollarınızı çaprazlayarak sonraki saldırıdan 20 hasara kadar emersiniz. Emilen hasarın %50'sini güç olarak geri yansıtır.",
+        "branch": "Stone Resolve",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 130,
+        "prerequisites": [
+          "sth_rooted_stance"
+        ],
+        "icon": "🙅",
+        "effects": {
+          "damage_absorption": "20",
+          "damage_reflection": "50%"
+        }
+      },
+      {
+        "spell_key": "sth_granite_carapace",
+        "name_en": "Granite Carapace",
+        "name_tr": "Granit Kabuk",
+        "description_en": "Encases yourself in thick granite. You gain 40 temporary HP and resistance to slashing and piercing damage.",
+        "description_tr": "Kendinizi kalın bir granite hapsedersiniz. 40 geçici HP ve kesici ile delici hasara karşı direnç kazanırsınız.",
+        "branch": "Stone Resolve",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 190,
+        "prerequisites": [
+          "sth_unflinching_guard"
+        ],
+        "icon": "🐢",
+        "effects": {
+          "temp_hp": "40",
+          "resistance": "slashing, piercing"
+        }
+      },
+      {
+        "spell_key": "sth_stalwart_defender",
+        "name_en": "Stalwart Defender",
+        "name_tr": "Sadık Savunmacı",
+        "description_en": "Creates a 5m aura around you. Allies within the aura gain +3 AC and you take 25% of the damage intended for them.",
+        "description_tr": "Etrafınızda 5m'lik bir aura yaratır. Aura içindeki müttefikler +3 ZS kazanır ve onlara yönelik hasarın %25'ini siz alırsınız.",
+        "branch": "Stone Resolve",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 230,
+        "prerequisites": [
+          "sth_granite_carapace"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "range": "5m aura",
+          "ac_bonus": "3",
+          "damage_share": "25%"
+        }
+      },
+      {
+        "spell_key": "sth_weight_of_earth",
+        "name_en": "Weight of the Earth",
+        "name_tr": "Dünyanın Ağırlığı",
+        "description_en": "Passively increases your mass. You are immune to being grappled or thrown. Active: Stomp to deal 3d6 damage to adjacent targets.",
+        "description_tr": "Kütlenizi pasif olarak artırır. Yakalanmaya veya fırlatılmaya karşı bağışıklık kazanırsınız. Aktif: Bitişik hedeflere 3d6 hasar vermek için yere basın.",
+        "branch": "Stone Resolve",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sth_stalwart_defender"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "3d6",
+          "status": "immune grapple/throw"
+        }
+      },
+      {
+        "spell_key": "sth_obsidian_armor",
+        "name_en": "Obsidian Armor",
+        "name_tr": "Obsidyen Zırh",
+        "description_en": "Summons jet-black armor that reflects magic. For 2 turns, any spells targeting you have a 30% chance to rebound to the caster.",
+        "description_tr": "Büyüyü yansıtan simsiyah bir zırh çağırır. 2 tur boyunca, sizi hedef alan tüm büyülerin büyücüye geri dönme şansı %30'dur.",
+        "branch": "Stone Resolve",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 370,
+        "prerequisites": [
+          "sth_weight_of_earth"
+        ],
+        "icon": "🖤",
+        "effects": {
+          "duration": "2 turns",
+          "spell_reflection": "30%"
+        }
+      },
+      {
+        "spell_key": "sth_ignore_pain",
+        "name_en": "Ignore Pain",
+        "name_tr": "Acıyı Görmezden Gelme",
+        "description_en": "Enter a trance of pure endurance. For 3 turns, you ignore all negative status effects (poison, burn, bleed) and continue fighting at 0 HP.",
+        "description_tr": "Saf bir dayanıklılık transına girersiniz. 3 tur boyunca tüm olumsuz durum etkilerini (zehir, yanma, kanama) yok sayar ve 0 HP'de savaşmaya devam edersiniz.",
+        "branch": "Stone Resolve",
+        "tier": 3,
+        "min_level": 51,
+        "xp_cost": 430,
+        "prerequisites": [
+          "sth_obsidian_armor"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "duration": "3 turns",
+          "status": "ignore negative effects & death"
+        }
+      },
+      {
+        "spell_key": "sth_immovable_object",
+        "name_en": "Immovable Object",
+        "name_tr": "Taşınmaz Nesne",
+        "description_en": "You become completely invulnerable to all damage and effects for 1 turn, but you cannot take any actions, bonus actions, or reactions.",
+        "description_tr": "1 tur boyunca tüm hasar ve etkilere karşı tamamen savunmasız hale gelirsiniz, ancak hiçbir eylem, bonus eylem veya tepki alamazsınız.",
+        "branch": "Stone Resolve",
+        "tier": 3,
+        "min_level": 57,
+        "xp_cost": 490,
+        "prerequisites": [
+          "sth_ignore_pain"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "duration": "1 turn",
+          "status": "invulnerable & immobile"
+        }
+      },
+      {
+        "spell_key": "sth_diamond_skin",
+        "name_en": "Diamond Skin",
+        "name_tr": "Elmas Deri",
+        "description_en": "Your flesh turns to perfect diamond. You gain immunity to all physical damage (bludgeoning, piercing, slashing) for 2 turns.",
+        "description_tr": "Etiniz mükemmel elmasa dönüşür. 2 tur boyunca tüm fiziksel hasarlara (ezici, delici, kesici) karşı bağışıklık kazanırsınız.",
+        "branch": "Stone Resolve",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 680,
+        "prerequisites": [
+          "sth_immovable_object"
+        ],
+        "icon": "💠",
+        "effects": {
+          "duration": "2 turns",
+          "immunity": "physical damage"
+        }
+      },
+      {
+        "spell_key": "sth_juggernauts_charge",
+        "name_en": "Juggernaut's Charge",
+        "name_tr": "Juggernaut'un Hücumu",
+        "description_en": "Dash forward up to 15m. You break through magical barriers and deal 8d6 damage to anything in your path, tossing them aside.",
+        "description_tr": "15m'ye kadar ileri atılırsınız. Büyülü bariyerleri kırar ve yolunuzdaki her şeye 8d6 hasar vererek onları kenara fırlatırsınız.",
+        "branch": "Stone Resolve",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "sth_diamond_skin"
+        ],
+        "icon": "🦏",
+        "effects": {
+          "range": "15m dash",
+          "damage": "8d6"
+        }
+      },
+      {
+        "spell_key": "sth_avatar_of_stone",
+        "name_en": "Avatar of Stone",
+        "name_tr": "Taşın Avatarı",
+        "description_en": "Increase your size to Large. You gain advantage on all Strength checks, +50 maximum HP, and your melee range increases by 2m. Lasts 5 turns.",
+        "description_tr": "Boyutunuzu Büyük'e çıkarır. Tüm Güç zarlarında avantaj, +50 maksimum HP kazanırsınız ve yakın dövüş menziliniz 2m artar. 5 tur sürer.",
+        "branch": "Stone Resolve",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sth_juggernauts_charge"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "duration": "5 turns",
+          "max_hp": "+50",
+          "melee_range": "+2m",
+          "size": "Large"
+        }
+      },
+      {
+        "spell_key": "sth_heart_of_mountain",
+        "name_en": "Heart of the Mountain",
+        "name_tr": "Dağın Kalbi",
+        "description_en": "Passive regeneration kicks in. Heal 5% of your max HP every turn. When your HP drops below 10%, instantly heal for 50%. (Once per long rest).",
+        "description_tr": "Pasif yenilenme devreye girer. Her tur maksimum HP'nizin %5'ini iyileştirin. HP'niz %10'un altına düştüğünde anında %50 iyileşirsiniz. (Uzun dinlenme başına bir kez).",
+        "branch": "Stone Resolve",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sth_avatar_of_stone"
+        ],
+        "icon": "💖",
+        "effects": {
+          "healing": "5%/turn",
+          "emergency_heal": "50%"
+        }
+      },
+      {
+        "spell_key": "sth_aegis_of_gaia",
+        "name_en": "Aegis of Gaia",
+        "name_tr": "Gaia'nın Kalkanı",
+        "description_en": "Become the absolute defender of the world. For 3 turns, all allies within 30m share your AC, resistances, and immunities. You absorb 50% of all damage they take.",
+        "description_tr": "Dünyanın mutlak savunucusu olun. 3 tur boyunca 30m içindeki tüm müttefikler ZS'nizi, dirençlerinizi ve bağışıklıklarınızı paylaşır. Aldıkları tüm hasarın %50'sini emersiniz.",
+        "branch": "Stone Resolve",
+        "tier": 5,
+        "min_level": 97,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sth_heart_of_mountain"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "range": "30m",
+          "duration": "3 turns",
+          "damage_share": "50%"
+        }
+      },
+      {
+        "spell_key": "sth_trembling_defense",
+        "name_en": "Trembling Defense",
+        "name_tr": "Titreyen Savunma",
+        "description_en": "Your defensive stance causes the ground around you to shake. Any enemy that hits you with a melee attack takes 3d6 bludgeoning damage and is pushed 2m back.",
+        "description_tr": "Savunma duruşunuz etrafınızdaki yerin sarsılmasına neden olur. Size yakın dövüş saldırısı ile vuran her düşman 3d6 ezici hasar alır ve 2m geriye itilir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sth_earthen_pillars",
+          "sth_obsidian_armor"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "sth_gorgons_shield",
+        "name_en": "Gorgon's Shield",
+        "name_tr": "Gorgon Kalkanı",
+        "description_en": "Summons a shield bearing the face of a gorgon. Gives +3 AC. Once per combat, you can flash the shield to petrify enemies in a 5m cone for 1 turn.",
+        "description_tr": "Gorgon yüzü taşıyan bir kalkan çağırır. +3 ZS verir. Çatışma başına bir kez, kalkanı parlatarak 5m'lik konideki düşmanları 1 tur taşlaştırabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sth_gorgons_breath",
+          "sth_stalwart_defender"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "ac_bonus": "3",
+          "range": "5m cone",
+          "duration": "1 turn",
+          "status": "petrified"
+        }
+      },
+      {
+        "spell_key": "sth_seismic_fossilization",
+        "name_en": "Seismic Fossilization",
+        "name_tr": "Sismik Fosilize Etme",
+        "description_en": "Sends a 15m tremor that not only damages enemies (5d8) but also infuses petrifying dust. Enemies failing the save are paralyzed and brittle, taking double physical damage.",
+        "description_tr": "Düşmanlara hasar vermenin (5d8) yanı sıra taşlaştırıcı toz aşılayan 15m'lik bir sarsıntı gönderir. Kurtarma zarında başarısız olan düşmanlar felç olur ve kırılganlaşarak iki kat fiziksel hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sth_earthshatter",
+          "sth_medusas_curse"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "damage": "5d8",
+          "range": "15m",
+          "status": "paralyzed, x2 physical damage taken"
+        }
+      },
+      {
+        "spell_key": "sth_avalanche_charge",
+        "name_en": "Avalanche Charge",
+        "name_tr": "Çığ Hücumu",
+        "description_en": "Cloak yourself in boulders and rush forward 20m. You deal 6d10 damage to targets in the path and leave a trail of difficult terrain that damages enemies.",
+        "description_tr": "Kendinizi kayalara sarın ve 20m ileri atılın. Yol üzerindeki hedeflere 6d10 hasar verirsiniz ve düşmanlara hasar veren zorlu bir arazi izi bırakırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 73,
+        "xp_cost": 820,
+        "prerequisites": [
+          "sth_gravity_well",
+          "sth_juggernauts_charge"
+        ],
+        "icon": "🏂",
+        "effects": {
+          "damage": "6d10",
+          "range": "20m dash"
+        }
+      },
+      {
+        "spell_key": "sth_diamond_dust",
+        "name_en": "Diamond Dust",
+        "name_tr": "Elmas Tozu",
+        "description_en": "Shatters a portion of your hardened skin, dealing 8d8 piercing damage in a 10m radius. Surviving enemies have their armor permanently degraded by 3 AC.",
+        "description_tr": "Sertleşmiş derinizin bir kısmını parçalayarak 10m yarıçapında 8d8 delici hasar verir. Hayatta kalan düşmanların zırhı kalıcı olarak 3 ZS zayıflar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 870,
+        "prerequisites": [
+          "sth_basilisk_eye",
+          "sth_diamond_skin"
+        ],
+        "icon": "✨",
+        "effects": {
+          "damage": "8d8 piercing",
+          "range": "10m radius",
+          "ac_reduction": "3"
+        }
+      },
+      {
+        "spell_key": "sth_meteor_of_gorgos",
+        "name_en": "Meteor of Gorgos",
+        "name_tr": "Gorgos Meteoru",
+        "description_en": "Summons a meteor of concentrated gorgon energy. On impact (15m radius), deals 10d10 force damage. Any survivor is instantly turned to stone.",
+        "description_tr": "Yoğunlaştırılmış gorgon enerjisinden bir meteor çağırır. Çarpma anında (15m yarıçap) 10d10 güç hasarı verir. Hayatta kalan herkes anında taşa dönüşür.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "sth_world_tremor",
+          "sth_mass_petrification"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "10d10 force",
+          "range": "15m radius",
+          "status": "permanent petrification"
+        }
+      },
+      {
+        "spell_key": "sth_mountain_kings_command",
+        "name_en": "Mountain King's Command",
+        "name_tr": "Dağ Kralının Emri",
+        "description_en": "You merge with the terrain. For 3 turns, you cannot move, but you gain 100 temporary HP and can cast Earthbound spells globally anywhere on the battlefield without line of sight.",
+        "description_tr": "Arazi ile birleşirsiniz. 3 tur boyunca hareket edemezsiniz, ancak 100 geçici HP kazanırsınız ve Dünya Bağı büyülerini savaş alanının herhangi bir yerinde görüş alanı olmadan kullanabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "sth_world_tremor",
+          "sth_heart_of_mountain"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "3 turns",
+          "temp_hp": "100",
+          "range": "Global"
+        }
+      },
+      {
+        "spell_key": "sth_genesis_worldstone",
+        "name_en": "Genesis of the Worldstone",
+        "name_tr": "Dünya Taşının Doğuşu",
+        "description_en": "You create the ultimate artifact: a Worldstone crystal. It restores all allies to full HP, grants them Diamond Skin, and permanently petrifies all enemies below 50% HP across the entire battlefield.",
+        "description_tr": "Nihai eseri yaratırsınız: bir Dünya Taşı kristali. Tüm müttefiklerin HP'sini tamamen yeniler, onlara Elmas Deri verir ve tüm savaş alanı boyunca %50 HP altındaki tüm düşmanları kalıcı olarak taşa çevirir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2500,
+        "prerequisites": [
+          "sth_wrath_of_titans",
+          "sth_gorgons_garden",
+          "sth_aegis_of_gaia"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "healing": "100%",
+          "status": "Diamond Skin (Allies), Permanent Petrification (Enemies < 50% HP)"
+        }
+      }
+    ]
+  }
+]

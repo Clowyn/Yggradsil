@@ -1,0 +1,1027 @@
+[
+  {
+    "subclass_key": "blood_mage",
+    "tree_name_en": "Blood Arts",
+    "tree_name_tr": "Kan Sanatları",
+    "tree_desc_en": "Harness the forbidden power of hemomancy, sacrificing your own vitality to unleash devastating attacks, or siphoning life from your foes to sustain yourself.",
+    "tree_desc_tr": "Kendi canlılığınızı feda ederek yıkıcı saldırılar açığa çıkaran veya hayatta kalmak için düşmanlarınızdan yaşam sömüren yasaklı kan büyücülüğü gücünü kontrol edin.",
+    "branches": [
+      "Blood Sacrifice",
+      "Life Drain",
+      "Hemomancy"
+    ],
+    "spells": [
+      {
+        "spell_key": "bm_blood_bolt",
+        "name_en": "Blood Bolt",
+        "name_tr": "Kan Mermisi",
+        "description_en": "Fires a bolt of hardened blood. Costs 2 HP to cast, dealing 2d6 necrotic damage to a target within 20m.",
+        "description_tr": "Sertleşmiş kandan bir mermi fırlatır. 20m içindeki bir hedefe 2d6 nekrotik hasar vermek için 2 SP feda eder.",
+        "branch": "Blood Sacrifice",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "damage": "2d6 necrotic",
+          "range": "20m",
+          "cost": "2 HP"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_slash",
+        "name_en": "Crimson Slash",
+        "name_tr": "Kızıl Kesik",
+        "description_en": "Swipes with a blade of blood in a 5m cone. Costs 5 HP, dealing 3d6 slashing damage.",
+        "description_tr": "Kandan bir bıçakla 5m'lik bir koni alanını keser. 5 SP feda ederek 3d6 kesici hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 120,
+        "prerequisites": [
+          "bm_blood_bolt"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "3d6 slashing",
+          "area": "5m cone",
+          "cost": "5 HP"
+        }
+      },
+      {
+        "spell_key": "bm_boiling_blood",
+        "name_en": "Boiling Blood",
+        "name_tr": "Kaynayan Kan",
+        "description_en": "Sacrifices 8 HP to boil an enemy's blood. Deals 1d8 fire damage per turn for 3 turns.",
+        "description_tr": "Bir düşmanın kanını kaynatmak için 8 SP feda eder. 3 tur boyunca her tur 1d8 ateş hasarı verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "bm_crimson_slash"
+        ],
+        "icon": "🌡️",
+        "effects": {
+          "damage": "1d8 fire/turn",
+          "duration": "3 turns",
+          "cost": "8 HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_nova",
+        "name_en": "Blood Nova",
+        "name_tr": "Kan Novası",
+        "description_en": "Explodes your own blood outwards. Costs 15 HP, dealing 4d8 necrotic damage to all enemies within 10m.",
+        "description_tr": "Kendi kanınızı dışa doğru patlatır. 15 SP feda ederek 10m içindeki tüm düşmanlara 4d8 nekrotik hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bm_boiling_blood"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8 necrotic",
+          "area": "10m radius",
+          "cost": "15 HP"
+        }
+      },
+      {
+        "spell_key": "bm_scarlet_frenzy",
+        "name_en": "Scarlet Frenzy",
+        "name_tr": "Kızıl Çılgınlık",
+        "description_en": "Enters a frenzy, granting an extra attack per turn but costing 5 HP per turn. Lasts 3 turns.",
+        "description_tr": "Bir çılgınlık haline girer, tur başına fazladan bir saldırı kazandırır ancak her tur 5 SP feda ettirir. 3 tur sürer.",
+        "branch": "Blood Sacrifice",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bm_blood_nova"
+        ],
+        "icon": "💢",
+        "effects": {
+          "buff": "+1 Attack/turn",
+          "duration": "3 turns",
+          "cost": "5 HP/turn"
+        }
+      },
+      {
+        "spell_key": "bm_sacrifice_pact",
+        "name_en": "Sacrifice Pact",
+        "name_tr": "Kurban Anlaşması",
+        "description_en": "Sacrifices 25 HP to maximize the damage dice of your next Blood Mage spell.",
+        "description_tr": "Sonraki Kan Büyücüsü büyünüzün hasar zarlarını en üst düzeye çıkarmak için 25 SP feda eder.",
+        "branch": "Blood Sacrifice",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bm_scarlet_frenzy"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "buff": "Maximized Damage",
+          "duration": "Next spell",
+          "cost": "25 HP"
+        }
+      },
+      {
+        "spell_key": "bm_hemorrhage_blast",
+        "name_en": "Hemorrhage Blast",
+        "name_tr": "Kanama Patlaması",
+        "description_en": "Fires a massive blast of blood costing 20 HP, dealing 6d10 damage in a 15m line.",
+        "description_tr": "15m'lik bir hatta 6d10 hasar veren, 20 SP bedelli devasa bir kan patlaması fırlatır.",
+        "branch": "Blood Sacrifice",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bm_sacrifice_pact"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d10 necrotic",
+          "area": "15m line",
+          "cost": "20 HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_eruption",
+        "name_en": "Blood Eruption",
+        "name_tr": "Kan Patlaması",
+        "description_en": "Sacrifices 30 HP to create a geyser of blood. Deals 8d8 necrotic damage in a 10m radius.",
+        "description_tr": "Bir kan gayzeri yaratmak için 30 SP feda eder. 10m yarıçapında 8d8 nekrotik hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bm_hemorrhage_blast"
+        ],
+        "icon": "⛲",
+        "effects": {
+          "damage": "8d8 necrotic",
+          "area": "10m radius",
+          "cost": "30 HP"
+        }
+      },
+      {
+        "spell_key": "bm_vital_surge",
+        "name_en": "Vital Surge",
+        "name_tr": "Hayati Akım",
+        "description_en": "Sacrifices 40 HP to immediately take an additional action and bonus action.",
+        "description_tr": "Anında fazladan bir eylem ve bonus eylem yapmak için 40 SP feda eder.",
+        "branch": "Blood Sacrifice",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bm_blood_eruption"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "buff": "+1 Action, +1 Bonus Action",
+          "duration": "Instant",
+          "cost": "40 HP"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_meteor",
+        "name_en": "Crimson Meteor",
+        "name_tr": "Kızıl Meteor",
+        "description_en": "Calls down a meteor of crystallized blood. Costs 50 HP, dealing 12d10 bludgeoning damage in a 20m radius.",
+        "description_tr": "Kristalleşmiş kandan bir meteor indirir. 50 SP feda ederek 20m yarıçapında 12d10 ezici hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bm_vital_surge"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "12d10 bludgeoning",
+          "area": "20m radius",
+          "cost": "50 HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_oath",
+        "name_en": "Blood Oath",
+        "name_tr": "Kan Yemini",
+        "description_en": "Binds your fate to a target. Costs 60 HP. For 3 turns, the target takes double damage from all sources.",
+        "description_tr": "Kaderinizi bir hedefe bağlar. 60 SP feda eder. 3 tur boyunca hedef tüm kaynaklardan iki kat hasar alır.",
+        "branch": "Blood Sacrifice",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bm_crimson_meteor"
+        ],
+        "icon": "📜",
+        "effects": {
+          "debuff": "Double damage taken",
+          "duration": "3 turns",
+          "cost": "60 HP"
+        }
+      },
+      {
+        "spell_key": "bm_heart_rend",
+        "name_en": "Heart Rend",
+        "name_tr": "Kalp Söken",
+        "description_en": "Sacrifices 80 HP to telekinetically crush a target's heart, dealing 15d12 necrotic damage.",
+        "description_tr": "Bir hedefin kalbini telekinetik olarak ezmek için 80 SP feda eder ve 15d12 nekrotik hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bm_blood_oath"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "damage": "15d12 necrotic",
+          "range": "20m",
+          "cost": "80 HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_god_wrath",
+        "name_en": "Wrath of the Blood God",
+        "name_tr": "Kan Tanrısının Gazabı",
+        "description_en": "Sacrifices half your current HP. Deals necrotic damage equal to 4 times the HP sacrificed to all enemies within 30m.",
+        "description_tr": "Mevcut SP'nizin yarısını feda eder. 30m içindeki tüm düşmanlara feda edilen SP'nin 4 katı kadar nekrotik hasar verir.",
+        "branch": "Blood Sacrifice",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bm_heart_rend"
+        ],
+        "icon": "👺",
+        "effects": {
+          "damage": "4x Sacrificed HP",
+          "area": "30m radius",
+          "cost": "50% Current HP"
+        }
+      },
+      {
+        "spell_key": "bm_vampiric_touch",
+        "name_en": "Vampiric Touch",
+        "name_tr": "Vampir Dokunuşu",
+        "description_en": "A melee spell attack dealing 2d6 necrotic damage. You heal HP equal to the damage dealt.",
+        "description_tr": "2d6 nekrotik hasar veren bir yakın dövüş büyü saldırısı. Verilen hasar kadar SP iyileşirsiniz.",
+        "branch": "Life Drain",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🦇",
+        "effects": {
+          "damage": "2d6 necrotic",
+          "heal": "100% of damage",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "bm_leeching_swarm",
+        "name_en": "Leeching Swarm",
+        "name_tr": "Sömüren Sürü",
+        "description_en": "Summons blood-sucking bats in a 10m radius. Deals 3d4 damage and heals you for half the damage dealt.",
+        "description_tr": "10m yarıçapında kan emici yarasalar çağırır. 3d4 hasar verir ve verilen hasarın yarısı kadar sizi iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 130,
+        "prerequisites": [
+          "bm_vampiric_touch"
+        ],
+        "icon": "🦟",
+        "effects": {
+          "damage": "3d4 piercing",
+          "heal": "50% of damage",
+          "area": "10m radius"
+        }
+      },
+      {
+        "spell_key": "bm_siphon_life",
+        "name_en": "Siphon Life",
+        "name_tr": "Yaşam Sömürüsü",
+        "description_en": "Drains life from a target up to 15m away, dealing 4d6 necrotic damage and healing you for 100% of the damage.",
+        "description_tr": "15m uzaktaki bir hedeften yaşam sömürerek 4d6 nekrotik hasar verir ve hasarın %100'ü kadar sizi iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "bm_leeching_swarm"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "4d6 necrotic",
+          "heal": "100% of damage",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bm_blood_thirst",
+        "name_en": "Blood Thirst",
+        "name_tr": "Kan Susuzluğu",
+        "description_en": "For 5 turns, your weapon attacks deal an extra 1d6 necrotic damage and heal you for that amount.",
+        "description_tr": "5 tur boyunca silah saldırılarınız fazladan 1d6 nekrotik hasar verir ve sizi bu miktar kadar iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bm_siphon_life"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "buff": "+1d6 necrotic & heal",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_tether",
+        "name_en": "Crimson Tether",
+        "name_tr": "Kızıl Bağ",
+        "description_en": "Links to an enemy within 20m. Deals 3d6 damage per turn for 3 turns, healing you for the same amount.",
+        "description_tr": "20m içindeki bir düşmana bağlanır. 3 tur boyunca tur başına 3d6 hasar verir ve sizi aynı miktarda iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 290,
+        "prerequisites": [
+          "bm_blood_thirst"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "damage": "3d6 necrotic/turn",
+          "heal": "100% of damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_feast_of_souls",
+        "name_en": "Feast of Souls",
+        "name_tr": "Ruhların Ziyafeti",
+        "description_en": "Drains 2d8 HP from all enemies within a 10m radius, healing you for the total amount drained.",
+        "description_tr": "10m yarıçapındaki tüm düşmanlardan 2d8 SP sömürerek toplam sömürülen miktar kadar sizi iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bm_crimson_tether"
+        ],
+        "icon": "🍽️",
+        "effects": {
+          "damage": "2d8 necrotic",
+          "heal": "100% of total damage",
+          "area": "10m radius"
+        }
+      },
+      {
+        "spell_key": "bm_exsanguinate",
+        "name_en": "Exsanguinate",
+        "name_tr": "Kanını Çekme",
+        "description_en": "Forces a target's blood out of their body. Deals 6d8 necrotic damage at 20m range, healing you for half.",
+        "description_tr": "Bir hedefin kanını vücudundan zorla çıkarır. 20m menzilde 6d8 nekrotik hasar verir ve sizi yarısı kadar iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bm_feast_of_souls"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "6d8 necrotic",
+          "heal": "50% of damage",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "bm_vampiric_aura",
+        "name_en": "Vampiric Aura",
+        "name_tr": "Vampirik Hale",
+        "description_en": "Emits a 15m aura for 3 turns. You and allies heal for 50% of all damage you deal to enemies.",
+        "description_tr": "3 tur boyunca 15m'lik bir hale yayar. Siz ve müttefikleriniz, düşmanlara verdiğiniz tüm hasarın %50'si kadar iyileşirsiniz.",
+        "branch": "Life Drain",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 460,
+        "prerequisites": [
+          "bm_exsanguinate"
+        ],
+        "icon": "✨",
+        "effects": {
+          "aura": "Heal 50% of damage dealt",
+          "area": "15m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_life_funnel",
+        "name_en": "Life Funnel",
+        "name_tr": "Yaşam Hunisi",
+        "description_en": "Drains 50 HP from an enemy and transfers it to an ally within 15m.",
+        "description_tr": "Bir düşmandan 50 SP sömürür ve bunu 15m içindeki bir müttefike aktarır.",
+        "branch": "Life Drain",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bm_vampiric_aura"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "damage": "50 necrotic",
+          "heal": "50 to ally",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bm_devour_vitality",
+        "name_en": "Devour Vitality",
+        "name_tr": "Canlılığı Yutmak",
+        "description_en": "Deals 10d8 necrotic damage. The target's maximum HP is reduced by the damage taken, and you gain that amount as temporary HP.",
+        "description_tr": "10d8 nekrotik hasar verir. Hedefin maksimum SP'si alınan hasar kadar azalır ve bu miktarı geçici SP olarak kazanırsınız.",
+        "branch": "Life Drain",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bm_life_funnel"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "damage": "10d8 necrotic",
+          "debuff": "Reduce Max HP",
+          "buff": "Gain Temp HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_harvest",
+        "name_en": "Blood Harvest",
+        "name_tr": "Kan Hasadı",
+        "description_en": "Reaps the life force of all creatures in a 20m radius. Deals 8d10 necrotic damage, healing you for 25% of the total damage dealt.",
+        "description_tr": "20m yarıçapındaki tüm canlıların yaşam gücünü biçer. 8d10 nekrotik hasar verir ve verilen toplam hasarın %25'i kadar sizi iyileştirir.",
+        "branch": "Life Drain",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bm_devour_vitality"
+        ],
+        "icon": "🌾",
+        "effects": {
+          "damage": "8d10 necrotic",
+          "heal": "25% of total damage",
+          "area": "20m radius"
+        }
+      },
+      {
+        "spell_key": "bm_immortal_leech",
+        "name_en": "Immortal Leech",
+        "name_tr": "Ölümsüz Sülük",
+        "description_en": "You cannot drop below 1 HP for 3 turns. When this effect ends, you heal for 50% of all damage you dealt during this time.",
+        "description_tr": "3 tur boyunca 1 SP'nin altına düşemezsiniz. Bu etki sona erdiğinde, bu süre zarfında verdiğiniz tüm hasarın %50'si kadar iyileşirsiniz.",
+        "branch": "Life Drain",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bm_blood_harvest"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "buff": "Cannot die",
+          "heal": "50% of damage dealt later",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_vampire_lord_domain",
+        "name_en": "Vampire Lord's Domain",
+        "name_tr": "Vampir Lordunun Bölgesi",
+        "description_en": "Creates a 30m zone of darkness for 5 turns. Enemies take 6d12 damage per turn. You heal 100% of damage dealt, allies heal 50%.",
+        "description_tr": "5 tur boyunca 30m'lik bir karanlık bölge yaratır. Düşmanlar tur başına 6d12 hasar alır. Siz hasarın %100'ü, müttefikler ise %50'si kadar iyileşir.",
+        "branch": "Life Drain",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bm_immortal_leech"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "damage": "6d12 necrotic/turn",
+          "heal": "100% self, 50% allies",
+          "area": "30m radius",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bm_blood_blade",
+        "name_en": "Blood Blade",
+        "name_tr": "Kan Kılıcı",
+        "description_en": "Manifests a floating blade of blood that attacks an enemy within 10m for 1d8+4 slashing damage.",
+        "description_tr": "10m içindeki bir düşmana 1d8+4 kesici hasar veren, havada süzülen kandan bir bıçak oluşturur.",
+        "branch": "Hemomancy",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🔪",
+        "effects": {
+          "damage": "1d8+4 slashing",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_shield",
+        "name_en": "Crimson Shield",
+        "name_tr": "Kızıl Kalkan",
+        "description_en": "Hardens your blood to form a shield. Grants +3 AC for 10 minutes. Attackers take 1d4 piercing damage.",
+        "description_tr": "Kalkan oluşturmak için kanınızı sertleştirir. 10 dakika boyunca +3 ZS kazandırır. Saldıranlar 1d4 delici hasar alır.",
+        "branch": "Hemomancy",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 140,
+        "prerequisites": [
+          "bm_blood_blade"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "+3 AC",
+          "damage": "1d4 piercing to attackers",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bm_coagulate",
+        "name_en": "Coagulate",
+        "name_tr": "Pıhtılaşma",
+        "description_en": "Forces a target's wounds to close or harden. Heals an ally for 3d6 HP or restrains an enemy for 1 turn.",
+        "description_tr": "Bir hedefin yaralarını kapanmaya veya sertleşmeye zorlar. Bir müttefiki 3d6 SP iyileştirir veya bir düşmanı 1 tur kısıtlar.",
+        "branch": "Hemomancy",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "bm_crimson_shield"
+        ],
+        "icon": "🩹",
+        "effects": {
+          "heal": "3d6 to ally",
+          "debuff": "Restrain enemy",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bm_blood_puppets",
+        "name_en": "Blood Puppets",
+        "name_tr": "Kan Kuklaları",
+        "description_en": "Takes control of the blood in up to 3 corpses, animating them as blood zombies to fight for you for 3 turns.",
+        "description_tr": "3 cesede kadar kanı kontrol altına alır ve onları 3 tur boyunca sizin için savaşacak kan zombileri olarak canlandırır.",
+        "branch": "Hemomancy",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 260,
+        "prerequisites": [
+          "bm_coagulate"
+        ],
+        "icon": "🪆",
+        "effects": {
+          "summon": "3 Blood Zombies",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_hemotoxin",
+        "name_en": "Hemotoxin",
+        "name_tr": "Hemotoksin",
+        "description_en": "Infects a target's blood within 15m. Deals 3d6 poison damage per turn for 3 turns and reduces their movement by 5m.",
+        "description_tr": "15m içindeki bir hedefin kanına bulaşır. 3 tur boyunca tur başına 3d6 zehir hasarı verir ve hareketlerini 5m azaltır.",
+        "branch": "Hemomancy",
+        "tier": 2,
+        "min_level": 33,
+        "xp_cost": 290,
+        "prerequisites": [
+          "bm_blood_puppets"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "damage": "3d6 poison/turn",
+          "debuff": "-5m movement",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_spikes",
+        "name_en": "Crimson Spikes",
+        "name_tr": "Kızıl Dikenler",
+        "description_en": "Spikes of coagulated blood erupt in a 10m area. Enemies take 4d8 piercing damage and are rooted for 1 turn.",
+        "description_tr": "Pıhtılaşmış kandan dikenler 10m'lik bir alanda fışkırır. Düşmanlar 4d8 delici hasar alır ve 1 turluğuna yere sabitlenir.",
+        "branch": "Hemomancy",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bm_hemotoxin"
+        ],
+        "icon": "📌",
+        "effects": {
+          "damage": "4d8 piercing",
+          "debuff": "Rooted",
+          "area": "10m radius"
+        }
+      },
+      {
+        "spell_key": "bm_blood_whip",
+        "name_en": "Blood Whip",
+        "name_tr": "Kan Kırbacı",
+        "description_en": "Strikes with a 15m blood whip. Deals 5d6 slashing damage and pulls the target 5m towards you.",
+        "description_tr": "15m'lik bir kan kırbacıyla vurur. 5d6 kesici hasar verir ve hedefi size doğru 5m çeker.",
+        "branch": "Hemomancy",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 410,
+        "prerequisites": [
+          "bm_crimson_spikes"
+        ],
+        "icon": "🪢",
+        "effects": {
+          "damage": "5d6 slashing",
+          "utility": "Pull 5m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bm_blood_prison",
+        "name_en": "Blood Prison",
+        "name_tr": "Kan Hapishanesi",
+        "description_en": "Traps a target in a sphere of blood. The target is restrained and takes 4d6 acid damage per turn for 3 turns.",
+        "description_tr": "Bir hedefi kan küresine hapseder. Hedef kısıtlanır ve 3 tur boyunca tur başına 4d6 asit hasarı alır.",
+        "branch": "Hemomancy",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bm_blood_whip"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "4d6 acid/turn",
+          "debuff": "Restrained",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_mist",
+        "name_en": "Crimson Mist",
+        "name_tr": "Kızıl Sis",
+        "description_en": "Transform into a mist of blood for 3 turns. You are immune to non-magical damage and can move through 5m spaces freely.",
+        "description_tr": "3 tur boyunca kandan bir sise dönüşürsünüz. Büyülü olmayan hasarlara karşı bağışık olursunuz ve 5m'lik boşluklardan serbestçe geçebilirsiniz.",
+        "branch": "Hemomancy",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bm_blood_prison"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "buff": "Immune to non-magical",
+          "utility": "Pass through spaces",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_marionette_control",
+        "name_en": "Marionette Control",
+        "name_tr": "Kukla Kontrolü",
+        "description_en": "Controls the blood of a living creature within 20m. Target makes a WIS save or is completely controlled by you for 2 turns.",
+        "description_tr": "20m içindeki canlı bir yaratığın kanını kontrol eder. Hedef BİL kurtarması yapar veya 2 tur boyunca tamamen sizin tarafınızdan kontrol edilir.",
+        "branch": "Hemomancy",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bm_crimson_mist"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "debuff": "Mind Control",
+          "duration": "2 turns",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "bm_blood_storm",
+        "name_en": "Blood Storm",
+        "name_tr": "Kan Fırtınası",
+        "description_en": "Creates a vortex of blood blades in a 20m radius. Deals 10d6 slashing damage per turn for 3 turns.",
+        "description_tr": "20m yarıçapında kan bıçaklarından oluşan bir girdap yaratır. 3 tur boyunca tur başına 10d6 kesici hasar verir.",
+        "branch": "Hemomancy",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "bm_marionette_control"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "10d6 slashing/turn",
+          "area": "20m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_iron_maiden_blood",
+        "name_en": "Blood Iron Maiden",
+        "name_tr": "Kanlı Demir Bakire",
+        "description_en": "Encases a target in an iron maiden made of hardened blood. Deals 12d10 piercing damage and bleeds them for 2d10 per turn.",
+        "description_tr": "Bir hedefi sertleşmiş kandan yapılmış bir demir bakirenin içine hapseder. 12d10 delici hasar verir ve her tur 2d10 kanama hasarı verir.",
+        "branch": "Hemomancy",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bm_blood_storm"
+        ],
+        "icon": "⚰️",
+        "effects": {
+          "damage": "12d10 piercing",
+          "damage_over_time": "2d10 bleed/turn",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bm_avatar_of_blood",
+        "name_en": "Avatar of Blood",
+        "name_tr": "Kan Avatarı",
+        "description_en": "Gain 150 temporary HP. For 5 turns, your size doubles, and your attacks deal an additional 6d12 necrotic damage.",
+        "description_tr": "150 geçici SP kazanın. 5 tur boyunca boyutunuz iki katına çıkar ve saldırılarınız fazladan 6d12 nekrotik hasar verir.",
+        "branch": "Hemomancy",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bm_iron_maiden_blood"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "buff": "+150 Temp HP, Double Size",
+          "damage": "+6d12 necrotic to attacks",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bm_blood_pact_weapon",
+        "name_en": "Blood Pact Weapon",
+        "name_tr": "Kan Anlaşması Silahı",
+        "description_en": "Sacrifices 15 HP to create a weapon of blood. It deals 4d8 slashing damage and ignores armor for 1 minute.",
+        "description_tr": "Kandan bir silah yaratmak için 15 SP feda eder. 4d8 kesici hasar verir ve 1 dakika boyunca zırhı yok sayar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bm_boiling_blood",
+          "bm_coagulate"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "summon": "4d8 Slashing Weapon",
+          "buff": "Ignores Armor",
+          "cost": "15 HP",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "bm_siphoning_spikes",
+        "name_en": "Siphoning Spikes",
+        "name_tr": "Sömüren Dikenler",
+        "description_en": "Shoots blood spikes in a 15m line. Deals 5d6 piercing damage and heals you for half the damage dealt.",
+        "description_tr": "15m'lik bir hatta kan dikenleri fırlatır. 5d6 delici hasar verir ve verilen hasarın yarısı kadar sizi iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bm_siphon_life",
+          "bm_coagulate"
+        ],
+        "icon": "📍",
+        "effects": {
+          "damage": "5d6 piercing",
+          "heal": "50% of damage",
+          "area": "15m line"
+        }
+      },
+      {
+        "spell_key": "bm_vampiric_eruption",
+        "name_en": "Vampiric Eruption",
+        "name_tr": "Vampirik Patlama",
+        "description_en": "Costs 25 HP. Causes blood to erupt from enemies in a 15m radius, dealing 6d8 necrotic damage and healing you for 50%.",
+        "description_tr": "25 SP bedeli vardır. 15m yarıçapındaki düşmanlardan kan fışkırmasına neden olur, 6d8 nekrotik hasar verir ve %50 iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "bm_sacrifice_pact",
+          "bm_feast_of_souls"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "6d8 necrotic",
+          "heal": "50% of damage",
+          "area": "15m radius",
+          "cost": "25 HP"
+        }
+      },
+      {
+        "spell_key": "bm_bloody_vengeance",
+        "name_en": "Bloody Vengeance",
+        "name_tr": "Kanlı İntikam",
+        "description_en": "Reaction: When hit, sacrifice 20 HP to instantly shape your spilled blood into a spear, dealing 8d6 piercing damage to the attacker.",
+        "description_tr": "Tepki: Vurulduğunda, dökülen kanınızı anında bir mızrağa dönüştürmek için 20 SP feda eder ve saldırgana 8d6 delici hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bm_sacrifice_pact",
+          "bm_crimson_spikes"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "damage": "8d6 piercing",
+          "cost": "20 HP",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "bm_leeching_shield",
+        "name_en": "Leeching Shield",
+        "name_tr": "Sömüren Kalkan",
+        "description_en": "Creates a floating blood shield granting +4 AC. Whenever it blocks an attack, it drains 3d6 HP from the attacker to heal you.",
+        "description_tr": "+4 ZS kazandıran süzülen bir kan kalkanı yaratır. Bir saldırıyı her engellediğinde, saldırgandan 3d6 SP sömürerek sizi iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bm_feast_of_souls",
+          "bm_crimson_spikes"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "buff": "+4 AC",
+          "heal": "3d6 per block",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "bm_crimson_execution",
+        "name_en": "Crimson Execution",
+        "name_tr": "Kızıl İnfaz",
+        "description_en": "Costs 40 HP. Drops a massive blood guillotine dealing 10d10 slashing damage. If it kills the target, you heal to full HP.",
+        "description_tr": "40 SP bedeli vardır. 10d10 kesici hasar veren devasa bir kan giyotini düşürür. Hedefi öldürürse, tam SP'ye iyileşirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bm_vital_surge",
+          "bm_life_funnel"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "10d10 slashing",
+          "heal": "100% Max HP if target dies",
+          "cost": "40 HP"
+        }
+      },
+      {
+        "spell_key": "bm_blood_golem",
+        "name_en": "Blood Golem",
+        "name_tr": "Kan Golemi",
+        "description_en": "Summons a 200 HP Golem of blood for 3 turns. Its attacks deal 4d10 damage and transfer the life force to you.",
+        "description_tr": "3 tur boyunca 200 SP'li bir Kan Golemi çağırır. Saldırıları 4d10 hasar verir ve yaşam gücünü size aktarır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bm_life_funnel",
+          "bm_crimson_mist"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "summon": "200 HP Golem",
+          "damage": "4d10 per hit",
+          "heal": "100% of golem's damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bm_vein_shatter",
+        "name_en": "Vein Shatter",
+        "name_tr": "Damar Parçalayan",
+        "description_en": "Sacrifices 35 HP to crystallize and shatter an enemy's veins. Deals 10d8 necrotic damage and stuns them for 1 turn.",
+        "description_tr": "Bir düşmanın damarlarını kristalleştirip parçalamak için 35 SP feda eder. 10d8 nekrotik hasar verir ve 1 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "bm_vital_surge",
+          "bm_crimson_mist"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "10d8 necrotic",
+          "debuff": "Stunned",
+          "duration": "1 turn",
+          "cost": "35 HP"
+        }
+      },
+      {
+        "spell_key": "bm_red_tide",
+        "name_en": "Red Tide",
+        "name_tr": "Kızıl Gelgit",
+        "description_en": "Costs 50 HP. Unleashes a 30m wave of blood dealing 12d8 damage, pushing enemies 15m back, and healing you for 50%.",
+        "description_tr": "50 SP bedeli vardır. 12d8 hasar veren, düşmanları 15m geriye iten ve sizi %50 iyileştiren 30m'lik bir kan dalgası serbest bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "bm_blood_oath",
+          "bm_blood_harvest",
+          "bm_blood_storm"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "12d8 bludgeoning",
+          "utility": "Push 15m",
+          "heal": "50% of damage",
+          "cost": "50 HP"
+        }
+      },
+      {
+        "spell_key": "bm_vampiric_armada",
+        "name_en": "Vampiric Armada",
+        "name_tr": "Vampirik Donanma",
+        "description_en": "Summons 10 flying swords of blood. Each sword attacks a random target for 2d8 damage and heals you for 1d8.",
+        "description_tr": "10 uçan kan kılıcı çağırır. Her kılıç rastgele bir hedefe 2d8 hasar vermek için saldırır ve sizi 1d8 iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "bm_blood_harvest",
+          "bm_blood_storm"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "summon": "10 Flying Swords",
+          "damage": "20d8 total",
+          "heal": "10d8 total"
+        }
+      },
+      {
+        "spell_key": "bm_omni_blood_eclipse",
+        "name_en": "Omni Blood Eclipse",
+        "name_tr": "Mutlak Kan Tutulması",
+        "description_en": "Costs 90% of your current HP. Deals necrotic damage equal to 10 times the HP spent to all enemies within 50m. Enemies killed become permanent blood thralls.",
+        "description_tr": "Mevcut SP'nizin %90'ını tüketir. 50m içindeki tüm düşmanlara harcanan SP'nin 10 katı kadar nekrotik hasar verir. Öldürülen düşmanlar kalıcı kan köleleri haline gelir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bm_blood_god_wrath",
+          "bm_vampire_lord_domain",
+          "bm_avatar_of_blood"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "10x HP spent",
+          "area": "50m radius",
+          "utility": "Raise killed as Thralls",
+          "cost": "90% Current HP"
+        }
+      }
+    ]
+  }
+]

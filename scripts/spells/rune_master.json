@@ -1,0 +1,973 @@
+[
+  {
+    "subclass_key": "rune_master",
+    "tree_name_en": "Rune Master",
+    "tree_name_tr": "Rün Ustası",
+    "tree_desc_en": "Master of ancient scripts, defensive wards, and profound enchantments, weaving magic into the very fabric of gear and the battlefield.",
+    "tree_desc_tr": "Kadim metinlerin, savunma sembollerinin ve derin efsunların ustası; büyüyü ekipmanların ve savaş alanının dokusuna işler.",
+    "branches": [
+      "Enchantment",
+      "Ward",
+      "Ancient"
+    ],
+    "spells": [
+      {
+        "spell_key": "rm_rune_sharpening",
+        "name_en": "Rune of Sharpening",
+        "name_tr": "Keskinleştirme Rünü",
+        "description_en": "Enchants a weapon with a sharpening rune, granting +1d4 physical damage.",
+        "description_tr": "Bir silahı keskinleştirme rünü ile efsunlayarak +1d4 fiziksel hasar kazandırır.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "+1d4 physical",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "rm_rune_hardening",
+        "name_en": "Rune of Hardening",
+        "name_tr": "Sertleştirme Rünü",
+        "description_en": "Inscribes a hardening rune on armor, granting +2 AC.",
+        "description_tr": "Zırha bir sertleştirme rünü kazıyarak +2 Zırh Sınıfı kazandırır.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 70,
+        "prerequisites": [
+          "rm_rune_sharpening"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+2",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "rm_rune_feather",
+        "name_en": "Rune of the Feather",
+        "name_tr": "Tüy Rünü",
+        "description_en": "Inscribes a feather rune on boots, increasing movement speed by 4m and removing fall damage.",
+        "description_tr": "Çizmelere bir tüy rünü kazıyarak hareket hızını 4m artırır ve düşme hasarını engeller.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "rm_rune_hardening"
+        ],
+        "icon": "🪶",
+        "effects": {
+          "speed_bonus": "+4m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "rm_flaming_edge",
+        "name_en": "Flaming Edge Rune",
+        "name_tr": "Alevli Kenar Rünü",
+        "description_en": "Imbues a weapon with a flaming rune, dealing an extra 2d6 fire damage on hit.",
+        "description_tr": "Bir silahı alev rünüyle güçlendirerek isabet halinde fazladan 2d6 ateş hasarı verir.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "rm_rune_feather"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "+2d6 fire",
+          "duration": "30 minutes"
+        }
+      },
+      {
+        "spell_key": "rm_frost_guard",
+        "name_en": "Frost Guard Rune",
+        "name_tr": "Ayaz Koruması Rünü",
+        "description_en": "Enchants armor with frost. Attackers are slowed by 50% for 1 turn upon striking you.",
+        "description_tr": "Zırhı ayaz ile efsunlar. Size saldıranlar 1 tur boyunca %50 yavaşlar.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "rm_rune_feather"
+        ],
+        "icon": "❄️",
+        "effects": {
+          "slow": "50%",
+          "duration": "30 minutes"
+        }
+      },
+      {
+        "spell_key": "rm_rune_mending",
+        "name_en": "Rune of Mending",
+        "name_tr": "Onarım Rünü",
+        "description_en": "Places a mending rune on a target's gear, healing them for 1d4 health per turn.",
+        "description_tr": "Bir hedefin ekipmanına onarım rünü yerleştirerek her tur 1d4 can iyileştirir.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "rm_flaming_edge",
+          "rm_frost_guard"
+        ],
+        "icon": "🛠️",
+        "effects": {
+          "healing": "1d4 per turn",
+          "duration": "10 turns"
+        }
+      },
+      {
+        "spell_key": "rm_rune_leech",
+        "name_en": "Rune of the Leech",
+        "name_tr": "Sömürü Rünü",
+        "description_en": "Enchants a weapon with a leech rune, converting 20% of damage dealt into health.",
+        "description_tr": "Bir silahı sömürü rünüyle efsunlayarak verilen hasarın %20'sini cana dönüştürür.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 350,
+        "prerequisites": [
+          "rm_rune_mending"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "lifesteal": "20%",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "rm_rune_shockwave",
+        "name_en": "Rune of Shockwave",
+        "name_tr": "Şok Dalgası Rünü",
+        "description_en": "When the enchanted weapon strikes, it unleashes a 5m shockwave dealing 3d8 thunder damage.",
+        "description_tr": "Efsunlu silah isabet ettiğinde, 5m yarıçapında 3d8 gök gürültüsü hasarı veren bir şok dalgası yayar.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "rm_rune_leech"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d8 thunder",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "rm_deflecting_rune",
+        "name_en": "Deflecting Rune",
+        "name_tr": "Saptırma Rünü",
+        "description_en": "Inscribes a deflecting rune that returns 30% of incoming physical damage back to the attacker.",
+        "description_tr": "Gelen fiziksel hasarın %30'unu saldırgana geri yansıtan bir saptırma rünü kazır.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "rm_rune_shockwave"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflection": "30%",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "rm_rune_giant",
+        "name_en": "Rune of the Giant",
+        "name_tr": "Dev Rünü",
+        "description_en": "Enchants armor to drastically increase the wearer's size, granting +6 Strength and huge size.",
+        "description_tr": "Kullanıcının boyutunu devasa ölçüde artıran ve +6 Güç kazandıran bir efsun uygular.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "rm_deflecting_rune"
+        ],
+        "icon": "🧌",
+        "effects": {
+          "size": "Huge",
+          "strength_bonus": "+6",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "rm_rune_phase",
+        "name_en": "Rune of Phase",
+        "name_tr": "Faz Rünü",
+        "description_en": "Enchants a weapon to temporarily phase out of reality, ignoring armor completely for 3 turns.",
+        "description_tr": "Bir silahı geçici olarak gerçeklikten çıkaran bir rünle efsunlar; 3 tur boyunca zırhı tamamen yok sayar.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "rm_rune_giant"
+        ],
+        "icon": "👻",
+        "effects": {
+          "bypass_armor": "100%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "rm_overclock_rune",
+        "name_en": "Overclock Rune",
+        "name_tr": "Aşırı Yük Rünü",
+        "description_en": "Inscribes an overclocking rune on a weapon, allowing the wielder to make 2 additional attacks per turn.",
+        "description_tr": "Bir silaha aşırı yük rünü kazıyarak kullanıcının tur başına fazladan 2 saldırı yapmasını sağlar.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "rm_rune_phase"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "extra_attacks": "+2",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "rm_rune_phoenix",
+        "name_en": "Rune of the Phoenix",
+        "name_tr": "Anka Rünü",
+        "description_en": "A profound enchantment that automatically revives the wearer with 50% health upon death.",
+        "description_tr": "Kullanıcıyı öldüğünde %50 canla otomatik olarak dirilten derin bir efsun.",
+        "branch": "Enchantment",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "rm_overclock_rune"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "revive_health": "50%",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "rm_worldforge_blessing",
+        "name_en": "Worldforge Blessing",
+        "name_tr": "Dünya Ocağı Kutsaması",
+        "description_en": "Ultimate enchantment. Instantly enchants the gear of all allies within 20m, granting immense power and defense.",
+        "description_tr": "Nihai efsun. 20m içindeki tüm müttefiklerin ekipmanlarını anında efsunlayarak devasa güç ve savunma kazandırır.",
+        "branch": "Enchantment",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "rm_rune_phoenix"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage_bonus": "+4d10",
+          "ac_bonus": "+5",
+          "radius": "20m",
+          "duration": "10 turns"
+        }
+      },
+      {
+        "spell_key": "rm_ward_warning",
+        "name_en": "Ward of Warning",
+        "name_tr": "Uyarı Sembolü",
+        "description_en": "Places an invisible ward that alerts the caster mentally when a creature enters its 10m radius.",
+        "description_tr": "Bir yaratık 10m yarıçapına girdiğinde büyücüyü zihinsel olarak uyaran görünmez bir sembol yerleştirir.",
+        "branch": "Ward",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔔",
+        "effects": {
+          "radius": "10m",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "rm_snare_ward",
+        "name_en": "Snare Ward",
+        "name_tr": "Kapan Sembolü",
+        "description_en": "Places a ward on the ground. When stepped on, it roots the target in place for 2 turns.",
+        "description_tr": "Yere bir sembol çizer. Üzerine basıldığında hedefi 2 tur boyunca olduğu yere sabitler.",
+        "branch": "Ward",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [
+          "rm_ward_warning"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "root_duration": "2 turns",
+          "trigger_radius": "2m"
+        }
+      },
+      {
+        "spell_key": "rm_repelling_ward",
+        "name_en": "Repelling Ward",
+        "name_tr": "İtici Sembol",
+        "description_en": "A hidden ward that violently repels any unauthorized creature 10m away when triggered.",
+        "description_tr": "Tetiklendiğinde izinsiz giren yaratıkları şiddetle 10m uzağa fırlatan gizli bir sembol.",
+        "branch": "Ward",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "rm_snare_ward"
+        ],
+        "icon": "💨",
+        "effects": {
+          "knockback": "10m",
+          "trigger_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "rm_explosive_ward",
+        "name_en": "Explosive Ward",
+        "name_tr": "Patlayıcı Sembol",
+        "description_en": "Places a volatile ward that explodes upon proximity, dealing 6d6 fire damage in a 5m radius.",
+        "description_tr": "Yaklaşıldığında patlayan ve 5m yarıçapında 6d6 ateş hasarı veren dengesiz bir sembol yerleştirir.",
+        "branch": "Ward",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "rm_repelling_ward"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "6d6 fire",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "rm_silence_ward",
+        "name_en": "Silence Ward",
+        "name_tr": "Sessizlik Sembolü",
+        "description_en": "A ward that mutes all sound and spellcasting within a 10m radius when activated.",
+        "description_tr": "Etkinleştirildiğinde 10m yarıçapındaki tüm sesleri ve büyü yapımını susturan bir sembol.",
+        "branch": "Ward",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "rm_explosive_ward"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "silence_duration": "3 turns",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "rm_ward_healing",
+        "name_en": "Ward of Healing",
+        "name_tr": "Şifa Sembolü",
+        "description_en": "A benevolent ward that heals allies within 5m for 2d8 health when they step on it.",
+        "description_tr": "Üzerine basıldığında 5m içindeki müttefikleri 2d8 can iyileştiren iyicil bir sembol.",
+        "branch": "Ward",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 260,
+        "prerequisites": [
+          "rm_silence_ward"
+        ],
+        "icon": "💖",
+        "effects": {
+          "healing": "2d8",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "rm_lightning_tether_ward",
+        "name_en": "Lightning Tether Ward",
+        "name_tr": "Yıldırım Bağı Sembolü",
+        "description_en": "A ward that strikes the intruder with lightning and tethers them, preventing escape beyond 5m.",
+        "description_tr": "İzinsiz gireni yıldırımla vuran ve onu 5m'den uzağa kaçmasını engelleyecek şekilde bağlayan bir sembol.",
+        "branch": "Ward",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "rm_ward_healing"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "4d8 lightning",
+          "tether_duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "rm_ward_confusion",
+        "name_en": "Ward of Confusion",
+        "name_tr": "Karmaşa Sembolü",
+        "description_en": "A complex mind-altering ward that confuses enemies within 8m, causing them to attack randomly.",
+        "description_tr": "8m içindeki düşmanların kafasını karıştırarak rastgele saldırmalarına neden olan zihin bükücü bir sembol.",
+        "branch": "Ward",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "rm_lightning_tether_ward"
+        ],
+        "icon": "😵‍💫",
+        "effects": {
+          "confusion_duration": "3 turns",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "rm_nullification_ward",
+        "name_en": "Nullification Ward",
+        "name_tr": "Sıfırlama Sembolü",
+        "description_en": "A powerful anti-magic ward that instantly dispels all active magical effects in a 10m area.",
+        "description_tr": "10m alandaki tüm aktif büyü etkilerini anında bozan güçlü bir anti-büyü sembolü.",
+        "branch": "Ward",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "rm_ward_confusion"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "dispel_magic": "100%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "rm_gravity_ward",
+        "name_en": "Gravity Ward",
+        "name_tr": "Yerçekimi Sembolü",
+        "description_en": "Increases gravity dramatically in a 15m radius, reducing enemy movement speed by 90%.",
+        "description_tr": "15m yarıçapında yerçekimini inanılmaz artırarak düşman hareket hızını %90 azaltır.",
+        "branch": "Ward",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 620,
+        "prerequisites": [
+          "rm_nullification_ward"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "movement_reduction": "90%",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "rm_ward_petrification",
+        "name_en": "Ward of Petrification",
+        "name_tr": "Taşlaşma Sembolü",
+        "description_en": "A deadly trap that turns any hostile creature entering its 6m radius to stone for 3 turns.",
+        "description_tr": "6m yarıçapına giren her düşman yaratığı 3 tur boyunca taşa çeviren ölümcül bir tuzak.",
+        "branch": "Ward",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 720,
+        "prerequisites": [
+          "rm_gravity_ward"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "petrify_duration": "3 turns",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "rm_mirror_ward",
+        "name_en": "Mirror Ward",
+        "name_tr": "Ayna Sembolü",
+        "description_en": "Creates a warding field around an area that reflects all targeted spells back to their casters.",
+        "description_tr": "Bir alanın etrafında hedeflenen tüm büyüleri büyücülere geri yansıtan bir koruma alanı yaratır.",
+        "branch": "Ward",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "rm_ward_petrification"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "spell_reflection": "100%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "rm_prison_ward",
+        "name_en": "Dimensional Prison Ward",
+        "name_tr": "Boyutsal Zindan Sembolü",
+        "description_en": "A legendary ward that banishes the creature who triggers it into a pocket dimension for 5 turns.",
+        "description_tr": "Onu tetikleyen yaratığı 5 tur boyunca cep boyutuna sürgün eden efsanevi bir sembol.",
+        "branch": "Ward",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "rm_mirror_ward"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "banish_duration": "5 turns",
+          "target": "1 creature"
+        }
+      },
+      {
+        "spell_key": "rm_absolute_sanctuary",
+        "name_en": "Absolute Sanctuary",
+        "name_tr": "Mutlak Sığınak",
+        "description_en": "Ultimate ward. Creates an impenetrable 15m zone where allies take no damage and negative effects cannot enter.",
+        "description_tr": "Nihai sembol. Müttefiklerin hasar almadığı ve negatif etkilerin giremediği aşılmaz 15m'lik bir alan yaratır.",
+        "branch": "Ward",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "rm_prison_ward"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "immunity": "100%",
+          "radius": "15m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "rm_decipher_text",
+        "name_en": "Decipher Text",
+        "name_tr": "Kadim Metinleri Çözme",
+        "description_en": "Allows the caster to read and understand any ancient or cryptic language perfectly.",
+        "description_tr": "Büyücünün her türlü kadim veya gizli dili mükemmel bir şekilde okuyup anlamasını sağlar.",
+        "branch": "Ancient",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "📜",
+        "effects": {
+          "comprehension": "100%",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "rm_ancient_missile",
+        "name_en": "Ancient Missile",
+        "name_tr": "Kadim Mermi",
+        "description_en": "Fires a runic bolt of pure force that unerringly strikes a target 30m away.",
+        "description_tr": "30m uzaklıktaki bir hedefi şaşmaz bir şekilde vuran saf güçten oluşan rünik bir ok ateşler.",
+        "branch": "Ancient",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 90,
+        "prerequisites": [
+          "rm_decipher_text"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "3d4 force",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "rm_glyph_light",
+        "name_en": "Glyph of Light",
+        "name_tr": "Işık Glifi",
+        "description_en": "Summons a glowing ancient glyph that illuminates 20m and blinds enemies looking at it.",
+        "description_tr": "20m'yi aydınlatan ve ona bakan düşmanları kör eden parlayan kadim bir glif çağırır.",
+        "branch": "Ancient",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 130,
+        "prerequisites": [
+          "rm_ancient_missile"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "light_radius": "20m",
+          "blindness": "1 turn"
+        }
+      },
+      {
+        "spell_key": "rm_runic_familiar",
+        "name_en": "Runic Familiar",
+        "name_tr": "Rünik Yoldaş",
+        "description_en": "Animates a small construct out of runestones to assist the caster in combat and utility.",
+        "description_tr": "Savaşta ve gündelik işlerde yardımcı olması için rün taşlarından küçük bir yapılandırılmış yaratık canlandırır.",
+        "branch": "Ancient",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 185,
+        "prerequisites": [
+          "rm_glyph_light"
+        ],
+        "icon": "🐕",
+        "effects": {
+          "summon": "Runic Construct",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "rm_word_binding",
+        "name_en": "Word of Binding",
+        "name_tr": "Bağlama Sözcüğü",
+        "description_en": "Speaks a word of ancient binding magic, paralyzing a target within 15m for 2 turns.",
+        "description_tr": "Kadim bağlama büyüsünün bir kelimesini söyleyerek 15m içindeki bir hedefi 2 tur felç eder.",
+        "branch": "Ancient",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 230,
+        "prerequisites": [
+          "rm_runic_familiar"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "paralysis": "2 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "rm_scroll_ancients",
+        "name_en": "Scroll of the Ancients",
+        "name_tr": "Kadimlerin Parşömeni",
+        "description_en": "Reads from an ethereal scroll, casting a random powerful spell from a forgotten era.",
+        "description_tr": "Ruhani bir parşömenden okuyarak unutulmuş bir çağdan rastgele güçlü bir büyü yapar.",
+        "branch": "Ancient",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "rm_word_binding"
+        ],
+        "icon": "🖜",
+        "effects": {
+          "spell_copy": "1 random spell",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "rm_erase_magic",
+        "name_en": "Erase Magic",
+        "name_tr": "Büyü Yok Etme",
+        "description_en": "Utters a syllable of unmaking, completely erasing a magical effect or summon within 20m.",
+        "description_tr": "Yok oluş hecesini söyleyerek 20m içindeki büyülü bir etkiyi veya çağrılmış yaratığı tamamen siler.",
+        "branch": "Ancient",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 360,
+        "prerequisites": [
+          "rm_scroll_ancients"
+        ],
+        "icon": "🧽",
+        "effects": {
+          "remove_magic": "Target",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "rm_word_power_push",
+        "name_en": "Word of Power: Push",
+        "name_tr": "Güç Sözcüğü: İtiş",
+        "description_en": "A word of immense power that deals 4d10 force damage and blasts all enemies in a cone 15m away.",
+        "description_tr": "4d10 güç hasarı veren ve bir koni içindeki tüm düşmanları 15m uzağa fırlatan muazzam bir güç sözcüğü.",
+        "branch": "Ancient",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 410,
+        "prerequisites": [
+          "rm_erase_magic"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "knockback": "15m",
+          "damage": "4d10 force"
+        }
+      },
+      {
+        "spell_key": "rm_ancient_golem",
+        "name_en": "Ancient Golem",
+        "name_tr": "Kadim Golem",
+        "description_en": "Summons a towering Ancient Golem infused with runic magic to fight for you.",
+        "description_tr": "Sizin için savaşması adına rünik büyüyle aşılanmış devasa bir Kadim Golem çağırır.",
+        "branch": "Ancient",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "rm_word_power_push"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "summon": "Ancient Golem",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "rm_runic_monolith",
+        "name_en": "Runic Monolith",
+        "name_tr": "Rünik Monolit",
+        "description_en": "Calls down a massive Runic Monolith that grants a 20% stat boost to all allies within 30m.",
+        "description_tr": "30m içindeki tüm müttefiklere %20 statü artışı sağlayan devasa bir Rünik Monolit indirir.",
+        "branch": "Ancient",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 630,
+        "prerequisites": [
+          "rm_ancient_golem"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "buff": "+20% stats to allies",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "rm_word_power_shatter",
+        "name_en": "Word of Power: Shatter",
+        "name_tr": "Güç Sözcüğü: Parçalama",
+        "description_en": "A devastating word that shatters physical objects, destroys armor, and deals 10d8 sonic damage.",
+        "description_tr": "Fiziksel nesneleri parçalayan, zırhları yok eden ve 10d8 ses hasarı veren yıkıcı bir sözcük.",
+        "branch": "Ancient",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 730,
+        "prerequisites": [
+          "rm_runic_monolith"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "10d8 sonic",
+          "destroy_armor": "Yes"
+        }
+      },
+      {
+        "spell_key": "rm_time_lost_rune",
+        "name_en": "Time-Lost Rune",
+        "name_tr": "Zamanın Unuttuğu Rün",
+        "description_en": "Activates a rune that steps outside of time, granting the caster 1 free turn of action.",
+        "description_tr": "Zamanın dışına çıkan bir rünü etkinleştirerek büyücüye fazladan 1 serbest tur eylem hakkı tanır.",
+        "branch": "Ancient",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 860,
+        "prerequisites": [
+          "rm_word_power_shatter"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "time_stop": "1 turn",
+          "range": "Personal"
+        }
+      },
+      {
+        "spell_key": "rm_word_power_kill",
+        "name_en": "Word of Power: Kill",
+        "name_tr": "Güç Sözcüğü: Ölüm",
+        "description_en": "Speaks the ultimate word of undoing. Instantly kills a creature within 15m if it has 100 HP or less.",
+        "description_tr": "Yok oluşun nihai sözcüğünü söyler. 15m içindeki bir yaratığın 100 veya daha az canı varsa anında öldürür.",
+        "branch": "Ancient",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "rm_time_lost_rune"
+        ],
+        "icon": "💀",
+        "effects": {
+          "instant_death_threshold": "100 HP",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "rm_echoes_creation",
+        "name_en": "Echoes of Creation",
+        "name_tr": "Yaratılış Yankıları",
+        "description_en": "Ultimate ancient magic. Speaks the words of creation, healing all allies to full and dealing apocalyptic damage to enemies in 40m.",
+        "description_tr": "Nihai kadim büyü. Yaratılışın sözcüklerini söyleyerek tüm müttefikleri tamamen iyileştirir ve 40m içindeki düşmanlara kıyamet hasarı verir.",
+        "branch": "Ancient",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1480,
+        "prerequisites": [
+          "rm_word_power_kill"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "reality_warp": "Massive damage & heal",
+          "radius": "40m"
+        }
+      },
+      {
+        "spell_key": "rm_warded_armor",
+        "name_en": "Warded Armor",
+        "name_tr": "Korumalı Zırh",
+        "description_en": "Enchants armor with hidden wards. When struck, there's a 20% chance to drop an explosive ward at the attacker's feet.",
+        "description_tr": "Zırhı gizli sembollerle efsunlar. Darbe alındığında %20 ihtimalle saldırganın ayaklarının dibine patlayıcı bir sembol bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 250,
+        "prerequisites": [
+          "rm_flaming_edge",
+          "rm_ward_healing"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+3",
+          "ward_drop_chance": "20%"
+        }
+      },
+      {
+        "spell_key": "rm_ancient_trap",
+        "name_en": "Ancient Trap",
+        "name_tr": "Kadim Tuzak",
+        "description_en": "Sets a hidden trap inscribed with ancient texts that binds and heavily damages the first creature to trigger it.",
+        "description_tr": "Tetikleyen ilk yaratığı bağlayan ve ona ağır hasar veren, üzerinde kadim metinler yazılı gizli bir tuzak kurar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 290,
+        "prerequisites": [
+          "rm_ward_healing",
+          "rm_scroll_ancients"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "damage": "8d6 force",
+          "snare_duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "rm_golem_forging",
+        "name_en": "Golem Forging",
+        "name_tr": "Golem İşleme",
+        "description_en": "Permanently enchants your Ancient Golem, boosting its stats by 50% and granting it flaming attacks.",
+        "description_tr": "Kadim Golem'inizi kalıcı olarak efsunlayarak statülerini %50 artırır ve ona alevli saldırılar kazandırır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 450,
+        "prerequisites": [
+          "rm_rune_shockwave",
+          "rm_ancient_golem"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "golem_buff": "+50% stats, flaming fists"
+        }
+      },
+      {
+        "spell_key": "rm_weapon_warding",
+        "name_en": "Weapon of Warding",
+        "name_tr": "Muhafızın Silahı",
+        "description_en": "Enchants a weapon to place a mini repelling ward on the ground upon every successful strike.",
+        "description_tr": "Başarılı her vuruşta yere küçük bir itici sembol bırakması için bir silahı efsunlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 480,
+        "prerequisites": [
+          "rm_deflecting_rune",
+          "rm_nullification_ward"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "ward_on_hit": "10% chance"
+        }
+      },
+      {
+        "spell_key": "rm_runic_fortress",
+        "name_en": "Runic Fortress",
+        "name_tr": "Rünik Kale",
+        "description_en": "Combines ancient magic and warding to create a 20m fortress zone, buffing allies' AC and damaging enemies inside.",
+        "description_tr": "Kadim büyü ve sembolleri birleştirerek, içerideki müttefiklerin zırhını artıran ve düşmanlara hasar veren 20m'lik bir kale alanı yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "rm_gravity_ward",
+          "rm_runic_monolith"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "zone_ac": "+5",
+          "zone_damage": "2d8 per turn",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "rm_word_empowerment",
+        "name_en": "Word of Empowerment",
+        "name_tr": "Güçlendirme Sözcüğü",
+        "description_en": "Shouts an ancient word that temporarily enchants the weapons of all allies within 30m with raw force.",
+        "description_tr": "30m içindeki tüm müttefiklerin silahlarını geçici olarak saf güçle efsunlayan kadim bir sözcük haykırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "rm_overclock_rune",
+          "rm_word_power_shatter"
+        ],
+        "icon": "📣",
+        "effects": {
+          "group_enchant": "+3d6 force damage",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "rm_masters_convergence",
+        "name_en": "Master's Convergence",
+        "name_tr": "Ustanın Yakınsaması",
+        "description_en": "Summons a floating crystalline familiar that acts as a mobile ward, enchanting nearby allies automatically.",
+        "description_tr": "Mobil bir sembol görevi gören ve yakındaki müttefikleri otomatik olarak efsunlayan uçan kristal bir yoldaş çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "rm_rune_phase",
+          "rm_mirror_ward",
+          "rm_time_lost_rune"
+        ],
+        "icon": "💎",
+        "effects": {
+          "summon": "Ward Familiar",
+          "buff_radius": "10m"
+        }
+      },
+      {
+        "spell_key": "rm_the_world_rune",
+        "name_en": "The World Rune",
+        "name_tr": "Dünya Rünü",
+        "description_en": "Grand Ultimate. Etches a rune upon the very fabric of reality, bending the world's laws to the Rune Master's absolute will.",
+        "description_tr": "Büyük Nihai. Gerçekliğin dokusuna bir rün kazıyarak dünyanın kurallarını Rün Ustası'nın mutlak iradesine göre büker.",
+        "branch": "Grand Ultimate",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "rm_worldforge_blessing",
+          "rm_absolute_sanctuary",
+          "rm_echoes_creation"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "global_reality_overwrite": "Immeasurable"
+        }
+      }
+    ]
+  }
+]

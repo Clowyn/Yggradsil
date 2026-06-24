@@ -1,0 +1,999 @@
+[
+  {
+    "subclass_key": "hellbinder",
+    "tree_name_en": "Hellbinder",
+    "tree_name_tr": "Cehennem Bağlayıcısı",
+    "tree_desc_en": "Masters of demonic summoning, hellfire manipulation, and dangerous blood pacts. They sacrifice their own vitality to unleash devastating infernal power.",
+    "tree_desc_tr": "Şeytani çağırma, cehennem ateşi manipülasyonu ve tehlikeli kan anlaşmalarının ustaları. Kendi yaşam güçlerini feda ederek yıkıcı cehennem gücünü serbest bırakırlar.",
+    "branches": [
+      "Demon",
+      "Hellfire",
+      "Pact",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "hb_demon_imp",
+        "name_en": "Minor Imp",
+        "name_tr": "Küçük İblis",
+        "description_en": "Summons a minor imp to aid you in combat.",
+        "description_tr": "Çatışmada size yardım etmesi için küçük bir iblis çağırır.",
+        "branch": "Demon",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🦇",
+        "effects": {
+          "health": 20,
+          "damage": "1d6 piercing",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "hb_demon_claws",
+        "name_en": "Demonic Claws",
+        "name_tr": "İblis Pençeleri",
+        "description_en": "Manifests demonic claws on your hands, allowing you to slash enemies.",
+        "description_tr": "Ellerinizde iblis pençeleri oluşturarak düşmanları biçmenizi sağlar.",
+        "branch": "Demon",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🐾",
+        "effects": {
+          "damage": "2d6 slashing",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "hb_demon_vigor",
+        "name_en": "Fiendish Vigor",
+        "name_tr": "Şeytani Zindelik",
+        "description_en": "Channel abyssal energy to grant yourself temporary hit points.",
+        "description_tr": "Kendinize geçici sağlık puanı sağlamak için hiçlik enerjisine kanalize olursunuz.",
+        "branch": "Demon",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "hb_demon_imp"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "temp_hp": "2d8",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "hb_demon_sight",
+        "name_en": "Abyssal Sight",
+        "name_tr": "Hiçlik Görüşü",
+        "description_en": "Allows you to see perfectly in both normal and magical darkness.",
+        "description_tr": "Hem normal hem de büyülü karanlıkta kusursuz görmenizi sağlar.",
+        "branch": "Demon",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "hb_demon_claws"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range": "30m",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "hb_demon_hellhound",
+        "name_en": "Summon Hellhound",
+        "name_tr": "Cehennem Tazısı Çağrısı",
+        "description_en": "Calls forth a ferocious hellhound that breathes fire and bites enemies.",
+        "description_tr": "Ateş püskürten ve düşmanları ısıran vahşi bir cehennem tazısı çağırır.",
+        "branch": "Demon",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "hb_demon_vigor"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "health": 45,
+          "damage": "2d6+2 fire",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "hb_demon_command",
+        "name_en": "Command Demon",
+        "name_tr": "İblis Emri",
+        "description_en": "Force a summoned or hostile demon to obey your single word command.",
+        "description_tr": "Çağrılmış veya düşman bir iblisi tek kelimelik emrinize uymaya zorlarsınız.",
+        "branch": "Demon",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 225,
+        "prerequisites": [
+          "hb_demon_sight"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "range": "20m",
+          "save": "Wisdom"
+        }
+      },
+      {
+        "spell_key": "hb_demon_shield",
+        "name_en": "Demonic Shield",
+        "name_tr": "İblis Kalkanı",
+        "description_en": "Surrounds you with a spectral shield of demonic energy, increasing your defense.",
+        "description_tr": "Sizi şeytani enerjiden oluşan spektral bir kalkanla sararak savunmanızı artırır.",
+        "branch": "Demon",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [
+          "hb_demon_hellhound"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+3",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_demon_blood_sacrifice",
+        "name_en": "Blood Sacrifice",
+        "name_tr": "Kan Adağı",
+        "description_en": "Sacrifice your own health to empower your summoned demons with frenzy.",
+        "description_tr": "Kendi sağlığınızı feda ederek çağırdığınız iblisleri cinnetle güçlendirirsiniz.",
+        "branch": "Demon",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 275,
+        "prerequisites": [
+          "hb_demon_hellhound"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "hp_cost": 10,
+          "summon_damage_bonus": "+2d6",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_demon_succubus",
+        "name_en": "Summon Succubus",
+        "name_tr": "Succubus Çağrısı",
+        "description_en": "Summons a charming succubus or incubus to manipulate and drain your foes.",
+        "description_tr": "Düşmanlarınızı manipüle etmek ve tüketmek için çekici bir succubus veya incubus çağırır.",
+        "branch": "Demon",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 350,
+        "prerequisites": [
+          "hb_demon_shield"
+        ],
+        "icon": "💋",
+        "effects": {
+          "health": 60,
+          "charm_chance": "40%",
+          "duration": "2 hours"
+        }
+      },
+      {
+        "spell_key": "hb_demon_wings",
+        "name_en": "Demonic Wings",
+        "name_tr": "İblis Kanatları",
+        "description_en": "Sprout leathery, bat-like wings from your back, granting you flight.",
+        "description_tr": "Sırtınızdan yarasa benzeri deri kanatlar çıkararak uçmanızı sağlar.",
+        "branch": "Demon",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 400,
+        "prerequisites": [
+          "hb_demon_blood_sacrifice"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "fly_speed": "15m",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_demon_rift",
+        "name_en": "Abyssal Rift",
+        "name_tr": "Hiçlik Yarığı",
+        "description_en": "Tears open a rift to the abyss, constantly spawning lesser demons.",
+        "description_tr": "Hiçliğe bir yarık açarak sürekli küçük iblislerin ortaya çıkmasını sağlar.",
+        "branch": "Demon",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 450,
+        "prerequisites": [
+          "hb_demon_succubus"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "spawn_rate": "1 demon/turn",
+          "max_demons": 3,
+          "duration": "5 mins",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "hb_demon_pit_fiend",
+        "name_en": "Summon Pit Fiend",
+        "name_tr": "Çukur İblisi Çağrısı",
+        "description_en": "Summons a terrifying pit fiend, a high-ranking devil of immense power.",
+        "description_tr": "Muazzam bir güce sahip yüksek rütbeli bir şeytan olan çukur iblisi çağırır.",
+        "branch": "Demon",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "hb_demon_rift"
+        ],
+        "icon": "👹",
+        "effects": {
+          "health": 150,
+          "damage": "4d10+5 fire/slashing",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "hb_demon_legions_call",
+        "name_en": "Legion's Call",
+        "name_tr": "Lejyonun Çağrısı",
+        "description_en": "Blow a demonic horn to summon a small army of fiends to the battlefield.",
+        "description_tr": "Savaş alanına küçük bir şeytan ordusu çağırmak için şeytani bir borazan çalarsınız.",
+        "branch": "Demon",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "hb_demon_pit_fiend",
+          "hb_demon_wings"
+        ],
+        "icon": "📯",
+        "effects": {
+          "summons": 10,
+          "demon_type": "Minor Fiends",
+          "duration": "10 mins",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "hb_demon_ultimate",
+        "name_en": "Demon Lord's Avatar",
+        "name_tr": "İblis Lordunun Avatarı",
+        "description_en": "Become the vessel for a Demon Lord, gaining apocalyptic size, health, and devastating demonic attacks.",
+        "description_tr": "Bir İblis Lordunun bedeni haline gelerek kıyametvari bir boyuta, sağlığa ve yıkıcı şeytani saldırılara sahip olursunuz.",
+        "branch": "Demon",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "hb_demon_legions_call"
+        ],
+        "icon": "👑",
+        "effects": {
+          "health_bonus": 300,
+          "damage": "8d10 necrotic/fire",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_fire_ignite",
+        "name_en": "Hellish Ignite",
+        "name_tr": "Cehennem Tutuşması",
+        "description_en": "Snaps your fingers to instantly ignite a target in unholy flames.",
+        "description_tr": "Hedefi anında kutsal olmayan alevlerle tutuşturmak için parmaklarınızı şıklatırsınız.",
+        "branch": "Hellfire",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🕯️",
+        "effects": {
+          "damage": "1d8 fire",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_rebuke",
+        "name_en": "Hellish Rebuke",
+        "name_tr": "Cehennem Azarı",
+        "description_en": "When struck, you instantly lash out with a burst of hellfire at your attacker.",
+        "description_tr": "Darbe aldığınızda, saldıran kişiye anında bir cehennem ateşi patlamasıyla karşılık verirsiniz.",
+        "branch": "Hellfire",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "damage": "2d10 fire",
+          "range": "15m",
+          "trigger": "Reaction"
+        }
+      },
+      {
+        "spell_key": "hb_fire_embers",
+        "name_en": "Brimstone Embers",
+        "name_tr": "Kükürt Közleri",
+        "description_en": "Scatters burning brimstone on the ground, burning anyone who steps on it.",
+        "description_tr": "Yere yanan kükürtler saçar, üzerine basan herkesi yakar.",
+        "branch": "Hellfire",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "hb_fire_ignite"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "1d6 fire/turn",
+          "radius": "5m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_fire_ray",
+        "name_en": "Scorching Ray",
+        "name_tr": "Kavurucu Işın",
+        "description_en": "Fires multiple beams of concentrated hellfire at your enemies.",
+        "description_tr": "Düşmanlarınıza birden fazla yoğunlaştırılmış cehennem ateşi ışını fırlatır.",
+        "branch": "Hellfire",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "hb_fire_rebuke"
+        ],
+        "icon": "✨",
+        "effects": {
+          "damage": "3x 2d6 fire",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_wall",
+        "name_en": "Hellfire Wall",
+        "name_tr": "Cehennem Ateşi Duvarı",
+        "description_en": "Creates a blazing wall of dark fire that sears anyone passing through.",
+        "description_tr": "İçinden geçen herkesi yakan, karanlık ateşten kavurucu bir duvar oluşturur.",
+        "branch": "Hellfire",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "hb_fire_embers"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "damage": "4d8 fire",
+          "length": "15m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_fire_chains",
+        "name_en": "Infernal Chains",
+        "name_tr": "Cehennem Zincirleri",
+        "description_en": "Wraps the target in burning iron chains, restricting their movement and roasting them.",
+        "description_tr": "Hedefi yanan demir zincirlerle sararak hareketlerini kısıtlar ve onları kavurur.",
+        "branch": "Hellfire",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 225,
+        "prerequisites": [
+          "hb_fire_ray"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "2d6 fire/turn",
+          "range": "15m",
+          "condition": "Restrained",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_fire_rain",
+        "name_en": "Brimstone Rain",
+        "name_tr": "Kükürt Yağmuru",
+        "description_en": "Calls down a shower of burning meteors over a wide area.",
+        "description_tr": "Geniş bir alana yanan meteorlardan oluşan bir sağanak indirir.",
+        "branch": "Hellfire",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [
+          "hb_fire_wall"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "3d8 fire",
+          "radius": "10m",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_breath",
+        "name_en": "Ashen Breath",
+        "name_tr": "Kül Nefesi",
+        "description_en": "Exhale a cone of suffocating ash and dark fire.",
+        "description_tr": "Boğucu bir kül ve karanlık ateş konisi üflersiniz.",
+        "branch": "Hellfire",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 275,
+        "prerequisites": [
+          "hb_fire_chains"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "4d6 fire",
+          "cone": "10m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_blast",
+        "name_en": "Hellfire Blast",
+        "name_tr": "Cehennem Ateşi Patlaması",
+        "description_en": "Hurls a massive sphere of hellfire that detonates on impact.",
+        "description_tr": "Çarpma anında patlayan devasa bir cehennem ateşi küresi fırlatır.",
+        "branch": "Hellfire",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 350,
+        "prerequisites": [
+          "hb_fire_rain"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d8 fire",
+          "radius": "10m",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_soul_burn",
+        "name_en": "Soul Burn",
+        "name_tr": "Ruh Yanığı",
+        "description_en": "Ignites the very soul of the target, dealing devastating necrotic and fire damage.",
+        "description_tr": "Hedefin ruhunu tutuşturarak yıkıcı nekrotik ve ateş hasarı verir.",
+        "branch": "Hellfire",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 400,
+        "prerequisites": [
+          "hb_fire_breath"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "4d10 necrotic + 4d10 fire",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_eruption",
+        "name_en": "Demonic Eruption",
+        "name_tr": "Şeytani Patlama",
+        "description_en": "Causes the ground to violently erupt with magma and hellfire.",
+        "description_tr": "Yerin şiddetle magma ve cehennem ateşiyle patlamasına neden olur.",
+        "branch": "Hellfire",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 450,
+        "prerequisites": [
+          "hb_fire_blast"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "8d6 fire",
+          "radius": "15m",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_meteor",
+        "name_en": "Meteor of the Abyss",
+        "name_tr": "Hiçlik Meteoru",
+        "description_en": "Pulls a massive demonic meteor from the sky to crush and incinerate everything.",
+        "description_tr": "Her şeyi ezmek ve yakmak için gökyüzünden devasa bir şeytani meteor çeker.",
+        "branch": "Hellfire",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "hb_fire_eruption"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "12d6 fire + 6d6 bludgeoning",
+          "radius": "20m",
+          "range": "100m"
+        }
+      },
+      {
+        "spell_key": "hb_fire_sea",
+        "name_en": "Sea of Hellfire",
+        "name_tr": "Cehennem Ateşi Denizi",
+        "description_en": "Floods the entire battlefield in an undulating wave of unending dark flames.",
+        "description_tr": "Tüm savaş alanını bitmek bilmeyen karanlık alevlerden oluşan dalgalı bir denizle sular altında bırakır.",
+        "branch": "Hellfire",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "hb_fire_soul_burn",
+          "hb_fire_meteor"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "10d8 fire",
+          "radius": "30m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_fire_ultimate",
+        "name_en": "Infernal Apocalypse",
+        "name_tr": "Cehennem Kıyameti",
+        "description_en": "Unleashes the raw destructive power of hell itself, instantly turning the area into a scorched wasteland of death.",
+        "description_tr": "Cehennemin saf yıkıcı gücünü serbest bırakarak alanı anında kavrulmuş bir ölüm çoraklığına çevirir.",
+        "branch": "Hellfire",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "hb_fire_sea"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "damage": "20d10 fire + 10d10 necrotic",
+          "radius": "50m",
+          "range": "100m"
+        }
+      },
+      {
+        "spell_key": "hb_pact_blood",
+        "name_en": "Blood Pact",
+        "name_tr": "Kan Anlaşması",
+        "description_en": "Sacrifice a small amount of your own health to empower your next magical attack.",
+        "description_tr": "Bir sonraki büyülü saldırınızı güçlendirmek için kendi sağlığınızın küçük bir kısmını feda edersiniz.",
+        "branch": "Pact",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "hp_cost": "1d8",
+          "damage_bonus": "+1d8",
+          "duration": "Next attack"
+        }
+      },
+      {
+        "spell_key": "hb_pact_whispers",
+        "name_en": "Dark Whispers",
+        "name_tr": "Karanlık Fısıltılar",
+        "description_en": "Fill a target's mind with maddening whispers from the abyss, frightening them.",
+        "description_tr": "Bir hedefin zihnini hiçlikten gelen çıldırtıcı fısıltılarla doldurarak onları korkutursunuz.",
+        "branch": "Pact",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🦻",
+        "effects": {
+          "range": "15m",
+          "condition": "Frightened",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_pact_siphon",
+        "name_en": "Siphon Life",
+        "name_tr": "Hayat Sömürüsü",
+        "description_en": "Drain the life force of an enemy to heal your own wounds.",
+        "description_tr": "Kendi yaralarınızı iyileştirmek için bir düşmanın yaşam gücünü sömürürsünüz.",
+        "branch": "Pact",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [
+          "hb_pact_blood"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "damage": "2d6 necrotic",
+          "healing": "100% of damage",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "hb_pact_bargain",
+        "name_en": "Devil's Bargain",
+        "name_tr": "Şeytanın Pazarlığı",
+        "description_en": "Gain an immediate advantage on your next action, but suffer disadvantage on your next defense.",
+        "description_tr": "Bir sonraki eyleminizde anında avantaj kazanırsınız, ancak bir sonraki savunmanızda dezavantaj yaşarsınız.",
+        "branch": "Pact",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 120,
+        "prerequisites": [
+          "hb_pact_whispers"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "buff": "Advantage",
+          "debuff": "Disadvantage",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_pact_blade",
+        "name_en": "Pact of the Blade",
+        "name_tr": "Kılıç Anlaşması",
+        "description_en": "Summons a magical weapon formed from dark pacts, binding it to your hand.",
+        "description_tr": "Karanlık anlaşmalardan oluşan büyülü bir silah çağırarak onu elinize bağlar.",
+        "branch": "Pact",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "hb_pact_siphon"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d8 + Charisma modifier",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "hb_pact_chain",
+        "name_en": "Soul Chain",
+        "name_tr": "Ruh Zinciri",
+        "description_en": "Links your soul to an ally, splitting all incoming damage evenly between you.",
+        "description_tr": "Ruhunuzu bir müttefiğe bağlayarak gelen tüm hasarı aranızda eşit olarak böler.",
+        "branch": "Pact",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "hb_pact_bargain"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "15m",
+          "damage_split": "50%",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_pact_resilience",
+        "name_en": "Infernal Resilience",
+        "name_tr": "Cehennem Direnci",
+        "description_en": "Your body hardens with demonic toughness, granting resistance to fire and poison.",
+        "description_tr": "Vücudunuz şeytani bir sertlikle güçlenerek ateşe ve zehre karşı direnç kazanır.",
+        "branch": "Pact",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "hb_pact_blade"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "resistances": "Fire, Poison",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "hb_pact_sacrifice",
+        "name_en": "Sacrifice Health",
+        "name_tr": "Sağlık Feda Etme",
+        "description_en": "Cut your own flesh to instantly transfer a large portion of your health to a dying ally.",
+        "description_tr": "Ölmekte olan bir müttefiğe sağlığınızın büyük bir bölümünü anında aktarmak için kendi etinizi kesersiniz.",
+        "branch": "Pact",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 275,
+        "prerequisites": [
+          "hb_pact_chain"
+        ],
+        "icon": "❤️‍🩹",
+        "effects": {
+          "hp_cost": 20,
+          "healing": 30,
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "hb_pact_agony",
+        "name_en": "Pact of Agony",
+        "name_tr": "Izdırap Anlaşması",
+        "description_en": "Curses a target, causing them to suffer immense pain and take extra damage from all attacks.",
+        "description_tr": "Bir hedefi lanetleyerek muazzam bir acı çekmelerine ve tüm saldırılardan ekstra hasar almalarına neden olur.",
+        "branch": "Pact",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 350,
+        "prerequisites": [
+          "hb_pact_resilience"
+        ],
+        "icon": "😫",
+        "effects": {
+          "damage_vulnerability": "+1d6 per hit",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_pact_deal",
+        "name_en": "Diabolic Deal",
+        "name_tr": "Şeytani Anlaşma",
+        "description_en": "Revives a fallen ally instantly, but permanently reduces both of your maximum health until rested.",
+        "description_tr": "Düşmüş bir müttefiği anında canlandırır, ancak dinlenene kadar her ikinizin de maksimum sağlığını kalıcı olarak azaltır.",
+        "branch": "Pact",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 400,
+        "prerequisites": [
+          "hb_pact_sacrifice"
+        ],
+        "icon": "📜",
+        "effects": {
+          "healing": "50% max HP",
+          "penalty": "-25% max HP",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "hb_pact_exchange",
+        "name_en": "Soul Exchange",
+        "name_tr": "Ruh Takası",
+        "description_en": "Instantly swap physical locations with an ally or an enemy.",
+        "description_tr": "Bir müttefik veya düşmanla anında fiziksel konumlarınızı değiştirirsiniz.",
+        "branch": "Pact",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 450,
+        "prerequisites": [
+          "hb_pact_agony"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "hb_pact_immortality",
+        "name_en": "Pact of Immortality",
+        "name_tr": "Ölümsüzlük Anlaşması",
+        "description_en": "If you are struck with a fatal blow, you instantly revive at 1 HP, but your max HP is halved for a day.",
+        "description_tr": "Ölümcül bir darbe alırsanız, anında 1 canla canlanırsınız, ancak maksimum canınız bir gün boyunca yarıya iner.",
+        "branch": "Pact",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 650,
+        "prerequisites": [
+          "hb_pact_deal",
+          "hb_pact_exchange"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "duration": "24 hours",
+          "penalty": "Max HP halved on trigger"
+        }
+      },
+      {
+        "spell_key": "hb_pact_doom",
+        "name_en": "Contract of Doom",
+        "name_tr": "Kıyamet Sözleşmesi",
+        "description_en": "Marks an enemy. If they fail to kill you within three turns, their soul is crushed for massive damage.",
+        "description_tr": "Bir düşmanı işaretler. Sizi üç tur içinde öldüremezlerse, ruhları ezilerek muazzam bir hasar alır.",
+        "branch": "Pact",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 800,
+        "prerequisites": [
+          "hb_pact_immortality"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "15d10 necrotic",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "hb_pact_ultimate",
+        "name_en": "True Demonic Ascension",
+        "name_tr": "Gerçek İblis Yükselişi",
+        "description_en": "Forfeit your humanity entirely, transforming into an unstoppable fiend bound by no mortal rules.",
+        "description_tr": "İnsanlığınızdan tamamen vazgeçerek fani kurallarına bağlı olmayan durdurulamaz bir şeytana dönüşürsünüz.",
+        "branch": "Pact",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "hb_pact_doom"
+        ],
+        "icon": "👿",
+        "effects": {
+          "temp_hp": 150,
+          "bonus_damage": "3d8 necrotic",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "hb_cross_flaming_familiar",
+        "name_en": "Flaming Familiar",
+        "name_tr": "Alevli Yoldaş",
+        "description_en": "Summons a small imp wreathed in hellfire that burns enemies near it.",
+        "description_tr": "Çevresindeki düşmanları yakan, cehennem ateşiyle sarılmış küçük bir iblis çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "hb_demon_imp",
+          "hb_fire_ignite"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "health": 30,
+          "aura_damage": "1d6 fire",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "hb_cross_blood_demon",
+        "name_en": "Bloodbound Demon",
+        "name_tr": "Kan Bağı İblisi",
+        "description_en": "Summons a demon forged from your own blood. It shares your health pool but attacks with unmatched ferocity.",
+        "description_tr": "Kendi kanınızdan dövülmüş bir iblis çağırır. Sağlık havuzunuzu paylaşır ancak eşsiz bir vahşetle saldırır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "hb_demon_blood_sacrifice",
+          "hb_pact_blood"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "health": "Shares 50% of your HP",
+          "damage": "3d8 slashing"
+        }
+      },
+      {
+        "spell_key": "hb_cross_hellfire_curse",
+        "name_en": "Hellfire Curse",
+        "name_tr": "Cehennem Ateşi Laneti",
+        "description_en": "Places a horrific curse on the target, burning them from the inside with hellfire every time they attack.",
+        "description_tr": "Hedefe korkunç bir lanet yerleştirerek, her saldırdıklarında onları içeriden cehennem ateşiyle yakar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "hb_fire_chains",
+          "hb_pact_agony"
+        ],
+        "icon": "🤬",
+        "effects": {
+          "damage": "2d8 fire per attack",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "hb_cross_balor_whip",
+        "name_en": "Balor's Whip",
+        "name_tr": "Balor'un Kırbacı",
+        "description_en": "Summons a blazing whip of a Balor, allowing you to strike, burn, and pull enemies toward you.",
+        "description_tr": "Bir Balor'un yanan kırbacını çağırarak düşmanlara vurmanızı, onları yakmanızı ve kendinize doğru çekmenizi sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "hb_demon_succubus",
+          "hb_fire_blast"
+        ],
+        "icon": "🪢",
+        "effects": {
+          "damage": "6d6 fire + 3d6 slashing",
+          "range": "10m pull"
+        }
+      },
+      {
+        "spell_key": "hb_cross_soul_devourer",
+        "name_en": "Soul Devourer",
+        "name_tr": "Ruh Yiyen İblis",
+        "description_en": "Summons a terrifying spectral demon that feeds on enemy souls, restoring your health as it deals damage.",
+        "description_tr": "Düşman ruhlarıyla beslenen ve hasar verdikçe sağlığınızı geri kazandıran korkutucu, spektral bir iblis çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "hb_demon_rift",
+          "hb_pact_siphon"
+        ],
+        "icon": "👻",
+        "effects": {
+          "health": 100,
+          "healing": "50% of damage dealt"
+        }
+      },
+      {
+        "spell_key": "hb_cross_pact_of_ash",
+        "name_en": "Pact of Ash",
+        "name_tr": "Kül Anlaşması",
+        "description_en": "Bind your soul to hellfire. Upon death, you explode in a fiery blast and resurrect from the ashes.",
+        "description_tr": "Ruhunuzu cehennem ateşine bağlarsınız. Öldüğünüzde ateşli bir patlamayla havaya uçar ve küllerinizden yeniden doğarsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "hb_fire_meteor",
+          "hb_pact_immortality"
+        ],
+        "icon": "⚱️",
+        "effects": {
+          "explosion_damage": "10d6 fire",
+          "revive_hp": "25% max HP"
+        }
+      },
+      {
+        "spell_key": "hb_cross_abyssal_gate",
+        "name_en": "Gate to the Abyss",
+        "name_tr": "Hiçlik Kapısı",
+        "description_en": "Tear open the ultimate gateway. Hellfire spews forth, and three high-tier demons emerge to destroy your enemies at the cost of half your health.",
+        "description_tr": "Nihai geçidi açarsınız. Cehennem ateşi fışkırır ve sağlığınızın yarısı pahasına düşmanlarınızı yok etmek için üç yüksek seviyeli iblis ortaya çıkar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "hb_demon_legions_call",
+          "hb_fire_sea",
+          "hb_pact_doom"
+        ],
+        "icon": "⛩️",
+        "effects": {
+          "hp_cost": "50% max HP",
+          "damage": "10d10 fire",
+          "summons": "3 T4 Demons"
+        }
+      },
+      {
+        "spell_key": "hb_grand_ultimate",
+        "name_en": "Archdemon's Absolute Pact",
+        "name_tr": "Baş İblisin Mutlak Anlaşması",
+        "description_en": "The ultimate sacrifice. You become the Archdemon of Hellfire, gaining absolute dominion over demons, flames, and life itself, becoming nearly invincible.",
+        "description_tr": "Nihai fedakarlık. Cehennem Ateşi Baş İblisi olursunuz; iblisler, alevler ve yaşamın kendisi üzerinde mutlak hakimiyet kurarak neredeyse yenilmez hale gelirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "hb_demon_ultimate",
+          "hb_fire_ultimate",
+          "hb_pact_ultimate"
+        ],
+        "icon": "👑",
+        "effects": {
+          "hp_cost": "99% of current HP",
+          "buff": "Invincible Archdemon Form",
+          "duration": "1 hour"
+        }
+      }
+    ]
+  }
+]

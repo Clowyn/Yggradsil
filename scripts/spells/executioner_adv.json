@@ -1,0 +1,1013 @@
+[
+  {
+    "subclass_key": "executioner_adv",
+    "tree_name_en": "Advanced Execution",
+    "tree_name_tr": "Gelişmiş İnfaz",
+    "tree_desc_en": "Advanced executioners specialize in bringing swift and absolute death. Their execute threshold natively reaches up to 50%, completely obliterating wounded foes.",
+    "tree_desc_tr": "Gelişmiş infazcılar, hızlı ve mutlak ölüm getirme konusunda uzmanlaşmıştır. İnfaz eşikleri %50'ye kadar ulaşarak yaralı düşmanları tamamen yok eder.",
+    "branches": [
+      "Perfect Execution",
+      "Death Sentence",
+      "Grim Harvest"
+    ],
+    "spells": [
+      {
+        "spell_key": "ea_fatal_strike",
+        "name_en": "Fatal Strike",
+        "name_tr": "Ölümcül Vuruş",
+        "description_en": "Deals 3d8 physical damage. If the target is below 50% HP, deals an additional 2d8 damage.",
+        "description_tr": "3d8 fiziksel hasar verir. Eğer hedefin canı %50'nin altındaysa ekstra 2d8 hasar verir.",
+        "branch": "Perfect Execution",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3d8",
+          "bonus_damage": "2d8",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_precise_cut",
+        "name_en": "Precise Cut",
+        "name_tr": "İsabetli Kesik",
+        "description_en": "Deals 2d10 physical damage, ignoring 30% of the target's armor.",
+        "description_tr": "Hedefin zırhının %30'unu yok sayarak 2d10 fiziksel hasar verir.",
+        "branch": "Perfect Execution",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2d10",
+          "armor_penetration": "30%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_ruthless_advance",
+        "name_en": "Ruthless Advance",
+        "name_tr": "Acımasız İlerleme",
+        "description_en": "Dash up to 10m and strike for 3d6 physical damage.",
+        "description_tr": "10m'ye kadar atılır ve 3d6 fiziksel hasar veren bir vuruş yapar.",
+        "branch": "Perfect Execution",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ea_fatal_strike"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_guillotine_blade",
+        "name_en": "Guillotine Blade",
+        "name_tr": "Giyotin Kılıcı",
+        "description_en": "Heavy overhead strike dealing 5d10 physical damage. Has a 15% chance to instantly execute non-boss enemies below 50% HP.",
+        "description_tr": "5d10 fiziksel hasar veren ağır bir tepeden vuruş. Canı %50'nin altındaki patron olmayan düşmanları %15 ihtimalle anında infaz eder.",
+        "branch": "Perfect Execution",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ea_precise_cut"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "5d10",
+          "execute_chance": "15%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_flawless_technique",
+        "name_en": "Flawless Technique",
+        "name_tr": "Kusursuz Teknik",
+        "description_en": "Passive: Your base execute threshold is increased by 5% (making it easier to reach the 50% target).",
+        "description_tr": "Pasif: Temel infaz eşiğiniz %5 artar (%50 hedefine ulaşmayı kolaylaştırır).",
+        "branch": "Perfect Execution",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 220,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "execute_threshold_increase": "5%"
+        }
+      },
+      {
+        "spell_key": "ea_sever_tendon",
+        "name_en": "Sever Tendon",
+        "name_tr": "Tendon Koparan",
+        "description_en": "Deals 3d8 damage, slows the target by 50% for 3 seconds, and causes them to bleed for 2d4 damage per second for 5 seconds.",
+        "description_tr": "3d8 hasar verir, hedefi 3 saniyeliğine %50 yavaşlatır ve 5 saniye boyunca saniyede 2d4 kanama hasarı almasını sağlar.",
+        "branch": "Perfect Execution",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ea_ruthless_advance"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "3d8",
+          "bleed_damage": "2d4/sec",
+          "duration": "5s",
+          "slow": "50%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_decapitate",
+        "name_en": "Decapitate",
+        "name_tr": "Baş Kesme",
+        "description_en": "Deals 8d10 physical damage. If the target is below 40% HP, this attack is an automatic critical hit.",
+        "description_tr": "8d10 fiziksel hasar verir. Eğer hedefin canı %40'ın altındaysa bu saldırı otomatik olarak kritik vurur.",
+        "branch": "Perfect Execution",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ea_guillotine_blade"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "8d10",
+          "auto_crit_threshold": "40%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_vital_puncture",
+        "name_en": "Vital Puncture",
+        "name_tr": "Hayati Delik",
+        "description_en": "Deals 4d10 damage and reduces the target's maximum HP by 15% for 1 minute.",
+        "description_tr": "4d10 hasar verir ve hedefin maksimum canını 1 dakikalığına %15 azaltır.",
+        "branch": "Perfect Execution",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ea_flawless_technique"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "4d10",
+          "max_hp_reduction": "15%",
+          "duration": "60s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_merciless_assault",
+        "name_en": "Merciless Assault",
+        "name_tr": "Merhametsiz Saldırı",
+        "description_en": "A 4-hit combo, each hit dealing 2d8 physical damage. The final hit stuns for 1.5 seconds.",
+        "description_tr": "Her vuruşu 2d8 fiziksel hasar veren 4 vuruşluk bir kombo. Son vuruş 1.5 saniyeliğine sersemletir.",
+        "branch": "Perfect Execution",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ea_sever_tendon"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "damage": "4x 2d8",
+          "stun_duration": "1.5s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_absolute_lethality",
+        "name_en": "Absolute Lethality",
+        "name_tr": "Mutlak Ölümcüllük",
+        "description_en": "Passive: Your critical hit damage is increased by 50% against targets below 50% HP.",
+        "description_tr": "Pasif: Canı %50'nin altındaki hedeflere karşı kritik vuruş hasarınız %50 artar.",
+        "branch": "Perfect Execution",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ea_decapitate"
+        ],
+        "icon": "💥",
+        "effects": {
+          "crit_damage_bonus": "50%",
+          "condition": "HP < 50%"
+        }
+      },
+      {
+        "spell_key": "ea_swift_demise",
+        "name_en": "Swift Demise",
+        "name_tr": "Ani Ecel",
+        "description_en": "A quick strike dealing 6d10 damage. If this attack kills the target, its cooldown is reset and you regain 10% of your max HP.",
+        "description_tr": "6d10 hasar veren hızlı bir vuruş. Bu saldırı hedefi öldürürse bekleme süresi sıfırlanır ve maksimum canınızın %10'unu iyileştirirsiniz.",
+        "branch": "Perfect Execution",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ea_vital_puncture"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "6d10",
+          "heal_on_kill": "10%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_cull_the_weak",
+        "name_en": "Cull the Weak",
+        "name_tr": "Zayıfları Ayıkla",
+        "description_en": "Deals 5d8 physical damage plus 1% extra damage for every 1% HP the target is missing.",
+        "description_tr": "5d8 fiziksel hasar ve hedefin eksik olan her %1 canı için %1 ekstra hasar verir.",
+        "branch": "Perfect Execution",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ea_merciless_assault"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "5d8",
+          "scaling": "+1% per 1% missing HP",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_perfect_execution",
+        "name_en": "Perfect Execution",
+        "name_tr": "Kusursuz İnfaz",
+        "description_en": "Ultimate. A flawless strike that deals 15d10 true damage. If the target is below 50% HP, they are instantly executed (bosses take double damage instead).",
+        "description_tr": "Ulti. 15d10 gerçek hasar veren kusursuz bir vuruş. Eğer hedefin canı %50'nin altındaysa anında infaz edilir (patronlar anında ölmek yerine iki kat hasar alır).",
+        "branch": "Perfect Execution",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_absolute_lethality",
+          "ea_swift_demise"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage": "15d10 true",
+          "execute_threshold": "50%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_mark_of_doom",
+        "name_en": "Mark of Doom",
+        "name_tr": "Kıyamet İşareti",
+        "description_en": "Marks a target for 10 seconds. You deal 15% more damage to the marked target.",
+        "description_tr": "Bir hedefi 10 saniyeliğine işaretler. İşaretli hedefe %15 daha fazla hasar verirsiniz.",
+        "branch": "Death Sentence",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "damage_bonus": "15%",
+          "duration": "10s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_condemn",
+        "name_en": "Condemn",
+        "name_tr": "Mahkum Et",
+        "description_en": "Deals 3d6 magical damage and reduces the target's healing received by 50% for 6 seconds.",
+        "description_tr": "3d6 büyü hasarı verir ve hedefin aldığı iyileştirmeyi 6 saniyeliğine %50 azaltır.",
+        "branch": "Death Sentence",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "3d6",
+          "anti_heal": "50%",
+          "duration": "6s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_chilling_verdict",
+        "name_en": "Chilling Verdict",
+        "name_tr": "Dondurucu Karar",
+        "description_en": "Deals 2d8 cold damage, slowing the target by 40% and reducing their physical damage output by 20% for 5 seconds.",
+        "description_tr": "2d8 soğuk hasarı verir, hedefi %40 yavaşlatır ve fiziksel hasar çıktısını 5 saniyeliğine %20 azaltır.",
+        "branch": "Death Sentence",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ea_mark_of_doom"
+        ],
+        "icon": "❄️",
+        "effects": {
+          "damage": "2d8",
+          "slow": "40%",
+          "damage_reduction": "20%",
+          "duration": "5s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_inescapable_fate",
+        "name_en": "Inescapable Fate",
+        "name_tr": "Kaçınılmaz Kader",
+        "description_en": "Pulls a marked target towards you from up to 15m away and deals 3d8 physical damage.",
+        "description_tr": "İşaretli bir hedefi 15m mesafeden size doğru çeker ve 3d8 fiziksel hasar verir.",
+        "branch": "Death Sentence",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ea_mark_of_doom"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "damage": "3d8",
+          "pull": "15m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_gavel_strike",
+        "name_en": "Gavel Strike",
+        "name_tr": "Tokmak Vuruşu",
+        "description_en": "Strikes the target for 4d8 physical damage. If the target is marked, they are stunned for 2 seconds.",
+        "description_tr": "Hedefe 4d8 fiziksel hasar veren bir vuruş yapar. Eğer hedef işaretliyse 2 saniyeliğine sersemler.",
+        "branch": "Death Sentence",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ea_condemn"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "4d8",
+          "stun_duration": "2s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_warrant_of_blood",
+        "name_en": "Warrant of Blood",
+        "name_tr": "Kan Fermanı",
+        "description_en": "Passive: Allies deal 10% more damage to targets affected by your Mark of Doom.",
+        "description_tr": "Pasif: Müttefikleriniz Kıyamet İşareti etkisindeki hedeflere %10 daha fazla hasar verir.",
+        "branch": "Death Sentence",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ea_chilling_verdict"
+        ],
+        "icon": "📜",
+        "effects": {
+          "ally_damage_bonus": "10%"
+        }
+      },
+      {
+        "spell_key": "ea_final_judgement",
+        "name_en": "Final Judgement",
+        "name_tr": "Nihai Yargı",
+        "description_en": "Consumes the mark on a target, causing it to explode for 6d10 force damage in a 5m radius around them.",
+        "description_tr": "Hedefteki işareti tüketerek etrafındaki 5m yarıçapında 6d10 güç hasarı verecek şekilde patlamasına neden olur.",
+        "branch": "Death Sentence",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ea_inescapable_fate"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "6d10",
+          "radius": "5m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_chain_of_guilt",
+        "name_en": "Chain of Guilt",
+        "name_tr": "Suçluluk Zinciri",
+        "description_en": "Binds the marked target to their current location for 5 seconds. If they move further than 5m from that point, they take 5d10 magical damage and are pulled back.",
+        "description_tr": "İşaretli hedefi 5 saniyeliğine bulunduğu konuma bağlar. Bu noktadan 5m'den fazla uzaklaşırlarsa 5d10 büyü hasarı alırlar ve geri çekilirler.",
+        "branch": "Death Sentence",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ea_gavel_strike"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "damage": "5d10",
+          "leash_radius": "5m",
+          "duration": "5s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_silencing_verdict",
+        "name_en": "Silencing Verdict",
+        "name_tr": "Susturucu Karar",
+        "description_en": "Deals 4d8 damage and silences the marked target for 3 seconds.",
+        "description_tr": "4d8 hasar verir ve işaretli hedefi 3 saniyeliğine susturur.",
+        "branch": "Death Sentence",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ea_warrant_of_blood"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "damage": "4d8",
+          "silence_duration": "3s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_doom_approaches",
+        "name_en": "Doom Approaches",
+        "name_tr": "Kıyamet Yaklaşıyor",
+        "description_en": "Upgrades Mark of Doom: After 5 seconds, the mark detonates, dealing 20% of the damage the target took while marked as bonus true damage.",
+        "description_tr": "Kıyamet İşareti Geliştirmesi: 5 saniye sonra işaret patlar ve hedefin işaretliyken aldığı hasarın %20'sini bonus gerçek hasar olarak verir.",
+        "branch": "Death Sentence",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ea_final_judgement"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "true_damage_detonation": "20% of damage taken"
+        }
+      },
+      {
+        "spell_key": "ea_aura_of_judgement",
+        "name_en": "Aura of Judgement",
+        "name_tr": "Yargı Aurası",
+        "description_en": "Emits an aura that automatically applies Mark of Doom to all enemies within 10m. Lasts 15 seconds.",
+        "description_tr": "10m içindeki tüm düşmanlara otomatik olarak Kıyamet İşareti uygulayan bir aura yayar. 15 saniye sürer.",
+        "branch": "Death Sentence",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ea_chain_of_guilt"
+        ],
+        "icon": "💫",
+        "effects": {
+          "radius": "10m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "ea_no_escape",
+        "name_en": "No Escape",
+        "name_tr": "Kaçış Yok",
+        "description_en": "Teleport instantly to any marked target within 30m and deal 6d8 physical damage, rooting them for 2 seconds.",
+        "description_tr": "30m içindeki herhangi bir işaretli hedefe anında ışınlanarak 6d8 fiziksel hasar verir ve onları 2 saniyeliğine yere sabitler.",
+        "branch": "Death Sentence",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ea_silencing_verdict"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "6d8",
+          "root_duration": "2s",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "ea_death_sentence",
+        "name_en": "Death Sentence",
+        "name_tr": "Ölüm Cezası",
+        "description_en": "Ultimate. Places an inescapable sentence on a target for 10 seconds. If their HP drops below 50% during this time, they are instantly slain, bypassing all immunities and shields.",
+        "description_tr": "Ulti. Bir hedefe 10 saniyeliğine kaçınılmaz bir ölüm cezası verir. Bu süre içinde canları %50'nin altına düşerse, tüm bağışıklıkları ve kalkanları hiçe sayarak anında katledilirler.",
+        "branch": "Death Sentence",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_doom_approaches",
+          "ea_no_escape"
+        ],
+        "icon": "🪦",
+        "effects": {
+          "execute_threshold": "50%",
+          "duration": "10s",
+          "bypasses_immunities": true,
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_bloody_reap",
+        "name_en": "Bloody Reap",
+        "name_tr": "Kanlı Hasat",
+        "description_en": "A wide sweep dealing 3d6 physical damage to all enemies in a 3m frontal cone.",
+        "description_tr": "3m'lik ön konideki tüm düşmanlara 3d6 fiziksel hasar veren geniş bir savurma.",
+        "branch": "Grim Harvest",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🌾",
+        "effects": {
+          "damage": "3d6",
+          "cone": "3m"
+        }
+      },
+      {
+        "spell_key": "ea_taste_of_death",
+        "name_en": "Taste of Death",
+        "name_tr": "Ölümün Tadı",
+        "description_en": "Passive: Whenever you kill an enemy, you heal for 5% of your maximum HP.",
+        "description_tr": "Pasif: Bir düşmanı her öldürdüğünüzde maksimum canınızın %5'i kadar iyileşirsiniz.",
+        "branch": "Grim Harvest",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🍷",
+        "effects": {
+          "heal_on_kill": "5%"
+        }
+      },
+      {
+        "spell_key": "ea_fear_the_reaper",
+        "name_en": "Fear the Reaper",
+        "name_tr": "Azrail'den Kork",
+        "description_en": "Unleash a terrifying presence. Enemies within 5m must make a Will save or be frightened for 3 seconds.",
+        "description_tr": "Dehşet verici bir varlık açığa çıkarın. 5m içindeki düşmanlar İrade zarı atmalıdır, başarısız olanlar 3 saniyeliğine korkutulur.",
+        "branch": "Grim Harvest",
+        "tier": 1,
+        "min_level": 11,
+        "xp_cost": 110,
+        "prerequisites": [
+          "ea_bloody_reap"
+        ],
+        "icon": "👻",
+        "effects": {
+          "fear_duration": "3s",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ea_whirlwind_of_carnage",
+        "name_en": "Whirlwind of Carnage",
+        "name_tr": "Katliam Kasırgası",
+        "description_en": "Spin with your weapon, dealing 4d6 physical damage to all enemies within 4m. Can move while spinning. Duration: 3 seconds.",
+        "description_tr": "Silahınızla dönerek 4m içindeki tüm düşmanlara 4d6 fiziksel hasar verin. Dönerken hareket edebilirsiniz. Süre: 3 saniye.",
+        "branch": "Grim Harvest",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ea_bloody_reap"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d6",
+          "radius": "4m",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "ea_soul_feast",
+        "name_en": "Soul Feast",
+        "name_tr": "Ruh Ziyafeti",
+        "description_en": "Passive: Killing an enemy grants you a stack of Soul Feast, increasing your max HP by 1% per stack (max 20 stacks). Resets out of combat.",
+        "description_tr": "Pasif: Bir düşmanı öldürmek size bir Ruh Ziyafeti yükü verir ve maksimum canınızı yük başına %1 artırır (maksimum 20 yük). Çatışma dışında sıfırlanır.",
+        "branch": "Grim Harvest",
+        "tier": 2,
+        "min_level": 29,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ea_taste_of_death"
+        ],
+        "icon": "🍽️",
+        "effects": {
+          "max_hp_bonus_per_kill": "1%",
+          "max_stacks": 20
+        }
+      },
+      {
+        "spell_key": "ea_dreadful_presence",
+        "name_en": "Dreadful Presence",
+        "name_tr": "Dehşet Verici Varlık",
+        "description_en": "Passive: Whenever you execute an enemy, all enemies within 8m have a 25% chance to be frightened for 2 seconds.",
+        "description_tr": "Pasif: Bir düşmanı infaz ettiğinizde, 8m içindeki tüm düşmanların %25 ihtimalle 2 saniyeliğine korkma şansı vardır.",
+        "branch": "Grim Harvest",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ea_fear_the_reaper"
+        ],
+        "icon": "😱",
+        "effects": {
+          "fear_chance_on_execute": "25%",
+          "fear_duration": "2s",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "ea_harvesting_scythe",
+        "name_en": "Harvesting Scythe",
+        "name_tr": "Hasat Tırpanı",
+        "description_en": "A massive 180-degree sweep dealing 5d8 physical damage and applying a bleed for 3d4 damage per second for 4 seconds to all hit enemies.",
+        "description_tr": "Vurulan tüm düşmanlara 5d8 fiziksel hasar veren ve 4 saniye boyunca saniyede 3d4 kanama uygulayan devasa bir 180 derece savurma.",
+        "branch": "Grim Harvest",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ea_whirlwind_of_carnage"
+        ],
+        "icon": "⛏️",
+        "effects": {
+          "damage": "5d8",
+          "bleed_damage": "3d4/sec",
+          "duration": "4s",
+          "arc": "180_deg",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "ea_blood_frenzy",
+        "name_en": "Blood Frenzy",
+        "name_tr": "Kan Cinneti",
+        "description_en": "Upon dropping an enemy below 50% HP, gain 30% increased attack speed and movement speed for 5 seconds.",
+        "description_tr": "Bir düşmanı %50 canın altına düşürdüğünüzde, 5 saniyeliğine %30 saldırı ve hareket hızı kazanırsınız.",
+        "branch": "Grim Harvest",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ea_soul_feast"
+        ],
+        "icon": "💢",
+        "effects": {
+          "attack_speed": "30%",
+          "movement_speed": "30%",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "ea_corpse_explosion",
+        "name_en": "Corpse Explosion",
+        "name_tr": "Ceset Patlaması",
+        "description_en": "Target a corpse within 15m. It explodes, dealing 6d8 physical damage to all enemies within 5m of the corpse.",
+        "description_tr": "15m içindeki bir cesedi hedef alın. Ceset patlayarak etrafındaki 5m içindeki tüm düşmanlara 6d8 fiziksel hasar verir.",
+        "branch": "Grim Harvest",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ea_dreadful_presence"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d8",
+          "radius": "5m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_massacre",
+        "name_en": "Massacre",
+        "name_tr": "Kıyım",
+        "description_en": "Leap to an area and unleash 3 rapid AoE strikes, each dealing 4d8 physical damage in a 6m radius.",
+        "description_tr": "Bir alana zıplayın ve her biri 6m yarıçapında 4d8 fiziksel hasar veren 3 hızlı alan saldırısı yapın.",
+        "branch": "Grim Harvest",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ea_harvesting_scythe"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "3x 4d8",
+          "radius": "6m",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_reapers_shroud",
+        "name_en": "Reaper's Shroud",
+        "name_tr": "Azrail'in Kefeni",
+        "description_en": "After executing an enemy, you gain a shield equal to 30% of your maximum HP and become immune to crowd control for 4 seconds.",
+        "description_tr": "Bir düşmanı infaz ettikten sonra, maksimum canınızın %30'una eşit bir kalkan kazanırsınız ve 4 saniyeliğine kitle kontrol etkilerine bağışıklık kazanırsınız.",
+        "branch": "Grim Harvest",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ea_blood_frenzy"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "shield": "30% max hp",
+          "cc_immunity": "4s"
+        }
+      },
+      {
+        "spell_key": "ea_echoes_of_slaughter",
+        "name_en": "Echoes of Slaughter",
+        "name_tr": "Katliam Yankıları",
+        "description_en": "Passive: When an enemy dies, all other enemies within 6m take 4d8 psychic damage from the sheer terror of the slaughter.",
+        "description_tr": "Pasif: Bir düşman öldüğünde, 6m içindeki diğer tüm düşmanlar katliamın dehşetinden 4d8 psişik hasar alır.",
+        "branch": "Grim Harvest",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ea_corpse_explosion"
+        ],
+        "icon": "🔊",
+        "effects": {
+          "damage": "4d8 psychic",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "ea_grim_harvest",
+        "name_en": "Grim Harvest",
+        "name_tr": "Acımasız Hasat",
+        "description_en": "Ultimate. Unleash a wave of death in a 10m radius. Deals 10d10 physical damage. Any enemy below 40% HP is instantly executed. You heal for 50% of the total damage dealt.",
+        "description_tr": "Ulti. 10m yarıçapında bir ölüm dalgası serbest bırakır. 10d10 fiziksel hasar verir. Canı %40'ın altındaki tüm düşmanlar anında infaz edilir. Verilen toplam hasarın %50'si kadar iyileşirsiniz.",
+        "branch": "Grim Harvest",
+        "tier": 5,
+        "min_level": 87,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_massacre",
+          "ea_reapers_shroud"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "10d10",
+          "execute_threshold": "40%",
+          "heal_percentage": "50%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_marked_for_harvest",
+        "name_en": "Marked for Harvest",
+        "name_tr": "Hasat İçin İşaretlendi",
+        "description_en": "A cleaving attack that deals 3d8 damage in a 4m cone. All enemies hit are afflicted with Mark of Doom.",
+        "description_tr": "4m'lik konide 3d8 hasar veren yarma saldırısı. Vurulan tüm düşmanlara Kıyamet İşareti uygulanır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "Death Sentence",
+          "Grim Harvest"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "3d8",
+          "cone": "4m",
+          "applies_mark": true
+        }
+      },
+      {
+        "spell_key": "ea_flawless_condemnation",
+        "name_en": "Flawless Condemnation",
+        "name_tr": "Kusursuz Mahkumiyet",
+        "description_en": "A precise strike dealing 5d8 damage. If this does not kill the target, they are automatically Marked and silenced for 2 seconds.",
+        "description_tr": "5d8 hasar veren isabetli bir vuruş. Eğer bu saldırı hedefi öldürmezse, otomatik olarak İşaretlenirler ve 2 saniyeliğine susturulurlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 33,
+        "xp_cost": 290,
+        "prerequisites": [
+          "Perfect Execution",
+          "Death Sentence"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "5d8",
+          "silence_duration": "2s",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ea_reapers_precision",
+        "name_en": "Reaper's Precision",
+        "name_tr": "Azrail'in İsabeti",
+        "description_en": "Throws a phantom blade that pierces in a 15m line, dealing 6d8 damage. It deals 50% more damage to the target with the lowest HP percentage in its path.",
+        "description_tr": "15m'lik bir çizgide deşip geçen ve 6d8 hasar veren hayalet bir bıçak fırlatır. Yolundaki en düşük can yüzdesine sahip hedefe %50 daha fazla hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 480,
+        "prerequisites": [
+          "Perfect Execution",
+          "Grim Harvest"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "damage": "6d8",
+          "bonus_damage": "50%",
+          "line": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_inevitable_cull",
+        "name_en": "Inevitable Cull",
+        "name_tr": "Kaçınılmaz Ayıklama",
+        "description_en": "A targeted strike that cannot miss or be dodged. Deals 7d8 true damage. If the target is marked, the execute threshold against them is increased to 50% for this attack.",
+        "description_tr": "Kaçırılamayan veya atlatılamayan hedefli bir vuruş. 7d8 gerçek hasar verir. Eğer hedef işaretliyse, bu saldırı için hedefe karşı infaz eşiği %50'ye çıkar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 53,
+        "xp_cost": 490,
+        "prerequisites": [
+          "Perfect Execution",
+          "Death Sentence"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "7d8 true",
+          "execute_threshold_boost": "50%",
+          "range": "3m"
+        }
+      },
+      {
+        "spell_key": "ea_bloody_verdict",
+        "name_en": "Bloody Verdict",
+        "name_tr": "Kanlı Karar",
+        "description_en": "Detonate the mark on a target, dealing 5d10 damage and healing yourself for 100% of the damage dealt.",
+        "description_tr": "Hedefteki işareti patlatarak 5d10 hasar verir ve verilen hasarın %100'ü kadar kendinizi iyileştirirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "Death Sentence",
+          "Grim Harvest"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "5d10",
+          "heal_percentage": "100%",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_slaughter_the_condemned",
+        "name_en": "Slaughter the Condemned",
+        "name_tr": "Mahkumları Katlet",
+        "description_en": "Consume Mark of Doom from all enemies within 30m. For each mark consumed, deal 8d8 damage in a 5m radius around that enemy.",
+        "description_tr": "30m içindeki tüm düşmanlardan Kıyamet İşaretini tüketin. Tüketilen her işaret için, o düşmanın etrafındaki 5m yarıçapta 8d8 hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "Death Sentence",
+          "Grim Harvest"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "8d8 per mark",
+          "radius": "5m",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "ea_flawless_massacre",
+        "name_en": "Flawless Massacre",
+        "name_tr": "Kusursuz Kıyım",
+        "description_en": "Passive: If you kill 3 enemies within 5 seconds, all your non-ultimate cooldowns are instantly reset.",
+        "description_tr": "Pasif: 5 saniye içinde 3 düşman öldürürseniz, ulti olmayan tüm bekleme süreleriniz anında sıfırlanır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "Perfect Execution",
+          "Grim Harvest"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "cooldown_reset": true,
+          "condition": "3 kills in 5s"
+        }
+      },
+      {
+        "spell_key": "ea_judgment_blade",
+        "name_en": "Judgment Blade",
+        "name_tr": "Yargı Kılıcı",
+        "description_en": "Enhance your weapon for 10 seconds. Your attacks deal an additional 3d10 true damage to marked targets.",
+        "description_tr": "Silahınızı 10 saniyeliğine güçlendirin. Saldırılarınız işaretli hedeflere fazladan 3d10 gerçek hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "Perfect Execution",
+          "Death Sentence"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "bonus_true_damage": "3d10",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "ea_reapers_judgment",
+        "name_en": "Reaper's Judgment",
+        "name_tr": "Azrail'in Yargısı",
+        "description_en": "Passive: Executing an enemy grants a 10% damage buff for 10 seconds (stacks up to 3 times) and unleashes a pulse that marks all enemies within 10m.",
+        "description_tr": "Pasif: Bir düşmanı infaz etmek, 10 saniyeliğine %10 hasar artışı sağlar (3 defaya kadar birikir) ve 10m içindeki tüm düşmanları işaretleyen bir titreşim yayar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "Perfect Execution",
+          "Death Sentence",
+          "Grim Harvest"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage_buff": "10% per stack",
+          "max_stacks": 3,
+          "duration": "10s",
+          "mark_radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_absolute_carnage",
+        "name_en": "Absolute Carnage",
+        "name_tr": "Mutlak Katliam",
+        "description_en": "Enter a state of carnage for 12 seconds. All your single-target attacks become 5m cleaves and deal 20% increased damage to enemies below 50% HP.",
+        "description_tr": "12 saniyeliğine bir katliam durumuna girin. Tüm tek hedefli saldırılarınız 5m'lik yarma saldırısına dönüşür ve canı %50'nin altındaki düşmanlara %20 artırılmış hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 89,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "Perfect Execution",
+          "Grim Harvest"
+        ],
+        "icon": "👹",
+        "effects": {
+          "cleave_radius": "5m",
+          "bonus_damage": "20%",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "ea_the_final_execution",
+        "name_en": "The Final Execution",
+        "name_tr": "Son İnfaz",
+        "description_en": "Grand Ultimate. You become the embodiment of death. In a 20m radius, all enemies below 50% HP are instantly executed. All enemies above 50% HP are immediately reduced to 50% of their maximum HP and take 10d10 necrotic damage.",
+        "description_tr": "Büyük Ulti. Ölümün vücut bulmuş hali olursunuz. 20m yarıçapındaki canı %50'nin altında olan tüm düşmanlar anında infaz edilir. Canı %50'nin üzerinde olan tüm düşmanların canı anında maksimum canlarının %50'sine düşürülür ve 10d10 nekrotik hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "Perfect Execution",
+          "Death Sentence",
+          "Grim Harvest"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "execute_threshold": "50%",
+          "radius": "20m",
+          "hp_reduction": "To 50%",
+          "damage": "10d10 necrotic"
+        }
+      }
+    ]
+  }
+]

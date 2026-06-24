@@ -1,0 +1,1010 @@
+[
+  {
+    "subclass_key": "elemental_swordmaster",
+    "tree_name_en": "Elemental Swordmaster",
+    "tree_name_tr": "Element Kılıçustası",
+    "tree_desc_en": "Harness the primal forces of flame, frost, and storm, channeling them through your blade to decimate your foes with devastating elemental strikes.",
+    "tree_desc_tr": "Alev, ayaz ve fırtınanın ilkel güçlerini dizginle, onları kılıcınla yönlendirerek düşmanlarını yıkıcı element vuruşlarıyla yok et.",
+    "branches": [
+      "Flame Sword",
+      "Frost Sword",
+      "Storm Sword",
+      "Hybrid Elements"
+    ],
+    "spells": [
+      {
+        "spell_key": "es_flame_ignited_blade",
+        "name_en": "Ignited Blade",
+        "name_tr": "Ateşlenmiş Kılıç",
+        "description_en": "Channel basic fire magic into your weapon. Your strikes deal additional fire damage and illuminate a 2m radius.",
+        "description_tr": "Silahına temel ateş büyüsü yönlendir. Vuruşların ek ateş hasarı verir ve 2m yarıçapı aydınlatır.",
+        "branch": "Flame Sword",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "damage": "1d6 fire",
+          "duration": "1 minute",
+          "range": "Self"
+        }
+      },
+      {
+        "spell_key": "es_flame_searing_slash",
+        "name_en": "Searing Slash",
+        "name_tr": "Yakıcı Kesiş",
+        "description_en": "A wide horizontal attack imbued with intense heat, extending your reach and scorching the target.",
+        "description_tr": "Yoğun ısıyla bezenmiş geniş yatay bir saldırı, menzilini uzatır ve hedefi kavurur.",
+        "branch": "Flame Sword",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 75,
+        "prerequisites": [
+          "es_flame_ignited_blade"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d8 fire",
+          "range": "2m reach"
+        }
+      },
+      {
+        "spell_key": "es_flame_ember_deflect",
+        "name_en": "Ember Deflection",
+        "name_tr": "Köz Yansıtması",
+        "description_en": "Use your reaction to block an incoming attack with a burst of sparks, boosting your defense and burning the attacker.",
+        "description_tr": "Gelen bir saldırıyı kıvılcım patlamasıyla engellemek için reaksiyonunu kullan; savunmanı artırır ve saldıranı yakar.",
+        "branch": "Flame Sword",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "es_flame_ignited_blade"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+2",
+          "damage": "1d4 fire to attacker",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "es_flame_sweep",
+        "name_en": "Flame Sweep",
+        "name_tr": "Alev Savurması",
+        "description_en": "Unleash a sweeping arc of fire that burns all enemies in front of you.",
+        "description_tr": "Önündeki tüm düşmanları yakan, geniş açılı bir alev kavisini serbest bırak.",
+        "branch": "Flame Sword",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 150,
+        "prerequisites": [
+          "es_flame_searing_slash"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "2d6 fire",
+          "area": "3m cone"
+        }
+      },
+      {
+        "spell_key": "es_flame_burning_thrust",
+        "name_en": "Burning Thrust",
+        "name_tr": "Yanan Saplama",
+        "description_en": "Lunge forward with a concentrated fiery stab that pierces multiple targets in a line, setting them ablaze.",
+        "description_tr": "Bir hat üzerindeki birden fazla hedefi deşip geçen yoğun bir ateşli saplama ile ileri atıl ve onları ateşe ver.",
+        "branch": "Flame Sword",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "es_flame_sweep"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "3d6 fire",
+          "area": "5m line",
+          "status": "Burn (1d4 fire per turn)"
+        }
+      },
+      {
+        "spell_key": "es_flame_volcanic_step",
+        "name_en": "Volcanic Step",
+        "name_tr": "Volkanik Adım",
+        "description_en": "Dash swiftly across the battlefield, leaving a trail of superheated magma that damages anyone crossing it.",
+        "description_tr": "Savaş alanında hızla atıl ve üzerinden geçen herkese hasar veren aşırı sıcak bir magma izi bırak.",
+        "branch": "Flame Sword",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "es_flame_burning_thrust"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "movement": "Dash up to 6m",
+          "hazard_damage": "2d4 fire per cross",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "es_flame_cauterize",
+        "name_en": "Cauterizing Strike",
+        "name_tr": "Dağlayan Vuruş",
+        "description_en": "A brutal flaming strike that scorches the enemy's wounds, preventing them from regaining hit points.",
+        "description_tr": "Düşmanın yaralarını kavuran ve onların can yenilemesini engelleyen acımasız bir alevli vuruş.",
+        "branch": "Flame Sword",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "es_flame_burning_thrust"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "2d8 fire",
+          "status": "Target cannot heal for 1 turn"
+        }
+      },
+      {
+        "spell_key": "es_flame_inferno_parry",
+        "name_en": "Inferno Parry",
+        "name_tr": "Cehennem Savuşturması",
+        "description_en": "Parry an attack perfectly to trigger a localized explosion of fire, blasting the attacker and nearby foes.",
+        "description_tr": "Bir saldırıyı kusursuzca savuşturarak yerel bir ateş patlamasını tetikle; saldırganı ve yakındaki düşmanları havaya uçur.",
+        "branch": "Flame Sword",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "es_flame_ember_deflect"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 fire",
+          "area": "2m radius around attacker",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "es_flame_blazing_cyclone",
+        "name_en": "Blazing Cyclone",
+        "name_tr": "Alevli Kasırga",
+        "description_en": "Spin with your sword engulfed in flames, creating a vortex of fire that pushes enemies back.",
+        "description_tr": "Alevler içindeki kılıcınla dönerek düşmanları geriye savuran bir ateş girdabı yarat.",
+        "branch": "Flame Sword",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "es_flame_cauterize",
+          "es_flame_volcanic_step"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d8 fire",
+          "area": "3m radius",
+          "push": "2m"
+        }
+      },
+      {
+        "spell_key": "es_flame_furnace_heart",
+        "name_en": "Furnace Heart",
+        "name_tr": "Fırın Yürek",
+        "description_en": "Overclock your internal temperature. Gain immunity to fire and cold, and deal massive extra fire damage on all hits.",
+        "description_tr": "İç sıcaklığını sınırın ötesine taşı. Ateş ve soğuğa bağışıklık kazan ve tüm vuruşlarında devasa ek ateş hasarı ver.",
+        "branch": "Flame Sword",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "es_flame_blazing_cyclone"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "buff": "Immune to fire/cold",
+          "bonus_damage": "+1d8 fire on all attacks",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_flame_explosive_exec",
+        "name_en": "Explosive Execution",
+        "name_tr": "Patlayıcı İnfaz",
+        "description_en": "Deliver a devastating single-target blow. If the target dies, their body erupts into a violent fireball.",
+        "description_tr": "Yıkıcı bir tek hedef vuruşu yap. Eğer hedef ölürse, bedeni şiddetli bir ateş topuna dönüşerek patlar.",
+        "branch": "Flame Sword",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "es_flame_blazing_cyclone"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "6d8 fire",
+          "on_kill": "Explodes for 4d6 fire in 4m radius"
+        }
+      },
+      {
+        "spell_key": "es_flame_meteor_cleave",
+        "name_en": "Meteor Cleave",
+        "name_tr": "Meteor Yarığı",
+        "description_en": "Leap high into the air and slam your flaming sword into the earth, creating a massive molten crater.",
+        "description_tr": "Havaya sıçra ve alevli kılıcını yere çarparak devasa erimiş bir krater yarat.",
+        "branch": "Flame Sword",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "es_flame_explosive_exec"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "leap": "Up to 10m",
+          "damage": "8d8 fire",
+          "area": "6m radius"
+        }
+      },
+      {
+        "spell_key": "es_flame_sunblade",
+        "name_en": "Sunblade Awakening",
+        "name_tr": "Güneşkılıcı Uyanışı",
+        "description_en": "Your sword burns with the intensity of a star. Deals radiant and fire damage, and has a chance to blind enemies on every hit.",
+        "description_tr": "Kılıcın bir yıldızın yoğunluğuyla yanar. Radyant ve ateş hasarı verir, her vuruşta düşmanları kör etme ihtimali vardır.",
+        "branch": "Flame Sword",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "es_flame_meteor_cleave",
+          "es_flame_furnace_heart"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "bonus_damage": "+2d10 fire/radiant",
+          "status": "Blind on failed WIS save",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_flame_supernova",
+        "name_en": "Supernova Strike",
+        "name_tr": "Süpernova Vuruşu",
+        "description_en": "ULTIMATE: Detonate the ultimate expression of your flame. Release a catastrophic explosion of cosmic fire that melts through resistances.",
+        "description_tr": "ULTİMAT: Alevinin nihai tezahürünü patlat. Dirençleri eriten kozmik bir ateşin felaket getiren patlamasını serbest bırak.",
+        "branch": "Flame Sword",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "es_flame_sunblade"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "15d10 fire",
+          "area": "15m radius",
+          "special": "Ignores fire resistance, targets burn for 3d10/turn"
+        }
+      },
+      {
+        "spell_key": "es_frost_chilling_edge",
+        "name_en": "Chilling Edge",
+        "name_tr": "Dondurucu Kenar",
+        "description_en": "Coat your blade in frost. Strikes deal extra cold damage and sap the enemy's warmth, reducing their movement speed.",
+        "description_tr": "Kılıcını ayazla kapla. Vuruşlar ek soğuk hasarı verir ve düşmanın sıcaklığını emerek hareket hızlarını azaltır.",
+        "branch": "Frost Sword",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "❄️",
+        "effects": {
+          "damage": "1d4 cold",
+          "status": "Reduces speed by 3m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_frost_piercing_icicle",
+        "name_en": "Piercing Icicle",
+        "name_tr": "Delici Buzsarkıtı",
+        "description_en": "Thrust your sword to launch a fast, sharp shard of magical ice at a distant enemy.",
+        "description_tr": "Uzak bir düşmana hızlı ve keskin sihirli bir buz parçası fırlatmak için kılıcını sapla.",
+        "branch": "Frost Sword",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 80,
+        "prerequisites": [
+          "es_frost_chilling_edge"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d8 cold",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "es_frost_frostguard",
+        "name_en": "Frostguard Stance",
+        "name_tr": "Ayazmuhafızı Duruşu",
+        "description_en": "Form a layer of hardened ice over your armor. Grants temporary hit points and retaliates against melee attackers with chilling cold.",
+        "description_tr": "Zırhının üzerinde sertleşmiş bir buz tabakası oluştur. Geçici can puanı verir ve yakın dövüş saldırganlarına dondurucu soğukla karşılık verir.",
+        "branch": "Frost Sword",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 110,
+        "prerequisites": [
+          "es_frost_chilling_edge"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "temp_hp": "1d10",
+          "retaliation": "1d4 cold to melee attackers",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_frost_glacial_sweep",
+        "name_en": "Glacial Sweep",
+        "name_tr": "Buzul Savurma",
+        "description_en": "Swing a wide arc of freezing wind that damages and risks freezing enemies' legs to the ground.",
+        "description_tr": "Düşmanlara hasar veren ve bacaklarını yere dondurma riski taşıyan geniş bir dondurucu rüzgar kavisi savur.",
+        "branch": "Frost Sword",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 160,
+        "prerequisites": [
+          "es_frost_piercing_icicle"
+        ],
+        "icon": "🌨️",
+        "effects": {
+          "damage": "2d6 cold",
+          "area": "3m cone",
+          "status": "Speed halved on failed STR save"
+        }
+      },
+      {
+        "spell_key": "es_frost_hoarfrost_thrust",
+        "name_en": "Hoarfrost Thrust",
+        "name_tr": "Kırağı Saplaması",
+        "description_en": "A deep lunge that shoots a line of jagged frost. Foes caught within might be restrained by the sudden freeze.",
+        "description_tr": "Tırtıklı bir ayaz hattı fırlatan derin bir hamle. İçinde kalan düşmanlar ani donma nedeniyle kısıtlanabilir.",
+        "branch": "Frost Sword",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 210,
+        "prerequisites": [
+          "es_frost_glacial_sweep"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "damage": "3d6 cold",
+          "area": "5m line",
+          "status": "Restrained on failed CON save"
+        }
+      },
+      {
+        "spell_key": "es_frost_ice_slide",
+        "name_en": "Ice Slide",
+        "name_tr": "Buz Kayışı",
+        "description_en": "Create a slick path of ice to glide gracefully across the battlefield, increasing your defense while moving.",
+        "description_tr": "Savaş alanında zarafetle süzülmek için kaygan bir buz yolu oluştur; hareket halindeyken savunmanı artırır.",
+        "branch": "Frost Sword",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 240,
+        "prerequisites": [
+          "es_frost_hoarfrost_thrust"
+        ],
+        "icon": "⛸️",
+        "effects": {
+          "movement": "Dash up to 8m",
+          "ac_bonus": "+2 during movement",
+          "special": "Ignores difficult terrain"
+        }
+      },
+      {
+        "spell_key": "es_frost_shattering_strike",
+        "name_en": "Shattering Strike",
+        "name_tr": "Parçalayan Vuruş",
+        "description_en": "A heavy blow designed to crack frozen defenses. Deals massive damage if the target is already slowed or frozen.",
+        "description_tr": "Donmuş savunmaları kırmak için tasarlanmış ağır bir darbe. Hedef zaten yavaşlamış veya donmuşsa devasa hasar verir.",
+        "branch": "Frost Sword",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 280,
+        "prerequisites": [
+          "es_frost_hoarfrost_thrust"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "4d6 cold",
+          "special": "Damage doubled against slowed/frozen targets"
+        }
+      },
+      {
+        "spell_key": "es_frost_winters_reflection",
+        "name_en": "Winter's Reflection",
+        "name_tr": "Kışın Yansıması",
+        "description_en": "Summon a mirror of thick ice as a reaction. It absorbs incoming damage and shatters to reflect half of it back as cold damage.",
+        "description_tr": "Bir reaksiyon olarak kalın bir buz aynası çağır. Gelen hasarı emer ve kırılarak yarısını soğuk hasarı olarak geri yansıtır.",
+        "branch": "Frost Sword",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "es_frost_frostguard"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "absorb": "up to 3d8 damage",
+          "reflect": "Half of absorbed damage as cold",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "es_frost_avalanche_spin",
+        "name_en": "Avalanche Spin",
+        "name_tr": "Çığ Dönüşü",
+        "description_en": "Spin wildly, releasing a cascade of heavy snow and ice that bludgeons enemies and knocks them off their feet.",
+        "description_tr": "Vahşice dönerek düşmanları ezen ve ayaklarını yerden kesen ağır bir kar ve buz şelalesi serbest bırak.",
+        "branch": "Frost Sword",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "es_frost_shattering_strike"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "damage": "5d6 cold",
+          "area": "4m radius",
+          "status": "Prone on failed STR save"
+        }
+      },
+      {
+        "spell_key": "es_frost_permafrost",
+        "name_en": "Permafrost Armor",
+        "name_tr": "Kalıcıbuz Zırhı",
+        "description_en": "Encase yourself in unbreakable glacial ice. Gain high physical resistance and a substantial armor boost.",
+        "description_tr": "Kendini kırılmaz buzul buzuyla sar. Yüksek fiziksel direnç ve önemli bir zırh takviyesi kazan.",
+        "branch": "Frost Sword",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "es_frost_avalanche_spin"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+3",
+          "resistance": "Non-magical physical damage",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_frost_flash_freeze",
+        "name_en": "Flash Freeze",
+        "name_tr": "Ani Donma",
+        "description_en": "A terrifyingly cold precision strike that stops a target's heart temporarily, stunning and freezing them solid.",
+        "description_tr": "Hedefin kalbini geçici olarak durduran, onları sersemleten ve tamamen donduran korkutucu derecede soğuk bir isabetli vuruş.",
+        "branch": "Frost Sword",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "es_frost_avalanche_spin"
+        ],
+        "icon": "🥶",
+        "effects": {
+          "damage": "4d8 cold",
+          "status": "Stunned (Frozen solid) for 1 turn on failed CON save"
+        }
+      },
+      {
+        "spell_key": "es_frost_absolute_zero",
+        "name_en": "Absolute Zero Blade",
+        "name_tr": "Mutlak Sıfır Kılıcı",
+        "description_en": "Your blade drops to absolute zero. Strikes freeze armor until it becomes brittle, severely reducing enemy defenses.",
+        "description_tr": "Kılıcın mutlak sıfır derecesine düşer. Vuruşlar zırhı kırılganlaşana kadar dondurarak düşman savunmalarını ciddi şekilde azaltır.",
+        "branch": "Frost Sword",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "es_frost_flash_freeze"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "6d8 cold",
+          "range": "3m",
+          "debuff": "-2 AC to target"
+        }
+      },
+      {
+        "spell_key": "es_frost_glacier_tomb",
+        "name_en": "Glacier Tomb",
+        "name_tr": "Buzul Mezarı",
+        "description_en": "Entomb a single target in a massive block of mystical ice, crushing them with extreme cold while trapping them completely.",
+        "description_tr": "Tek bir hedefi devasa mistik bir buz kütlesinin içine hapset; onları tamamen tuzağa düşürürken aşırı soğukla ezer.",
+        "branch": "Frost Sword",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 880,
+        "prerequisites": [
+          "es_frost_absolute_zero",
+          "es_frost_permafrost"
+        ],
+        "icon": "⚰️",
+        "effects": {
+          "damage": "8d8 cold per turn trapped",
+          "status": "Trapped in 3x3m ice block",
+          "save": "DEX save to avoid"
+        }
+      },
+      {
+        "spell_key": "es_frost_epoch_of_ice",
+        "name_en": "Epoch of Ice",
+        "name_tr": "Buz Çağı",
+        "description_en": "ULTIMATE: Plunge the battlefield into a localized ice age. Freezes all moisture in the air, halting enemies in their tracks.",
+        "description_tr": "ULTİMAT: Savaş alanını bölgesel bir buz çağına sok. Havadaki tüm nemi dondurarak düşmanları oldukları yerde durdurur.",
+        "branch": "Frost Sword",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "es_frost_glacier_tomb"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage": "12d10 cold",
+          "area": "20m radius",
+          "status": "Speed becomes 0, lose reactions",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "es_storm_sparking_blade",
+        "name_en": "Sparking Blade",
+        "name_tr": "Kıvılcımlı Kılıç",
+        "description_en": "Electrify your weapon. Hits deal additional lightning damage and sparks can arc to a secondary nearby target.",
+        "description_tr": "Silahını elektriklendir. Vuruşlar ek yıldırım hasarı verir ve kıvılcımlar yakındaki ikincil bir hedefe sıçrayabilir.",
+        "branch": "Storm Sword",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "1d4 lightning",
+          "arc_damage": "1d4 to 1 nearby target"
+        }
+      },
+      {
+        "spell_key": "es_storm_zephyr_slash",
+        "name_en": "Zephyr Slash",
+        "name_tr": "Meltem Kesişi",
+        "description_en": "Swing your blade to launch a slicing wave of highly compressed wind across the battlefield.",
+        "description_tr": "Savaş alanında yüksek basınçlı kesici bir rüzgar dalgası fırlatmak için kılıcını savur.",
+        "branch": "Storm Sword",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 85,
+        "prerequisites": [
+          "es_storm_sparking_blade"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d8 slashing/thunder",
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "es_storm_tailwind_step",
+        "name_en": "Tailwind Step",
+        "name_tr": "Kuyrukrüzgarı Adımı",
+        "description_en": "Use the wind to propel yourself forward as a bonus action, boosting your speed and slipping past enemies gracefully.",
+        "description_tr": "Bir bonus eylem olarak rüzgarı kullanarak kendini ileri it; hızını artır ve düşmanların yanından zarafetle süzül.",
+        "branch": "Storm Sword",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [
+          "es_storm_sparking_blade"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "bonus_movement": "+5m",
+          "special": "Ignores opportunity attacks",
+          "type": "Bonus Action"
+        }
+      },
+      {
+        "spell_key": "es_storm_thunderclap",
+        "name_en": "Thunderclap Strike",
+        "name_tr": "Gök Gürültüsü Vuruşu",
+        "description_en": "Strike with the echoing force of a tempest. Deals sonic damage and aggressively shoves the target backward.",
+        "description_tr": "Bir fırtınanın yankılanan gücüyle vur. Sonik hasar verir ve hedefi agresif bir şekilde geriye iter.",
+        "branch": "Storm Sword",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 165,
+        "prerequisites": [
+          "es_storm_zephyr_slash"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "1d6 thunder",
+          "push": "3m backward"
+        }
+      },
+      {
+        "spell_key": "es_storm_lightning_lunge",
+        "name_en": "Lightning Lunge",
+        "name_tr": "Yıldırım Hamlesi",
+        "description_en": "Transform into a bolt of pure lightning and instantly teleport to a target, manifesting with a shocking stab.",
+        "description_tr": "Saf bir yıldırım okuna dönüş ve hedefe anında ışınlanarak şok edici bir saplama ile ortaya çık.",
+        "branch": "Storm Sword",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 220,
+        "prerequisites": [
+          "es_storm_thunderclap"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "teleport": "Up to 10m",
+          "damage": "3d6 lightning"
+        }
+      },
+      {
+        "spell_key": "es_storm_cyclone_parry",
+        "name_en": "Cyclone Parry",
+        "name_tr": "Siklon Savuşturması",
+        "description_en": "React to projectiles by spinning your blade into a miniature tornado, deflecting the shot and sending a thunderous wave forward.",
+        "description_tr": "Kılıcını mini bir kasırgaya çevirerek mermilere reaksiyon göster; atışı savuştur ve ileriye gök gürültülü bir dalga gönder.",
+        "branch": "Storm Sword",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "es_storm_tailwind_step"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "deflect": "Ranged attacks",
+          "counter_damage": "2d8 thunder in 3m line",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "es_storm_chain_lightning",
+        "name_en": "Chain Lightning Strike",
+        "name_tr": "Zincirleme Yıldırım Vuruşu",
+        "description_en": "A heavy overhead strike that discharges volatile electricity, violently arcing to multiple other targets in the vicinity.",
+        "description_tr": "Uçucu elektrik boşaltan ağır bir tepeden vuruş; yakındaki diğer hedeflere şiddetle seker.",
+        "branch": "Storm Sword",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 290,
+        "prerequisites": [
+          "es_storm_lightning_lunge"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "primary_damage": "3d6 lightning",
+          "arc_damage": "2d6 lightning to up to 3 targets in 5m"
+        }
+      },
+      {
+        "spell_key": "es_storm_tempest_aura",
+        "name_en": "Tempest Aura",
+        "name_tr": "Fırtına Halesi",
+        "description_en": "Surround yourself with a localized storm. Passive lightning strikes zap enemies who dare approach you.",
+        "description_tr": "Kendini bölgesel bir fırtınayla sar. Sana yaklaşmaya cüret eden düşmanları pasif yıldırımlar çarpar.",
+        "branch": "Storm Sword",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 310,
+        "prerequisites": [
+          "es_storm_lightning_lunge"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "aura": "2m radius",
+          "damage": "1d8 lightning at start of your turn",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_storm_sonic_boom",
+        "name_en": "Sonic Boom Spin",
+        "name_tr": "Ses Patlaması Dönüşü",
+        "description_en": "Spin with such ferocious speed that you break the sound barrier, deafening foes and crushing them with a massive shockwave.",
+        "description_tr": "O kadar şiddetli bir hızla dön ki ses bariyerini kır; düşmanları sağır et ve devasa bir şok dalgasıyla ez.",
+        "branch": "Storm Sword",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 400,
+        "prerequisites": [
+          "es_storm_chain_lightning"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8 thunder",
+          "area": "5m radius",
+          "status": "Deafened"
+        }
+      },
+      {
+        "spell_key": "es_storm_gale_thrust",
+        "name_en": "Gale Force Thrust",
+        "name_tr": "Bora Gücü Saplaması",
+        "description_en": "Channel a focused hurricane through the tip of your sword. A massive blast of wind pushes back everything in its path.",
+        "description_tr": "Kılıcının ucundan odaklanmış bir kasırga yönlendir. Devasa bir rüzgar patlaması yolundaki her şeyi geriye iter.",
+        "branch": "Storm Sword",
+        "tier": 3,
+        "min_level": 53,
+        "xp_cost": 450,
+        "prerequisites": [
+          "es_storm_sonic_boom"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "5d8 thunder",
+          "area": "15m line",
+          "push": "5m and knocked prone"
+        }
+      },
+      {
+        "spell_key": "es_storm_overcharge",
+        "name_en": "Overcharge",
+        "name_tr": "Aşırı Yükleme",
+        "description_en": "Surge immense electrical energy through your own nervous system, vastly accelerating your reaction times and movement.",
+        "description_tr": "Kendi sinir sisteminden devasa bir elektrik enerjisi geçir; tepki sürelerini ve hareketlerini muazzam derecede hızlandırır.",
+        "branch": "Storm Sword",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "es_storm_sonic_boom"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "buff": "Haste (+1 action, +5m speed)",
+          "bonus_damage": "+2d6 lightning on attacks",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "es_storm_skysplitter",
+        "name_en": "Sky-Splitter",
+        "name_tr": "Gökyaran",
+        "description_en": "Raise your blade to the heavens to call down a pillar of annihilating lightning directly upon your target.",
+        "description_tr": "Hedefinin tam üzerine yok edici bir yıldırım sütunu indirmek için kılıcını göklere kaldır.",
+        "branch": "Storm Sword",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 780,
+        "prerequisites": [
+          "es_storm_gale_thrust"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "8d8 lightning",
+          "area": "10m vertical column",
+          "radius": "2m"
+        }
+      },
+      {
+        "spell_key": "es_storm_vacuum_blade",
+        "name_en": "Vacuum Blade",
+        "name_tr": "Vakum Kılıcı",
+        "description_en": "Slice the air so fast it creates a vacuum singularity, violently pulling all nearby enemies into melee range before rending them.",
+        "description_tr": "Havayı o kadar hızlı kes ki bir vakum tekilliği oluşsun; yakındaki tüm düşmanları şiddetle yakın dövüş menziline çeker ve parçalar.",
+        "branch": "Storm Sword",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "es_storm_skysplitter",
+          "es_storm_overcharge"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "pull": "All enemies within 10m pulled to 2m",
+          "damage": "6d8 slashing/wind"
+        }
+      },
+      {
+        "spell_key": "es_storm_eye_of_hurricane",
+        "name_en": "Eye of the Hurricane",
+        "name_tr": "Kasırganın Gözü",
+        "description_en": "ULTIMATE: Become pure storm energy. Teleport seamlessly between enemies across the battlefield, striking each with apocalyptic force before they can react.",
+        "description_tr": "ULTİMAT: Saf fırtına enerjisine dönüş. Savaş alanında düşmanlar arasında kusursuzca ışınlanarak, onlar tepki veremeden her birine kıyamet gücüyle vur.",
+        "branch": "Storm Sword",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "es_storm_vacuum_blade"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "targets": "Up to 8 within 30m",
+          "damage": "10d10 lightning/thunder per target",
+          "special": "Untargetable during execution"
+        }
+      },
+      {
+        "spell_key": "es_cross_steam_rend",
+        "name_en": "Steam Rend",
+        "name_tr": "Buhar Yarığı",
+        "description_en": "Combine fire and frost to unleash a scalding wave of steam. Damages enemies and leaves a thick blinding fog.",
+        "description_tr": "Ateş ve ayazı birleştirerek haşlayıcı bir buhar dalgası sal. Düşmanlara hasar verir ve kalın kör edici bir sis bırakır.",
+        "branch": "Hybrid Elements",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 280,
+        "prerequisites": [
+          "es_flame_sweep",
+          "es_frost_glacial_sweep"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "damage": "2d6 fire + 2d6 cold",
+          "area": "4m cone",
+          "status": "Blindness (Fog Cloud)"
+        }
+      },
+      {
+        "spell_key": "es_cross_plasma_arc",
+        "name_en": "Plasma Arc",
+        "name_tr": "Plazma Arkı",
+        "description_en": "Merge intense flame with volatile lightning to shoot a line of superheated plasma that ignites and electrocutes.",
+        "description_tr": "Yoğun ateşi uçucu yıldırımla birleştirerek yakan ve elektrik çarpan süper ısıtılmış bir plazma hattı fırlat.",
+        "branch": "Hybrid Elements",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "es_flame_burning_thrust",
+          "es_storm_lightning_lunge"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "4d6 fire + 4d6 lightning",
+          "area": "10m line",
+          "status": "Ignites target, jumps to 1 nearby"
+        }
+      },
+      {
+        "spell_key": "es_cross_hailstorm_assault",
+        "name_en": "Hailstorm Assault",
+        "name_tr": "Dolu Fırtınası Saldırısı",
+        "description_en": "Ride an icy gale into battle. Leap forward and slam the ground, creating an expanding ring of devastating hail and wind.",
+        "description_tr": "Buzlu bir fırtınaya binerek savaşa gir. İleri atıl ve yere çarparak genişleyen yıkıcı bir dolu ve rüzgar halkası yarat.",
+        "branch": "Hybrid Elements",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 475,
+        "prerequisites": [
+          "es_frost_hoarfrost_thrust",
+          "es_storm_thunderclap"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "leap": "Up to 8m",
+          "damage": "4d8 cold/bludgeoning",
+          "push": "3m"
+        }
+      },
+      {
+        "spell_key": "es_cross_thermal_shock",
+        "name_en": "Thermal Shock",
+        "name_tr": "Termal Şok",
+        "description_en": "Hit a target with searing fire followed instantly by absolute cold. The rapid temperature change shatters their armor.",
+        "description_tr": "Hedefi yakıcı ateşle vur ve anında mutlak soğukla devam et. Ani sıcaklık değişimi zırhlarını paramparça eder.",
+        "branch": "Hybrid Elements",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "es_flame_cauterize",
+          "es_frost_shattering_strike"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "4d8 fire + 4d8 cold",
+          "debuff": "-3 AC on failed CON save"
+        }
+      },
+      {
+        "spell_key": "es_cross_thunderfire",
+        "name_en": "Thunderfire Eruption",
+        "name_tr": "Yıldırım-Alev Püskürmesi",
+        "description_en": "Slam your blade down to trigger a dual-elemental explosion that blasts enemies high into the air.",
+        "description_tr": "Kılıcını yere çarparak düşmanları havaya uçuran çift elementli bir patlamayı tetikle.",
+        "branch": "Hybrid Elements",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 820,
+        "prerequisites": [
+          "es_flame_blazing_cyclone",
+          "es_storm_sonic_boom"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d8 fire + 4d8 thunder",
+          "area": "8m radius",
+          "status": "Knocked into air (take 2d6 fall damage)"
+        }
+      },
+      {
+        "spell_key": "es_cross_blizzard_conductor",
+        "name_en": "Blizzard Conductor",
+        "name_tr": "Tipi İletkeni",
+        "description_en": "Channel a ferocious winter storm through your blade. Your attacks carry the slowing chill of ice and the stunning force of lightning.",
+        "description_tr": "Kılıcının içinden vahşi bir kış fırtınası yönlendir. Saldırıların buzun yavaşlatıcı soğuğunu ve yıldırımın sersemletici gücünü taşır.",
+        "branch": "Hybrid Elements",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 860,
+        "prerequisites": [
+          "es_frost_permafrost",
+          "es_storm_tempest_aura"
+        ],
+        "icon": "🌨️",
+        "effects": {
+          "bonus_damage": "+2d8 cold +2d8 lightning",
+          "status": "Slowed by 5m, lose reactions"
+        }
+      },
+      {
+        "spell_key": "es_cross_tri_stance",
+        "name_en": "Tri-Elemental Stance",
+        "name_tr": "Üç Element Duruşu",
+        "description_en": "Achieve perfect harmony with nature's furies. You gain resistance to all elements, and your next few strikes erupt with combined elemental destruction.",
+        "description_tr": "Doğanın öfkeleriyle kusursuz bir uyum yakala. Tüm elementlere direnç kazanırsın ve sonraki birkaç vuruşun birleşik element yıkımıyla patlar.",
+        "branch": "Hybrid Elements",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 950,
+        "prerequisites": [
+          "es_flame_sunblade",
+          "es_frost_absolute_zero",
+          "es_storm_skysplitter"
+        ],
+        "icon": "☯️",
+        "effects": {
+          "resistance": "Fire, Cold, Lightning",
+          "bonus_damage": "+2d6 fire +2d6 cold +2d6 lightning on next 3 attacks"
+        }
+      },
+      {
+        "spell_key": "es_cross_cataclysm",
+        "name_en": "Cataclysmic World-Breaker",
+        "name_tr": "Kıyamet Dünyakıran",
+        "description_en": "GRAND ULTIMATE: Strike the fabric of reality with a blade forged from absolute temperature and kinetic energy. Tears a destructive rift that devastates everything.",
+        "description_tr": "BÜYÜK ULTİMAT: Mutlak sıcaklık ve kinetik enerjiden dövülmüş bir kılıçla gerçekliğin dokusuna vur. Her şeyi harap eden yıkıcı bir yarık açar.",
+        "branch": "Hybrid Elements",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "es_flame_supernova",
+          "es_frost_epoch_of_ice",
+          "es_storm_eye_of_hurricane"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "10d12 fire + 10d12 cold + 10d12 lightning",
+          "area": "30m line, 5m wide",
+          "special": "Tears a rift; permanently reduces stats of survivors"
+        }
+      }
+    ]
+  }
+]

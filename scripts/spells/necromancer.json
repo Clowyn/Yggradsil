@@ -1,0 +1,1029 @@
+[
+  {
+    "subclass_key": "necromancer",
+    "tree_name_en": "The Dark Arts",
+    "tree_name_tr": "Karanlık Sanatlar",
+    "tree_desc_en": "Master the forces of death, raising armies of skeletons, manipulating bone, and spreading vile plagues.",
+    "tree_desc_tr": "Ölümün güçlerinde ustalaşarak iskelet orduları diriltin, kemikleri manipüle edin ve iğrenç vebalar yayın.",
+    "branches": [
+      "Skeleton",
+      "Bone",
+      "Plague",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "nc_raise_skeleton_warrior",
+        "name_en": "Raise Skeleton Warrior",
+        "name_tr": "İskelet Savaşçı Dirilt",
+        "description_en": "Raise a skeleton warrior from a corpse to fight for you. It remains until destroyed.",
+        "description_tr": "Senin için savaşması amacıyla bir cesetten iskelet savaşçı diriltir. Yok edilene kadar kalır.",
+        "branch": "Skeleton",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💀",
+        "effects": {
+          "summons": "1 Skeleton Warrior",
+          "health": "20 HP",
+          "damage": "1d6 physical"
+        }
+      },
+      {
+        "spell_key": "nc_bone_splinter",
+        "name_en": "Bone Splinter",
+        "name_tr": "Kemik Kıymığı",
+        "description_en": "Fire a sharp splinter of bone at an enemy from a distance.",
+        "description_tr": "Uzaktan bir düşmana keskin bir kemik kıymığı fırlatır.",
+        "branch": "Bone",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🦴",
+        "effects": {
+          "damage": "1d6 piercing",
+          "range": "18m"
+        }
+      },
+      {
+        "spell_key": "nc_touch_of_decay",
+        "name_en": "Touch of Decay",
+        "name_tr": "Çürüme Dokunuşu",
+        "description_en": "A melee spell attack that rots the target's flesh over time.",
+        "description_tr": "Hedefin etini zamanla çürüten yakın dövüş büyü saldırısı.",
+        "branch": "Plague",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🦠",
+        "effects": {
+          "damage": "1d4 necrotic/sec",
+          "duration": "5s",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "nc_skeleton_mastery",
+        "name_en": "Skeleton Mastery",
+        "name_tr": "İskelet Ustalığı",
+        "description_en": "Passively increases the health and damage of all raised skeletons.",
+        "description_tr": "Diriltilen tüm iskeletlerin sağlığını ve hasarını pasif olarak artırır.",
+        "branch": "Skeleton",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "nc_raise_skeleton_warrior"
+        ],
+        "icon": "👑",
+        "effects": {
+          "health_bonus": "+20%",
+          "damage_bonus": "+15%"
+        }
+      },
+      {
+        "spell_key": "nc_bone_armor",
+        "name_en": "Bone Armor",
+        "name_tr": "Kemik Zırh",
+        "description_en": "Surround yourself with a shield of orbiting bones that absorbs physical damage.",
+        "description_tr": "Kendini fiziksel hasarı emen, yörüngede dönen kemiklerden oluşan bir kalkanla çevreler.",
+        "branch": "Bone",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "nc_bone_splinter"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "absorb": "30 damage",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "nc_poison_cloud",
+        "name_en": "Poison Cloud",
+        "name_tr": "Zehir Bulutu",
+        "description_en": "Conjure a small cloud of toxic gas that lingers in an area.",
+        "description_tr": "Belirli bir alanda kalan küçük bir zehirli gaz bulutu yaratır.",
+        "branch": "Plague",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 110,
+        "prerequisites": [
+          "nc_touch_of_decay"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d6 poison/sec",
+          "radius": "4m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nc_undead_frenzy",
+        "name_en": "Undead Frenzy",
+        "name_tr": "Ölümsüz Çılgınlığı",
+        "description_en": "Target undead minion gains immense attack speed and movement speed for a short time.",
+        "description_tr": "Hedef ölümsüz minyon kısa süreliğine devasa saldırı ve hareket hızı kazanır.",
+        "branch": "Skeleton",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "nc_skeleton_mastery"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "attack_speed": "+50%",
+          "movement_speed": "+30%",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nc_calcify",
+        "name_en": "Calcify",
+        "name_tr": "Kireçlenme",
+        "description_en": "Harden a target's bones, increasing their armor but reducing movement speed.",
+        "description_tr": "Bir hedefin kemiklerini sertleştirerek zırhını artırır ancak hareket hızını düşürür.",
+        "branch": "Bone",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 140,
+        "prerequisites": [
+          "nc_bone_armor"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "armor_bonus": "+5",
+          "speed_reduction": "-3m/s",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "nc_weaken",
+        "name_en": "Weaken",
+        "name_tr": "Zayıflatma",
+        "description_en": "Curse an enemy, reducing their physical damage output.",
+        "description_tr": "Bir düşmanı lanetleyerek fiziksel hasar çıkışını azaltır.",
+        "branch": "Plague",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "nc_poison_cloud"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage_reduction": "25%",
+          "duration": "12s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "nc_raise_skeleton_archer",
+        "name_en": "Raise Skeleton Archer",
+        "name_tr": "İskelet Okçu Dirilt",
+        "description_en": "Raise a skeleton archer that attacks from a distance.",
+        "description_tr": "Uzaktan saldıran bir iskelet okçu diriltir.",
+        "branch": "Skeleton",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "nc_raise_skeleton_warrior"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "summons": "1 Skeleton Archer",
+          "range": "15m",
+          "damage": "1d8 physical"
+        }
+      },
+      {
+        "spell_key": "nc_corpse_explosion",
+        "name_en": "Corpse Explosion",
+        "name_tr": "Ceset Patlaması",
+        "description_en": "Detonate a nearby corpse, dealing massive damage to all enemies around it.",
+        "description_tr": "Yakındaki bir cesedi patlatarak etrafındaki tüm düşmanlara devasa hasar verir.",
+        "branch": "Plague",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "nc_poison_cloud"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "15% of corpse max HP",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "nc_bone_spear",
+        "name_en": "Bone Spear",
+        "name_tr": "Kemik Mızrak",
+        "description_en": "Conjure a large bone spear that pierces through multiple enemies in a line.",
+        "description_tr": "Düz bir çizgideki birden fazla düşmanı deşip geçen büyük bir kemik mızrak yaratır.",
+        "branch": "Bone",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "nc_bone_splinter"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "3d8 piercing",
+          "range": "20m line",
+          "piercing": "true"
+        }
+      },
+      {
+        "spell_key": "nc_skeletal_repair",
+        "name_en": "Skeletal Repair",
+        "name_tr": "İskelet Onarımı",
+        "description_en": "Channel dark magic to heal your undead minions in an area.",
+        "description_tr": "Karanlık büyüye odaklanarak bir alandaki ölümsüz minyonlarını iyileştirir.",
+        "branch": "Skeleton",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "nc_raise_skeleton_archer",
+          "nc_undead_frenzy"
+        ],
+        "icon": "🔧",
+        "effects": {
+          "heal": "3d8",
+          "radius": "10m",
+          "cooldown": "30s"
+        }
+      },
+      {
+        "spell_key": "nc_bone_wall",
+        "name_en": "Bone Wall",
+        "name_tr": "Kemik Duvar",
+        "description_en": "Erupt a solid wall of bone from the ground to block paths or protect allies.",
+        "description_tr": "Yolları kapatmak veya müttefikleri korumak için yerden sağlam bir kemik duvar çıkartır.",
+        "branch": "Bone",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 240,
+        "prerequisites": [
+          "nc_bone_spear",
+          "nc_calcify"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "length": "6m",
+          "health": "50 HP",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "nc_blight",
+        "name_en": "Blight",
+        "name_tr": "Solgunluk",
+        "description_en": "Corrupt a patch of ground, causing enemies within to take necrotic damage and lose healing effectiveness.",
+        "description_tr": "Zemini yozlaştırarak, içindeki düşmanların nekrotik hasar almasına ve iyileşme etkilerinin azalmasına neden olur.",
+        "branch": "Plague",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "nc_corpse_explosion",
+          "nc_weaken"
+        ],
+        "icon": "🤢",
+        "effects": {
+          "damage": "2d6 necrotic/sec",
+          "healing_reduction": "50%",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "nc_plague_zombies",
+        "name_en": "Plague Zombies",
+        "name_tr": "Veba Zombileri",
+        "description_en": "Raise bloated plague zombies instead of skeletons. They move slowly but explode in a poison cloud upon death.",
+        "description_tr": "İskeletler yerine şişkin veba zombileri diriltir. Yavaş hareket ederler ancak öldüklerinde zehir bulutu yayarak patlarlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 280,
+        "prerequisites": [
+          "nc_raise_skeleton_warrior",
+          "nc_corpse_explosion"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "summons": "2 Plague Zombies",
+          "death_explosion": "3d6 poison, 4m radius"
+        }
+      },
+      {
+        "spell_key": "nc_skeleton_vanguard",
+        "name_en": "Skeleton Vanguard",
+        "name_tr": "İskelet Öncüsü",
+        "description_en": "Passively grants skeleton warriors a chance to block attacks and briefly taunt enemies.",
+        "description_tr": "İskelet savaşçılara saldırıları bloklama ve düşmanları kışkırtma şansı veren pasif yetenek.",
+        "branch": "Skeleton",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "nc_skeletal_repair"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "block_chance": "15%",
+          "taunt_duration": "3s"
+        }
+      },
+      {
+        "spell_key": "nc_marrow_extraction",
+        "name_en": "Marrow Extraction",
+        "name_tr": "İlik Çekimi",
+        "description_en": "Rip the life essence from a target's bones, dealing damage and healing yourself.",
+        "description_tr": "Bir hedefin kemiklerinden yaşam özünü söküp alarak hasar verir ve kendini iyileştirir.",
+        "branch": "Bone",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "nc_bone_wall"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "2d6 necrotic",
+          "heal": "100% of damage",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "nc_plague_bearer",
+        "name_en": "Plague Bearer",
+        "name_tr": "Veba Taşıyıcısı",
+        "description_en": "Infect a target with a virulent plague. If they die, the plague spreads to nearby enemies.",
+        "description_tr": "Bir hedefe ölümcül bir veba bulaştırır. Ölürlerse, veba yakındaki düşmanlara yayılır.",
+        "branch": "Plague",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "nc_blight"
+        ],
+        "icon": "🐀",
+        "effects": {
+          "damage": "2d8 poison/sec",
+          "spread_radius": "5m",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "nc_bone_archers",
+        "name_en": "Bone Archers",
+        "name_tr": "Kemik Okçular",
+        "description_en": "Upgrade your skeleton archers to fire bone spears that pierce through multiple enemies.",
+        "description_tr": "İskelet okçularını, birden fazla düşmanı delip geçen kemik mızraklar fırlatacak şekilde geliştirir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 320,
+        "prerequisites": [
+          "nc_raise_skeleton_archer",
+          "nc_bone_spear"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "projectile": "Bone Spear",
+          "pierce": "true",
+          "damage_bonus": "+2d8"
+        }
+      },
+      {
+        "spell_key": "nc_raise_skeleton_mage",
+        "name_en": "Raise Skeleton Mage",
+        "name_tr": "İskelet Büyücü Dirilt",
+        "description_en": "Summons a skeleton mage that casts necrotic bolts from afar.",
+        "description_tr": "Uzaktan nekrotik mermiler fırlatan bir iskelet büyücü çağırır.",
+        "branch": "Skeleton",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "nc_raise_skeleton_archer"
+        ],
+        "icon": "🧙",
+        "effects": {
+          "summons": "1 Skeleton Mage",
+          "damage": "2d6 necrotic",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "nc_bone_prison",
+        "name_en": "Bone Prison",
+        "name_tr": "Kemik Hapishanesi",
+        "description_en": "Encase a single target in a circular cage of bone, trapping them.",
+        "description_tr": "Tek bir hedefi kemikten dairesel bir kafese hapsederek tuzağa düşürür.",
+        "branch": "Bone",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "nc_bone_wall"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "health": "80 HP",
+          "radius": "2m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "nc_decrepify",
+        "name_en": "Decrepify",
+        "name_tr": "Yıpratma",
+        "description_en": "A debilitating curse that drastically slows enemies and reduces their attack speed.",
+        "description_tr": "Düşmanları büyük ölçüde yavaşlatan ve saldırı hızlarını düşüren zayıflatıcı bir lanet.",
+        "branch": "Plague",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 380,
+        "prerequisites": [
+          "nc_blight"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "movement_slow": "40%",
+          "attack_speed_reduction": "30%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "nc_bone_command",
+        "name_en": "Bone Command",
+        "name_tr": "Kemik Komutası",
+        "description_en": "Focus all your minions to attack a single target, granting them bonus damage.",
+        "description_tr": "Tüm minyonlarının tek bir hedefe saldırmasını sağlayarak onlara bonus hasar kazandırır.",
+        "branch": "Skeleton",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "nc_raise_skeleton_mage",
+          "nc_skeleton_vanguard"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage_bonus": "+40%",
+          "duration": "8s",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "nc_noxious_eruption",
+        "name_en": "Noxious Eruption",
+        "name_tr": "Zehirli Patlama",
+        "description_en": "Cause an infected target to violently erupt, dealing poison damage to everything around them.",
+        "description_tr": "Enfekte olmuş bir hedefin şiddetle patlayarak etrafındaki her şeye zehir hasarı vermesini sağlar.",
+        "branch": "Plague",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "nc_decrepify",
+          "nc_plague_bearer"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "5d8 poison",
+          "radius": "6m",
+          "removes_infection": "true"
+        }
+      },
+      {
+        "spell_key": "nc_bone_spirit",
+        "name_en": "Bone Spirit",
+        "name_tr": "Kemik Ruhu",
+        "description_en": "Release a vengeful spirit of bone that homes in on a target and explodes.",
+        "description_tr": "Hedefe güdümlü giden ve patlayan intikamcı bir kemik ruhu serbest bırakır.",
+        "branch": "Bone",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "nc_bone_prison",
+          "nc_marrow_extraction"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "4d10 necrotic",
+          "radius": "4m",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "nc_corrosive_marrow",
+        "name_en": "Corrosive Marrow",
+        "name_tr": "Aşındırıcı İlik",
+        "description_en": "Your bone spells now leave behind a trail of corrosive acid that melts armor and deals damage over time.",
+        "description_tr": "Kemik büyülerin artık zırhı eriten ve zamanla hasar veren aşındırıcı bir asit izi bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "nc_bone_spirit",
+          "nc_noxious_eruption"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "acid_damage": "2d6/sec",
+          "armor_reduction": "-3",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nc_undead_swarm",
+        "name_en": "Undead Swarm",
+        "name_tr": "Ölümsüz Sürüsü",
+        "description_en": "Instantly summon multiple temporary fragile skeletons that rush and overwhelm the enemy.",
+        "description_tr": "Düşmanın üzerine çullanıp onları alt eden geçici ve kırılgan iskeletler anında çağırır.",
+        "branch": "Skeleton",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "nc_bone_command"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "summons": "5 Swarm Skeletons",
+          "duration": "15s",
+          "damage": "1d4 each"
+        }
+      },
+      {
+        "spell_key": "nc_splintering_shield",
+        "name_en": "Splintering Shield",
+        "name_tr": "Parçalanan Kalkan",
+        "description_en": "Your Bone Armor now explodes into splinters when destroyed, damaging nearby enemies.",
+        "description_tr": "Kemik Zırhın yok edildiğinde kıymıklara ayrılarak yakındaki düşmanlara hasar verir.",
+        "branch": "Bone",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "nc_bone_spirit"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 piercing",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "nc_wither",
+        "name_en": "Wither",
+        "name_tr": "Kurutma",
+        "description_en": "Rapidly age a target, reducing their maximum health and armor permanently until a long rest.",
+        "description_tr": "Bir hedefi hızla yaşlandırarak uzun dinlenmeye kadar maksimum sağlığını ve zırhını kalıcı olarak düşürür.",
+        "branch": "Plague",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "nc_noxious_eruption"
+        ],
+        "icon": "🍂",
+        "effects": {
+          "max_health_reduction": "15%",
+          "armor_reduction": "2",
+          "duration": "Until Rest"
+        }
+      },
+      {
+        "spell_key": "nc_skeletal_siege_engine",
+        "name_en": "Skeletal Siege Engine",
+        "name_tr": "İskelet Kuşatma Makinesi",
+        "description_en": "Construct a massive catapult made of bone, manned by skeletons, to bombard areas from afar.",
+        "description_tr": "İskeletler tarafından kullanılan ve uzaktan bölgeleri bombalayan devasa kemik bir mancınık inşa eder.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "nc_bone_prison",
+          "nc_undead_swarm"
+        ],
+        "icon": "⚙️",
+        "effects": {
+          "summons": "1 Siege Engine",
+          "range": "50m",
+          "damage": "6d10 bludgeoning/necrotic",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "nc_bone_storm",
+        "name_en": "Bone Storm",
+        "name_tr": "Kemik Fırtınası",
+        "description_en": "Create a vortex of swirling bone fragments around you, damaging and lacerating enemies.",
+        "description_tr": "Etrafında girdap gibi dönen kemik parçalarından oluşan, düşmanlara hasar veren ve onları yaralayan bir fırtına yaratır.",
+        "branch": "Bone",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "nc_bone_spirit"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d6 slashing/sec",
+          "radius": "8m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nc_epidemic",
+        "name_en": "Epidemic",
+        "name_tr": "Salgın",
+        "description_en": "Unleash a massive wave of disease. All enemies in a huge area become infected with your strongest poison.",
+        "description_tr": "Devasa bir hastalık dalgası salar. Büyük bir alandaki tüm düşmanlara en güçlü zehrini bulaştırır.",
+        "branch": "Plague",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 640,
+        "prerequisites": [
+          "nc_decrepify"
+        ],
+        "icon": "🟢",
+        "effects": {
+          "radius": "30m",
+          "damage": "3d8 poison/sec",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nc_raise_skeletal_behemoth",
+        "name_en": "Raise Skeletal Behemoth",
+        "name_tr": "İskelet Dev Dirilt",
+        "description_en": "Consume multiple corpses to raise a massive skeletal brute.",
+        "description_tr": "Devasa bir iskelet canavar diriltmek için birden fazla cesedi tüketir.",
+        "branch": "Skeleton",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "nc_raise_skeleton_mage"
+        ],
+        "icon": "👹",
+        "effects": {
+          "summons": "1 Skeletal Behemoth",
+          "health": "150 HP",
+          "damage": "3d10 physical"
+        }
+      },
+      {
+        "spell_key": "nc_prison_of_the_damned",
+        "name_en": "Prison of the Damned",
+        "name_tr": "Lanetliler Hapishanesi",
+        "description_en": "Enemies trapped in your bone prison are continuously attacked by skeletal hands dragging them down.",
+        "description_tr": "Kemik hapishanende mahsur kalan düşmanlar, onları aşağı çeken iskelet eller tarafından sürekli saldırıya uğrar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "nc_bone_prison",
+          "nc_raise_skeletal_behemoth"
+        ],
+        "icon": "🪦",
+        "effects": {
+          "damage": "3d8 slashing/sec",
+          "root": "true",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "nc_ossified_carapace",
+        "name_en": "Ossified Carapace",
+        "name_tr": "Kemikleşmiş Kabuk",
+        "description_en": "Encase an ally or yourself in an impenetrable bone shell, granting immunity but stunning the target.",
+        "description_tr": "Bir müttefiki veya kendini delinmez bir kemik kabukla kaplayarak dokunulmazlık verir, ancak hedefi sersemletir.",
+        "branch": "Bone",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "nc_bone_storm",
+          "nc_splintering_shield"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "invulnerability": "true",
+          "stun": "true",
+          "duration": "4s"
+        }
+      },
+      {
+        "spell_key": "nc_legions_vigor",
+        "name_en": "Legion's Vigor",
+        "name_tr": "Lejyonun Kudreti",
+        "description_en": "Grants an aura that constantly regenerates the health of your undead minions.",
+        "description_tr": "Ölümsüz minyonlarının sağlığını sürekli olarak yenileyen bir aura kazandırır.",
+        "branch": "Skeleton",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 720,
+        "prerequisites": [
+          "nc_raise_skeletal_behemoth",
+          "nc_undead_swarm"
+        ],
+        "icon": "❤️",
+        "effects": {
+          "regeneration": "5 HP/s",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "nc_soul_rot",
+        "name_en": "Soul Rot",
+        "name_tr": "Ruh Çürümesi",
+        "description_en": "Corrupts the target's very soul, silencing them and draining their life.",
+        "description_tr": "Hedefin ruhunu yozlaştırarak susturur ve yaşamını emer.",
+        "branch": "Plague",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 730,
+        "prerequisites": [
+          "nc_epidemic",
+          "nc_wither"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "silence": "true",
+          "damage": "4d10 necrotic/sec",
+          "duration": "4s"
+        }
+      },
+      {
+        "spell_key": "nc_skeletal_amalgamation",
+        "name_en": "Skeletal Amalgamation",
+        "name_tr": "İskelet Birleşimi",
+        "description_en": "Sacrifice two skeletons to merge them into a horrific bone construct with enhanced abilities.",
+        "description_tr": "İki iskeleti feda ederek onları gelişmiş yeteneklere sahip korkunç bir kemik yapıya dönüştürür.",
+        "branch": "Skeleton",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "nc_legions_vigor"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "sacrifice": "2 Minions",
+          "stats_multiplier": "2.5x",
+          "duration": "Infinite"
+        }
+      },
+      {
+        "spell_key": "nc_aura_of_decay",
+        "name_en": "Aura of Decay",
+        "name_tr": "Çürüme Aurası",
+        "description_en": "You emit an aura that constantly rots away the health of non-undead entities around you.",
+        "description_tr": "Etrafındaki ölümsüz olmayan varlıkların sağlığını sürekli çürüten bir aura yayarsın.",
+        "branch": "Plague",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "nc_soul_rot"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "damage": "3d6 necrotic/sec",
+          "radius": "10m",
+          "toggle": "true"
+        }
+      },
+      {
+        "spell_key": "nc_bone_crush",
+        "name_en": "Bone Crush",
+        "name_tr": "Kemik Kırma",
+        "description_en": "Command the bones of an enemy to violently compress, dealing massive damage and causing crippling.",
+        "description_tr": "Bir düşmanın kemiklerine şiddetle sıkışmalarını emrederek devasa hasar verir ve sakatlanmalarına neden olur.",
+        "branch": "Bone",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "nc_ossified_carapace"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "8d8 bludgeoning",
+          "cripple": "50% slow",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nc_miasma_golem",
+        "name_en": "Miasma Golem",
+        "name_tr": "Miasma Golemi",
+        "description_en": "Construct a terrifying golem of bone and rotting flesh that exudes a deadly miasma.",
+        "description_tr": "Ölümcül bir miasma yayan, kemik ve çürüyen etten oluşan korkutucu bir golem inşa eder.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 880,
+        "prerequisites": [
+          "nc_epidemic",
+          "nc_bone_crush",
+          "nc_skeletal_amalgamation"
+        ],
+        "icon": "🧌",
+        "effects": {
+          "summons": "1 Miasma Golem",
+          "health": "300 HP",
+          "aura_damage": "4d6 poison/sec",
+          "aura_radius": "8m"
+        }
+      },
+      {
+        "spell_key": "nc_fortress_of_bones",
+        "name_en": "Fortress of Bones",
+        "name_tr": "Kemik Kalesi",
+        "description_en": "Raise an entire fortress structure of bone from the earth to serve as a defensive stronghold.",
+        "description_tr": "Topraktan savunma kalesi olarak hizmet edecek, tamamen kemikten oluşan bir yapı yükseltir.",
+        "branch": "Bone",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1050,
+        "prerequisites": [
+          "nc_bone_crush"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "structure_health": "500 HP",
+          "size": "15x15m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "nc_army_of_the_dead",
+        "name_en": "Army of the Dead",
+        "name_tr": "Ölüler Ordusu",
+        "description_en": "Raise a temporary massive army of skeletons from the ground, regardless of corpses.",
+        "description_tr": "Cesetlere ihtiyaç duymadan topraktan geçici devasa bir iskelet ordusu diriltir.",
+        "branch": "Skeleton",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "nc_skeletal_amalgamation"
+        ],
+        "icon": "🧟",
+        "effects": {
+          "summons": "12 Skeletons",
+          "duration": "30s",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "nc_cloud_of_death",
+        "name_en": "Cloud of Death",
+        "name_tr": "Ölüm Bulutu",
+        "description_en": "Summon a massive, slow-moving cloud of pure necrotic energy that annihilates everything inside.",
+        "description_tr": "İçindeki her şeyi yok eden saf nekrotik enerjiden oluşan devasa, yavaş hareket eden bir bulut çağırır.",
+        "branch": "Plague",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "nc_aura_of_decay"
+        ],
+        "icon": "☁️",
+        "effects": {
+          "damage": "10d10 necrotic/sec",
+          "radius": "15m",
+          "speed": "2m/s",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "nc_death_knight",
+        "name_en": "Death Knight",
+        "name_tr": "Ölüm Şövalyesi",
+        "description_en": "Summon a Death Knight, an elite undead champion wielding bone armor and plague-infused weapons.",
+        "description_tr": "Kemik zırhı ve veba aşılanmış silahları olan elit bir ölümsüz şampiyon olan Ölüm Şövalyesi'ni çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "nc_army_of_the_dead",
+          "nc_fortress_of_bones",
+          "nc_cloud_of_death"
+        ],
+        "icon": "🏇",
+        "effects": {
+          "summons": "1 Death Knight",
+          "health": "500 HP",
+          "damage": "6d10",
+          "aura": "Provides buffs to allies"
+        }
+      },
+      {
+        "spell_key": "nc_avatar_of_marrow_ultimate",
+        "name_en": "ULTIMATE: Avatar of Marrow",
+        "name_tr": "ULTIMATE: İlik Avatarı",
+        "description_en": "Transform into a towering entity of pure bone, gaining immense armor, health, and melee damage.",
+        "description_tr": "Saf kemikten devasa bir varlığa dönüşerek devasa zırh, sağlık ve yakın dövüş hasarı kazanırsın.",
+        "branch": "Bone",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "nc_fortress_of_bones"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "health_bonus": "+200",
+          "armor_bonus": "+20",
+          "melee_damage": "4d12",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "nc_lord_of_skulls_ultimate",
+        "name_en": "ULTIMATE: Lord of Skulls",
+        "name_tr": "ULTIMATE: Kafatasları Efendisi",
+        "description_en": "Become the Lord of Skulls, making your summons immortal for a duration and massively increasing your summon limit.",
+        "description_tr": "Kafatasları Efendisi olarak çağrılarını kısa süreliğine ölümsüz yapar ve çağrı sınırını devasa oranda artırırsın.",
+        "branch": "Skeleton",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "nc_army_of_the_dead"
+        ],
+        "icon": "💀",
+        "effects": {
+          "immortality_duration": "15s",
+          "summon_limit": "+10",
+          "bonus_damage": "+100%"
+        }
+      },
+      {
+        "spell_key": "nc_harbinger_of_pestilence_ultimate",
+        "name_en": "ULTIMATE: Harbinger of Pestilence",
+        "name_tr": "ULTIMATE: Veba Habercisi",
+        "description_en": "Become the embodiment of plague. Your spells apply irresistible rot, and you heal from all necrotic damage dealt.",
+        "description_tr": "Vebanın vücut bulmuş hali olursun. Büyülerin karşı konulamaz çürüme uygular ve verilen tüm nekrotik hasardan iyileşirsin.",
+        "branch": "Plague",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1480,
+        "prerequisites": [
+          "nc_cloud_of_death"
+        ],
+        "icon": "🪰",
+        "effects": {
+          "rot_damage": "5d10/sec",
+          "lifesteal": "100%",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "nc_ascendance_of_the_lich_king_ultimate",
+        "name_en": "GRAND ULTIMATE: Ascendance of the Lich King",
+        "name_tr": "GRAND ULTIMATE: Lich Kralının Yükselişi",
+        "description_en": "Ascend to become the Lich King. You gain a massive aura of death, unlimited summons, impenetrable armor, and touch of death.",
+        "description_tr": "Lich Kralı olarak yükselirsin. Devasa bir ölüm aurası, sınırsız çağrı, delinmez zırh ve ölüm dokunuşu kazanırsın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "nc_lord_of_skulls_ultimate",
+          "nc_avatar_of_marrow_ultimate",
+          "nc_harbinger_of_pestilence_ultimate"
+        ],
+        "icon": "👑",
+        "effects": {
+          "summon_limit": "Infinite",
+          "armor": "+50",
+          "death_aura": "50m radius, 10d10 necrotic/sec",
+          "duration": "1 minute"
+        }
+      }
+    ]
+  }
+]

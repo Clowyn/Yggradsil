@@ -1,0 +1,3 @@
+## 2026-06-20T22:06:37Z
+
+Please analyze the node rendering in `src/components/spell-tree/SpellNode.tsx`. Look at how the circle (currently 80x80px) is styled and how the spell/class/subclass names are currently positioned outside/below the circle. Recommend changes to move the text labels inside the circle node along with the icon, keeping them legibly styled (e.g. appropriate font size, layout, wrapping). Check if we need to adjust the circle size or style (using Tailwind CSS, without using direct CSS transforms on React Flow nodes). Save your report to `d:\DnD\.agents\teamwork_preview_explorer_investigate_layout_2\handoff.md`.

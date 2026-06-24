@@ -1,0 +1,972 @@
+[
+  {
+    "subclass_key": "late_chaser",
+    "tree_name_en": "Late Chaser",
+    "tree_name_tr": "Geç Kalan Takipçi",
+    "tree_desc_en": "Masters of patience, tracking, and lethal precision. They set delayed traps, relentlessly hunt their marks, and excel at finishing off weakened prey.",
+    "tree_desc_tr": "Sabır, takip ve ölümcül isabetlilik ustaları. Gecikmeli tuzaklar kurarlar, işaretlediklerini amansızca avlarlar ve zayıflamış avları bitirmede uzmandırlar.",
+    "branches": [
+      "Delay",
+      "Tracking",
+      "Execute",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "lc_delayed_shot",
+        "name_en": "Delayed Shot",
+        "name_tr": "Gecikmeli Atış",
+        "description_en": "Fires a projectile that lodges into the target. After 3 seconds, it detonates, dealing 2d6 piercing damage.",
+        "description_tr": "Hedefe saplanan bir mermi ateşler. 3 saniye sonra patlayarak 2d6 delici hasar verir.",
+        "branch": "Delay",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⏱️",
+        "effects": {
+          "damage": "2d6",
+          "delay": "3s"
+        }
+      },
+      {
+        "spell_key": "lc_patience",
+        "name_en": "Patience",
+        "name_tr": "Sabır",
+        "description_en": "If you do not attack for 1 turn, your next attack deals +3d6 damage and ignores 10% armor.",
+        "description_tr": "1 tur boyunca saldırmazsanız, bir sonraki saldırınız +3d6 hasar verir ve %10 zırhı yok sayar.",
+        "branch": "Delay",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "⏳",
+        "effects": {
+          "damage_bonus": "3d6",
+          "armor_pen": "10%"
+        }
+      },
+      {
+        "spell_key": "lc_time_bomb_arrow",
+        "name_en": "Time Bomb Arrow",
+        "name_tr": "Saatli Bomba Oku",
+        "description_en": "Shoot an arrow that ticks for 2 turns. Upon detonation, it deals 4d6 fire damage in a 5m radius.",
+        "description_tr": "2 tur boyunca sayan bir ok atar. Patladığında 5m yarıçapındaki alana 4d6 ateş hasarı verir.",
+        "branch": "Delay",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🧨",
+        "effects": {
+          "damage": "4d6",
+          "radius": "5m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_deferred_pain",
+        "name_en": "Deferred Pain",
+        "name_tr": "Ertelenmiş Acı",
+        "description_en": "Store 20% of the damage you deal for 3 turns. At the end, release it all at once as true damage to the last target hit.",
+        "description_tr": "3 tur boyunca verdiğiniz hasarın %20'sini depolar. Süre sonunda, tüm hasarı gerçek hasar olarak vurulan son hedefe aktarır.",
+        "branch": "Delay",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 190,
+        "prerequisites": [
+          "lc_patience"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage_stored": "20%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_lingering_wound",
+        "name_en": "Lingering Wound",
+        "name_tr": "Kalıcı Yara",
+        "description_en": "Applies a wound dealing 1d6 bleed damage every turn for 5 turns. If dispelled, it violently ruptures for 4d6 burst damage.",
+        "description_tr": "5 tur boyunca her tur 1d6 kanama hasarı veren bir yara açar. Eğer temizlenirse, şiddetli bir şekilde patlayarak 4d6 anlık hasar verir.",
+        "branch": "Delay",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 230,
+        "prerequisites": [
+          "lc_delayed_shot"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d6/turn",
+          "burst_damage": "4d6",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "lc_tactical_pause",
+        "name_en": "Tactical Pause",
+        "name_tr": "Taktiksel Duraklama",
+        "description_en": "Enter a tactical stance for 2 turns. Movement drops to 0m, but attack range increases by 10m and critical chance by 20%.",
+        "description_tr": "2 turluğuna taktiksel bir duruşa geçin. Hareket 0m'ye düşer, ancak saldırı menzili 10m ve kritik şansı %20 artar.",
+        "branch": "Delay",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "lc_patience"
+        ],
+        "icon": "⏸️",
+        "effects": {
+          "range_bonus": "10m",
+          "crit_chance": "+20%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_echoing_strike",
+        "name_en": "Echoing Strike",
+        "name_tr": "Yankılanan Vuruş",
+        "description_en": "Whenever you hit a target, a phantom arrow strikes them again 2 turns later for 50% of the original damage.",
+        "description_tr": "Bir hedefe her vurduğunuzda, 2 tur sonra hayalet bir ok onlara tekrar çarparak orijinal hasarın %50'sini verir.",
+        "branch": "Delay",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 370,
+        "prerequisites": [
+          "lc_lingering_wound"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "damage": "50% original",
+          "delay": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_hourglass_trap",
+        "name_en": "Hourglass Trap",
+        "name_tr": "Kum Saati Tuzağı",
+        "description_en": "Place an invisible trap (3m radius). Enemies triggering it are slowed by 50% and take 6d8 force damage after a 1 turn delay.",
+        "description_tr": "Görünmez bir tuzak (3m yarıçap) yerleştirir. Onu tetikleyen düşmanlar %50 yavaşlar ve 1 tur gecikmeyle 6d8 güç hasarı alırlar.",
+        "branch": "Delay",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "lc_time_bomb_arrow"
+        ],
+        "icon": "⌛",
+        "effects": {
+          "damage": "6d8",
+          "slow": "50%",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "lc_stasis_shot",
+        "name_en": "Stasis Shot",
+        "name_tr": "Durağanlık Atışı",
+        "description_en": "Target is stunned and invulnerable for 1 turn. When stasis ends, they instantly take 8d6 force damage.",
+        "description_tr": "Hedef 1 tur boyunca sersemler ve hasar görmez olur. Durağanlık bittiğinde anında 8d6 güç hasarı alırlar.",
+        "branch": "Delay",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "lc_deferred_pain"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "damage": "8d6",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "lc_inevitable_end",
+        "name_en": "Inevitable End",
+        "name_tr": "Kaçınılmaz Son",
+        "description_en": "Mark an enemy. In exactly 3 turns, they take 12d10 true damage. This damage cannot be evaded or mitigated.",
+        "description_tr": "Bir düşmanı işaretler. Tam 3 tur sonra 12d10 gerçek hasar alırlar. Bu hasardan kaçınılamaz veya hasar azaltılamaz.",
+        "branch": "Delay",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "lc_echoing_strike"
+        ],
+        "icon": "🕰️",
+        "effects": {
+          "damage": "12d10",
+          "delay": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_karma_bullet",
+        "name_en": "Karma Bullet",
+        "name_tr": "Karma Mermisi",
+        "description_en": "Fires an arrow that absorbs all damage the target deals for 2 turns, then reflects 50% of it back as radiant damage.",
+        "description_tr": "Hedefin 2 tur boyunca verdiği tüm hasarı emen ve ardından %50'sini ışık hasarı olarak geri yansıtan bir ok ateşler.",
+        "branch": "Delay",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "lc_stasis_shot"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "reflection": "50%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_chronal_detonation",
+        "name_en": "Chronal Detonation",
+        "name_tr": "Zamansal Patlama",
+        "description_en": "Detonate all your delayed effects on targets within 30m immediately, amplifying their total damage by 30%.",
+        "description_tr": "30m içindeki hedeflerde bulunan tüm gecikmeli etkilerinizi anında patlatarak toplam hasarlarını %30 artırır.",
+        "branch": "Delay",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 790,
+        "prerequisites": [
+          "lc_hourglass_trap"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage_amp": "30%",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "lc_doomsday_clock",
+        "name_en": "Doomsday Clock",
+        "name_tr": "Kıyamet Saati",
+        "description_en": "Ultimate. Place a mark on a target. After 4 turns, an orbital strike hits them for 20d12 damage and stuns for 2 turns. Resets cooldown on kill.",
+        "description_tr": "Ulti. Hedefe bir işaret yerleştirir. 4 tur sonra, yörüngesel bir vuruş 20d12 hasar verir ve 2 tur sersemletir. Öldürürse bekleme süresi sıfırlanır.",
+        "branch": "Delay",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "lc_inevitable_end",
+          "lc_chronal_detonation"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "20d12",
+          "stun": "2 turns",
+          "delay": "4 turns"
+        }
+      },
+      {
+        "spell_key": "lc_hunter_mark",
+        "name_en": "Hunter's Mark",
+        "name_tr": "Avcı İşareti",
+        "description_en": "Mark a target up to 40m away. You gain true sight of them and deal +1d6 damage. Lasts 10 minutes.",
+        "description_tr": "40m'ye kadar bir hedefi işaretler. Onları net olarak görürsünüz ve +1d6 fazladan hasar verirsiniz. 10 dakika sürer.",
+        "branch": "Tracking",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "damage_bonus": "1d6",
+          "range": "40m",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "lc_blood_scent",
+        "name_en": "Blood Scent",
+        "name_tr": "Kan Kokusu",
+        "description_en": "Passive. Gain +5m movement speed when moving towards enemies with less than 50% HP.",
+        "description_tr": "Pasif. %50 HP'nin altındaki düşmanlara doğru hareket ederken +5m hareket hızı kazanırsınız.",
+        "branch": "Tracking",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "🐾",
+        "effects": {
+          "speed_bonus": "5m",
+          "condition": "Enemy <50% HP"
+        }
+      },
+      {
+        "spell_key": "lc_revealing_flare",
+        "name_en": "Revealing Flare",
+        "name_tr": "Açığa Çıkaran İşaret Fişeği",
+        "description_en": "Fire a flare illuminating a 20m radius, revealing stealthed enemies and reducing their evasion by 10% for 3 turns.",
+        "description_tr": "20m yarıçapı aydınlatan bir işaret fişeği ateşleyerek gizlenmiş düşmanları açığa çıkarır ve 3 tur boyunca kaçınmalarını %10 azaltır.",
+        "branch": "Tracking",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [],
+        "icon": "🎆",
+        "effects": {
+          "radius": "20m",
+          "evasion_reduction": "10%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_relentless_pursuit",
+        "name_en": "Relentless Pursuit",
+        "name_tr": "Amansız Takip",
+        "description_en": "Dash 10m towards a marked target. Your next attack ignores 20% of their armor.",
+        "description_tr": "İşaretli bir hedefe doğru 10m atılın. Bir sonraki saldırınız onların zırhının %20'sini yok sayar.",
+        "branch": "Tracking",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "lc_hunter_mark"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "dash": "10m",
+          "armor_pen": "20%"
+        }
+      },
+      {
+        "spell_key": "lc_sniper_focus",
+        "name_en": "Sniper's Focus",
+        "name_tr": "Keskin Nişancı Odaklanması",
+        "description_en": "Increase your range against marked targets by 20m. Attacks against them cannot suffer disadvantage.",
+        "description_tr": "İşaretli hedeflere karşı menzilinizi 20m artırır. Onlara yapılan saldırılar dezavantaj alamaz.",
+        "branch": "Tracking",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 240,
+        "prerequisites": [
+          "lc_hunter_mark"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "range_bonus": "20m"
+        }
+      },
+      {
+        "spell_key": "lc_crippling_tracker",
+        "name_en": "Crippling Tracker",
+        "name_tr": "Sakatlayan Takipçi",
+        "description_en": "Hitting a fleeing enemy reduces their movement speed by 50% for 2 turns and deals +2d8 physical damage.",
+        "description_tr": "Kaçan bir düşmanı vurmak, 2 tur boyunca hareket hızlarını %50 azaltır ve +2d8 fiziksel hasar verir.",
+        "branch": "Tracking",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "lc_blood_scent"
+        ],
+        "icon": "🦿",
+        "effects": {
+          "slow": "50%",
+          "damage": "2d8",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_no_escape",
+        "name_en": "No Escape",
+        "name_tr": "Kaçış Yok",
+        "description_en": "Passively track enemies that damaged you in the last 24 hours. Gain +10m speed when following their trail.",
+        "description_tr": "Son 24 saat içinde size hasar veren düşmanları pasif olarak takip edin. İzlerini sürerken +10m hız kazanın.",
+        "branch": "Tracking",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "lc_relentless_pursuit"
+        ],
+        "icon": "👣",
+        "effects": {
+          "speed_bonus": "10m"
+        }
+      },
+      {
+        "spell_key": "lc_piercing_gaze",
+        "name_en": "Piercing Gaze",
+        "name_tr": "Delici Bakış",
+        "description_en": "Your attacks against marked targets can pass through walls up to 1m thick, dealing 80% damage.",
+        "description_tr": "İşaretli hedeflere karşı saldırılarınız 1m kalınlığa kadar duvarlardan geçebilir ve %80 hasar verir.",
+        "branch": "Tracking",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "lc_sniper_focus"
+        ],
+        "icon": "🔭",
+        "effects": {
+          "wall_pen": "1m",
+          "damage_mod": "80%"
+        }
+      },
+      {
+        "spell_key": "lc_tether_shot",
+        "name_en": "Tether Shot",
+        "name_tr": "Bağlayan Atış",
+        "description_en": "Attach a tether for 3 turns. If the target moves more than 15m from the impact point, they are pulled back and take 6d8 damage.",
+        "description_tr": "3 turluğuna bir bağ takar. Hedef çarpma noktasından 15m'den fazla uzaklaşırsa, geri çekilir ve 6d8 hasar alır.",
+        "branch": "Tracking",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "lc_crippling_tracker"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "damage": "6d8",
+          "pull_radius": "15m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_omnipresent_hunter",
+        "name_en": "Omnipresent Hunter",
+        "name_tr": "Her Yerde Olan Avcı",
+        "description_en": "Teleport up to 30m to a location where you have a direct line of sight to your marked target.",
+        "description_tr": "İşaretli hedefinize doğrudan görüş alanınız olan 30m içindeki bir konuma ışınlanın.",
+        "branch": "Tracking",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "lc_no_escape"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "teleport": "30m"
+        }
+      },
+      {
+        "spell_key": "lc_death_warrant",
+        "name_en": "Death Warrant",
+        "name_tr": "Ölüm Fermanı",
+        "description_en": "Your mark now reduces the target's healing received by 100% and reveals their exact HP and weaknesses to your party.",
+        "description_tr": "İşaretiniz artık hedefin aldığı iyileşmeyi %100 azaltır ve onların tam HP'sini ve zayıflıklarını grubunuza gösterir.",
+        "branch": "Tracking",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 720,
+        "prerequisites": [
+          "lc_piercing_gaze"
+        ],
+        "icon": "📜",
+        "effects": {
+          "anti_heal": "100%",
+          "reveal": "Weaknesses & HP"
+        }
+      },
+      {
+        "spell_key": "lc_shadow_hound",
+        "name_en": "Shadow Hound",
+        "name_tr": "Gölge Tazısı",
+        "description_en": "Summon a spectral hound that chases a marked target, dealing 4d10 damage per turn and revealing them across the map.",
+        "description_tr": "İşaretli bir hedefi kovalayan, tur başına 4d10 hasar veren ve onları haritada açığa çıkaran hayalet bir tazı çağırın.",
+        "branch": "Tracking",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 800,
+        "prerequisites": [
+          "lc_tether_shot"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "damage": "4d10/turn",
+          "reveal": "Global"
+        }
+      },
+      {
+        "spell_key": "lc_inescapable_hunt",
+        "name_en": "Inescapable Hunt",
+        "name_tr": "Kaçınılmaz Av",
+        "description_en": "Ultimate. Mark all enemies within 100m. See through obstacles. For 3 turns, arrows automatically hit marked targets for +50% damage.",
+        "description_tr": "Ulti. 100m içindeki tüm düşmanları işaretler. Engellerin arkasını görürsünüz. 3 tur boyunca oklar işaretli hedefleri otomatik olarak bulur ve +%50 hasar verir.",
+        "branch": "Tracking",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "lc_omnipresent_hunter",
+          "lc_shadow_hound"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "radius": "100m",
+          "damage_bonus": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_coup_de_grace",
+        "name_en": "Coup de Grace",
+        "name_tr": "Merhamet Vuruşu",
+        "description_en": "Deal 3d6 damage. If the target is below 30% HP, deal an additional 2d6 damage.",
+        "description_tr": "3d6 hasar verir. Hedefin HP'si %30'un altındaysa, ek olarak 2d6 hasar verir.",
+        "branch": "Execute",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3d6",
+          "bonus_damage": "2d6"
+        }
+      },
+      {
+        "spell_key": "lc_merciless_aim",
+        "name_en": "Merciless Aim",
+        "name_tr": "Acımasız Nişan",
+        "description_en": "Your critical strike range increases by 1 (e.g., 19-20) against enemies below 50% HP.",
+        "description_tr": "HP'si %50'nin altındaki düşmanlara karşı kritik vuruş aralığınız 1 artar (örneğin 19-20).",
+        "branch": "Execute",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 85,
+        "prerequisites": [],
+        "icon": "🏹",
+        "effects": {
+          "crit_range": "+1"
+        }
+      },
+      {
+        "spell_key": "lc_bleeding_edge",
+        "name_en": "Bleeding Edge",
+        "name_tr": "Kanayan Kenar",
+        "description_en": "Attacks apply Bleed. When an enemy drops below 20% HP, all Bleed stacks instantly deal their remaining damage.",
+        "description_tr": "Saldırılar Kanama uygular. Bir düşman %20 HP'nin altına düştüğünde, tüm Kanama yükleri kalan hasarlarını anında verir.",
+        "branch": "Execute",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "execute_trigger": "20% HP",
+          "effect": "Pop all bleeds"
+        }
+      },
+      {
+        "spell_key": "lc_fatal_draw",
+        "name_en": "Fatal Draw",
+        "name_tr": "Ölümcül Çekiş",
+        "description_en": "Deal 4d8 damage. If this reduces the target to 0 HP, you immediately regain an action point.",
+        "description_tr": "4d8 hasar verir. Bu, hedefi 0 HP'ye düşürürse, anında bir eylem puanı geri kazanırsınız.",
+        "branch": "Execute",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 180,
+        "prerequisites": [
+          "lc_coup_de_grace"
+        ],
+        "icon": "🃏",
+        "effects": {
+          "damage": "4d8",
+          "on_kill": "+1 Action Point"
+        }
+      },
+      {
+        "spell_key": "lc_cull_the_weak",
+        "name_en": "Cull the Weak",
+        "name_tr": "Zayıfları Ayıkla",
+        "description_en": "Deal 10% more damage for every 10% HP the target is missing.",
+        "description_tr": "Hedefin eksik olan her %10 HP'si için %10 daha fazla hasar verir.",
+        "branch": "Execute",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 220,
+        "prerequisites": [
+          "lc_merciless_aim"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage_scaling": "10% per 10% missing HP"
+        }
+      },
+      {
+        "spell_key": "lc_heartseeker_arrow",
+        "name_en": "Heartseeker Arrow",
+        "name_tr": "Kalp Arayan Ok",
+        "description_en": "Fires an arrow dealing 5d6 damage. If the target falls below 15% HP within 3 turns, they instantly die (bosses take 10d10).",
+        "description_tr": "5d6 hasar veren bir ok ateşler. Hedef 3 tur içinde %15 HP'nin altına düşerse anında ölür (patronlar 10d10 alır).",
+        "branch": "Execute",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 260,
+        "prerequisites": [
+          "lc_bleeding_edge"
+        ],
+        "icon": "💘",
+        "effects": {
+          "damage": "5d6",
+          "execute_threshold": "15%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_executioner_stance",
+        "name_en": "Executioner's Stance",
+        "name_tr": "Cellat Duruşu",
+        "description_en": "Enter a stance for 3 turns. Your attacks ignore shields and barriers if the target is below 40% HP.",
+        "description_tr": "3 turluğuna bir duruşa geçin. Hedefin HP'si %40'ın altındaysa saldırılarınız kalkanları ve bariyerleri yok sayar.",
+        "branch": "Execute",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 360,
+        "prerequisites": [
+          "lc_fatal_draw"
+        ],
+        "icon": "🧍",
+        "effects": {
+          "duration": "3 turns",
+          "condition": "Target <40% HP"
+        }
+      },
+      {
+        "spell_key": "lc_death_spiral",
+        "name_en": "Death Spiral",
+        "name_tr": "Ölüm Sarmalı",
+        "description_en": "Fire 3 rapid shots dealing 2d8 damage each. Each subsequent shot deals +25% damage if the target's HP is decreasing.",
+        "description_tr": "Her biri 2d8 hasar veren 3 hızlı atış yapın. Hedefin HP'si azalıyorsa, sonraki her atış +%25 hasar verir.",
+        "branch": "Execute",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "lc_cull_the_weak"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3x 2d8",
+          "scaling": "+25% per hit"
+        }
+      },
+      {
+        "spell_key": "lc_guillotine_shot",
+        "name_en": "Guillotine Shot",
+        "name_tr": "Giyotin Atışı",
+        "description_en": "Deals 8d8 physical damage. The damage dice become d12s if the target is below 50% HP.",
+        "description_tr": "8d8 fiziksel hasar verir. Hedef %50 HP'nin altındaysa hasar zarları d12'ye dönüşür.",
+        "branch": "Execute",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "lc_heartseeker_arrow"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "8d8 or 8d12"
+        }
+      },
+      {
+        "spell_key": "lc_reaper_toll",
+        "name_en": "Reaper's Toll",
+        "name_tr": "Azrail'in Bedeli",
+        "description_en": "Mark a threshold of 25% HP (40% for minions). Your attacks hitting them below this threshold are guaranteed critical hits.",
+        "description_tr": "%25 HP'lik bir eşik işaretler (minyonlar için %40). Bu eşiğin altındayken onlara vuran saldırılarınız kesin kritik vuruş olur.",
+        "branch": "Execute",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 640,
+        "prerequisites": [
+          "lc_executioner_stance"
+        ],
+        "icon": "🪙",
+        "effects": {
+          "threshold": "25% or 40%"
+        }
+      },
+      {
+        "spell_key": "lc_final_breath",
+        "name_en": "Final Breath",
+        "name_tr": "Son Nefes",
+        "description_en": "Silences a target below 30% HP for 2 turns and deals 10d10 necrotic damage.",
+        "description_tr": "HP'si %30'un altındaki bir hedefi 2 tur susturur ve 10d10 nekrotik hasar verir.",
+        "branch": "Execute",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 730,
+        "prerequisites": [
+          "lc_death_spiral"
+        ],
+        "icon": "🫁",
+        "effects": {
+          "damage": "10d10",
+          "silence": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_soul_piercer",
+        "name_en": "Soul Piercer",
+        "name_tr": "Ruh Delici",
+        "description_en": "Bypass armor and resistances, dealing true damage equal to 20% of the target's missing health.",
+        "description_tr": "Zırhı ve dirençleri yok sayarak, hedefin eksik canının %20'sine eşit gerçek hasar verir.",
+        "branch": "Execute",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 780,
+        "prerequisites": [
+          "lc_guillotine_shot"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "20% missing HP"
+        }
+      },
+      {
+        "spell_key": "lc_judgement_day",
+        "name_en": "Judgement Day",
+        "name_tr": "Kıyamet Günü",
+        "description_en": "Ultimate. Deals 20d10 damage. Executes targets below 30% HP instantly. On execute, heal for 50% max HP.",
+        "description_tr": "Ulti. 20d10 hasar verir. %30 HP'nin altındaki hedefleri anında infaz eder. İnfaz durumunda, maksimum HP'nin %50'si kadar iyileşin.",
+        "branch": "Execute",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "lc_reaper_toll",
+          "lc_soul_piercer"
+        ],
+        "icon": "🪬",
+        "effects": {
+          "damage": "20d10",
+          "execute_threshold": "30%",
+          "healing": "50% max HP"
+        }
+      },
+      {
+        "spell_key": "lc_marked_for_death",
+        "name_en": "Marked for Death",
+        "name_tr": "Ölüm İçin İşaretli",
+        "description_en": "Delayed mark. After 2 turns, target takes 4d8 damage + 20% of their missing HP.",
+        "description_tr": "Gecikmeli işaret. 2 tur sonra hedef 4d8 hasar + eksik HP'lerinin %20'si kadar hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "lc_delayed_shot",
+          "lc_coup_de_grace"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "4d8 + 20% missing HP",
+          "delay": "2 turns"
+        }
+      },
+      {
+        "spell_key": "lc_stalker_patience",
+        "name_en": "Stalker's Patience",
+        "name_tr": "İz Sürücünün Sabrı",
+        "description_en": "While stationary tracking a mark, gain invisibility. First shot from stealth deals +4d6 damage.",
+        "description_tr": "Bir işareti sabit durarak takip ederken görünmezlik kazanın. Gizlilikten yapılan ilk atış +4d6 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "lc_patience",
+          "lc_hunter_mark"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "damage_bonus": "4d6",
+          "stealth": "Yes"
+        }
+      },
+      {
+        "spell_key": "lc_bloodhound_bomb",
+        "name_en": "Bloodhound Bomb",
+        "name_tr": "Av Köpeği Bombası",
+        "description_en": "Homing explosive arrow chases mark up to 30m. Explodes after 1 turn for 8d6 fire damage.",
+        "description_tr": "Güzeümlü patlayıcı ok, işareti 30m'ye kadar kovalar. 1 tur sonra patlayarak 8d6 ateş hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "lc_revealing_flare",
+          "lc_time_bomb_arrow"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "8d6",
+          "delay": "1 turn",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "lc_vulture_instinct",
+        "name_en": "Vulture's Instinct",
+        "name_tr": "Akbaba İçgüdüsü",
+        "description_en": "When a tracked enemy falls below 20% HP, gain a free dash towards them and a free attack.",
+        "description_tr": "Takip edilen bir düşman %20 HP'nin altına düştüğünde, onlara doğru ücretsiz bir atılma ve ücretsiz bir saldırı kazanın.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "lc_relentless_pursuit",
+          "lc_heartseeker_arrow"
+        ],
+        "icon": "🪶",
+        "effects": {
+          "dash": "Free",
+          "attack": "Free"
+        }
+      },
+      {
+        "spell_key": "lc_delayed_execution",
+        "name_en": "Delayed Execution",
+        "name_tr": "Gecikmeli İnfaz",
+        "description_en": "Record damage taken by target for 3 turns. At the end, they take 30% of recorded damage as an execute.",
+        "description_tr": "Hedefin aldığı hasarı 3 tur boyunca kaydeder. Sonunda, kaydedilen hasarın %30'unu infaz olarak alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 660,
+        "prerequisites": [
+          "lc_deferred_pain",
+          "lc_guillotine_shot"
+        ],
+        "icon": "🎬",
+        "effects": {
+          "damage": "30% recorded",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "lc_predator_countdown",
+        "name_en": "Predator's Countdown",
+        "name_tr": "Yırtıcının Geri Sayımı",
+        "description_en": "Every turn you track a mark without attacking, your execute threshold against them increases by 5% (max 25%).",
+        "description_tr": "Saldırmadan bir işareti takip ettiğiniz her tur, onlara karşı infaz eşiğiniz %5 artar (maksimum %25).",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 750,
+        "prerequisites": [
+          "lc_sniper_focus",
+          "lc_tactical_pause",
+          "lc_cull_the_weak"
+        ],
+        "icon": "🔢",
+        "effects": {
+          "threshold_increase": "5%/turn",
+          "max": "25%"
+        }
+      },
+      {
+        "spell_key": "lc_chaser_climax",
+        "name_en": "Chaser's Climax",
+        "name_tr": "Takipçinin Zirvesi",
+        "description_en": "Hitting a mark with a delayed spell reduces delay by 1 turn and explosion tracks other marked enemies within 20m.",
+        "description_tr": "Gecikmeli bir büyüyle işarete vurmak gecikmeyi 1 tur azaltır ve patlama 20m içindeki diğer işaretli düşmanları takip eder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1050,
+        "prerequisites": [
+          "lc_chronal_detonation",
+          "lc_death_warrant"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "delay_reduction": "1 turn",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "lc_inevitable_cull",
+        "name_en": "Inevitable Cull",
+        "name_tr": "Kaçınılmaz Kıyım",
+        "description_en": "Teleport behind a mark below 50% HP. Fire a point-blank shot for 15d10 true damage. Range: 50m.",
+        "description_tr": "%50 HP'nin altındaki bir işaretin arkasına ışınlanın. 15d10 gerçek hasar için yakın mesafeden ateş edin. Menzil: 50m.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "lc_omnipresent_hunter",
+          "lc_soul_piercer"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "15d10",
+          "range": "50m"
+        }
+      },
+      {
+        "spell_key": "lc_patience_of_the_reaper",
+        "name_en": "Patience of the Reaper",
+        "name_tr": "Azrail'in Sabrı",
+        "description_en": "Meditate for 2 turns (-50% damage taken). Next attack deals 3x damage and executes non-bosses below 40% HP.",
+        "description_tr": "2 tur meditasyon yapın (alınan hasar -%50). Sonraki saldırı 3 kat hasar verir ve %40 HP altı patron olmayanları infaz eder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "lc_inevitable_end",
+          "lc_reaper_toll"
+        ],
+        "icon": "📿",
+        "effects": {
+          "damage_mitigation": "50%",
+          "damage_multiplier": "3x",
+          "execute_threshold": "40%"
+        }
+      },
+      {
+        "spell_key": "lc_master_of_the_hunt",
+        "name_en": "Master of the Hunt",
+        "name_tr": "Avın Ustası",
+        "description_en": "Delayed effects auto-apply mark. Marked targets take double damage from execute abilities.",
+        "description_tr": "Gecikmeli etkiler otomatik olarak işaret uygular. İşaretli hedefler infaz yeteneklerinden iki kat hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "lc_chronal_detonation",
+          "lc_shadow_hound",
+          "lc_soul_piercer"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage_amp": "2x from executes"
+        }
+      },
+      {
+        "spell_key": "lc_the_late_chaser",
+        "name_en": "The Late Chaser",
+        "name_tr": "Geç Kalan Takipçi",
+        "description_en": "Grand Ultimate. Mark all enemies for 3 turns. Moving deals 1d10 damage/step. Falling below 30% HP triggers a 30d12 true damage orbital execute.",
+        "description_tr": "Görkemli Ulti. Tüm düşmanları 3 tur işaretler. Hareket etmek adım başına 1d10 hasar verir. %30 HP'nin altına düşmek, 30d12 gerçek hasarlı yörüngesel bir infazı tetikler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "lc_doomsday_clock",
+          "lc_inescapable_hunt",
+          "lc_judgement_day"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "1d10/step",
+          "execute_damage": "30d12",
+          "duration": "3 turns"
+        }
+      }
+    ]
+  }
+]

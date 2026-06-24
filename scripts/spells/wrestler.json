@@ -1,0 +1,988 @@
+[
+  {
+    "subclass_key": "wrestler",
+    "tree_name_en": "Wrestler's Might",
+    "tree_name_tr": "Güreşçinin Kudreti",
+    "tree_desc_en": "Master the art of close-quarters combat through devastating grapples, earth-shattering throws, and lethal submissions.",
+    "tree_desc_tr": "Yıkıcı kavramalar, yeri sarsan fırlatmalar ve ölümcül pes ettirmeler aracılığıyla yakın dövüş sanatında ustalaş.",
+    "branches": [
+      "Grapple",
+      "Throw",
+      "Submission",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "wr_iron_grip",
+        "name_en": "Iron Grip",
+        "name_tr": "Demir Kavrama",
+        "description_en": "Grip a target within 2m, reducing their movement speed to 0. Target has disadvantage on their attack rolls.",
+        "description_tr": "2m mesafedeki bir hedefi kavrayarak hareket hızını 0'a düşürürsün. Hedef, saldırı zarlarında dezavantaja sahip olur.",
+        "branch": "Grapple",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🦾",
+        "effects": {
+          "range": "2m",
+          "movement_speed": "0",
+          "debuff": "Disadvantage on attacks"
+        }
+      },
+      {
+        "spell_key": "wr_bear_hug",
+        "name_en": "Bear Hug",
+        "name_tr": "Ayı Kapanı",
+        "description_en": "Squeeze the target, dealing 2d6 bludgeoning damage per turn. Lasts 3 turns. Target speed is 0.",
+        "description_tr": "Hedefi sıkarak tur başına 2d6 ezici hasar verirsin. 3 tur sürer. Hedefin hızı 0'dır.",
+        "branch": "Grapple",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "wr_iron_grip"
+        ],
+        "icon": "🐻",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "duration": "3 turns",
+          "speed": "0m"
+        }
+      },
+      {
+        "spell_key": "wr_dash_grab",
+        "name_en": "Dash Grab",
+        "name_tr": "Atılıp Yakalama",
+        "description_en": "Dash up to 10m and immediately grapple a target.",
+        "description_tr": "10m'ye kadar atıl ve anında bir hedefi kavra.",
+        "branch": "Grapple",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wr_iron_grip"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "dash_range": "10m",
+          "condition": "Grappled"
+        }
+      },
+      {
+        "spell_key": "wr_chokehold",
+        "name_en": "Chokehold",
+        "name_tr": "Boğma Mandalı",
+        "description_en": "Deal 3d6 bludgeoning damage and silence the target. They cannot cast verbal spells while grappled.",
+        "description_tr": "3d6 ezici hasar ver ve hedefi sustur. Kavrandıkları sürece sözlü büyü yapamazlar.",
+        "branch": "Grapple",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wr_bear_hug"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "condition": "Silenced",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "wr_unbreakable_pin",
+        "name_en": "Unbreakable Pin",
+        "name_tr": "Kırılmaz Tuş",
+        "description_en": "Pin a prone target to the ground. They cannot move or stand up unless they pass a massive Strength check.",
+        "description_tr": "Yere serilmiş bir hedefi yere çivile. Çok zor bir Güç zarını geçmedikçe hareket edemez veya ayağa kalkamazlar.",
+        "branch": "Grapple",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wr_chokehold"
+        ],
+        "icon": "📌",
+        "effects": {
+          "condition": "Pinned (Prone + Grappled)",
+          "escape_dc": "Strength save with Disadvantage"
+        }
+      },
+      {
+        "spell_key": "wr_giant_swing",
+        "name_en": "Giant Swing",
+        "name_tr": "Dev Savurma",
+        "description_en": "Spin a grappled target, hitting other enemies within 3m for 4d6 damage, then throw them up to 5m.",
+        "description_tr": "Kavranmış bir hedefi çevirerek 3m içindeki diğer düşmanlara 4d6 hasar ver, ardından onu 5m uzağa fırlat.",
+        "branch": "Grapple",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wr_unbreakable_pin",
+          "wr_dash_grab"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "aoe_damage": "4d6 bludgeoning",
+          "aoe_range": "3m radius",
+          "throw_distance": "5m"
+        }
+      },
+      {
+        "spell_key": "wr_ground_pound",
+        "name_en": "Ground and Pound",
+        "name_tr": "Yere Serme ve Yumruklama",
+        "description_en": "Rain blows on a pinned target for 5d6 damage. Stuns target for 1 turn.",
+        "description_tr": "Yere çivilenmiş hedefin üzerine yumruk yağdırarak 5d6 hasar ver. Hedefi 1 tur sersemletir.",
+        "branch": "Grapple",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "wr_unbreakable_pin"
+        ],
+        "icon": "🥊",
+        "effects": {
+          "damage": "5d6 bludgeoning",
+          "condition": "Stunned",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wr_titans_grasp",
+        "name_en": "Titan's Grasp",
+        "name_tr": "Titan'ın Kavrayışı",
+        "description_en": "You can now grapple creatures up to two size categories larger than you.",
+        "description_tr": "Artık senden iki boyut kategorisine kadar daha büyük yaratıkları kavrayabilirsin.",
+        "branch": "Grapple",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "wr_giant_swing"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "passive": "Grapple targets up to 2 size categories larger"
+        }
+      },
+      {
+        "spell_key": "wr_immobilizing_lock",
+        "name_en": "Immobilizing Lock",
+        "name_tr": "Hareketsiz Bırakan Kilit",
+        "description_en": "Target takes 6d8 damage and is completely restrained. Cannot take any physical actions.",
+        "description_tr": "Hedef 6d8 hasar alır ve tamamen kısıtlanır. Hiçbir fiziksel eylem yapamaz.",
+        "branch": "Grapple",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wr_ground_pound"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "condition": "Restrained"
+        }
+      },
+      {
+        "spell_key": "wr_spinecrusher",
+        "name_en": "Spinecrusher",
+        "name_tr": "Omurga Kıran",
+        "description_en": "A brutal grapple move. Deals 8d8 damage, and the target's movement speed is halved permanently until healed.",
+        "description_tr": "Acımasız bir kavrama hareketi. 8d8 hasar verir ve iyileştirilene kadar hedefin hareket hızı kalıcı olarak yarıya iner.",
+        "branch": "Grapple",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "wr_titans_grasp"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "damage": "8d8 bludgeoning",
+          "debuff": "Movement speed halved permanently"
+        }
+      },
+      {
+        "spell_key": "wr_grapplers_instinct",
+        "name_en": "Grappler's Instinct",
+        "name_tr": "Güreşçi İçgüdüsü",
+        "description_en": "Passive. Gain +5 to all grapple checks and +10m movement speed when moving towards an enemy.",
+        "description_tr": "Pasif. Tüm kavrama zarlarına +5 ve bir düşmana doğru hareket ederken +10m hareket hızı kazanırsın.",
+        "branch": "Grapple",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "wr_immobilizing_lock"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "buff": "+5 to Grapple checks",
+          "movement": "+10m when moving toward enemy"
+        }
+      },
+      {
+        "spell_key": "wr_colossal_restraint",
+        "name_en": "Colossal Restraint",
+        "name_tr": "Devasa Zaptetme",
+        "description_en": "Restrain an entire group by creating a shockwave that roots enemies within 8m.",
+        "description_tr": "8m içindeki düşmanları yere sabitleyen bir şok dalgası yaratarak tüm bir grubu zaptet.",
+        "branch": "Grapple",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "wr_spinecrusher"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "aoe_radius": "8m",
+          "condition": "Rooted"
+        }
+      },
+      {
+        "spell_key": "wr_absolute_control",
+        "name_en": "Absolute Control",
+        "name_tr": "Mutlak Kontrol",
+        "description_en": "The area within 5m of you becomes your domain. Any enemy entering is automatically grappled.",
+        "description_tr": "Senin 5m çevren senin alanın olur. Giren her düşman otomatik olarak kavranır.",
+        "branch": "Grapple",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "wr_colossal_restraint"
+        ],
+        "icon": "🎛️",
+        "effects": {
+          "aura_radius": "5m",
+          "condition": "Auto-Grapple on entry"
+        }
+      },
+      {
+        "spell_key": "wr_black_hole_grip",
+        "name_en": "Black Hole Grip",
+        "name_tr": "Kara Delik Kavrayışı",
+        "description_en": "Ultimate. Grip a target with such force that reality distorts. Deals 20d10 force damage. Target is crushed into a singularity.",
+        "description_tr": "Ulti. Bir hedefi gerçekliği bükecek bir güçle kavra. 20d10 güç hasarı verir. Hedef ezilerek bir tekilliğe dönüşür.",
+        "branch": "Grapple",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "wr_absolute_control",
+          "wr_grapplers_instinct"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "20d10 force",
+          "condition": "Crushed into singularity"
+        }
+      },
+      {
+        "spell_key": "wr_body_slam",
+        "name_en": "Body Slam",
+        "name_tr": "Gövde Savurma",
+        "description_en": "Lift and slam a target within 2m. Deals 3d6 bludgeoning damage and knocks them prone.",
+        "description_tr": "2m içindeki bir hedefi kaldırıp yere çarp. 3d6 ezici hasar verir ve onları yere serer.",
+        "branch": "Throw",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "condition": "Prone",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "wr_hip_toss",
+        "name_en": "Hip Toss",
+        "name_tr": "Kalça Fırlatması",
+        "description_en": "Throw the target up to 4m away. They take 2d6 damage upon landing.",
+        "description_tr": "Hedefi 4m uzağa fırlat. Yere düştüklerinde 2d6 hasar alırlar.",
+        "branch": "Throw",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [
+          "wr_body_slam"
+        ],
+        "icon": "↪️",
+        "effects": {
+          "throw_distance": "4m",
+          "damage": "2d6 bludgeoning"
+        }
+      },
+      {
+        "spell_key": "wr_backdrop",
+        "name_en": "Backdrop",
+        "name_tr": "Geriye Düşürme",
+        "description_en": "Drop the target directly behind you. Deals 4d6 damage and bypasses armor.",
+        "description_tr": "Hedefi doğrudan arkana düşür. 4d6 hasar verir ve zırhı yok sayar.",
+        "branch": "Throw",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wr_hip_toss"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "damage": "4d6 bludgeoning (ignores armor)",
+          "position": "Directly behind caster"
+        }
+      },
+      {
+        "spell_key": "wr_suplex",
+        "name_en": "Suplex",
+        "name_tr": "Supleks",
+        "description_en": "A classic backward throw. Deals 5d6 damage and stuns the target for 1 turn.",
+        "description_tr": "Klasik bir geriye fırlatma. 5d6 hasar verir ve hedefi 1 tur sersemletir.",
+        "branch": "Throw",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wr_backdrop"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage": "5d6 bludgeoning",
+          "condition": "Stunned",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wr_powerbomb",
+        "name_en": "Powerbomb",
+        "name_tr": "Güç Bombası",
+        "description_en": "Lift the target high and smash them down. Deals 6d6 damage in a 2m radius around the target.",
+        "description_tr": "Hedefi yükseğe kaldırıp yere vur. Hedefin etrafındaki 2m'lik bir alanda 6d6 hasar verir.",
+        "branch": "Throw",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wr_suplex"
+        ],
+        "icon": "💣",
+        "effects": {
+          "aoe_damage": "6d6 bludgeoning",
+          "aoe_radius": "2m"
+        }
+      },
+      {
+        "spell_key": "wr_tornado_throw",
+        "name_en": "Tornado Throw",
+        "name_tr": "Kasırga Fırlatışı",
+        "description_en": "Spin like a tornado and throw the target up to 10m. They deal 4d6 damage to anyone they hit.",
+        "description_tr": "Bir kasırga gibi dön ve hedefi 10m uzağa fırlat. Çarptıkları herkese 4d6 hasar verirler.",
+        "branch": "Throw",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wr_powerbomb"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "throw_distance": "10m",
+          "collision_damage": "4d6 bludgeoning"
+        }
+      },
+      {
+        "spell_key": "wr_aerial_crash",
+        "name_en": "Aerial Crash",
+        "name_tr": "Havadan Çarpışma",
+        "description_en": "Leap 8m into the air with the target and crash down. Deals 8d6 damage to the target and 4d6 to enemies within 4m.",
+        "description_tr": "Hedefle birlikte havaya 8m sıçra ve yere çakıl. Hedefe 8d6, 4m içindeki düşmanlara 4d6 hasar verir.",
+        "branch": "Throw",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "wr_tornado_throw"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "leap_height": "8m",
+          "target_damage": "8d6 bludgeoning",
+          "aoe_damage": "4d6 bludgeoning",
+          "aoe_radius": "4m"
+        }
+      },
+      {
+        "spell_key": "wr_avalanche_slam",
+        "name_en": "Avalanche Slam",
+        "name_tr": "Çığ Çarpması",
+        "description_en": "Slam the target so hard it creates a 6m cone shockwave dealing 5d8 damage.",
+        "description_tr": "Hedefi o kadar sert çarp ki, 6m'lik bir koni şeklinde 5d8 hasar veren bir şok dalgası yaratır.",
+        "branch": "Throw",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "wr_powerbomb"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "aoe_damage": "5d8 bludgeoning",
+          "cone_range": "6m"
+        }
+      },
+      {
+        "spell_key": "wr_german_suplex",
+        "name_en": "German Suplex",
+        "name_tr": "Alman Supleksi",
+        "description_en": "A devastating backward throw. Deals 7d8 damage and causes 2d4 bleeding damage per turn.",
+        "description_tr": "Yıkıcı bir geriye fırlatma. 7d8 hasar verir ve tur başına 2d4 kanama hasarına neden olur.",
+        "branch": "Throw",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "wr_avalanche_slam"
+        ],
+        "icon": "🤼",
+        "effects": {
+          "damage": "7d8 bludgeoning",
+          "bleed": "2d4 damage per turn"
+        }
+      },
+      {
+        "spell_key": "wr_meteor_slam",
+        "name_en": "Meteor Slam",
+        "name_tr": "Meteor Çarpması",
+        "description_en": "Jump 15m and crash down like a meteor. Deals 10d8 damage to the target and 6d8 in a 6m radius.",
+        "description_tr": "15m sıçra ve bir meteor gibi yere çakıl. Hedefe 10d8, 6m yarıçapa ise 6d8 hasar verir.",
+        "branch": "Throw",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "wr_aerial_crash"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "leap_distance": "15m",
+          "target_damage": "10d8 bludgeoning",
+          "aoe_damage": "6d8 bludgeoning",
+          "aoe_radius": "6m"
+        }
+      },
+      {
+        "spell_key": "wr_living_projectile",
+        "name_en": "Living Projectile",
+        "name_tr": "Canlı Mermi",
+        "description_en": "Throw an enemy up to 15m like a weapon. Deals 8d8 damage to both the thrown enemy and the target they hit.",
+        "description_tr": "Bir düşmanı bir silah gibi 15m uzağa fırlat. Hem fırlatılan düşmana hem de çarptığı hedefe 8d8 hasar verir.",
+        "branch": "Throw",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 780,
+        "prerequisites": [
+          "wr_german_suplex"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "throw_distance": "15m",
+          "damage": "8d8 bludgeoning to both targets"
+        }
+      },
+      {
+        "spell_key": "wr_earthshatter_drop",
+        "name_en": "Earthshatter Drop",
+        "name_tr": "Yeri Sarsan Düşüş",
+        "description_en": "Slam the target, causing the ground to crack. Deals 12d8 damage and makes a 10m radius difficult terrain.",
+        "description_tr": "Hedefi yere çarparak yerin çatlamasını sağla. 12d8 hasar verir ve 10m'lik alanı zorlu arazi yapar.",
+        "branch": "Throw",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 880,
+        "prerequisites": [
+          "wr_meteor_slam"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "12d8 bludgeoning",
+          "terrain": "Difficult terrain in 10m radius"
+        }
+      },
+      {
+        "spell_key": "wr_gravity_defiance",
+        "name_en": "Gravity Defiance",
+        "name_tr": "Yerçekimine Meydan Okuma",
+        "description_en": "Toss an enemy so high they take 3 turns to fall, taking 15d10 falling damage upon impact.",
+        "description_tr": "Bir düşmanı o kadar yükseğe fırlat ki düşmesi 3 tur sürsün, yere çarptığında 15d10 düşme hasarı alsın.",
+        "branch": "Throw",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "wr_earthshatter_drop"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "falling_delay": "3 turns",
+          "falling_damage": "15d10"
+        }
+      },
+      {
+        "spell_key": "wr_world_breaker_suplex",
+        "name_en": "World Breaker Suplex",
+        "name_tr": "Dünya Yıkan Supleks",
+        "description_en": "Ultimate. A suplex that shatters the earth. Deals 25d10 damage to the target and creates a massive 20m crater, dealing 10d10 to others.",
+        "description_tr": "Ulti. Yeryüzünü parçalayan bir supleks. Hedefe 25d10 hasar verir ve devasa 20m'lik bir krater oluşturarak diğerlerine 10d10 hasar verir.",
+        "branch": "Throw",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "wr_gravity_defiance",
+          "wr_living_projectile"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "target_damage": "25d10 bludgeoning",
+          "aoe_damage": "10d10 bludgeoning",
+          "crater_radius": "20m"
+        }
+      },
+      {
+        "spell_key": "wr_joint_lock",
+        "name_en": "Joint Lock",
+        "name_tr": "Eklem Kilidi",
+        "description_en": "Twist a joint. Deals 1d8 damage and reduces the target's attack rolls by 1d4.",
+        "description_tr": "Bir eklemi bük. 1d8 hasar verir ve hedefin saldırı zarlarını 1d4 düşürür.",
+        "branch": "Submission",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔧",
+        "effects": {
+          "damage": "1d8 bludgeoning",
+          "debuff": "-1d4 to attack rolls"
+        }
+      },
+      {
+        "spell_key": "wr_ankle_breaker",
+        "name_en": "Ankle Breaker",
+        "name_tr": "Ayak Bileği Kıran",
+        "description_en": "Target's movement is reduced by 50% for 3 turns. Deals 2d6 damage.",
+        "description_tr": "Hedefin hareketi 3 tur boyunca %50 azalır. 2d6 hasar verir.",
+        "branch": "Submission",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "wr_joint_lock"
+        ],
+        "icon": "🦶",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "movement": "-50% for 3 turns"
+        }
+      },
+      {
+        "spell_key": "wr_armbar",
+        "name_en": "Armbar",
+        "name_tr": "Kol Kilidi",
+        "description_en": "Lock the target's arm. They drop their weapon and cannot use that arm for 2 turns.",
+        "description_tr": "Hedefin kolunu kilitle. Silahlarını düşürürler ve o kolu 2 tur kullanamazlar.",
+        "branch": "Submission",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 140,
+        "prerequisites": [
+          "wr_ankle_breaker"
+        ],
+        "icon": "💪",
+        "effects": {
+          "condition": "Disarmed (One arm)",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "wr_guillotine_choke",
+        "name_en": "Guillotine Choke",
+        "name_tr": "Giyotin Boğması",
+        "description_en": "Target takes 3d8 damage. If they fail a Constitution save, they fall asleep.",
+        "description_tr": "Hedef 3d8 hasar alır. Eğer bir Bünye zarında başarısız olurlarsa uykuya dalarlar.",
+        "branch": "Submission",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wr_armbar"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "3d8 bludgeoning",
+          "condition": "Sleep on failed Con save"
+        }
+      },
+      {
+        "spell_key": "wr_sleeper_hold",
+        "name_en": "Sleeper Hold",
+        "name_tr": "Uyku Kilidi",
+        "description_en": "Deals 4d6 damage per turn. If maintained for 3 turns, the target falls unconscious.",
+        "description_tr": "Tur başına 4d6 hasar verir. Eğer 3 tur sürdürülürse, hedef bilincini kaybeder.",
+        "branch": "Submission",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wr_guillotine_choke"
+        ],
+        "icon": "😴",
+        "effects": {
+          "damage": "4d6 bludgeoning per turn",
+          "condition": "Unconscious after 3 turns"
+        }
+      },
+      {
+        "spell_key": "wr_pain_inducer",
+        "name_en": "Pain Inducer",
+        "name_tr": "Acı Tetikleyici",
+        "description_en": "Inflict agonizing pain. Target has disadvantage on all saving throws and attacks.",
+        "description_tr": "Izdırap verici bir acı yaşat. Hedef tüm kurtarma ve saldırı zarlarında dezavantaja sahip olur.",
+        "branch": "Submission",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "wr_sleeper_hold"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "debuff": "Disadvantage on saves and attacks"
+        }
+      },
+      {
+        "spell_key": "wr_triangle_choke",
+        "name_en": "Triangle Choke",
+        "name_tr": "Üçgen Kilit",
+        "description_en": "Restrict blood flow. Deals 5d8 damage, and the target is silenced and blinded.",
+        "description_tr": "Kan akışını kısıtla. 5d8 hasar verir ve hedef susturulur ve kör edilir.",
+        "branch": "Submission",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "wr_pain_inducer"
+        ],
+        "icon": "📐",
+        "effects": {
+          "damage": "5d8 bludgeoning",
+          "condition": "Silenced and Blinded"
+        }
+      },
+      {
+        "spell_key": "wr_bone_crusher",
+        "name_en": "Bone Crusher",
+        "name_tr": "Kemik Kıran",
+        "description_en": "Snap bones. Deals 6d8 damage, and the target takes double damage from all physical attacks for 2 turns.",
+        "description_tr": "Kemikleri kır. 6d8 hasar verir ve hedef 2 tur boyunca tüm fiziksel saldırılardan iki kat hasar alır.",
+        "branch": "Submission",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "wr_triangle_choke"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "vulnerability": "Double damage from physical attacks",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "wr_nerve_pinch",
+        "name_en": "Nerve Pinch",
+        "name_tr": "Sinir Sıkıştırması",
+        "description_en": "Target is paralyzed for 1 turn and takes 4d8 psychic damage.",
+        "description_tr": "Hedef 1 tur felç olur ve 4d8 psişik hasar alır.",
+        "branch": "Submission",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "wr_bone_crusher"
+        ],
+        "icon": "🤏",
+        "effects": {
+          "damage": "4d8 psychic",
+          "condition": "Paralyzed",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wr_kimura_lock",
+        "name_en": "Kimura Lock",
+        "name_tr": "Kimura Kilidi",
+        "description_en": "Destroy the target's shoulder. Deals 8d8 damage and permanently disarms one arm until magically healed.",
+        "description_tr": "Hedefin omzunu yok et. 8d8 hasar verir ve sihirle iyileştirilene kadar bir kolu kalıcı olarak silahsız bırakır.",
+        "branch": "Submission",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "wr_nerve_pinch"
+        ],
+        "icon": "🔐",
+        "effects": {
+          "damage": "8d8 bludgeoning",
+          "condition": "Permanently disarms one arm"
+        }
+      },
+      {
+        "spell_key": "wr_paralytic_grip",
+        "name_en": "Paralytic Grip",
+        "name_tr": "Felç Edici Tutuş",
+        "description_en": "A grip that stops the nervous system. Target cannot move, attack, or cast spells for 2 turns.",
+        "description_tr": "Sinir sistemini durduran bir tutuş. Hedef 2 tur boyunca hareket edemez, saldıramaz veya büyü yapamaz.",
+        "branch": "Submission",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "wr_kimura_lock"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "condition": "Cannot move, attack, or cast",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "wr_suffocating_vice",
+        "name_en": "Suffocating Vice",
+        "name_tr": "Boğucu Mengene",
+        "description_en": "Target loses 15% of their maximum HP per turn while held.",
+        "description_tr": "Hedef tutulduğu süre boyunca tur başına maksimum canının %15'ini kaybeder.",
+        "branch": "Submission",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wr_paralytic_grip"
+        ],
+        "icon": "🗜️",
+        "effects": {
+          "damage": "15% max HP per turn"
+        }
+      },
+      {
+        "spell_key": "wr_asphyxiation",
+        "name_en": "Asphyxiation",
+        "name_tr": "Oksijensiz Bırakma",
+        "description_en": "Target begins to suffocate. They drop to 0 HP in 3 turns if the hold is not broken.",
+        "description_tr": "Hedef boğulmaya başlar. Tutuş bozulmazsa 3 tur içinde canı 0'a düşer.",
+        "branch": "Submission",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "wr_suffocating_vice"
+        ],
+        "icon": "🫁",
+        "effects": {
+          "condition": "Drops to 0 HP in 3 turns"
+        }
+      },
+      {
+        "spell_key": "wr_executioners_lock",
+        "name_en": "Executioner's Lock",
+        "name_tr": "Cellat Kilidi",
+        "description_en": "Ultimate. A flawless, lethal submission. Deals 20d10 damage. If the target is below 25% HP, they die instantly.",
+        "description_tr": "Ulti. Kusursuz, ölümcül bir pes ettiriş. 20d10 hasar verir. Eğer hedefin canı %25'in altındaysa anında ölürler.",
+        "branch": "Submission",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "wr_asphyxiation"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "20d10 bludgeoning",
+          "execute": "Insta-kill if under 25% HP"
+        }
+      },
+      {
+        "spell_key": "wr_launching_grab",
+        "name_en": "Launching Grab",
+        "name_tr": "Fırlatan Tutuş",
+        "description_en": "Dash 8m, grab a target, and instantly throw them 8m further.",
+        "description_tr": "8m atıl, bir hedefi kavra ve anında onları 8m daha uzağa fırlat.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wr_dash_grab",
+          "wr_hip_toss"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "dash_range": "8m",
+          "throw_distance": "8m"
+        }
+      },
+      {
+        "spell_key": "wr_crushing_embrace",
+        "name_en": "Crushing Embrace",
+        "name_tr": "Ezen Kucaklaşma",
+        "description_en": "A bear hug that also applies submission debuffs. Deals 4d8 damage and paralyzes the target for 1 turn.",
+        "description_tr": "Aynı zamanda pes ettirme zayıflatmaları uygulayan bir ayı kapanı. 4d8 hasar verir ve hedefi 1 tur felç eder.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 280,
+        "prerequisites": [
+          "wr_bear_hug",
+          "wr_sleeper_hold"
+        ],
+        "icon": "🤗",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "condition": "Paralyzed",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wr_dislocating_slam",
+        "name_en": "Dislocating Slam",
+        "name_tr": "Çıkık Yaratan Çarpma",
+        "description_en": "Slam the target and keep hold of their limb, dislocating it. Deals 6d8 damage and applies armbar effects.",
+        "description_tr": "Hedefi yere çarp ve uzvunu tutmaya devam ederek çıkar. 6d8 hasar verir ve kol kilidi etkilerini uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "wr_powerbomb",
+          "wr_triangle_choke"
+        ],
+        "icon": "🏥",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "condition": "Disarmed (One arm)"
+        }
+      },
+      {
+        "spell_key": "wr_lucha_libre_combo",
+        "name_en": "Lucha Libre Combo",
+        "name_tr": "Lucha Libre Kombosu",
+        "description_en": "A 3-hit combo: Grab, throw into the air, and catch them in a submission upon landing. Deals 10d8 total damage.",
+        "description_tr": "3 vuruşluk bir kombo: Kavra, havaya fırlat ve yere düşerken bir kilitle yakala. Toplam 10d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wr_unbreakable_pin",
+          "wr_suplex",
+          "wr_bone_crusher"
+        ],
+        "icon": "🦸",
+        "effects": {
+          "total_damage": "10d8 bludgeoning",
+          "combo": "Grab -> Air Throw -> Submission"
+        }
+      },
+      {
+        "spell_key": "wr_inescapable_doom",
+        "name_en": "Inescapable Doom",
+        "name_tr": "Kaçınılmaz Kıyamet",
+        "description_en": "Pin the target and apply a lethal choke. Deals 8d8 damage per turn and cannot be broken by physical means.",
+        "description_tr": "Hedefi yere çivile ve ölümcül bir boğma uygula. Tur başına 8d8 hasar verir ve fiziksel yollarla bozulamaz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "wr_ground_pound",
+          "wr_nerve_pinch"
+        ],
+        "icon": "🕷️",
+        "effects": {
+          "damage": "8d8 bludgeoning per turn",
+          "condition": "Unbreakable by physical means"
+        }
+      },
+      {
+        "spell_key": "wr_breakneck_toss",
+        "name_en": "Breakneck Toss",
+        "name_tr": "Boyun Kıran Fırlatma",
+        "description_en": "Throw the target by their neck. Deals 12d8 damage and stuns them for 2 turns.",
+        "description_tr": "Hedefi boynundan tutarak fırlat. 12d8 hasar verir ve 2 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wr_meteor_slam",
+          "wr_paralytic_grip"
+        ],
+        "icon": "🦒",
+        "effects": {
+          "damage": "12d8 bludgeoning",
+          "condition": "Stunned",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "wr_titans_carousel",
+        "name_en": "Titan's Carousel",
+        "name_tr": "Titan Atlıkarıncası",
+        "description_en": "Grab two enemies, spin them around dealing 10d8 damage to everything in a 6m radius, then throw them 15m.",
+        "description_tr": "İki düşmanı kavra, 6m içindeki her şeye 10d8 hasar vererek onları çevir, ardından 15m uzağa fırlat.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wr_absolute_control",
+          "wr_gravity_defiance"
+        ],
+        "icon": "🎠",
+        "effects": {
+          "aoe_damage": "10d8 bludgeoning",
+          "aoe_radius": "6m",
+          "throw_distance": "15m"
+        }
+      },
+      {
+        "spell_key": "wr_god_of_the_ring",
+        "name_en": "God of the Ring",
+        "name_tr": "Ringin Tanrısı",
+        "description_en": "Grand Ultimate. Summon a ghostly 30m wrestling ring. Inside, your physical stats are doubled, enemies cannot leave, and your cooldowns are halved. Lasts 5 turns.",
+        "description_tr": "Büyük Ulti. Hayaletimsi 30m'lik bir güreş ringi çağır. İçeride fiziksel istatistiklerin iki katına çıkar, düşmanlar ayrılamaz ve bekleme sürelerin yarıya iner. 5 tur sürer.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "wr_black_hole_grip",
+          "wr_world_breaker_suplex",
+          "wr_executioners_lock"
+        ],
+        "icon": "🏟️",
+        "effects": {
+          "arena_radius": "30m",
+          "buff": "Double physical stats, half cooldowns",
+          "duration": "5 turns"
+        }
+      }
+    ]
+  }
+]

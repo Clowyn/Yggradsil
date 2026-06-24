@@ -1,0 +1,1025 @@
+[
+  {
+    "subclass_key": "executioner",
+    "tree_name_en": "Executioner",
+    "tree_name_tr": "Cellat",
+    "tree_desc_en": "Master the art of the killing blow. Deliver devastating finishers, swing heavy blades with unmatched mastery, and break the enemy's will to fight.",
+    "tree_desc_tr": "Ölümcül darbe sanatında ustalaş. Yıkıcı bitirici vuruşlar yap, ağır bıçakları eşsiz bir ustalıkla savur ve düşmanın savaşma iradesini kır.",
+    "branches": [
+      "Execution",
+      "Blade Mastery",
+      "Intimidation"
+    ],
+    "spells": [
+      {
+        "spell_key": "ex_ruthless_strike",
+        "name_en": "Ruthless Strike",
+        "name_tr": "Acımasız Darbe",
+        "description_en": "A calculated strike dealing 1d8 physical damage. Has a 50% chance to instantly execute targets below 20% HP.",
+        "description_tr": "1d8 fiziksel hasar veren hesaplanmış bir darbe. %20 HP'nin altındaki hedefleri anında infaz etme şansı %50'dir.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d8",
+          "execute_chance": "50%",
+          "execute_threshold": "20% HP"
+        }
+      },
+      {
+        "spell_key": "ex_blood_scent",
+        "name_en": "Blood Scent",
+        "name_tr": "Kan Kokusu",
+        "description_en": "Passive. Gain +2 to perception and tracking checks against bleeding targets.",
+        "description_tr": "Pasif. Kanayan hedeflere karşı algı ve iz sürme zarlarında +2 kazan.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ex_ruthless_strike"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "passive": true,
+          "perception_bonus": 2,
+          "tracking_bonus": 2,
+          "condition": "bleeding_targets"
+        }
+      },
+      {
+        "spell_key": "ex_crippling_blow",
+        "name_en": "Crippling Blow",
+        "name_tr": "Sakatlayıcı Darbe",
+        "description_en": "Target the legs, dealing 2d6 damage and reducing their movement speed by 3m for 2 turns.",
+        "description_tr": "Bacakları hedef alarak 2d6 hasar ver ve hareket hızlarını 2 tur boyunca 3m azalt.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ex_blood_scent"
+        ],
+        "icon": "🦵",
+        "effects": {
+          "damage": "2d6",
+          "speed_reduction": "3m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ex_finishing_touch",
+        "name_en": "Finishing Touch",
+        "name_tr": "Bitirici Dokunuş",
+        "description_en": "Deliver a surgical strike for 3d6 damage. Execute threshold increased to 25% HP for this attack.",
+        "description_tr": "3d6 hasar veren cerrahi bir darbe indir. Bu saldırı için infaz sınırı %25 HP'ye çıkar.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ex_crippling_blow"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "3d6",
+          "execute_chance": "50%",
+          "execute_threshold": "25% HP"
+        }
+      },
+      {
+        "spell_key": "ex_cull_the_weak",
+        "name_en": "Cull the Weak",
+        "name_tr": "Zayıfları Ayıkla",
+        "description_en": "Passive. Your attacks deal 20% more damage to enemies that are slowed, stunned, or rooted.",
+        "description_tr": "Pasif. Saldırıların yavaşlatılmış, sersemlemiş veya sabitlenmiş düşmanlara %20 daha fazla hasar verir.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "ex_finishing_touch"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "passive": true,
+          "damage_bonus": "20%",
+          "condition": "slowed_stunned_rooted"
+        }
+      },
+      {
+        "spell_key": "ex_guillotine",
+        "name_en": "Guillotine",
+        "name_tr": "Giyotin",
+        "description_en": "A heavy vertical chop dealing 4d8 damage. Causes severe bleeding, dealing 1d8 damage per turn for 3 turns.",
+        "description_tr": "4d8 hasar veren ağır bir dikey kesiş. Şiddetli kanamaya neden olarak 3 tur boyunca her tur 1d8 hasar verir.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 225,
+        "prerequisites": [
+          "ex_cull_the_weak"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "4d8",
+          "dot": "1d8",
+          "dot_type": "bleeding",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_lethal_momentum",
+        "name_en": "Lethal Momentum",
+        "name_tr": "Ölümcül Moment",
+        "description_en": "Passive. Executing an enemy grants you an extra action and 5m of movement speed this turn.",
+        "description_tr": "Pasif. Bir düşmanı infaz etmek bu tur sana fazladan bir eylem ve 5m hareket hızı kazandırır.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "ex_guillotine"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "passive": true,
+          "on_kill_extra_action": 1,
+          "on_kill_speed_bonus": "5m"
+        }
+      },
+      {
+        "spell_key": "ex_sever_artery",
+        "name_en": "Sever Artery",
+        "name_tr": "Atardamar Kesme",
+        "description_en": "A precise strike dealing 5d6 damage that halves all healing received by the target for 3 turns.",
+        "description_tr": "Hedefin aldığı tüm iyileştirmeleri 3 tur boyunca yarıya indiren 5d6 hasarlık isabetli bir darbe.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 350,
+        "prerequisites": [
+          "ex_lethal_momentum"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "5d6",
+          "healing_reduction": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_headsman_chop",
+        "name_en": "Headsman Chop",
+        "name_tr": "Cellat Vuruşu",
+        "description_en": "A vicious attack dealing 6d8 damage. The 50% execute chance now applies to targets below 30% HP.",
+        "description_tr": "6d8 hasar veren vahşi bir saldırı. %50 infaz şansı artık %30 HP'nin altındaki hedefler için geçerlidir.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 425,
+        "prerequisites": [
+          "ex_sever_artery"
+        ],
+        "icon": "🥩",
+        "effects": {
+          "damage": "6d8",
+          "execute_chance": "50%",
+          "execute_threshold": "30% HP"
+        }
+      },
+      {
+        "spell_key": "ex_executioner_stance",
+        "name_en": "Executioner Stance",
+        "name_tr": "Cellat Duruşu",
+        "description_en": "Enter a deadly stance for 3 turns. Your attacks ignore 20% of physical armor and deal +10% execute damage.",
+        "description_tr": "3 tur boyunca ölümcül bir duruşa geç. Saldırıların fiziksel zırhın %20'sini yok sayar ve +%10 infaz hasarı verir.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ex_headsman_chop"
+        ],
+        "icon": "🧍",
+        "effects": {
+          "stance": true,
+          "armor_penetration": "20%",
+          "execute_damage_bonus": "10%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_merciless_judgment",
+        "name_en": "Merciless Judgment",
+        "name_tr": "Acımasız Yargı",
+        "description_en": "Strike the target for 8d8 damage. If they survive, they take double bleeding damage from all sources.",
+        "description_tr": "Hedefe 8d8 hasar ver. Hayatta kalırlarsa, tüm kaynaklardan iki kat kanama hasarı alırlar.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 600,
+        "prerequisites": [
+          "ex_executioner_stance"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "8d8",
+          "bleeding_vulnerability": "200%"
+        }
+      },
+      {
+        "spell_key": "ex_decapitate",
+        "name_en": "Decapitate",
+        "name_tr": "Kafa Koparma",
+        "description_en": "Attempt to decapitate the target, dealing 8d10 damage. Instantly kills regular enemies below 30% HP.",
+        "description_tr": "Hedefin kafasını kesmeye çalış, 8d10 hasar ver. %30 HP'nin altındaki normal düşmanları anında öldürür.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ex_merciless_judgment"
+        ],
+        "icon": "👤",
+        "effects": {
+          "damage": "8d10",
+          "execute_threshold": "30% HP",
+          "execute_chance": "100% on normal enemies"
+        }
+      },
+      {
+        "spell_key": "ex_fatal_flaw",
+        "name_en": "Fatal Flaw",
+        "name_tr": "Ölümcül Kusur",
+        "description_en": "Exploit an exposed weak point. Your next attack is a guaranteed critical hit with a 3x multiplier.",
+        "description_tr": "Açık bir zayıf noktadan faydalan. Sonraki saldırın garanti bir kritik vuruştur ve 3x çarpanı vardır.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 73,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ex_decapitate"
+        ],
+        "icon": "🔍",
+        "effects": {
+          "guaranteed_crit": true,
+          "crit_multiplier": 3,
+          "charges": 1
+        }
+      },
+      {
+        "spell_key": "ex_death_warrant",
+        "name_en": "Death Warrant",
+        "name_tr": "Ölüm Fermanı",
+        "description_en": "Mark a target for death. They take 30% more damage from your attacks and are rooted in place for 2 turns.",
+        "description_tr": "Bir hedefi ölüm için işaretle. Saldırılarından %30 daha fazla hasar alırlar ve 2 tur boyunca oldukları yere sabitlenirler.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ex_fatal_flaw"
+        ],
+        "icon": "📜",
+        "effects": {
+          "mark": true,
+          "damage_vulnerability": "30%",
+          "root": true,
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ex_final_verdict",
+        "name_en": "Final Verdict",
+        "name_tr": "Son Karar",
+        "description_en": "ULTIMATE: Deliver the ultimate punishment. Deal 15d12 damage. If the target is below 50% HP, execute them instantly. Unrevivable.",
+        "description_tr": "NİHAİ: Nihai cezayı kes. 15d12 hasar ver. Hedef %50 HP'nin altındaysa anında infaz et. Diriltilemez.",
+        "branch": "Execution",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ex_death_warrant"
+        ],
+        "icon": "⚰️",
+        "effects": {
+          "damage": "15d12",
+          "execute_threshold": "50% HP",
+          "execute_chance": "100%",
+          "unrevivable": true
+        }
+      },
+      {
+        "spell_key": "ex_heavy_cleave",
+        "name_en": "Heavy Cleave",
+        "name_tr": "Ağır Yarma",
+        "description_en": "Swing your weapon in a wide arc, dealing 2d8 damage to up to 3 enemies within a 3m frontal cone.",
+        "description_tr": "Silahını geniş bir kavisle savur, 3m ön koni içindeki en fazla 3 düşmana 2d8 hasar ver.",
+        "branch": "Blade Mastery",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "☄️",
+        "effects": {
+          "damage": "2d8",
+          "aoe_cone": "3m",
+          "max_targets": 3
+        }
+      },
+      {
+        "spell_key": "ex_honed_edge",
+        "name_en": "Honed Edge",
+        "name_tr": "Bilenmiş Kesici",
+        "description_en": "Passive. Your meticulous weapon care grants +1 to attack rolls with two-handed bladed weapons.",
+        "description_tr": "Pasif. Titiz silah bakımın çift elli kesici silahlarla yapılan saldırı zarlarına +1 kazandırır.",
+        "branch": "Blade Mastery",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ex_heavy_cleave"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "passive": true,
+          "attack_roll_bonus": 1,
+          "weapon_requirement": "two-handed blade"
+        }
+      },
+      {
+        "spell_key": "ex_sweeping_blade",
+        "name_en": "Sweeping Blade",
+        "name_tr": "Süpüren Kılıç",
+        "description_en": "Strike all enemies within a 4m radius for 3d6 damage, knocking them back 2m.",
+        "description_tr": "4m yarıçapındaki tüm düşmanlara 3d6 hasar vererek onları 2m geriye savur.",
+        "branch": "Blade Mastery",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ex_honed_edge"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d6",
+          "aoe_radius": "4m",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "ex_blade_dash",
+        "name_en": "Blade Dash",
+        "name_tr": "Kılıç Atılımı",
+        "description_en": "Dash up to 8m in a straight line, dealing 3d8 damage to all enemies you pass through.",
+        "description_tr": "Düz bir çizgide 8m'ye kadar atıl, içinden geçtiğin tüm düşmanlara 3d8 hasar ver.",
+        "branch": "Blade Mastery",
+        "tier": 1,
+        "min_level": 17,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ex_sweeping_blade"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "3d8",
+          "dash_range": "8m",
+          "aoe_line": true
+        }
+      },
+      {
+        "spell_key": "ex_steel_whirlwind",
+        "name_en": "Steel Whirlwind",
+        "name_tr": "Çelik Kasırgası",
+        "description_en": "Spin rapidly, striking all enemies within 5m twice for 2d6 damage each hit.",
+        "description_tr": "Hızla kendi etrafında dön, 5m içindeki tüm düşmanlara her biri 2d6 hasar veren iki vuruş yap.",
+        "branch": "Blade Mastery",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 175,
+        "prerequisites": [
+          "ex_blade_dash"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "2d6",
+          "hits": 2,
+          "aoe_radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ex_parry_and_riposte",
+        "name_en": "Parry and Riposte",
+        "name_tr": "Savuşturma ve Karşı Saldırı",
+        "description_en": "Assume a defensive posture. Negate the next melee attack against you and counter for 4d8 damage.",
+        "description_tr": "Savunma duruşuna geç. Sana yapılan sonraki yakın dövüş saldırısını iptal et ve 4d8 hasarla karşılık ver.",
+        "branch": "Blade Mastery",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ex_steel_whirlwind"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "parry": true,
+          "counter_damage": "4d8",
+          "trigger": "next_melee_attack"
+        }
+      },
+      {
+        "spell_key": "ex_armor_breaker",
+        "name_en": "Armor Breaker",
+        "name_tr": "Zırh Kırıcı",
+        "description_en": "A crushing blow that deals 4d10 damage and reduces the target's Armor Class by 3 for 3 turns.",
+        "description_tr": "4d10 hasar veren ve hedefin Zırh Sınıfını (AC) 3 tur boyunca 3 azaltan ezici bir darbe.",
+        "branch": "Blade Mastery",
+        "tier": 2,
+        "min_level": 37,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ex_parry_and_riposte"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "4d10",
+          "ac_reduction": 3,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_bloodied_blade",
+        "name_en": "Bloodied Blade",
+        "name_tr": "Kanlı Kılıç",
+        "description_en": "Passive. Your weapon attacks deal bonus physical damage equal to 5% of your missing HP.",
+        "description_tr": "Pasif. Silah saldırıların, eksik HP'nin %5'i kadar ilave fiziksel hasar verir.",
+        "branch": "Blade Mastery",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 350,
+        "prerequisites": [
+          "ex_armor_breaker"
+        ],
+        "icon": "💉",
+        "effects": {
+          "passive": true,
+          "bonus_damage": "5% missing HP"
+        }
+      },
+      {
+        "spell_key": "ex_colossal_smash",
+        "name_en": "Colossal Smash",
+        "name_tr": "Devasa Ezme",
+        "description_en": "Leap and smash the ground, dealing 6d8 damage in a 6m radius and stunning enemies for 1 turn.",
+        "description_tr": "Sıçra ve yere şiddetle vur, 6m yarıçapta 6d8 hasar ver ve düşmanları 1 tur sersemlet.",
+        "branch": "Blade Mastery",
+        "tier": 3,
+        "min_level": 51,
+        "xp_cost": 425,
+        "prerequisites": [
+          "ex_bloodied_blade"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d8",
+          "aoe_radius": "6m",
+          "stun": true,
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ex_blade_fury",
+        "name_en": "Blade Fury",
+        "name_tr": "Kılıç Öfkesi",
+        "description_en": "Unleash a barrage of 3 rapid strikes, each dealing 3d10 physical damage to a single target.",
+        "description_tr": "Tek bir hedefe her biri 3d10 fiziksel hasar veren 3 hızlı darbe yağmuru serbest bırak.",
+        "branch": "Blade Mastery",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ex_colossal_smash"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3d10",
+          "hits": 3
+        }
+      },
+      {
+        "spell_key": "ex_slaughtering_swing",
+        "name_en": "Slaughtering Swing",
+        "name_tr": "Katliam Savuruşu",
+        "description_en": "A massive horizontal swing dealing 8d8 damage in an 8m frontal cone.",
+        "description_tr": "8m ön konide 8d8 hasar veren devasa yatay bir savuruş.",
+        "branch": "Blade Mastery",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 600,
+        "prerequisites": [
+          "ex_blade_fury"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "8d8",
+          "aoe_cone": "8m"
+        }
+      },
+      {
+        "spell_key": "ex_deflecting_steel",
+        "name_en": "Deflecting Steel",
+        "name_tr": "Saptıran Çelik",
+        "description_en": "Spin your blade fast enough to deflect all incoming physical projectiles for 2 turns.",
+        "description_tr": "Bıçağını gelen tüm fiziksel mermileri 2 tur boyunca saptıracak kadar hızlı çevir.",
+        "branch": "Blade Mastery",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ex_slaughtering_swing"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "deflect_projectiles": true,
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ex_phantom_slash",
+        "name_en": "Phantom Slash",
+        "name_tr": "Hayalet Kesik",
+        "description_en": "Send out a compressed wave of blade energy dealing 8d10 damage to enemies in a 15m line.",
+        "description_tr": "15m'lik bir çizgideki düşmanlara 8d10 hasar veren sıkıştırılmış bir bıçak enerjisi dalgası yolla.",
+        "branch": "Blade Mastery",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ex_deflecting_steel"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "8d10",
+          "aoe_line": "15m"
+        }
+      },
+      {
+        "spell_key": "ex_master_of_arms",
+        "name_en": "Master of Arms",
+        "name_tr": "Silah Ustası",
+        "description_en": "Passive. Your supreme blade mastery allows you to ignore 50% of the target's physical resistance.",
+        "description_tr": "Pasif. Yüce kılıç ustalığın, hedefin fiziksel direncinin %50'sini yok saymanı sağlar.",
+        "branch": "Blade Mastery",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ex_phantom_slash"
+        ],
+        "icon": "👑",
+        "effects": {
+          "passive": true,
+          "armor_penetration": "50%"
+        }
+      },
+      {
+        "spell_key": "ex_blade_of_annihilation",
+        "name_en": "Blade of Annihilation",
+        "name_tr": "Yok Oluş Kılıcı",
+        "description_en": "ULTIMATE: A single, reality-tearing strike dealing 20d10 physical damage in a 10m line. Ignores all armor and shields.",
+        "description_tr": "NİHAİ: 10m'lik bir çizgide 20d10 fiziksel hasar veren gerçekliği yırtan tek bir darbe. Tüm zırh ve kalkanları yok sayar.",
+        "branch": "Blade Mastery",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ex_master_of_arms"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "20d10",
+          "aoe_line": "10m",
+          "ignores_all_armor": true,
+          "ignores_shields": true
+        }
+      },
+      {
+        "spell_key": "ex_menacing_glare",
+        "name_en": "Menacing Glare",
+        "name_tr": "Tehditkar Bakış",
+        "description_en": "Lock eyes with a target, terrifying them. Reduces their attack rolls by 2 for 2 turns.",
+        "description_tr": "Bir hedefle göz göze gelip onu dehşete düşür. Saldırı zarlarını 2 tur boyunca 2 azalt.",
+        "branch": "Intimidation",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "attack_roll_penalty": -2,
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ex_frightening_shout",
+        "name_en": "Frightening Shout",
+        "name_tr": "Korkutucu Bağırma",
+        "description_en": "Let out a terrifying roar. Enemies within 8m must succeed a save or become feared for 1 turn.",
+        "description_tr": "Korkutucu bir kükreme kopar. 8m içindeki düşmanlar kurtarma zarı atamazsa 1 tur korkuya kapılır.",
+        "branch": "Intimidation",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ex_menacing_glare"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "fear": true,
+          "aoe_radius": "8m",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ex_aura_of_dread",
+        "name_en": "Aura of Dread",
+        "name_tr": "Dehşet Aurası",
+        "description_en": "Passive. You radiate an aura of dread. Enemies within 5m of you suffer -1 to all saving throws.",
+        "description_tr": "Pasif. Bir dehşet aurası yayarsın. 5m içindeki düşmanlar tüm kurtarma zarlarına -1 cezası alır.",
+        "branch": "Intimidation",
+        "tier": 1,
+        "min_level": 13,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ex_frightening_shout"
+        ],
+        "icon": "🥶",
+        "effects": {
+          "passive": true,
+          "aura": "5m",
+          "saving_throw_penalty": -1
+        }
+      },
+      {
+        "spell_key": "ex_stare_down",
+        "name_en": "Stare Down",
+        "name_tr": "Dik Bakış",
+        "description_en": "Force a target to back away in fear. The target instantly moves 6m away from you and loses their reaction.",
+        "description_tr": "Bir hedefi korkuyla geri çekilmeye zorla. Hedef anında senden 6m uzaklaşır ve reaksiyonunu kaybeder.",
+        "branch": "Intimidation",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ex_aura_of_dread"
+        ],
+        "icon": "🔙",
+        "effects": {
+          "forced_movement": "6m away",
+          "lose_reaction": true
+        }
+      },
+      {
+        "spell_key": "ex_terror_strike",
+        "name_en": "Terror Strike",
+        "name_tr": "Terör Darbesi",
+        "description_en": "Strike a target for 3d8 damage. If the target is suffering from fear, this deals double damage.",
+        "description_tr": "Bir hedefe 3d8 hasar ver. Hedef korku etkisindeyse, bu saldırı iki kat hasar verir.",
+        "branch": "Intimidation",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ex_stare_down"
+        ],
+        "icon": "😱",
+        "effects": {
+          "damage": "3d8",
+          "fear_vulnerability": "200%"
+        }
+      },
+      {
+        "spell_key": "ex_bloodcurdling_roar",
+        "name_en": "Bloodcurdling Roar",
+        "name_tr": "Kan Donduran Kükreme",
+        "description_en": "A deafening roar dealing 4d6 sonic damage and fearing all enemies in a 10m radius for 2 turns.",
+        "description_tr": "10m yarıçapındaki tüm düşmanlara 4d6 sonik hasar veren ve onları 2 tur korkutan sağır edici bir kükreme.",
+        "branch": "Intimidation",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ex_terror_strike"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "damage": "4d6",
+          "damage_type": "sonic",
+          "fear": true,
+          "aoe_radius": "10m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ex_imposing_presence",
+        "name_en": "Imposing Presence",
+        "name_tr": "Heybetli Duruş",
+        "description_en": "Passive. Your sheer presence makes you completely immune to fear and charm effects.",
+        "description_tr": "Pasif. Salt varlığın seni korku ve çekicilik etkilerine karşı tamamen bağışık kılar.",
+        "branch": "Intimidation",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ex_bloodcurdling_roar"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "passive": true,
+          "immune_fear": true,
+          "immune_charm": true
+        }
+      },
+      {
+        "spell_key": "ex_panic_wave",
+        "name_en": "Panic Wave",
+        "name_tr": "Panik Dalgası",
+        "description_en": "Emit a wave of pure panic. Enemies within 12m drop their weapons and run away for 1 turn.",
+        "description_tr": "Saf bir panik dalgası yay. 12m içindeki düşmanlar silahlarını düşürür ve 1 tur boyunca kaçarlar.",
+        "branch": "Intimidation",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 375,
+        "prerequisites": [
+          "ex_imposing_presence"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "panic": true,
+          "disarm": true,
+          "aoe_radius": "12m",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ex_crush_morale",
+        "name_en": "Crush Morale",
+        "name_tr": "Moral Çökertme",
+        "description_en": "Slam the ground with overwhelming force. All enemies in combat lose 20% of their current mana and stamina.",
+        "description_tr": "Yere ezici bir güçle vur. Savaştaki tüm düşmanlar mevcut mana ve dayanıklılıklarının %20'sini kaybeder.",
+        "branch": "Intimidation",
+        "tier": 3,
+        "min_level": 53,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ex_panic_wave"
+        ],
+        "icon": "📉",
+        "effects": {
+          "mana_drain": "20% current",
+          "stamina_drain": "20% current",
+          "aoe": "all_combatants"
+        }
+      },
+      {
+        "spell_key": "ex_fear_toxin",
+        "name_en": "Fear Toxin",
+        "name_tr": "Korku Toksini",
+        "description_en": "Passive. Your intimidating strikes apply psychological pressure. At 3 stacks, the target attacks their closest ally.",
+        "description_tr": "Pasif. Korkutucu vuruşların psikolojik baskı uygular. 3 yükte hedef en yakın müttefikine saldırır.",
+        "branch": "Intimidation",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ex_crush_morale"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "passive": true,
+          "stack_effect": "madness",
+          "max_stacks": 3,
+          "trigger": "attack_ally"
+        }
+      },
+      {
+        "spell_key": "ex_hallucination_of_death",
+        "name_en": "Hallucination of Death",
+        "name_tr": "Ölüm Halüsinasyonu",
+        "description_en": "The target sees their own gruesome demise, taking 8d8 psychic damage and paralyzing them with fear for 1 turn.",
+        "description_tr": "Hedef kendi korkunç ölümünü görür, 8d8 psişik hasar alır ve 1 tur boyunca korkudan felç olur.",
+        "branch": "Intimidation",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ex_fear_toxin"
+        ],
+        "icon": "😵",
+        "effects": {
+          "damage": "8d8",
+          "damage_type": "psychic",
+          "paralyze": true,
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ex_paralyzing_fear",
+        "name_en": "Paralyzing Fear",
+        "name_tr": "Felç Edici Korku",
+        "description_en": "Radiate paralyzing terror. Any enemy that steps within 8m of you is immediately paralyzed for 1 turn.",
+        "description_tr": "Felç edici bir terör yay. Senin 8m yakınına giren herhangi bir düşman anında 1 tur felç olur.",
+        "branch": "Intimidation",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ex_hallucination_of_death"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "aura": "8m",
+          "paralyze": true,
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ex_shatter_will",
+        "name_en": "Shatter Will",
+        "name_tr": "İrade Kırma",
+        "description_en": "Break the target's mind completely. They permanently lose 4 WIS and 4 INT until magically restored.",
+        "description_tr": "Hedefin zihnini tamamen kır. Sihirli bir şekilde onarılana kadar kalıcı olarak 4 WIS ve 4 INT kaybederler.",
+        "branch": "Intimidation",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ex_paralyzing_fear"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "stat_penalty_wis": 4,
+          "stat_penalty_int": 4,
+          "permanent": true
+        }
+      },
+      {
+        "spell_key": "ex_lord_of_terror",
+        "name_en": "Lord of Terror",
+        "name_tr": "Terör Lordu",
+        "description_en": "Passive. Your terrifying presence is absolute. All your fear effects bypass enemy fear immunity.",
+        "description_tr": "Pasif. Korkutucu varlığın mutlaktır. Tüm korku etkilerin düşmanların korku bağışıklığını delip geçer.",
+        "branch": "Intimidation",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ex_shatter_will"
+        ],
+        "icon": "👹",
+        "effects": {
+          "passive": true,
+          "bypass_fear_immunity": true
+        }
+      },
+      {
+        "spell_key": "ex_domain_of_despair",
+        "name_en": "Domain of Despair",
+        "name_tr": "Umutsuzluk Alanı",
+        "description_en": "ULTIMATE: Turn a 30m area into a nightmare zone for 3 turns. Enemies take 10d10 psychic damage per turn, are slowed by 80%, and cannot heal.",
+        "description_tr": "NİHAİ: 30m'lik alanı 3 tur boyunca kabus bölgesine çevir. Düşmanlar tur başına 10d10 psişik hasar alır, %80 yavaşlar ve iyileşemez.",
+        "branch": "Intimidation",
+        "tier": 5,
+        "min_level": 97,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ex_lord_of_terror"
+        ],
+        "icon": "🏚️",
+        "effects": {
+          "aoe_radius": "30m",
+          "dot": "10d10",
+          "damage_type": "psychic",
+          "slow": "80%",
+          "prevent_healing": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_bloodbath",
+        "name_en": "Bloodbath",
+        "name_tr": "Kan Banyosu",
+        "description_en": "Cross-Branch: A whirlwind of death dealing 6d10 damage to all within 6m. You heal for 50% of the damage dealt.",
+        "description_tr": "Çapraz Dal: 6m içindeki herkese 6d10 hasar veren bir ölüm kasırgası. Verilen hasarın %50'si kadar iyileşirsin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ex_headsman_chop",
+          "ex_colossal_smash"
+        ],
+        "icon": "🛁",
+        "effects": {
+          "damage": "6d10",
+          "aoe_radius": "6m",
+          "lifesteal": "50%"
+        }
+      },
+      {
+        "spell_key": "ex_frightful_cleave",
+        "name_en": "Frightful Cleave",
+        "name_tr": "Korkunç Yarma",
+        "description_en": "Cross-Branch: A massive sweeping cleave dealing 7d8 damage. Enemies hit are feared for 3 turns.",
+        "description_tr": "Çapraz Dal: 7d8 hasar veren devasa geniş bir savuruş. İsabet alan düşmanlar 3 tur boyunca korkar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ex_colossal_smash",
+          "ex_crush_morale"
+        ],
+        "icon": "🪚",
+        "effects": {
+          "damage": "7d8",
+          "aoe_cleave": true,
+          "fear": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ex_dread_juggernaut",
+        "name_en": "Dread Juggernaut",
+        "name_tr": "Korkunç Ezici Güç",
+        "description_en": "Cross-Branch: Become an unstoppable executioner. Immune to crowd control, +10m speed, +40% damage for 4 turns.",
+        "description_tr": "Çapraz Dal: Durdurulamaz bir cellat ol. 4 tur boyunca kitle kontrole bağışık, +10m hız, +%40 hasar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ex_death_warrant",
+          "ex_paralyzing_fear"
+        ],
+        "icon": "🚂",
+        "effects": {
+          "cc_immunity": true,
+          "speed_bonus": "10m",
+          "damage_bonus": "40%",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "ex_executioner_aspect",
+        "name_en": "Executioner Aspect",
+        "name_tr": "Cellat Görünümü",
+        "description_en": "Cross-Branch Passive: All enemies take 15% more physical damage. Your base 50% execute chance now triggers at 30% HP.",
+        "description_tr": "Çapraz Dal Pasif: Tüm düşmanlar %15 daha fazla fiziksel hasar alır. Temel %50 infaz şansın artık %30 HP'de tetiklenir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ex_fatal_flaw",
+          "ex_master_of_arms",
+          "ex_shatter_will"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "passive": true,
+          "global_damage_vulnerability": "15%",
+          "execute_threshold": "30% HP"
+        }
+      },
+      {
+        "spell_key": "ex_the_end_of_all",
+        "name_en": "The End of All",
+        "name_tr": "Her Şeyin Sonu",
+        "description_en": "GRAND ULTIMATE: A catastrophic strike on a single target dealing 30d12 damage. If they die, their soul is destroyed (unrevivable) and all enemies map-wide are feared for 5 turns. Requires all 3 branch ultimates.",
+        "description_tr": "BÜYÜK NİHAİ: Tek bir hedefe 30d12 hasar veren feci bir darbe. Ölürlerse ruhları yok olur (diriltilemez) ve haritadaki tüm düşmanlar 5 tur korkar. 3 dalın nihaisini gerektirir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ex_final_verdict",
+          "ex_blade_of_annihilation",
+          "ex_domain_of_despair"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "30d12",
+          "soul_destroy": true,
+          "unrevivable": true,
+          "global_fear": true,
+          "duration": "5 turns"
+        }
+      }
+    ]
+  }
+]

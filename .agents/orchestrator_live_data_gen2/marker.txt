@@ -1,0 +1,5 @@
+Milestone: Live Data Integration and GM Character Management
+Active: Yes
+Generation: 2
+Created At: 2026-06-19T18:08:00+03:00
+Predecessor Directory: D:\DnD\.agents\orchestrator_live_data\

@@ -1,0 +1,998 @@
+[
+  {
+    "subclass_key": "iron_fist",
+    "tree_name_en": "Iron Fist",
+    "tree_name_tr": "Demir Yumruk",
+    "tree_desc_en": "A master of unarmed combat, utilizing an unbreakable body and crushing strikes to bypass armor and pulverize enemies.",
+    "tree_desc_tr": "Kırılmaz bir beden ve zırhı aşan ezen vuruşlar kullanarak düşmanları toza çeviren silahsız dövüş ustası.",
+    "branches": [
+      "Iron Body",
+      "Crushing Blow",
+      "Unstoppable",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "if_iron_skin",
+        "name_en": "Iron Skin",
+        "name_tr": "Demir Deri",
+        "description_en": "Hardens the skin, reducing all incoming physical damage by 1d4.",
+        "description_tr": "Deriyi sertleştirerek gelen tüm fiziksel hasarı 1d4 azaltır.",
+        "branch": "Iron Body",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "damage_reduction": "1d4 physical",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "if_heavy_punch",
+        "name_en": "Heavy Punch",
+        "name_tr": "Ağır Yumruk",
+        "description_en": "A forceful unarmed strike that deals 1d10 bludgeoning damage and ignores 1 point of Armor Class.",
+        "description_tr": "1d10 ezici hasar veren ve Zırh Sınıfını 1 puan yok sayan güçlü bir silahsız vuruş.",
+        "branch": "Crushing Blow",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🤜",
+        "effects": {
+          "damage": "1d10 bludgeoning",
+          "armor_penetration": "1 AC",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "if_bull_rush",
+        "name_en": "Bull Rush",
+        "name_tr": "Boğa Hücumu",
+        "description_en": "Charge forward up to 8m, dealing 1d6 damage and pushing the target back 2m.",
+        "description_tr": "8m'ye kadar ileri atılarak 1d6 hasar verir ve hedefi 2m geriye itersiniz.",
+        "branch": "Unstoppable",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🐂",
+        "effects": {
+          "damage": "1d6 bludgeoning",
+          "range": "8m",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "if_tempered_bones",
+        "name_en": "Tempered Bones",
+        "name_tr": "Tavlanmış Kemikler",
+        "description_en": "Increases maximum hit points by 10% and grants resistance to falling damage.",
+        "description_tr": "Maksimum can puanını %10 artırır ve düşme hasarına karşı direnç sağlar.",
+        "branch": "Iron Body",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "if_iron_skin"
+        ],
+        "icon": "🦴",
+        "effects": {
+          "max_hp_increase": "10%",
+          "resistance": "falling damage"
+        }
+      },
+      {
+        "spell_key": "if_shatter_guard",
+        "name_en": "Shatter Guard",
+        "name_tr": "Siper Kırma",
+        "description_en": "Strikes for 1d8 damage, disabling the target's ability to block or use shields for 1 turn.",
+        "description_tr": "1d8 hasar vurarak hedefin 1 tur boyunca kalkan kullanma veya blok yapma yeteneğini devre dışı bırakır.",
+        "branch": "Crushing Blow",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [
+          "if_heavy_punch"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "1d8 bludgeoning",
+          "debuff": "block disabled",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "if_relentless_step",
+        "name_en": "Relentless Step",
+        "name_tr": "Acımasız Adım",
+        "description_en": "Allows you to ignore movement penalties from difficult terrain for 3 turns.",
+        "description_tr": "3 tur boyunca zorlu araziden kaynaklanan hareket cezalarını yok saymanızı sağlar.",
+        "branch": "Unstoppable",
+        "tier": 1,
+        "min_level": 11,
+        "xp_cost": 100,
+        "prerequisites": [
+          "if_bull_rush"
+        ],
+        "icon": "🥾",
+        "effects": {
+          "buff": "ignore difficult terrain",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "if_deflecting_palm",
+        "name_en": "Deflecting Palm",
+        "name_tr": "Yön Değiştiren Avuç",
+        "description_en": "Gives a 20% passive chance to deflect incoming projectile attacks completely.",
+        "description_tr": "Gelen menzilli mermi saldırılarını tamamen savuşturmak için %20 pasif şans verir.",
+        "branch": "Iron Body",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 150,
+        "prerequisites": [
+          "if_tempered_bones"
+        ],
+        "icon": "✋",
+        "effects": {
+          "deflection_chance": "20%",
+          "target": "projectiles"
+        }
+      },
+      {
+        "spell_key": "if_armor_pierce",
+        "name_en": "Armor Pierce",
+        "name_tr": "Zırh Delme",
+        "description_en": "Focuses energy to make your next unarmed strike ignore 50% of the target's armor.",
+        "description_tr": "Enerjinizi odaklayarak bir sonraki silahsız vuruşunuzun hedefin zırhının %50'sini yok saymasını sağlar.",
+        "branch": "Crushing Blow",
+        "tier": 1,
+        "min_level": 17,
+        "xp_cost": 150,
+        "prerequisites": [
+          "if_shatter_guard"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "armor_penetration": "50%",
+          "duration": "1 strike"
+        }
+      },
+      {
+        "spell_key": "if_momentum_build",
+        "name_en": "Momentum Build",
+        "name_tr": "Momentum İnşası",
+        "description_en": "For each meter you move before striking, your next attack deals +1 damage (max +10).",
+        "description_tr": "Vurmadan önce hareket ettiğiniz her metre için bir sonraki saldırınız +1 hasar verir (maksimum +10).",
+        "branch": "Unstoppable",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "if_relentless_step"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "bonus_damage": "+1 per meter",
+          "cap": "+10 damage"
+        }
+      },
+      {
+        "spell_key": "if_steel_stance",
+        "name_en": "Steel Stance",
+        "name_tr": "Çelik Duruş",
+        "description_en": "Adopt a rigid stance. Gain +3 AC for 2 turns, but your movement speed is reduced by 3m.",
+        "description_tr": "Sert bir duruş alın. 2 tur boyunca +3 Zırh Sınıfı kazanırsınız ancak hareket hızınız 3m azalır.",
+        "branch": "Iron Body",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "if_iron_skin"
+        ],
+        "icon": "🥋",
+        "effects": {
+          "ac_bonus": "+3",
+          "movement_penalty": "-3m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "if_concussion_blow",
+        "name_en": "Concussion Blow",
+        "name_tr": "Sarsıcı Vuruş",
+        "description_en": "A brutal blow to the head dealing 2d8 damage with a 30% chance to stun the target for 1 turn.",
+        "description_tr": "Kafaya indirilen ve 2d8 hasar veren, %30 ihtimalle hedefi 1 tur sersemleten acımasız bir darbe.",
+        "branch": "Crushing Blow",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "if_heavy_punch"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "2d8 bludgeoning",
+          "stun_chance": "30%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "if_break_chains",
+        "name_en": "Break Chains",
+        "name_tr": "Zincir Kırma",
+        "description_en": "Instantly flex your muscles to free yourself from grapples, roots, or slowing effects.",
+        "description_tr": "Kaslarınızı anında sıkarak kavramalardan, sabitlemelerden veya yavaşlatma etkilerinden kurtulun.",
+        "branch": "Unstoppable",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "if_relentless_step"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "cleanse": "grapple, root, slow",
+          "action": "instant"
+        }
+      },
+      {
+        "spell_key": "if_iron_charge",
+        "name_en": "Iron Charge",
+        "name_tr": "Demir Hücum",
+        "description_en": "Charge forward 8m and brace for impact, gaining a shield equal to 10% of your max HP.",
+        "description_tr": "8m ileri hücum edip çarpışmaya hazırlanın, maksimum canınızın %10'u kadar kalkan kazanın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "if_iron_skin",
+          "if_bull_rush"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "range": "8m",
+          "shield": "10% max HP"
+        }
+      },
+      {
+        "spell_key": "if_adamantine_block",
+        "name_en": "Adamantine Block",
+        "name_tr": "Adamantiyum Blok",
+        "description_en": "Completely block one incoming physical attack, negating all of its damage and effects. Usable once per encounter.",
+        "description_tr": "Gelen bir fiziksel saldırıyı tamamen bloke ederek tüm hasarını ve etkilerini sıfırlar. Çarpışma başına bir kez kullanılabilir.",
+        "branch": "Iron Body",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "if_steel_stance"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "block": "100% negation",
+          "limit": "once per encounter"
+        }
+      },
+      {
+        "spell_key": "if_internal_damage",
+        "name_en": "Internal Damage",
+        "name_tr": "İç Hasar",
+        "description_en": "Strikes the target's organs, dealing 2d6 damage directly to their HP, bypassing any temporary shields or armor.",
+        "description_tr": "Hedefin organlarına vurarak herhangi bir geçici kalkanı veya zırhı aşan, doğrudan can puanına 2d6 hasar verir.",
+        "branch": "Crushing Blow",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "if_armor_pierce"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "damage": "2d6 true damage",
+          "bypass": "shields and armor"
+        }
+      },
+      {
+        "spell_key": "if_meteor_charge",
+        "name_en": "Meteor Charge",
+        "name_tr": "Meteor Hücumu",
+        "description_en": "Dash up to 12m in a straight line, dealing 3d6 bludgeoning damage to the first target hit.",
+        "description_tr": "Düz bir çizgide 12m'ye kadar atılın ve vurulan ilk hedefe 3d6 ezici hasar verin.",
+        "branch": "Unstoppable",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [
+          "if_bull_rush"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "range": "12m dash"
+        }
+      },
+      {
+        "spell_key": "if_crushing_counter",
+        "name_en": "Crushing Counter",
+        "name_tr": "Ezen Kontra",
+        "description_en": "Block an incoming attack and immediately retaliate with an armor-piercing strike that deals 2d10 damage.",
+        "description_tr": "Gelen bir saldırıyı engelleyin ve anında 2d10 hasar veren zırh delici bir vuruşla misilleme yapın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 250,
+        "prerequisites": [
+          "if_heavy_punch",
+          "if_steel_stance"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "damage": "2d10 bludgeoning",
+          "armor_penetration": "100%",
+          "trigger": "on block"
+        }
+      },
+      {
+        "spell_key": "if_counter_strike",
+        "name_en": "Counter Strike",
+        "name_tr": "Karşı Saldırı",
+        "description_en": "When hit by a melee attack, immediately deal 1d8 physical damage back to the attacker as a reflex.",
+        "description_tr": "Yakın dövüş saldırısı aldığınızda, refleks olarak saldıran kişiye anında 1d8 fiziksel hasar geri verir.",
+        "branch": "Iron Body",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "if_deflecting_palm"
+        ],
+        "icon": "🥊",
+        "effects": {
+          "damage": "1d8 physical",
+          "trigger": "when hit in melee"
+        }
+      },
+      {
+        "spell_key": "if_cratering_smash",
+        "name_en": "Cratering Smash",
+        "name_tr": "Krater Vuruşu",
+        "description_en": "Slam the ground, dealing 3d6 area damage to all enemies within a 3m radius.",
+        "description_tr": "Yere vurarak 3m yarıçapındaki tüm düşmanlara 3d6 alan hasarı verir.",
+        "branch": "Crushing Blow",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "if_concussion_blow"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "if_unstoppable_force",
+        "name_en": "Unstoppable Force",
+        "name_tr": "Durdurulamaz Güç",
+        "description_en": "Tense your muscles, becoming completely immune to all crowd control effects for 2 turns.",
+        "description_tr": "Kaslarınızı gererek 2 tur boyunca tüm kitle kontrol etkilerine karşı tamamen bağışıklık kazanın.",
+        "branch": "Unstoppable",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "if_break_chains"
+        ],
+        "icon": "🚂",
+        "effects": {
+          "immunity": "all crowd control",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "if_titan_skin",
+        "name_en": "Titan Skin",
+        "name_tr": "Titan Derisi",
+        "description_en": "Your skin turns to stone, permanently reducing all incoming physical damage by 1d8+4.",
+        "description_tr": "Deriniz taşa dönüşerek gelen tüm fiziksel hasarı kalıcı olarak 1d8+4 azaltır.",
+        "branch": "Iron Body",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "if_adamantine_block"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "damage_reduction": "1d8+4 physical",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "if_bone_breaker",
+        "name_en": "Bone Breaker",
+        "name_tr": "Kemik Kıran",
+        "description_en": "A crippling strike that deals 3d10 damage and reduces the target's movement speed by 5m for 2 turns.",
+        "description_tr": "3d10 hasar veren ve hedefin hareket hızını 2 tur boyunca 5m azaltan sakatlayıcı bir vuruş.",
+        "branch": "Crushing Blow",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "if_concussion_blow"
+        ],
+        "icon": "🩻",
+        "effects": {
+          "damage": "3d10 bludgeoning",
+          "movement_penalty": "-5m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "if_juggernaut_sprint",
+        "name_en": "Juggernaut Sprint",
+        "name_tr": "Juggernaut Koşusu",
+        "description_en": "Increases movement speed by 8m. Moving through enemies deals 2d8 trampling damage.",
+        "description_tr": "Hareket hızını 8m artırır. Düşmanların içinden geçmek onlara 2d8 ezme hasarı verir.",
+        "branch": "Unstoppable",
+        "tier": 3,
+        "min_level": 47,
+        "xp_cost": 400,
+        "prerequisites": [
+          "if_meteor_charge"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "speed_bonus": "+8m",
+          "damage": "2d8 bludgeoning",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "if_momentum_smash",
+        "name_en": "Momentum Smash",
+        "name_tr": "Momentum Vuruşu",
+        "description_en": "Charge up to 10m. Damage is multiplied by 1.5x if maximum distance is covered. Deals 4d8 base damage.",
+        "description_tr": "10m'ye kadar atılın. Maksimum mesafe katedilirse hasar 1.5 katına çıkar. Temel hasar 4d8'dir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "if_cratering_smash",
+          "if_meteor_charge"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "modifier": "1.5x at max range",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "if_kinetic_absorption",
+        "name_en": "Kinetic Absorption",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "Absorb 20% of taken damage and add it as bonus damage to your next unarmed strike.",
+        "description_tr": "Alınan hasarın %20'sini emerek bir sonraki silahsız vuruşunuza ilave hasar olarak eklersiniz.",
+        "branch": "Iron Body",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "if_counter_strike"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "absorption": "20%",
+          "buff": "adds to next attack"
+        }
+      },
+      {
+        "spell_key": "if_heart_stopper",
+        "name_en": "Heart Stopper",
+        "name_tr": "Kalp Durduran",
+        "description_en": "A precision blow to the chest dealing 4d8 damage. Silences the target from using spells/abilities for 2 turns.",
+        "description_tr": "Göğse indirilen hassas darbe 4d8 hasar verir. Hedefi 2 tur boyunca büyü/yetenek kullanmaktan susturur.",
+        "branch": "Crushing Blow",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 450,
+        "prerequisites": [
+          "if_internal_damage"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "debuff": "silence",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "if_battering_ram",
+        "name_en": "Battering Ram",
+        "name_tr": "Koçbaşı",
+        "description_en": "Charge up to 10m, easily destroying obstacles, doors, or thin walls, and dealing 4d6 damage to creatures.",
+        "description_tr": "Engelleri, kapıları veya ince duvarları kolayca yok ederek 10m'ye kadar atılır ve yaratıklara 4d6 hasar verir.",
+        "branch": "Unstoppable",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "if_juggernaut_sprint"
+        ],
+        "icon": "🐏",
+        "effects": {
+          "damage": "4d6 bludgeoning",
+          "destruction": "obstacles and walls",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "if_kinetic_discharge",
+        "name_en": "Kinetic Discharge",
+        "name_tr": "Kinetik Deşarj",
+        "description_en": "Release all stored absorbed damage as a massive 8m AoE shockwave around you.",
+        "description_tr": "Depolanan tüm emilmiş hasarı etrafınızda 8m'lik devasa bir şok dalgası olarak serbest bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 450,
+        "prerequisites": [
+          "if_counter_strike",
+          "if_internal_damage"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "100% of stored absorption",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "if_unyielding_mass",
+        "name_en": "Unyielding Mass",
+        "name_tr": "Boyun Eğmez Kütle",
+        "description_en": "Your immense density makes you permanently immune to being knocked back, pulled, or knocked prone.",
+        "description_tr": "Devasa yoğunluğunuz sizi geri itilmelere, çekilmelere veya yere düşürülmelere karşı kalıcı olarak bağışık kılar.",
+        "branch": "Iron Body",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "if_titan_skin"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "immunity": "knockback, pull, prone",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "if_mountain_cleaver",
+        "name_en": "Mountain Cleaver",
+        "name_tr": "Dağ Yaran",
+        "description_en": "A sweeping karate chop that generates a shockwave, dealing 5d8 damage in a 5m line.",
+        "description_tr": "Şok dalgası yaratan süpürücü bir karate kesişi, 5m'lik bir çizgide 5d8 hasar verir.",
+        "branch": "Crushing Blow",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "if_cratering_smash"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "damage": "5d8 force",
+          "area": "5m line"
+        }
+      },
+      {
+        "spell_key": "if_endless_stamina",
+        "name_en": "Endless Stamina",
+        "name_tr": "Sonsuz Dayanıklılık",
+        "description_en": "Regain 30% of your maximum stamina immediately and ignore all exhaustion effects for 1 hour.",
+        "description_tr": "Maksimum dayanıklılığınızın %30'unu anında yeniler ve 1 saat boyunca tüm yorgunluk etkilerini yok sayarsınız.",
+        "branch": "Unstoppable",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "if_unstoppable_force"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "restore": "30% stamina",
+          "immunity": "exhaustion",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "if_diamond_flesh",
+        "name_en": "Diamond Flesh",
+        "name_tr": "Elmas Et",
+        "description_en": "Your skin crystallizes, reflecting 25% of all incoming physical damage back to the attacker.",
+        "description_tr": "Deriniz kristalleşerek gelen tüm fiziksel hasarın %25'ini saldırgana geri yansıtır.",
+        "branch": "Iron Body",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "if_unyielding_mass"
+        ],
+        "icon": "💎",
+        "effects": {
+          "reflection": "25% physical damage",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "if_unstoppable_juggernaut",
+        "name_en": "Unstoppable Juggernaut",
+        "name_tr": "Durdurulamaz Juggernaut",
+        "description_en": "Move through enemies without provoking attacks of opportunity, gaining +5 AC while moving.",
+        "description_tr": "Fırsat saldırılarını tetiklemeden düşmanların içinden geçin, hareket halindeyken +5 Zırh Sınıfı kazanın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "if_unyielding_mass",
+          "if_juggernaut_sprint"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "no opportunity attacks",
+          "ac_bonus": "+5 during movement"
+        }
+      },
+      {
+        "spell_key": "if_nullify_armor",
+        "name_en": "Nullify Armor",
+        "name_tr": "Zırh İptali",
+        "description_en": "Your next strike vibrates through defenses, completely ignoring all AC bonuses from worn armor.",
+        "description_tr": "Bir sonraki vuruşunuz savunmaların içinden titreşerek giyilen zırhtan gelen tüm Zırh Sınıfı bonuslarını tamamen yok sayar.",
+        "branch": "Crushing Blow",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "if_bone_breaker"
+        ],
+        "icon": "📉",
+        "effects": {
+          "armor_penetration": "100%",
+          "duration": "1 strike"
+        }
+      },
+      {
+        "spell_key": "if_fury_rush",
+        "name_en": "Fury Rush",
+        "name_tr": "Hiddet Akını",
+        "description_en": "Dash between up to 3 targets within 15m, dealing 4d8 damage to each in rapid succession.",
+        "description_tr": "15m içindeki 3 hedefe kadar aralarında atılarak her birine art arda 4d8 hasar verirsiniz.",
+        "branch": "Unstoppable",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "if_battering_ram"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "4d8 bludgeoning per target",
+          "targets": "up to 3",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "if_iron_will",
+        "name_en": "Iron Will",
+        "name_tr": "Demir İrade",
+        "description_en": "Your mental fortitude matches your body. You gain permanent advantage on all saving throws.",
+        "description_tr": "Zihinsel metanetiniz bedeninizle eşleşir. Tüm kurtarma zarlarında kalıcı avantaj kazanırsınız.",
+        "branch": "Iron Body",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "if_diamond_flesh"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "advantage": "all saving throws",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "if_devastating_uppercut",
+        "name_en": "Devastating Uppercut",
+        "name_tr": "Yıkıcı Aparkat",
+        "description_en": "A legendary punch dealing 6d8 damage. The target is knocked 5m into the air, taking fall damage upon landing.",
+        "description_tr": "6d8 hasar veren efsanevi bir yumruk. Hedef havaya 5m fırlatılır ve yere düştüğünde düşme hasarı alır.",
+        "branch": "Crushing Blow",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "if_mountain_cleaver"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "knockup": "5m",
+          "additional": "fall damage"
+        }
+      },
+      {
+        "spell_key": "if_earthquake_stomp",
+        "name_en": "Earthquake Stomp",
+        "name_tr": "Deprem Ezmesi",
+        "description_en": "Stomp the ground with titanic force. Enemies within 10m take 5d6 damage and must save or fall prone.",
+        "description_tr": "Yere titanik bir güçle basın. 10m içindeki düşmanlar 5d6 hasar alır ve zar atamazlarsa yere düşerler.",
+        "branch": "Unstoppable",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "if_fury_rush"
+        ],
+        "icon": "🦶",
+        "effects": {
+          "damage": "5d6 bludgeoning",
+          "radius": "10m",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "if_shattering_charge",
+        "name_en": "Shattering Charge",
+        "name_tr": "Parçalayan Hücum",
+        "description_en": "Dash 15m. You instantly shatter any magical or physical shields on targets in your path, dealing 6d8 damage.",
+        "description_tr": "15m atılın. Yolunuz üzerindeki hedeflerin büyülü veya fiziksel kalkanlarını anında parçalar, 6d8 hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 750,
+        "prerequisites": [
+          "if_bone_breaker",
+          "if_battering_ram"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d8 bludgeoning",
+          "shield_break": "100%",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "if_pain_to_power",
+        "name_en": "Pain to Power",
+        "name_tr": "Acıdan Güce",
+        "description_en": "When your HP drops below 30%, your unarmed strikes gain an additional +3d6 damage.",
+        "description_tr": "Canınız %30'un altına düştüğünde, silahsız vuruşlarınız fazladan +3d6 hasar kazanır.",
+        "branch": "Iron Body",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "if_kinetic_absorption"
+        ],
+        "icon": "💢",
+        "effects": {
+          "condition": "HP < 30%",
+          "bonus_damage": "+3d6"
+        }
+      },
+      {
+        "spell_key": "if_pressure_point",
+        "name_en": "Pressure Point",
+        "name_tr": "Basınç Noktası",
+        "description_en": "Strike a crucial nerve for 4d10 damage. The target takes double damage from the next attack they receive.",
+        "description_tr": "Hayati bir sinire vurarak 4d10 hasar verin. Hedef alacağı bir sonraki saldırıdan iki kat hasar alır.",
+        "branch": "Crushing Blow",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "if_heart_stopper"
+        ],
+        "icon": "📍",
+        "effects": {
+          "damage": "4d10 piercing",
+          "debuff": "vulnerable to next attack"
+        }
+      },
+      {
+        "spell_key": "if_defy_death",
+        "name_en": "Defy Death",
+        "name_tr": "Ölümle Alay",
+        "description_en": "When reduced to 0 HP, you instead drop to 1 HP and immediately gain a free 5m movement (Once per long rest).",
+        "description_tr": "0 Cana düştüğünüzde, bunun yerine 1 Cana düşersiniz ve anında ücretsiz 5m hareket kazanırsınız (Uzun dinlenme başına bir kez).",
+        "branch": "Unstoppable",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "if_endless_stamina"
+        ],
+        "icon": "💀",
+        "effects": {
+          "survival": "drop to 1 HP instead of 0",
+          "bonus_movement": "5m",
+          "limit": "once per long rest"
+        }
+      },
+      {
+        "spell_key": "if_impenetrable_fortress",
+        "name_en": "Impenetrable Fortress",
+        "name_tr": "Aşılmaz Kale",
+        "description_en": "Channel your absolute defense. For 3 turns, you take 50% less damage from all sources.",
+        "description_tr": "Mutlak savunmanızı yönlendirin. 3 tur boyunca tüm kaynaklardan %50 daha az hasar alırsınız.",
+        "branch": "Iron Body",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "if_iron_will",
+          "if_pain_to_power"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "damage_reduction": "50% all sources",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "if_vibrating_palm",
+        "name_en": "Vibrating Palm",
+        "name_tr": "Titreşimli Avuç",
+        "description_en": "Plant fatal vibrations in the target. After 3 turns, the target erupts, taking 10d10 lethal damage.",
+        "description_tr": "Hedefe ölümcül titreşimler yerleştirin. 3 tur sonra hedef patlayarak 10d10 ölümcül hasar alır.",
+        "branch": "Crushing Blow",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "if_nullify_armor",
+          "if_pressure_point"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "delayed_damage": "10d10 force",
+          "delay": "3 turns"
+        }
+      },
+      {
+        "spell_key": "if_relentless_assault",
+        "name_en": "Relentless Assault",
+        "name_tr": "Kesintisiz Saldırı",
+        "description_en": "Push your body beyond its limits, taking 2 consecutive turns immediately.",
+        "description_tr": "Vücudunuzu sınırlarının ötesine zorlayarak anında ardışık 2 tur hakkı elde edersiniz.",
+        "branch": "Unstoppable",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "if_earthquake_stomp",
+          "if_defy_death"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "extra_turns": "2",
+          "action": "instant"
+        }
+      },
+      {
+        "spell_key": "if_body_of_destruction",
+        "name_en": "Body of Destruction",
+        "name_tr": "Yıkım Bedeni",
+        "description_en": "Your body becomes a living weapon. Unarmed strikes permanently deal +3d8 damage, and you gain permanent CC resistance.",
+        "description_tr": "Bedeniniz canlı bir silaha dönüşür. Silahsız vuruşlar kalıcı olarak +3d8 hasar verir ve kitle kontrol direnci kazanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "if_diamond_flesh",
+          "if_nullify_armor",
+          "if_earthquake_stomp"
+        ],
+        "icon": "⚛️",
+        "effects": {
+          "bonus_damage": "+3d8 permanently",
+          "resistance": "crowd control"
+        }
+      },
+      {
+        "spell_key": "if_ultimate_iron_god",
+        "name_en": "Iron God Avatar",
+        "name_tr": "Demir Tanrı Avatarı",
+        "description_en": "Ultimate: Become the Iron God for 10 turns. Gain +10 AC and total immunity to physical damage, but you cannot be healed by magic.",
+        "description_tr": "Ulti: 10 tur boyunca Demir Tanrı olun. +10 ZS ve fiziksel hasara karşı tam bağışıklık kazanın, ancak büyü ile iyileştirilemezsiniz.",
+        "branch": "Iron Body",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "if_impenetrable_fortress"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "ac_bonus": "+10",
+          "immunity": "all physical damage",
+          "debuff": "cannot be healed magically",
+          "duration": "10 turns"
+        }
+      },
+      {
+        "spell_key": "if_ultimate_world_breaker",
+        "name_en": "World Breaker Strike",
+        "name_tr": "Dünya Kıran Vuruş",
+        "description_en": "Ultimate: Deliver an earth-shattering blow for 20d10 damage, ignoring all armor. Creates a 10m shockwave dealing half damage to others.",
+        "description_tr": "Ulti: Tüm zırhları yok sayarak 20d10 hasar veren dünyayı sarsan bir vuruş indirin. Diğerlerine yarı hasar veren 10m'lik bir şok dalgası yaratır.",
+        "branch": "Crushing Blow",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "if_vibrating_palm"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "20d10 force",
+          "armor_penetration": "100%",
+          "aoe_damage": "half damage in 10m radius"
+        }
+      },
+      {
+        "spell_key": "if_ultimate_colossus",
+        "name_en": "March of the Colossus",
+        "name_tr": "Devasanın Yürüyüşü",
+        "description_en": "Ultimate: For 5 turns, your movement speed is doubled. You can walk through enemies, dealing 5d10 damage, and become completely unstoppable.",
+        "description_tr": "Ulti: 5 tur boyunca hareket hızınız iki katına çıkar. Düşmanların içinden geçerek 5d10 hasar verebilir ve tamamen durdurulamaz olursunuz.",
+        "branch": "Unstoppable",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "if_relentless_assault"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "speed_multiplier": "2x",
+          "trample_damage": "5d10 bludgeoning",
+          "immunity": "all CC",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "if_grand_ultimate_fist_of_the_north",
+        "name_en": "Fist of the North Star",
+        "name_tr": "Kuzey Yıldızı Yumruğu",
+        "description_en": "Grand Ultimate: Dash 30m and strike a target 100 times in a blur. Deals 50d10 true damage, ignores immunities, and permanently destroys their armor.",
+        "description_tr": "Büyük Ulti: 30m atılın ve hedefe bulanık bir hızda 100 kez vurun. 50d10 gerçek hasar verir, bağışıklıkları yok sayar ve zırhlarını kalıcı olarak yok eder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "if_ultimate_iron_god",
+          "if_ultimate_world_breaker",
+          "if_ultimate_colossus"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "50d10 true damage",
+          "armor_destruction": "permanent",
+          "bypass": "immunities",
+          "range": "30m"
+        }
+      }
+    ]
+  }
+]

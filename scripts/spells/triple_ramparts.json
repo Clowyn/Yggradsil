@@ -1,0 +1,985 @@
+[
+  {
+    "subclass_key": "triple_ramparts",
+    "tree_name_en": "Triple Ramparts",
+    "tree_name_tr": "Üçlü Surlar",
+    "tree_desc_en": "Masters of the three-shield combat style, offering impenetrable defense and versatile offense.",
+    "tree_desc_tr": "Geçilmez bir savunma ve çok yönlü bir hücum sunan üç kalkanlı dövüş sanatının ustaları.",
+    "branches": [
+      "Tri-Shield",
+      "Bastion",
+      "Reflection"
+    ],
+    "spells": [
+      {
+        "spell_key": "trp_trishield_bash",
+        "name_en": "Tri-Shield Bash",
+        "name_tr": "Üçlü Kalkan Vuruşu",
+        "description_en": "Smashes the target with the primary shield, dealing 1d8 bludgeoning damage and pushing them back 2m.",
+        "description_tr": "Hedefi ana kalkanla ezerek 1d8 ezici hasar verir ve 2m geriye iter.",
+        "branch": "Tri-Shield",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛑",
+        "effects": {
+          "damage": "1d8 bludgeoning",
+          "range": "Melee",
+          "push": "2m"
+        }
+      },
+      {
+        "spell_key": "trp_floating_shield",
+        "name_en": "Floating Shield",
+        "name_tr": "Yüzen Kalkan",
+        "description_en": "Animates one of your shields to float around you, granting +2 AC for 1 minute. You can still attack with your main weapon.",
+        "description_tr": "Kalkanlarından birini canlandırarak etrafında yüzmesini sağlar, 1 dakika boyunca +2 Zırh Sınıfı verir. Ana silahınla saldırmaya devam edebilirsin.",
+        "branch": "Tri-Shield",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🛸",
+        "effects": {
+          "buff": "+2 AC",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "trp_shield_boomerang",
+        "name_en": "Shield Boomerang",
+        "name_tr": "Bumerang Kalkan",
+        "description_en": "Throws a shield up to 15m away, dealing 2d6 bludgeoning damage to a target before returning to your hand.",
+        "description_tr": "Bir kalkanı 15m'ye kadar fırlatarak hedefe 2d6 ezici hasar verir ve ardından kalkan elinize geri döner.",
+        "branch": "Tri-Shield",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🪃",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "trp_tri_strike",
+        "name_en": "Tri-Strike",
+        "name_tr": "Üçlü Vuruş",
+        "description_en": "A rapid 3-hit combo using all three shields, dealing 3d6 bludgeoning damage to a single target within 2m.",
+        "description_tr": "Üç kalkanı da kullanarak yapılan hızlı bir 3 vuruşluk kombo, 2m içindeki tek bir hedefe 3d6 ezici hasar verir.",
+        "branch": "Tri-Shield",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "trp_trishield_bash"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 bludgeoning",
+          "range": "2m",
+          "hits": "3"
+        }
+      },
+      {
+        "spell_key": "trp_orbiting_guard",
+        "name_en": "Orbiting Guard",
+        "name_tr": "Yörünge Koruması",
+        "description_en": "Commands two shields to orbit you at a 3m radius for 30 seconds, dealing 1d6 damage to enemies that enter the area.",
+        "description_tr": "İki kalkanın 30 saniye boyunca 3m yarıçapında etrafında dönmesini emreder, alana giren düşmanlara 1d6 hasar verir.",
+        "branch": "Tri-Shield",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 240,
+        "prerequisites": [
+          "trp_floating_shield"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "1d6",
+          "radius": "3m",
+          "duration": "30 seconds"
+        }
+      },
+      {
+        "spell_key": "trp_shield_charge",
+        "name_en": "Shield Charge",
+        "name_tr": "Kalkan Hücumu",
+        "description_en": "Charges forward up to 10m with shields raised, dealing 2d8 damage and knocking prone any Medium or smaller creature in the path.",
+        "description_tr": "Kalkanlar havada olacak şekilde 10m'ye kadar ileri atılır, 2d8 hasar verir ve yol üzerindeki Orta veya daha küçük yaratıkları yere serer.",
+        "branch": "Tri-Shield",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "trp_trishield_bash"
+        ],
+        "icon": "🐂",
+        "effects": {
+          "damage": "2d8",
+          "range": "10m",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "trp_heavy_ricochet",
+        "name_en": "Heavy Ricochet",
+        "name_tr": "Ağır Sekme",
+        "description_en": "Throws a shield that bounces between up to 3 targets within 10m of each other, dealing 3d6 damage to each.",
+        "description_tr": "Birbirine 10m mesafedeki 3 hedefe kadar seken bir kalkan fırlatarak her birine 3d6 hasar verir.",
+        "branch": "Tri-Shield",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "trp_shield_boomerang"
+        ],
+        "icon": "🏓",
+        "effects": {
+          "damage": "3d6",
+          "range": "10m between targets",
+          "targets": "3"
+        }
+      },
+      {
+        "spell_key": "trp_shield_juggernaut",
+        "name_en": "Shield Juggernaut",
+        "name_tr": "Kalkan Devi",
+        "description_en": "Passive: While wielding 3 shields, your movement speed is reduced by 2m but you gain +4 to Strength checks and saves.",
+        "description_tr": "Pasif: 3 kalkan birden kullanırken hareket hızın 2m azalır ancak Güç zarlarına ve kurtarma atışlarına +4 kazanırsın.",
+        "branch": "Tri-Shield",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "trp_shield_charge"
+        ],
+        "icon": "🏋️",
+        "effects": {
+          "buff": "+4 Strength checks/saves",
+          "debuff": "-2m Movement Speed"
+        }
+      },
+      {
+        "spell_key": "trp_phantom_fourth",
+        "name_en": "Phantom Fourth",
+        "name_tr": "Dördüncü Hayalet",
+        "description_en": "Manifests an ethereal fourth shield for 1 minute, allowing you to throw two shields while maintaining full defense.",
+        "description_tr": "1 dakika boyunca ruhani dördüncü bir kalkan oluşturarak, tam savunmanı korurken iki kalkan fırlatmana olanak tanır.",
+        "branch": "Tri-Shield",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "trp_orbiting_guard"
+        ],
+        "icon": "👻",
+        "effects": {
+          "duration": "1 minute",
+          "mechanics": "Allows throwing 2 shields while maintaining defense"
+        }
+      },
+      {
+        "spell_key": "trp_triple_meteor",
+        "name_en": "Triple Meteor",
+        "name_tr": "Üçlü Meteor",
+        "description_en": "Leaps into the air and crashes down in a 5m radius, slamming all three shields into the ground. Deals 5d8 area damage.",
+        "description_tr": "Havaya sıçrar ve 5m yarıçaplı bir alana inerek üç kalkanı birden yere çarpar. 5d8 alan hasarı verir.",
+        "branch": "Tri-Shield",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "trp_shield_charge"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "5d8",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "trp_whirlwind_of_steel",
+        "name_en": "Whirlwind of Steel",
+        "name_tr": "Çelik Hortumu",
+        "description_en": "Spins rapidly with out-stretched shields, creating a 4m tornado of steel that deals 4d10 damage to adjacent enemies.",
+        "description_tr": "Kalkanlar uzatılmış halde hızla dönerek bitişik düşmanlara 4d10 hasar veren 4m'lik çelik bir hortum yaratır.",
+        "branch": "Tri-Shield",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "trp_tri_strike"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d10",
+          "radius": "4m"
+        }
+      },
+      {
+        "spell_key": "trp_unending_barrage",
+        "name_en": "Unending Barrage",
+        "name_tr": "Bitmeyen Yaylım",
+        "description_en": "Rapidly throws and recalls shields in a continuous barrage for 3 turns, dealing 4d6 damage per turn to targets up to 20m away.",
+        "description_tr": "3 tur boyunca sürekli bir yaylım ateşiyle kalkanları hızla fırlatır ve geri çağırır, 20m'ye kadar olan hedeflere tur başına 4d6 hasar verir.",
+        "branch": "Tri-Shield",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "trp_heavy_ricochet"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "damage": "4d6 per turn",
+          "range": "20m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "trp_tri_shield_avalanche",
+        "name_en": "Tri-Shield Avalanche",
+        "name_tr": "Üçlü Kalkan Çığı",
+        "description_en": "Summons massive spectral duplicates of your three shields that crush everything in a 20m cone, dealing 12d10 damage and stunning for 1 turn.",
+        "description_tr": "Üç kalkanının devasa spektral kopyalarını çağırarak 20m'lik bir koni içindeki her şeyi ezer, 12d10 hasar verir ve 1 tur sersemletir.",
+        "branch": "Tri-Shield",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "trp_triple_meteor",
+          "trp_whirlwind_of_steel"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "damage": "12d10",
+          "range": "20m cone",
+          "condition": "Stunned",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "trp_iron_brace",
+        "name_en": "Iron Brace",
+        "name_tr": "Demir Siper",
+        "description_en": "Brace behind your shield, halving all physical damage taken until your next turn. Movement speed drops to 0.",
+        "description_tr": "Kalkanının arkasında siper alarak bir sonraki turuna kadar alınan tüm fiziksel hasarı yarıya indirir. Hareket hızı 0'a düşer.",
+        "branch": "Bastion",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🚧",
+        "effects": {
+          "damage_reduction": "50% physical",
+          "duration": "Until next turn",
+          "debuff": "0 Movement"
+        }
+      },
+      {
+        "spell_key": "trp_cover_ally",
+        "name_en": "Cover Ally",
+        "name_tr": "Dosta Siper Ol",
+        "description_en": "Dash up to 5m to an ally and intercept an incoming attack aimed at them, taking the damage yourself.",
+        "description_tr": "Bir dosta doğru 5m atılarak ona yöneltilmiş bir saldırının önüne geçer ve hasarı sen alırsın.",
+        "branch": "Bastion",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🫂",
+        "effects": {
+          "range": "5m dash",
+          "mechanics": "Intercepts attack"
+        }
+      },
+      {
+        "spell_key": "trp_shield_wall",
+        "name_en": "Shield Wall",
+        "name_tr": "Kalkan Duvarı",
+        "description_en": "Plants one shield into the ground to create a 3m wide, 2m high cover that grants 3/4 cover to allies behind it.",
+        "description_tr": "Bir kalkanı yere sabitleyerek 3m genişliğinde, 2m yüksekliğinde bir siper yaratır ve arkasındaki dostlara 3/4 siper sağlar.",
+        "branch": "Bastion",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 140,
+        "prerequisites": [],
+        "icon": "🏰",
+        "effects": {
+          "dimension": "3m wide x 2m high",
+          "buff": "3/4 Cover"
+        }
+      },
+      {
+        "spell_key": "trp_entrench",
+        "name_en": "Entrench",
+        "name_tr": "Mevzi Al",
+        "description_en": "Plants two shields to form an angled defensive position. Grants immunity to being pushed or knocked prone for 1 minute.",
+        "description_tr": "İki kalkanı sabitleyerek açılı bir savunma pozisyonu oluşturur. 1 dakika boyunca itilmeye veya yere serilmeye karşı bağışıklık kazandırır.",
+        "branch": "Bastion",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "trp_iron_brace"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "immunity": "Push/Prone",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "trp_unmovable_object",
+        "name_en": "Unmovable Object",
+        "name_tr": "Kaldırılamaz Obje",
+        "description_en": "Passive: You gain +20% maximum HP and your armor class increases by +1 for every enemy within 3m.",
+        "description_tr": "Pasif: Maksimum Canın %20 artar ve 3m içindeki her düşman için zırh sınıfın +1 artar.",
+        "branch": "Bastion",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "trp_cover_ally"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "buff": "+20% Max HP, +1 AC per enemy within 3m"
+        }
+      },
+      {
+        "spell_key": "trp_heavy_plating",
+        "name_en": "Heavy Plating",
+        "name_tr": "Ağır Kaplama",
+        "description_en": "Coats your shields in dense magical earth. For 10 minutes, critical hits against you become normal hits.",
+        "description_tr": "Kalkanlarını yoğun büyülü toprakla kaplar. 10 dakika boyunca sana yapılan kritik vuruşlar normal vuruşlara dönüşür.",
+        "branch": "Bastion",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "trp_shield_wall"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "duration": "10 minutes",
+          "mechanics": "Nullifies critical hits"
+        }
+      },
+      {
+        "spell_key": "trp_fortress_stance",
+        "name_en": "Fortress Stance",
+        "name_tr": "Kale Duruşu",
+        "description_en": "Locks your three shields together. You cannot attack, but you gain +10 AC and regenerate 5 HP per turn for up to 5 turns.",
+        "description_tr": "Üç kalkanını birbirine kilitler. Saldıramazsın, ancak +10 Zırh Sınıfı kazanırsın ve 5 tur boyunca tur başına 5 Can yenilersin.",
+        "branch": "Bastion",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "trp_entrench"
+        ],
+        "icon": "🏦",
+        "effects": {
+          "buff": "+10 AC, 5 HP regeneration",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "trp_dome_of_protection",
+        "name_en": "Dome of Protection",
+        "name_tr": "Koruma Kubbesi",
+        "description_en": "Projects a hemispherical barrier 5m in radius. Allies inside gain resistance to elemental damage for 1 minute.",
+        "description_tr": "5m yarıçapında yarım küre şeklinde bir bariyer yansıtır. İçerideki dostlar 1 dakika boyunca element hasarına direnç kazanır.",
+        "branch": "Bastion",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "trp_heavy_plating"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "radius": "5m",
+          "buff": "Elemental Resistance",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "trp_magnetic_pull",
+        "name_en": "Magnetic Pull",
+        "name_tr": "Manyetik Çekim",
+        "description_en": "Creates a magnetic field that taunts all enemies within 15m to attack you, and pulls metal-wearing enemies 5m closer.",
+        "description_tr": "15m içindeki tüm düşmanları sana saldırması için kışkırtan ve metal giyen düşmanları 5m yakınına çeken manyetik bir alan yaratır.",
+        "branch": "Bastion",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "trp_unmovable_object"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "radius": "15m",
+          "condition": "Taunt",
+          "pull": "5m (metal wearers)"
+        }
+      },
+      {
+        "spell_key": "trp_impenetrable_phalanx",
+        "name_en": "Impenetrable Phalanx",
+        "name_tr": "Geçilmez Falanks",
+        "description_en": "Summons 5 spectral shieldbearers that surround you in a 3m radius. Blocks all line-of-sight attacks for 3 turns.",
+        "description_tr": "Seni 3m yarıçapında çevreleyen 5 spektral kalkan taşıyıcısı çağırır. 3 tur boyunca görüş hattı gerektiren tüm saldırıları engeller.",
+        "branch": "Bastion",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "trp_fortress_stance"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "radius": "3m",
+          "duration": "3 turns",
+          "mechanics": "Blocks line-of-sight attacks"
+        }
+      },
+      {
+        "spell_key": "trp_bastion_of_hope",
+        "name_en": "Bastion of Hope",
+        "name_tr": "Umut Tablası",
+        "description_en": "Radiates a 10m aura of pure defense. Allies within the aura gain +3 AC and advantage on all saving throws.",
+        "description_tr": "10m'lik saf savunma aurası yayar. Aura içindeki dostlar +3 Zırh Sınıfı ve tüm kurtarma atışlarında avantaj kazanır.",
+        "branch": "Bastion",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "trp_dome_of_protection"
+        ],
+        "icon": "✨",
+        "effects": {
+          "radius": "10m",
+          "buff": "+3 AC, Advantage on Saving Throws"
+        }
+      },
+      {
+        "spell_key": "trp_walking_fortress",
+        "name_en": "Walking Fortress",
+        "name_tr": "Yürüyen Kale",
+        "description_en": "Transforms into a juggernaut of defense. For 1 minute, you ignore all damage less than 15 points per hit.",
+        "description_tr": "Savunma devine dönüşürsün. 1 dakika boyunca vuruş başına 15 puandan az olan tüm hasarları yok sayarsın.",
+        "branch": "Bastion",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "trp_impenetrable_phalanx"
+        ],
+        "icon": "🚶‍♂️",
+        "effects": {
+          "damage_reduction": "Ignores damage < 15",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "trp_absolute_defense",
+        "name_en": "Absolute Defense",
+        "name_tr": "Mutlak Savunma",
+        "description_en": "Generates an invulnerable 6m zone for 2 turns. No damage or hostile magic can enter or occur inside this zone.",
+        "description_tr": "2 tur boyunca hasar görmez 6m'lik bir alan yaratır. Bu alana hiçbir hasar veya düşmanca büyü giremez ya da alanda gerçekleşemez.",
+        "branch": "Bastion",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "trp_bastion_of_hope",
+          "trp_walking_fortress"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "radius": "6m",
+          "duration": "2 turns",
+          "mechanics": "Total invulnerability"
+        }
+      },
+      {
+        "spell_key": "trp_deflect",
+        "name_en": "Deflect",
+        "name_tr": "Saptırma",
+        "description_en": "Use your reaction to add +3 to your AC against a single melee attack. If it misses, you may push the attacker 1m.",
+        "description_tr": "Tek bir yakın dövüş saldırısına karşı Zırh Sınıfına +3 eklemek için reaksiyonunu kullanırsın. Iskalarsa saldıranı 1m itebilirsin.",
+        "branch": "Reflection",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🏑",
+        "effects": {
+          "buff": "+3 AC (reaction)",
+          "push": "1m"
+        }
+      },
+      {
+        "spell_key": "trp_mirror_polish",
+        "name_en": "Mirror Polish",
+        "name_tr": "Ayna Cilası",
+        "description_en": "Polishes your shield to mirror perfection. Reflects gaze attacks and grants +2 AC against beam/ray spells.",
+        "description_tr": "Kalkanını ayna mükemmelliğinde parlatır. Bakış saldırılarını yansıtır ve ışın/hüzme büyülerine karşı +2 Zırh Sınıfı verir.",
+        "branch": "Reflection",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🪞",
+        "effects": {
+          "buff": "+2 AC against rays",
+          "mechanics": "Reflects gaze attacks"
+        }
+      },
+      {
+        "spell_key": "trp_kinetic_absorb",
+        "name_en": "Kinetic Absorb",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "Absorbs the kinetic energy of an incoming physical attack, reducing damage by 1d10+Level and storing the energy.",
+        "description_tr": "Gelen bir fiziksel saldırının kinetik enerjisini emerek hasarı 1d10+Seviye kadar azaltır ve enerjiyi depolar.",
+        "branch": "Reflection",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "📥",
+        "effects": {
+          "damage_reduction": "1d10 + Level",
+          "mechanics": "Stores kinetic energy"
+        }
+      },
+      {
+        "spell_key": "trp_rebound_strike",
+        "name_en": "Rebound Strike",
+        "name_tr": "Sekme Vuruşu",
+        "description_en": "Releases stored kinetic energy on your next melee hit, dealing an additional 2d8 force damage.",
+        "description_tr": "Depolanan kinetik enerjiyi bir sonraki yakın dövüş vuruşunda serbest bırakarak fazladan 2d8 güç hasarı verir.",
+        "branch": "Reflection",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "trp_kinetic_absorb"
+        ],
+        "icon": "📤",
+        "effects": {
+          "damage": "+2d8 force"
+        }
+      },
+      {
+        "spell_key": "trp_magic_dispersion",
+        "name_en": "Magic Dispersion",
+        "name_tr": "Büyü Dağıtma",
+        "description_en": "Smashes an incoming spell projectile with your shield, reducing its damage by 4d6 and scattering the rest in a 3m cone behind you.",
+        "description_tr": "Gelen bir büyü mermisine kalkanınla vurarak hasarını 4d6 azaltır ve kalanını arkanda 3m'lik bir koniye dağıtır.",
+        "branch": "Reflection",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "trp_deflect"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage_reduction": "4d6",
+          "area": "3m cone"
+        }
+      },
+      {
+        "spell_key": "trp_resonant_shield",
+        "name_en": "Resonant Shield",
+        "name_tr": "Rezonans Kalkanı",
+        "description_en": "Strikes your own shields together to create a deafening 5m sonic wave, dealing 2d6 thunder damage and silencing targets for 1 turn.",
+        "description_tr": "Kendi kalkanlarını birbirine çarparak 5m'lik sağır edici bir ses dalgası yaratır, 2d6 gök gürültüsü hasarı verir ve hedefleri 1 tur susturur.",
+        "branch": "Reflection",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "trp_mirror_polish"
+        ],
+        "icon": "🔔",
+        "effects": {
+          "damage": "2d6 thunder",
+          "radius": "5m",
+          "condition": "Silenced",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "trp_energy_redirection",
+        "name_en": "Energy Redirection",
+        "name_tr": "Enerji Yönlendirme",
+        "description_en": "Catch a magical attack and instantly fire it back at the caster or another target within 15m as a reaction.",
+        "description_tr": "Büyülü bir saldırıyı yakalayarak reaksiyon olarak anında büyücüye veya 15m içindeki başka bir hedefe geri ateşler.",
+        "branch": "Reflection",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 390,
+        "prerequisites": [
+          "trp_magic_dispersion"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "range": "15m",
+          "mechanics": "Reflects magical attack"
+        }
+      },
+      {
+        "spell_key": "trp_vengeful_echo",
+        "name_en": "Vengeful Echo",
+        "name_tr": "İntikamcı Yankı",
+        "description_en": "Passive: Whenever an enemy critically hits you, your shields automatically blast them with 3d10 force damage in retaliation.",
+        "description_tr": "Pasif: Bir düşman sana ne zaman kritik vuruş yapsa, kalkanların misilleme olarak onları 3d10 güç hasarıyla otomatik olarak patlatır.",
+        "branch": "Reflection",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 450,
+        "prerequisites": [
+          "trp_rebound_strike"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "3d10 force",
+          "mechanics": "Triggers on critical hit taken"
+        }
+      },
+      {
+        "spell_key": "trp_blinding_flash",
+        "name_en": "Blinding Flash",
+        "name_tr": "Kör Eden Flaş",
+        "description_en": "Channels light into your shields and bursts it outward. All enemies within 10m looking at you must save or be blinded for 2 turns.",
+        "description_tr": "Kalkanlarına ışık odaklar ve dışarı patlatır. Sana bakan 10m içindeki tüm düşmanlar kurtarma atışı yapmalı aksi takdirde 2 tur kör olurlar.",
+        "branch": "Reflection",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "trp_resonant_shield"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "radius": "10m",
+          "condition": "Blinded",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "trp_perfect_parry",
+        "name_en": "Perfect Parry",
+        "name_tr": "Kusursuz Savuşturma",
+        "description_en": "Once per short rest, completely negate the damage and effects of a single physical or magical attack, regardless of power.",
+        "description_tr": "Kısa dinlenme başına bir kez, gücü ne olursa olsun tek bir fiziksel veya büyülü saldırının hasarını ve etkilerini tamamen sıfırlar.",
+        "branch": "Reflection",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "trp_energy_redirection"
+        ],
+        "icon": "✋",
+        "effects": {
+          "mechanics": "Negates one attack completely",
+          "limit": "Once per short rest"
+        }
+      },
+      {
+        "spell_key": "trp_kinetic_discharge",
+        "name_en": "Kinetic Discharge",
+        "name_tr": "Kinetik Deşarj",
+        "description_en": "Releases all accumulated battle energy in a 8m shockwave, dealing 6d8 force damage and throwing enemies 4m backwards.",
+        "description_tr": "Biriken tüm savaş enerjisini 8m'lik bir şok dalgasıyla serbest bırakır, 6d8 güç hasarı verir ve düşmanları 4m geriye fırlatır.",
+        "branch": "Reflection",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "trp_vengeful_echo"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "6d8 force",
+          "radius": "8m",
+          "push": "4m"
+        }
+      },
+      {
+        "spell_key": "trp_mirror_dimension",
+        "name_en": "Mirror Dimension",
+        "name_tr": "Ayna Boyutu",
+        "description_en": "Trap a target within 10m inside a cage of reflective shields for 1 minute. They take damage equal to their own attacks while inside.",
+        "description_tr": "10m içindeki bir hedefi 1 dakika boyunca yansıtıcı kalkanlardan oluşan bir kafese hapseder. İçerideyken kendi saldırılarına eşit hasar alırlar.",
+        "branch": "Reflection",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "trp_perfect_parry"
+        ],
+        "icon": "🪩",
+        "effects": {
+          "range": "10m",
+          "duration": "1 minute",
+          "mechanics": "Target takes damage equal to their own attacks"
+        }
+      },
+      {
+        "spell_key": "trp_aegis_of_reflection",
+        "name_en": "Aegis of Reflection",
+        "name_tr": "Yansıma Kalkanı",
+        "description_en": "For 3 turns, all magical and physical attacks aimed at you or allies within 5m are reflected back to their source with double damage.",
+        "description_tr": "3 tur boyunca, sana veya 5m içindeki dostlarına yöneltilen tüm büyülü ve fiziksel saldırılar iki kat hasarla kaynağına geri yansıtılır.",
+        "branch": "Reflection",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1450,
+        "prerequisites": [
+          "trp_mirror_dimension",
+          "trp_kinetic_discharge"
+        ],
+        "icon": "💎",
+        "effects": {
+          "radius": "5m",
+          "duration": "3 turns",
+          "mechanics": "Reflects attacks with 200% damage"
+        }
+      },
+      {
+        "spell_key": "trp_bouncing_bastion",
+        "name_en": "Bouncing Bastion",
+        "name_tr": "Seken Tabya",
+        "description_en": "Throws a shield that bounces to an ally up to 10m away, granting them 1d8 temporary HP, before bouncing to an enemy for 2d6 damage.",
+        "description_tr": "10m'ye kadar uzaktaki bir dosta sekerek ona 1d8 geçici Can veren ve ardından bir düşmana sekerek 2d6 hasar veren bir kalkan fırlatır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 230,
+        "prerequisites": [
+          "trp_shield_boomerang",
+          "trp_cover_ally"
+        ],
+        "icon": "💚",
+        "effects": {
+          "range": "10m",
+          "buff": "1d8 Temp HP",
+          "damage": "2d6"
+        }
+      },
+      {
+        "spell_key": "trp_reflecting_wall",
+        "name_en": "Reflecting Wall",
+        "name_tr": "Yansıtan Duvar",
+        "description_en": "Plants a shield that creates a 3m wide wall. Any ranged attack hitting the wall is reflected back toward the attacker.",
+        "description_tr": "3m genişliğinde bir duvar yaratan bir kalkan sabitler. Duvara çarpan her menzilli saldırı saldırgana geri yansıtılır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 270,
+        "prerequisites": [
+          "trp_shield_wall",
+          "trp_deflect"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "dimension": "3m wide",
+          "mechanics": "Reflects ranged attacks"
+        }
+      },
+      {
+        "spell_key": "trp_boomerang_parry",
+        "name_en": "Boomerang Parry",
+        "name_tr": "Bumerang Savuşturması",
+        "description_en": "Your returning shield automatically intercepts one attack aimed at you from behind, granting +2 AC to your rear.",
+        "description_tr": "Geri dönen kalkanın, arkadan sana yöneltilmiş bir saldırının önüne otomatik olarak geçerek arkana +2 Zırh Sınıfı verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "trp_shield_boomerang",
+          "trp_kinetic_absorb"
+        ],
+        "icon": "🔙",
+        "effects": {
+          "buff": "+2 AC to rear",
+          "mechanics": "Intercepts one rear attack"
+        }
+      },
+      {
+        "spell_key": "trp_orbiting_fortress",
+        "name_en": "Orbiting Fortress",
+        "name_tr": "Yörünge Kalesi",
+        "description_en": "Your orbiting shields expand to a 4m radius. Allies inside the orbit gain +2 AC and resistance to slashing damage.",
+        "description_tr": "Yörüngendeki kalkanlar 4m yarıçapa genişler. Yörünge içindeki dostlar +2 Zırh Sınıfı ve kesici hasara direnç kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "trp_orbiting_guard",
+          "trp_fortress_stance"
+        ],
+        "icon": "🪐",
+        "effects": {
+          "radius": "4m",
+          "buff": "+2 AC, Slashing Resistance"
+        }
+      },
+      {
+        "spell_key": "trp_absorb_and_throw",
+        "name_en": "Absorb and Throw",
+        "name_tr": "Em ve Fırlat",
+        "description_en": "Absorbs an elemental spell, embedding its energy into your shield. Your next shield throw deals an extra 4d6 of that element.",
+        "description_tr": "Elementsel bir büyüyü emerek enerjisini kalkanına yerleştirir. Bir sonraki kalkan fırlatışın o elementten fazladan 4d6 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "trp_heavy_ricochet",
+          "trp_rebound_strike"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "+4d6 elemental",
+          "mechanics": "Absorbs elemental spell"
+        }
+      },
+      {
+        "spell_key": "trp_magnetic_reflection",
+        "name_en": "Magnetic Reflection",
+        "name_tr": "Manyetik Yansıma",
+        "description_en": "Magnetically draws all stray projectiles in a 10m radius to your shields, then violently repels them outward in a 5m AoE, dealing 4d8 damage.",
+        "description_tr": "10m yarıçapındaki tüm serseri mermileri manyetik olarak kalkanlarına çeker, ardından 5m'lik bir alan etkisinde şiddetle dışarı iterek 4d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "trp_magnetic_pull",
+          "trp_magic_dispersion"
+        ],
+        "icon": "📡",
+        "effects": {
+          "radius": "10m pull, 5m blast",
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "trp_triple_guard_stance",
+        "name_en": "Triple Guard Stance",
+        "name_tr": "Üçlü Koruma Duruşu",
+        "description_en": "Enters a supreme defensive stance. You block in three directions simultaneously, ignoring flanking and gaining +5 to all saves.",
+        "description_tr": "Üstün bir savunma duruşuna geçer. Aynı anda üç yönden savunma yaparak kuşatılmayı yok sayar ve tüm kurtarma atışlarına +5 kazanırsın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 720,
+        "prerequisites": [
+          "trp_triple_meteor",
+          "trp_impenetrable_phalanx"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "buff": "+5 Saving Throws, immunity to flanking"
+        }
+      },
+      {
+        "spell_key": "trp_kinetic_entrenchment",
+        "name_en": "Kinetic Entrenchment",
+        "name_tr": "Kinetik Mevzi",
+        "description_en": "While entrenched, every attack that hits your shields builds charge. After 3 hits, it automatically releases a 15m shockwave for 5d10 force damage.",
+        "description_tr": "Siper almışken, kalkanlarına isabet eden her saldırı yük biriktirir. 3 vuruştan sonra otomatik olarak 5d10 güç hasarı veren 15m'lik bir şok dalgası yayar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 780,
+        "prerequisites": [
+          "trp_entrench",
+          "trp_kinetic_discharge"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "5d10 force",
+          "radius": "15m",
+          "mechanics": "Triggers after 3 hits"
+        }
+      },
+      {
+        "spell_key": "trp_whirlwind_reflector",
+        "name_en": "Whirlwind Reflector",
+        "name_tr": "Yansıtıcı Hortum",
+        "description_en": "While using Whirlwind of Steel, all magic and physical attacks that touch the whirlwind are violently deflected randomly up to 15m away.",
+        "description_tr": "Çelik Hortumu kullanırken, hortuma temas eden tüm büyü ve fiziksel saldırılar 15m'ye kadar rastgele bir şekilde şiddetle saptırılır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 860,
+        "prerequisites": [
+          "trp_whirlwind_of_steel",
+          "trp_perfect_parry"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "range": "15m reflect",
+          "mechanics": "Randomly deflects all attacks"
+        }
+      },
+      {
+        "spell_key": "trp_three_headed_hydra",
+        "name_en": "Three-Headed Hydra",
+        "name_tr": "Üç Başlı Hidra",
+        "description_en": "Summons a spectral hydra projection made of three shields for 1 minute. It bites enemies for 3d10 damage and defends allies for +3 AC within 5m.",
+        "description_tr": "1 dakika boyunca üç kalkandan oluşan spektral bir hidra projeksiyonu çağırır. 5m içindeki düşmanları ısırarak 3d10 hasar verir ve dostları +3 Zırh Sınıfı ile savunur.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "trp_triple_meteor",
+          "trp_bastion_of_hope",
+          "trp_perfect_parry"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "duration": "1 minute",
+          "damage": "3d10",
+          "buff": "+3 AC within 5m"
+        }
+      },
+      {
+        "spell_key": "trp_grand_rampart_trinity",
+        "name_en": "Grand Rampart Trinity",
+        "name_tr": "Büyük Üçlü Sur",
+        "description_en": "The ultimate technique of the Triple Ramparts. Merges three shields into a colossal floating fortress above you for 3 turns. It rains down shield-meteors dealing 10d10 damage per turn, grants all allies within 30m complete damage immunity, and reflects any spell level 8 or lower.",
+        "description_tr": "Üçlü Surların nihai tekniği. Üç kalkanı 3 tur boyunca tepende devasa yüzen bir kaleye dönüştürür. Tur başına 10d10 hasar veren kalkan meteorları yağdırır, 30m içindeki tüm dostlara tam hasar bağışıklığı verir ve 8. seviye veya daha düşük tüm büyüleri yansıtır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "trp_tri_shield_avalanche",
+          "trp_absolute_defense",
+          "trp_aegis_of_reflection"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "3 turns",
+          "damage": "10d10 per turn",
+          "buff": "Immunity within 30m",
+          "mechanics": "Reflects level 8 or lower spells"
+        }
+      }
+    ]
+  }
+]

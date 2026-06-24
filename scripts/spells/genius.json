@@ -1,0 +1,996 @@
+[
+  {
+    "subclass_key": "genius",
+    "tree_name_en": "Mind of the Genius",
+    "tree_name_tr": "Dehanın Zihni",
+    "tree_desc_en": "Unparalleled intellect that turns the battlefield into a chessboard. Features tactical commands, ingenious gadgets, and the ability to foresee enemy movements.",
+    "tree_desc_tr": "Savaş alanını bir satranç tahtasına çeviren eşsiz bir zeka. Taktiksel emirler, dahiyane aletler ve düşman hareketlerini öngörme yetenekleri içerir.",
+    "branches": [
+      "Tactics",
+      "Inventions",
+      "Foresight",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "gn_tactics_analyze",
+        "name_en": "Analyze Weakness",
+        "name_tr": "Zayıflık Analizi",
+        "description_en": "Analyze an enemy to find structural or behavioral flaws, reducing their AC by 2 for 3 turns.",
+        "description_tr": "Bir düşmanın yapısal veya davranışsal kusurlarını analiz ederek 3 tur boyunca Zırh Sınıfını (AC) 2 düşürür.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔍",
+        "effects": {
+          "ac_reduction": 2,
+          "duration": "3 turns",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_flank",
+        "name_en": "Flanking Maneuver",
+        "name_tr": "Kanat Manevrası",
+        "description_en": "Direct an ally to flank an enemy, granting them advantage on their next attack and adding 1d6 tactical damage.",
+        "description_tr": "Bir müttefiki düşmanı kanatlaması için yönlendirir, bir sonraki saldırısında avantaj ve 1d6 taktiksel hasar kazandırır.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔄",
+        "effects": {
+          "bonus_damage": "1d6",
+          "advantage": true,
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_reposition",
+        "name_en": "Tactical Retreat",
+        "name_tr": "Taktiksel Geri Çekilme",
+        "description_en": "Command an ally to move up to 10m without provoking opportunity attacks.",
+        "description_tr": "Bir müttefike fırsat saldırısı tetiklemeden 10m'ye kadar hareket etmesi için emir verir.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "gn_tactics_flank"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "movement": "10m",
+          "range": "20m",
+          "opportunity_attack_immunity": true
+        }
+      },
+      {
+        "spell_key": "gn_tactics_command",
+        "name_en": "Direct Command",
+        "name_tr": "Doğrudan Emir",
+        "description_en": "Grant an ally an immediate extra action at the cost of your own action.",
+        "description_tr": "Kendi eyleminiz pahasına bir müttefike anında fazladan bir eylem hakkı tanır.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "gn_tactics_analyze"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "action_granted": 1,
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_vulnerability",
+        "name_en": "Expose Vulnerability",
+        "name_tr": "Zayıflık İfşası",
+        "description_en": "Point out a critical weak spot. The next attack against the target critically hits on a 18-20 and deals an extra 2d8 damage.",
+        "description_tr": "Kritik bir zayıf noktayı işaret eder. Hedefe yapılan bir sonraki saldırı 18-20 zarlarında kritik vurur ve fazladan 2d8 hasar verir.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "gn_tactics_analyze"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "crit_range": "18-20",
+          "bonus_damage": "2d8",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_formation",
+        "name_en": "Phalanx Formation",
+        "name_tr": "Falanks Dizilimi",
+        "description_en": "Organize allies within 10m. They gain +3 AC and resistance to physical damage as long as they stay within 2m of each other.",
+        "description_tr": "10m içindeki müttefikleri organize eder. Birbirlerinden en fazla 2m uzakta kaldıkları sürece +3 AC ve fiziksel hasar direnci kazanırlar.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "gn_tactics_reposition"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": 3,
+          "resistance": "Physical",
+          "radius": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_coordination",
+        "name_en": "Perfect Coordination",
+        "name_tr": "Kusursuz Koordinasyon",
+        "description_en": "Link the minds of up to 3 allies. Whenever one hits an enemy, the others gain +2 to their next attack roll against that same enemy.",
+        "description_tr": "3 müttefike kadar zihinleri bağlar. Biri düşmana vurduğunda, diğerleri o düşmana karşı bir sonraki saldırılarında +2 bonus kazanır.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 240,
+        "prerequisites": [
+          "gn_tactics_command"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "attack_bonus": 2,
+          "targets": 3,
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_feint",
+        "name_en": "Calculated Feint",
+        "name_tr": "Hesaplanmış Şaşırtmaca",
+        "description_en": "Execute a perfect feint, forcing an enemy to waste their reaction and leaving them open to a free opportunity attack from an ally.",
+        "description_tr": "Kusursuz bir şaşırtmaca yaparak düşmanın tepki eylemini (reaction) boşa harcatır ve müttefikin ücretsiz bir fırsat saldırısı yapmasına olanak tanır.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "gn_tactics_vulnerability"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "reaction_denial": true,
+          "opportunity_attack": true,
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_overwatch",
+        "name_en": "Overwatch Stance",
+        "name_tr": "Gözetleme Duruşu",
+        "description_en": "Designate a 15m cone. Any enemy that moves within this area triggers an immediate ranged attack from you or an ally with a +5 bonus.",
+        "description_tr": "15m'lik konik bir alanı işaretler. Bu alanda hareket eden her düşman, sizden veya bir müttefikten +5 bonuslu anında bir menzilli saldırı tetikler.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "gn_tactics_formation"
+        ],
+        "icon": "👀",
+        "effects": {
+          "area": "15m cone",
+          "attack_bonus": 5,
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_ambush",
+        "name_en": "Setup Ambush",
+        "name_tr": "Pusu Kurulumu",
+        "description_en": "Prepare an ambush zone (10m radius). The first enemy entering it takes 6d6 surprise damage and is stunned for 1 turn.",
+        "description_tr": "10m yarıçaplı bir pusu alanı hazırlar. Giren ilk düşman 6d6 sürpriz hasar alır ve 1 tur boyunca sersemler.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gn_tactics_coordination"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "damage": "6d6",
+          "radius": "10m",
+          "condition": "Stunned"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_exploit",
+        "name_en": "Exploit Opening",
+        "name_tr": "Açığı Değerlendirme",
+        "description_en": "Capitalize on a debuffed enemy. Deal 5d8 physical damage, doubling the damage if the target has any negative conditions.",
+        "description_tr": "Zayıflatılmış bir düşmandan faydalanır. 5d8 fiziksel hasar verir; hedefin herhangi bir olumsuz durumu (debuff) varsa hasar ikiye katlanır.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "gn_tactics_feint"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "5d8",
+          "conditional_damage": "10d8",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_checkmate",
+        "name_en": "Checkmate Setup",
+        "name_tr": "Şah Mat Hazırlığı",
+        "description_en": "Trap an enemy in a tactical corner. They cannot move more than 3m per turn and take 8d8 psychic damage from the sheer realization of their doom.",
+        "description_tr": "Düşmanı taktiksel bir köşeye sıkıştırır. Tur başına 3m'den fazla hareket edemezler ve sonlarının geldiğini fark etmenin verdiği dehşetle 8d8 psişik hasar alırlar.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "gn_tactics_overwatch",
+          "gn_tactics_ambush"
+        ],
+        "icon": "♟️",
+        "effects": {
+          "damage": "8d8",
+          "movement_limit": "3m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_synergy",
+        "name_en": "Total Synergy",
+        "name_tr": "Tam Sinerji",
+        "description_en": "For 3 turns, all allies share their highest stats. If one ally has 20 Strength, all allies use 20 Strength for their rolls.",
+        "description_tr": "3 tur boyunca tüm müttefikler en yüksek istatistiklerini paylaşır. Bir müttefikin 20 Gücü varsa, tüm müttefikler zarlarında 20 Güç kullanır.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gn_tactics_exploit"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "stat_sharing": true,
+          "duration": "3 turns",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_disarray",
+        "name_en": "Sow Disarray",
+        "name_tr": "Karmaşa Yaratma",
+        "description_en": "Manipulate enemy communications. All enemies in 20m must make an Intelligence save or attack their nearest ally on their next turn.",
+        "description_tr": "Düşman iletişimini manipüle eder. 20m içindeki tüm düşmanlar Zeka kurtarması yapmalıdır, aksi takdirde bir sonraki turlarında en yakın müttefiklerine saldırırlar.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "gn_tactics_checkmate"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "radius": "20m",
+          "condition": "Confusion",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gn_tactics_masterplan",
+        "name_en": "The Master Plan",
+        "name_tr": "Ana Plan",
+        "description_en": "Execute a flawless strategy. All allies immediately take a full turn, bypassing the initiative order, with advantage on all rolls and +10 to damage.",
+        "description_tr": "Kusursuz bir strateji uygular. Tüm müttefikler inisiyatif sırasını atlayarak anında tam bir tur hakkı kazanır; tüm zarlarda avantaj ve hasarda +10 bonus elde ederler.",
+        "branch": "Tactics",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gn_tactics_synergy",
+          "gn_tactics_disarray"
+        ],
+        "icon": "👑",
+        "effects": {
+          "extra_turn_allies": true,
+          "damage_bonus": 10,
+          "radius": "50m"
+        }
+      },
+      {
+        "spell_key": "gn_invent_caltrops",
+        "name_en": "Spring-loaded Caltrops",
+        "name_tr": "Yaylı Dikenler",
+        "description_en": "Deploy mechanical caltrops in a 5m area. Enemies entering take 1d8 piercing damage and have their speed reduced by half.",
+        "description_tr": "5m'lik alana mekanik dikenler saçar. Giren düşmanlar 1d8 delici hasar alır ve hızları yarı yarıya düşer.",
+        "branch": "Inventions",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "📌",
+        "effects": {
+          "damage": "1d8",
+          "area": "5m",
+          "speed_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "gn_invent_grapple",
+        "name_en": "Auto-Grapple",
+        "name_tr": "Otomatik Kanca",
+        "description_en": "Fire a mechanical grappling hook to pull yourself up to 15m to a target location, or pull a medium/small enemy to you.",
+        "description_tr": "Kendinizi 15m'ye kadar bir hedefe çekmek veya orta/küçük boy bir düşmanı size çekmek için mekanik bir kanca fırlatır.",
+        "branch": "Inventions",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🪝",
+        "effects": {
+          "range": "15m",
+          "pull": true
+        }
+      },
+      {
+        "spell_key": "gn_invent_smoke",
+        "name_en": "Chemical Smoke Bomb",
+        "name_tr": "Kimyasal Sis Bombası",
+        "description_en": "Throw a bomb that creates a 10m radius cloud of thick smoke, blinding enemies and dealing 1d4 poison damage per turn.",
+        "description_tr": "10m yarıçaplı yoğun bir duman bulutu yaratan bir bomba atarak düşmanları kör eder ve tur başına 1d4 zehir hasarı verir.",
+        "branch": "Inventions",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 85,
+        "prerequisites": [
+          "gn_invent_caltrops"
+        ],
+        "icon": "💨",
+        "effects": {
+          "radius": "10m",
+          "damage": "1d4/turn",
+          "condition": "Blinded"
+        }
+      },
+      {
+        "spell_key": "gn_invent_spark",
+        "name_en": "Spark Generator",
+        "name_tr": "Kıvılcım Jeneratörü",
+        "description_en": "Release a burst of electricity from a handheld device, dealing 2d6 lightning damage in a 4m cone.",
+        "description_tr": "Elde tutulan bir cihazdan elektrik patlaması yayarak 4m'lik konik alanda 2d6 yıldırım hasarı verir.",
+        "branch": "Inventions",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d6",
+          "area": "4m cone"
+        }
+      },
+      {
+        "spell_key": "gn_invent_net",
+        "name_en": "Electrified Net",
+        "name_tr": "Elektrikli Ağ",
+        "description_en": "Launch a heavy net that restrains an enemy and deals 2d8 lightning damage at the start of their turns. Requires a DC 16 Strength check to escape.",
+        "description_tr": "Düşmanı kısıtlayan ağır bir ağ fırlatır; düşmanın tur başlangıçlarında 2d8 yıldırım hasarı verir. Kaçmak için DC 16 Güç kontrolü gerektirir.",
+        "branch": "Inventions",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "gn_invent_grapple"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "damage": "2d8/turn",
+          "condition": "Restrained",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "gn_invent_drone",
+        "name_en": "Recon Drone",
+        "name_tr": "Keşif Dronu",
+        "description_en": "Deploy a small flying drone that reveals invisible enemies and grants you telepathic vision in a 30m radius for 10 minutes.",
+        "description_tr": "Görünmez düşmanları açığa çıkaran ve size 10 dakika boyunca 30m yarıçaplı alanda telepatik görüş sağlayan küçük bir uçan dron konuşlandırır.",
+        "branch": "Inventions",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 210,
+        "prerequisites": [
+          "gn_invent_smoke"
+        ],
+        "icon": "🚁",
+        "effects": {
+          "radius": "30m",
+          "truesight": true,
+          "duration": "10 min"
+        }
+      },
+      {
+        "spell_key": "gn_invent_barrier",
+        "name_en": "Deployable Cover",
+        "name_tr": "Kurulabilir Siper",
+        "description_en": "Throw a capsule that expands into a 3m wide, 2m tall titanium barricade. Provides full cover and has 50 HP.",
+        "description_tr": "3m genişliğinde, 2m yüksekliğinde titanyum bir barikata dönüşen bir kapsül atar. Tam siper sağlar ve 50 Can Puanı (HP) vardır.",
+        "branch": "Inventions",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [],
+        "icon": "🚧",
+        "effects": {
+          "barrier_hp": 50,
+          "width": "3m",
+          "height": "2m",
+          "duration": "Permanent until destroyed"
+        }
+      },
+      {
+        "spell_key": "gn_invent_stim",
+        "name_en": "Adrenaline Stimulant",
+        "name_tr": "Adrenalin İğnesi",
+        "description_en": "Inject an ally with a potent chemical mix. They heal for 3d8 HP, gain +3m movement, and ignore exhaustion for 1 hour.",
+        "description_tr": "Bir müttefike güçlü bir kimyasal karışım enjekte eder. 3d8 HP iyileşirler, +3m hareket kazanırlar ve 1 saat boyunca yorgunluğu görmezden gelirler.",
+        "branch": "Inventions",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "gn_invent_spark"
+        ],
+        "icon": "💉",
+        "effects": {
+          "healing": "3d8",
+          "movement_bonus": "3m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "gn_invent_turret",
+        "name_en": "Automated Turret",
+        "name_tr": "Otomatik Taret",
+        "description_en": "Deploy a stationary turret that attacks the nearest enemy each turn, dealing 3d10 piercing damage. Lasts 4 turns or until destroyed (60 HP).",
+        "description_tr": "Her tur en yakın düşmana saldırarak 3d10 delici hasar veren sabit bir taret kurar. 4 tur veya yok edilene kadar (60 HP) kalır.",
+        "branch": "Inventions",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 370,
+        "prerequisites": [
+          "gn_invent_net"
+        ],
+        "icon": "🔫",
+        "effects": {
+          "damage": "3d10/turn",
+          "turret_hp": 60,
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "gn_invent_mine",
+        "name_en": "Proximity Mine",
+        "name_tr": "Yakınlık Mayını",
+        "description_en": "Plant an invisible explosive. When triggered by an enemy within 3m, it detonates for 6d8 fire damage and knocks targets prone.",
+        "description_tr": "Görünmez bir patlayıcı yerleştirir. 3m içindeki bir düşman tarafından tetiklendiğinde patlayarak 6d8 ateş hasarı verir ve hedefleri yüzüstü düşürür.",
+        "branch": "Inventions",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "gn_invent_barrier"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "6d8",
+          "trigger_radius": "3m",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "gn_invent_deflector",
+        "name_en": "Magnetic Deflector",
+        "name_tr": "Manyetik Saptırıcı",
+        "description_en": "Activate a magnetic field around yourself for 3 turns. All ranged projectile attacks have a 50% chance to be deflected back at the attacker.",
+        "description_tr": "Kendiniz etrafında 3 tur boyunca manyetik bir alan aktive eder. Tüm menzilli mermi saldırılarının saldırgana geri yansıma ihtimali %50'dir.",
+        "branch": "Inventions",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "gn_invent_drone"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "deflection_chance": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gn_invent_golem",
+        "name_en": "Clockwork Golem",
+        "name_tr": "Kurmalı Golem",
+        "description_en": "Assemble a mechanical construct to fight for you. It has 120 HP, deals 4d10 bludgeoning damage per hit, and absorbs 30% of damage meant for you.",
+        "description_tr": "Sizin için savaşacak mekanik bir yapı birleştirir. 120 Canı vardır, vuruş başına 4d10 ezme hasarı verir ve size gelen hasarın %30'unu emer.",
+        "branch": "Inventions",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "gn_invent_turret"
+        ],
+        "icon": "🤖",
+        "effects": {
+          "golem_hp": 120,
+          "damage": "4d10",
+          "damage_absorption": "30%",
+          "duration": "10 min"
+        }
+      },
+      {
+        "spell_key": "gn_invent_emp",
+        "name_en": "EMP Grenade",
+        "name_tr": "EMP Bombası",
+        "description_en": "Detonate an electromagnetic pulse in a 15m radius. Dispels magical effects, disables technological devices, and deals 8d6 force damage.",
+        "description_tr": "15m yarıçapında bir elektromanyetik dalga patlatır. Büyülü etkileri dağıtır, teknolojik cihazları devre dışı bırakır ve 8d6 güç hasarı verir.",
+        "branch": "Inventions",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "gn_invent_mine"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "8d6",
+          "radius": "15m",
+          "dispel": true
+        }
+      },
+      {
+        "spell_key": "gn_invent_ray",
+        "name_en": "Plasma Ray",
+        "name_tr": "Plazma Işını",
+        "description_en": "Fire a concentrated beam of superheated plasma in a 30m line. Deals 10d10 fire/radiant damage and melts armor, reducing AC by 3 permanently.",
+        "description_tr": "30m'lik bir hatta yoğunlaştırılmış süper ısıtılmış plazma ışını fırlatır. 10d10 ateş/radyant hasarı verir ve zırhı eriterek Zırh Sınıfını (AC) kalıcı olarak 3 düşürür.",
+        "branch": "Inventions",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "gn_invent_deflector"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "10d10",
+          "ac_reduction": 3,
+          "area": "30m line"
+        }
+      },
+      {
+        "spell_key": "gn_invent_doomsday",
+        "name_en": "Doomsday Device",
+        "name_tr": "Kıyamet Makinesi",
+        "description_en": "Deploy your magnum opus. After 2 turns of charging, it detonates in a 100m radius, dealing 25d10 force damage and warping reality, disintegrating enemies under 100 HP.",
+        "description_tr": "Başyapıtınızı konuşlandırır. 2 turluk şarjın ardından 100m yarıçapta patlayarak 25d10 güç hasarı verir, gerçekliği bükerek 100 HP altındaki düşmanları toza çevirir.",
+        "branch": "Inventions",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "gn_invent_golem",
+          "gn_invent_emp"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "damage": "25d10",
+          "radius": "100m",
+          "disintegrate_threshold": 100,
+          "delay": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gn_fore_predict",
+        "name_en": "Predict Strike",
+        "name_tr": "Saldırı Öngörüsü",
+        "description_en": "Analyze an enemy's muscle twitches to predict their next melee attack, gaining +4 AC against it.",
+        "description_tr": "Düşmanın kas seğirmelerini analiz ederek bir sonraki yakın dövüş saldırısını öngörür ve ona karşı +4 AC kazandırır.",
+        "branch": "Foresight",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "ac_bonus": 4,
+          "duration": "1 attack"
+        }
+      },
+      {
+        "spell_key": "gn_fore_dodge",
+        "name_en": "Calculated Dodge",
+        "name_tr": "Hesaplanmış Kaçış",
+        "description_en": "Move exactly 1m out of the way of an incoming area effect, taking half damage automatically, or no damage on a successful save.",
+        "description_tr": "Gelen bir alan etkisinden tam olarak 1m uzağa çekilerek otomatik olarak yarım hasar veya başarılı bir kurtarmada sıfır hasar alır.",
+        "branch": "Foresight",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🤸",
+        "effects": {
+          "evasion": true,
+          "reaction": true
+        }
+      },
+      {
+        "spell_key": "gn_fore_initiative",
+        "name_en": "Seize Initiative",
+        "name_tr": "İnisiyatif Gaspı",
+        "description_en": "Mentally process the battlefield at hyperspeed. Add your Intelligence modifier to your Initiative roll and cannot be surprised.",
+        "description_tr": "Savaş alanını zihinsel olarak hiper hızda işler. İnisiyatif zarına Zeka düzenleyicisini ekler ve hazırlıksız yakalanamazsınız (surprised olmazsınız).",
+        "branch": "Foresight",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "⏱️",
+        "effects": {
+          "initiative_bonus": "INT mod",
+          "immunity": "Surprise"
+        }
+      },
+      {
+        "spell_key": "gn_fore_read",
+        "name_en": "Read Intentions",
+        "name_tr": "Niyet Okuma",
+        "description_en": "Focus on a target to learn their exact current HP, resistances, vulnerabilities, and their intended target for their next turn.",
+        "description_tr": "Bir hedefe odaklanarak mevcut Canlarını, dirençlerini, zayıflıklarını ve bir sonraki turdaki planladıkları hedeflerini kesin olarak öğrenir.",
+        "branch": "Foresight",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 120,
+        "prerequisites": [
+          "gn_fore_predict"
+        ],
+        "icon": "📖",
+        "effects": {
+          "info_gathering": true,
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gn_fore_counter",
+        "name_en": "Anticipatory Counter",
+        "name_tr": "Beklenen Karşı Saldırı",
+        "description_en": "When an enemy misses you with a melee attack, instantly retaliate with an unavoidable strike dealing 3d6 damage.",
+        "description_tr": "Bir düşman size yakın dövüş saldırısı kaçırdığında, 3d6 hasar veren kaçınılmaz bir vuruşla anında misilleme yapar.",
+        "branch": "Foresight",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "gn_fore_predict"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "damage": "3d6",
+          "auto_hit": true,
+          "reaction": true
+        }
+      },
+      {
+        "spell_key": "gn_fore_glimpse",
+        "name_en": "Glimpse the Future",
+        "name_tr": "Geleceği Görme",
+        "description_en": "Look 3 seconds into the future. You may reroll one d20 roll you or an ally makes, keeping the new result.",
+        "description_tr": "Geleceğin 3 saniye sonrasına bakar. Sizin veya müttefikinizin attığı bir d20 zarını yeniden atabilir ve yeni sonucu tutarsınız.",
+        "branch": "Foresight",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 220,
+        "prerequisites": [
+          "gn_fore_read"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "reroll": true,
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "gn_fore_evade",
+        "name_en": "Preemptive Evasion",
+        "name_tr": "Önleyici Kaçınma",
+        "description_en": "Pre-calculate the trajectories of all projectiles. Ranged attacks against you have disadvantage for 3 turns.",
+        "description_tr": "Tüm mermilerin yörüngelerini önceden hesaplar. Size yapılan menzilli saldırılar 3 tur boyunca dezavantaja sahip olur.",
+        "branch": "Foresight",
+        "tier": 2,
+        "min_level": 33,
+        "xp_cost": 260,
+        "prerequisites": [
+          "gn_fore_dodge"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "disadvantage_ranged": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gn_fore_delay",
+        "name_en": "Delay Opponent",
+        "name_tr": "Rakibi Geciktirme",
+        "description_en": "Force an enemy to double-guess their action. They are pushed to the very end of the initiative order for the current round.",
+        "description_tr": "Düşmanı eylemini ikinci kez düşünmeye zorlar. Düşman mevcut tur için inisiyatif sırasının en sonuna itilir.",
+        "branch": "Foresight",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "gn_fore_initiative"
+        ],
+        "icon": "🐢",
+        "effects": {
+          "initiative_change": "Last",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gn_fore_timeline",
+        "name_en": "Calculate Timelines",
+        "name_tr": "Zaman Çizelgesi Hesaplama",
+        "description_en": "Simulate multiple combat outcomes. For the next 2 turns, you can choose to replace any enemy's attack roll with a flat 10.",
+        "description_tr": "Birden fazla savaş sonucunu simüle eder. Sonraki 2 tur boyunca, herhangi bir düşmanın saldırı zarını doğrudan 10 ile değiştirmeyi seçebilirsiniz.",
+        "branch": "Foresight",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 380,
+        "prerequisites": [
+          "gn_fore_glimpse"
+        ],
+        "icon": "📊",
+        "effects": {
+          "roll_replacement": 10,
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gn_fore_outsmart",
+        "name_en": "Outsmart",
+        "name_tr": "Zekayla Alt Etme",
+        "description_en": "Lure an enemy into an obvious trap. Deal 5d8 psychic damage, and they waste their next turn attacking an illusion of you.",
+        "description_tr": "Düşmanı bariz bir tuzağa çeker. 5d8 psişik hasar verir ve düşman bir sonraki turunu sizin illüzyonunuza saldırarak boşa harcar.",
+        "branch": "Foresight",
+        "tier": 3,
+        "min_level": 51,
+        "xp_cost": 430,
+        "prerequisites": [
+          "gn_fore_counter"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "damage": "5d8",
+          "condition": "Distracted",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gn_fore_rewind",
+        "name_en": "Mental Rewind",
+        "name_tr": "Zihinsel Geri Sarma",
+        "description_en": "Realize the current turn was just a mental simulation. Reset the combat state (HP, positions, spell slots) back to the start of the current round. Usable once per day.",
+        "description_tr": "Mevcut turun sadece zihinsel bir simülasyon olduğunu fark eder. Savaş durumunu (Can, konumlar, büyü slotları) mevcut turun başlangıcına sıfırlar. Günde bir kez kullanılır.",
+        "branch": "Foresight",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 500,
+        "prerequisites": [
+          "gn_fore_evade"
+        ],
+        "icon": "⏪",
+        "effects": {
+          "time_manipulation": "1 round rewind",
+          "uses": "1/day"
+        }
+      },
+      {
+        "spell_key": "gn_fore_prescience",
+        "name_en": "Combat Prescience",
+        "name_tr": "Savaş Öngörüsü",
+        "description_en": "Enter a state of total awareness. For 1 minute, you cannot be hit by attacks unless the attacker rolls a natural 20.",
+        "description_tr": "Tam farkındalık durumuna girer. 1 dakika boyunca, saldıran kişi doğal 20 atmadıkça hiçbir saldırıdan isabet almazsınız.",
+        "branch": "Foresight",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 630,
+        "prerequisites": [
+          "gn_fore_timeline"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "ac_bonus": "Only crit hits",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "gn_fore_fate",
+        "name_en": "Dictate Fate",
+        "name_tr": "Kaderi Belirleme",
+        "description_en": "Declare an enemy's demise. If the target is below 30% HP, their heart stops from the sheer psychological pressure of your prediction, instantly killing them.",
+        "description_tr": "Düşmanın ölümünü ilan eder. Eğer hedef %30 Canın altındaysa, kehanetinizin yarattığı psikolojik baskıdan kalbi durur ve anında ölür.",
+        "branch": "Foresight",
+        "tier": 4,
+        "min_level": 71,
+        "xp_cost": 760,
+        "prerequisites": [
+          "gn_fore_outsmart"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "execute_threshold": "30% HP",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "gn_fore_paradox",
+        "name_en": "Causal Paradox",
+        "name_tr": "Nedensellik Paradoksu",
+        "description_en": "Attack an enemy before they arrive. Deal 12d8 force damage. If this damage kills them, their past actions in the last 2 turns are undone.",
+        "description_tr": "Bir düşmana o henüz varmadan saldırır. 12d8 güç hasarı verir. Eğer bu hasar onu öldürürse, son 2 turdaki geçmiş eylemleri geri alınır.",
+        "branch": "Foresight",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 860,
+        "prerequisites": [
+          "gn_fore_rewind"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "damage": "12d8",
+          "effect_reversal": "2 turns on kill"
+        }
+      },
+      {
+        "spell_key": "gn_fore_omniscience",
+        "name_en": "Laplace's Demon",
+        "name_tr": "Laplace'ın Şeytanı",
+        "description_en": "Process every atom in the battlefield. You foresee absolutely everything for 3 turns. All your attacks critically hit, all enemies have disadvantage, and you automatically succeed on all saves.",
+        "description_tr": "Savaş alanındaki her atomu işler. 3 tur boyunca her şeyi eksiksiz öngörürsünüz. Tüm saldırılarınız kritik vurur, tüm düşmanlar dezavantaja sahip olur ve tüm kurtarmalarda otomatik başarı sağlarsınız.",
+        "branch": "Foresight",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "gn_fore_prescience",
+          "gn_fore_paradox"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "auto_crit": true,
+          "auto_save": true,
+          "enemy_disadvantage": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gn_cb_anticipate",
+        "name_en": "Anticipated Orders",
+        "name_tr": "Öngörülen Emirler",
+        "description_en": "Issue a command before the battle begins. One ally gains a free action during the surprise round or before the first initiative turn.",
+        "description_tr": "Savaş başlamadan önce bir emir verir. Bir müttefik, sürpriz turunda veya inisiyatif sırasından önce ücretsiz bir eylem kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 230,
+        "prerequisites": [
+          "gn_tactics_command",
+          "gn_fore_initiative"
+        ],
+        "icon": "📋",
+        "effects": {
+          "free_action": true,
+          "timing": "Pre-combat"
+        }
+      },
+      {
+        "spell_key": "gn_cb_trap",
+        "name_en": "Tactical Snare",
+        "name_tr": "Taktiksel Tuzak",
+        "description_en": "Lure an enemy into a hidden gravity trap. Deals 4d10 crushing damage and permanently reduces their movement speed by 5m for the encounter.",
+        "description_tr": "Düşmanı gizli bir yerçekimi tuzağına çeker. 4d10 ezme hasarı verir ve savaş boyunca hareket hızını kalıcı olarak 5m düşürür.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 47,
+        "xp_cost": 410,
+        "prerequisites": [
+          "gn_tactics_vulnerability",
+          "gn_invent_net"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "damage": "4d10",
+          "speed_reduction": "5m",
+          "duration": "Encounter"
+        }
+      },
+      {
+        "spell_key": "gn_cb_predictive_shield",
+        "name_en": "Predictive Shielding",
+        "name_tr": "Öngörülü Kalkan",
+        "description_en": "Equip an AI-driven personal shield that anticipates the damage type of the next attack and automatically grants immunity to that element for 1 turn.",
+        "description_tr": "Bir sonraki saldırının hasar türünü öngören yapay zeka güdümlü bir kalkan kuşanarak o elemente karşı 1 tur boyunca otomatik bağışıklık sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "gn_invent_barrier",
+          "gn_fore_glimpse"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "immunity": "Adaptive",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gn_cb_mastermind",
+        "name_en": "Mastermind's Gambit",
+        "name_tr": "Dehanın Kumarı",
+        "description_en": "Sacrifice your deployed inventions to overload the battlefield. Each active invention explodes for 10d10 damage, while you and allies are phased out of reality to avoid harm.",
+        "description_tr": "Savaş alanını aşırı yüklemek için sahada bulunan icatlarınızı feda eder. Her aktif icat 10d10 hasarla patlarken, zarar görmemeniz için siz ve müttefikleriniz gerçeklikten soyutlanırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "gn_tactics_checkmate",
+          "gn_invent_emp",
+          "gn_fore_prescience"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "damage": "10d10 per invention",
+          "immunity": "Allies"
+        }
+      },
+      {
+        "spell_key": "gn_grand_ultimate",
+        "name_en": "Deus Ex Machina",
+        "name_tr": "Makinedeki Tanrı",
+        "description_en": "The ultimate display of extreme intellect. You construct a probability-altering hypercomputer in real-time. For the rest of the battle, you control the dice. You can change any roll made by any creature to a 1 or a 20.",
+        "description_tr": "Aşırı zekanın nihai gösterimi. Gerçek zamanlı olarak olasılıkları değiştiren bir hiper bilgisayar inşa edersiniz. Savaşın geri kalanında zarları siz kontrol edersiniz. Herhangi bir varlık tarafından atılan bir zarı 1 veya 20 olarak değiştirebilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "gn_tactics_masterplan",
+          "gn_invent_doomsday",
+          "gn_fore_omniscience"
+        ],
+        "icon": "🎲",
+        "effects": {
+          "dice_control": true,
+          "duration": "Rest of encounter",
+          "uses": "Unlimited within encounter"
+        }
+      }
+    ]
+  }
+]

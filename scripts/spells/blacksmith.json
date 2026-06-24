@@ -1,0 +1,1024 @@
+[
+  {
+    "subclass_key": "blacksmith",
+    "tree_name_en": "Blacksmith",
+    "tree_name_tr": "Demirci",
+    "tree_desc_en": "Masters of the forge, blacksmiths craft weapons, upgrade armor, and melt their foes with searing metal.",
+    "tree_desc_tr": "Ocak ustaları olan demirciler silah üretir, zırhları geliştirir ve düşmanlarını kavurucu metallerle eritir.",
+    "branches": [
+      "Forge",
+      "Upgrade",
+      "Weaponry"
+    ],
+    "spells": [
+      {
+        "spell_key": "bs_heat_metal",
+        "name_en": "Heat Metal",
+        "name_tr": "Metal Isıtma",
+        "description_en": "Heats a targeted enemy's metal equipment, dealing 2d6 fire damage and causing them to drop it if they fail a save.",
+        "description_tr": "Hedeflenen düşmanın metal ekipmanını ısıtarak 2d6 ateş hasarı verir ve eğer kurtarma zarında başarısız olurlarsa eşyayı düşürmelerine sebep olur.",
+        "branch": "Forge",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "♨️",
+        "effects": {
+          "damage": "2d6 fire",
+          "range": "15m",
+          "save": "WIS or drop weapon"
+        }
+      },
+      {
+        "spell_key": "bs_sharpen_blade",
+        "name_en": "Sharpen Blade",
+        "name_tr": "Bıçak Bileme",
+        "description_en": "Temporarily sharpens an ally's weapon, granting it +1d4 damage and +1 to hit for 10 minutes.",
+        "description_tr": "Bir müttefikin silahını geçici olarak biler, 10 dakika boyunca +1d4 hasar ve isabet zarına +1 kazandırır.",
+        "branch": "Upgrade",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "buff": "+1d4 damage, +1 to hit",
+          "range": "Touch",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "bs_throw_hammer",
+        "name_en": "Throw Hammer",
+        "name_tr": "Çekiç Fırlatma",
+        "description_en": "Hurls a magically forged hammer at a target within 15m, dealing 2d8 bludgeoning damage and returning to your hand.",
+        "description_tr": "Büyüyle dövülmüş bir çekiçi 15m içindeki bir hedefe fırlatır, 2d8 ezici hasar verir ve çekiç elinize geri döner.",
+        "branch": "Weaponry",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "damage": "2d8 bludgeoning",
+          "range": "15m",
+          "effect": "Returns to hand"
+        }
+      },
+      {
+        "spell_key": "bs_smelt_ore",
+        "name_en": "Smelt Ore",
+        "name_tr": "Cevher Eritme",
+        "description_en": "Hurls a lump of burning, molten slag at a target, dealing 2d8 fire damage and reducing their movement speed by 2m.",
+        "description_tr": "Bir hedefe yanan, erimiş cüruf parçası fırlatarak 2d8 ateş hasarı verir ve hareket hızlarını 2m azaltır.",
+        "branch": "Forge",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "bs_heat_metal"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "damage": "2d8 fire",
+          "range": "12m",
+          "speed_reduction": "-2m"
+        }
+      },
+      {
+        "spell_key": "bs_mend_armor",
+        "name_en": "Mend Armor",
+        "name_tr": "Zırh Onarımı",
+        "description_en": "Quickly repairs a piece of armor, restoring 2d8 temporary HP to the wearer and removing the 'Broken' condition.",
+        "description_tr": "Bir zırh parçasını hızla onararak giyene 2d8 geçici HP kazandırır ve 'Kırık' durumunu kaldırır.",
+        "branch": "Upgrade",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [
+          "bs_sharpen_blade"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "heal": "2d8 temp HP",
+          "effect": "Removes Broken condition",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_phantom_dagger",
+        "name_en": "Phantom Dagger",
+        "name_tr": "Hayalet Hançer",
+        "description_en": "Throws a translucent dagger that pierces through armor, dealing 2d4 piercing damage and ignoring AC bonuses from armor.",
+        "description_tr": "Zırhı delip geçen yarı saydam bir hançer fırlatır. Zırhtan gelen AC bonuslarını yok sayarak 2d4 delici hasar verir.",
+        "branch": "Weaponry",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "bs_throw_hammer"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2d4 piercing",
+          "range": "15m",
+          "effect": "Ignores Armor AC"
+        }
+      },
+      {
+        "spell_key": "bs_forge_sparks",
+        "name_en": "Forge Sparks",
+        "name_tr": "Ocak Kıvılcımları",
+        "description_en": "Emits a blast of blinding sparks in a 5m cone, dealing 3d4 fire damage and blinding enemies for 1 turn.",
+        "description_tr": "5m'lik bir koni alanına kör edici kıvılcımlar saçarak 3d4 ateş hasarı verir ve düşmanları 1 turluğuna kör eder.",
+        "branch": "Forge",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "bs_smelt_ore"
+        ],
+        "icon": "✨",
+        "effects": {
+          "damage": "3d4 fire",
+          "area": "5m cone",
+          "status": "Blinded (1 turn)"
+        }
+      },
+      {
+        "spell_key": "bs_reinforce_shield",
+        "name_en": "Reinforce Shield",
+        "name_tr": "Kalkan Güçlendirme",
+        "description_en": "Strengthens an ally's shield, granting them +2 AC and a 10% chance to completely block physical attacks for 3 turns.",
+        "description_tr": "Bir müttefikin kalkanını güçlendirir, 3 tur boyunca onlara +2 AC ve fiziksel saldırıları tamamen bloklamak için %10 şans verir.",
+        "branch": "Upgrade",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "bs_mend_armor"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "buff": "+2 AC, 10% block chance",
+          "duration": "3 turns",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_iron_grip",
+        "name_en": "Iron Grip",
+        "name_tr": "Demir Kavrama",
+        "description_en": "Your hands become like iron vises. You grapple an enemy within 2m, dealing 1d10 bludgeoning damage per turn and restraining them.",
+        "description_tr": "Elleriniz demir bir mengene gibi olur. 2m içindeki bir düşmanı kavrayarak her tur 1d10 ezici hasar verir ve onları kısıtlarsınız.",
+        "branch": "Weaponry",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "bs_phantom_dagger"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "damage": "1d10 bludgeoning/turn",
+          "range": "2m",
+          "status": "Restrained"
+        }
+      },
+      {
+        "spell_key": "bs_molten_splash",
+        "name_en": "Molten Splash",
+        "name_tr": "Erimiş Sıçrama",
+        "description_en": "Splashes liquid metal in a 4m radius, dealing 4d6 fire damage and applying a burning effect that deals 1d6 damage for 3 turns.",
+        "description_tr": "4m'lik bir yarıçapa sıvı metal sıçratır, 4d6 ateş hasarı verir ve 3 tur boyunca 1d6 hasar veren yanma etkisi uygular.",
+        "branch": "Forge",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "bs_forge_sparks"
+        ],
+        "icon": "💦",
+        "effects": {
+          "damage": "4d6 fire",
+          "area": "4m radius",
+          "status": "Burning (1d6/3 turns)"
+        }
+      },
+      {
+        "spell_key": "bs_heavy_plating",
+        "name_en": "Heavy Plating",
+        "name_tr": "Ağır Kaplama",
+        "description_en": "Coats an ally's armor in thick metal. Grants +4 AC and resistance to slashing/piercing damage, but reduces movement speed by 3m.",
+        "description_tr": "Bir müttefikin zırhını kalın metalle kaplar. +4 AC ve kesici/delici hasarlara direnç kazandırır, ancak hareket hızını 3m düşürür.",
+        "branch": "Upgrade",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "bs_reinforce_shield"
+        ],
+        "icon": "🪨",
+        "effects": {
+          "buff": "+4 AC, Physical Resist",
+          "debuff": "-3m speed",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "bs_summon_anvil",
+        "name_en": "Summon Anvil",
+        "name_tr": "Örs Çağırma",
+        "description_en": "Drops a 500kg anvil from the sky onto a 3m radius area within 20m. Deals 4d10 bludgeoning damage and knocks enemies prone.",
+        "description_tr": "20m içinde belirlenen 3m yarıçaplı bir alana gökyüzünden 500kg'lık bir örs düşürür. 4d10 ezici hasar verir ve düşmanları yere serer.",
+        "branch": "Weaponry",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 210,
+        "prerequisites": [
+          "bs_iron_grip"
+        ],
+        "icon": "🏗️",
+        "effects": {
+          "damage": "4d10 bludgeoning",
+          "area": "3m radius within 20m",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "bs_shape_iron",
+        "name_en": "Shape Iron",
+        "name_tr": "Demir Şekillendirme",
+        "description_en": "Summons a 3m wide, 2m tall wall of solid iron from the ground to block attacks or narrow passages.",
+        "description_tr": "Saldırıları engellemek veya dar geçitleri kapatmak için yerden 3m genişliğinde, 2m yüksekliğinde som demirden bir duvar yükseltir.",
+        "branch": "Forge",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 200,
+        "prerequisites": [
+          "bs_smelt_ore"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "area": "3m wide, 2m tall wall",
+          "duration": "5 turns",
+          "hp": "50"
+        }
+      },
+      {
+        "spell_key": "bs_alloy_coating",
+        "name_en": "Alloy Coating",
+        "name_tr": "Alaşım Kaplama",
+        "description_en": "Coats a weapon or armor in a special alloy, making it immune to rust, acid, and degradation for 1 hour.",
+        "description_tr": "Bir silahı veya zırhı özel bir alaşımla kaplar, onu 1 saatliğine pas, asit ve bozulmaya karşı bağışık hale getirir.",
+        "branch": "Upgrade",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 220,
+        "prerequisites": [
+          "bs_reinforce_shield"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "buff": "Immune to rust/acid/degradation",
+          "duration": "1 hour",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_flying_axes",
+        "name_en": "Flying Axes",
+        "name_tr": "Uçan Baltalar",
+        "description_en": "Forges two axes and throws them in an arc. Each axe targets a different enemy within 15m, dealing 3d6 slashing damage.",
+        "description_tr": "İki balta döver ve onları bir kavisle fırlatır. Her balta 15m içindeki farklı bir hedefi bularak 3d6 kesici hasar verir.",
+        "branch": "Weaponry",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 240,
+        "prerequisites": [
+          "bs_iron_grip"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "3d6 slashing per axe (x2)",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bs_bellows_breath",
+        "name_en": "Bellows' Breath",
+        "name_tr": "Körük Nefesi",
+        "description_en": "Blows a 10m line of searing hot air, pushing enemies back 3m and dealing 3d8 fire damage.",
+        "description_tr": "10m'lik bir hat boyunca kavurucu sıcak hava üfler, düşmanları 3m geriye savurur ve 3d8 ateş hasarı verir.",
+        "branch": "Forge",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "bs_molten_splash",
+          "bs_shape_iron"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "3d8 fire",
+          "area": "10m line",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "bs_molten_armor",
+        "name_en": "Molten Armor",
+        "name_tr": "Erimiş Zırh",
+        "description_en": "Coats an ally in a layer of defensive molten metal. Grants +3 AC, and any melee attacker within 2m takes 2d8 fire damage. Lasts 3 turns.",
+        "description_tr": "Bir müttefiki koruyucu erimiş metal bir katmanla kaplar. +3 AC kazandırır ve 2m içindeki yakın dövüş saldırganları 2d8 ateş hasarı alır. 3 tur sürer.",
+        "branch": "Forge",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 270,
+        "prerequisites": [
+          "bs_shape_iron",
+          "bs_heavy_plating"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "+3 AC",
+          "damage": "2d8 fire to attackers within 2m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bs_weightless_steel",
+        "name_en": "Weightless Steel",
+        "name_tr": "Ağırlıksız Çelik",
+        "description_en": "Infuses an ally's gear with magic, reducing its weight to zero. Grants +3m movement speed and advantage on Dexterity saving throws for 5 turns.",
+        "description_tr": "Bir müttefikin ekipmanını büyüyle doldurarak ağırlığını sıfıra indirir. 5 tur boyunca +3m hareket hızı ve Çeviklik kurtarma zarlarında avantaj sağlar.",
+        "branch": "Upgrade",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "bs_heavy_plating",
+          "bs_alloy_coating"
+        ],
+        "icon": "🪶",
+        "effects": {
+          "buff": "+3m speed, Advantage on DEX saves",
+          "duration": "5 turns",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_shattering_strike",
+        "name_en": "Shattering Strike",
+        "name_tr": "Parçalayan Vuruş",
+        "description_en": "A devastating melee strike that deals 4d8 bludgeoning damage and permanently reduces the target's AC by 2.",
+        "description_tr": "Hedefe 4d8 ezici hasar veren ve Zırh Sınıfını (AC) kalıcı olarak 2 düşüren yıkıcı bir yakın dövüş vuruşu yapar.",
+        "branch": "Weaponry",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "bs_summon_anvil",
+          "bs_flying_axes"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "range": "Melee",
+          "debuff": "-2 AC permanently"
+        }
+      },
+      {
+        "spell_key": "bs_magma_pool",
+        "name_en": "Magma Pool",
+        "name_tr": "Magma Havuzu",
+        "description_en": "Transforms a 10m radius area of the ground into bubbling magma for 5 turns. Enemies starting their turn inside take 5d6 fire damage and have their speed halved.",
+        "description_tr": "10m yarıçaplı bir alanı 5 turluğuna fokurdayan magmaya çevirir. İçeride turuna başlayan düşmanlar 5d6 ateş hasarı alır ve hızları yarıya iner.",
+        "branch": "Forge",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 350,
+        "prerequisites": [
+          "bs_bellows_breath"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "5d6 fire",
+          "area": "10m radius",
+          "duration": "5 turns",
+          "speed": "Halved"
+        }
+      },
+      {
+        "spell_key": "bs_elemental_edge",
+        "name_en": "Elemental Edge",
+        "name_tr": "Elementel Keskinlik",
+        "description_en": "Imbues a weapon with elemental power (Fire, Cold, or Lightning). The weapon deals an additional 2d6 elemental damage for 1 minute.",
+        "description_tr": "Bir silaha elementsel güç (Ateş, Soğuk veya Yıldırım) aşılar. Silah 1 dakika boyunca fazladan 2d6 elementsel hasar verir.",
+        "branch": "Upgrade",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 360,
+        "prerequisites": [
+          "bs_weightless_steel"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "+2d6 elemental",
+          "duration": "1 min",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_whirlwind_blades",
+        "name_en": "Whirlwind of Blades",
+        "name_tr": "Bıçak Kasırgası",
+        "description_en": "Summons a vortex of flying swords around yourself in a 5m radius for 2 turns. Enemies entering or starting their turn take 4d8 slashing damage.",
+        "description_tr": "2 tur boyunca etrafınızda 5m yarıçapında uçuşan kılıçlardan oluşan bir girdap çağırır. İçeri giren veya turuna başlayan düşmanlar 4d8 kesici hasar alır.",
+        "branch": "Weaponry",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 380,
+        "prerequisites": [
+          "bs_shattering_strike"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d8 slashing",
+          "area": "5m radius aura",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "bs_forge_fire",
+        "name_en": "Forge Fire",
+        "name_tr": "Ocak Ateşi",
+        "description_en": "Ignites a localized mystical fire. Allies within 8m gain 50% fire resistance, while enemies take 2d6 fire damage per turn.",
+        "description_tr": "Lokal bir mistik ocak ateşi yakar. 8m içindeki müttefikler %50 ateş direnci kazanırken düşmanlar her tur 2d6 ateş hasarı alır.",
+        "branch": "Forge",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "bs_bellows_breath"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "buff": "50% Fire Resist",
+          "damage": "2d6 fire/turn to enemies",
+          "area": "8m radius"
+        }
+      },
+      {
+        "spell_key": "bs_reflecting_polish",
+        "name_en": "Reflecting Polish",
+        "name_tr": "Yansıtan Cila",
+        "description_en": "Polishes an ally's armor to a mirror finish. For 3 turns, single-target magic spells have a 30% chance to bounce back at the caster.",
+        "description_tr": "Bir müttefikin zırhını ayna parlaklığında cilalar. 3 tur boyunca tek hedefine alınan büyülerin büyücüye geri sekmesi için %30 şans tanır.",
+        "branch": "Upgrade",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "bs_weightless_steel"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "buff": "30% chance to reflect spells",
+          "duration": "3 turns",
+          "range": "Touch"
+        }
+      },
+      {
+        "spell_key": "bs_chain_whip",
+        "name_en": "Forged Chain Whip",
+        "name_tr": "Dövme Zincir Kırbaç",
+        "description_en": "Creates a 15m long spiked chain. Deals 3d10 slashing damage to a target and pulls them 5m towards you.",
+        "description_tr": "15m uzunluğunda çivili bir zincir yaratır. Bir hedefe 3d10 kesici hasar verir ve onları 5m size doğru çeker.",
+        "branch": "Weaponry",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "bs_shattering_strike"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "3d10 slashing",
+          "range": "15m",
+          "effect": "Pulls target 5m"
+        }
+      },
+      {
+        "spell_key": "bs_flaming_hammer",
+        "name_en": "Flaming Hammer",
+        "name_tr": "Alevli Çekiç",
+        "description_en": "Throws a hammer superheated by the forge. Deals 4d8 bludgeoning and 4d8 fire damage, exploding in an 8m radius on impact.",
+        "description_tr": "Ocakta aşırı ısıtılmış bir çekiç fırlatır. 4d8 ezici ve 4d8 ateş hasarı verir, çarptığında 8m yarıçapında patlar.",
+        "branch": "Weaponry",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "bs_magma_pool",
+          "bs_summon_anvil"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "4d8 bludgeoning + 4d8 fire",
+          "area": "8m radius explosion",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "bs_slag_eruption",
+        "name_en": "Slag Eruption",
+        "name_tr": "Cüruf Püskürmesi",
+        "description_en": "Causes sharp, burning slag to erupt from the ground in a 6m radius, dealing 6d6 piercing and fire damage, pinning enemies to the ground for 1 turn.",
+        "description_tr": "6m'lik bir alanda keskin, yanan cürufların yerden püskürmesine neden olur. 6d6 delici ve ateş hasarı verir, düşmanları 1 turluğuna yere mıhlar.",
+        "branch": "Forge",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "bs_magma_pool",
+          "bs_forge_fire"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "6d6 piercing/fire",
+          "area": "6m radius",
+          "status": "Pinned (1 turn)"
+        }
+      },
+      {
+        "spell_key": "bs_dancing_swords",
+        "name_en": "Dancing Swords",
+        "name_tr": "Dans Eden Kılıçlar",
+        "description_en": "Upgrades 3 temporary swords to fight automatically. They hover around allies within 10m, parrying attacks and dealing 3d6 slashing damage to nearby enemies.",
+        "description_tr": "Otomatik olarak savaşmaları için 3 geçici kılıcı geliştirir. 10m içindeki müttefiklerin etrafında süzülerek saldırıları savuşturur ve yakındaki düşmanlara 3d6 kesici hasar verirler.",
+        "branch": "Upgrade",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 470,
+        "prerequisites": [
+          "bs_elemental_edge",
+          "bs_whirlwind_blades"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "summons": "3 automated swords (3d6 slashing)",
+          "area": "10m aura",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bs_adamantine_rivets",
+        "name_en": "Adamantine Rivets",
+        "name_tr": "Adamantiyum Perçinler",
+        "description_en": "Reinforces an ally's armor with adamantine. The wearer becomes immune to critical hits and reduces all incoming physical damage by 5 for 10 minutes.",
+        "description_tr": "Bir müttefikin zırhını adamantiyum ile güçlendirir. Giyen kişi 10 dakika boyunca kritik vuruşlara karşı bağışık olur ve gelen tüm fiziksel hasarı 5 azaltır.",
+        "branch": "Upgrade",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "bs_elemental_edge",
+          "bs_reflecting_polish"
+        ],
+        "icon": "💎",
+        "effects": {
+          "buff": "Crit Immunity, 5 Physical Damage Reduction",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "bs_heavy_impact",
+        "name_en": "Heavy Impact",
+        "name_tr": "Ağır Darbe",
+        "description_en": "Slams the ground with a massive hammer. Deals 5d10 bludgeoning damage in an 8m cone and knocks all enemies back 6m.",
+        "description_tr": "Devasa bir çekiçle yere vurur. 8m'lik bir koni içindeki herkese 5d10 ezici hasar verir ve tüm düşmanları 6m geriye savurur.",
+        "branch": "Weaponry",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "bs_whirlwind_blades",
+          "bs_chain_whip"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "5d10 bludgeoning",
+          "area": "8m cone",
+          "knockback": "6m"
+        }
+      },
+      {
+        "spell_key": "bs_liquid_steel",
+        "name_en": "Liquid Steel",
+        "name_tr": "Sıvı Çelik",
+        "description_en": "Pours a torrent of liquid steel onto a target within 12m. Deals 8d8 fire damage and hardens instantly, immobilizing them for 2 turns.",
+        "description_tr": "12m içindeki bir hedefin üzerine sıvı çelik selini boşaltır. 8d8 ateş hasarı verir ve anında katılaşarak hedefi 2 turluğuna hareketsiz bırakır.",
+        "branch": "Forge",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "bs_slag_eruption"
+        ],
+        "icon": "🫗",
+        "effects": {
+          "damage": "8d8 fire",
+          "range": "12m",
+          "status": "Immobilized (2 turns)"
+        }
+      },
+      {
+        "spell_key": "bs_enchanted_alloy",
+        "name_en": "Enchanted Alloy",
+        "name_tr": "Efsunlu Alaşım",
+        "description_en": "Upgrades a weapon or armor to +2 magical status for 1 hour, granting it properties that bypass normal magical resistances.",
+        "description_tr": "Bir silahı veya zırhı 1 saatliğine +2 büyülü statüye yükseltir ve ona normal büyü dirençlerini aşan özellikler kazandırır.",
+        "branch": "Upgrade",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 680,
+        "prerequisites": [
+          "bs_adamantine_rivets"
+        ],
+        "icon": "✨",
+        "effects": {
+          "buff": "+2 Magical Status, Magic Resist",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "bs_rain_of_spears",
+        "name_en": "Rain of Spears",
+        "name_tr": "Mızrak Yağmuru",
+        "description_en": "Conjures hundreds of spears that rain down in a 12m radius, dealing 8d6 piercing damage and pinning enemies to the ground for 1 turn.",
+        "description_tr": "12m'lik bir alana yağmur gibi yağan yüzlerce mızrak yaratır. 8d6 delici hasar verir ve düşmanları 1 turluğuna yere mıhlar.",
+        "branch": "Weaponry",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "bs_heavy_impact"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "8d6 piercing",
+          "area": "12m radius",
+          "status": "Pinned (1 turn)"
+        }
+      },
+      {
+        "spell_key": "bs_obsidian_forge",
+        "name_en": "Obsidian Forge",
+        "name_tr": "Obsidyen Ocağı",
+        "description_en": "Scatters razor-sharp obsidian shards over a 15m area. Anyone moving through it takes 2d8 slashing damage per 2m moved.",
+        "description_tr": "15m'lik bir alana jilet gibi keskin obsidyen parçaları saçar. İçinden geçen herkes hareket ettiği her 2m için 2d8 kesici hasar alır.",
+        "branch": "Forge",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bs_slag_eruption"
+        ],
+        "icon": "🖤",
+        "effects": {
+          "damage": "2d8 slashing per 2m moved",
+          "area": "15m radius",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bs_volcanic_shield",
+        "name_en": "Volcanic Shield",
+        "name_tr": "Volkanik Kalkan",
+        "description_en": "Erects a 5m wide barricade of hardened magma. It blocks all incoming projectiles, and shoots a 3d6 fireball back at anyone who attacks it.",
+        "description_tr": "Sertleşmiş magmadan 5m genişliğinde bir barikat kurar. Gelen tüm mermileri engeller ve ona saldıran herkese 3d6 hasarlık bir ateş topu fırlatır.",
+        "branch": "Forge",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "bs_liquid_steel",
+          "bs_enchanted_alloy"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "effect": "Blocks projectiles, counterattacks with 3d6 fireballs",
+          "area": "5m wide",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bs_unbreakable_ward",
+        "name_en": "Unbreakable Ward",
+        "name_tr": "Kırılmaz Tılsım",
+        "description_en": "Places a protective seal on an ally's gear. They gain invulnerability to all damage for 1 turn, and their gear cannot be unequipped or destroyed.",
+        "description_tr": "Bir müttefikin donanımına koruyucu bir mühür yerleştirir. 1 turluğuna tüm hasarlara karşı dokunulmazlık kazanırlar ve ekipmanları çıkarılamaz veya yok edilemez.",
+        "branch": "Upgrade",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "bs_adamantine_rivets"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "Invulnerability, Gear cannot be destroyed",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "bs_colossal_hammer",
+        "name_en": "Colossal Hammer",
+        "name_tr": "Devasa Çekiç",
+        "description_en": "Forges an impossibly large hammer. Deals a single strike on a 5m radius area within 10m, dealing 10d10 bludgeoning damage and stunning survivors.",
+        "description_tr": "İnanılmaz büyüklükte bir çekiç döver. 10m içinde 5m yarıçaplı bir alana tek bir vuruş yaparak 10d10 ezici hasar verir ve hayatta kalanları sersemletir.",
+        "branch": "Weaponry",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "bs_heavy_impact"
+        ],
+        "icon": "⚒️",
+        "effects": {
+          "damage": "10d10 bludgeoning",
+          "area": "5m radius within 10m",
+          "status": "Stunned"
+        }
+      },
+      {
+        "spell_key": "bs_core_temperature",
+        "name_en": "Core Temperature",
+        "name_tr": "Çekirdek Isısı",
+        "description_en": "Radiates extreme heat. For 3 turns, all non-magical metal weapons and armor within 20m begin to melt, destroying them and dealing 4d10 fire damage to wearers.",
+        "description_tr": "Aşırı bir ısı yayar. 3 tur boyunca, 20m içindeki tüm büyülü olmayan metal silah ve zırhlar erimeye başlar, yok olur ve giyenlere 4d10 ateş hasarı verir.",
+        "branch": "Forge",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bs_liquid_steel",
+          "bs_obsidian_forge"
+        ],
+        "icon": "🌡️",
+        "effects": {
+          "damage": "4d10 fire",
+          "area": "20m radius",
+          "effect": "Melts non-magical metal"
+        }
+      },
+      {
+        "spell_key": "bs_meteor_strike",
+        "name_en": "Meteor Strike",
+        "name_tr": "Meteor Çarpması",
+        "description_en": "Forges an anvil from the core of a dying star. Drops it on a 20m area, dealing 8d10 bludgeoning and 8d10 fire damage, leaving a pool of magma behind.",
+        "description_tr": "Ölen bir yıldızın çekirdeğinden bir örs döver. Onu 20m'lik bir alana düşürerek 8d10 ezici ve 8d10 ateş hasarı verir, arkasında bir magma havuzu bırakır.",
+        "branch": "Weaponry",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "bs_core_temperature",
+          "bs_colossal_hammer"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "8d10 bludgeoning + 8d10 fire",
+          "area": "20m radius",
+          "effect": "Leaves magma pool"
+        }
+      },
+      {
+        "spell_key": "bs_runic_etching",
+        "name_en": "Runic Etching",
+        "name_tr": "Rün İşlemesi",
+        "description_en": "Carves glowing runes into an ally's weapon, causing their attacks to trigger an explosion of 4d6 force damage in a 3m radius on hit.",
+        "description_tr": "Bir müttefikin silahına parlayan rünler kazır. Saldırıları isabet ettiğinde 3m yarıçapında 4d6 güç hasarı veren bir patlamayı tetikler.",
+        "branch": "Upgrade",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "bs_enchanted_alloy",
+          "bs_unbreakable_ward"
+        ],
+        "icon": "🔣",
+        "effects": {
+          "damage": "4d6 force explosion on hit",
+          "area": "3m radius on hit",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "bs_mastercrafted_arsenal",
+        "name_en": "Mastercrafted Arsenal",
+        "name_tr": "Usta İşi Cephanelik",
+        "description_en": "Summons a rack of legendary weapons for your party. For 5 turns, all allies' weapon attacks deal an extra 4d8 force damage and score a critical hit on a 18-20.",
+        "description_tr": "Grubunuz için efsanevi silahlardan oluşan bir raf çağırır. 5 tur boyunca tüm müttefiklerin silah saldırıları fazladan 4d8 güç hasarı verir ve 18-20 zarlarında kritik vurur.",
+        "branch": "Upgrade",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 890,
+        "prerequisites": [
+          "bs_runic_etching",
+          "bs_phantom_armory"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "buff": "+4d8 force damage, Crit on 18-20",
+          "area": "Party within 20m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "bs_phantom_armory",
+        "name_en": "Phantom Armory",
+        "name_tr": "Hayalet Cephanelik",
+        "description_en": "Summons 5 animated spectral weapons that fight alongside you for 4 turns. Each makes an independent attack dealing 2d8 damage per turn.",
+        "description_tr": "4 tur boyunca sizinle birlikte savaşan 5 hareketli ruhani silah çağırır. Her biri bağımsız saldırarak tur başına 2d8 hasar verir.",
+        "branch": "Weaponry",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "bs_rain_of_spears",
+          "bs_colossal_hammer"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "summons": "5 spectral weapons (2d8 damage each)",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "bs_heart_of_the_forge",
+        "name_en": "Heart of the Forge",
+        "name_tr": "Ocağın Kalbi",
+        "description_en": "Summons the fiery core of a legendary forge. It pulls all enemies within 25m towards it, dealing 10d10 fire damage and melting their defenses (reduces AC by 5).",
+        "description_tr": "Efsanevi bir ocağın ateşli çekirdeğini çağırır. 25m içindeki tüm düşmanları kendine çeker, 10d10 ateş hasarı verir ve savunmalarını eritir (Zırh Sınıfını 5 düşürür).",
+        "branch": "Forge",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "bs_core_temperature"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "damage": "10d10 fire",
+          "area": "25m radius",
+          "effect": "Pulls enemies, -5 AC"
+        }
+      },
+      {
+        "spell_key": "bs_aegis_craft",
+        "name_en": "Aegis Craft",
+        "name_tr": "Kalkan Zanaatı",
+        "description_en": "Forges an ethereal Aegis shield for the entire party within 15m. Grants +5 AC, 50 temporary HP, and advantage on all saving throws for 3 turns.",
+        "description_tr": "15m içindeki tüm grup için ruhani bir Koruyucu kalkan döver. 3 tur boyunca +5 AC, 50 geçici HP ve tüm kurtarma zarlarında avantaj sağlar.",
+        "branch": "Upgrade",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "bs_runic_etching"
+        ],
+        "icon": "🔰",
+        "effects": {
+          "buff": "+5 AC, 50 temp HP, Advantage on Saves",
+          "area": "15m radius party",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bs_blade_storm",
+        "name_en": "Blade Storm",
+        "name_tr": "Kılıç Fırtınası",
+        "description_en": "Creates a massive 30m radius storm of thousands of forged blades. Deals 8d10 slashing damage to all enemies inside, shredding their armor completely.",
+        "description_tr": "Dövülmüş binlerce kılıçtan oluşan 30m yarıçaplı devasa bir fırtına yaratır. İçerideki tüm düşmanlara 8d10 kesici hasar verir ve zırhlarını tamamen parçalar.",
+        "branch": "Weaponry",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "bs_phantom_armory"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "8d10 slashing",
+          "area": "30m radius",
+          "effect": "Shreds armor completely"
+        }
+      },
+      {
+        "spell_key": "bs_forge_gods_avatar",
+        "name_en": "Forge God's Avatar",
+        "name_tr": "Ocak Tanrısının Avatarı",
+        "description_en": "You transform into a 5m tall being of perfect steel and molten core for 3 turns. You gain 200 temporary HP, immunity to physical/fire damage, and your melee attacks deal 10d10 mixed damage.",
+        "description_tr": "3 turluğuna mükemmel çelikten ve erimiş çekirdekten oluşan 5m boyunda bir varlığa dönüşürsünüz. 200 geçici HP kazanırsınız, fiziksel/ateş hasarına bağışık olursunuz ve yakın dövüş saldırılarınız 10d10 karma hasar verir.",
+        "branch": "Weaponry",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "bs_heart_of_the_forge",
+          "bs_aegis_craft",
+          "bs_blade_storm"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "buff": "200 temp HP, Immune to physical/fire",
+          "damage": "10d10 mixed",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "bs_master_of_metals_ult",
+        "name_en": "Master of Metals",
+        "name_tr": "Metallerin Efendisi",
+        "description_en": "Forge Ultimate. You gain absolute control over metal and heat. For 5 turns, all your fire damage ignores resistance, you become immune to fire, and you can mold any metallic object within 50m at will.",
+        "description_tr": "Ocak Ultisi. Metal ve ısı üzerinde mutlak kontrol kazanırsınız. 5 tur boyunca tüm ateş hasarlarınız dirençleri yok sayar, ateşe bağışık olursunuz ve 50m içindeki herhangi bir metal nesneyi istediğiniz gibi şekillendirebilirsiniz.",
+        "branch": "Forge",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "bs_heart_of_the_forge"
+        ],
+        "icon": "👑",
+        "effects": {
+          "buff": "Immune to fire, ignore fire res, control metal",
+          "duration": "5 turns",
+          "area": "50m"
+        }
+      },
+      {
+        "spell_key": "bs_perfectionist_ult",
+        "name_en": "Perfectionist's Touch",
+        "name_tr": "Mükemmeliyetçinin Dokunuşu",
+        "description_en": "Upgrade Ultimate. Instantly upgrades all party members' weapons and armor to Legendary status for 5 turns. Grants +3 to all rolls, double damage dice, and massive damage reduction.",
+        "description_tr": "Geliştirme Ultisi. Tüm grup üyelerinin silahlarını ve zırhlarını 5 turluğuna anında Efsanevi statüye yükseltir. Tüm zarlara +3 kazandırır, hasar zarlarını ikiye katlar ve devasa hasar azaltma sağlar.",
+        "branch": "Upgrade",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1350,
+        "prerequisites": [
+          "bs_aegis_craft"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "buff": "+3 to rolls, double damage dice, massive reduction",
+          "duration": "5 turns",
+          "area": "Party"
+        }
+      },
+      {
+        "spell_key": "bs_gods_anvil_ult",
+        "name_en": "God's Anvil",
+        "name_tr": "Tanrının Örsü",
+        "description_en": "Weaponry Ultimate. Summons a divine anvil the size of a building. Drops onto a 25m radius area, dealing 15d10 bludgeoning damage, ignoring all resistances, and creating a permanent crater.",
+        "description_tr": "Silahşörlük Ultisi. Bir bina büyüklüğünde ilahi bir örs çağırır. 25m'lik bir alana düşerek 15d10 ezici hasar verir, tüm dirençleri yok sayar ve kalıcı bir krater oluşturur.",
+        "branch": "Weaponry",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "bs_blade_storm"
+        ],
+        "icon": "⛪",
+        "effects": {
+          "damage": "15d10 bludgeoning",
+          "area": "25m radius",
+          "effect": "Ignores resistances, permanent crater"
+        }
+      },
+      {
+        "spell_key": "bs_creation_engine_grand_ult",
+        "name_en": "The Creation Engine",
+        "name_tr": "Yaratılış Motoru",
+        "description_en": "Grand Ultimate. Summons a massive, intricate factory-engine of war on the battlefield. It continuously upgrades allies (maxing AC/damage), rains anvils on enemies, and floods the 50m arena with searing magma. Lasts 5 turns.",
+        "description_tr": "Büyük Ulti. Savaş alanına devasa, karmaşık bir savaş fabrikası-motoru çağırır. Müttefikleri sürekli olarak geliştirir (AC/hasarı maksimuma çıkarır), düşmanların üzerine örsler yağdırır ve 50m'lik arenayı kavurucu magmayla doldurur. 5 tur sürer.",
+        "branch": "Forge",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "bs_master_of_metals_ult",
+          "bs_perfectionist_ult",
+          "bs_gods_anvil_ult"
+        ],
+        "icon": "⚙️",
+        "effects": {
+          "effect": "Maxes AC/dmg, rains anvils, floods 50m with magma",
+          "duration": "5 turns"
+        }
+      }
+    ]
+  }
+]

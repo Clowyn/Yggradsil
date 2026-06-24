@@ -1,0 +1,290 @@
+diff --git a/src/hooks/useSpellTree.ts b/src/hooks/useSpellTree.ts
+index c6b8a8b..fa42e2a 100644
+--- a/src/hooks/useSpellTree.ts
++++ b/src/hooks/useSpellTree.ts
+@@ -240,33 +240,24 @@ export function useSpellTree(characterId: string | null) {
+   // Filter spell trees based on character's details
+   const visibleTrees = useMemo(() => {
+     if (!effectiveCharacter) return spellTrees;
+ 
+     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
+-    const subclassKey = effectiveCharacter.subclass?.key;
+     const raceKey = effectiveCharacter.race?.key;
+ 
+     return spellTrees.filter(tree => {
+       if (!tree.assignments || tree.assignments.length === 0) {
+         return true;
+       }
+       return tree.assignments.some(assign => {
+         // Check min_level
+         if (effectiveCharacter.level < (assign.min_level ?? 1)) {
+           return false;
+         }
+         // Check class_key
+         if (assign.class_key && classCategoryKey !== assign.class_key) {
+           return false;
+         }
+-        // Check subclass_key
+-        if (assign.subclass_key && subclassKey !== assign.subclass_key) {
+-          return false;
+-        }
+         // Check race_key
+         if (assign.race_key && raceKey !== assign.race_key) {
+           return false;
+         }
+         return true;
+@@ -359,80 +350,97 @@ export function useSpellTree(characterId: string | null) {
+ 
+   // Generate nodes and edges for React Flow
+   const nodes = useMemo<Node[]>(() => {
+-    const spellNodes: Node[] = visibleSpells.map(spell => {
+-      const status = getSpellStatus(spell);
+-      const nodeColor = BRANCH_COLORS[spell.branch || 'Base'] || '#3b82f6';
+-      return {
+-        id: spell.id,
+-        type: 'spellNode',
+-        position: spell.position || { x: 0, y: 0 },
+-        data: {
+-          spell,
+-          status,
+-          nodeColor,
+-        },
+-        sourcePosition: Position.Bottom,
+-        targetPosition: Position.Top,
+-      };
+-    });
+-
+-    const classNodes: Node[] = CLASS_CATEGORIES.map((cls, idx) => ({
+-      id: `class-${cls.key}`,
+-      type: 'spellNode',
+-      position: { x: idx * 15000, y: 0 },
+-      data: {
+-        spell: {
+-          id: `class-${cls.key}`,
+-          spell_key: `class_${cls.key}`,
+-          name_en: cls.name_en,
+-          name_tr: cls.name_tr,
+-          icon: '👑',
+-          branch: 'Base',
+-          tier: 0,
+-          min_level: 0,
+-          xp_cost: 0,
+-          description_en: 'Class Root',
+-          description_tr: 'Sınıf Kökü',
+-        },
+-        status: 'unlocked',
+-        nodeColor: '#ffd700',
+-      },
+-      sourcePosition: Position.Bottom,
+-      targetPosition: Position.Top,
+-    }));
+-
+-    const subclassNodes: Node[] = SUBCLASSES.map((sub) => {
+-      const parentClassIdx = CLASS_CATEGORIES.findIndex(c => c.key === sub.category_key);
+-      const subSiblings = SUBCLASSES.filter(s => s.category_key === sub.category_key);
+-      const sibIdx = subSiblings.findIndex(s => s.key === sub.key);
+-      const classX = parentClassIdx * 15000;
+-      
+-      return {
+-        id: `subclass-${sub.key}`,
+-        type: 'spellNode',
+-        position: { x: classX + (sibIdx - subSiblings.length/2) * 1200, y: 500 },
+-        data: {
+-          spell: {
+-            id: `subclass-${sub.key}`,
+-            spell_key: `subclass_${sub.key}`,
+-            name_en: sub.name_en,
+-            name_tr: sub.name_tr,
+-            icon: '⚔️',
+-            branch: 'Base',
+-            tier: 0,
+-            min_level: 0,
+-            xp_cost: 0,
+-            description_en: sub.ability_desc_en,
+-            description_tr: sub.ability_desc_tr,
+-          },
+-          status: 'unlocked',
+-          nodeColor: '#c0c0c0',
+-        },
+-        sourcePosition: Position.Bottom,
+-        targetPosition: Position.Top,
+-      };
+-    });
+-
+-    return [...classNodes, ...subclassNodes, ...spellNodes];
+-  }, [visibleSpells, getSpellStatus]);
++    if (!effectiveCharacter) return [];
++
++    const classCategoryKey = effectiveCharacter.subclass?.category?.key;
++    const subclassKey = effectiveCharacter.subclass?.key;
++
++    const activeSubclasses = SUBCLASSES.filter(sub => sub.category_key === classCategoryKey);
++
++    const classNodes: Node[] = CLASS_CATEGORIES.filter(c => c.key === classCategoryKey).map((cls) => ({
++      id: `class-${cls.key}`,
++      type: 'spellNode',
++      position: { x: 0, y: 0 },
++      data: {
++        spell: {
++          id: `class-${cls.key}`,
++          spell_key: `class_${cls.key}`,
++          name_en: cls.name_en,
++          name_tr: cls.name_tr,
++          icon: '👑',
++          branch: 'Base',
++          tier: 0,
++          min_level: 0,
++          xp_cost: 0,
++          description_en: 'Class Root',
++          description_tr: 'Sınıf Kökü',
++        },
++        status: 'unlocked',
++        nodeColor: '#ffd700',
++        isDimmed: false,
++        isActiveSubclassTree: true,
++      },
++      sourcePosition: Position.Bottom,
++      targetPosition: Position.Top,
++    }));
++
++    const subclassNodes: Node[] = activeSubclasses.map((sub) => {
++      const sibIdx = activeSubclasses.findIndex(s => s.key === sub.key);
++      const subclassX = (sibIdx - activeSubclasses.length / 2) * 6000;
++      const subclassY = 800;
++      const isCharacterSubclass = sub.key === subclassKey;
++
++      return {
++        id: `subclass-${sub.key}`,
++        type: 'spellNode',
++        position: { x: subclassX, y: subclassY },
++        data: {
++          spell: {
++            id: `subclass-${sub.key}`,
++            spell_key: `subclass_${sub.key}`,
++            name_en: sub.name_en,
++            name_tr: sub.name_tr,
++            icon: '⚔️',
++            branch: 'Base',
++            tier: 0,
++            min_level: 0,
++            xp_cost: 0,
++            description_en: sub.ability_desc_en,
++            description_tr: sub.ability_desc_tr,
++          },
++          status: 'unlocked',
++          nodeColor: isCharacterSubclass ? '#ffd700' : '#c0c0c0',
++          isDimmed: !isCharacterSubclass,
++          isActiveSubclassTree: isCharacterSubclass,
++        },
++        sourcePosition: Position.Bottom,
++        targetPosition: Position.Top,
++      };
++    });
++
++    const spellNodes: Node[] = visibleSpells.map(spell => {
++      const status = getSpellStatus(spell);
++      const nodeColor = BRANCH_COLORS[spell.branch || 'Base'] || '#3b82f6';
++      
++      let spellX = spell.position?.x || 0;
++      let spellY = spell.position?.y || 0;
++      let isDimmed = false;
++      let isActiveSubclassTree = false;
++
++      const tree = visibleTrees.find(t => t.id === spell.spell_tree_id);
++      if (tree && tree.assignments) {
++        const assign = tree.assignments.find(a => a.class_key === classCategoryKey);
++        if (assign && assign.subclass_key) {
++          const sibIdx = activeSubclasses.findIndex(s => s.key === assign.subclass_key);
++          if (sibIdx !== -1) {
++            const subclassX = (sibIdx - activeSubclasses.length / 2) * 6000;
++            const subclassY = 800;
++            spellX += subclassX;
++            spellY += subclassY;
++          }
++          const isCharacterSubclass = assign.subclass_key === subclassKey;
++          isDimmed = !isCharacterSubclass;
++          isActiveSubclassTree = isCharacterSubclass;
++        } else if (assign && assign.class_key) {
++          spellY += 800;
++          isDimmed = false;
++          isActiveSubclassTree = true;
++        }
++      }
++
++      return {
++        id: spell.id,
++        type: 'spellNode',
++        position: { x: spellX, y: spellY },
++        data: {
++          spell,
++          status,
++          nodeColor,
++          isDimmed,
++          isActiveSubclassTree,
++        },
++        sourcePosition: Position.Bottom,
++        targetPosition: Position.Top,
++      };
++    });
++
++    return [...classNodes, ...subclassNodes, ...spellNodes];
++  }, [visibleSpells, getSpellStatus, visibleTrees, effectiveCharacter]);
+ 
+   const edges = useMemo<Edge[]>(() => {
++    if (!effectiveCharacter) return [];
++    
++    const classCategoryKey = effectiveCharacter.subclass?.category?.key;
++    const activeSubclasses = SUBCLASSES.filter(sub => sub.category_key === classCategoryKey);
++
+     const result: Edge[] = [];
+ 
+     visibleSpells.forEach(spell => {
+@@ -469,35 +477,36 @@ export function useSpellTree(characterId: string | null) {
+       }
+     });
+ 
+-    const classSubclassEdges: Edge[] = SUBCLASSES.map(sub => ({
++    const classSubclassEdges: Edge[] = activeSubclasses.map(sub => ({
+       id: `edge-class-${sub.category_key}-subclass-${sub.key}`,
+       source: `class-${sub.category_key}`,
+       target: `subclass-${sub.key}`,
+       type: 'spellEdge',
+       data: { status: 'unlocked', color: '#ffd700' },
+     }));
+ 
+     const subclassSpellEdges: Edge[] = [];
+-    // Link tier 1 spells to subclasses if they have no prerequisites
+     visibleSpells.forEach(spell => {
+       if (!spell.prerequisites || spell.prerequisites.length === 0) {
+         const tree = visibleTrees.find(t => t.id === spell.spell_tree_id);
+         if (tree && tree.assignments) {
+-          const assign = tree.assignments[0];
+-          if (assign && assign.subclass_key) {
++          const assign = tree.assignments.find(a => a.class_key === classCategoryKey);
++          if (assign) {
++            const sourceId = assign.subclass_key 
++              ? `subclass-${assign.subclass_key}` 
++              : `class-${assign.class_key}`;
++            
+             subclassSpellEdges.push({
+-              id: `edge-subclass-${assign.subclass_key}-spell-${spell.id}`,
+-              source: `subclass-${assign.subclass_key}`,
++              id: `edge-${sourceId}-spell-${spell.id}`,
++              source: sourceId,
+               target: spell.id,
+               type: 'spellEdge',
+-              data: { status: getSpellStatus(spell) === 'unlocked' ? 'unlocked' : 'partial', color: '#c0c0c0' },
++              data: { 
++                status: getSpellStatus(spell) === 'unlocked' ? 'unlocked' : 'partial', 
++                color: '#c0c0c0' 
++              },
+             });
+           }
+         }
+       }
+     });
+ 
+-    return [...classSubclassEdges, ...subclassSpellEdges, ...result];
+-  }, [visibleSpells, visibleTrees, getSpellStatus]);
++    return [...classSubclassEdges, ...subclassSpellEdges, ...result];
++  }, [visibleSpells, visibleTrees, getSpellStatus, effectiveCharacter]);

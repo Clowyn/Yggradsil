@@ -1,0 +1,976 @@
+[
+  {
+    "subclass_key": "rune_archer",
+    "tree_name_en": "Rune Archer Spell Tree",
+    "tree_name_tr": "Rün Okçusu Büyü Ağacı",
+    "tree_desc_en": "Mastery over enchanted arrows, setting rune traps, and unleashing elemental magic shots.",
+    "tree_desc_tr": "Efsunlu oklar, rün tuzakları kurma ve elementsel sihirli atışlar yapma üzerinde ustalık.",
+    "branches": [
+      "Enchantment",
+      "Rune Trap",
+      "Magic Shot",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "ra_enchant_1",
+        "name_en": "Glowing Rune",
+        "name_tr": "Parlama Rünü",
+        "description_en": "Enchants your bow with a glowing rune, providing light in a 10m radius and adding 1d4 radiant damage to attacks for 1 hour.",
+        "description_tr": "Yayınızı parlayan bir rünle efsunlar, 10m yarıçapında ışık sağlar ve 1 saat boyunca saldırılara 1d4 parlak hasar ekler.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🕯️",
+        "effects": {
+          "damage": "1d4 radiant",
+          "radius": "10m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_2",
+        "name_en": "Mark of Tracking",
+        "name_tr": "Takip İşareti",
+        "description_en": "Places an invisible rune on a target hit by your arrow, allowing you to track their precise location up to 1000m away for 24 hours.",
+        "description_tr": "Okunuzla vurulan bir hedefe görünmez bir rün yerleştirir, 24 saat boyunca 1000m uzaklığa kadar konumlarını tam olarak takip etmenizi sağlar.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "range": "1000m",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_3",
+        "name_en": "Wind Blessing",
+        "name_tr": "Rüzgar Kutsaması",
+        "description_en": "Carves a wind rune onto your bow, increasing arrow range by 20m and flight speed for 10 minutes.",
+        "description_tr": "Yayınıza bir rüzgar rünü kazır, 10 dakika boyunca ok menzilini 20m ve uçuş hızını artırır.",
+        "branch": "Enchantment",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [
+          "ra_enchant_1"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "range_increase": "20m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_4",
+        "name_en": "Splintering Rune",
+        "name_tr": "Parçalanma Rünü",
+        "description_en": "Enchants arrows to splinter upon impact, dealing 1d6 piercing damage to all enemies within 3m of the primary target.",
+        "description_tr": "Okları çarpışmada parçalanacak şekilde efsunlar, birincil hedefin 3m yakınındaki tüm düşmanlara 1d6 delici hasar verir.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ra_enchant_3"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "1d6 piercing",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_5",
+        "name_en": "Mark of Vulnerability",
+        "name_tr": "Savunmasızlık İşareti",
+        "description_en": "Marks a target with a weakening rune. For 1 minute, the target takes an extra 2d6 damage from all your attacks.",
+        "description_tr": "Bir hedefi zayıflatıcı bir rünle işaretler. 1 dakika boyunca, hedef tüm saldırılarınızdan fazladan 2d6 hasar alır.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ra_enchant_2"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage_bonus": "2d6",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_6",
+        "name_en": "Rune of Speed",
+        "name_tr": "Hız Rünü",
+        "description_en": "Imbues your legs with a speed rune, increasing movement speed by 10m and allowing you to fire an extra arrow per turn for 3 turns.",
+        "description_tr": "Bacaklarınızı bir hız rünü ile doldurur, hareket hızını 10m artırır ve 3 tur boyunca tur başına fazladan bir ok atmanızı sağlar.",
+        "branch": "Enchantment",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ra_enchant_4"
+        ],
+        "icon": "👟",
+        "effects": {
+          "speed_bonus": "10m",
+          "extra_attack": 1,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_7",
+        "name_en": "Piercing Enchantment",
+        "name_tr": "Delici Efsun",
+        "description_en": "Enchants your arrows to pierce through enemies and cover. Arrows travel in a straight line for 30m, hitting everything in their path for 3d8 piercing damage.",
+        "description_tr": "Oklarınızı düşmanları ve siperleri delecek şekilde efsunlar. Oklar 30m boyunca düz bir çizgide ilerleyerek yollarındaki her şeye 3d8 delici hasar verir.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ra_enchant_6"
+        ],
+        "icon": "🪡",
+        "effects": {
+          "damage": "3d8 piercing",
+          "range": "30m line"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_8",
+        "name_en": "True Sight Mark",
+        "name_tr": "Gerçek Görüş İşareti",
+        "description_en": "Marks a target, revealing their weaknesses, invisibility, and illusions. Increases critical hit chance against them by 15% for 3 turns.",
+        "description_tr": "Bir hedefi işaretleyerek zayıflıklarını, görünmezliğini ve illüzyonlarını ortaya çıkarır. Onlara karşı kritik vuruş şansını 3 tur boyunca %15 artırır.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ra_enchant_5"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "crit_chance_bonus": "15%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_9",
+        "name_en": "Homing Rune",
+        "name_tr": "Güdüm Rünü",
+        "description_en": "Arrows etched with this rune automatically curve towards marked targets, ignoring half and three-quarters cover.",
+        "description_tr": "Bu rün kazınmış oklar otomatik olarak işaretli hedeflere doğru kavis çizer, yarım ve üç çeyrek siperi yok sayar.",
+        "branch": "Enchantment",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ra_enchant_8"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "mechanic": "Ignores cover",
+          "target": "Marked enemies"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_10",
+        "name_en": "Rune of Duplication",
+        "name_tr": "Kopyalama Rünü",
+        "description_en": "When you fire an arrow, the rune duplicates it in mid-air, firing 3 identical arrows at the target, each dealing normal damage.",
+        "description_tr": "Bir ok attığınızda, rün onu havada çoğaltarak hedefe her biri normal hasar veren 3 özdeş ok atar.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ra_enchant_7"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "arrows": 3
+        }
+      },
+      {
+        "spell_key": "ra_enchant_11",
+        "name_en": "Mark of Doom",
+        "name_tr": "Kıyamet İşareti",
+        "description_en": "Places a lethal mark on a target. After 3 turns, the mark detonates dealing 6d10 force damage. If the target dies before detonation, the mark transfers to the nearest enemy.",
+        "description_tr": "Bir hedefe ölümcül bir işaret yerleştirir. 3 tur sonra, işaret patlayarak 6d10 güç hasarı verir. Hedef patlamadan önce ölürse, işaret en yakın düşmana geçer.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ra_enchant_9"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "6d10 force",
+          "delay": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_12",
+        "name_en": "Armor Shatter Rune",
+        "name_tr": "Zırh Parçalama Rünü",
+        "description_en": "Enchants an arrow to destroy defenses. On hit, reduces the target's armor class by 3 for 1 minute and destroys any magical shields.",
+        "description_tr": "Savunmaları yok etmek için bir oku efsunlar. Vuruşta hedefin zırh sınıfını 1 dakika boyunca 3 azaltır ve her türlü büyülü kalkanı yok eder.",
+        "branch": "Enchantment",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ra_enchant_11"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_reduction": 3,
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_13",
+        "name_en": "Rune Weaver's Aura",
+        "name_tr": "Rün Dokuyucu Halesi",
+        "description_en": "A passive aura extending 15m. Friendly ranged attacks within the aura gain a random minor rune effect (+1d6 fire, ice, or lightning damage).",
+        "description_tr": "15m'ye uzanan pasif bir hale. Hale içindeki dost menzilli saldırılar rastgele küçük bir rün etkisi kazanır (+1d6 ateş, buz veya yıldırım hasarı).",
+        "branch": "Enchantment",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ra_enchant_10",
+          "ra_enchant_12"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "radius": "15m",
+          "bonus_damage": "1d6 random element"
+        }
+      },
+      {
+        "spell_key": "ra_enchant_ult",
+        "name_en": "Ultimate: Rune of Absolute Power",
+        "name_tr": "Ulti: Mutlak Güç Rünü",
+        "description_en": "Etches the ultimate rune of power on your bow. For 5 minutes, every arrow fired deals an extra 4d12 force damage, ignores all resistances, and creates a 5m shockwave on impact.",
+        "description_tr": "Yayınıza nihai güç rününü kazır. 5 dakika boyunca, atılan her ok fazladan 4d12 güç hasarı verir, tüm dirençleri yok sayar ve çarpışmada 5m şok dalgası yaratır.",
+        "branch": "Enchantment",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ra_enchant_13"
+        ],
+        "icon": "💠",
+        "effects": {
+          "bonus_damage": "4d12 force",
+          "radius": "5m",
+          "duration": "5 minutes"
+        }
+      },
+      {
+        "spell_key": "ra_trap_1",
+        "name_en": "Snare Sigil",
+        "name_tr": "Kapan Mührü",
+        "description_en": "Places an invisible sigil on the ground. The first enemy to step within 2m is immobilized for 2 turns by magical roots.",
+        "description_tr": "Yere görünmez bir mühür yerleştirir. 2m yakınına adım atan ilk düşman, büyülü kökler tarafından 2 tur boyunca hareketsiz bırakılır.",
+        "branch": "Rune Trap",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🪢",
+        "effects": {
+          "trigger_radius": "2m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ra_trap_2",
+        "name_en": "Ember Trap",
+        "name_tr": "Köz Tuzağı",
+        "description_en": "Sets a fiery rune that explodes when triggered, dealing 2d6 fire damage in a 4m radius.",
+        "description_tr": "Tetiklendiğinde patlayan ateşli bir rün kurar, 4m yarıçapında 2d6 ateş hasarı verir.",
+        "branch": "Rune Trap",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "damage": "2d6 fire",
+          "radius": "4m"
+        }
+      },
+      {
+        "spell_key": "ra_trap_3",
+        "name_en": "Alarm Rune",
+        "name_tr": "Alarm Rünü",
+        "description_en": "Places a rune that monitors a 20m area. If an enemy enters, it silently alerts you and pings their location on your mind.",
+        "description_tr": "20m'lik bir alanı izleyen bir rün yerleştirir. Bir düşman girerse, sizi sessizce uyarır ve konumlarını zihninize işler.",
+        "branch": "Rune Trap",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "ra_trap_1"
+        ],
+        "icon": "🚨",
+        "effects": {
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "ra_trap_4",
+        "name_en": "Frost Ward",
+        "name_tr": "Ayaz Koğuşu",
+        "description_en": "A freezing trap that detonates on proximity, dealing 3d6 cold damage and reducing movement speed by 5m in a 6m radius for 3 turns.",
+        "description_tr": "Yaklaşınca patlayan dondurucu bir tuzak, 3 tur boyunca 6m yarıçapında 3d6 soğuk hasarı verir ve hareket hızını 5m azaltır.",
+        "branch": "Rune Trap",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ra_trap_2"
+        ],
+        "icon": "❄️",
+        "effects": {
+          "damage": "3d6 cold",
+          "speed_reduction": "5m",
+          "radius": "6m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ra_trap_5",
+        "name_en": "Repulsion Trap",
+        "name_tr": "İtme Tuzağı",
+        "description_en": "When triggered, violently pushes all enemies within 5m back by 10m, knocking them prone and dealing 2d8 bludgeoning damage.",
+        "description_tr": "Tetiklendiğinde, 5m içindeki tüm düşmanları şiddetle 10m geriye iter, yere düşürür ve 2d8 ezme hasarı verir.",
+        "branch": "Rune Trap",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ra_trap_1"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "2d8 bludgeoning",
+          "push_distance": "10m",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ra_trap_6",
+        "name_en": "Venom Sigil",
+        "name_tr": "Zehir Mührü",
+        "description_en": "Releases a toxic cloud when stepped on, poisoning enemies in an 8m radius. They take 1d10 poison damage per turn for 4 turns.",
+        "description_tr": "Üzerine basıldığında zehirli bir bulut salarak 8m yarıçapındaki düşmanları zehirler. 4 tur boyunca tur başına 1d10 zehir hasarı alırlar.",
+        "branch": "Rune Trap",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ra_trap_3"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "damage": "1d10 poison per turn",
+          "radius": "8m",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "ra_trap_7",
+        "name_en": "Lightning Net",
+        "name_tr": "Yıldırım Ağı",
+        "description_en": "A complex trap that fires a net of electricity upwards. Enemies caught in a 5m radius take 4d8 lightning damage and are stunned for 1 turn.",
+        "description_tr": "Yukarı doğru bir elektrik ağı fırlatan karmaşık bir tuzak. 5m yarıçapında yakalanan düşmanlar 4d8 yıldırım hasarı alır ve 1 tur sersemler.",
+        "branch": "Rune Trap",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ra_trap_5"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "4d8 lightning",
+          "radius": "5m",
+          "duration": "1 turn stun"
+        }
+      },
+      {
+        "spell_key": "ra_trap_8",
+        "name_en": "Blast Rune",
+        "name_tr": "Patlama Rünü",
+        "description_en": "A highly volatile explosive rune. Deals 6d6 fire and 2d6 thunder damage in a 10m radius upon detonation.",
+        "description_tr": "Son derece uçucu patlayıcı bir rün. Patladığında 10m yarıçapında 6d6 ateş ve 2d6 gök gürültüsü hasarı verir.",
+        "branch": "Rune Trap",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ra_trap_4"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "6d6 fire + 2d6 thunder",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ra_trap_9",
+        "name_en": "Gravity Well Trap",
+        "name_tr": "Yerçekimi Kuyusu Tuzağı",
+        "description_en": "Triggers a micro black hole that pulls all creatures within 15m towards the center, drastically lowering their speed to 0 for 2 turns.",
+        "description_tr": "15m içindeki tüm yaratıkları merkeze doğru çeken, hızlarını 2 tur boyunca şiddetle 0'a düşüren mikro bir kara delik tetikler.",
+        "branch": "Rune Trap",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ra_trap_7"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "15m",
+          "duration": "2 turns speed 0"
+        }
+      },
+      {
+        "spell_key": "ra_trap_10",
+        "name_en": "Silence Ward",
+        "name_tr": "Sessizlik Koğuşu",
+        "description_en": "An anti-magic trap. Creates a 15m radius zone of absolute silence for 1 minute, preventing any spellcasting within.",
+        "description_tr": "Anti-büyü tuzağı. 1 dakika boyunca 15m yarıçapında mutlak sessizlik alanı yaratarak içeride büyü yapılmasını engeller.",
+        "branch": "Rune Trap",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ra_trap_6"
+        ],
+        "icon": "🔇",
+        "effects": {
+          "radius": "15m",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ra_trap_11",
+        "name_en": "Void Trap",
+        "name_tr": "Hiçlik Tuzağı",
+        "description_en": "Banishes the creature that triggers it into a pocket void dimension for 3 turns. Upon return, they take 4d10 psychic damage.",
+        "description_tr": "Tetikleyen yaratığı 3 tur boyunca bir cep hiçlik boyutuna sürgün eder. Döndüğünde 4d10 psişik hasar alır.",
+        "branch": "Rune Trap",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ra_trap_9"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "4d10 psychic",
+          "duration": "3 turns banishment"
+        }
+      },
+      {
+        "spell_key": "ra_trap_12",
+        "name_en": "Chain Detonation",
+        "name_tr": "Zincirleme Patlama",
+        "description_en": "Places a master rune that can remotely trigger up to 5 other traps at once, increasing their combined damage output by 50%.",
+        "description_tr": "Aynı anda 5 diğer tuzağı uzaktan tetikleyebilen, birleşik hasar çıktılarını %50 artıran bir ana rün yerleştirir.",
+        "branch": "Rune Trap",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ra_trap_8"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "targets": 5,
+          "damage_multiplier": "1.5x"
+        }
+      },
+      {
+        "spell_key": "ra_trap_13",
+        "name_en": "Master of Wards",
+        "name_tr": "Koğuş Ustası",
+        "description_en": "Passive skill. You can place traps instantly as a bonus action, and your traps become completely invisible even to true sight.",
+        "description_tr": "Pasif yetenek. Tuzakları bonus eylem olarak anında kurabilirsiniz ve tuzaklarınız gerçek görüşe bile tamamen görünmez olur.",
+        "branch": "Rune Trap",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ra_trap_10",
+          "ra_trap_12"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "action_type": "Bonus Action",
+          "visibility": "Invisible"
+        }
+      },
+      {
+        "spell_key": "ra_trap_ult",
+        "name_en": "Ultimate: Domain of Runes",
+        "name_tr": "Ulti: Rün Alanı",
+        "description_en": "Transforms a 50m radius area into your personal domain for 5 minutes. The ground is covered in shifting trap runes. Enemies moving through it trigger a random trap (fire, ice, snare, lightning) every 5m they move.",
+        "description_tr": "50m yarıçaplı bir alanı 5 dakika boyunca kişisel alanınıza dönüştürür. Zemin değişen tuzak rünleriyle kaplıdır. İçinde hareket eden düşmanlar hareket ettikleri her 5m'de rastgele bir tuzak (ateş, buz, kapan, yıldırım) tetikler.",
+        "branch": "Rune Trap",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ra_trap_13"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "radius": "50m",
+          "duration": "5 minutes",
+          "trigger_interval": "every 5m moved"
+        }
+      },
+      {
+        "spell_key": "ra_shot_1",
+        "name_en": "Arcane Arrow",
+        "name_tr": "Sır Ok",
+        "description_en": "Fires an arrow made of pure arcane energy. Deals 1d10 force damage and ignores non-magical armor.",
+        "description_tr": "Saf sır enerjisinden yapılmış bir ok atar. 1d10 güç hasarı verir ve büyülü olmayan zırhları yok sayar.",
+        "branch": "Magic Shot",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "☄️",
+        "effects": {
+          "damage": "1d10 force"
+        }
+      },
+      {
+        "spell_key": "ra_shot_2",
+        "name_en": "Flare Shot",
+        "name_tr": "Parlama Atışı",
+        "description_en": "Shoots a blazing arrow that illuminates a 30m area and deals 2d6 fire damage. Can blind enemies looking directly at it for 1 turn.",
+        "description_tr": "30m alanı aydınlatan ve 2d6 ateş hasarı veren alevli bir ok atar. Doğrudan ona bakan düşmanları 1 tur kör edebilir.",
+        "branch": "Magic Shot",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🎇",
+        "effects": {
+          "damage": "2d6 fire",
+          "radius": "30m",
+          "duration": "1 turn blind"
+        }
+      },
+      {
+        "spell_key": "ra_shot_3",
+        "name_en": "Gale Arrow",
+        "name_tr": "Bora Oku",
+        "description_en": "Fires a concentrated gust of wind. Deals 1d8 slashing damage and knocks targets weighing less than 300 lbs back 5m.",
+        "description_tr": "Yoğunlaşmış bir rüzgar rüzgarı atar. 1d8 kesme hasarı verir ve 300 lbs'den hafif hedefleri 5m geriye iter.",
+        "branch": "Magic Shot",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 150,
+        "prerequisites": [
+          "ra_shot_1"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "1d8 slashing",
+          "push_distance": "5m"
+        }
+      },
+      {
+        "spell_key": "ra_shot_4",
+        "name_en": "Frostbite Shot",
+        "name_tr": "Donuk Vuruş",
+        "description_en": "Shoots a frigid arrow. Deals 3d6 cold damage and reduces the target's movement speed by 50% for 2 turns.",
+        "description_tr": "Buz gibi bir ok atar. 3d6 soğuk hasarı verir ve hedefin hareket hızını 2 tur boyunca %50 azaltır.",
+        "branch": "Magic Shot",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ra_shot_2"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "damage": "3d6 cold",
+          "speed_reduction": "50%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ra_shot_5",
+        "name_en": "Spark Arrow",
+        "name_tr": "Kıvılcım Oku",
+        "description_en": "Fires an arrow that arcs lightning to up to 3 nearby enemies within 5m of the target, dealing 2d8 lightning damage to all.",
+        "description_tr": "Hedefin 5m yakınındaki 3 düşmana kadar yıldırım sıçratan bir ok atar, hepsine 2d8 yıldırım hasarı verir.",
+        "branch": "Magic Shot",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ra_shot_1"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d8 lightning",
+          "targets": 3,
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ra_shot_6",
+        "name_en": "Phantom Piercer",
+        "name_tr": "Hayalet Delici",
+        "description_en": "Shoots an ethereal arrow that phases through solid walls up to 2m thick before materializing to strike the target for 3d8 necrotic damage.",
+        "description_tr": "Hedefi 3d8 nekrotik hasarla vurmak için maddileşmeden önce 2m kalınlığa kadar katı duvarlardan geçen ruhani bir ok atar.",
+        "branch": "Magic Shot",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ra_shot_3"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "3d8 necrotic",
+          "pierce_thickness": "2m"
+        }
+      },
+      {
+        "spell_key": "ra_shot_7",
+        "name_en": "Burst Arrow",
+        "name_tr": "İnfilak Oku",
+        "description_en": "Fires an arrow that explodes into shrapnel mid-air. Deals 4d6 piercing damage in a 10m cone behind the initial target.",
+        "description_tr": "Havada şarapnele dönüşerek patlayan bir ok atar. İlk hedefin arkasındaki 10m'lik koni içinde 4d6 delici hasar verir.",
+        "branch": "Magic Shot",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ra_shot_5"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "4d6 piercing",
+          "area": "10m cone"
+        }
+      },
+      {
+        "spell_key": "ra_shot_8",
+        "name_en": "Comet Shot",
+        "name_tr": "Kuyrukluyıldız Atışı",
+        "description_en": "Draws the bow back with immense force, firing a glowing projectile that leaves a trail of ice. Deals 5d8 cold/force damage.",
+        "description_tr": "Yayı muazzam bir güçle geri çekerek buzdan bir iz bırakan parlayan bir mermi fırlatır. 5d8 soğuk/güç hasarı verir.",
+        "branch": "Magic Shot",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ra_shot_4"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "5d8 cold/force"
+        }
+      },
+      {
+        "spell_key": "ra_shot_9",
+        "name_en": "Phase Arrow",
+        "name_tr": "Faz Oku",
+        "description_en": "Shoots an arrow that briefly sends the target to the astral plane. Deals 3d10 psychic damage and the target loses their next action.",
+        "description_tr": "Hedefi kısa süreliğine astral düzleme gönderen bir ok atar. 3d10 psişik hasar verir ve hedef bir sonraki eylemini kaybeder.",
+        "branch": "Magic Shot",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ra_shot_6"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "3d10 psychic",
+          "duration": "1 turn stun"
+        }
+      },
+      {
+        "spell_key": "ra_shot_10",
+        "name_en": "Starfall Volley",
+        "name_tr": "Yıldız Düşüşü Yaylımı",
+        "description_en": "Fires a single arrow into the sky, which splits into dozens of radiant stars. Showers a 15m radius area, dealing 6d8 radiant damage.",
+        "description_tr": "Gökyüzüne tek bir ok atar, bu ok onlarca parlak yıldıza bölünür. 15m yarıçaplı bir alana yağarak 6d8 parlak hasar verir.",
+        "branch": "Magic Shot",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ra_shot_7"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "6d8 radiant",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "ra_shot_11",
+        "name_en": "Eclipse Arrow",
+        "name_tr": "Tutulma Oku",
+        "description_en": "Fires an arrow of pure darkness. Creates a 20m sphere of magical darkness on impact, and deals 6d10 necrotic damage to the primary target.",
+        "description_tr": "Saf karanlıktan bir ok atar. Çarpışmada 20m'lik büyülü bir karanlık küresi yaratır ve birincil hedefe 6d10 nekrotik hasar verir.",
+        "branch": "Magic Shot",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ra_shot_9"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "6d10 necrotic",
+          "radius": "20m darkness"
+        }
+      },
+      {
+        "spell_key": "ra_shot_12",
+        "name_en": "Prismatic Shot",
+        "name_tr": "Prizmatik Atış",
+        "description_en": "Fires a rainbow-colored arrow. Deals 2d6 of fire, cold, lightning, poison, and acid damage simultaneously (10d6 total).",
+        "description_tr": "Gökkuşağı renkli bir ok atar. Eşzamanlı olarak 2d6 ateş, soğuk, yıldırım, zehir ve asit hasarı verir (toplam 10d6).",
+        "branch": "Magic Shot",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ra_shot_8"
+        ],
+        "icon": "🌈",
+        "effects": {
+          "damage": "10d6 mixed"
+        }
+      },
+      {
+        "spell_key": "ra_shot_13",
+        "name_en": "Arcane Archer's Focus",
+        "name_tr": "Sır Okçu Odaklanması",
+        "description_en": "Passive. Your Magic Shots cost 25% less mana, have their range doubled, and their critical hit multiplier becomes x3.",
+        "description_tr": "Pasif. Büyülü Atışlarınız %25 daha az mana harcar, menzilleri iki katına çıkar ve kritik vuruş çarpanları x3 olur.",
+        "branch": "Magic Shot",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ra_shot_10",
+          "ra_shot_12"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "mana_reduction": "25%",
+          "range_multiplier": "2x",
+          "crit_multiplier": "x3"
+        }
+      },
+      {
+        "spell_key": "ra_shot_ult",
+        "name_en": "Ultimate: World-Piercing Shot",
+        "name_tr": "Ulti: Dünyayı Delen Atış",
+        "description_en": "Focuses all your magic into a single, devastating beam arrow. Shoots a 5m wide, 100m long line. Deals 15d10 force damage to everything in its path, disintegrating targets reduced to 0 HP.",
+        "description_tr": "Tüm büyünüzü tek, yıkıcı bir ışın okuna odaklar. 5m genişliğinde, 100m uzunluğunda bir çizgi atar. Yolundaki her şeye 15d10 güç hasarı verir, 0 HP'ye düşen hedefleri parçalar.",
+        "branch": "Magic Shot",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ra_shot_13"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "15d10 force",
+          "area": "5m x 100m line",
+          "mechanic": "Disintegrate on 0 HP"
+        }
+      },
+      {
+        "spell_key": "ra_cb_1",
+        "name_en": "Trapped Arrow",
+        "name_tr": "Tuzaklı Ok",
+        "description_en": "Ties a Rune Trap to an arrow. When the arrow hits a target or surface, the trap immediately activates. Adds the trap's effect to the arrow's impact.",
+        "description_tr": "Bir oka Rün Tuzağı bağlar. Ok bir hedefe veya yüzeye çarptığında tuzak anında etkinleşir. Tuzağın etkisini okun çarpışmasına ekler.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ra_trap_5",
+          "ra_shot_6"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "mechanic": "Combine Trap and Shot"
+        }
+      },
+      {
+        "spell_key": "ra_cb_2",
+        "name_en": "Enchanted Trap",
+        "name_tr": "Efsunlu Tuzak",
+        "description_en": "Imbues your traps with weapon enchantments. Triggers from the trap will apply your active marks (like Mark of Vulnerability) to all targets hit in the area.",
+        "description_tr": "Tuzaklarınızı silah efsunlarıyla doldurur. Tuzaktan gelen tetiklemeler, alandaki vurulan tüm hedeflere aktif işaretlerinizi (Savunmasızlık İşareti gibi) uygular.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ra_trap_7",
+          "ra_enchant_7"
+        ],
+        "icon": "❇️",
+        "effects": {
+          "mechanic": "Apply Marks via Traps"
+        }
+      },
+      {
+        "spell_key": "ra_cb_3",
+        "name_en": "Marked Execution",
+        "name_tr": "İşaretli İnfaz",
+        "description_en": "When you fire a Magic Shot at a target with a Mark, the arrow perfectly homes in, dealing guaranteed maximum damage and ignoring shields.",
+        "description_tr": "İşaretli bir hedefe Büyülü Atış yaptığınızda, ok mükemmel bir şekilde güdümlenir, garantili maksimum hasar verir ve kalkanları yok sayar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ra_enchant_8",
+          "ra_shot_9"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "mechanic": "Max damage, ignores shields"
+        }
+      },
+      {
+        "spell_key": "ra_cb_4",
+        "name_en": "Seeking Trap Arrows",
+        "name_tr": "Arayıcı Tuzak Okları",
+        "description_en": "Fires multiple trapped arrows that actively seek out enemies in a 30m radius, planting themselves directly onto the targets and detonating their traps.",
+        "description_tr": "30m yarıçapındaki düşmanları aktif olarak arayan, doğrudan hedeflere yerleşen ve tuzaklarını patlatan birden fazla tuzaklı ok atar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ra_enchant_9",
+          "ra_trap_10",
+          "ra_shot_10"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "radius": "30m",
+          "mechanic": "Homing Trap Detonation"
+        }
+      },
+      {
+        "spell_key": "ra_cb_5",
+        "name_en": "Elemental Overload",
+        "name_tr": "Eylemsel Aşırı Yük",
+        "description_en": "Fuses an Enchantment with a high-tier Magic Shot. Your next Prismatic Shot or Starfall Volley applies all active Marks and shatters enemy armor entirely (-5 AC) for 3 turns.",
+        "description_tr": "Bir Efsunu üst seviye bir Büyülü Atış ile birleştirir. Bir sonraki Prizmatik Atışınız veya Yıldız Düşüşü Yaylımınız tüm aktif İşaretleri uygular ve düşman zırhını 3 tur boyunca tamamen parçalar (-5 AC).",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ra_enchant_12",
+          "ra_shot_12"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "ac_reduction": 5,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ra_cb_6",
+        "name_en": "Minefield Volley",
+        "name_tr": "Mayın Tarlası Yaylımı",
+        "description_en": "Fires a massive volley of arrows into the air that rain down over a 40m area. Each arrow plants a random high-tier Rune Trap into the ground, instantly establishing a deadly zone.",
+        "description_tr": "Havaya, 40m'lik bir alana yağan devasa bir ok yaylımı atar. Her ok, yere rastgele bir üst seviye Rün Tuzağı yerleştirerek anında ölümcül bir bölge oluşturur.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "ra_trap_13",
+          "ra_shot_13"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "radius": "40m",
+          "mechanic": "Mass Trap Deployment"
+        }
+      },
+      {
+        "spell_key": "ra_cb_7",
+        "name_en": "Aura of the Runic Hunter",
+        "name_tr": "Rünik Avcı Halesi",
+        "description_en": "Passive. Your Mark, Trap, and Shot magic harmonize. Whenever a trap is triggered, all your Marks deal 2d10 force damage. Whenever you hit with a Magic Shot, your traps' cooldowns decrease by 1 turn.",
+        "description_tr": "Pasif. İşaret, Tuzak ve Atış büyünüz uyum içindedir. Bir tuzak tetiklendiğinde, tüm İşaretleriniz 2d10 güç hasarı verir. Büyülü bir Atışla her vurduğunuzda, tuzaklarınızın bekleme süreleri 1 tur azalır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "ra_enchant_13",
+          "ra_trap_13",
+          "ra_shot_13"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage": "2d10 force on trigger",
+          "cooldown_reduction": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ra_grand_ult",
+        "name_en": "Grand Ultimate: The Rune Weaver's Judgement",
+        "name_tr": "Büyük Ulti: Rün Dokuyucunun Hükmü",
+        "description_en": "You invoke the ultimate art of the Rune Archer. You float into the air, creating a massive runic bow. You fire an arrow that shatters space itself, raining down 100 explosive rune-arrows globally within a 100m radius. Each arrow deals 5d12 force damage and applies every known Mark and Trap to any survivor.",
+        "description_tr": "Rün Okçusunun nihai sanatını çağırırsınız. Havaya yükselerek devasa bir rün yayı yaratırsınız. Uzayı parçalayan bir ok atarak 100m yarıçapında küresel olarak 100 patlayıcı rün-oku yağdırırsınız. Her ok 5d12 güç hasarı verir ve hayatta kalanlara bilinen her İşareti ve Tuzağı uygular.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2500,
+        "prerequisites": [
+          "ra_enchant_ult",
+          "ra_trap_ult",
+          "ra_shot_ult"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "500d12 force total",
+          "radius": "100m",
+          "mechanic": "Applies all Marks and Traps"
+        }
+      }
+    ]
+  }
+]

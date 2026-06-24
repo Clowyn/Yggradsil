@@ -1,0 +1,991 @@
+[
+  {
+    "subclass_key": "curious",
+    "tree_name_en": "Curiosity & Experimentation",
+    "tree_name_tr": "Merak ve Deney",
+    "tree_desc_en": "A path of relentless exploration, unpredictable magical experiments, and deep analysis to uncover the secrets of the universe.",
+    "tree_desc_tr": "Evrenin sırlarını ortaya çıkarmak için amansız keşif, öngörülemeyen büyülü deneyler ve derin analiz yolu.",
+    "branches": [
+      "Observe",
+      "Experiment",
+      "Discovery"
+    ],
+    "spells": [
+      {
+        "spell_key": "cr_scan",
+        "name_en": "Scan",
+        "name_tr": "İnceleme",
+        "description_en": "Scans a target within 15m, revealing HP, MP, and basic resistances.",
+        "description_tr": "15m menzildeki bir hedefi tarayarak HP, MP ve temel dirençlerini ortaya çıkarır.",
+        "branch": "Observe",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "cr_keen_eye",
+        "name_en": "Keen Eye",
+        "name_tr": "Keskin Göz",
+        "description_en": "Increases critical hit chance by 10% for 30s by finding small openings.",
+        "description_tr": "30 saniye boyunca açıklar bularak kritik vuruş şansını %10 artıran bir yetenek.",
+        "branch": "Observe",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "cr_scan"
+        ],
+        "icon": "🔍",
+        "effects": {
+          "duration": "30s",
+          "crit_chance": "+10%"
+        }
+      },
+      {
+        "spell_key": "cr_weakness_spot",
+        "name_en": "Weakness Spot",
+        "name_tr": "Zayıf Nokta",
+        "description_en": "Marks a target at 20m. Target takes 15% more damage from all sources for 15s.",
+        "description_tr": "20m menzildeki bir hedefi işaretler. Hedef 15 saniye boyunca tüm kaynaklardan %15 daha fazla hasar alır.",
+        "branch": "Observe",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cr_keen_eye"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "range": "20m",
+          "duration": "15s",
+          "damage_taken": "+15%"
+        }
+      },
+      {
+        "spell_key": "cr_aura_read",
+        "name_en": "Aura Read",
+        "name_tr": "Aura Okuma",
+        "description_en": "Grants 20m true sight, revealing invisible enemies and magical traps for 1 minute.",
+        "description_tr": "1 dakika boyunca görünmez düşmanları ve büyülü tuzakları ortaya çıkaran 20m gerçek görüş kazandırır.",
+        "branch": "Observe",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cr_weakness_spot"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "range": "20m",
+          "duration": "60s",
+          "true_sight": "true"
+        }
+      },
+      {
+        "spell_key": "cr_predict_movement",
+        "name_en": "Predict Movement",
+        "name_tr": "Hareket Tahmini",
+        "description_en": "Gives a 50% dodge chance against the next 3 incoming attacks within 10s.",
+        "description_tr": "10 saniye içinde gelecek ilk 3 saldırıya karşı %50 kaçınma şansı verir.",
+        "branch": "Observe",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "cr_aura_read"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "duration": "10s",
+          "dodge_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "cr_anatomy_study",
+        "name_en": "Anatomy Study",
+        "name_tr": "Anatomi Çalışması",
+        "description_en": "Attacks ignore 25% of the target's physical armor for 20s.",
+        "description_tr": "20 saniye boyunca saldırılarınız hedefin fiziksel zırhının %25'ini görmezden gelir.",
+        "branch": "Observe",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cr_predict_movement"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "duration": "20s",
+          "armor_penetration": "25%"
+        }
+      },
+      {
+        "spell_key": "cr_piercing_gaze",
+        "name_en": "Piercing Gaze",
+        "name_tr": "Delici Bakış",
+        "description_en": "Deals 4d8 psychic damage and stuns a target for 3s within 15m.",
+        "description_tr": "15m içindeki bir hedefe 4d8 psişik hasar verir ve onu 3 saniyeliğine sersemletir.",
+        "branch": "Observe",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cr_anatomy_study"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "range": "15m",
+          "damage": "4d8",
+          "stun": "3s"
+        }
+      },
+      {
+        "spell_key": "cr_flaw_exploitation",
+        "name_en": "Flaw Exploitation",
+        "name_tr": "Kusur Sömürüsü",
+        "description_en": "Deals 6d10 true damage if the target is marked by Weakness Spot. Range 10m.",
+        "description_tr": "Zayıf Nokta ile işaretlenmiş hedefe 6d10 gerçek hasar verir. Menzil 10m.",
+        "branch": "Observe",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cr_piercing_gaze"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "range": "10m",
+          "damage": "6d10"
+        }
+      },
+      {
+        "spell_key": "cr_clairvoyance",
+        "name_en": "Clairvoyance",
+        "name_tr": "Durugörü",
+        "description_en": "View any location up to 500m away for 1 minute, ignoring walls.",
+        "description_tr": "Duvarları yok sayarak 500m uzaklığa kadar herhangi bir konumu 1 dakika boyunca izlemenizi sağlar.",
+        "branch": "Observe",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cr_flaw_exploitation"
+        ],
+        "icon": "🔭",
+        "effects": {
+          "range": "500m",
+          "duration": "60s"
+        }
+      },
+      {
+        "spell_key": "cr_absolute_focus",
+        "name_en": "Absolute Focus",
+        "name_tr": "Mutlak Odak",
+        "description_en": "Slows down time for the user; increases action speed by 100% and movement speed by 50% for 12s.",
+        "description_tr": "12 saniye boyunca zaman algınızı yavaşlatır; eylem hızınızı %100 ve hareket hızınızı %50 artırır.",
+        "branch": "Observe",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cr_clairvoyance"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "duration": "12s",
+          "action_speed": "+100%",
+          "movement_speed": "+50%"
+        }
+      },
+      {
+        "spell_key": "cr_omniscience_glimpse",
+        "name_en": "Omniscience Glimpse",
+        "name_tr": "Her Şeyi Bilme Belirtisi",
+        "description_en": "Gain 100% dodge chance and immunity to surprise attacks for 8s.",
+        "description_tr": "8 saniye boyunca %100 kaçınma şansı ve sürpriz saldırılara karşı bağışıklık kazandırır.",
+        "branch": "Observe",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cr_absolute_focus"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "duration": "8s",
+          "dodge_chance": "100%"
+        }
+      },
+      {
+        "spell_key": "cr_vital_strike",
+        "name_en": "Vital Strike",
+        "name_tr": "Hayati Vuruş",
+        "description_en": "A calculated melee strike that guarantees a critical hit and deals 12d10 physical damage, causing massive bleeding (2d10 per sec for 5s).",
+        "description_tr": "Kesinlikle kritik vuran, 12d10 fiziksel hasar veren ve 5 saniye boyunca saniyede 2d10 kanama uygulayan hesaplanmış bir yakın dövüş saldırısı.",
+        "branch": "Observe",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cr_omniscience_glimpse"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "12d10",
+          "bleed": "2d10/s",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "cr_perfect_analysis",
+        "name_en": "Perfect Analysis",
+        "name_tr": "Kusursuz Analiz",
+        "description_en": "Strips a target of all immunities and resistances for 15s. Range 30m.",
+        "description_tr": "30m menzildeki bir hedefin tüm bağışıklıklarını ve dirençlerini 15 saniyeliğine ortadan kaldırır.",
+        "branch": "Observe",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cr_vital_strike"
+        ],
+        "icon": "📈",
+        "effects": {
+          "range": "30m",
+          "duration": "15s",
+          "strip_resistances": "true"
+        }
+      },
+      {
+        "spell_key": "cr_all_seeing_eye",
+        "name_en": "All-Seeing Eye",
+        "name_tr": "Her Şeyi Gören Göz",
+        "description_en": "Summons a massive ethereal eye over the battlefield for 30s. Grants 100m true sight to all allies, increases their crit chance by 50%, and automatically dodges the first 5 attacks per ally.",
+        "description_tr": "30 saniyeliğine savaş alanının üzerinde devasa ruhani bir göz çağırır. Tüm müttefiklere 100m gerçek görüş, %50 kritik şansı verir ve müttefik başına ilk 5 saldırıdan otomatik kaçınma sağlar.",
+        "branch": "Observe",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cr_perfect_analysis"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "duration": "30s",
+          "range": "100m",
+          "crit_chance": "+50%"
+        }
+      },
+      {
+        "spell_key": "cr_minor_catalyst",
+        "name_en": "Minor Catalyst",
+        "name_tr": "Küçük Katalizör",
+        "description_en": "Throws a flask dealing 2d6 random elemental damage in a 3m radius.",
+        "description_tr": "3m yarıçapında 2d6 rastgele element hasarı veren bir şişe fırlatır.",
+        "branch": "Experiment",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧪",
+        "effects": {
+          "range": "3m",
+          "damage": "2d6"
+        }
+      },
+      {
+        "spell_key": "cr_volatile_flask",
+        "name_en": "Volatile Flask",
+        "name_tr": "Uçucu Şişe",
+        "description_en": "Throws an unstable flask dealing 3d6 fire damage in a 5m radius. Has a 10% chance to explode in hand for half damage.",
+        "description_tr": "5m yarıçapında 3d6 ateş hasarı veren dengesiz bir şişe fırlatır. %10 ihtimalle elde patlayarak yarı hasar verir.",
+        "branch": "Experiment",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [
+          "cr_minor_catalyst"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "range": "5m",
+          "damage": "3d6"
+        }
+      },
+      {
+        "spell_key": "cr_random_spark",
+        "name_en": "Random Spark",
+        "name_tr": "Rastgele Kıvılcım",
+        "description_en": "Shoots a bolt dealing 2d8 lightning damage that bounces to 2 random targets within 8m.",
+        "description_tr": "8m içindeki 2 rastgele hedefe seken 2d8 yıldırım hasarı veren bir enerji oku ateşler.",
+        "branch": "Experiment",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "cr_volatile_flask"
+        ],
+        "icon": "✨",
+        "effects": {
+          "range": "8m",
+          "damage": "2d8",
+          "bounces": "2"
+        }
+      },
+      {
+        "spell_key": "cr_mutated_element",
+        "name_en": "Mutated Element",
+        "name_tr": "Mutasyona Uğramış Element",
+        "description_en": "Combines fire and acid to shoot a glob dealing 4d6 damage, reducing armor by 10 for 5s. Range 20m.",
+        "description_tr": "20m menzilde 4d6 hasar veren ve zırhı 5 saniyeliğine 10 azaltan ateş ve asit karışımı fırlatır.",
+        "branch": "Experiment",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cr_random_spark"
+        ],
+        "icon": "🦠",
+        "effects": {
+          "range": "20m",
+          "damage": "4d6",
+          "armor_reduction": "10",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "cr_unstable_concoction",
+        "name_en": "Unstable Concoction",
+        "name_tr": "Kararsız Karışım",
+        "description_en": "Drink to gain a random massive buff (+50% dmg, +50% speed, or +50% armor) for 15s, but take 1d10 poison damage per second.",
+        "description_tr": "15 saniyeliğine devasa bir rastgele güçlendirme (+%50 hasar, hız veya zırh) kazanmak için içilir, ancak saniyede 1d10 zehir hasarı alınır.",
+        "branch": "Experiment",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "cr_mutated_element"
+        ],
+        "icon": "🍸",
+        "effects": {
+          "duration": "15s",
+          "buff": "+50%",
+          "self_damage": "1d10/s"
+        }
+      },
+      {
+        "spell_key": "cr_bouncing_jolt",
+        "name_en": "Bouncing Jolt",
+        "name_tr": "Sıçrayan Çarpma",
+        "description_en": "Lightning that deals 4d8 damage and bounces up to 5 times. Range 20m.",
+        "description_tr": "4d8 hasar veren ve 5 defaya kadar seken yıldırım atar. Menzil 20m.",
+        "branch": "Experiment",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cr_unstable_concoction"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "range": "20m",
+          "damage": "4d8",
+          "bounces": "5"
+        }
+      },
+      {
+        "spell_key": "cr_chaotic_infusion",
+        "name_en": "Chaotic Infusion",
+        "name_tr": "Kaotik İnfüzyon",
+        "description_en": "Infuse your weapon. Next 5 hits deal an extra 3d8 damage of a random element and apply a random debuff.",
+        "description_tr": "Silahınızı kaosla güçlendirir. Sonraki 5 vuruş fazladan 3d8 rastgele element hasarı verir ve rastgele bir zayıflatma uygular.",
+        "branch": "Experiment",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cr_bouncing_jolt"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "hits": "5",
+          "bonus_damage": "3d8"
+        }
+      },
+      {
+        "spell_key": "cr_hazardous_brew",
+        "name_en": "Hazardous Brew",
+        "name_tr": "Tehlikeli Karışım",
+        "description_en": "Creates a 10m radius puddle that mutates every 3s, dealing 4d6 damage of changing types and applying different status effects for 15s.",
+        "description_tr": "15 saniye boyunca her 3 saniyede bir mutasyona uğrayan, değişen türlerde 4d6 hasar veren ve farklı durum efektleri uygulayan 10m yarıçapında bir su birikintisi yaratır.",
+        "branch": "Experiment",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cr_chaotic_infusion"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "radius": "10m",
+          "duration": "15s",
+          "damage": "4d6/3s"
+        }
+      },
+      {
+        "spell_key": "cr_wild_surge",
+        "name_en": "Wild Surge",
+        "name_tr": "Vahşi Dalgalanma",
+        "description_en": "Next spell cast has a 50% chance to double its effects, and a 50% chance to target a random entity within 30m.",
+        "description_tr": "Bir sonraki büyünün etkisini ikiye katlama şansı %50, 30m içindeki rastgele bir varlığı hedef alma şansı %50'dir.",
+        "branch": "Experiment",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cr_hazardous_brew"
+        ],
+        "icon": "🎲",
+        "effects": {
+          "double_chance": "50%",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "cr_chain_reaction",
+        "name_en": "Chain Reaction",
+        "name_tr": "Zincirleme Reaksiyon",
+        "description_en": "Curses a target for 15s. If they die under this effect, they explode dealing 8d10 damage in a 10m radius, spreading the curse to others.",
+        "description_tr": "Bir hedefi 15 saniyeliğine lanetler. Etki altındayken ölürlerse patlayarak 10m yarıçapında 8d10 hasar verir ve laneti başkalarına yayarlar.",
+        "branch": "Experiment",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cr_wild_surge"
+        ],
+        "icon": "💥",
+        "effects": {
+          "duration": "15s",
+          "radius": "10m",
+          "damage": "8d10"
+        }
+      },
+      {
+        "spell_key": "cr_anomalous_burst",
+        "name_en": "Anomalous Burst",
+        "name_tr": "Anormal Patlama",
+        "description_en": "A 15m radius explosion dealing 10d10 pure damage. Has a 20% chance to silence, stun, or disarm targets.",
+        "description_tr": "10d10 saf hasar veren 15m yarıçapında bir patlama. Hedefleri susturma, sersemletme veya silahsızlandırma şansı %20'dir.",
+        "branch": "Experiment",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cr_chain_reaction"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "radius": "15m",
+          "damage": "10d10"
+        }
+      },
+      {
+        "spell_key": "cr_reality_warp",
+        "name_en": "Reality Warp",
+        "name_tr": "Gerçeklik Bükülmesi",
+        "description_en": "Randomly swaps the positions of up to 5 enemies within 40m, dealing 6d10 space damage and confusing them for 3s.",
+        "description_tr": "40m içindeki en fazla 5 düşmanın yerlerini rastgele değiştirir, 6d10 uzay hasarı verir ve onları 3 saniyeliğine sersemletir.",
+        "branch": "Experiment",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cr_anomalous_burst"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "range": "40m",
+          "damage": "6d10",
+          "stun": "3s"
+        }
+      },
+      {
+        "spell_key": "cr_quantum_state",
+        "name_en": "Quantum State",
+        "name_tr": "Kuantum Durumu",
+        "description_en": "Enter a state of superposition for 20s. You evade 50% of all attacks, and every spell you cast is duplicated automatically at a second target.",
+        "description_tr": "20 saniyeliğine süperpozisyon durumuna girer. Saldırıların %50'sinden kaçınırsınız ve yaptığınız her büyü otomatik olarak ikinci bir hedefe kopyalanır.",
+        "branch": "Experiment",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cr_reality_warp"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "20s",
+          "dodge_chance": "50%",
+          "duplicate_spells": "true"
+        }
+      },
+      {
+        "spell_key": "cr_eureka_moment",
+        "name_en": "Eureka Moment",
+        "name_tr": "Evreka Anı",
+        "description_en": "The pinnacle of experimentation. Create a 30m anomaly that lasts 20s. Every second, it deals 15d10 random elemental damage to enemies and heals allies for 5d10 while granting them random powerful buffs.",
+        "description_tr": "Deneylerin zirvesi. 20 saniye süren 30m'lik bir anomali yaratır. Her saniye düşmanlara 15d10 rastgele element hasarı verir, müttefikleri 5d10 iyileştirir ve onlara rastgele güçlü güçlendirmeler kazandırır.",
+        "branch": "Experiment",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cr_quantum_state"
+        ],
+        "icon": "💡",
+        "effects": {
+          "radius": "30m",
+          "duration": "20s",
+          "damage": "15d10/s",
+          "heal": "5d10/s"
+        }
+      },
+      {
+        "spell_key": "cr_trailblazer",
+        "name_en": "Trailblazer",
+        "name_tr": "Öncü",
+        "description_en": "Increases movement speed by 20% and leaves a glowing trail that allies can follow for the same buff. Lasts 30s.",
+        "description_tr": "30 saniye boyunca hareket hızını %20 artırır ve müttefiklerin aynı güçlendirme için takip edebileceği parlayan bir iz bırakır.",
+        "branch": "Discovery",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🛤️",
+        "effects": {
+          "duration": "30s",
+          "movement_speed": "+20%"
+        }
+      },
+      {
+        "spell_key": "cr_hidden_step",
+        "name_en": "Hidden Step",
+        "name_tr": "Gizli Adım",
+        "description_en": "Instantly teleport up to 8m to an unoccupied space you can see.",
+        "description_tr": "Görebildiğiniz boş bir alana 8m'ye kadar anında ışınlanın.",
+        "branch": "Discovery",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [
+          "cr_trailblazer"
+        ],
+        "icon": "👣",
+        "effects": {
+          "range": "8m"
+        }
+      },
+      {
+        "spell_key": "cr_object_reading",
+        "name_en": "Object Reading",
+        "name_tr": "Nesne Okuma",
+        "description_en": "Touch an object to receive a vision of the last person who held it and its use in the past 24 hours.",
+        "description_tr": "Bir nesneye dokunarak onu son tutan kişinin ve son 24 saatteki kullanımının vizyonunu görün.",
+        "branch": "Discovery",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "cr_hidden_step"
+        ],
+        "icon": "📜",
+        "effects": {
+          "duration": "24h_history"
+        }
+      },
+      {
+        "spell_key": "cr_phase_shift",
+        "name_en": "Phase Shift",
+        "name_tr": "Evre Geçişi",
+        "description_en": "Become intangible for 4s, able to pass through solid objects up to 2m thick and immune to physical attacks.",
+        "description_tr": "4 saniyeliğine soyutlaşarak 2m kalınlığa kadar katı nesnelerin içinden geçebilir ve fiziksel saldırılara karşı bağışıklık kazanırsınız.",
+        "branch": "Discovery",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "cr_object_reading"
+        ],
+        "icon": "👻",
+        "effects": {
+          "duration": "4s",
+          "intangible": "true"
+        }
+      },
+      {
+        "spell_key": "cr_secret_path",
+        "name_en": "Secret Path",
+        "name_tr": "Gizli Yol",
+        "description_en": "Creates a portal between two points up to 30m apart that lasts for 1 minute.",
+        "description_tr": "30m'ye kadar uzaklıktaki iki nokta arasında 1 dakika süren bir portal oluşturur.",
+        "branch": "Discovery",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "cr_phase_shift"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "range": "30m",
+          "duration": "60s"
+        }
+      },
+      {
+        "spell_key": "cr_archaeologist_touch",
+        "name_en": "Archaeologist's Touch",
+        "name_tr": "Arkeolog Dokunuşu",
+        "description_en": "Touch a locked door or chest to reveal its mechanism, granting a +10 bonus to unlocking it or bypassing magical traps.",
+        "description_tr": "Kilitli bir kapıya veya sandığa dokunarak mekanizmasını ortaya çıkarır, kilidini açmak veya büyülü tuzakları atlatmak için +10 bonus kazandırır.",
+        "branch": "Discovery",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cr_secret_path"
+        ],
+        "icon": "⛏️",
+        "effects": {
+          "bonus": "+10"
+        }
+      },
+      {
+        "spell_key": "cr_wormhole_step",
+        "name_en": "Wormhole Step",
+        "name_tr": "Solucandeliği Adımı",
+        "description_en": "Teleport up to 30m instantly, creating a vacuum that pulls nearby enemies 3m towards your departure point.",
+        "description_tr": "Anında 30m'ye kadar ışınlanır ve yakındaki düşmanları ayrılış noktanıza 3m çeken bir vakum yaratır.",
+        "branch": "Discovery",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cr_archaeologist_touch"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "range": "30m",
+          "pull_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "cr_relic_activation",
+        "name_en": "Relic Activation",
+        "name_tr": "Kalıntı Aktivasyonu",
+        "description_en": "Summon an ancient ethereal artifact that pulses 3 times, each pulse pushing enemies back 5m and dealing 3d10 force damage.",
+        "description_tr": "3 kez titreşen kadim ruhani bir eser çağırır. Her titreşim düşmanları 5m geriye iter ve 3d10 kuvvet hasarı verir.",
+        "branch": "Discovery",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cr_wormhole_step"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "pulses": "3",
+          "pushback": "5m",
+          "damage": "3d10"
+        }
+      },
+      {
+        "spell_key": "cr_gravity_tweak",
+        "name_en": "Gravity Tweak",
+        "name_tr": "Yerçekimi Ayarı",
+        "description_en": "Create a 15m zone for 20s where enemies move at half speed and allies can jump triple height.",
+        "description_tr": "20 saniye boyunca düşmanların yarı hızda hareket ettiği ve müttefiklerin üç kat yükseğe zıplayabildiği 15m'lik bir bölge yaratır.",
+        "branch": "Discovery",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cr_relic_activation"
+        ],
+        "icon": "🪐",
+        "effects": {
+          "radius": "15m",
+          "duration": "20s",
+          "enemy_speed": "-50%"
+        }
+      },
+      {
+        "spell_key": "cr_spatial_fold",
+        "name_en": "Spatial Fold",
+        "name_tr": "Uzamsal Katlanma",
+        "description_en": "Folds space, bringing a target up to 40m away instantly into melee range, stunning them for 1s.",
+        "description_tr": "Uzayı katlayarak 40m uzaklıktaki bir hedefi anında yakın dövüş menziline getirir ve onları 1 saniyeliğine sersemletir.",
+        "branch": "Discovery",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cr_gravity_tweak"
+        ],
+        "icon": "📐",
+        "effects": {
+          "range": "40m",
+          "stun": "1s"
+        }
+      },
+      {
+        "spell_key": "cr_lost_knowledge",
+        "name_en": "Lost Knowledge",
+        "name_tr": "Kayıp Bilgi",
+        "description_en": "Gain the ability to cast one random Tier 4 spell from any other class. Usable once within the next 10 minutes.",
+        "description_tr": "Diğer herhangi bir sınıftan rastgele bir Aşama 4 büyüsü yapma yeteneği kazandırır. Sonraki 10 dakika içinde bir kez kullanılabilir.",
+        "branch": "Discovery",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cr_spatial_fold"
+        ],
+        "icon": "📚",
+        "effects": {
+          "duration": "10m",
+          "uses": "1"
+        }
+      },
+      {
+        "spell_key": "cr_time_skip",
+        "name_en": "Time Skip",
+        "name_tr": "Zaman Atlaması",
+        "description_en": "Skips time forward by 3s. You vanish and reappear, negating any damage or effects that would have hit you during that window.",
+        "description_tr": "Zamanı 3 saniye ileri atlatır. Ortadan kaybolur ve yeniden ortaya çıkarsınız, o süre zarfında size çarpacak olan her türlü hasarı veya etkiyi geçersiz kılarsınız.",
+        "branch": "Discovery",
+        "tier": 4,
+        "min_level": 82,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cr_lost_knowledge"
+        ],
+        "icon": "⏱️",
+        "effects": {
+          "duration": "3s",
+          "invulnerability": "true"
+        }
+      },
+      {
+        "spell_key": "cr_ancient_secret",
+        "name_en": "Ancient Secret",
+        "name_tr": "Kadim Sır",
+        "description_en": "Reveal a maddening cosmic truth to all enemies within 20m. Deals 12d10 psychic damage and permanently reduces their magic resistance by 20%.",
+        "description_tr": "20m içindeki tüm düşmanlara çıldırtıcı kozmik bir gerçeği açıklar. 12d10 psişik hasar verir ve büyü dirençlerini kalıcı olarak %20 azaltır.",
+        "branch": "Discovery",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cr_time_skip"
+        ],
+        "icon": "🗝️",
+        "effects": {
+          "range": "20m",
+          "damage": "12d10",
+          "magic_resist": "-20%"
+        }
+      },
+      {
+        "spell_key": "cr_world_walker",
+        "name_en": "World Walker",
+        "name_tr": "Dünya Gezgini",
+        "description_en": "Step fully into the spaces between worlds for 30s. You can teleport anywhere within 100m every 2s, and each teleport leaves behind a spatial tear that deals 10d10 force damage to anyone touching it.",
+        "description_tr": "30 saniyeliğine dünyalar arasındaki boşluğa tamamen adım atarsınız. Her 2 saniyede bir 100m içindeki herhangi bir yere ışınlanabilirsiniz ve her ışınlanma dokunanlara 10d10 kuvvet hasarı veren uzaysal bir yırtık bırakır.",
+        "branch": "Discovery",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cr_ancient_secret"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "duration": "30s",
+          "teleport_range": "100m",
+          "damage": "10d10"
+        }
+      },
+      {
+        "spell_key": "cr_calculated_risk",
+        "name_en": "Calculated Risk",
+        "name_tr": "Hesaplanmış Risk",
+        "description_en": "Analyze a chemical mixture perfectly, creating a bomb that deals 6d8 fire damage in a 10m radius but intelligently avoids all allies.",
+        "description_tr": "Kimyasal bir karışımı mükemmel şekilde analiz ederek, 10m yarıçapında 6d8 ateş hasarı veren ancak müttefiklerden akıllıca kaçınan bir bomba yaratır.",
+        "branch": "Observe, Experiment",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cr_anatomy_study",
+          "cr_unstable_concoction"
+        ],
+        "icon": "📊",
+        "effects": {
+          "radius": "10m",
+          "damage": "6d8"
+        }
+      },
+      {
+        "spell_key": "cr_scout_probe",
+        "name_en": "Scout Probe",
+        "name_tr": "Gözlem Sondası",
+        "description_en": "Deploy a magical floating eye that travels up to 200m away, streaming its vision back to you and detecting hidden passages for 2 minutes.",
+        "description_tr": "200m uzağa kadar seyahat edebilen, görüşünü size aktaran ve 2 dakika boyunca gizli geçitleri tespit eden büyülü uçan bir göz yerleştirir.",
+        "branch": "Observe, Discovery",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "cr_aura_read",
+          "cr_secret_path"
+        ],
+        "icon": "🛰️",
+        "effects": {
+          "range": "200m",
+          "duration": "120s"
+        }
+      },
+      {
+        "spell_key": "cr_field_testing",
+        "name_en": "Field Testing",
+        "name_tr": "Saha Testi",
+        "description_en": "Dash randomly up to 15m three times in quick succession. At each stopping point, drop an unstable mine that deals 4d8 lightning damage.",
+        "description_tr": "Arka arkaya hızlıca 3 kez 15m'ye kadar rastgele atılın. Her durma noktasında, 4d8 yıldırım hasarı veren dengesiz bir mayın bırakın.",
+        "branch": "Experiment, Discovery",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cr_hazardous_brew",
+          "cr_wormhole_step"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "dashes": "3",
+          "range": "15m",
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "cr_theory_proven",
+        "name_en": "Theory Proven",
+        "name_tr": "Kanıtlanmış Teori",
+        "description_en": "Target an enemy's weakness with the exact element they are vulnerable to, dealing 8d8 customized damage and reducing their speed by 30% for 5s.",
+        "description_tr": "Bir düşmanın zayıf noktasını tam olarak savunmasız oldukları elementle hedefleyerek 8d8 özelleştirilmiş hasar verir ve hızlarını 5 saniyeliğine %30 azaltır.",
+        "branch": "Observe, Experiment",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "cr_flaw_exploitation",
+          "cr_wild_surge"
+        ],
+        "icon": "📐",
+        "effects": {
+          "damage": "8d8",
+          "speed": "-30%",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "cr_dimensional_breach",
+        "name_en": "Dimensional Breach",
+        "name_tr": "Boyutsal Yırtık",
+        "description_en": "Tear a 5m unstable portal that sucks in all enemies within 20m. Deals 10d10 space damage and heavily mutates them, applying 3 random debuffs.",
+        "description_tr": "20m içindeki tüm düşmanları içine çeken 5m'lik dengesiz bir portal açar. 10d10 uzay hasarı verir ve onları ağır bir şekilde mutasyona uğratarak 3 rastgele zayıflatma uygular.",
+        "branch": "Experiment, Discovery",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cr_anomalous_burst",
+          "cr_spatial_fold"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "radius": "20m",
+          "damage": "10d10",
+          "debuffs": "3"
+        }
+      },
+      {
+        "spell_key": "cr_truth_unveiled",
+        "name_en": "Truth Unveiled",
+        "name_tr": "Ortaya Çıkan Gerçek",
+        "description_en": "Release a massive pulse of revelation in a 50m radius. Dispels all illusions, reveals all invisibility, unlocks all nearby hidden doors, and blinds enemies for 4s.",
+        "description_tr": "50m yarıçapında devasa bir aydınlanma dalgası yayar. Tüm illüzyonları ortadan kaldırır, tüm görünmezlikleri açığa çıkarır, yakındaki tüm gizli kapıların kilidini açar ve düşmanları 4 saniyeliğine kör eder.",
+        "branch": "Observe, Discovery",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "cr_omniscience_glimpse",
+          "cr_lost_knowledge"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "radius": "50m",
+          "blind": "4s"
+        }
+      },
+      {
+        "spell_key": "cr_paradigm_shift",
+        "name_en": "Paradigm Shift",
+        "name_tr": "Paradigma Kayması",
+        "description_en": "Alter the fundamental rules around a target for 15s. Their highest resistance becomes their lowest, and any damage they deal has a 50% chance to heal you instead.",
+        "description_tr": "Bir hedefin etrafındaki temel kuralları 15 saniyeliğine değiştirir. En yüksek dirençleri en düşük dirençleri haline gelir ve verdikleri herhangi bir hasarın sizi iyileştirme şansı %50 olur.",
+        "branch": "Observe, Experiment",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cr_perfect_analysis",
+          "cr_quantum_state"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "duration": "15s",
+          "lifesteal_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "cr_universal_theorem",
+        "name_en": "Universal Theorem",
+        "name_tr": "Evrensel Teorem",
+        "description_en": "The ultimate realization of curiosity. Stop time completely for 5s. Perfectly analyze every enemy, deploy 5 anomalous energy spheres, and instantly reposition. When time resumes, the spheres detonate for 30d10 true damage each.",
+        "description_tr": "Merakın nihai gerçekleşmesi. Zamanı 5 saniyeliğine tamamen durdurur. Her düşmanı kusursuzca analiz edin, 5 anormal enerji küresi yerleştirin ve anında konumlanın. Zaman devam ettiğinde, küreler patlayarak her biri 30d10 gerçek hasar verir.",
+        "branch": "Observe, Experiment, Discovery",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "cr_all_seeing_eye",
+          "cr_eureka_moment",
+          "cr_world_walker"
+        ],
+        "icon": "💠",
+        "effects": {
+          "duration": "5s",
+          "spheres": "5",
+          "damage": "30d10"
+        }
+      }
+    ]
+  }
+]

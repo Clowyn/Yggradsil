@@ -1,0 +1,944 @@
+[
+  {
+    "subclass_key": "twin_ramparts",
+    "tree_name_en": "Twin Ramparts",
+    "tree_name_tr": "İkiz Surlar",
+    "tree_desc_en": "Mastery of dual shields, impenetrable defenses, and devastating counterattacks.",
+    "tree_desc_tr": "Çifte kalkan ustalığı, aşılmaz savunmalar ve yıkıcı karşı saldırılar.",
+    "branches": [
+      "Bulwark",
+      "Counter",
+      "Dual Shields"
+    ],
+    "spells": [
+      {
+        "spell_key": "twr_shield_wall",
+        "name_en": "Shield Wall",
+        "name_tr": "Kalkan Duvarı",
+        "description_en": "Fortify your position, gaining +2 AC and a 15% bonus to your block chance.",
+        "description_tr": "Pozisyonunu güçlendirerek +2 Zırh Sınıfı ve %15 bloklama şansı bonusu kazanırsın.",
+        "branch": "Bulwark",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "ac": "+2",
+          "block_chance": "+15%"
+        }
+      },
+      {
+        "spell_key": "twr_taunting_strike",
+        "name_en": "Taunting Strike",
+        "name_tr": "Kışkırtıcı Vuruş",
+        "description_en": "Hit an enemy with your shield for 1d8 bludgeoning damage, forcing them to target you for 2 turns.",
+        "description_tr": "Düşmanına kalkanınla vurarak 1d8 ezici hasar verir ve onu 2 tur boyunca seni hedef almaya zorlarsın.",
+        "branch": "Bulwark",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "📢",
+        "effects": {
+          "damage": "1d8 bludgeoning",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "twr_iron_stance",
+        "name_en": "Iron Stance",
+        "name_tr": "Demir Duruş",
+        "description_en": "Root yourself in place, reducing all incoming damage by 20% while you remain stationary.",
+        "description_tr": "Olduğun yere kök salarak hareketsiz kaldığın sürece alınan tüm hasarı %20 azaltırsın.",
+        "branch": "Bulwark",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🗿",
+        "effects": {
+          "damage_reduction": "20%"
+        }
+      },
+      {
+        "spell_key": "twr_fortified_armor",
+        "name_en": "Fortified Armor",
+        "name_tr": "Güçlendirilmiş Zırh",
+        "description_en": "Passive: Your rigorous training grants +15 Maximum HP and a permanent +2 to AC.",
+        "description_tr": "Pasif: Sıkı eğitimin sana +15 Maksimum Can ve kalıcı olarak +2 Zırh Sınıfı kazandırır.",
+        "branch": "Bulwark",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🦾",
+        "effects": {
+          "max_hp": "+15",
+          "ac": "+2"
+        }
+      },
+      {
+        "spell_key": "twr_phalanx_formation",
+        "name_en": "Phalanx Formation",
+        "name_tr": "Falanks Düzeni",
+        "description_en": "Allies within 5m of you gain a +15% block chance and can use your shield for cover.",
+        "description_tr": "5m içindeki müttefiklerin %15 bloklama şansı kazanır ve kalkanını siper olarak kullanabilirler.",
+        "branch": "Bulwark",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 180,
+        "prerequisites": [
+          "twr_shield_wall"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "block_chance": "+15%",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "twr_ignore_pain",
+        "name_en": "Ignore Pain",
+        "name_tr": "Acıya Tahammül",
+        "description_en": "Harden your resolve to instantly gain 20 Temporary HP.",
+        "description_tr": "İradeni güçlendirerek anında 20 Geçici Can kazanırsın.",
+        "branch": "Bulwark",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "twr_iron_stance"
+        ],
+        "icon": "🩹",
+        "effects": {
+          "temp_hp": "20"
+        }
+      },
+      {
+        "spell_key": "twr_unbreakable_guard",
+        "name_en": "Unbreakable Guard",
+        "name_tr": "Kırılamaz Siper",
+        "description_en": "For 3 turns, you become completely immune to critical hits.",
+        "description_tr": "3 tur boyunca kritik vuruşlara karşı tamamen bağışıklık kazanırsın.",
+        "branch": "Bulwark",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "twr_fortified_armor"
+        ],
+        "icon": "💎",
+        "effects": {
+          "immune_crit": "true",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "twr_aegis_aura",
+        "name_en": "Aegis Aura",
+        "name_tr": "Himaye Halesi",
+        "description_en": "Radiate a protective aura that reduces all damage taken by allies within 10m by 10%.",
+        "description_tr": "10m içindeki müttefiklerin aldığı tüm hasarı %10 azaltan koruyucu bir hale yayarsın.",
+        "branch": "Bulwark",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "twr_phalanx_formation"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "damage_reduction": "10%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "twr_immovable_object",
+        "name_en": "Immovable Object",
+        "name_tr": "Sarsılmaz Nesne",
+        "description_en": "Passive: You become immune to knockbacks, hooks, grapples, and forced movement.",
+        "description_tr": "Pasif: Geri savurma, çekme, yakalanma ve zorunlu hareket etkilerine bağışıklık kazanırsın.",
+        "branch": "Bulwark",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "twr_ignore_pain"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "immune_knockback": "true"
+        }
+      },
+      {
+        "spell_key": "twr_last_bastion",
+        "name_en": "Last Bastion",
+        "name_tr": "Son Kale",
+        "description_en": "When your HP drops below 20%, automatically generate a 50 HP protective shield.",
+        "description_tr": "Canın %20'nin altına düştüğünde otomatik olarak 50 Canlık koruyucu bir kalkan üretirsin.",
+        "branch": "Bulwark",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "twr_unbreakable_guard"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "shield": "50 HP"
+        }
+      },
+      {
+        "spell_key": "twr_colossus_avatar",
+        "name_en": "Colossus Avatar",
+        "name_tr": "Dev Avatarı",
+        "description_en": "Grow by one size category, increasing Max HP by 40 and gaining +3 AC.",
+        "description_tr": "Bir boyut kategorisi büyüyerek Maksimum Canını 40 artırır ve +3 Zırh Sınıfı kazanırsın.",
+        "branch": "Bulwark",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "twr_immovable_object"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "max_hp": "+40",
+          "ac": "+3"
+        }
+      },
+      {
+        "spell_key": "twr_mass_provocation",
+        "name_en": "Mass Provocation",
+        "name_tr": "Kitlesel Kışkırtma",
+        "description_en": "Emit a warcry that taunts all enemies within a 15m radius to attack you.",
+        "description_tr": "15m yarıçapındaki tüm düşmanları sana saldırmaya kışkırtan bir savaş çığlığı atarsın.",
+        "branch": "Bulwark",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "twr_aegis_aura"
+        ],
+        "icon": "🤬",
+        "effects": {
+          "taunt_radius": "15m"
+        }
+      },
+      {
+        "spell_key": "twr_steadfast_defender",
+        "name_en": "Steadfast Defender",
+        "name_tr": "Metanetli Savunmacı",
+        "description_en": "Passive: Every time you successfully block an attack, you heal 5% of your Maximum HP.",
+        "description_tr": "Pasif: Bir saldırıyı her başarıyla blokladığında Maksimum Canının %5'i kadar iyileşirsin.",
+        "branch": "Bulwark",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "twr_last_bastion"
+        ],
+        "icon": "🐢",
+        "effects": {
+          "heal": "5% max hp"
+        }
+      },
+      {
+        "spell_key": "twr_living_fortress_ult",
+        "name_en": "The Living Fortress",
+        "name_tr": "Yaşayan Kale",
+        "description_en": "Ultimate: For 5 turns, redirect all damage taken by allies within 20m to yourself, reducing the transferred damage by 80%.",
+        "description_tr": "Ulti: 5 tur boyunca 20m içindeki müttefiklerin aldığı tüm hasarı kendine yönlendirir ve bu transfer edilen hasarı %80 azaltırsın.",
+        "branch": "Bulwark",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "twr_colossus_avatar",
+          "twr_mass_provocation"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "damage_reduction": "80%",
+          "duration": "5 turns",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "twr_shield_bash",
+        "name_en": "Shield Bash",
+        "name_tr": "Kalkan Vuruşu",
+        "description_en": "Strike forcefully with your shield, dealing 1d10 bludgeoning damage and pushing the target 2m.",
+        "description_tr": "Kalkanınla güçlü bir şekilde vurarak 1d10 ezici hasar verir ve hedefi 2m geri itersin.",
+        "branch": "Counter",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "damage": "1d10 bludgeoning",
+          "push": "2m"
+        }
+      },
+      {
+        "spell_key": "twr_spiked_defense",
+        "name_en": "Spiked Defense",
+        "name_tr": "Dikenli Savunma",
+        "description_en": "Adopt a defensive posture that returns 1d6 piercing damage to anyone hitting you with a melee attack.",
+        "description_tr": "Sana yakın dövüş saldırısı yapan herkese 1d6 delici hasar yansıtan savunmacı bir duruş sergilersin.",
+        "branch": "Counter",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 65,
+        "prerequisites": [],
+        "icon": "🦔",
+        "effects": {
+          "reflect_damage": "1d6 piercing"
+        }
+      },
+      {
+        "spell_key": "twr_reactive_strike",
+        "name_en": "Reactive Strike",
+        "name_tr": "Tepkisel Vuruş",
+        "description_en": "When an ally within 3m is hit, you immediately make an attack of opportunity dealing 1d10 damage.",
+        "description_tr": "3m içindeki bir müttefik vurulduğunda anında 1d10 hasar veren bir fırsat saldırısı yaparsın.",
+        "branch": "Counter",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 85,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "1d10",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "twr_perfect_parry",
+        "name_en": "Perfect Parry",
+        "name_tr": "Kusursuz Savuşturma",
+        "description_en": "Perfectly time a block to completely nullify the attack and stun the attacker for 1 turn.",
+        "description_tr": "Bir saldırıyı tam zamanında bloklayarak hasarı tamamen sıfırlar ve saldırganı 1 tur sersemletirsin.",
+        "branch": "Counter",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "⏱️",
+        "effects": {
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "twr_shield_charge",
+        "name_en": "Shield Charge",
+        "name_tr": "Kalkan Hücumu",
+        "description_en": "Dash up to 10m forward, slamming into enemies for 2d8 damage and knocking them prone.",
+        "description_tr": "10m ileri atılarak düşmanlara çarpar, 2d8 hasar verir ve onları yere serersin.",
+        "branch": "Counter",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 185,
+        "prerequisites": [
+          "twr_shield_bash"
+        ],
+        "icon": "🏈",
+        "effects": {
+          "damage": "2d8",
+          "dash": "10m",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "twr_deflecting_spin",
+        "name_en": "Deflecting Spin",
+        "name_tr": "Yansıtıcı Dönüş",
+        "description_en": "Spin rapidly, reflecting all physical projectiles within a 5m radius back at their attackers.",
+        "description_tr": "Hızla dönerek 5m yarıçapındaki tüm fiziksel mermileri saldırganlara geri yansıtırsın.",
+        "branch": "Counter",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 210,
+        "prerequisites": [
+          "twr_spiked_defense"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "reflect_projectiles": "true",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "twr_vengeful_slam",
+        "name_en": "Vengeful Slam",
+        "name_tr": "İntikamcı Çarpış",
+        "description_en": "Deal 3d8 damage plus 50% of all the damage you took in the previous turn.",
+        "description_tr": "3d8 hasar ve önceki tur aldığın tüm hasarın %50'si kadar ek hasar verirsin.",
+        "branch": "Counter",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 260,
+        "prerequisites": [
+          "twr_perfect_parry"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "3d8 + 50% taken"
+        }
+      },
+      {
+        "spell_key": "twr_heavy_counter",
+        "name_en": "Heavy Counter",
+        "name_tr": "Ağır Misilleme",
+        "description_en": "Immediately after a successful block, strike back with devastating force, dealing 4d8 damage.",
+        "description_tr": "Başarılı bir bloklamanın hemen ardından yıkıcı bir güçle karşı saldırı yaparak 4d8 hasar verirsin.",
+        "branch": "Counter",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 370,
+        "prerequisites": [
+          "twr_perfect_parry"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "twr_seismic_stomp",
+        "name_en": "Seismic Stomp",
+        "name_tr": "Sismik Ezme",
+        "description_en": "Stomp the ground violently, dealing 3d6 damage and slowing enemies within 8m by 50%.",
+        "description_tr": "Yere şiddetle vurarak 8m içindeki düşmanlara 3d6 hasar verir ve onları %50 yavaşlatırsın.",
+        "branch": "Counter",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 410,
+        "prerequisites": [
+          "twr_shield_charge"
+        ],
+        "icon": "🥾",
+        "effects": {
+          "damage": "3d6",
+          "slow": "50%",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "twr_kinetic_absorption",
+        "name_en": "Kinetic Absorption",
+        "name_tr": "Kinetik Emilim",
+        "description_en": "Store blocked damage and release it as a 4d10 kinetic shockwave in a 5m cone.",
+        "description_tr": "Bloklanan hasarı depolar ve 5m'lik bir koni içinde 4d10 kinetik şok dalgası olarak serbest bırakırsın.",
+        "branch": "Counter",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 460,
+        "prerequisites": [
+          "twr_deflecting_spin"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "damage": "4d10",
+          "cone": "5m"
+        }
+      },
+      {
+        "spell_key": "twr_shield_guillotine",
+        "name_en": "Shield Guillotine",
+        "name_tr": "Kalkan Giyotini",
+        "description_en": "Strike downwards with the edge of your shield, dealing 6d8 slashing damage to a target.",
+        "description_tr": "Kalkanının kenarıyla aşağı doğru vurarak hedefe 6d8 kesici hasar verirsin.",
+        "branch": "Counter",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 660,
+        "prerequisites": [
+          "twr_heavy_counter"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "6d8 slashing"
+        }
+      },
+      {
+        "spell_key": "twr_punishing_rebound",
+        "name_en": "Punishing Rebound",
+        "name_tr": "Cezalandırıcı Sekme",
+        "description_en": "Passive: 50% of all damage you successfully block is automatically dealt back to the attacker.",
+        "description_tr": "Pasif: Başarıyla blokladığın tüm hasarın %50'si otomatik olarak saldırgana geri verilir.",
+        "branch": "Counter",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 720,
+        "prerequisites": [
+          "twr_kinetic_absorption"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "reflect_damage": "50%"
+        }
+      },
+      {
+        "spell_key": "twr_relentless_pursuer",
+        "name_en": "Relentless Pursuer",
+        "name_tr": "Acımasız Takipçi",
+        "description_en": "Passive: Using Shield Charge against a taunted target costs no action.",
+        "description_tr": "Pasif: Kışkırtılmış bir hedefe karşı Kalkan Hücumu kullanmak aksiyon gerektirmez.",
+        "branch": "Counter",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "twr_seismic_stomp"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "cost_reduction": "action"
+        }
+      },
+      {
+        "spell_key": "twr_absolute_retribution_ult",
+        "name_en": "Absolute Retribution",
+        "name_tr": "Mutlak İntikam",
+        "description_en": "Ultimate: For 3 turns, you block 100% of all incoming damage and reflect it back to attackers as true damage.",
+        "description_tr": "Ulti: 3 tur boyunca gelen tüm hasarı %100 bloklar ve saldırganlara gerçek hasar olarak geri yansıtırsın.",
+        "branch": "Counter",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "twr_shield_guillotine",
+          "twr_punishing_rebound"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "block": "100%",
+          "reflect_true_damage": "true",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "twr_twin_shield_stance",
+        "name_en": "Twin Shield Stance",
+        "name_tr": "Çifte Kalkan Duruşu",
+        "description_en": "Equip a shield in each hand. Your attacks deal 2d6 damage, and you benefit from both shields' AC bonuses.",
+        "description_tr": "Her iki ele de kalkan kuşanırsın. Saldırıların 2d6 hasar verir ve her iki kalkanın Zırh Sınıfı bonusundan faydalanırsın.",
+        "branch": "Dual Shields",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 55,
+        "prerequisites": [],
+        "icon": "♊",
+        "effects": {
+          "damage": "2d6",
+          "ac_bonus": "both shields"
+        }
+      },
+      {
+        "spell_key": "twr_clashing_plates",
+        "name_en": "Clashing Plates",
+        "name_tr": "Çarpışan Plakalar",
+        "description_en": "Slam your dual shields together, dealing 1d6 thunder damage and deafening enemies within 5m.",
+        "description_tr": "Çifte kalkanlarını birbirine çarparak 5m içindeki düşmanlara 1d6 gök gürültüsü hasarı verir ve onları sağır edersin.",
+        "branch": "Dual Shields",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🔔",
+        "effects": {
+          "damage": "1d6 thunder",
+          "deafen": "true",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "twr_momentum_swing",
+        "name_en": "Momentum Swing",
+        "name_tr": "İvme Savuruşu",
+        "description_en": "Use the weight of both shields to swing in a 3m arc, dealing 2d8 damage to all targets hit.",
+        "description_tr": "Her iki kalkanın ağırlığını kullanarak 3m'lik bir yay çizer ve isabet alan tüm hedeflere 2d8 hasar verirsin.",
+        "branch": "Dual Shields",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "⚾",
+        "effects": {
+          "damage": "2d8",
+          "arc": "3m"
+        }
+      },
+      {
+        "spell_key": "twr_interlocking_guard",
+        "name_en": "Interlocking Guard",
+        "name_tr": "Kenetlenen Siper",
+        "description_en": "Overlap your shields to gain advantage on saving throws against breath weapons and AoE spells.",
+        "description_tr": "Kalkanlarını üst üste bindirerek nefes saldırılarına ve alan büyülerine karşı kurtarma zarlarında avantaj kazanırsın.",
+        "branch": "Dual Shields",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "🧱",
+        "effects": {
+          "advantage": "aoe and breath"
+        }
+      },
+      {
+        "spell_key": "twr_battering_ram",
+        "name_en": "Battering Ram",
+        "name_tr": "Koçbaşı",
+        "description_en": "Sprint up to 15m with locked shields, dealing 3d8 damage to any enemy in your path.",
+        "description_tr": "Kenetlenmiş kalkanlarla 15m'ye kadar depar atarak yoluna çıkan tüm düşmanlara 3d8 hasar verirsin.",
+        "branch": "Dual Shields",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "twr_momentum_swing"
+        ],
+        "icon": "🐏",
+        "effects": {
+          "damage": "3d8",
+          "sprint": "15m"
+        }
+      },
+      {
+        "spell_key": "twr_pincer_bash",
+        "name_en": "Pincer Bash",
+        "name_tr": "Kıskaç Vuruşu",
+        "description_en": "Crush an enemy simultaneously between both shields for 3d10 damage and a 1-turn stun.",
+        "description_tr": "Bir düşmanı her iki kalkanın arasında eşzamanlı ezerek 3d10 hasar verir ve 1 tur sersemletirsin.",
+        "branch": "Dual Shields",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 220,
+        "prerequisites": [
+          "twr_twin_shield_stance"
+        ],
+        "icon": "🦞",
+        "effects": {
+          "damage": "3d10",
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "twr_shield_skater",
+        "name_en": "Shield Skater",
+        "name_tr": "Kalkan Kaykaycısı",
+        "description_en": "Drop one shield and slide on it, increasing your movement speed by 10m per turn.",
+        "description_tr": "Bir kalkanı yere atıp üzerinde kayarak hareket hızını tur başına 10m artırırsın.",
+        "branch": "Dual Shields",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 270,
+        "prerequisites": [
+          "twr_clashing_plates"
+        ],
+        "icon": "🛹",
+        "effects": {
+          "move_speed": "+10m"
+        }
+      },
+      {
+        "spell_key": "twr_flying_disc",
+        "name_en": "Flying Disc",
+        "name_tr": "Uçan Disk",
+        "description_en": "Throw one of your shields up to 15m, dealing 3d8 damage before it miraculously returns to your hand.",
+        "description_tr": "Kalkanlarından birini 15m'ye kadar fırlatıp 3d8 hasar verirsin, kalkan mucizevi bir şekilde eline geri döner.",
+        "branch": "Dual Shields",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 380,
+        "prerequisites": [
+          "twr_momentum_swing"
+        ],
+        "icon": "🛸",
+        "effects": {
+          "damage": "3d8",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "twr_cyclone_of_steel",
+        "name_en": "Cyclone of Steel",
+        "name_tr": "Çelik Kasırgası",
+        "description_en": "Spin wildly with dual shields, dealing 4d8 damage to all enemies within a 4m radius.",
+        "description_tr": "Çifte kalkanlarla çılgınca dönerek 4m yarıçapındaki tüm düşmanlara 4d8 hasar verirsin.",
+        "branch": "Dual Shields",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 420,
+        "prerequisites": [
+          "twr_shield_skater"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d8",
+          "radius": "4m"
+        }
+      },
+      {
+        "spell_key": "twr_dual_ward",
+        "name_en": "Dual Ward",
+        "name_tr": "Çifte Koruma",
+        "description_en": "Block magic with one shield and physical strikes with the other, granting a flat 30% resistance to all damage types.",
+        "description_tr": "Büyüyü bir kalkanla, fiziksel vuruşları diğeriyle bloklayarak tüm hasar türlerine karşı %30 direnç kazanırsın.",
+        "branch": "Dual Shields",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "twr_interlocking_guard"
+        ],
+        "icon": "☯️",
+        "effects": {
+          "resistance": "30%",
+          "block_types": "magic and physical"
+        }
+      },
+      {
+        "spell_key": "twr_meteor_crash",
+        "name_en": "Meteor Crash",
+        "name_tr": "Meteor Çarpıntısı",
+        "description_en": "Leap up to 15m and slam both shields into the earth, dealing 6d10 damage in a 6m radius.",
+        "description_tr": "15m'ye kadar sıçrayıp her iki kalkanı da yere çarparak 6m yarıçapında 6d10 hasar verirsin.",
+        "branch": "Dual Shields",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 680,
+        "prerequisites": [
+          "twr_battering_ram"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "6d10",
+          "leap": "15m",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "twr_unstoppable_juggernaut",
+        "name_en": "Unstoppable Juggernaut",
+        "name_tr": "Durdurulamaz Yıkıcı",
+        "description_en": "While sprinting or charging, you become completely immune to all crowd control effects.",
+        "description_tr": "Koşarken veya hücum ederken tüm kitle kontrol etkilerine karşı tamamen bağışıklık kazanırsın.",
+        "branch": "Dual Shields",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "twr_cyclone_of_steel"
+        ],
+        "icon": "🚂",
+        "effects": {
+          "immune_cc": "true",
+          "condition": "sprinting"
+        }
+      },
+      {
+        "spell_key": "twr_twin_dragon_breath",
+        "name_en": "Twin Dragon Breath",
+        "name_tr": "İkiz Ejderha Nefesi",
+        "description_en": "Channel raw magical energy through your twin shields to unleash a 15m cone of fire, dealing 8d8 damage.",
+        "description_tr": "İkiz kalkanlarından saf büyü enerjisi yönlendirerek 15m'lik bir ateş konisi salar ve 8d8 hasar verirsin.",
+        "branch": "Dual Shields",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "twr_dual_ward"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "8d8 fire",
+          "cone": "15m"
+        }
+      },
+      {
+        "spell_key": "twr_twin_ramparts_ult",
+        "name_en": "Twin Ramparts Mastery",
+        "name_tr": "İkiz Surlar Ustalığı",
+        "description_en": "Ultimate: Your shields grow massive. You deal continuous 5d8 AoE damage, become immune to conditions, and can attack as a bonus action.",
+        "description_tr": "Ulti: Kalkanların devasa boyutlara ulaşır. Sürekli 5d8 alan hasarı verir, zayıflatıcılara bağışıklık kazanır ve bonus aksiyon olarak saldırabilirsin.",
+        "branch": "Dual Shields",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "twr_meteor_crash",
+          "twr_unstoppable_juggernaut"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "5d8 aoe",
+          "immune_conditions": "true",
+          "bonus_action_attack": "true"
+        }
+      },
+      {
+        "spell_key": "twr_retaliatory_guard",
+        "name_en": "Retaliatory Guard",
+        "name_tr": "Misilleme Siperi",
+        "description_en": "Taunted enemies take 2d6 piercing damage every time they land a hit on you.",
+        "description_tr": "Kışkırtılmış düşmanlar sana her vurduğunda 2d6 delici hasar alır.",
+        "branch": "Counter",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "twr_taunting_strike",
+          "twr_spiked_defense"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "2d6 piercing"
+        }
+      },
+      {
+        "spell_key": "twr_ricochet_bash",
+        "name_en": "Ricochet Bash",
+        "name_tr": "Seken Vuruş",
+        "description_en": "Your thrown shield bounces to up to 3 enemies, dealing 3d8 damage to each and applying counter-attack effects.",
+        "description_tr": "Fırlattığın kalkan 3 düşmana kadar sekerek her birine 3d8 hasar verir ve karşı saldırı etkilerini uygular.",
+        "branch": "Dual Shields",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "twr_flying_disc",
+          "twr_shield_bash"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "damage": "3d8",
+          "bounces": "3"
+        }
+      },
+      {
+        "spell_key": "twr_mobile_fortress",
+        "name_en": "Mobile Fortress",
+        "name_tr": "Hareketli Kale",
+        "description_en": "You can move at normal speed while in Iron Stance, keeping the 20% damage reduction active.",
+        "description_tr": "Demir Duruş halindeyken %20 hasar azaltmasını koruyarak normal hızda hareket edebilirsin.",
+        "branch": "Bulwark",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "twr_iron_stance",
+          "twr_shield_skater"
+        ],
+        "icon": "🚚",
+        "effects": {
+          "move_speed": "normal",
+          "damage_reduction": "20%"
+        }
+      },
+      {
+        "spell_key": "twr_absorbing_bastion",
+        "name_en": "Absorbing Bastion",
+        "name_tr": "Emen İstihkâm",
+        "description_en": "Heal yourself for 100% of the damage successfully reflected by your Spiked Defense.",
+        "description_tr": "Dikenli Savunma tarafından başarıyla yansıtılan hasarın %100'ü kadar kendini iyileştirirsin.",
+        "branch": "Counter",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "twr_punishing_rebound",
+          "twr_last_bastion"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "heal": "100% reflected damage"
+        }
+      },
+      {
+        "spell_key": "twr_devastating_clap",
+        "name_en": "Devastating Clap",
+        "name_tr": "Yıkıcı Çarpma",
+        "description_en": "Your Pincer Bash stores kinetic energy, creating a shockwave that explodes for an additional 5d10 AoE damage.",
+        "description_tr": "Kıskaç Vuruşun kinetik enerjiyi depolayarak ek 5d10 alan hasarı veren patlayıcı bir şok dalgası yaratır.",
+        "branch": "Dual Shields",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "twr_pincer_bash",
+          "twr_kinetic_absorption"
+        ],
+        "icon": "👏",
+        "effects": {
+          "damage": "5d10 aoe"
+        }
+      },
+      {
+        "spell_key": "twr_aegis_of_the_twins",
+        "name_en": "Aegis of the Twins",
+        "name_tr": "İkizlerin Himayesi",
+        "description_en": "Project massive ethereal shields that block all incoming projectiles in a 30m radius for 2 turns.",
+        "description_tr": "2 tur boyunca 30m yarıçapındaki tüm mermileri engelleyen devasa ruhanî kalkanlar yansıtırsın.",
+        "branch": "Bulwark",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "twr_mass_provocation",
+          "twr_twin_dragon_breath"
+        ],
+        "icon": "👐",
+        "effects": {
+          "block_projectiles": "true",
+          "radius": "30m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "twr_judgment_spin",
+        "name_en": "Judgment Spin",
+        "name_tr": "Hüküm Dönüşü",
+        "description_en": "Cyclone of Steel now perfectly reflects all spells and projectiles it hits back to the casters.",
+        "description_tr": "Çelik Kasırgası artık isabet ettiği tüm büyüleri ve mermileri kusursuzca atanlara geri yansıtır.",
+        "branch": "Dual Shields",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "twr_cyclone_of_steel",
+          "twr_deflecting_spin"
+        ],
+        "icon": "🎡",
+        "effects": {
+          "reflect_all": "true"
+        }
+      },
+      {
+        "spell_key": "twr_indomitable_mountain_ult",
+        "name_en": "The Indomitable Mountain",
+        "name_tr": "Boyun Eğmez Dağ",
+        "description_en": "Grand Ultimate: Merge your twin shields into an unbreachable wall. Your entire party gains invulnerability for 3 turns, you heal to 100%, and reflect all global incoming damage.",
+        "description_tr": "Görkemli Ulti: İkiz kalkanlarını aşılamaz bir duvarda birleştir. Tüm grubun 3 tur boyunca hasar görmezlik kazanır, sen %100 iyileşirsin ve gelen tüm küresel hasarı yansıtırsın.",
+        "branch": "Bulwark",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "twr_living_fortress_ult",
+          "twr_absolute_retribution_ult",
+          "twr_twin_ramparts_ult"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "invulnerable": "3 turns",
+          "heal": "100%",
+          "reflect_global": "true"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1013 @@
+[
+  {
+    "subclass_key": "soul_summoner",
+    "tree_name_en": "Soul Summoner",
+    "tree_name_tr": "Ruh Çağırıcı",
+    "tree_desc_en": "Masters of the ethereal plane, manipulating souls, calling forth spectral legions, and weaving spirit chains to control the battlefield.",
+    "tree_desc_tr": "Ruhani düzlemin ustaları; ruhları manipüle eder, spektral lejyonları çağırır ve savaş alanını kontrol etmek için ruh zincirleri örerler.",
+    "branches": [
+      "Spectral",
+      "Extraction",
+      "Spirit Chain"
+    ],
+    "spells": [
+      {
+        "spell_key": "sos_spectral_wisp",
+        "name_en": "Spectral Wisp",
+        "name_tr": "Spektral Işık",
+        "description_en": "Summons a basic spectral wisp that shoots bolts of ethereal energy at enemies. Up to 3 wisps can be active.",
+        "description_tr": "Düşmanlara ruhani enerji okları atan temel bir spektral ışık çağırır. Aynı anda 3 adede kadar ışık aktif olabilir.",
+        "branch": "Spectral",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👻",
+        "effects": {
+          "summon_limit": 3,
+          "damage": "1d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "sos_phantom_claws",
+        "name_en": "Phantom Claws",
+        "name_tr": "Hayalet Pençeler",
+        "description_en": "Grants your spectral minions razor-sharp phantom claws, increasing their melee damage.",
+        "description_tr": "Spektral minyonlarınıza jilet gibi keskin hayalet pençeler vererek yakın dövüş hasarlarını artırır.",
+        "branch": "Spectral",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "sos_spectral_wisp"
+        ],
+        "icon": "🐾",
+        "effects": {
+          "minion_damage_bonus": "+1d4",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sos_ethereal_shift",
+        "name_en": "Ethereal Shift",
+        "name_tr": "Ruhani Kayma",
+        "description_en": "Commands your minions to temporarily shift fully into the ethereal plane, gaining a high chance to dodge attacks.",
+        "description_tr": "Minyonlarınıza tamamen ruhani düzleme geçmelerini emreder, saldırılardan kaçınma şanslarını büyük ölçüde artırır.",
+        "branch": "Spectral",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sos_spectral_wisp"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "dodge_chance": "40%",
+          "duration": "5s",
+          "cooldown": "15s"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_hound",
+        "name_en": "Spectral Hound",
+        "name_tr": "Spektral Tazı",
+        "description_en": "Summons a swift spectral hound that hunts down enemies, dealing physical and ethereal damage.",
+        "description_tr": "Düşmanları avlayan, fiziksel ve ruhani hasar veren hızlı bir spektral tazı çağırır.",
+        "branch": "Spectral",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "sos_spectral_wisp"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "summon_hp": 30,
+          "damage": "2d6",
+          "speed": "12m"
+        }
+      },
+      {
+        "spell_key": "sos_ghostly_wail",
+        "name_en": "Ghostly Wail",
+        "name_tr": "Hayalet Feryadı",
+        "description_en": "Causes your Spectral Hound to let out a terrifying wail, fearing nearby enemies.",
+        "description_tr": "Spektral Tazınızın korkunç bir feryat atmasını sağlayarak yakındaki düşmanları korkutur.",
+        "branch": "Spectral",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sos_spectral_hound"
+        ],
+        "icon": "🔊",
+        "effects": {
+          "radius": "8m",
+          "fear_duration": "3s",
+          "cooldown": "20s"
+        }
+      },
+      {
+        "spell_key": "sos_phantom_shield",
+        "name_en": "Phantom Shield",
+        "name_tr": "Hayalet Kalkanı",
+        "description_en": "Wraps your minions in a protective phantom barrier that absorbs incoming damage.",
+        "description_tr": "Minyonlarınızı gelen hasarı emen koruyucu bir hayalet bariyerle sarar.",
+        "branch": "Spectral",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sos_ethereal_shift"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield_amount": "50",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sos_wraith_summon",
+        "name_en": "Wraith Summon",
+        "name_tr": "Hortlak Çağrısı",
+        "description_en": "Summons a deadly Wraith that attacks with sweeping scythe strikes, damaging multiple enemies in front of it.",
+        "description_tr": "Önündeki birden fazla düşmana hasar veren, tırpan darbeleriyle saldıran ölümcül bir Hortlak çağırır.",
+        "branch": "Spectral",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sos_spectral_hound"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "summon_hp": 80,
+          "cleave_damage": "3d6",
+          "arc": "120_degrees"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_swarm",
+        "name_en": "Spectral Swarm",
+        "name_tr": "Spektral Sürü",
+        "description_en": "Increases the maximum number of Spectral Wisps you can summon to 8, and allows summoning them in clusters.",
+        "description_tr": "Çağırabileceğiniz maksimum Spektral Işık sayısını 8'e çıkarır ve onları kümeler halinde çağırmanıza olanak tanır.",
+        "branch": "Spectral",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "sos_ghostly_wail",
+          "sos_wraith_summon"
+        ],
+        "icon": "✨",
+        "effects": {
+          "new_limit": 8,
+          "summon_count": 3
+        }
+      },
+      {
+        "spell_key": "sos_incorporeal_form",
+        "name_en": "Incorporeal Form",
+        "name_tr": "Cisimsiz Form",
+        "description_en": "Minions can now passively pass through solid objects and enemies, ignoring collision and reducing physical damage taken.",
+        "description_tr": "Minyonlar artık pasif olarak katı nesnelerin ve düşmanların içinden geçebilir, çarpışmaları yok sayar ve alınan fiziksel hasarı azaltır.",
+        "branch": "Spectral",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "sos_phantom_shield"
+        ],
+        "icon": "👻",
+        "effects": {
+          "physical_reduction": "30%",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sos_banshee_summon",
+        "name_en": "Banshee Summon",
+        "name_tr": "Ölüm Perisi Çağrısı",
+        "description_en": "Summons a Banshee that constantly emits an aura of despair, slowing enemy movement and attack speeds.",
+        "description_tr": "Sürekli bir çaresizlik aurası yayan, düşman hareket ve saldırı hızlarını yavaşlatan bir Ölüm Perisi çağırır.",
+        "branch": "Spectral",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sos_wraith_summon"
+        ],
+        "icon": "🧟‍♀️",
+        "effects": {
+          "aura_radius": "10m",
+          "slow_amount": "25%",
+          "summon_hp": 120
+        }
+      },
+      {
+        "spell_key": "sos_poltergeist_fury",
+        "name_en": "Poltergeist Fury",
+        "name_tr": "Poltergeist Öfkesi",
+        "description_en": "Frenzy your minions, massively increasing their attack speed and causing their attacks to deal bonus telekinetic damage.",
+        "description_tr": "Minyonlarınızı çıldırtarak saldırı hızlarını büyük ölçüde artırır ve saldırılarının ilave telekinetik hasar vermesini sağlar.",
+        "branch": "Spectral",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sos_spectral_swarm"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "attack_speed": "+50%",
+          "bonus_damage": "1d8",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_behemoth",
+        "name_en": "Spectral Behemoth",
+        "name_tr": "Spektral Dev",
+        "description_en": "Summons a giant Spectral Behemoth that acts as a tank, drawing enemy aggro and slamming the ground for AoE damage.",
+        "description_tr": "Düşmanların dikkatini çeken ve yere vurarak alan hasarı veren devasa bir Spektral Dev çağırır.",
+        "branch": "Spectral",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sos_banshee_summon"
+        ],
+        "icon": "🦍",
+        "effects": {
+          "summon_hp": 500,
+          "aoe_damage": "4d8",
+          "taunt_radius": "15m"
+        }
+      },
+      {
+        "spell_key": "sos_possession",
+        "name_en": "Possession",
+        "name_tr": "Ele Geçirme",
+        "description_en": "Commands a Wraith to possess an enemy, taking control of them for a short duration. The Wraith perishes afterwards.",
+        "description_tr": "Bir Hortlağa bir düşmanı ele geçirmesini emreder, kısa süreliğine kontrollerini ele alır. Hortlak sonrasında yok olur.",
+        "branch": "Spectral",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sos_banshee_summon",
+          "sos_incorporeal_form"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "control_duration": "10s",
+          "cost": "1_Wraith",
+          "cooldown": "60s"
+        }
+      },
+      {
+        "spell_key": "sos_ethereal_army",
+        "name_en": "Ethereal Army",
+        "name_tr": "Ruhani Ordu",
+        "description_en": "Passively increases all summon limits and grants all minions a portion of your maximum health.",
+        "description_tr": "Tüm çağırma sınırlarını pasif olarak artırır ve tüm minyonlara maksimum sağlığınızın bir kısmını verir.",
+        "branch": "Spectral",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sos_spectral_behemoth",
+          "sos_poltergeist_fury"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "summon_limit_bonus": "+2",
+          "hp_share": "15%"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_dragon",
+        "name_en": "Spectral Dragon",
+        "name_tr": "Spektral Ejderha",
+        "description_en": "Ultimate: Summons a colossal Spectral Dragon that breathes ethereal flames, decimating enemies and turning their souls into temporary wisps.",
+        "description_tr": "Ulti: Ruhani alevler püskürten, düşmanları yok eden ve ruhlarını geçici ışıklara dönüştüren devasa bir Spektral Ejderha çağırır.",
+        "branch": "Spectral",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sos_ethereal_army",
+          "sos_possession"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "summon_hp": 1500,
+          "breath_damage": "10d10",
+          "wisp_spawn_chance": "100_on_kill"
+        }
+      },
+      {
+        "spell_key": "sos_soul_tear",
+        "name_en": "Soul Tear",
+        "name_tr": "Ruh Yırtması",
+        "description_en": "Tears a fragment of an enemy's soul, dealing magic damage and granting you 1 Soul Charge.",
+        "description_tr": "Bir düşmanın ruhundan bir parça kopararak büyü hasarı verir ve size 1 Ruh Yükü kazandırır.",
+        "branch": "Extraction",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪝",
+        "effects": {
+          "damage": "1d8",
+          "soul_charges": 1,
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "sos_soul_harvest",
+        "name_en": "Soul Harvest",
+        "name_tr": "Ruh Hasadı",
+        "description_en": "Sweeps an area to instantly kill very weak enemies, harvesting their souls to grant multiple Soul Charges.",
+        "description_tr": "Çok zayıf düşmanları anında öldürmek için bir alanı tarar, ruhlarını hasat ederek çoklu Ruh Yükü kazandırır.",
+        "branch": "Extraction",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "sos_soul_tear"
+        ],
+        "icon": "🌾",
+        "effects": {
+          "execute_threshold": "10%_hp",
+          "radius": "10m",
+          "soul_per_kill": 2
+        }
+      },
+      {
+        "spell_key": "sos_consume_soul",
+        "name_en": "Consume Soul",
+        "name_tr": "Ruh Tüketimi",
+        "description_en": "Consumes 1 Soul Charge to instantly heal yourself.",
+        "description_tr": "Kendinizi anında iyileştirmek için 1 Ruh Yükü tüketir.",
+        "branch": "Extraction",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sos_soul_tear"
+        ],
+        "icon": "🍷",
+        "effects": {
+          "heal": "2d8",
+          "cost": "1_Soul_Charge"
+        }
+      },
+      {
+        "spell_key": "sos_soul_dart",
+        "name_en": "Soul Dart",
+        "name_tr": "Ruh Oku",
+        "description_en": "Fires a concentrated Soul Charge as a dart, dealing high piercing damage.",
+        "description_tr": "Konsantre bir Ruh Yükünü ok olarak ateşler, yüksek delici hasar verir.",
+        "branch": "Extraction",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "sos_soul_tear"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage": "3d6",
+          "cost": "1_Soul_Charge",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "sos_soul_shatter",
+        "name_en": "Soul Shatter",
+        "name_tr": "Ruh Parçalanması",
+        "description_en": "Expends 2 Soul Charges to create a devastating explosion at a target location.",
+        "description_tr": "Hedef konumda yıkıcı bir patlama yaratmak için 2 Ruh Yükü harcar.",
+        "branch": "Extraction",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sos_soul_dart",
+          "sos_soul_harvest"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8",
+          "radius": "8m",
+          "cost": "2_Soul_Charges"
+        }
+      },
+      {
+        "spell_key": "sos_essence_drain",
+        "name_en": "Essence Drain",
+        "name_tr": "Öz Sömürüsü",
+        "description_en": "Curses an enemy, dealing damage over time. Every 3 seconds, it extracts 1 Soul Charge from them.",
+        "description_tr": "Bir düşmanı lanetleyerek zamanla hasar verir. Her 3 saniyede bir onlardan 1 Ruh Yükü çıkarır.",
+        "branch": "Extraction",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sos_soul_tear"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "dot_damage": "1d6/s",
+          "duration": "9s",
+          "total_souls": 3
+        }
+      },
+      {
+        "spell_key": "sos_soul_siphon",
+        "name_en": "Soul Siphon",
+        "name_tr": "Ruh Çekişi",
+        "description_en": "Channels Soul Charges directly into your minions, healing them significantly.",
+        "description_tr": "Ruh Yüklerini doğrudan minyonlarınıza aktararak onları önemli ölçüde iyileştirir.",
+        "branch": "Extraction",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sos_consume_soul"
+        ],
+        "icon": "💉",
+        "effects": {
+          "minion_heal": "3d8",
+          "cost": "1_Soul_Charge_per_minion"
+        }
+      },
+      {
+        "spell_key": "sos_mass_extraction",
+        "name_en": "Mass Extraction",
+        "name_tr": "Toplu Çıkarma",
+        "description_en": "Tears souls from all enemies in a wide cone, dealing damage and gaining up to 5 Soul Charges.",
+        "description_tr": "Geniş bir konideki tüm düşmanlardan ruhları koparır, hasar verir ve 5 adede kadar Ruh Yükü kazandırır.",
+        "branch": "Extraction",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "sos_essence_drain",
+          "sos_soul_shatter"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d8",
+          "cone": "15m",
+          "max_souls": 5
+        }
+      },
+      {
+        "spell_key": "sos_soul_forge",
+        "name_en": "Soul Forge",
+        "name_tr": "Ruh Ocağı",
+        "description_en": "Permanently consume 10 Soul Charges to permanently increase your max health and spell power.",
+        "description_tr": "Maksimum sağlığınızı ve büyü gücünüzü kalıcı olarak artırmak için 10 Ruh Yükünü kalıcı olarak tüketir.",
+        "branch": "Extraction",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "sos_soul_siphon"
+        ],
+        "icon": "⚒️",
+        "effects": {
+          "hp_bonus": "+20",
+          "spell_power": "+5",
+          "cost": "10_Soul_Charges"
+        }
+      },
+      {
+        "spell_key": "sos_tormented_soul",
+        "name_en": "Tormented Soul",
+        "name_tr": "Azaplı Ruh",
+        "description_en": "Fires a tortured soul that infects an enemy, reducing their magic resistance and dealing continuous damage.",
+        "description_tr": "Bir düşmana bulaşan, büyü direncini düşüren ve sürekli hasar veren işkence görmüş bir ruh ateşler.",
+        "branch": "Extraction",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sos_essence_drain"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "resist_reduction": "-30%",
+          "dot_damage": "2d6/s",
+          "duration": "8s",
+          "cost": "2_Soul_Charges"
+        }
+      },
+      {
+        "spell_key": "sos_soul_vortex",
+        "name_en": "Soul Vortex",
+        "name_tr": "Ruh Girdabı",
+        "description_en": "Creates a dark vortex that pulls in enemies, constantly extracting Soul Charges and dealing massive damage.",
+        "description_tr": "Düşmanları içine çeken, sürekli Ruh Yükü çıkaran ve devasa hasar veren karanlık bir girdap yaratır.",
+        "branch": "Extraction",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sos_mass_extraction"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "radius": "12m",
+          "damage": "4d8/s",
+          "souls_per_sec": 2,
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "sos_soul_barrier",
+        "name_en": "Soul Barrier",
+        "name_tr": "Ruh Bariyeri",
+        "description_en": "Expends all current Soul Charges to create an impenetrable shield. Shield strength multiplies by charges spent.",
+        "description_tr": "Geçilemez bir kalkan yaratmak için mevcut tüm Ruh Yüklerini harcar. Kalkan gücü harcanan yüklerle çarpılır.",
+        "branch": "Extraction",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sos_soul_forge"
+        ],
+        "icon": "🪩",
+        "effects": {
+          "base_shield": 100,
+          "multiplier": "50_per_charge",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sos_soul_rend",
+        "name_en": "Soul Rend",
+        "name_tr": "Ruh Yırtılışı",
+        "description_en": "A devastating single-target attack that rips the enemy's soul apart, dealing fatal damage. Grants max Soul Charges on kill.",
+        "description_tr": "Düşmanın ruhunu parçalayarak ölümcül hasar veren yıkıcı bir tek hedefli saldırı. Öldürmede maksimum Ruh Yükü kazandırır.",
+        "branch": "Extraction",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sos_tormented_soul"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "12d10",
+          "on_kill": "Max_Souls",
+          "cooldown": "40s"
+        }
+      },
+      {
+        "spell_key": "sos_essence_overload",
+        "name_en": "Essence Overload",
+        "name_tr": "Öz Aşırı Yüklenmesi",
+        "description_en": "Forces an enemy's soul to expand violently inside them, stunning them and causing them to explode for AoE damage.",
+        "description_tr": "Bir düşmanın ruhunu kendi içlerinde şiddetle genişlemeye zorlar, onları sersemletir ve alan hasarı için patlamalarına neden olur.",
+        "branch": "Extraction",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sos_soul_vortex"
+        ],
+        "icon": "🤯",
+        "effects": {
+          "stun_duration": "3s",
+          "explosion_damage": "6d8",
+          "radius": "10m",
+          "cost": "3_Soul_Charges"
+        }
+      },
+      {
+        "spell_key": "sos_soul_reaper",
+        "name_en": "Soul Reaper",
+        "name_tr": "Ruh Biçici",
+        "description_en": "Ultimate: Transform into an Avatar of Death. Your basic attacks instantly extract souls, and you passively deal death aura damage.",
+        "description_tr": "Ulti: Ölüm Avatarı'na dönüşün. Temel saldırılarınız anında ruh çıkarır ve pasif olarak ölüm aurası hasarı verirsiniz.",
+        "branch": "Extraction",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sos_essence_overload",
+          "sos_soul_rend",
+          "sos_soul_barrier"
+        ],
+        "icon": "💀",
+        "effects": {
+          "duration": "30s",
+          "aura_damage": "5d8/s",
+          "attack_soul_gain": 2
+        }
+      },
+      {
+        "spell_key": "sos_spirit_link",
+        "name_en": "Spirit Link",
+        "name_tr": "Ruh Bağlantısı",
+        "description_en": "Links two enemies together. A portion of the damage taken by one is shared with the other.",
+        "description_tr": "İki düşmanı birbirine bağlar. Birinin aldığı hasarın bir kısmı diğeriyle paylaşılır.",
+        "branch": "Spirit Chain",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔗",
+        "effects": {
+          "shared_damage": "40%",
+          "duration": "10s",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "sos_minion_tether",
+        "name_en": "Minion Tether",
+        "name_tr": "Minyon Bağı",
+        "description_en": "Links yourself to a minion. You can redirect incoming damage to the tethered minion.",
+        "description_tr": "Kendinizi bir minyona bağlarsınız. Gelen hasarı bağlı minyona yönlendirebilirsiniz.",
+        "branch": "Spirit Chain",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "sos_spirit_link"
+        ],
+        "icon": "🪢",
+        "effects": {
+          "damage_redirect": "50%",
+          "duration": "Until_broken"
+        }
+      },
+      {
+        "spell_key": "sos_chain_whip",
+        "name_en": "Chain Whip",
+        "name_tr": "Zincir Kırbaç",
+        "description_en": "Strikes an enemy with a ghostly chain, dealing damage and pulling them slightly towards you.",
+        "description_tr": "Bir düşmana hayalet bir zincirle vurarak hasar verir ve onları hafifçe size doğru çeker.",
+        "branch": "Spirit Chain",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sos_spirit_link"
+        ],
+        "icon": "〰️",
+        "effects": {
+          "damage": "2d6",
+          "pull_distance": "5m"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_bind",
+        "name_en": "Spectral Bind",
+        "name_tr": "Spektral Bağlama",
+        "description_en": "Wraps an enemy in spiritual chains, rooting them in place and preventing movement skills.",
+        "description_tr": "Bir düşmanı ruhani zincirlere sararak onları oldukları yere sabitler ve hareket yeteneklerini engeller.",
+        "branch": "Spirit Chain",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "sos_spirit_link"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "root_duration": "4s",
+          "cooldown": "12s"
+        }
+      },
+      {
+        "spell_key": "sos_ethereal_chain",
+        "name_en": "Ethereal Chain",
+        "name_tr": "Ruhani Zincir",
+        "description_en": "Throws a chain that hits an enemy, then bounces to up to 3 nearby enemies, dealing damage and briefly slowing them.",
+        "description_tr": "Bir düşmana çarpan, ardından yakındaki 3 düşmana kadar seken bir zincir fırlatır, hasar verir ve onları kısa süreliğine yavaşlatır.",
+        "branch": "Spirit Chain",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "sos_chain_whip"
+        ],
+        "icon": "➰",
+        "effects": {
+          "damage": "3d6",
+          "bounces": 3,
+          "slow": "30%"
+        }
+      },
+      {
+        "spell_key": "sos_soul_shackles",
+        "name_en": "Soul Shackles",
+        "name_tr": "Ruh Prangaları",
+        "description_en": "Upgrades Spirit Link. Linked enemies now suffer a movement speed penalty and are silenced for 2 seconds.",
+        "description_tr": "Ruh Bağlantısı'nı geliştirir. Bağlı düşmanlar artık hareket hızı cezası alır ve 2 saniyeliğine susturulur.",
+        "branch": "Spirit Chain",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sos_spectral_bind"
+        ],
+        "icon": "🔐",
+        "effects": {
+          "slow": "40%",
+          "silence_duration": "2s"
+        }
+      },
+      {
+        "spell_key": "sos_chain_of_command",
+        "name_en": "Chain of Command",
+        "name_tr": "Komuta Zinciri",
+        "description_en": "Links all your active minions together. Any buff applied to one minion spreads to all linked minions at 50% effectiveness.",
+        "description_tr": "Tüm aktif minyonlarınızı birbirine bağlar. Bir minyona uygulanan herhangi bir güçlendirme, %50 etkinlikle tüm bağlı minyonlara yayılır.",
+        "branch": "Spirit Chain",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sos_minion_tether"
+        ],
+        "icon": "🎖️",
+        "effects": {
+          "buff_share": "50%",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "sos_pain_resonance",
+        "name_en": "Pain Resonance",
+        "name_tr": "Acı Rezonansı",
+        "description_en": "Linked enemies now share 75% of damage taken, and critical hits have a chance to stun the linked target.",
+        "description_tr": "Bağlı düşmanlar artık alınan hasarın %75'ini paylaşır ve kritik vuruşların bağlı hedefi sersemletme şansı vardır.",
+        "branch": "Spirit Chain",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "sos_soul_shackles"
+        ],
+        "icon": "📻",
+        "effects": {
+          "shared_damage": "75%",
+          "stun_chance": "20%"
+        }
+      },
+      {
+        "spell_key": "sos_chain_drag",
+        "name_en": "Chain Drag",
+        "name_tr": "Zincir Çekimi",
+        "description_en": "Violently yanks all linked enemies towards a central point, causing them to collide for heavy physical damage.",
+        "description_tr": "Tüm bağlı düşmanları şiddetle merkezi bir noktaya çeker ve ağır fiziksel hasar için çarpışmalarına neden olur.",
+        "branch": "Spirit Chain",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 410,
+        "prerequisites": [
+          "sos_ethereal_chain"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "collision_damage": "4d8",
+          "pull_center": "Target_Location"
+        }
+      },
+      {
+        "spell_key": "sos_life_funnel",
+        "name_en": "Life Funnel",
+        "name_tr": "Yaşam Hunisi",
+        "description_en": "Creates a draining link between an enemy and a minion. The enemy takes continuous damage, healing the minion.",
+        "description_tr": "Bir düşman ile bir minyon arasında sömürücü bir bağ yaratır. Düşman sürekli hasar alır ve minyonu iyileştirir.",
+        "branch": "Spirit Chain",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sos_chain_of_command"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "drain_damage": "2d8/s",
+          "heal_conversion": "100%",
+          "duration": "6s"
+        }
+      },
+      {
+        "spell_key": "sos_soul_anchor",
+        "name_en": "Soul Anchor",
+        "name_tr": "Ruh Çapası",
+        "description_en": "Drops a massive ethereal anchor that links to all enemies in a 15m radius. If an enemy leaves the radius, the chain snaps, dealing immense damage and stunning them.",
+        "description_tr": "15m yarıçapındaki tüm düşmanlara bağlanan devasa bir ruhani çapa bırakır. Bir düşman yarıçapı terk ederse zincir kopar, devasa hasar verir ve onları sersemletir.",
+        "branch": "Spirit Chain",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sos_chain_drag"
+        ],
+        "icon": "⚓",
+        "effects": {
+          "radius": "15m",
+          "snap_damage": "8d10",
+          "stun": "3s"
+        }
+      },
+      {
+        "spell_key": "sos_web_of_souls",
+        "name_en": "Web of Souls",
+        "name_tr": "Ruhlar Ağı",
+        "description_en": "Fires dozens of chains that link up to 10 enemies in a massive web. Damage dealt to one is distributed among all.",
+        "description_tr": "10 düşmana kadar devasa bir ağda birbirine bağlayan düzinelerce zincir ateşler. Birine verilen hasar tümüne dağıtılır.",
+        "branch": "Spirit Chain",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sos_pain_resonance"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "max_targets": 10,
+          "damage_distribution": "Evenly_Split",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "sos_chain_explosion",
+        "name_en": "Chain Explosion",
+        "name_tr": "Zincir Patlaması",
+        "description_en": "Instantly detonates all active Spirit Links and Tethers, dealing heavy AoE damage around every linked entity.",
+        "description_tr": "Tüm aktif Ruh Bağlantılarını ve Bağları anında patlatarak her bağlı varlığın etrafında ağır alan hasarı verir.",
+        "branch": "Spirit Chain",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sos_web_of_souls"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "explosion_damage": "6d8_per_entity",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "sos_unbreakable_bond",
+        "name_en": "Unbreakable Bond",
+        "name_tr": "Kırılmaz Bağ",
+        "description_en": "While linked to you, minions cannot drop below 1 HP. Any fatal damage they take drains your Mana instead.",
+        "description_tr": "Size bağlıyken minyonların canı 1'in altına düşemez. Aldıkları ölümcül hasar bunun yerine Mana'nızı tüketir.",
+        "branch": "Spirit Chain",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 880,
+        "prerequisites": [
+          "sos_life_funnel"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "immortality": "Yes",
+          "mana_drain": "1_Mana_per_2_Damage"
+        }
+      },
+      {
+        "spell_key": "sos_puppeteer_chains",
+        "name_en": "Puppeteer's Chains",
+        "name_tr": "Kuklacı Zincirleri",
+        "description_en": "Ultimate: Take full control of up to 3 linked enemies, turning them into your mindless puppets for 20 seconds. They gain massive buffs.",
+        "description_tr": "Ulti: Bağlı 3 düşmana kadar tam kontrolü ele geçirerek onları 20 saniyeliğine beyinsiz kuklalarınıza dönüştürün. Devasa güçlendirmeler kazanırlar.",
+        "branch": "Spirit Chain",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sos_soul_anchor",
+          "sos_chain_explosion",
+          "sos_unbreakable_bond"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "control_count": 3,
+          "duration": "20s",
+          "buff": "+100%_Damage_and_HP"
+        }
+      },
+      {
+        "spell_key": "sos_soul_infusion",
+        "name_en": "Soul Infusion",
+        "name_tr": "Ruh İnfüzyonu",
+        "description_en": "Spends Soul Charges to massively mutate and empower a Spectral Minion, turning it into a monstrous soul-fueled variant.",
+        "description_tr": "Bir Spektral Minyonu devasa bir şekilde mutasyona uğratmak ve güçlendirmek için Ruh Yüklerini harcar ve onu ruhla beslenen korkunç bir varyanta dönüştürür.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sos_spectral_swarm",
+          "sos_mass_extraction"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "cost": "5_Soul_Charges",
+          "hp_multiplier": "x3",
+          "damage_multiplier": "x2"
+        }
+      },
+      {
+        "spell_key": "sos_spectral_chains",
+        "name_en": "Spectral Chains",
+        "name_tr": "Spektral Zincirler",
+        "description_en": "Summons a specialized Phantom that does no damage, but automatically casts Spirit Links on all nearby enemies.",
+        "description_tr": "Hasar vermeyen ancak yakındaki tüm düşmanlara otomatik olarak Ruh Bağlantıları uygulayan özel bir Hayalet çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sos_banshee_summon",
+          "sos_chain_drag"
+        ],
+        "icon": "⛓️‍💥",
+        "effects": {
+          "summon_hp": 200,
+          "link_radius": "15m",
+          "cast_rate": "1_per_sec"
+        }
+      },
+      {
+        "spell_key": "sos_harvesting_links",
+        "name_en": "Harvesting Links",
+        "name_tr": "Hasat Bağları",
+        "description_en": "Extracting a soul from a linked enemy automatically extracts half a soul (rounded up) from all other linked enemies.",
+        "description_tr": "Bağlı bir düşmandan ruh çıkarmak, diğer tüm bağlı düşmanlardan otomatik olarak yarım ruh (yukarı yuvarlanmış) çıkarır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sos_soul_vortex",
+          "sos_web_of_souls"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "soul_multiplication": "Passive",
+          "chain_synergy": "True"
+        }
+      },
+      {
+        "spell_key": "sos_soul_golem",
+        "name_en": "Soul Golem",
+        "name_tr": "Ruh Golemi",
+        "description_en": "Combines Spectral energy, Extraction charges, and Chains to create a hulking Soul Golem. Its power scales with how many enemies are chained and how many souls were spent.",
+        "description_tr": "Devasa bir Ruh Golemi yaratmak için Spektral enerji, Çıkarma yükleri ve Zincirleri birleştirir. Gücü, kaç düşmanın zincirlendiğine ve kaç ruh harcandığına göre artar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sos_soul_infusion",
+          "sos_spectral_chains"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "base_hp": 800,
+          "scaling": "+100_HP_per_chain",
+          "damage_scaling": "+1d8_per_soul"
+        }
+      },
+      {
+        "spell_key": "sos_domain_of_souls",
+        "name_en": "Domain of Souls",
+        "name_tr": "Ruhlar Alanı",
+        "description_en": "Grand Ultimate: Transforms the battlefield into the Underworld. Endless phantoms swarm enemies, every enemy is chained together, and your Soul Charges become infinite for 15 seconds.",
+        "description_tr": "Büyük Ulti: Savaş alanını Yeraltı Dünyasına dönüştürür. Sonsuz hayaletler düşmanlara akın eder, her düşman birbirine zincirlenir ve Ruh Yükleriniz 15 saniyeliğine sonsuz olur.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sos_spectral_dragon",
+          "sos_soul_reaper",
+          "sos_puppeteer_chains"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "15s",
+          "infinite_souls": "True",
+          "global_chain": "True",
+          "phantom_dps": "10d10/s"
+        }
+      }
+    ]
+  }
+]

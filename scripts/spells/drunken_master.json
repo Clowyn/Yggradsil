@@ -1,0 +1,1009 @@
+[
+  {
+    "subclass_key": "drunken_master",
+    "tree_name_en": "Drunken Master",
+    "tree_name_tr": "Sarhoş Usta",
+    "tree_desc_en": "Embraces unpredictable movements, staggering strikes, and the power of intoxicating brews to confuse and decimate foes. Masters the art of redirecting incoming attacks while intoxicated.",
+    "tree_desc_tr": "Düşmanları şaşırtmak ve yok etmek için öngörülemez hareketleri, sendeleyen vuruşları ve sarhoş edici içkilerin gücünü kucaklar. Sarhoşken gelen saldırıları yönlendirme sanatında ustalaşır.",
+    "branches": [
+      "Drunken Style",
+      "Improvisation",
+      "Chaos"
+    ],
+    "spells": [
+      {
+        "spell_key": "dkm_staggering_step",
+        "name_en": "Staggering Step",
+        "name_tr": "Sendeleyen Adım",
+        "description_en": "Take a sudden, clumsy step that magically evades an incoming attack. Grants a 20% chance to redirect the attack to a nearby enemy within 2m.",
+        "description_tr": "Gelen bir saldırıdan sihirli bir şekilde kaçınan ani ve sakar bir adım atar. Saldırıyı 2m içindeki yakın bir düşmana yönlendirmek için %20 şans kazandırır.",
+        "branch": "Drunken Style",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "evasion": true,
+          "redirect_chance": "20%",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "dkm_liquid_courage",
+        "name_en": "Liquid Courage",
+        "name_tr": "Sıvı Cesaret",
+        "description_en": "Take a swig from your flask, gaining 1d8+CON temporary HP and entering the 'Drunk' state for 3 turns.",
+        "description_tr": "Mataranızdan bir yudum alarak 1d8+DAY geçici HP kazanın ve 3 tur boyunca 'Sarhoş' durumuna girin.",
+        "branch": "Drunken Style",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🍶",
+        "effects": {
+          "temp_hp": "1d8+CON",
+          "duration": "3 turns",
+          "status": "Drunk"
+        }
+      },
+      {
+        "spell_key": "dkm_slurred_taunt",
+        "name_en": "Slurred Taunt",
+        "name_tr": "Sarhoş Narası",
+        "description_en": "Insult enemies within 10m with slurred words. For 2 turns, they have disadvantage on attacks against targets other than you.",
+        "description_tr": "10m içindeki düşmanlara geveleyerek hakaret edin. 2 tur boyunca, sizden başka hedeflere yaptıkları saldırılarda dezavantajlı olurlar.",
+        "branch": "Drunken Style",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🤬",
+        "effects": {
+          "range": "10m",
+          "duration": "2 turns",
+          "debuff": "Disadvantage on others"
+        }
+      },
+      {
+        "spell_key": "dkm_swaying_reed",
+        "name_en": "Swaying Reed",
+        "name_tr": "Sallanan Sazlık",
+        "description_en": "Adopt an evasive stance. While Drunk, your redirect chance increases to 30% for 3 turns.",
+        "description_tr": "Kaçınma odaklı bir duruş benimseyin. Sarhoşken, yönlendirme şansınız 3 tur boyunca %30'a çıkar.",
+        "branch": "Drunken Style",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dkm_staggering_step"
+        ],
+        "icon": "🌾",
+        "effects": {
+          "duration": "3 turns",
+          "redirect_chance_bonus": "+10%",
+          "stance": true
+        }
+      },
+      {
+        "spell_key": "dkm_sudden_counter",
+        "name_en": "Sudden Counter",
+        "name_tr": "Ani Kontra",
+        "description_en": "When an enemy misses you, immediately strike back as a reaction with an unpredictable blow dealing 2d8 bludgeoning damage.",
+        "description_tr": "Bir düşman sizi ıskaladığında, tepki olarak anında 2d8 ezme hasarı veren beklenmedik bir darbeyle karşılık verin.",
+        "branch": "Drunken Style",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dkm_staggering_step"
+        ],
+        "icon": "👊",
+        "effects": {
+          "damage": "2d8 Bludgeoning",
+          "trigger": "On Miss",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "dkm_drunkards_resolve",
+        "name_en": "Drunkard's Resolve",
+        "name_tr": "Ayyaşın İradesi",
+        "description_en": "Your inebriated mind is hard to read. Gain resistance to psychic damage and immunity to charm and fear effects while Drunk.",
+        "description_tr": "Sarhoş zihninizi okumak zordur. Sarhoşken psişik hasara karşı direnç ve tılsımlanma ile korku etkilerine karşı bağışıklık kazanın.",
+        "branch": "Drunken Style",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dkm_liquid_courage"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "immunity": "Charm, Fear",
+          "resistance": "Psychic",
+          "duration": "Passive while Drunk"
+        }
+      },
+      {
+        "spell_key": "dkm_falling_leaf_strike",
+        "name_en": "Falling Leaf Strike",
+        "name_tr": "Düşen Yaprak Vuruşu",
+        "description_en": "A seemingly weak strike that carries immense force, dealing 3d10 damage and knocking the target prone if they fail a STR save.",
+        "description_tr": "Muazzam bir güç taşıyan ve görünüşte zayıf olan bu vuruş, 3d10 hasar verir ve GÜÇ kurtarmasında başarısız olursa hedefi yere serer.",
+        "branch": "Drunken Style",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dkm_sudden_counter"
+        ],
+        "icon": "🍂",
+        "effects": {
+          "damage": "3d10 Bludgeoning",
+          "save": "STR",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "dkm_dizzying_parry",
+        "name_en": "Dizzying Parry",
+        "name_tr": "Baş Döndüren Savuşturma",
+        "description_en": "Parry a melee attack and spin the attacker around, inflicting the 'Dizzy' status for 1 turn.",
+        "description_tr": "Yakın dövüş saldırısını savuşturun ve saldırganı döndürerek 1 tur boyunca 'Baş Dönmesi' durumu uygulayın.",
+        "branch": "Drunken Style",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 425,
+        "prerequisites": [
+          "dkm_swaying_reed"
+        ],
+        "icon": "💫",
+        "effects": {
+          "parry": true,
+          "status": "Dizzy",
+          "duration": "1 turn",
+          "range": "Melee"
+        }
+      },
+      {
+        "spell_key": "dkm_fluid_motion",
+        "name_en": "Fluid Motion",
+        "name_tr": "Akışkan Hareket",
+        "description_en": "Move like water. Ignore difficult terrain and your movement does not provoke opportunity attacks for 2 turns.",
+        "description_tr": "Su gibi hareket edin. Zorlu arazileri yok sayın ve hareketiniz 2 tur boyunca fırsat saldırılarını tetiklemesin.",
+        "branch": "Drunken Style",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dkm_swaying_reed"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "duration": "2 turns",
+          "ignore_terrain": true,
+          "avoid_opportunity": true
+        }
+      },
+      {
+        "spell_key": "dkm_drunken_frenzy",
+        "name_en": "Drunken Frenzy",
+        "name_tr": "Sarhoş Çılgınlığı",
+        "description_en": "Unleash a flurry of 4 rapid strikes, each dealing 2d6 damage. If Drunk, add your DEX modifier to each hit.",
+        "description_tr": "Her biri 2d6 hasar veren 4 hızlı vuruş serbest bırakın. Eğer Sarhoş iseniz, her vuruşa ÇEV değiştiricinizi ekleyin.",
+        "branch": "Drunken Style",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dkm_falling_leaf_strike"
+        ],
+        "icon": "🤛",
+        "effects": {
+          "hits": 4,
+          "damage_per_hit": "2d6 Bludgeoning",
+          "drunk_bonus": "+DEX"
+        }
+      },
+      {
+        "spell_key": "dkm_redirecting_flow",
+        "name_en": "Redirecting Flow",
+        "name_tr": "Yönlendiren Akış",
+        "description_en": "Perfect the art of redirection. While Drunk, your baseline redirect chance becomes 40%. Redirected attacks gain a +2 bonus to hit their new target.",
+        "description_tr": "Yönlendirme sanatını mükemmelleştirin. Sarhoşken, temel yönlendirme şansınız %40 olur. Yönlendirilen saldırılar yeni hedeflerine vurmak için +2 bonus kazanır.",
+        "branch": "Drunken Style",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dkm_dizzying_parry"
+        ],
+        "icon": "🔀",
+        "effects": {
+          "redirect_base": "40%",
+          "redirect_bonus_hit": "+2",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "dkm_unbreakable_stance",
+        "name_en": "Unbreakable Stance",
+        "name_tr": "Kırılmaz Duruş",
+        "description_en": "Root yourself like a mountain, reducing all incoming bludgeoning, piercing, and slashing damage by half for 3 turns. You cannot be moved.",
+        "description_tr": "Kendinizi bir dağ gibi köklendirin, gelen tüm ezme, delme ve kesme hasarını 3 tur boyunca yarıya indirin. Hareket ettirilemezsiniz.",
+        "branch": "Drunken Style",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dkm_fluid_motion"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "resistance": "B/P/S",
+          "duration": "3 turns",
+          "immovable": true
+        }
+      },
+      {
+        "spell_key": "dkm_master_of_the_jug",
+        "name_en": "Master of the Jug",
+        "name_tr": "Testinin Üstadı",
+        "description_en": "Your flask never empties. Drinking no longer costs an action, and you can grant the Drunk status (and its buffs) to allies within 5m.",
+        "description_tr": "Mataranız asla boşalmaz. İçmek artık bir eylem gerektirmez ve 5m içindeki müttefiklere Sarhoş durumunu (ve onun güçlendirmelerini) verebilirsiniz.",
+        "branch": "Drunken Style",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dkm_unbreakable_stance"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "action_cost": "Free",
+          "aoe_buff": true,
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "dkm_illusory_sway",
+        "name_en": "Illusory Sway",
+        "name_tr": "Yanılsamalı Salınım",
+        "description_en": "Your movements become so erratic they create afterimages. Gain 3 mirror images that absorb hits and confuse attackers for 1 minute.",
+        "description_tr": "Hareketleriniz o kadar dengesizleşir ki ardıl görüntüler yaratır. 1 dakika boyunca isabetleri emen ve saldırganları şaşırtan 3 ayna görüntüsü kazanın.",
+        "branch": "Drunken Style",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dkm_redirecting_flow"
+        ],
+        "icon": "👥",
+        "effects": {
+          "images": 3,
+          "duration": "1 minute",
+          "defense": "Mirror Image"
+        }
+      },
+      {
+        "spell_key": "dkm_ultimate_drunken_fist",
+        "name_en": "Ultimate: Drunken Fist",
+        "name_tr": "Ulti: Sarhoş Yumruğu",
+        "description_en": "The pinnacle of Drunken Style. Deliver a devastating punch that ignores all armor, dealing 10d10 force damage and permanently reducing the target's AC by 2.",
+        "description_tr": "Sarhoş Stili'nin zirvesi. Tüm zırhları yok sayan, 10d10 güç hasarı veren ve hedefin Zırh Sınıfını (AC) kalıcı olarak 2 düşüren yıkıcı bir yumruk indirin.",
+        "branch": "Drunken Style",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dkm_master_of_the_jug",
+          "dkm_illusory_sway"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "10d10 Force",
+          "armor_pen": true,
+          "debuff": "-2 AC"
+        }
+      },
+      {
+        "spell_key": "dkm_jug_smash",
+        "name_en": "Jug Smash",
+        "name_tr": "Testi Kırma",
+        "description_en": "Smash a clay jug over an enemy's head, dealing 1d8 bludgeoning damage and blinding them for 1 turn.",
+        "description_tr": "Bir düşmanın kafasında kil bir testiyi kırarak 1d8 ezme hasarı verin ve onları 1 tur boyunca kör edin.",
+        "branch": "Improvisation",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🏺",
+        "effects": {
+          "damage": "1d8 Bludgeoning",
+          "status": "Blind",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "dkm_spit_fire",
+        "name_en": "Spit Fire",
+        "name_tr": "Ateş Tükürme",
+        "description_en": "Ignite high-proof alcohol from your mouth, dealing 2d6 fire damage in a 3m cone.",
+        "description_tr": "Ağzınızdan yüksek alkollü bir içkiyi ateşleyerek 3m'lik bir koni alanında 2d6 ateş hasarı verin.",
+        "branch": "Improvisation",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "damage": "2d6 Fire",
+          "area": "3m Cone"
+        }
+      },
+      {
+        "spell_key": "dkm_dirty_kick",
+        "name_en": "Dirty Kick",
+        "name_tr": "Kirli Tekme",
+        "description_en": "A swift, unexpected low blow dealing 1d6 damage and a 50% chance to stun the target for 1 turn.",
+        "description_tr": "Hızlı, beklenmedik bir belden aşağı vuruşla 1d6 hasar verin ve hedefi 1 tur sersemletmek için %50 şans elde edin.",
+        "branch": "Improvisation",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🦵",
+        "effects": {
+          "damage": "1d6 Bludgeoning",
+          "stun_chance": "50%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "dkm_barroom_brawler",
+        "name_en": "Barroom Brawler",
+        "name_tr": "Meyhane Dövüşçüsü",
+        "description_en": "Improvise weapons from the environment. Throw a chair, mug, or rock up to 15m, dealing 2d8 damage.",
+        "description_tr": "Çevreden silahlar doğaçlayın. 15m'ye kadar bir sandalye, kupa veya kaya fırlatarak 2d8 hasar verin.",
+        "branch": "Improvisation",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dkm_jug_smash"
+        ],
+        "icon": "🪑",
+        "effects": {
+          "range": "15m",
+          "damage": "2d8 Bludgeoning",
+          "type": "Ranged"
+        }
+      },
+      {
+        "spell_key": "dkm_bottle_barrage",
+        "name_en": "Bottle Barrage",
+        "name_tr": "Şişe Yağmuru",
+        "description_en": "Throw three bottles in quick succession at up to three targets within 12m. Each deals 1d8 slashing damage.",
+        "description_tr": "12m içindeki en fazla üç hedefe arka arkaya hızla üç şişe fırlatın. Her biri 1d8 kesme hasarı verir.",
+        "branch": "Improvisation",
+        "tier": 2,
+        "min_level": 27,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dkm_jug_smash"
+        ],
+        "icon": "🍾",
+        "effects": {
+          "hits": 3,
+          "damage_per_hit": "1d8 Slashing",
+          "range": "12m"
+        }
+      },
+      {
+        "spell_key": "dkm_unpredictable_toss",
+        "name_en": "Unpredictable Toss",
+        "name_tr": "Beklenmedik Fırlatma",
+        "description_en": "Throw an object that ricochets. If it hits the primary target, it bounces to a second target within 5m for half damage.",
+        "description_tr": "Seken bir nesne fırlatın. Eğer birincil hedefe vurursa, 5m içindeki ikinci bir hedefe sekerek yarım hasar verir.",
+        "branch": "Improvisation",
+        "tier": 2,
+        "min_level": 33,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dkm_barroom_brawler"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "bounce": 1,
+          "range": "15m / 5m",
+          "damage": "Primary full, Secondary half"
+        }
+      },
+      {
+        "spell_key": "dkm_toxic_brew",
+        "name_en": "Toxic Brew",
+        "name_tr": "Zehirli İksir",
+        "description_en": "Spit a noxious concoction. Enemies in a 4m cone take 3d8 poison damage and are poisoned for 2 turns.",
+        "description_tr": "Zehirli bir karışım tükürün. 4m koni içindeki düşmanlar 3d8 zehir hasarı alır ve 2 tur boyunca zehirlenirler.",
+        "branch": "Improvisation",
+        "tier": 3,
+        "min_level": 43,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dkm_spit_fire"
+        ],
+        "icon": "🤢",
+        "effects": {
+          "damage": "3d8 Poison",
+          "area": "4m Cone",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "dkm_improvised_shield",
+        "name_en": "Improvised Shield",
+        "name_tr": "Doğaçlama Kalkan",
+        "description_en": "Grab a table or large object to block an incoming attack, gaining +5 AC against one attack as a reaction. The object shatters into shrapnel dealing 1d6 damage to the attacker.",
+        "description_tr": "Gelen bir saldırıyı engellemek için bir masa veya büyük bir nesne kapın, tepki olarak bir saldırıya karşı +5 AC kazanın. Nesne parçalanarak saldırgana 1d6 hasar veren şarapnele dönüşür.",
+        "branch": "Improvisation",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 425,
+        "prerequisites": [
+          "dkm_barroom_brawler"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+5",
+          "reaction": true,
+          "recoil_damage": "1d6 Piercing"
+        }
+      },
+      {
+        "spell_key": "dkm_keg_roll",
+        "name_en": "Keg Roll",
+        "name_tr": "Fıçı Yuvarlama",
+        "description_en": "Roll a massive keg in a 10m line. Targets must save or take 4d6 bludgeoning damage and be knocked prone.",
+        "description_tr": "10m'lik bir hatta devasa bir fıçı yuvarlayın. Hedefler kurtarma yapmalı veya 4d6 ezme hasarı alıp yere serilmelidir.",
+        "branch": "Improvisation",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dkm_dirty_kick"
+        ],
+        "icon": "🛢️",
+        "effects": {
+          "damage": "4d6 Bludgeoning",
+          "area": "10m Line",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "dkm_shattering_crescendo",
+        "name_en": "Shattering Crescendo",
+        "name_tr": "Parçalayan Kreşendo",
+        "description_en": "Smash two massive bottles together, creating a shockwave of glass. 5m radius area takes 5d8 slashing damage.",
+        "description_tr": "İki devasa şişeyi birbirine çarparak camdan bir şok dalgası yaratın. 5m yarıçapındaki alan 5d8 kesme hasarı alır.",
+        "branch": "Improvisation",
+        "tier": 4,
+        "min_level": 63,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dkm_bottle_barrage"
+        ],
+        "icon": "🥂",
+        "effects": {
+          "damage": "5d8 Slashing",
+          "area": "5m Radius"
+        }
+      },
+      {
+        "spell_key": "dkm_volatile_spit",
+        "name_en": "Volatile Spit",
+        "name_tr": "Patlayıcı Tükürük",
+        "description_en": "Spit an explosive brew. Deals 6d6 fire damage in a 5m radius explosion up to 15m away.",
+        "description_tr": "Patlayıcı bir iksir tükürün. 15m'ye kadar uzaklıkta, 5m yarıçaplı bir patlamayla 6d6 ateş hasarı verir.",
+        "branch": "Improvisation",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dkm_toxic_brew"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "6d6 Fire",
+          "area": "5m Radius",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dkm_master_scavenger",
+        "name_en": "Master Scavenger",
+        "name_tr": "Usta Çöpçü",
+        "description_en": "Any improvised weapon you wield becomes magical, dealing an extra 2d6 damage and ignoring non-magical resistances.",
+        "description_tr": "Kullandığınız herhangi bir doğaçlama silah büyülü hale gelir, fazladan 2d6 hasar verir ve büyülü olmayan dirençleri yok sayar.",
+        "branch": "Improvisation",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dkm_improvised_shield"
+        ],
+        "icon": "🛠️",
+        "effects": {
+          "buff": "Improvised Weapons Magical",
+          "bonus_damage": "2d6",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "dkm_dragon_breath_brew",
+        "name_en": "Dragon Breath Brew",
+        "name_tr": "Ejderha Nefesi İksiri",
+        "description_en": "Drink a legendary brew and exhale a massive 15m cone of searing blue flames, dealing 8d10 fire damage and igniting enemies.",
+        "description_tr": "Efsanevi bir iksir için ve 15m'lik devasa bir kavurucu mavi alev konisi üfleyerek 8d10 ateş hasarı verip düşmanları tutuşturun.",
+        "branch": "Improvisation",
+        "tier": 5,
+        "min_level": 83,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dkm_volatile_spit"
+        ],
+        "icon": "🐲",
+        "effects": {
+          "damage": "8d10 Fire",
+          "area": "15m Cone",
+          "condition": "Ignited"
+        }
+      },
+      {
+        "spell_key": "dkm_ultimate_pub_brawl",
+        "name_en": "Ultimate: Pub Brawl",
+        "name_tr": "Ulti: Meyhane Kavgası",
+        "description_en": "Turn the battlefield into a chaotic tavern brawl. Ropes, chairs, and mugs fly everywhere. For 3 turns, all enemies in 20m take 4d8 bludgeoning damage each turn and cannot take reactions.",
+        "description_tr": "Savaş alanını kaotik bir meyhane kavgasına çevirin. İpler, sandalyeler ve kupalar her yere uçar. 3 tur boyunca 20m içindeki tüm düşmanlar her tur 4d8 ezme hasarı alır ve tepki kullanamazlar.",
+        "branch": "Improvisation",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dkm_shattering_crescendo",
+          "dkm_master_scavenger"
+        ],
+        "icon": "🍻",
+        "effects": {
+          "damage": "4d8 Bludgeoning / turn",
+          "area": "20m Radius",
+          "duration": "3 turns",
+          "debuff": "No Reactions"
+        }
+      },
+      {
+        "spell_key": "dkm_clumsy_charge",
+        "name_en": "Clumsy Charge",
+        "name_tr": "Sakar Hücum",
+        "description_en": "Charge blindly up to 8m. You hit a random target in range for 1d10 damage, but might also hit an ally if they are the only one in range.",
+        "description_tr": "8m'ye kadar körü körüne hücum edin. Menzil içindeki rastgele bir hedefe 1d10 hasar verirsiniz, ancak menzildeki tek kişi onlarsa bir müttefike de vurabilirsiniz.",
+        "branch": "Chaos",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🏃",
+        "effects": {
+          "damage": "1d10 Bludgeoning",
+          "range": "8m",
+          "target": "Random"
+        }
+      },
+      {
+        "spell_key": "dkm_hiccup_blast",
+        "name_en": "Hiccup Blast",
+        "name_tr": "Hıçkırık Patlaması",
+        "description_en": "A magically amplified hiccup releases a sonic wave, dealing 1d6 thunder damage to adjacent creatures and pushing them 1m away.",
+        "description_tr": "Sihirli bir şekilde güçlendirilmiş bir hıçkırık sonik bir dalga yayarak bitişik yaratıklara 1d6 gök gürültüsü hasarı verir ve onları 1m uzağa iter.",
+        "branch": "Chaos",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "damage": "1d6 Thunder",
+          "area": "1m Radius",
+          "knockback": "1m"
+        }
+      },
+      {
+        "spell_key": "dkm_trip_and_fall",
+        "name_en": "Trip and Fall",
+        "name_tr": "Takılıp Düşme",
+        "description_en": "'Accidentally' fall prone, dodging an attack completely and tripping an adjacent enemy, dealing 1d4 damage and knocking them prone.",
+        "description_tr": "'Yanlışlıkla' yüzüstü düşerek bir saldırıdan tamamen kaçının ve bitişik bir düşmanı çelmeleyerek 1d4 hasar verip yere serin.",
+        "branch": "Chaos",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🤸",
+        "effects": {
+          "dodge": true,
+          "condition": "Prone (Self & Target)",
+          "damage": "1d4 Bludgeoning"
+        }
+      },
+      {
+        "spell_key": "dkm_erratic_whirlwind",
+        "name_en": "Erratic Whirlwind",
+        "name_tr": "Dengesiz Kasırga",
+        "description_en": "Spin wildly with arms outstretched, moving 5m in a random direction. Deals 2d6 slashing damage to anyone in your path.",
+        "description_tr": "Kollarınız açık şekilde çılgınca dönün ve rastgele bir yönde 5m ilerleyin. Yolunuza çıkan herkese 2d6 kesme hasarı verir.",
+        "branch": "Chaos",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dkm_clumsy_charge"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "2d6 Slashing",
+          "movement": "5m Random"
+        }
+      },
+      {
+        "spell_key": "dkm_infectious_laughter",
+        "name_en": "Infectious Laughter",
+        "name_tr": "Bulaşıcı Kahkaha",
+        "description_en": "Let out a booming, drunken laugh. Enemies within 8m must make a WIS save or fall prone laughing for 1 turn.",
+        "description_tr": "Gürleyen, sarhoş bir kahkaha atın. 8m içindeki düşmanlar BİL kurtarması yapmalı veya 1 tur boyunca gülmekten yere serilmelidir.",
+        "branch": "Chaos",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dkm_hiccup_blast"
+        ],
+        "icon": "😂",
+        "effects": {
+          "area": "8m Radius",
+          "save": "WIS",
+          "condition": "Incapacitated/Prone",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "dkm_bouncing_bruiser",
+        "name_en": "Bouncing Bruiser",
+        "name_tr": "Zıplayan Kabadayı",
+        "description_en": "Leap at an enemy (up to 6m) for 2d6 damage, then bounce to another random enemy within 4m for 1d6 damage.",
+        "description_tr": "Bir düşmana (6m'ye kadar) sıçrayarak 2d6 hasar verin, ardından 4m içindeki başka bir rastgele düşmana sekerek 1d6 hasar verin.",
+        "branch": "Chaos",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dkm_trip_and_fall"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "damage": "2d6 -> 1d6 Bludgeoning",
+          "range": "6m -> 4m"
+        }
+      },
+      {
+        "spell_key": "dkm_pandemonium_step",
+        "name_en": "Pandemonium Step",
+        "name_tr": "Kargaşa Adımı",
+        "description_en": "Teleport up to 10m to a point you can see, leaving behind a cloud of confusing dust that blinds enemies in a 2m radius.",
+        "description_tr": "Görebildiğiniz 10m uzaklıktaki bir noktaya ışınlanın, geride 2m yarıçapındaki düşmanları kör eden kafa karıştırıcı bir toz bulutu bırakın.",
+        "branch": "Chaos",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dkm_erratic_whirlwind"
+        ],
+        "icon": "💨",
+        "effects": {
+          "teleport": "10m",
+          "area": "2m Radius",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "dkm_drunken_aura",
+        "name_en": "Drunken Aura",
+        "name_tr": "Sarhoş Aurası",
+        "description_en": "Emit an aura of intoxicating fumes for 3 turns. Enemies within 5m have their movement speed halved and suffer disadvantage on DEX saves.",
+        "description_tr": "3 tur boyunca sarhoş edici dumanlardan oluşan bir aura yayın. 5m içindeki düşmanların hareket hızı yarıya düşer ve ÇEV kurtarmalarında dezavantaj yaşarlar.",
+        "branch": "Chaos",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 425,
+        "prerequisites": [
+          "dkm_infectious_laughter"
+        ],
+        "icon": "🥴",
+        "effects": {
+          "duration": "3 turns",
+          "area": "5m Aura",
+          "debuff": "Half Speed, Disadv DEX"
+        }
+      },
+      {
+        "spell_key": "dkm_chaos_brew",
+        "name_en": "Chaos Brew",
+        "name_tr": "Kaos İksiri",
+        "description_en": "Drink a mystery potion. Roll 1d4: 1=Haste, 2=Enlarge, 3=Invisibility, 4=Burp (deals 3d6 thunder damage around you).",
+        "description_tr": "Gizemli bir iksir için. 1d4 atın: 1=Hız, 2=Büyüme, 3=Görünmezlik, 4=Geğirti (etrafınıza 3d6 gök gürültüsü hasarı verir).",
+        "branch": "Chaos",
+        "tier": 3,
+        "min_level": 57,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dkm_bouncing_bruiser"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "random_buff": "1d4 outcome",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "dkm_mad_stampede",
+        "name_en": "Mad Stampede",
+        "name_tr": "Çılgın İzdiham",
+        "description_en": "Run wildly in a 12m line. You pass through enemies, dealing 4d8 bludgeoning damage and forcing them to attack the nearest creature on their next turn.",
+        "description_tr": "12m'lik bir hatta çılgınca koşun. Düşmanların içinden geçerek 4d8 ezme hasarı verir ve sonraki turlarında en yakın yaratığa saldırmaya zorlarsınız.",
+        "branch": "Chaos",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dkm_pandemonium_step"
+        ],
+        "icon": "🐃",
+        "effects": {
+          "damage": "4d8 Bludgeoning",
+          "area": "12m Line",
+          "debuff": "Attack Nearest"
+        }
+      },
+      {
+        "spell_key": "dkm_hallucinatory_vapors",
+        "name_en": "Hallucinatory Vapors",
+        "name_tr": "Halüsinatif Buharlar",
+        "description_en": "Exhale mind-bending vapors in an 8m radius. Enemies see illusions of multiple drunken masters and suffer a 50% miss chance on all attacks for 2 turns.",
+        "description_tr": "8m yarıçapında akıl almaz buharlar üfleyin. Düşmanlar birden fazla sarhoş usta illüzyonu görür ve 2 tur boyunca tüm saldırılarında %50 ıskalama şansı yaşarlar.",
+        "branch": "Chaos",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dkm_drunken_aura"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "area": "8m Radius",
+          "duration": "2 turns",
+          "debuff": "50% Miss Chance"
+        }
+      },
+      {
+        "spell_key": "dkm_unpredictable_strikes",
+        "name_en": "Unpredictable Strikes",
+        "name_tr": "Beklenmedik Vuruşlar",
+        "description_en": "Make 3 melee attacks. For each attack, you instantly teleport to a random enemy within 10m before striking for 3d8 damage.",
+        "description_tr": "3 yakın dövüş saldırısı yapın. Her saldırı için, 3d8 hasar vermeden önce 10m içindeki rastgele bir düşmana anında ışınlanırsınız.",
+        "branch": "Chaos",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dkm_chaos_brew"
+        ],
+        "icon": "🎲",
+        "effects": {
+          "hits": 3,
+          "teleport": "10m per hit",
+          "damage": "3d8 per hit"
+        }
+      },
+      {
+        "spell_key": "dkm_avatar_of_chaos",
+        "name_en": "Avatar of Chaos",
+        "name_tr": "Kaosun Avatarı",
+        "description_en": "Become chaos incarnate for 1 minute. Every time you take damage, you teleport 3m in a random direction and deal 2d10 force damage to enemies adjacent to your new location.",
+        "description_tr": "1 dakika boyunca kaosun vücut bulmuş hali olun. Her hasar aldığınızda, rastgele bir yöne 3m ışınlanırsınız ve yeni konumunuza bitişik düşmanlara 2d10 güç hasarı verirsiniz.",
+        "branch": "Chaos",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "dkm_mad_stampede",
+          "dkm_hallucinatory_vapors"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "duration": "1 minute",
+          "trigger": "On Damage",
+          "reaction_effect": "Teleport + 2d10 Force"
+        }
+      },
+      {
+        "spell_key": "dkm_ultimate_drunken_god",
+        "name_en": "Ultimate: Drunken God",
+        "name_tr": "Ulti: Sarhoş Tanrı",
+        "description_en": "Ascend to drunken godhood. For 3 turns, your redirect chance becomes 80%, you are immune to all conditions, and your attacks deal maximum possible damage instead of rolling.",
+        "description_tr": "Sarhoş bir tanrılığa yükselin. 3 tur boyunca yönlendirme şansınız %80 olur, tüm durumlara karşı bağışıklık kazanırsınız ve saldırılarınız zar atmak yerine olası maksimum hasarı verir.",
+        "branch": "Chaos",
+        "tier": 5,
+        "min_level": 97,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dkm_avatar_of_chaos",
+          "dkm_unpredictable_strikes"
+        ],
+        "icon": "🍺",
+        "effects": {
+          "duration": "3 turns",
+          "redirect_chance": "80%",
+          "buff": "Max Damage, Immunity"
+        }
+      },
+      {
+        "spell_key": "dkm_stumbling_counter",
+        "name_en": "Stumbling Counter",
+        "name_tr": "Tökezleyen Kontra",
+        "description_en": "Fall prone to dodge an attack, then immediately launch a kick from the ground dealing 2d8 damage and confusing the target.",
+        "description_tr": "Bir saldırıdan kaçmak için yüzüstü düşün, ardından hemen yerden 2d8 hasar veren ve hedefi şaşırtan bir tekme atın.",
+        "branch": "Drunken Style, Chaos",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dkm_sudden_counter",
+          "dkm_trip_and_fall"
+        ],
+        "icon": "🤹",
+        "effects": {
+          "damage": "2d8 Bludgeoning",
+          "status": "Confused",
+          "dodge": true
+        }
+      },
+      {
+        "spell_key": "dkm_exploding_hiccup",
+        "name_en": "Exploding Hiccup",
+        "name_tr": "Patlayan Hıçkırık",
+        "description_en": "A toxic hiccup ignites the air around you, dealing 3d6 fire and 3d6 poison damage in a 4m radius.",
+        "description_tr": "Zehirli bir hıçkırık etrafınızdaki havayı tutuşturur, 4m yarıçapında 3d6 ateş ve 3d6 zehir hasarı verir.",
+        "branch": "Improvisation, Chaos",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dkm_hiccup_blast",
+          "dkm_toxic_brew"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "3d6 Fire + 3d6 Poison",
+          "area": "4m Radius"
+        }
+      },
+      {
+        "spell_key": "dkm_drunken_juggler",
+        "name_en": "Drunken Juggler",
+        "name_tr": "Sarhoş Hokkabaz",
+        "description_en": "Catch incoming ranged projectiles and immediately throw them back at the attacker with your improvised weapon damage bonuses.",
+        "description_tr": "Gelen menzilli mermileri yakalayın ve doğaçlama silah hasarı bonuslarınızla hemen saldırgana geri fırlatın.",
+        "branch": "Drunken Style, Improvisation",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dkm_bottle_barrage",
+          "dkm_swaying_reed"
+        ],
+        "icon": "🤹‍♂️",
+        "effects": {
+          "counter": "Ranged Attacks",
+          "damage": "Projectile + 1d8"
+        }
+      },
+      {
+        "spell_key": "dkm_mayhem_stance",
+        "name_en": "Mayhem Stance",
+        "name_tr": "Kargaşa Duruşu",
+        "description_en": "Enter a manic stance. Whenever you redirect an attack, you automatically throw an improvised item at the attacker for 2d10 damage. Lasts 3 turns.",
+        "description_tr": "Maniyak bir duruşa geçin. Bir saldırıyı her yönlendirdiğinizde, otomatik olarak saldırgana 2d10 hasar veren doğaçlama bir eşya fırlatırsınız. 3 tur sürer.",
+        "branch": "Drunken Style, Chaos, Improvisation",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dkm_unbreakable_stance",
+          "dkm_mad_stampede",
+          "dkm_master_scavenger"
+        ],
+        "icon": "🃏",
+        "effects": {
+          "duration": "3 turns",
+          "trigger": "On Redirect",
+          "damage": "2d10 Ranged"
+        }
+      },
+      {
+        "spell_key": "dkm_laughing_parry",
+        "name_en": "Laughing Parry",
+        "name_tr": "Gülen Savuşturma",
+        "description_en": "Deflect a blow while cackling madly. The attacker and all enemies within 3m must save or be incapacitated by laughter for 1 turn.",
+        "description_tr": "Çılgınca kıkırdayarak bir darbeyi savuşturun. Saldırgan ve 3m içindeki tüm düşmanlar kurtarma yapmalı veya 1 tur boyunca gülmekten aciz kalmalıdır.",
+        "branch": "Drunken Style, Chaos",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dkm_dizzying_parry",
+          "dkm_infectious_laughter"
+        ],
+        "icon": "🤣",
+        "effects": {
+          "parry": true,
+          "area": "3m Radius",
+          "condition": "Incapacitated"
+        }
+      },
+      {
+        "spell_key": "dkm_catastrophic_brew",
+        "name_en": "Catastrophic Brew",
+        "name_tr": "Felaket İksiri",
+        "description_en": "Mix your ultimate brew. Hurl it up to 20m. It explodes in a 10m radius, dealing 6d10 fire damage and inflicting a random powerful debuff (stun, blind, or paralyze) to all affected.",
+        "description_tr": "Nihai iksirinizi karıştırın. Onu 20m'ye kadar fırlatın. 10m yarıçapında patlayarak 6d10 ateş hasarı verir ve etkilenen herkese rastgele güçlü bir zayıflatma (sersemletme, körlük veya felç) uygular.",
+        "branch": "Improvisation, Chaos",
+        "tier": 5,
+        "min_level": 89,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "dkm_dragon_breath_brew",
+          "dkm_avatar_of_chaos"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "range": "20m",
+          "area": "10m Radius",
+          "damage": "6d10 Fire",
+          "random_debuff": true
+        }
+      },
+      {
+        "spell_key": "dkm_grand_ultimate_eight_immortals",
+        "name_en": "Grand Ultimate: Eight Immortals",
+        "name_tr": "Büyük Ulti: Sekiz Ölümsüz",
+        "description_en": "Channel the mythical Eight Immortals. You split into eight uncontrollable drunken avatars for 1 turn, striking every enemy within 30m eight times. Each strike deals 2d12 damage of a random type, and you automatically dodge all attacks during this turn.",
+        "description_tr": "Efsanevi Sekiz Ölümsüz'ü yönlendirin. 1 tur boyunca sekiz kontrol edilemez sarhoş avatara bölünürsünüz ve 30m içindeki her düşmana sekiz kez vurursunuz. Her vuruş rastgele bir türde 2d12 hasar verir ve bu tur boyunca tüm saldırılardan otomatik olarak kaçınırsınız.",
+        "branch": "Drunken Style, Improvisation, Chaos",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dkm_ultimate_drunken_fist",
+          "dkm_ultimate_pub_brawl",
+          "dkm_ultimate_drunken_god"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "hits": 8,
+          "damage": "2d12 Random Type per hit",
+          "area": "30m Radius",
+          "buff": "Invincibility for 1 turn"
+        }
+      }
+    ]
+  }
+]

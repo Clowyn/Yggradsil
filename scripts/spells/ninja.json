@@ -1,0 +1,983 @@
+[
+  {
+    "subclass_key": "ninja",
+    "tree_name_en": "Path of the Ninja",
+    "tree_name_tr": "Ninja Yolu",
+    "tree_desc_en": "Master the arts of stealth, deadly shurikens, and elemental ninjutsu to assassinate targets from the shadows.",
+    "tree_desc_tr": "Hedeflere gölgelerden suikast düzenlemek için gizlilik, ölümcül shurikenler ve elementel ninjutsu sanatlarında ustalaşın.",
+    "branches": [
+      "Stealth",
+      "Ninjutsu",
+      "Shuriken"
+    ],
+    "spells": [
+      {
+        "spell_key": "nj_stealth_shadow_step",
+        "name_en": "Shadow Step",
+        "name_tr": "Gölge Adımı",
+        "description_en": "Teleport up to 10m into a shadow. Gain stealth for 3s.",
+        "description_tr": "10m mesafeye kadar bir gölgeye ışınlanırsınız. 3 saniyeliğine görünmezlik kazandırır.",
+        "branch": "Stealth",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "range": "10m",
+          "stealth_duration": "3s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_hidden_blade",
+        "name_en": "Hidden Blade",
+        "name_tr": "Gizli Bıçak",
+        "description_en": "Your first attack from stealth deals an extra 1d8 physical damage.",
+        "description_tr": "Görünmezlikten yapılan ilk saldırınız fazladan 1d8 fiziksel hasar verir.",
+        "branch": "Stealth",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "nj_stealth_shadow_step"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d8"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_cloak",
+        "name_en": "Cloak of Night",
+        "name_tr": "Gece Pelerini",
+        "description_en": "Become fully invisible for 10s. Movement speed increased by 20%.",
+        "description_tr": "10 saniyeliğine tamamen görünmez olursunuz. Hareket hızı %20 artar.",
+        "branch": "Stealth",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "nj_stealth_hidden_blade"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "10s",
+          "speed_buff": "20%"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_assassinate",
+        "name_en": "Assassinate",
+        "name_tr": "Suikast",
+        "description_en": "A precision strike dealing 3d6 damage. Critical chance is doubled if attacking from stealth.",
+        "description_tr": "3d6 hasar veren hassas bir vuruş. Görünmezlikten saldırırsanız kritik vuruş şansı iki katına çıkar.",
+        "branch": "Stealth",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "nj_stealth_cloak"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "damage": "3d6",
+          "crit_chance_multiplier": 2
+        }
+      },
+      {
+        "spell_key": "nj_stealth_blend",
+        "name_en": "Shadow Blend",
+        "name_tr": "Gölge Karışımı",
+        "description_en": "Passive: Gain natural camouflage in dim light, reducing enemy detection radius by 5m.",
+        "description_tr": "Pasif: Loş ışıkta doğal kamuflaj kazanarak düşman tespit yarıçapını 5m azaltırsınız.",
+        "branch": "Stealth",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "nj_stealth_assassinate"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "stealth_buff": "5m"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_takedown",
+        "name_en": "Silent Takedown",
+        "name_tr": "Sessiz İnfaz",
+        "description_en": "Melee strike dealing 4d6 damage and silencing the target for 3s.",
+        "description_tr": "4d6 hasar veren ve hedefi 3 saniyeliğine susturan yakın dövüş saldırısı.",
+        "branch": "Stealth",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "nj_stealth_blend"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "damage": "4d6",
+          "silence": "3s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_vanish",
+        "name_en": "Vanish",
+        "name_tr": "Gözden Kaybolma",
+        "description_en": "Instantly break target locks, blind nearby enemies for 2s, and become invisible for 8s.",
+        "description_tr": "Anında hedef kilitlerini kırar, yakındaki düşmanları 2 saniye kör eder ve 8 saniye boyunca görünmez olursunuz.",
+        "branch": "Stealth",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "nj_stealth_takedown"
+        ],
+        "icon": "💨",
+        "effects": {
+          "blind_duration": "2s",
+          "stealth_duration": "8s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_shadow_strike",
+        "name_en": "Shadow Strike",
+        "name_tr": "Gölge Vuruşu",
+        "description_en": "Teleport 15m to a target and strike for 5d6 damage, stunning them for 1.5s.",
+        "description_tr": "Bir hedefe 15m ışınlanarak 5d6 hasar vurursunuz ve 1.5 saniye sersemletirsiniz.",
+        "branch": "Stealth",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "nj_stealth_vanish"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "range": "15m",
+          "damage": "5d6",
+          "stun": "1.5s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_phantom_step",
+        "name_en": "Phantom Step",
+        "name_tr": "Hayalet Adım",
+        "description_en": "While stealthed, you can walk through solid obstacles up to 2m thick. Duration 5s.",
+        "description_tr": "Görünmezken 2m kalınlığa kadar katı engellerin içinden geçebilirsiniz. Süre 5s.",
+        "branch": "Stealth",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "nj_stealth_shadow_strike"
+        ],
+        "icon": "👻",
+        "effects": {
+          "wall_thickness": "2m",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_shadow_realm",
+        "name_en": "Shadow Realm",
+        "name_tr": "Gölge Diyarı",
+        "description_en": "Phase into the shadow realm for 5s, becoming immune to all damage and effects, but unable to attack.",
+        "description_tr": "5 saniyeliğine gölge diyarına geçerek tüm hasar ve etkilere karşı bağışıklık kazanırsınız, ancak saldıramazsınız.",
+        "branch": "Stealth",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "nj_stealth_phantom_step"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "immunity_duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_execution",
+        "name_en": "Execution",
+        "name_tr": "İdam",
+        "description_en": "Deal 8d6 damage. If the target is below 20% HP, this attack deals triple damage.",
+        "description_tr": "8d6 hasar verirsiniz. Hedefin canı %20'nin altındaysa, bu saldırı üç kat hasar verir.",
+        "branch": "Stealth",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "nj_stealth_shadow_realm"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "8d6",
+          "execute_threshold": "20%",
+          "multiplier": 3
+        }
+      },
+      {
+        "spell_key": "nj_stealth_aura",
+        "name_en": "Aura of Darkness",
+        "name_tr": "Karanlık Halesi",
+        "description_en": "Create a 15m radius of magical darkness for 10s. Enemies inside are blinded.",
+        "description_tr": "10 saniyeliğine 15m yarıçapında büyülü bir karanlık yaratır. İçerideki düşmanlar kör olur.",
+        "branch": "Stealth",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "nj_stealth_execution"
+        ],
+        "icon": "🌚",
+        "effects": {
+          "radius": "15m",
+          "duration": "10s",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_one_with_shadows",
+        "name_en": "One with Shadows",
+        "name_tr": "Gölgelerle Bir",
+        "description_en": "Attacking no longer breaks your invisibility for the next 10s.",
+        "description_tr": "Önümüzdeki 10 saniye boyunca saldırmak artık görünmezliğinizi bozmaz.",
+        "branch": "Stealth",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "nj_stealth_aura"
+        ],
+        "icon": "🌒",
+        "effects": {
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nj_stealth_ultimate_nightfall",
+        "name_en": "Ultimate: Nightfall Assassin",
+        "name_tr": "Ulti: Alacakaranlık Suikastçısı",
+        "description_en": "Dash instantly between all enemies within 20m, dealing 12d6 damage to each and returning to your starting position in stealth.",
+        "description_tr": "20m içindeki tüm düşmanlar arasında anında atılarak her birine 12d6 hasar verir ve başlangıç konumunuza görünmez olarak dönersiniz.",
+        "branch": "Stealth",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "nj_stealth_one_with_shadows"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "20m",
+          "damage": "12d6"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_smoke_bomb",
+        "name_en": "Smoke Bomb",
+        "name_tr": "Sis Bombası",
+        "description_en": "Throw a bomb that creates a 5m smoke cloud for 5s, blocking vision and granting stealth.",
+        "description_tr": "Görüşü engelleyen ve görünmezlik sağlayan, 5 saniyeliğine 5m'lik bir sis bulutu yaratan bir bomba atar.",
+        "branch": "Ninjutsu",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌫️",
+        "effects": {
+          "radius": "5m",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_substitution",
+        "name_en": "Substitution Jutsu",
+        "name_tr": "Yer Değiştirme Jutsusu",
+        "description_en": "When struck, swap places with a wooden log, negating the damage and teleporting 5m away.",
+        "description_tr": "Vurulduğunda tahta bir kütükle yer değiştirerek hasarı sıfırlar ve 5m uzağa ışınlanırsınız.",
+        "branch": "Ninjutsu",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [
+          "nj_ninjutsu_smoke_bomb"
+        ],
+        "icon": "🪵",
+        "effects": {
+          "teleport": "5m",
+          "damage_negated": "100%"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_water_walk",
+        "name_en": "Water Walk",
+        "name_tr": "Su Yürüyüşü",
+        "description_en": "Channel chakra to walk on water and other liquid surfaces for 1 hour.",
+        "description_tr": "Çakranızı yönlendirerek 1 saat boyunca su ve diğer sıvı yüzeylerde yürürsünüz.",
+        "branch": "Ninjutsu",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 120,
+        "prerequisites": [
+          "nj_ninjutsu_substitution"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "duration": "1h"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_caltrops",
+        "name_en": "Caltrops",
+        "name_tr": "Çivili Kapan",
+        "description_en": "Scatter caltrops over a 5m area. Enemies entering take 2d4 damage and are slowed by 50%.",
+        "description_tr": "5m'lik bir alana kapanlar saçar. Giren düşmanlar 2d4 hasar alır ve %50 yavaşlar.",
+        "branch": "Ninjutsu",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "nj_ninjutsu_water_walk"
+        ],
+        "icon": "📌",
+        "effects": {
+          "radius": "5m",
+          "damage": "2d4",
+          "slow": "50%"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_fire_breath",
+        "name_en": "Fire Breath",
+        "name_tr": "Ateş Nefesi",
+        "description_en": "Exhale a 10m cone of flames, dealing 4d6 fire damage and igniting targets for 3s.",
+        "description_tr": "10m'lik bir koni şeklinde alev üfleyerek 4d6 ateş hasarı verir ve hedefleri 3 saniye yakarsınız.",
+        "branch": "Ninjutsu",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "nj_ninjutsu_caltrops"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "cone": "10m",
+          "damage": "4d6",
+          "burn_duration": "3s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_shadow_clone",
+        "name_en": "Shadow Clone",
+        "name_tr": "Gölge Klonu",
+        "description_en": "Create an illusory clone of yourself that distracts enemies and mimics your basic attacks for 10s.",
+        "description_tr": "Düşmanların dikkatini dağıtan ve 10 saniye boyunca temel saldırılarınızı taklit eden illüzyon bir kopyanızı yaratırsınız.",
+        "branch": "Ninjutsu",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "nj_ninjutsu_fire_breath"
+        ],
+        "icon": "👥",
+        "effects": {
+          "clones": 1,
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_poison_fog",
+        "name_en": "Poison Fog",
+        "name_tr": "Zehirli Sis",
+        "description_en": "Release a 10m cloud of toxic gas for 8s. Enemies inside take 3d6 poison damage per second.",
+        "description_tr": "8 saniyeliğine 10m'lik zehirli gaz bulutu salar. İçerideki düşmanlar saniyede 3d6 zehir hasarı alır.",
+        "branch": "Ninjutsu",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "nj_ninjutsu_shadow_clone"
+        ],
+        "icon": "🤢",
+        "effects": {
+          "radius": "10m",
+          "duration": "8s",
+          "damage_per_sec": "3d6"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_earth_wall",
+        "name_en": "Earth Wall",
+        "name_tr": "Toprak Duvar",
+        "description_en": "Raise a 3m wide, 2m tall rock wall to block projectiles and movement. Lasts 15s.",
+        "description_tr": "Mermileri ve hareketi engellemek için 3m genişliğinde, 2m yüksekliğinde bir taş duvar yükseltir. 15s sürer.",
+        "branch": "Ninjutsu",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "nj_ninjutsu_poison_fog"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "width": "3m",
+          "height": "2m",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_lightning_speed",
+        "name_en": "Lightning Speed",
+        "name_tr": "Yıldırım Hızı",
+        "description_en": "Infuse your body with lightning, increasing movement speed by 100% and attack speed by 50% for 6s.",
+        "description_tr": "Vücudunuza yıldırım enjekte ederek 6 saniyeliğine hareket hızınızı %100 ve saldırı hızınızı %50 artırırsınız.",
+        "branch": "Ninjutsu",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 500,
+        "prerequisites": [
+          "nj_ninjutsu_earth_wall"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "speed_buff": "100%",
+          "attack_speed": "50%",
+          "duration": "6s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_exploding_tags",
+        "name_en": "Exploding Tags",
+        "name_tr": "Patlayıcı Kağıtlar",
+        "description_en": "Attach an explosive seal to a target or surface. Detonates after 2s for 6d6 fire damage in a 5m radius.",
+        "description_tr": "Bir hedefe veya yüzeye patlayıcı mühür yapıştırır. 2 saniye sonra 5m yarıçapında 6d6 ateş hasarı ile patlar.",
+        "branch": "Ninjutsu",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 650,
+        "prerequisites": [
+          "nj_ninjutsu_lightning_speed"
+        ],
+        "icon": "💥",
+        "effects": {
+          "delay": "2s",
+          "damage": "6d6",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_multi_clone",
+        "name_en": "Multi Shadow Clone",
+        "name_tr": "Çoklu Gölge Klonu",
+        "description_en": "Summon 3 shadow clones. They deal 20% of your damage and have 10% of your max HP. Lasts 15s.",
+        "description_tr": "3 gölge klonu çağırır. Hasarınızın %20'sini verirler ve maksimum canınızın %10'una sahiptirler. 15s sürer.",
+        "branch": "Ninjutsu",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 750,
+        "prerequisites": [
+          "nj_ninjutsu_exploding_tags"
+        ],
+        "icon": "👬",
+        "effects": {
+          "clones": 3,
+          "damage_modifier": "20%",
+          "hp_modifier": "10%",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_wind_scythe",
+        "name_en": "Wind Scythe",
+        "name_tr": "Rüzgar Tırpanı",
+        "description_en": "Unleash a crescent blade of wind traveling 20m. Deals 7d6 slashing damage and knocks enemies back 5m.",
+        "description_tr": "20m ilerleyen hilal şeklinde bir rüzgar bıçağı serbest bırakır. 7d6 kesici hasar verir ve düşmanları 5m geri savurur.",
+        "branch": "Ninjutsu",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "nj_ninjutsu_multi_clone"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "range": "20m",
+          "damage": "7d6",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_demon_seal",
+        "name_en": "Demon Sealing",
+        "name_tr": "İblis Mührü",
+        "description_en": "Place a complex seal on a target, paralyzing them for 3s and sealing their magic/skills for 10s.",
+        "description_tr": "Bir hedefe karmaşık bir mühür yerleştirerek onu 3 saniye felç eder ve büyülerini/yeteneklerini 10 saniye mühürlersiniz.",
+        "branch": "Ninjutsu",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "nj_ninjutsu_wind_scythe"
+        ],
+        "icon": "👹",
+        "effects": {
+          "paralysis": "3s",
+          "silence": "10s"
+        }
+      },
+      {
+        "spell_key": "nj_ninjutsu_ultimate_kage",
+        "name_en": "Ultimate: Kage Bunshin Army",
+        "name_tr": "Ulti: Kage Bunshin Ordusu",
+        "description_en": "Summon 10 elite clones for 20s. They deal 50% of your damage, can cast basic shuriken, and confuse enemies.",
+        "description_tr": "20 saniyeliğine 10 elit klon çağırır. Hasarınızın %50'sini verirler, temel shuriken atabilirler ve düşmanların aklını karıştırırlar.",
+        "branch": "Ninjutsu",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "nj_ninjutsu_demon_seal"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "clones": 10,
+          "damage_modifier": "50%",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_throw",
+        "name_en": "Throw Shuriken",
+        "name_tr": "Shuriken Fırlat",
+        "description_en": "Quickly throw a shuriken at a target within 15m, dealing 1d6 physical damage.",
+        "description_tr": "15m içindeki bir hedefe hızla shuriken fırlatarak 1d6 fiziksel hasar verirsiniz.",
+        "branch": "Shuriken",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪃",
+        "effects": {
+          "range": "15m",
+          "damage": "1d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_kunai_barrage",
+        "name_en": "Kunai Barrage",
+        "name_tr": "Kunai Yağmuru",
+        "description_en": "Throw 3 kunai simultaneously at up to 3 targets in a 15m cone. Each deals 2d4 damage.",
+        "description_tr": "15m'lik bir koni içinde 3 hedefe kadar aynı anda 3 kunai fırlatır. Her biri 2d4 hasar verir.",
+        "branch": "Shuriken",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 80,
+        "prerequisites": [
+          "nj_shuriken_throw"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "range": "15m",
+          "projectiles": 3,
+          "damage_per_projectile": "2d4"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_poison_blade",
+        "name_en": "Poisoned Blade",
+        "name_tr": "Zehirli Bıçak",
+        "description_en": "Coat your next thrown weapon in poison, dealing an extra 2d6 poison damage over 4s.",
+        "description_tr": "Bir sonraki fırlatılan silahınızı zehirle kaplayarak 4 saniye içinde fazladan 2d6 zehir hasarı verirsiniz.",
+        "branch": "Shuriken",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 120,
+        "prerequisites": [
+          "nj_shuriken_kunai_barrage"
+        ],
+        "icon": "💉",
+        "effects": {
+          "damage": "2d6",
+          "duration": "4s"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_piercing",
+        "name_en": "Piercing Star",
+        "name_tr": "Delici Yıldız",
+        "description_en": "Throw a high-velocity shuriken that pierces through all enemies in a 20m line, dealing 3d6 damage.",
+        "description_tr": "20m'lik bir çizgideki tüm düşmanları delen ve 3d6 hasar veren yüksek hızlı bir shuriken fırlatır.",
+        "branch": "Shuriken",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "nj_shuriken_poison_blade"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "range": "20m",
+          "damage": "3d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_homing",
+        "name_en": "Homing Kunai",
+        "name_tr": "Güdümlü Kunai",
+        "description_en": "Throw a chakra-guided kunai that never misses its target within 25m, dealing 4d4 damage.",
+        "description_tr": "25m içinde hedefini asla ıskalamayan çakra güdümlü bir kunai fırlatarak 4d4 hasar verirsiniz.",
+        "branch": "Shuriken",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "nj_shuriken_piercing"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "range": "25m",
+          "damage": "4d4"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_fan",
+        "name_en": "Fan of Knives",
+        "name_tr": "Bıçak Yelpazesi",
+        "description_en": "Spin and release knives in a 360-degree arc around you, dealing 4d6 damage to enemies within 5m.",
+        "description_tr": "Kendi etrafınızda dönerek 360 derecelik bir yayla bıçaklar fırlatır ve 5m içindeki düşmanlara 4d6 hasar verirsiniz.",
+        "branch": "Shuriken",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 300,
+        "prerequisites": [
+          "nj_shuriken_homing"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "radius": "5m",
+          "damage": "4d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_exploding",
+        "name_en": "Exploding Shuriken",
+        "name_tr": "Patlayan Shuriken",
+        "description_en": "Throw a shuriken rigged with an explosive tag. Deals 5d6 AoE fire damage in a 4m radius upon impact.",
+        "description_tr": "Patlayıcı kağıtla donatılmış bir shuriken fırlatır. Çarptığında 4m yarıçapında 5d6 alan etkili ateş hasarı verir.",
+        "branch": "Shuriken",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "nj_shuriken_fan"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "radius": "4m",
+          "damage": "5d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_twin",
+        "name_en": "Twin Demon Stars",
+        "name_tr": "İkiz İblis Yıldızları",
+        "description_en": "Throw two massive shurikens that fly 15m and return to you, dealing 4d6 damage both ways.",
+        "description_tr": "15m uçan ve size geri dönen iki devasa shuriken fırlatır, her iki yönde de 4d6 hasar verir.",
+        "branch": "Shuriken",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "nj_shuriken_exploding"
+        ],
+        "icon": "♊",
+        "effects": {
+          "range": "15m",
+          "damage": "4d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_paralysis",
+        "name_en": "Paralysis Dart",
+        "name_tr": "Felç Dartı",
+        "description_en": "Shoot a precise dart coated in neurotoxin from up to 20m, stunning the target for 3s.",
+        "description_tr": "20m'den nörotoksin kaplı hassas bir dart atarak hedefi 3 saniye sersemletirsiniz.",
+        "branch": "Shuriken",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "nj_shuriken_twin"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "range": "20m",
+          "stun": "3s"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_storm",
+        "name_en": "Shuriken Storm",
+        "name_tr": "Shuriken Fırtınası",
+        "description_en": "Leap into the air and rain down dozens of shurikens in a 10m radius, dealing 8d6 damage to all inside.",
+        "description_tr": "Havaya sıçrayarak 10m yarıçapına düzinelerce shuriken yağdırır ve içeridekilere 8d6 hasar verirsiniz.",
+        "branch": "Shuriken",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "nj_shuriken_paralysis"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "radius": "10m",
+          "damage": "8d6"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_windmill",
+        "name_en": "Giant Windmill Shuriken",
+        "name_tr": "Dev Rüzgargülü Shuriken",
+        "description_en": "Throw a massive fūma shuriken traveling 30m. It pushes enemies back and inflicts deep bleeding (3d6 per sec for 3s).",
+        "description_tr": "30m ilerleyen devasa bir fūma shuriken fırlatır. Düşmanları geri iter ve derin kanamaya (3 saniye boyunca saniyede 3d6) neden olur.",
+        "branch": "Shuriken",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "nj_shuriken_storm"
+        ],
+        "icon": "💠",
+        "effects": {
+          "range": "30m",
+          "bleed": "3d6/s",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_vipers_kiss",
+        "name_en": "Viper's Kiss",
+        "name_tr": "Engerek Öpücüğü",
+        "description_en": "Throw a toxic needle. Afflicts target with venom that deals 5% of their max HP over 5s.",
+        "description_tr": "Zehirli bir iğne fırlatır. Hedefi, 5 saniye içinde maksimum canının %5'i kadar hasar veren bir zehirle etkiler.",
+        "branch": "Shuriken",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 850,
+        "prerequisites": [
+          "nj_shuriken_windmill"
+        ],
+        "icon": "🐍",
+        "effects": {
+          "damage": "5% Max HP",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_infinite",
+        "name_en": "Infinite Arsenal",
+        "name_tr": "Sonsuz Cephanelik",
+        "description_en": "For the next 10s, all shuriken and kunai skills have 0 cooldown and cost no stamina/mana.",
+        "description_tr": "Önümüzdeki 10 saniye boyunca tüm shuriken ve kunai yeteneklerinin bekleme süresi 0 olur ve dayanıklılık/mana harcamaz.",
+        "branch": "Shuriken",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "nj_shuriken_vipers_kiss"
+        ],
+        "icon": "✨",
+        "effects": {
+          "duration": "10s",
+          "cooldown_reduction": "100%"
+        }
+      },
+      {
+        "spell_key": "nj_shuriken_ultimate_dance",
+        "name_en": "Ultimate: Blade Dance of the Wind",
+        "name_tr": "Ulti: Rüzgarın Bıçak Dansı",
+        "description_en": "Become a vortex of blades. Throw 100 shurikens in all directions across a 15m radius, dealing 15d6 physical damage and heavily bleeding all targets.",
+        "description_tr": "Bir bıçak girdabına dönüşürsünüz. 15m yarıçapındaki her yöne 100 shuriken fırlatarak 15d6 fiziksel hasar verir ve tüm hedefleri ağır şekilde kanatırsınız.",
+        "branch": "Shuriken",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "nj_shuriken_infinite"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "radius": "15m",
+          "damage": "15d6",
+          "bleed": "Heavy"
+        }
+      },
+      {
+        "spell_key": "nj_cross_shadow_shuriken",
+        "name_en": "Shadow Shuriken",
+        "name_tr": "Gölge Shuriken",
+        "description_en": "Throw a shuriken from stealth. Upon impact, it materializes into a shadow clone behind the target and strikes.",
+        "description_tr": "Görünmezlikten bir shuriken fırlatır. Çarptığında, hedefin arkasında bir gölge klonuna dönüşür ve saldırır.",
+        "branch": "Stealth, Shuriken",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "nj_stealth_blend",
+          "nj_shuriken_piercing"
+        ],
+        "icon": "👥",
+        "effects": {
+          "clone": 1,
+          "strike": "Auto"
+        }
+      },
+      {
+        "spell_key": "nj_cross_smoke_kunai",
+        "name_en": "Smoke Kunai",
+        "name_tr": "Sis Kunaisi",
+        "description_en": "Throw a kunai that detonates into a 8m thick smoke cloud on impact, blinding enemies inside.",
+        "description_tr": "Çarptığında 8m kalınlığında bir sis bulutuna dönüşerek içerideki düşmanları kör eden bir kunai fırlatır.",
+        "branch": "Ninjutsu, Shuriken",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "nj_ninjutsu_shadow_clone",
+          "nj_shuriken_fan"
+        ],
+        "icon": "☁️",
+        "effects": {
+          "radius": "8m",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "nj_cross_silent_clone",
+        "name_en": "Silent Clone",
+        "name_tr": "Sessiz Klon",
+        "description_en": "Create an invisible shadow clone that approaches the target and delivers a free Silent Takedown.",
+        "description_tr": "Hedefe yaklaşan ve ücretsiz bir Sessiz İnfaz uygulayan görünmez bir gölge klonu yaratır.",
+        "branch": "Stealth, Ninjutsu",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "nj_stealth_vanish",
+          "nj_ninjutsu_shadow_clone"
+        ],
+        "icon": "👤",
+        "effects": {
+          "clone_stealth": true,
+          "free_cast": "Silent Takedown"
+        }
+      },
+      {
+        "spell_key": "nj_cross_poison_clone",
+        "name_en": "Poison Clone Explosion",
+        "name_tr": "Zehirli Klon Patlaması",
+        "description_en": "Your clones now erupt into a 5m Poison Fog when destroyed, heavily damaging nearby enemies.",
+        "description_tr": "Klonlarınız artık yok edildiklerinde 5m'lik bir Zehirli Sis yayarak yakındaki düşmanlara ağır hasar verir.",
+        "branch": "Ninjutsu, Shuriken",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "nj_ninjutsu_poison_fog",
+          "nj_shuriken_exploding"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "radius": "5m",
+          "trigger": "Clone Death"
+        }
+      },
+      {
+        "spell_key": "nj_cross_shuriken_teleport",
+        "name_en": "Flying Thunder Teleport",
+        "name_tr": "Uçan Yıldırım Işınlanması",
+        "description_en": "Throw a marked kunai up to 30m, and instantly teleport to its location. If in stealth, it is not broken.",
+        "description_tr": "İşaretli bir kunaiyi 30m'ye kadar fırlatır ve anında o konuma ışınlanırsınız. Görünmez iseniz, bozulmaz.",
+        "branch": "Stealth, Shuriken",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "nj_stealth_phantom_step",
+          "nj_shuriken_twin"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "range": "30m",
+          "stealth_preserved": true
+        }
+      },
+      {
+        "spell_key": "nj_cross_nightfall_trap",
+        "name_en": "Nightfall Trap",
+        "name_tr": "Alacakaranlık Tuzağı",
+        "description_en": "Leave an invisible explosive seal. When triggered, it deals 8d6 damage and casts Aura of Darkness instantly.",
+        "description_tr": "Görünmez bir patlayıcı mühür bırakır. Tetiklendiğinde 8d6 hasar verir ve anında Karanlık Halesi uygular.",
+        "branch": "Stealth, Ninjutsu",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "nj_stealth_execution",
+          "nj_ninjutsu_exploding_tags"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "8d6",
+          "trigger_spell": "Aura of Darkness"
+        }
+      },
+      {
+        "spell_key": "nj_cross_elemental_blade",
+        "name_en": "Elemental Blade Storm",
+        "name_tr": "Element Bıçak Fırtınası",
+        "description_en": "Unleash a Fan of Knives infused with fire, lightning, and wind. Deals 10d6 mixed elemental damage and pushes enemies.",
+        "description_tr": "Ateş, yıldırım ve rüzgarla aşılanmış bir Bıçak Yelpazesi serbest bırakır. 10d6 karma element hasarı verir ve düşmanları iter.",
+        "branch": "Ninjutsu, Shuriken",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "nj_ninjutsu_wind_scythe",
+          "nj_shuriken_vipers_kiss"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "10d6",
+          "elements": "Fire, Lightning, Wind",
+          "pushback": "5m"
+        }
+      },
+      {
+        "spell_key": "nj_grand_ultimate_master_unseen",
+        "name_en": "Grand Ultimate: Susanoo's Shadow",
+        "name_tr": "Büyük Ulti: Susanoo'nun Gölgesi",
+        "description_en": "Become the ultimate ninja god. Spawn 10 clones that spam Windmill Shurikens and Poison Fog, while you remain permanently invisible and immune to damage for 20 seconds.",
+        "description_tr": "Nihai ninja tanrısı olun. Dev Rüzgargülü Shuriken ve Zehirli Sis kullanan 10 klon çıkarırken, siz 20 saniye boyunca kalıcı olarak görünmez olur ve hasara karşı bağışıklık kazanırsınız.",
+        "branch": "Stealth, Ninjutsu, Shuriken",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "nj_stealth_ultimate_nightfall",
+          "nj_ninjutsu_ultimate_kage",
+          "nj_shuriken_ultimate_dance"
+        ],
+        "icon": "👺",
+        "effects": {
+          "clones": 10,
+          "duration": "20s",
+          "immunity": true,
+          "permanent_stealth": true
+        }
+      }
+    ]
+  }
+]

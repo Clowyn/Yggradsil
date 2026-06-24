@@ -1,0 +1,1009 @@
+[
+  {
+    "subclass_key": "phantom_veil",
+    "tree_name_en": "Phantom Veil Arts",
+    "tree_name_tr": "Hayalet Peçe Sanatları",
+    "tree_desc_en": "Master the arts of illusions, choking smoke, and psychic confusion to assassinate targets without them ever knowing what hit them.",
+    "tree_desc_tr": "Hedeflere neyin çarptığını asla bilmeden suikast düzenlemek için yanılsama, boğucu duman ve psişik kafa karışıklığı sanatlarında ustalaşın.",
+    "branches": [
+      "Illusion",
+      "Smoke",
+      "Confusion",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "pv_minor_phantom",
+        "name_en": "Minor Phantom",
+        "name_tr": "Küçük Hayalet",
+        "description_en": "Creates a minor phantom sound or image within 15 meters to distract enemies.",
+        "description_tr": "Düşmanları dikkatini dağıtmak için 15 metre içinde küçük bir hayalet ses veya görüntü oluşturur.",
+        "branch": "Illusion",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👻",
+        "effects": {
+          "range": "15m",
+          "duration": "10s",
+          "utility": "Distraction"
+        }
+      },
+      {
+        "spell_key": "pv_mirror_image",
+        "name_en": "Mirror Image",
+        "name_tr": "Ayna Görüntüsü",
+        "description_en": "Summons 3 illusory clones that mimic your movements. Each clone can absorb one incoming attack before shattering.",
+        "description_tr": "Hareketlerinizi taklit eden 3 yanılsama klonu çağırır. Her klon parçalanmadan önce bir gelen saldırıyı emebilir.",
+        "branch": "Illusion",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pv_minor_phantom"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "clones": 3,
+          "duration": "1 min",
+          "defense": "Absorbs 1 hit per clone"
+        }
+      },
+      {
+        "spell_key": "pv_phantom_step",
+        "name_en": "Phantom Step",
+        "name_tr": "Hayalet Adımı",
+        "description_en": "Teleports up to 10 meters, leaving a brief illusory trail that confuses enemies.",
+        "description_tr": "10 metreye kadar ışınlanır, düşmanların kafasını karıştıran kısa süreli yanıltıcı bir iz bırakır.",
+        "branch": "Illusion",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [
+          "pv_minor_phantom"
+        ],
+        "icon": "👣",
+        "effects": {
+          "range": "10m",
+          "teleport": true,
+          "utility": "Evasion"
+        }
+      },
+      {
+        "spell_key": "pv_spectral_decoy",
+        "name_en": "Spectral Decoy",
+        "name_tr": "Hayalet Yem",
+        "description_en": "Drops a spectral decoy that taunts all enemies within a 5-meter radius for 3 seconds.",
+        "description_tr": "5 metrelik bir yarıçap içindeki tüm düşmanları 3 saniye boyunca kışkırtan hayalet bir yem bırakır.",
+        "branch": "Illusion",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pv_mirror_image"
+        ],
+        "icon": "🎎",
+        "effects": {
+          "range": "5m",
+          "duration": "3s",
+          "taunt": true
+        }
+      },
+      {
+        "spell_key": "pv_blur_stance",
+        "name_en": "Blur Stance",
+        "name_tr": "Bulanık Duruş",
+        "description_en": "Your form shifts and blurs constantly, granting a 20% evasion chance for 10 seconds.",
+        "description_tr": "Formunuz sürekli değişir ve bulanıklaşır, 10 saniye boyunca %20 kaçınma şansı sağlar.",
+        "branch": "Illusion",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pv_phantom_step"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "evasion": "20%",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "pv_phantom_strike",
+        "name_en": "Phantom Strike",
+        "name_tr": "Hayalet Vuruşu",
+        "description_en": "Send forth an illusion to strike a target up to 15 meters away, dealing 3d6 psychic damage.",
+        "description_tr": "15 metreye kadar uzaklıktaki bir hedefe vurmak için bir yanılsama göndererek 3d6 psişik hasar verir.",
+        "branch": "Illusion",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pv_spectral_decoy"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "3d6 psychic",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "pv_veil_of_shadows",
+        "name_en": "Veil of Shadows",
+        "name_tr": "Gölgeler Peçesi",
+        "description_en": "Bend light to become invisible for 15 seconds. Your next attack from invisibility deals an extra 4d8 physical damage.",
+        "description_tr": "15 saniye boyunca görünmez olmak için ışığı bükün. Görünmezlikten yapılan ilk saldırınız fazladan 4d8 fiziksel hasar verir.",
+        "branch": "Illusion",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pv_blur_stance"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "duration": "15s",
+          "bonus_damage": "4d8 physical",
+          "invisibility": true
+        }
+      },
+      {
+        "spell_key": "pv_clone_assault",
+        "name_en": "Clone Assault",
+        "name_tr": "Klon Saldırısı",
+        "description_en": "Summon 4 explosive clones that rush at enemies within 20 meters, each dealing 4d6 psychic damage upon detonating.",
+        "description_tr": "20 metre içindeki düşmanlara hücum eden ve her biri patladığında 4d6 psişik hasar veren 4 patlayıcı klon çağırır.",
+        "branch": "Illusion",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pv_phantom_strike"
+        ],
+        "icon": "💥",
+        "effects": {
+          "clones": 4,
+          "damage_per_clone": "4d6 psychic",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "pv_illusory_terrain",
+        "name_en": "Illusory Terrain",
+        "name_tr": "Yanılsama Alanı",
+        "description_en": "Alter the appearance of a 20-meter radius area for 1 minute, hiding traps and allies while misleading enemies.",
+        "description_tr": "1 dakika boyunca 20 metrelik yarıçaplı bir alanın görünümünü değiştirerek tuzakları ve müttefikleri gizlerken düşmanları yanıltır.",
+        "branch": "Illusion",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pv_veil_of_shadows"
+        ],
+        "icon": "🏞️",
+        "effects": {
+          "range": "20m radius",
+          "duration": "1 min",
+          "utility": "Terrain alteration"
+        }
+      },
+      {
+        "spell_key": "pv_mass_mirror",
+        "name_en": "Mass Mirror",
+        "name_tr": "Toplu Ayna",
+        "description_en": "Grant up to 3 allies within 15 meters 2 mirror images each, absorbing attacks.",
+        "description_tr": "15 metre içindeki 3 müttefike kadar her birine saldırıları emen 2 ayna görüntüsü verir.",
+        "branch": "Illusion",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pv_illusory_terrain"
+        ],
+        "icon": "👥",
+        "effects": {
+          "range": "15m",
+          "targets": 3,
+          "clones_per_target": 2
+        }
+      },
+      {
+        "spell_key": "pv_phantom_legion",
+        "name_en": "Phantom Legion",
+        "name_tr": "Hayalet Lejyonu",
+        "description_en": "A sweeping legion of phantoms charges in a 15-meter cone, dealing 6d8 psychic damage and pushing enemies back.",
+        "description_tr": "Geniş bir hayalet lejyonu 15 metrelik bir koni içinde hücum ederek 6d8 psişik hasar verir ve düşmanları geri iter.",
+        "branch": "Illusion",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pv_clone_assault"
+        ],
+        "icon": "🐎",
+        "effects": {
+          "damage": "6d8 psychic",
+          "area": "15m cone",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "pv_lethal_illusion",
+        "name_en": "Lethal Illusion",
+        "name_tr": "Ölümcül Yanılsama",
+        "description_en": "Trap a target in a fatal illusion. They believe they are dying, taking 8d10 psychic damage and becoming stunned for 2 seconds.",
+        "description_tr": "Bir hedefi ölümcül bir yanılsamaya hapseder. Öldüklerine inanarak 8d10 psişik hasar alırlar ve 2 saniye boyunca sersemlerler.",
+        "branch": "Illusion",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pv_phantom_legion"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "8d10 psychic",
+          "duration": "2s",
+          "status": "Stun"
+        }
+      },
+      {
+        "spell_key": "pv_reality_tear",
+        "name_en": "Reality Tear",
+        "name_tr": "Gerçeklik Yırtılması",
+        "description_en": "Tear the boundary between illusion and reality in a 20-meter radius, dealing 10d10 force damage to all enemies caught within.",
+        "description_tr": "20 metrelik bir yarıçapta yanılsama ve gerçeklik arasındaki sınırı yırtarak yakalanan tüm düşmanlara 10d10 güç hasarı verir.",
+        "branch": "Illusion",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pv_lethal_illusion"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "10d10 force",
+          "range": "20m radius"
+        }
+      },
+      {
+        "spell_key": "pv_ult_phantom_king",
+        "name_en": "Ultimate: King of Phantoms",
+        "name_tr": "Nihai: Hayaletler Kralı",
+        "description_en": "Become the ultimate illusion. You gain immunity for 10 seconds, and countless clones replicate every attack you make, effectively tripling your damage output.",
+        "description_tr": "Nihai yanılsama olun. 10 saniye boyunca bağışıklık kazanırsınız ve sayısız klon yaptığınız her saldırıyı tekrarlayarak hasar çıktınızı etkili bir şekilde üç katına çıkarır.",
+        "branch": "Illusion",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "pv_reality_tear"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "10s",
+          "immunity": true,
+          "damage_multiplier": "x3"
+        }
+      },
+      {
+        "spell_key": "pv_smoke_bomb",
+        "name_en": "Smoke Bomb",
+        "name_tr": "Sis Bombası",
+        "description_en": "Throw a smoke bomb that creates a 5-meter radius cloud, blocking vision for 10 seconds.",
+        "description_tr": "10 saniye boyunca görüşü engelleyen 5 metrelik yarıçaplı bir bulut oluşturan bir sis bombası atın.",
+        "branch": "Smoke",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💣",
+        "effects": {
+          "range": "5m radius",
+          "duration": "10s",
+          "utility": "Blocks vision"
+        }
+      },
+      {
+        "spell_key": "pv_choking_haze",
+        "name_en": "Choking Haze",
+        "name_tr": "Boğucu Pus",
+        "description_en": "Conjure a 5-meter toxic cloud that deals 1d6 poison damage per second for 5 seconds to enemies inside.",
+        "description_tr": "İçerdeki düşmanlara 5 saniye boyunca saniyede 1d6 zehir hasarı veren 5 metrelik zehirli bir bulut yaratın.",
+        "branch": "Smoke",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pv_smoke_bomb"
+        ],
+        "icon": "🤢",
+        "effects": {
+          "damage": "1d6 poison/sec",
+          "range": "5m radius",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pv_smoke_dash",
+        "name_en": "Smoke Dash",
+        "name_tr": "Sis Atılımı",
+        "description_en": "Transform into a wisp of smoke and dash up to 15 meters, passing through enemies and hazards without taking damage.",
+        "description_tr": "Bir sis tutamına dönüşün ve hasar almadan düşmanların ve tehlikelerin içinden geçerek 15 metreye kadar atılın.",
+        "branch": "Smoke",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "pv_smoke_bomb"
+        ],
+        "icon": "💨",
+        "effects": {
+          "range": "15m",
+          "utility": "Intangible movement"
+        }
+      },
+      {
+        "spell_key": "pv_ash_cloud",
+        "name_en": "Ash Cloud",
+        "name_tr": "Kül Bulutu",
+        "description_en": "Detonate an explosive pouch of ash in a 10-meter radius. Enemies hit are blinded for 4 seconds.",
+        "description_tr": "10 metrelik bir yarıçapta patlayıcı bir kül kesesini patlatın. Vurulan düşmanlar 4 saniye boyunca kör olur.",
+        "branch": "Smoke",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pv_smoke_dash"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "range": "10m radius",
+          "duration": "4s",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "pv_toxic_fumes",
+        "name_en": "Toxic Fumes",
+        "name_tr": "Zehirli Gazlar",
+        "description_en": "Release a noxious gas over a 10-meter area. Deals 3d6 poison damage initially and reduces enemy armor by 10% for 8 seconds.",
+        "description_tr": "10 metrelik bir alana zararlı bir gaz salın. Başlangıçta 3d6 zehir hasarı verir ve 8 saniye boyunca düşman zırhını %10 azaltır.",
+        "branch": "Smoke",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pv_choking_haze"
+        ],
+        "icon": "☣️",
+        "effects": {
+          "damage": "3d6 poison",
+          "armor_reduction": "10%",
+          "duration": "8s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "pv_smokescreen",
+        "name_en": "Smokescreen",
+        "name_tr": "Sis Perdesi",
+        "description_en": "Create a dense wall of smoke 15 meters long and 3 meters high that blocks all projectiles and line of sight.",
+        "description_tr": "15 metre uzunluğunda ve 3 metre yüksekliğinde, tüm mermileri ve görüş hattını engelleyen yoğun bir sis duvarı oluşturun.",
+        "branch": "Smoke",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pv_ash_cloud"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "dimensions": "15x3m",
+          "utility": "Projectile block"
+        }
+      },
+      {
+        "spell_key": "pv_suffocating_fog",
+        "name_en": "Suffocating Fog",
+        "name_tr": "Boğucu Sis",
+        "description_en": "A heavy 15-meter radius fog silences all enemies inside and deals 4d6 poison damage.",
+        "description_tr": "Ağır 15 metrelik yarıçaplı bir sis, içindeki tüm düşmanları susturur ve 4d6 zehir hasarı verir.",
+        "branch": "Smoke",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pv_toxic_fumes"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "range": "15m radius",
+          "damage": "4d6 poison",
+          "status": "Silence"
+        }
+      },
+      {
+        "spell_key": "pv_smoke_clones",
+        "name_en": "Smoke Clones",
+        "name_tr": "Sis Klonları",
+        "description_en": "Form 2 clones made entirely of volatile smoke. When struck, they explode in a 5-meter radius for 3d6 poison damage.",
+        "description_tr": "Tamamen uçucu sisten yapılmış 2 klon oluşturun. Vurulduklarında 5 metrelik bir yarıçapta patlayarak 3d6 zehir hasarı verirler.",
+        "branch": "Smoke",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pv_smokescreen"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "clones": 2,
+          "damage": "3d6 poison",
+          "explosion_radius": "5m"
+        }
+      },
+      {
+        "spell_key": "pv_blinding_smog",
+        "name_en": "Blinding Smog",
+        "name_tr": "Kör Edici Duman",
+        "description_en": "Envelop a 20-meter area in thick, stinging smog. Enemies suffer a 50% miss chance on all attacks while inside.",
+        "description_tr": "20 metrelik bir alanı kalın, batıcı bir dumanla sarın. Düşmanlar içerideyken tüm saldırılarda %50 ıskalama şansına maruz kalırlar.",
+        "branch": "Smoke",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pv_suffocating_fog"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "range": "20m radius",
+          "miss_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "pv_volcanic_ash",
+        "name_en": "Volcanic Ash",
+        "name_tr": "Volkanik Kül",
+        "description_en": "Rain down burning, toxic ash in a 15-meter radius, dealing 6d8 combined fire and poison damage.",
+        "description_tr": "15 metrelik bir yarıçapta yanan, zehirli kül yağdırarak toplam 6d8 ateş ve zehir hasarı verin.",
+        "branch": "Smoke",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pv_blinding_smog"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "6d8 fire/poison",
+          "range": "15m radius"
+        }
+      },
+      {
+        "spell_key": "pv_shadow_smoke_veil",
+        "name_en": "Shadow Smoke Veil",
+        "name_tr": "Gölge Sisi Peçesi",
+        "description_en": "Wreathe yourself in solidified smoke, gaining 30% physical resistance and leaving a trail of blinding ash for 15 seconds.",
+        "description_tr": "Kendinizi katılaşmış sisle sararak %30 fiziksel direnç kazanın ve 15 saniye boyunca kör edici bir kül izi bırakın.",
+        "branch": "Smoke",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pv_smoke_clones"
+        ],
+        "icon": "🦹",
+        "effects": {
+          "physical_resist": "30%",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "pv_vaporize",
+        "name_en": "Vaporize",
+        "name_tr": "Buharlaşma",
+        "description_en": "Dissolve your physical body entirely into a cloud of smoke for 5 seconds. You are invulnerable and can fly at double speed.",
+        "description_tr": "Fiziksel bedeninizi 5 saniye boyunca tamamen bir sis bulutuna dönüştürün. Yenilmezsiniz ve iki kat hızla uçabilirsiniz.",
+        "branch": "Smoke",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pv_volcanic_ash"
+        ],
+        "icon": "☁️",
+        "effects": {
+          "duration": "5s",
+          "invulnerability": true,
+          "speed_multiplier": "x2"
+        }
+      },
+      {
+        "spell_key": "pv_abyssal_smoke",
+        "name_en": "Abyssal Smoke",
+        "name_tr": "Hiçlik Sisi",
+        "description_en": "Summon dark, dense void smoke in a 20-meter radius. Enemies inside lose 10% of their maximum HP as true damage over 5 seconds.",
+        "description_tr": "20 metrelik bir yarıçapta karanlık, yoğun boşluk sisi çağırın. İçerideki düşmanlar 5 saniye boyunca gerçek hasar olarak maksimum HP'lerinin %10'unu kaybederler.",
+        "branch": "Smoke",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pv_vaporize"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "10% max HP true damage",
+          "range": "20m radius",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pv_ult_smoke_dragon",
+        "name_en": "Ultimate: Smoke Dragon",
+        "name_tr": "Nihai: Sis Ejderhası",
+        "description_en": "Conjure a massive dragon made of pure toxic smoke that sweeps over a 30-meter area, dealing 15d10 poison damage and permanently blinding survivors.",
+        "description_tr": "30 metrelik bir alanı süpüren, 15d10 zehir hasarı veren ve hayatta kalanları kalıcı olarak kör eden saf zehirli sisten devasa bir ejderha yaratın.",
+        "branch": "Smoke",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "pv_abyssal_smoke"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "15d10 poison",
+          "range": "30m area",
+          "status": "Permanent Blind"
+        }
+      },
+      {
+        "spell_key": "pv_whispers_of_doubt",
+        "name_en": "Whispers of Doubt",
+        "name_tr": "Şüphe Fısıltıları",
+        "description_en": "Plant phantom whispers in a target's mind, imposing a -2 penalty to their attack rolls for 10 seconds.",
+        "description_tr": "Bir hedefin zihnine hayalet fısıltılar yerleştirerek 10 saniye boyunca saldırı zarlarına -2 ceza uygulayın.",
+        "branch": "Confusion",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "attack_penalty": "-2",
+          "duration": "10s",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "pv_mind_jolt",
+        "name_en": "Mind Jolt",
+        "name_tr": "Zihin Sarsıntısı",
+        "description_en": "Send a sudden psychic shockwave to a target up to 15 meters away, dealing 2d6 psychic damage and interrupting spellcasting.",
+        "description_tr": "15 metreye kadar uzaklıktaki bir hedefe ani bir psişik şok dalgası göndererek 2d6 psişik hasar verin ve büyü yapmayı kesin.",
+        "branch": "Confusion",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pv_whispers_of_doubt"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d6 psychic",
+          "range": "15m",
+          "utility": "Interrupt"
+        }
+      },
+      {
+        "spell_key": "pv_dizzying_hex",
+        "name_en": "Dizzying Hex",
+        "name_tr": "Sersemletici Büyü",
+        "description_en": "Hex a target, disrupting their balance. They are forced to move in a random direction for 3 seconds.",
+        "description_tr": "Bir hedefi büyüleyerek dengesini bozun. 3 saniye boyunca rastgele bir yöne hareket etmeye zorlanırlar.",
+        "branch": "Confusion",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [
+          "pv_whispers_of_doubt"
+        ],
+        "icon": "😵",
+        "effects": {
+          "duration": "3s",
+          "status": "Random Movement"
+        }
+      },
+      {
+        "spell_key": "pv_paranoia",
+        "name_en": "Paranoia",
+        "name_tr": "Paranoya",
+        "description_en": "Inflict severe paranoia on enemies in a 10-meter radius. For 3 seconds, they perceive their allies as threats and attack the nearest creature.",
+        "description_tr": "10 metrelik bir yarıçap içindeki düşmanlara şiddetli paranoya verin. 3 saniye boyunca müttefiklerini tehdit olarak algılar ve en yakın yaratığa saldırırlar.",
+        "branch": "Confusion",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pv_dizzying_hex"
+        ],
+        "icon": "😨",
+        "effects": {
+          "range": "10m radius",
+          "duration": "3s",
+          "status": "Confusion"
+        }
+      },
+      {
+        "spell_key": "pv_psychic_shiv",
+        "name_en": "Psychic Shiv",
+        "name_tr": "Psişik Hançer",
+        "description_en": "Form a blade of pure mental energy. A melee attack deals 4d6 psychic damage and reduces the target's movement speed by 15% for 5 seconds.",
+        "description_tr": "Saf zihinsel enerjiden bir bıçak oluşturun. Yakın dövüş saldırısı 4d6 psişik hasar verir ve hedefin hareket hızını 5 saniye boyunca %15 azaltır.",
+        "branch": "Confusion",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pv_mind_jolt"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "4d6 psychic",
+          "speed_reduction": "15%",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pv_hallucination",
+        "name_en": "Hallucination",
+        "name_tr": "Halüsinasyon",
+        "description_en": "Force a target to witness their worst fears. Deals 3d6 psychic damage and stuns them in sheer terror for 2 seconds.",
+        "description_tr": "Bir hedefi en kötü korkularına tanık olmaya zorlar. 3d6 psişik hasar verir ve onları 2 saniye boyunca dehşet içinde sersemletir.",
+        "branch": "Confusion",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 300,
+        "prerequisites": [
+          "pv_paranoia"
+        ],
+        "icon": "👺",
+        "effects": {
+          "damage": "3d6 psychic",
+          "duration": "2s",
+          "status": "Stun"
+        }
+      },
+      {
+        "spell_key": "pv_madness_glare",
+        "name_en": "Madness Glare",
+        "name_tr": "Delilik Bakışı",
+        "description_en": "Lock eyes with a target within 10 meters, projecting raw madness. Deals 5d6 psychic damage and inflicts Fear for 4 seconds.",
+        "description_tr": "10 metre içindeki bir hedefle göz göze gelerek saf delilik yansıtın. 5d6 psişik hasar verir ve 4 saniye boyunca Korku uygular.",
+        "branch": "Confusion",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pv_hallucination"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "damage": "5d6 psychic",
+          "range": "10m",
+          "status": "Fear",
+          "duration": "4s"
+        }
+      },
+      {
+        "spell_key": "pv_vertigo_wave",
+        "name_en": "Vertigo Wave",
+        "name_tr": "Baş Dönmesi Dalgası",
+        "description_en": "Emit a 15-meter cone of disorienting psychic energy. Enemies hit are knocked prone and confused for 3 seconds.",
+        "description_tr": "15 metrelik bir yönelim bozucu psişik enerji konisi yayın. Vurulan düşmanlar yere düşer ve 3 saniye boyunca kafaları karışır.",
+        "branch": "Confusion",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pv_psychic_shiv"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "area": "15m cone",
+          "status": "Prone & Confusion",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "pv_shatter_mind",
+        "name_en": "Shatter Mind",
+        "name_tr": "Zihin Parçalama",
+        "description_en": "Violently crack a target's mental defenses. Deals 6d8 psychic damage and reduces their mental resistances by 20% for 10 seconds.",
+        "description_tr": "Bir hedefin zihinsel savunmasını şiddetle kırın. 6d8 psişik hasar verir ve zihinsel dirençlerini 10 saniye boyunca %20 azaltır.",
+        "branch": "Confusion",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pv_madness_glare"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "damage": "6d8 psychic",
+          "resistance_reduction": "20%",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "pv_mass_hysteria",
+        "name_en": "Mass Hysteria",
+        "name_tr": "Toplu Histeri",
+        "description_en": "Unleash a wave of unchecked hysteria in a 20-meter radius. All enemies furiously attack each other for 5 seconds.",
+        "description_tr": "20 metrelik bir yarıçapta kontrolsüz bir histeri dalgası serbest bırakın. Tüm düşmanlar 5 saniye boyunca öfkeyle birbirlerine saldırır.",
+        "branch": "Confusion",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pv_vertigo_wave"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "range": "20m radius",
+          "duration": "5s",
+          "status": "Frenzy/Confusion"
+        }
+      },
+      {
+        "spell_key": "pv_cognitive_collapse",
+        "name_en": "Cognitive Collapse",
+        "name_tr": "Bilişsel Çöküş",
+        "description_en": "Temporarily wipe a target's combat memory. They take 8d8 psychic damage and cannot use any class skills for 6 seconds.",
+        "description_tr": "Bir hedefin savaş hafızasını geçici olarak silin. 8d8 psişik hasar alırlar ve 6 saniye boyunca hiçbir sınıf yeteneğini kullanamazlar.",
+        "branch": "Confusion",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pv_shatter_mind"
+        ],
+        "icon": "📉",
+        "effects": {
+          "damage": "8d8 psychic",
+          "duration": "6s",
+          "status": "Skill Lock"
+        }
+      },
+      {
+        "spell_key": "pv_phantom_pain",
+        "name_en": "Phantom Pain",
+        "name_tr": "Hayalet Ağrı",
+        "description_en": "Curse a target to feel agonizing phantom pains. They take double damage from the next 3 attacks that hit them.",
+        "description_tr": "Hedefi dayanılmaz hayalet ağrılar hissetmesi için lanetleyin. Onlara isabet eden sonraki 3 saldırıdan iki kat hasar alırlar.",
+        "branch": "Confusion",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 900,
+        "prerequisites": [
+          "pv_cognitive_collapse"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "vulnerability": "Double damage for 3 hits"
+        }
+      },
+      {
+        "spell_key": "pv_mind_labyrinth",
+        "name_en": "Mind Labyrinth",
+        "name_tr": "Zihin Labirenti",
+        "description_en": "Trap a target's consciousness in an inescapable mental maze. They are incapacitated for 10 seconds and take 10d10 psychic damage over the duration.",
+        "description_tr": "Bir hedefin bilincini kaçınılmaz bir zihinsel labirente hapsedin. 10 saniye boyunca etkisiz hale gelirler ve süre boyunca 10d10 psişik hasar alırlar.",
+        "branch": "Confusion",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pv_mass_hysteria"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "damage": "10d10 psychic",
+          "duration": "10s",
+          "status": "Incapacitated"
+        }
+      },
+      {
+        "spell_key": "pv_ult_cerebral_void",
+        "name_en": "Ultimate: Cerebral Void",
+        "name_tr": "Nihai: Zihinsel Boşluk",
+        "description_en": "Erase all thoughts in a 30-meter radius. Deals 12d12 psychic damage, completely silencing and paralyzing all enemies for 5 seconds.",
+        "description_tr": "30 metrelik bir yarıçaptaki tüm düşünceleri silin. 12d12 psişik hasar verir, tüm düşmanları 5 saniye boyunca tamamen susturur ve felç eder.",
+        "branch": "Confusion",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "pv_mind_labyrinth"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "12d12 psychic",
+          "range": "30m radius",
+          "status": "Silence & Paralyze",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pv_smoke_illusion",
+        "name_en": "Smoke Illusion",
+        "name_tr": "Sis Yanılsaması",
+        "description_en": "Drop a localized smoke bomb that instantly forms 3 shadowy clones within the smoke to confuse attackers.",
+        "description_tr": "Saldırganları şaşırtmak için anında dumanın içinde 3 gölgeli klon oluşturan yerel bir sis bombası bırakın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pv_mirror_image",
+          "pv_smoke_bomb"
+        ],
+        "icon": "🌫️👥",
+        "effects": {
+          "clones": 3,
+          "utility": "Smoke + Clones"
+        }
+      },
+      {
+        "spell_key": "pv_confusing_mirage",
+        "name_en": "Confusing Mirage",
+        "name_tr": "Şaşırtıcı Serap",
+        "description_en": "Conjure an illusion that, when struck, shatters into a burst of psychic energy, confusing the attacker for 4 seconds.",
+        "description_tr": "Vurulduğunda psişik bir enerji patlamasına dönüşen ve saldırganın kafasını 4 saniye boyunca karıştıran bir yanılsama yaratın.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pv_spectral_decoy",
+          "pv_paranoia"
+        ],
+        "icon": "🪞🌀",
+        "effects": {
+          "duration": "4s",
+          "status": "Confusion on hit"
+        }
+      },
+      {
+        "spell_key": "pv_choking_whispers",
+        "name_en": "Choking Whispers",
+        "name_tr": "Boğucu Fısıltılar",
+        "description_en": "Create a 10-meter smoke cloud filled with maddening voices. Enemies inside take 4d6 poison and 4d6 psychic damage.",
+        "description_tr": "Çıldırtıcı seslerle dolu 10 metrelik bir sis bulutu oluşturun. İçerideki düşmanlar 4d6 zehir ve 4d6 psişik hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pv_toxic_fumes",
+          "pv_madness_glare"
+        ],
+        "icon": "🗣️🌫️",
+        "effects": {
+          "damage": "4d6 poison + 4d6 psychic",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "pv_phantom_miasma",
+        "name_en": "Phantom Miasma",
+        "name_tr": "Hayalet Miasma",
+        "description_en": "Unleash a 20-meter cloud of hallucinogenic smoke. Spawns random clones, poisons enemies, and causes mass paranoia for 8 seconds.",
+        "description_tr": "20 metrelik halüsinojenik bir sis bulutu salın. Rastgele klonlar üretir, düşmanları zehirler ve 8 saniye boyunca kitlesel paranoyaya neden olur.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pv_illusory_terrain",
+          "pv_blinding_smog",
+          "pv_mass_hysteria"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "range": "20m radius",
+          "duration": "8s",
+          "status": "Poison, Paranoia, Clones"
+        }
+      },
+      {
+        "spell_key": "pv_mind_fog_assassination",
+        "name_en": "Mind Fog Assassination",
+        "name_tr": "Zihin Sisi Suikastı",
+        "description_en": "Instantly teleport to an enemy trapped inside your smoke. Strike their mind directly for 10d8 psychic damage.",
+        "description_tr": "Sisinizin içinde sıkışıp kalmış bir düşmana anında ışınlanın. 10d8 psişik hasar için doğrudan zihinlerine vurun.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "pv_vaporize",
+          "pv_phantom_pain"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "damage": "10d8 psychic",
+          "teleport": true,
+          "condition": "Target must be in smoke"
+        }
+      },
+      {
+        "spell_key": "pv_shattered_reality",
+        "name_en": "Shattered Reality",
+        "name_tr": "Parçalanmış Gerçeklik",
+        "description_en": "Force all active illusions to violently shatter, dealing 12d8 psychic damage to enemies within 15 meters of any shattered clone.",
+        "description_tr": "Tüm aktif yanılsamaları şiddetle parçalanmaya zorlayarak, parçalanmış herhangi bir klonun 15 metre içindeki düşmanlarına 12d8 psişik hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "pv_reality_tear",
+          "pv_mind_labyrinth"
+        ],
+        "icon": "🪞💥",
+        "effects": {
+          "damage": "12d8 psychic",
+          "range": "15m from clones"
+        }
+      },
+      {
+        "spell_key": "pv_smoldering_psyche",
+        "name_en": "Smoldering Psyche",
+        "name_tr": "İçin İçin Yanan Zihin",
+        "description_en": "Ignite a target's consciousness, causing them to exhale smoke from their mind. They take 8d10 combined psychic/poison damage and are silenced for 5 seconds.",
+        "description_tr": "Hedefin bilincini tutuşturarak zihinlerinden duman solumalarına neden olun. 8d10 birleşik psişik/zehir hasarı alırlar ve 5 saniye boyunca susturulurlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "pv_abyssal_smoke",
+          "pv_mind_labyrinth"
+        ],
+        "icon": "🤯",
+        "effects": {
+          "damage": "8d10 psychic/poison",
+          "status": "Silence",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "pv_grand_ult_veil_of_the_phantom_lord",
+        "name_en": "Grand Ultimate: Veil of the Phantom Lord",
+        "name_tr": "Görkemli Nihai: Hayalet Lordun Peçesi",
+        "description_en": "The battlefield becomes a nightmare realm for 30 seconds. You gain perfect invisibility, infinite clones, and all enemies take 20d12 psychic/poison damage over time while suffering from permanent confusion.",
+        "description_tr": "Savaş alanı 30 saniye boyunca bir kabus diyarına dönüşür. Kusursuz görünmezlik, sonsuz klonlar kazanırsınız ve tüm düşmanlar kalıcı kafa karışıklığından muzdarip olurken zamanla 20d12 psişik/zehir hasarı alır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "pv_ult_phantom_king",
+          "pv_ult_smoke_dragon",
+          "pv_ult_cerebral_void"
+        ],
+        "icon": "🌌👑",
+        "effects": {
+          "duration": "30s",
+          "damage": "20d12 psychic/poison over time",
+          "status": "Perfect Invisibility, Infinite Clones, Permanent Confusion"
+        }
+      }
+    ]
+  }
+]

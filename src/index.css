@@ -1,0 +1,322 @@
+@import "tailwindcss";
+
+/* ============================================================
+   D&D Companion App — Dark Fantasy Theme
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* --- CSS Custom Properties (Theme Tokens) --- */
+@theme {
+  --color-abyss: #0a0a0f;
+  --color-void: #0f0f18;
+  --color-shadow: #1a0a2e;
+  --color-obsidian: #151520;
+  --color-slate-dark: #1e1e2e;
+  --color-gold: #ffd700;
+  --color-gold-dim: #b8860b;
+  --color-gold-bright: #ffed4a;
+  --color-crimson: #dc143c;
+  --color-crimson-dim: #8b0000;
+  --color-arcane: #6366f1;
+  --color-arcane-dim: #4338ca;
+  --color-emerald: #10b981;
+  --color-parchment: #d4c5a9;
+  --color-parchment-dim: #8b7d6b;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+
+  --font-cinzel: 'Cinzel', serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* --- Base Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-abyss);
+  color: #e2e8f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cinzel);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold-dim), var(--color-shadow));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-gold), var(--color-arcane-dim));
+}
+
+/* --- Glass Morphism Utility --- */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-hover:hover {
+  background: var(--color-glass-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Holy Light Animation (Character Selection) --- */
+@keyframes holy-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px #ffd700,
+      0 0 40px #ffa500,
+      0 0 60px #ff8c00,
+      inset 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 40px #ffd700,
+      0 0 80px #ffa500,
+      0 0 120px #ff8c00,
+      inset 0 0 40px rgba(255, 215, 0, 0.5);
+  }
+}
+
+@keyframes holy-glow-custom {
+  0%, 100% {
+    box-shadow:
+      0 0 20px var(--glow-color, #ffd700),
+      0 0 40px var(--glow-color, #ffa500),
+      0 0 60px var(--glow-color, #ff8c00),
+      inset 0 0 20px color-mix(in srgb, var(--glow-color, #ffd700) 30%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 40px var(--glow-color, #ffd700),
+      0 0 80px var(--glow-color, #ffa500),
+      0 0 120px var(--glow-color, #ff8c00),
+      inset 0 0 40px color-mix(in srgb, var(--glow-color, #ffd700) 50%, transparent);
+  }
+}
+
+@keyframes fade-to-darkness {
+  from {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  to {
+    opacity: 0.3;
+    filter: brightness(0.4) grayscale(0.8);
+  }
+}
+
+.holy-selected {
+  animation: holy-glow 2s ease-in-out infinite;
+  filter: brightness(1.3);
+  transform: scale(1.05);
+}
+
+.holy-unselected {
+  opacity: 0.3;
+  filter: brightness(0.4) grayscale(0.8);
+}
+
+.holy-card {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Particle Effect for Selected Cards --- */
+.holy-selected::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+  animation: holy-glow 2s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* --- Skill Tree Animations --- */
+@keyframes skill-unlock-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+  }
+}
+
+@keyframes energy-flow {
+  0% {
+    stroke-dashoffset: 20;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes node-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 0 50px rgba(16, 185, 129, 0.3);
+  }
+}
+
+.skill-unlockable {
+  animation: node-glow-pulse 2s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.skill-unlock-burst {
+  animation: skill-unlock-pulse 0.6s ease-out;
+}
+
+/* --- XP Counter Animation --- */
+@keyframes xp-increment {
+  0% {
+    transform: scale(1);
+    color: var(--color-gold);
+  }
+  50% {
+    transform: scale(1.3);
+    color: var(--color-gold-bright);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    color: var(--color-gold);
+  }
+}
+
+.xp-animate {
+  animation: xp-increment 0.5s ease-out;
+}
+
+/* --- Fog Drift Animation (Map) --- */
+@keyframes fog-drift {
+  0%, 100% {
+    opacity: 0.92;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
+/* --- Item Rarity Glow --- */
+.rarity-common { border-color: #9ca3af; }
+.rarity-uncommon { border-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
+.rarity-rare { border-color: #3b82f6; box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
+.rarity-epic { border-color: #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4); }
+.rarity-legendary {
+  border-color: #f97316;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+  animation: holy-glow 3s ease-in-out infinite;
+}
+
+/* --- Golden Gradient Text --- */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #ffd700, #ffed4a, #ffa500, #ffd700);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Background Pattern --- */
+.bg-dark-pattern {
+  background-color: var(--color-abyss);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(26, 10, 46, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+}
+
+/* --- React Flow Overrides --- */
+.react-flow__background {
+  background-color: var(--color-abyss) !important;
+}
+
+.react-flow__minimap {
+  background-color: var(--color-void) !important;
+  border: 1px solid var(--color-glass-border) !important;
+  border-radius: 8px !important;
+}
+
+.react-flow__controls {
+  background: var(--color-glass) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--color-glass-border) !important;
+  border-radius: 8px !important;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border-bottom: 1px solid var(--color-glass-border) !important;
+  color: #e2e8f0 !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--color-glass-hover) !important;
+}
+
+/* --- Utility Classes --- */
+.font-cinzel {
+  font-family: var(--font-cinzel);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+/* Loading spinner */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}

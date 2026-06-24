@@ -1,0 +1,963 @@
+[
+  {
+    "subclass_key": "darkcabe",
+    "tree_name_en": "Darkcabe",
+    "tree_name_tr": "Karanlık Suikastçı",
+    "tree_desc_en": "Masters of shadow magic, blinking through darkness to execute their targets with lethal precision.",
+    "tree_desc_tr": "Gölge büyüsü ustaları, karanlığın içinden geçerek hedeflerini ölümcül bir hassasiyetle infaz ederler.",
+    "branches": [
+      "Shadowstep",
+      "Gloom",
+      "Execution",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "dc_shadow_dash",
+        "name_en": "Shadow Dash",
+        "name_tr": "Gölge Atılımı",
+        "description_en": "Dash up to 10m, leaving a trailing shadow.",
+        "description_tr": "Gölge izi bırakarak 10m'ye kadar atılın.",
+        "branch": "Shadowstep",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💨",
+        "effects": {
+          "range": "10m",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "dc_fade",
+        "name_en": "Fade",
+        "name_tr": "Soluş",
+        "description_en": "Turn invisible for 3 seconds. Taking an action breaks it.",
+        "description_tr": "3 saniyeliğine görünmez olun. Bir eylem yapmak görünmezliği bozar.",
+        "branch": "Shadowstep",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🫥",
+        "effects": {
+          "duration": "3s",
+          "status": "Invisible"
+        }
+      },
+      {
+        "spell_key": "dc_phantom_step",
+        "name_en": "Phantom Step",
+        "name_tr": "Hayalet Adımı",
+        "description_en": "Teleport exactly 5m directly behind an enemy target.",
+        "description_tr": "Bir düşman hedefinin tam 5m arkasına ışınlanın.",
+        "branch": "Shadowstep",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "👣",
+        "effects": {
+          "range": "5m",
+          "type": "Teleport"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_slip",
+        "name_en": "Shadow Slip",
+        "name_tr": "Gölgeden Sızma",
+        "description_en": "Pass seamlessly through solid obstacles up to 2m thick.",
+        "description_tr": "2m kalınlığa kadar olan katı engellerin içinden sorunsuzca geçin.",
+        "branch": "Shadowstep",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dc_shadow_dash"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "max_thickness": "2m"
+        }
+      },
+      {
+        "spell_key": "dc_evasive_shadows",
+        "name_en": "Evasive Shadows",
+        "name_tr": "Kaçak Gölgeler",
+        "description_en": "Passive. Gain +15% dodge chance while in dim light or darkness.",
+        "description_tr": "Pasif. Loş ışıkta veya karanlıkta +%15 kaçınma şansı kazanın.",
+        "branch": "Shadowstep",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dc_fade"
+        ],
+        "icon": "🥷",
+        "effects": {
+          "dodge_chance": "+15%"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_swap",
+        "name_en": "Shadow Swap",
+        "name_tr": "Gölge Takası",
+        "description_en": "Leave a shadow clone in your current position. Activate again within 10s to swap places up to 15m away.",
+        "description_tr": "Bulunduğunuz konuma bir gölge kopyası bırakın. 15m uzaklığa kadar yer değiştirmek için 10s içinde tekrar etkinleştirin.",
+        "branch": "Shadowstep",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dc_phantom_step"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "range": "15m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "dc_umbral_leap",
+        "name_en": "Umbral Leap",
+        "name_tr": "Karanlık Sıçrayış",
+        "description_en": "Teleport up to 20m, leaving an exploding illusion that blinds enemies within 3m for 2s.",
+        "description_tr": "20m'ye kadar ışınlanın ve geride 3m içindeki düşmanları 2s boyunca kör eden patlayan bir illüzyon bırakın.",
+        "branch": "Shadowstep",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dc_shadow_slip"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "range": "20m",
+          "aoe": "3m",
+          "blind_duration": "2s"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_walk",
+        "name_en": "Shadow Walk",
+        "name_tr": "Gölge Yürüyüşü",
+        "description_en": "Step into the shadow plane for 5s, becoming completely untargetable and able to move freely.",
+        "description_tr": "5s boyunca gölge düzlemine geçerek tamamen hedef alınamaz hale gelin ve özgürce hareket edin.",
+        "branch": "Shadowstep",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dc_evasive_shadows"
+        ],
+        "icon": "🚶",
+        "effects": {
+          "duration": "5s",
+          "status": "Untargetable"
+        }
+      },
+      {
+        "spell_key": "dc_dark_momentum",
+        "name_en": "Dark Momentum",
+        "name_tr": "Karanlık İvme",
+        "description_en": "Passive. Moving at least 5m increases the damage of your next attack by 20%.",
+        "description_tr": "Pasif. En az 5m hareket etmek, bir sonraki saldırınızın hasarını %20 artırır.",
+        "branch": "Shadowstep",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dc_shadow_swap"
+        ],
+        "icon": "🛹",
+        "effects": {
+          "damage_bonus": "+20%",
+          "trigger": "Move 5m"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_dance",
+        "name_en": "Shadow Dance",
+        "name_tr": "Gölge Dansı",
+        "description_en": "Chain up to 3 short teleports (max 10m each) within 5 seconds.",
+        "description_tr": "5 saniye içinde art arda 3 kısa ışınlanma (her biri en fazla 10m) gerçekleştirin.",
+        "branch": "Shadowstep",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dc_umbral_leap"
+        ],
+        "icon": "💃",
+        "effects": {
+          "charges": 3,
+          "range": "10m",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "dc_living_shadow",
+        "name_en": "Living Shadow",
+        "name_tr": "Yaşayan Gölge",
+        "description_en": "Your shadow detaches for 10s, mimicking your attacks and dealing 30% of your damage.",
+        "description_tr": "Gölgeniz 10s boyunca sizden ayrılır, saldırılarınızı taklit eder ve hasarınızın %30'unu verir.",
+        "branch": "Shadowstep",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dc_shadow_walk"
+        ],
+        "icon": "👥",
+        "effects": {
+          "duration": "10s",
+          "damage_mimic": "30%"
+        }
+      },
+      {
+        "spell_key": "dc_void_step",
+        "name_en": "Void Step",
+        "name_tr": "Hiçlik Adımı",
+        "description_en": "A powerful 30m teleport that bypasses magical barriers and wards.",
+        "description_tr": "Büyülü bariyerleri ve korumaları aşan, güçlü bir 30m ışınlanma.",
+        "branch": "Shadowstep",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dc_shadow_dance"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "30m",
+          "special": "Bypasses barriers"
+        }
+      },
+      {
+        "spell_key": "dc_omnipresence",
+        "name_en": "Omnipresence",
+        "name_tr": "Her Yerde Olma",
+        "description_en": "Teleport instantly to the location of any cast shadow within 50m.",
+        "description_tr": "50m içindeki herhangi bir gölgenin konumuna anında ışınlanın.",
+        "branch": "Shadowstep",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dc_dark_momentum"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "range": "50m"
+        }
+      },
+      {
+        "spell_key": "dc_realm_of_shadows",
+        "name_en": "Realm of Shadows",
+        "name_tr": "Gölgeler Diyarı",
+        "description_en": "Ultimate. Become untargetable for 8s. During this time, your teleport cooldowns are zero, allowing infinite 15m leaps.",
+        "description_tr": "Ulti. 8s boyunca hedef alınamaz olun. Bu süre zarfında ışınlanma bekleme süreleriniz sıfıra iner ve sonsuz 15m sıçramalar yapmanıza olanak tanır.",
+        "branch": "Shadowstep",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dc_void_step",
+          "dc_omnipresence"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "duration": "8s",
+          "teleport_range": "15m",
+          "cooldown_reduction": "100%"
+        }
+      },
+      {
+        "spell_key": "dc_gloom_veil",
+        "name_en": "Gloom Veil",
+        "name_tr": "Karanlık Örtüsü",
+        "description_en": "Create a 5m radius sphere of magical darkness lasting 10s.",
+        "description_tr": "10s süren 5m yarıçapında büyülü bir karanlık küresi yaratın.",
+        "branch": "Gloom",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌫️",
+        "effects": {
+          "radius": "5m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "dc_blinding_shade",
+        "name_en": "Blinding Shade",
+        "name_tr": "Kör Eden Gölge",
+        "description_en": "Strike a target's eyes with shadows, blinding them for 3s.",
+        "description_tr": "Bir hedefin gözlerine gölgelerle vurarak onları 3s boyunca kör edin.",
+        "branch": "Gloom",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🕶️",
+        "effects": {
+          "duration": "3s",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_snare",
+        "name_en": "Shadow Snare",
+        "name_tr": "Gölge Kapanı",
+        "description_en": "Command a shadow to wrap around a target's legs, rooting them in place for 4s.",
+        "description_tr": "Bir gölgeye hedefin bacaklarına dolanmasını emrederek onları 4s boyunca yerine sabitleyin.",
+        "branch": "Gloom",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🪢",
+        "effects": {
+          "duration": "4s",
+          "status": "Root"
+        }
+      },
+      {
+        "spell_key": "dc_creeping_dark",
+        "name_en": "Creeping Dark",
+        "name_tr": "Sürünen Karanlık",
+        "description_en": "Passive. Your Gloom Veil expands by 2m per second and slows enemies inside by 30%.",
+        "description_tr": "Pasif. Karanlık Örtüsü her saniye 2m genişler ve içindeki düşmanları %30 yavaşlatır.",
+        "branch": "Gloom",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dc_gloom_veil"
+        ],
+        "icon": "🦑",
+        "effects": {
+          "expansion_rate": "2m/s",
+          "slow": "30%"
+        }
+      },
+      {
+        "spell_key": "dc_night_terror",
+        "name_en": "Night Terror",
+        "name_tr": "Gece Terörü",
+        "description_en": "Passive. Enemies inside your magical darkness have a 20% chance each second to be feared for 2s.",
+        "description_tr": "Pasif. Büyülü karanlığınızın içindeki düşmanların her saniye %20 ihtimalle 2s boyunca korkutulma şansı vardır.",
+        "branch": "Gloom",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dc_blinding_shade"
+        ],
+        "icon": "😱",
+        "effects": {
+          "fear_chance": "20%/s",
+          "fear_duration": "2s"
+        }
+      },
+      {
+        "spell_key": "dc_smokescreen",
+        "name_en": "Smokescreen",
+        "name_tr": "Sis Perdesi",
+        "description_en": "Throw a shadow bomb that creates an 8m radius zone. Enemies inside are blinded for 5s.",
+        "description_tr": "8m yarıçaplı bir alan yaratan gölge bombası atın. İçerdeki düşmanlar 5s boyunca kör olur.",
+        "branch": "Gloom",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dc_shadow_snare"
+        ],
+        "icon": "💣",
+        "effects": {
+          "radius": "8m",
+          "duration": "5s",
+          "status": "Blind"
+        }
+      },
+      {
+        "spell_key": "dc_suffocating_shadows",
+        "name_en": "Suffocating Shadows",
+        "name_tr": "Boğucu Gölgeler",
+        "description_en": "Passive. Enemies standing in your darkness take 3d6 shadow damage per second.",
+        "description_tr": "Pasif. Karanlığınızın içinde duran düşmanlar saniyede 3d6 gölge hasarı alır.",
+        "branch": "Gloom",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dc_creeping_dark"
+        ],
+        "icon": "😵",
+        "effects": {
+          "damage": "3d6/s",
+          "type": "Shadow"
+        }
+      },
+      {
+        "spell_key": "dc_gloom_ward",
+        "name_en": "Gloom Ward",
+        "name_tr": "Karanlık Kalkanı",
+        "description_en": "Gain a 50 HP damage absorption shield while standing inside any magical darkness.",
+        "description_tr": "Herhangi bir büyülü karanlığın içinde dururken 50 HP hasar emme kalkanı kazanın.",
+        "branch": "Gloom",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dc_night_terror"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield": "50 HP"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_tendrils",
+        "name_en": "Shadow Tendrils",
+        "name_tr": "Gölge Dokunaçları",
+        "description_en": "Erupt shadows from the ground in a 10m area, rooting enemies and pulling them 3m towards the center.",
+        "description_tr": "10m'lik bir alanda yerden gölgeler fışkırtarak düşmanları yere sabitleyin ve onları merkeze doğru 3m çekin.",
+        "branch": "Gloom",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dc_smokescreen"
+        ],
+        "icon": "🐙",
+        "effects": {
+          "radius": "10m",
+          "pull_distance": "3m",
+          "status": "Root"
+        }
+      },
+      {
+        "spell_key": "dc_pitch_black",
+        "name_en": "Pitch Black",
+        "name_tr": "Zifiri Karanlık",
+        "description_en": "Create a 15m area of absolute darkness that dispels all light magic of Tier 3 or lower.",
+        "description_tr": "Seviye 3 veya daha düşük tüm ışık büyülerini dağıtan 15m'lik mutlak bir karanlık alanı yaratın.",
+        "branch": "Gloom",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dc_suffocating_shadows"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "15m",
+          "special": "Dispels Light"
+        }
+      },
+      {
+        "spell_key": "dc_mind_eclipse",
+        "name_en": "Mind Eclipse",
+        "name_tr": "Zihin Tutulması",
+        "description_en": "Unleash a wave of darkness that silences and blinds all enemies in a 10m cone for 6s.",
+        "description_tr": "10m'lik bir konideki tüm düşmanları 6s boyunca susturan ve kör eden bir karanlık dalgası serbest bırakın.",
+        "branch": "Gloom",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dc_gloom_ward"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "10m cone",
+          "duration": "6s",
+          "status": "Blind & Silence"
+        }
+      },
+      {
+        "spell_key": "dc_gloom_fiend",
+        "name_en": "Gloom Fiend",
+        "name_tr": "Karanlık İblisi",
+        "description_en": "Summon a terrifying shadow entity for 15s that attacks enemies, prioritizing blinded targets.",
+        "description_tr": "Kör edilmiş hedeflere öncelik vererek düşmanlara saldıran korkunç bir gölge varlığını 15s boyunca çağırın.",
+        "branch": "Gloom",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dc_shadow_tendrils"
+        ],
+        "icon": "👹",
+        "effects": {
+          "duration": "15s",
+          "summon": "Gloom Fiend"
+        }
+      },
+      {
+        "spell_key": "dc_devouring_dark",
+        "name_en": "Devouring Dark",
+        "name_tr": "Yutan Karanlık",
+        "description_en": "Passive. Your darkness areas drain the life force of enemies, reducing their max HP by 2% per second they remain inside.",
+        "description_tr": "Pasif. Karanlık alanlarınız düşmanların yaşam gücünü tüketerek, içeride kaldıkları her saniye için maksimum canlarını %2 azaltır.",
+        "branch": "Gloom",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dc_pitch_black"
+        ],
+        "icon": "🧛",
+        "effects": {
+          "max_hp_drain": "2%/s"
+        }
+      },
+      {
+        "spell_key": "dc_eclipse_of_despair",
+        "name_en": "Eclipse of Despair",
+        "name_tr": "Umutsuzluk Tutulması",
+        "description_en": "Ultimate. Summon a massive 30m radius darkness for 15s. All enemies inside are blinded, silenced, slowed by 80%, and suffer 8d8 shadow damage per second.",
+        "description_tr": "Ulti. 15s boyunca 30m yarıçapında devasa bir karanlık çağırın. İçerdeki tüm düşmanlar kör olur, susturulur, %80 yavaşlar ve saniyede 8d8 gölge hasarı alır.",
+        "branch": "Gloom",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dc_devouring_dark",
+          "dc_mind_eclipse"
+        ],
+        "icon": "🌘",
+        "effects": {
+          "radius": "30m",
+          "duration": "15s",
+          "slow": "80%",
+          "damage": "8d8/s"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_strike",
+        "name_en": "Shadow Strike",
+        "name_tr": "Gölge Vuruşu",
+        "description_en": "A swift melee attack infused with shadow, dealing weapon damage plus 2d6 shadow damage.",
+        "description_tr": "Gölgeyle aşılanmış hızlı bir yakın dövüş saldırısı, silah hasarı artı 2d6 gölge hasarı verir.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🤺",
+        "effects": {
+          "damage": "Weapon + 2d6"
+        }
+      },
+      {
+        "spell_key": "dc_backstab",
+        "name_en": "Backstab",
+        "name_tr": "Arkadan Bıçaklama",
+        "description_en": "Passive. Striking an enemy from behind increases the total damage dealt by 50%.",
+        "description_tr": "Pasif. Bir düşmana arkadan vurmak, verilen toplam hasarı %50 artırır.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🔪",
+        "effects": {
+          "damage_bonus": "50%"
+        }
+      },
+      {
+        "spell_key": "dc_blood_in_the_dark",
+        "name_en": "Blood in the Dark",
+        "name_tr": "Karanlıktaki Kan",
+        "description_en": "Passive. Your melee critical hits apply a bleeding effect dealing 1d6 damage per second for 3s.",
+        "description_tr": "Pasif. Yakın dövüş kritik vuruşlarınız, 3s boyunca saniyede 1d6 hasar veren bir kanama etkisi uygular.",
+        "branch": "Execution",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "bleed_damage": "1d6/s",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "dc_throat_slitter",
+        "name_en": "Throat Slitter",
+        "name_tr": "Boğaz Kesen",
+        "description_en": "Passive. Gain +30% critical hit chance against enemies who are blinded, stunned, or unaware of you.",
+        "description_tr": "Pasif. Kör, sersemlemiş veya sizden habersiz düşmanlara karşı +%30 kritik vuruş şansı kazanın.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "dc_shadow_strike"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "crit_chance": "+30%"
+        }
+      },
+      {
+        "spell_key": "dc_phantom_blades",
+        "name_en": "Phantom Blades",
+        "name_tr": "Hayalet Bıçaklar",
+        "description_en": "Throw 3 shadow-forged daggers up to 15m away, each dealing 2d8 piercing shadow damage.",
+        "description_tr": "Her biri 2d8 delici gölge hasarı veren, 15m uzağa kadar 3 gölge dövme hançer fırlatın.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "dc_backstab"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "projectiles": 3,
+          "damage": "2d8 per hit",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "dc_coup_de_grace",
+        "name_en": "Coup de Grace",
+        "name_tr": "Son Darbe",
+        "description_en": "Passive. Your attacks deal 40% more damage to targets with less than 30% of their maximum HP.",
+        "description_tr": "Pasif. Saldırılarınız, maksimum canı %30'un altında olan hedeflere %40 daha fazla hasar verir.",
+        "branch": "Execution",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "dc_blood_in_the_dark"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage_multiplier": "+40%",
+          "condition": "<30% HP"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_pierce",
+        "name_en": "Shadow Pierce",
+        "name_tr": "Gölge Delici",
+        "description_en": "Passive. Your shadow-infused attacks ignore 50% of the target's physical armor.",
+        "description_tr": "Pasif. Gölge aşılanmış saldırılarınız, hedefin fiziksel zırhının %50'sini yok sayar.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "dc_throat_slitter"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "armor_penetration": "50%"
+        }
+      },
+      {
+        "spell_key": "dc_lethal_precision",
+        "name_en": "Lethal Precision",
+        "name_tr": "Ölümcül İsabet",
+        "description_en": "Passive. Your critical damage multiplier is increased by an additional 0.5x.",
+        "description_tr": "Pasif. Kritik hasar çarpanınız ek olarak 0.5x artar.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "dc_phantom_blades"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "crit_damage": "+0.5x"
+        }
+      },
+      {
+        "spell_key": "dc_assassins_mark",
+        "name_en": "Assassin's Mark",
+        "name_tr": "Suikastçının İşareti",
+        "description_en": "Mark a target for 10s. They take 15% increased damage from all your attacks.",
+        "description_tr": "Bir hedefi 10s boyunca işaretleyin. Tüm saldırılarınızdan %15 daha fazla hasar alırlar.",
+        "branch": "Execution",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dc_coup_de_grace"
+        ],
+        "icon": "✖️",
+        "effects": {
+          "damage_taken": "+15%",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "dc_gloom_blade",
+        "name_en": "Gloom Blade",
+        "name_tr": "Karanlık Kılıcı",
+        "description_en": "Transform your weapon into pure shadow for 10s. Increases melee range to 3m and converts all damage to pure shadow damage.",
+        "description_tr": "Silahınızı 10s boyunca saf gölgeye dönüştürün. Yakın dövüş menzilini 3m'ye çıkarır ve tüm hasarı saf gölge hasarına çevirir.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "dc_shadow_pierce"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "duration": "10s",
+          "melee_range": "3m",
+          "damage_type": "Shadow"
+        }
+      },
+      {
+        "spell_key": "dc_heartseeker",
+        "name_en": "Heartseeker",
+        "name_tr": "Kalp Arayan",
+        "description_en": "Your next attack within 5s is a guaranteed critical hit and stuns the target for 2s.",
+        "description_tr": "5s içindeki bir sonraki saldırınız garantili bir kritik vuruştur ve hedefi 2s sersemletir.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "dc_lethal_precision"
+        ],
+        "icon": "💘",
+        "effects": {
+          "crit_chance": "100%",
+          "stun_duration": "2s"
+        }
+      },
+      {
+        "spell_key": "dc_dark_harvest",
+        "name_en": "Dark Harvest",
+        "name_tr": "Karanlık Hasat",
+        "description_en": "Passive. Landing a killing blow on an enemy restores 15% of your maximum HP.",
+        "description_tr": "Pasif. Bir düşmana ölümcül darbe indirmek, maksimum HP'nizin %15'ini geri yükler.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "dc_assassins_mark"
+        ],
+        "icon": "🌾",
+        "effects": {
+          "heal": "15% Max HP"
+        }
+      },
+      {
+        "spell_key": "dc_silent_death",
+        "name_en": "Silent Death",
+        "name_tr": "Sessiz Ölüm",
+        "description_en": "Passive. Critical hits have a 10% chance to instantly kill non-boss enemies.",
+        "description_tr": "Pasif. Kritik vuruşların patron olmayan düşmanları anında öldürme ihtimali %10'dur.",
+        "branch": "Execution",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "dc_gloom_blade"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "instant_kill_chance": "10%"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_guillotine",
+        "name_en": "Shadow Guillotine",
+        "name_tr": "Gölge Giyotini",
+        "description_en": "Ultimate. Deliver a devastating single strike dealing 10d20 shadow damage. If the target drops below 20% max HP, they are instantly executed.",
+        "description_tr": "Ulti. 10d20 gölge hasarı veren yıkıcı tek bir vuruş yapın. Hedefin canı %20'nin altına düşerse, anında infaz edilir.",
+        "branch": "Execution",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "dc_heartseeker",
+          "dc_silent_death"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "10d20",
+          "execute_threshold": "20% Max HP"
+        }
+      },
+      {
+        "spell_key": "dc_gloom_step",
+        "name_en": "Gloom Step",
+        "name_tr": "Karanlık Adımı",
+        "description_en": "Teleport instantly into any of your active darkness areas within 40m. Cooldown is only 2s.",
+        "description_tr": "40m içindeki herhangi bir aktif karanlık alanınıza anında ışınlanın. Bekleme süresi sadece 2s'dir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "dc_phantom_step",
+          "dc_gloom_veil"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "range": "40m",
+          "cooldown": "2s"
+        }
+      },
+      {
+        "spell_key": "dc_executioners_shade",
+        "name_en": "Executioner's Shade",
+        "name_tr": "İnfazcının Gölgesi",
+        "description_en": "Passive. Upon killing an enemy, your next teleportation spell within 5s costs no mana/stamina and is instantaneous.",
+        "description_tr": "Pasif. Bir düşmanı öldürdükten sonra, 5s içindeki bir sonraki ışınlanma büyünüz mana/dayanıklılık harcamaz ve anında gerçekleşir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dc_backstab",
+          "dc_phantom_step"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "duration": "5s",
+          "resource_cost": "0"
+        }
+      },
+      {
+        "spell_key": "dc_blind_side",
+        "name_en": "Blind Side",
+        "name_tr": "Kör Nokta",
+        "description_en": "Passive. Your critical strikes deal double damage against blinded enemies.",
+        "description_tr": "Pasif. Kritik vuruşlarınız kör edilmiş düşmanlara karşı iki kat hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "dc_blinding_shade",
+          "dc_throat_slitter"
+        ],
+        "icon": "🙈",
+        "effects": {
+          "damage_multiplier": "2x"
+        }
+      },
+      {
+        "spell_key": "dc_shadow_trap",
+        "name_en": "Shadow Trap",
+        "name_tr": "Gölge Tuzağı",
+        "description_en": "Whenever you teleport, leave behind a 4m trap. If triggered in darkness, it explodes for 3d10 damage and blinds for 2s.",
+        "description_tr": "Her ışınlandığınızda geride 4m'lik bir tuzak bırakın. Karanlıkta tetiklenirse, 3d10 hasar vererek patlar ve 2s kör eder.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dc_umbral_leap",
+          "dc_smokescreen"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "radius": "4m",
+          "damage": "3d10",
+          "blind_duration": "2s"
+        }
+      },
+      {
+        "spell_key": "dc_umbral_assassin",
+        "name_en": "Umbral Assassin",
+        "name_tr": "Karanlık Suikastçı",
+        "description_en": "Passive. While inside magical darkness, gain +20% movement speed and +25% attack speed.",
+        "description_tr": "Pasif. Büyülü karanlığın içindeyken, +%20 hareket hızı ve +%25 saldırı hızı kazanın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dc_pitch_black",
+          "dc_shadow_pierce"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "movement_speed": "+20%",
+          "attack_speed": "+25%"
+        }
+      },
+      {
+        "spell_key": "dc_death_from_nowhere",
+        "name_en": "Death From Nowhere",
+        "name_tr": "Hiçlikten Gelen Ölüm",
+        "description_en": "Passive. Attacks made within 1s after teleporting deal +100% damage.",
+        "description_tr": "Pasif. Işınlandıktan sonraki 1s içinde yapılan saldırılar +%100 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 900,
+        "prerequisites": [
+          "dc_shadow_dance",
+          "dc_assassins_mark"
+        ],
+        "icon": "🪦",
+        "effects": {
+          "damage_bonus": "+100%",
+          "duration": "1s"
+        }
+      },
+      {
+        "spell_key": "dc_nightfall_carnage",
+        "name_en": "Nightfall Carnage",
+        "name_tr": "Alacakaranlık Katliamı",
+        "description_en": "Instantly teleport to and strike up to 5 blinded enemies within 30m, dealing 8d10 damage to each.",
+        "description_tr": "30m içindeki 5'e kadar kör edilmiş düşmana anında ışınlanıp saldırın, her birine 8d10 hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "dc_void_step",
+          "dc_pitch_black",
+          "dc_heartseeker"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "targets": 5,
+          "range": "30m",
+          "damage": "8d10"
+        }
+      },
+      {
+        "spell_key": "dc_absolute_void_assassination",
+        "name_en": "Absolute Void Assassination",
+        "name_tr": "Mutlak Hiçlik İnfazı",
+        "description_en": "Grand Ultimate. Plunges a 50m area into absolute darkness and stops time for 3s. You unleash 15 consecutive guaranteed critical strikes, each dealing 5d10 damage, distributed among targets.",
+        "description_tr": "Büyük Ulti. 50m'lik bir alanı mutlak karanlığa gömer ve zamanı 3s boyunca durdurur. Hedefler arasında dağıtılan, her biri 5d10 hasar veren ardışık 15 garantili kritik vuruş serbest bırakırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "dc_realm_of_shadows",
+          "dc_eclipse_of_despair",
+          "dc_shadow_guillotine"
+        ],
+        "icon": "🖤",
+        "effects": {
+          "radius": "50m",
+          "duration": "3s",
+          "strikes": 15,
+          "damage": "5d10 per strike"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,999 @@
+[
+  {
+    "subclass_key": "elementalist_archer",
+    "tree_name_en": "Elemental Marksmanship",
+    "tree_name_tr": "Element Okçuluğu",
+    "tree_desc_en": "Mastery of infusing arrows with raw elemental power, swapping between Fire, Ice, Lightning, Earth, and Primal magic on the fly to decimate enemies.",
+    "tree_desc_tr": "Okları saf element gücüyle doldurma ustalığı; düşmanları yok etmek için Ateş, Buz, Yıldırım, Toprak ve İlkel büyü arasında anında geçiş yapar.",
+    "branches": [
+      "Thermal_Archery",
+      "Geostorm_Archery",
+      "Primal_Resonance",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "ea_ignite_arrow",
+        "name_en": "Ignite Arrow",
+        "name_tr": "Tutuşturucu Ok",
+        "description_en": "A basic attack infused with fire, dealing 1d8 fire damage and igniting the target.",
+        "description_tr": "Ateşle güçlendirilmiş temel saldırı, 1d8 ateş hasarı verir ve hedefi tutuşturur.",
+        "branch": "Thermal_Archery",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "damage": "1d8",
+          "burn_chance": "25%",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "ea_frost_shot",
+        "name_en": "Frost Shot",
+        "name_tr": "Ayaz Atışı",
+        "description_en": "An arrow of solid ice that slows the target's movement by 20%.",
+        "description_tr": "Hedefin hareket hızını %20 yavaşlatan som buzdan bir ok.",
+        "branch": "Thermal_Archery",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "❄️",
+        "effects": {
+          "damage": "1d8",
+          "slow": "20%",
+          "duration": "2 rounds",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "ea_thermal_shift",
+        "name_en": "Thermal Shift",
+        "name_tr": "Termal Geçiş",
+        "description_en": "Swiftly swap between fire and ice elements, granting a temporary 10% damage boost to the next shot.",
+        "description_tr": "Ateş ve buz elementleri arasında hızla geçiş yaparak bir sonraki atışa %10 geçici hasar artışı sağlar.",
+        "branch": "Thermal_Archery",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🌗",
+        "effects": {
+          "damage_bonus": "+10%",
+          "duration": "1 round"
+        }
+      },
+      {
+        "spell_key": "ea_blazing_volley",
+        "name_en": "Blazing Volley",
+        "name_tr": "Alevli Yaylım",
+        "description_en": "Fires 3 flaming arrows in a wide arc, hitting multiple enemies for 2d6 fire damage.",
+        "description_tr": "Geniş bir kavisle 3 alevli ok ateşleyerek birden fazla düşmana 2d6 ateş hasarı verir.",
+        "branch": "Thermal_Archery",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "ea_ignite_arrow"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "2d6 per arrow",
+          "arrows": "3",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "ea_glacier_piercer",
+        "name_en": "Glacier Piercer",
+        "name_tr": "Buzul Delici",
+        "description_en": "A highly pressurized ice arrow that pieces through enemies in a 15m line.",
+        "description_tr": "15m düz bir çizgideki düşmanları delip geçen yüksek basınçlı bir buz oku.",
+        "branch": "Thermal_Archery",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ea_frost_shot"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "damage": "3d6",
+          "area": "15m line",
+          "pierce": "true"
+        }
+      },
+      {
+        "spell_key": "ea_scorch_trap",
+        "name_en": "Scorch Trap",
+        "name_tr": "Kavurucu Tuzak",
+        "description_en": "Fires an arrow into the ground that erupts into flames when an enemy steps within 3m.",
+        "description_tr": "Yere atılan bir ok, bir düşman 3m yakınına geldiğinde alevler içinde patlar.",
+        "branch": "Thermal_Archery",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ea_ignite_arrow"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "damage": "3d8",
+          "trigger_radius": "3m",
+          "duration": "10 minutes"
+        }
+      },
+      {
+        "spell_key": "ea_chill_wind",
+        "name_en": "Chill Wind",
+        "name_tr": "Dondurucu Rüzgar",
+        "description_en": "Releases a gust of freezing wind with an arrow, reducing enemy attack speed by 15%.",
+        "description_tr": "Bir okla dondurucu bir rüzgar fırlatarak düşman saldırı hızını %15 azaltır.",
+        "branch": "Thermal_Archery",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ea_frost_shot"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "debuff": "-15% attack speed",
+          "area": "10m cone",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_meteor_arrow",
+        "name_en": "Meteor Arrow",
+        "name_tr": "Meteor Oku",
+        "description_en": "Summons a flaming meteor strike disguised as an arrow, dealing 5d8 fire damage in a 5m radius.",
+        "description_tr": "Ok kılığında alevli bir meteor çağırarak 5m yarıçapta 5d8 ateş hasarı verir.",
+        "branch": "Thermal_Archery",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ea_blazing_volley"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "5d8",
+          "radius": "5m",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "ea_blizzard_barrage",
+        "name_en": "Blizzard Barrage",
+        "name_tr": "Tipi Yağmuru",
+        "description_en": "Rains down ice shards over a 10m area, continuously freezing and damaging enemies.",
+        "description_tr": "10m'lik bir alana buz parçacıkları yağdırarak düşmanları sürekli dondurur ve hasar verir.",
+        "branch": "Thermal_Archery",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ea_glacier_piercer"
+        ],
+        "icon": "🌨️",
+        "effects": {
+          "damage": "4d6 per round",
+          "radius": "10m",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_steam_cloud",
+        "name_en": "Steam Cloud",
+        "name_tr": "Buhar Bulutu",
+        "description_en": "Combines fire and ice to create a blinding steam cloud, obscuring vision and dealing 2d6 scalding damage.",
+        "description_tr": "Ateş ve buzu birleştirerek kör edici bir buhar bulutu yaratır, görüşü engeller ve 2d6 haşlanma hasarı verir.",
+        "branch": "Thermal_Archery",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ea_scorch_trap",
+          "ea_chill_wind"
+        ],
+        "icon": "♨️",
+        "effects": {
+          "damage": "2d6",
+          "blind_chance": "50%",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "ea_supernova_shot",
+        "name_en": "Supernova Shot",
+        "name_tr": "Süpernova Atışı",
+        "description_en": "A devastating fire arrow that explodes with the force of a dying star, dealing 8d10 damage.",
+        "description_tr": "Ölen bir yıldızın gücüyle patlayan yıkıcı bir ateş oku, 8d10 hasar verir.",
+        "branch": "Thermal_Archery",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ea_meteor_arrow"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "8d10",
+          "radius": "12m",
+          "range": "60m"
+        }
+      },
+      {
+        "spell_key": "ea_absolute_zero_arrow",
+        "name_en": "Absolute Zero Arrow",
+        "name_tr": "Mutlak Sıfır Oku",
+        "description_en": "Freezes a single target completely in unmelting ice for 2 rounds.",
+        "description_tr": "Tek bir hedefi erimeyen buzun içinde 2 tur boyunca tamamen dondurur.",
+        "branch": "Thermal_Archery",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 720,
+        "prerequisites": [
+          "ea_blizzard_barrage"
+        ],
+        "icon": "🥶",
+        "effects": {
+          "damage": "6d10",
+          "stun": "2 rounds",
+          "range": "50m"
+        }
+      },
+      {
+        "spell_key": "ea_thermal_shock",
+        "name_en": "Thermal Shock",
+        "name_tr": "Termal Şok",
+        "description_en": "Rapidly applies extreme heat then cold, shattering enemy armor by 30%.",
+        "description_tr": "Hızla aşırı ısı ve ardından soğuk uygulayarak düşman zırhını %30 parçalar.",
+        "branch": "Thermal_Archery",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ea_steam_cloud"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "5d8",
+          "armor_reduction": "30%",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_phoenix_flight",
+        "name_en": "Phoenix Flight",
+        "name_tr": "Anka Uçuşu",
+        "description_en": "Propels the archer backward 15m with a burst of fire, evading attacks and leaving a trail of flames.",
+        "description_tr": "Ateş püskürterek okçuyu 15m geriye iter, saldırılardan kaçınır ve arkasında alevden bir iz bırakır.",
+        "branch": "Thermal_Archery",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ea_thermal_shift"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "dash": "15m backward",
+          "trail_damage": "3d6/round",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_ultimate_thermal_eclipse",
+        "name_en": "Thermal Eclipse",
+        "name_tr": "Termal Tutulma",
+        "description_en": "Creates a massive zone where fire and ice storm simultaneously, dealing 12d10 damage over 4 rounds.",
+        "description_tr": "Ateş ve buz fırtınasının aynı anda koptuğu devasa bir alan yaratarak 4 tur boyunca 12d10 hasar verir.",
+        "branch": "Thermal_Archery",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_supernova_shot",
+          "ea_absolute_zero_arrow"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "12d10 total",
+          "radius": "25m",
+          "duration": "4 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_spark_arrow",
+        "name_en": "Spark Arrow",
+        "name_tr": "Kıvılcım Oku",
+        "description_en": "A fast-moving lightning arrow that bounces to one additional target.",
+        "description_tr": "Hızlı hareket eden ve fazladan bir hedefe seken yıldırım oku.",
+        "branch": "Geostorm_Archery",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "1d8",
+          "bounce": "1 target",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "ea_stone_tip",
+        "name_en": "Stone Tip",
+        "name_tr": "Taş Uç",
+        "description_en": "A heavy, earth-infused arrow that knocks the target back 2m.",
+        "description_tr": "Hedefi 2m geriye iten ağır, toprakla güçlendirilmiş bir ok.",
+        "branch": "Geostorm_Archery",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 65,
+        "prerequisites": [],
+        "icon": "🪨",
+        "effects": {
+          "damage": "1d10",
+          "knockback": "2m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_static_field",
+        "name_en": "Static Field",
+        "name_tr": "Statik Alan",
+        "description_en": "Fires an arrow that deploys a 5m static field, slightly shocking anyone inside.",
+        "description_tr": "İçindeki herkesi hafifçe çarpan 5m'lik bir statik alan oluşturan bir ok fırlatır.",
+        "branch": "Geostorm_Archery",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🧲",
+        "effects": {
+          "damage": "1d4/round",
+          "radius": "5m",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_chain_lightning_shot",
+        "name_en": "Chain Lightning Shot",
+        "name_tr": "Zincirleme Yıldırım Atışı",
+        "description_en": "A powerful bolt that chains up to 4 enemies within 8m of each other.",
+        "description_tr": "Birbirine 8m mesafede olan 4 düşmana kadar zincirleme seken güçlü bir yıldırım.",
+        "branch": "Geostorm_Archery",
+        "tier": 2,
+        "min_level": 23,
+        "xp_cost": 190,
+        "prerequisites": [
+          "ea_spark_arrow"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "3d6",
+          "targets": "4",
+          "bounce_range": "8m"
+        }
+      },
+      {
+        "spell_key": "ea_tremor_shaft",
+        "name_en": "Tremor Shaft",
+        "name_tr": "Sarsıntı Oku",
+        "description_en": "Strikes the ground to create a localized earthquake, knocking enemies prone in a 6m radius.",
+        "description_tr": "Yere çarparak bölgesel bir deprem yaratır ve 6m yarıçaptaki düşmanları yere serer.",
+        "branch": "Geostorm_Archery",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 210,
+        "prerequisites": [
+          "ea_stone_tip"
+        ],
+        "icon": "🫨",
+        "effects": {
+          "damage": "2d8",
+          "prone_chance": "60%",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "ea_magnetized_target",
+        "name_en": "Magnetized Target",
+        "name_tr": "Manyetize Hedef",
+        "description_en": "Marks an enemy with lightning, causing subsequent arrows to home in on them.",
+        "description_tr": "Bir düşmanı yıldırımla işaretler ve sonraki okların ona güdümlenmesini sağlar.",
+        "branch": "Geostorm_Archery",
+        "tier": 2,
+        "min_level": 31,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ea_static_field"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "tracking": "100% accuracy",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_boulder_shot",
+        "name_en": "Boulder Shot",
+        "name_tr": "Kaya Atışı",
+        "description_en": "Transforms the arrow mid-flight into a massive boulder, crushing armor.",
+        "description_tr": "Oku uçuş sırasında devasa bir kayaya dönüştürerek zırhı ezer.",
+        "branch": "Geostorm_Archery",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ea_tremor_shaft"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "damage": "4d6",
+          "armor_break": "15%",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "ea_thunderbolt_snipe",
+        "name_en": "Thunderbolt Snipe",
+        "name_tr": "Yıldırım Suikastı",
+        "description_en": "A high-velocity lightning shot that ignores 50% of the target's physical resistance.",
+        "description_tr": "Hedefin fiziksel direncinin %50'sini yok sayan yüksek hızlı bir yıldırım atışı.",
+        "branch": "Geostorm_Archery",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 410,
+        "prerequisites": [
+          "ea_chain_lightning_shot"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5d8",
+          "armor_penetration": "50%",
+          "range": "50m"
+        }
+      },
+      {
+        "spell_key": "ea_petrifying_arrow",
+        "name_en": "Petrifying Arrow",
+        "name_tr": "Taştan Ok",
+        "description_en": "Coats the target in heavy stone, reducing their movement to zero for 1 round.",
+        "description_tr": "Hedefi ağır taşla kaplayarak hareket hızını 1 turluğuna sıfıra indirir.",
+        "branch": "Geostorm_Archery",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ea_boulder_shot"
+        ],
+        "icon": "🗽",
+        "effects": {
+          "damage": "4d8",
+          "root": "1 round"
+        }
+      },
+      {
+        "spell_key": "ea_dust_storm_arrow",
+        "name_en": "Dust Storm Arrow",
+        "name_tr": "Kum Fırtınası Oku",
+        "description_en": "Creates a swirling storm of electrified sand, dealing 3d8 damage and blinding enemies.",
+        "description_tr": "Girdap gibi dönen elektrikli bir kum fırtınası yaratarak 3d8 hasar verir ve düşmanları kör eder.",
+        "branch": "Geostorm_Archery",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ea_tremor_shaft",
+          "ea_static_field"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "3d8",
+          "blind": "1 round",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_plasma_piercer",
+        "name_en": "Plasma Piercer",
+        "name_tr": "Plazma Delici",
+        "description_en": "An ultra-hot lightning arrow that vaporizes barriers and deals 7d8 damage.",
+        "description_tr": "Bariyerleri buharlaştıran ve 7d8 hasar veren aşırı sıcak bir yıldırım oku.",
+        "branch": "Geostorm_Archery",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 710,
+        "prerequisites": [
+          "ea_thunderbolt_snipe"
+        ],
+        "icon": "🚀",
+        "effects": {
+          "damage": "7d8",
+          "destroys_shields": "true",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "ea_tectonic_rupture",
+        "name_en": "Tectonic Rupture",
+        "name_tr": "Tektonik Çatlak",
+        "description_en": "Fires an arrow deep underground, splitting the earth to create a 20m chasm.",
+        "description_tr": "Yerin derinliklerine bir ok fırlatarak toprağı yarar ve 20m'lik bir uçurum yaratır.",
+        "branch": "Geostorm_Archery",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 730,
+        "prerequisites": [
+          "ea_petrifying_arrow"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "damage": "6d10",
+          "area": "20m line",
+          "difficult_terrain": "true"
+        }
+      },
+      {
+        "spell_key": "ea_fulgurite_spike",
+        "name_en": "Fulgurite Spike",
+        "name_tr": "Fülgerit Dikeni",
+        "description_en": "Strikes sand/earth with lightning to form a glass spike that impales enemies for 8d8 damage.",
+        "description_tr": "Kum/toprağa yıldırımla vurarak düşmanları deşen ve 8d8 hasar veren camdan bir diken oluşturur.",
+        "branch": "Geostorm_Archery",
+        "tier": 4,
+        "min_level": 73,
+        "xp_cost": 760,
+        "prerequisites": [
+          "ea_dust_storm_arrow"
+        ],
+        "icon": "🏜️",
+        "effects": {
+          "damage": "8d8",
+          "bleed": "2d4",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "ea_lightning_tether",
+        "name_en": "Lightning Tether",
+        "name_tr": "Yıldırım Bağı",
+        "description_en": "Tethers the archer to an arrow, allowing them to instantly teleport to where it lands.",
+        "description_tr": "Okçuyu oka bağlayarak okun düştüğü yere anında ışınlanmasını sağlar.",
+        "branch": "Geostorm_Archery",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 810,
+        "prerequisites": [
+          "ea_magnetized_target"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "teleport": "arrow destination",
+          "max_range": "40m"
+        }
+      },
+      {
+        "spell_key": "ea_ultimate_geostorm_cataclysm",
+        "name_en": "Geostorm Cataclysm",
+        "name_tr": "Jeofırtına Afeti",
+        "description_en": "Unleashes a massive thunderstorm that rains boulders and lightning bolts, obliterating a 30m area.",
+        "description_tr": "30m'lik bir alanı yok eden kayalar ve yıldırımlar yağdıran devasa bir gök gürültülü fırtına serbest bırakır.",
+        "branch": "Geostorm_Archery",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_plasma_piercer",
+          "ea_tectonic_rupture"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "damage": "14d10",
+          "stun": "1 round",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "ea_primal_attunement",
+        "name_en": "Primal Attunement",
+        "name_tr": "İlkel Uyum",
+        "description_en": "Passively increases mana regeneration and attunes the archer to raw natural energy.",
+        "description_tr": "Pasif olarak mana yenilenmesini artırır ve okçuyu saf doğal enerjiye uyumlar.",
+        "branch": "Primal_Resonance",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🧘",
+        "effects": {
+          "mana_regen": "+20%",
+          "duration": "Passive"
+        }
+      },
+      {
+        "spell_key": "ea_elemental_tracer",
+        "name_en": "Elemental Tracer",
+        "name_tr": "Element İzleyici",
+        "description_en": "Fires a faint magical arrow that grants vision of the target for 5 minutes.",
+        "description_tr": "Hedefin 5 dakika boyunca görülmesini sağlayan soluk, büyülü bir ok fırlatır.",
+        "branch": "Primal_Resonance",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "vision": "True sight",
+          "duration": "5 minutes"
+        }
+      },
+      {
+        "spell_key": "ea_mana_infused_bowstring",
+        "name_en": "Mana-Infused Bowstring",
+        "name_tr": "Mana Yüklü Kiriş",
+        "description_en": "Empowers the bowstring with pure mana, increasing attack range by 10m.",
+        "description_tr": "Yay kirişini saf manayla güçlendirerek saldırı menzilini 10m artırır.",
+        "branch": "Primal_Resonance",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 195,
+        "prerequisites": [
+          "ea_primal_attunement"
+        ],
+        "icon": "🎻",
+        "effects": {
+          "range_bonus": "+10m",
+          "duration": "10 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_seeking_element",
+        "name_en": "Seeking Element",
+        "name_tr": "Arayan Element",
+        "description_en": "Arrows curve mid-air to find their targets, ignoring partial cover.",
+        "description_tr": "Oklar havadayken kavis çizerek hedeflerini bulur ve kısmi siperi yok sayar.",
+        "branch": "Primal_Resonance",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 215,
+        "prerequisites": [
+          "ea_elemental_tracer"
+        ],
+        "icon": "💫",
+        "effects": {
+          "ignore_cover": "50%",
+          "accuracy": "+20%"
+        }
+      },
+      {
+        "spell_key": "ea_primal_burst",
+        "name_en": "Primal Burst",
+        "name_tr": "İlkel Patlama",
+        "description_en": "An arrow of raw untyped magic that explodes for 3d8 force damage.",
+        "description_tr": "Saf, türsüz büyüden oluşan bir ok, 3d8 güç hasarıyla patlar.",
+        "branch": "Primal_Resonance",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 240,
+        "prerequisites": [
+          "ea_mana_infused_bowstring"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "3d8 force",
+          "radius": "4m"
+        }
+      },
+      {
+        "spell_key": "ea_elemental_vortex",
+        "name_en": "Elemental Vortex",
+        "name_tr": "Element Girdabı",
+        "description_en": "Creates a vacuum of raw magic that pulls enemies into a 5m center.",
+        "description_tr": "Düşmanları 5m'lik bir merkeze çeken saf büyüden bir vakum yaratır.",
+        "branch": "Primal_Resonance",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 390,
+        "prerequisites": [
+          "ea_primal_burst"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "pull_radius": "10m to 5m",
+          "damage": "4d6"
+        }
+      },
+      {
+        "spell_key": "ea_adaptive_quiver",
+        "name_en": "Adaptive Quiver",
+        "name_tr": "Adaptif Sadak",
+        "description_en": "Automatically coats arrows in the element the enemy is weakest against.",
+        "description_tr": "Okları otomatik olarak düşmanın en zayıf olduğu elementle kaplar.",
+        "branch": "Primal_Resonance",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "ea_seeking_element"
+        ],
+        "icon": "🎒",
+        "effects": {
+          "damage_conversion": "Enemy Weakness",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_primal_echo",
+        "name_en": "Primal Echo",
+        "name_tr": "İlkel Yankı",
+        "description_en": "Every arrow fired creates a phantom copy that deals 50% damage.",
+        "description_tr": "Fırlatılan her ok, %50 hasar veren hayalet bir kopya yaratır.",
+        "branch": "Primal_Resonance",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ea_elemental_vortex"
+        ],
+        "icon": "👻",
+        "effects": {
+          "echo_damage": "50%",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_chaos_arrow",
+        "name_en": "Chaos Arrow",
+        "name_tr": "Kaos Oku",
+        "description_en": "Fires an unpredictable arrow that deals 6d12 damage of a random element.",
+        "description_tr": "Rastgele bir elementte 6d12 hasar veren öngörülemez bir ok fırlatır.",
+        "branch": "Primal_Resonance",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 690,
+        "prerequisites": [
+          "ea_primal_echo"
+        ],
+        "icon": "🎲",
+        "effects": {
+          "damage": "6d12",
+          "element": "Random"
+        }
+      },
+      {
+        "spell_key": "ea_elemental_barrage",
+        "name_en": "Elemental Barrage",
+        "name_tr": "Element Yaylımı",
+        "description_en": "Unleashes a rapid stream of 10 arrows, each infused with a different element.",
+        "description_tr": "Her biri farklı bir elementle güçlendirilmiş 10 okluk hızlı bir yaylım ateşi başlatır.",
+        "branch": "Primal_Resonance",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 740,
+        "prerequisites": [
+          "ea_adaptive_quiver"
+        ],
+        "icon": "🏹",
+        "effects": {
+          "damage": "1d10 per arrow",
+          "hits": "10"
+        }
+      },
+      {
+        "spell_key": "ea_primal_avatar",
+        "name_en": "Primal Avatar",
+        "name_tr": "İlkel Avatar",
+        "description_en": "Transform into a being of pure elemental energy, gaining immunity to all elemental damage.",
+        "description_tr": "Saf element enerjisinden oluşan bir varlığa dönüşerek tüm element hasarlarına karşı bağışıklık kazanın.",
+        "branch": "Primal_Resonance",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ea_chaos_arrow"
+        ],
+        "icon": "🦸",
+        "effects": {
+          "immunity": "Fire/Ice/Lightning/Earth",
+          "duration": "2 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_ultimate_primal_convergence",
+        "name_en": "Primal Convergence",
+        "name_tr": "İlkel Yakınsama",
+        "description_en": "Collapses all surrounding elemental energy into a singularity arrow, dealing 15d10 pure damage.",
+        "description_tr": "Etraftaki tüm element enerjisini bir tekillik okuna çökertir ve 15d10 saf hasar verir.",
+        "branch": "Primal_Resonance",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ea_primal_avatar",
+          "ea_elemental_barrage"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "15d10 force",
+          "bypass_immunity": "true",
+          "range": "80m"
+        }
+      },
+      {
+        "spell_key": "ea_magma_shot",
+        "name_en": "Magma Shot",
+        "name_tr": "Magma Atışı",
+        "description_en": "Melts earth into a glob of magma, dealing 4d8 fire and 4d8 earth damage, leaving a molten pool.",
+        "description_tr": "Toprağı eritip bir magma kütlesine dönüştürerek 4d8 ateş ve 4d8 toprak hasarı verir, erimiş bir havuz bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ea_blazing_volley",
+          "ea_tremor_shaft"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "8d8 total",
+          "hazard_duration": "3 rounds",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "ea_thunderstorm_volley",
+        "name_en": "Thunderstorm Volley",
+        "name_tr": "Fırtına Yaylımı",
+        "description_en": "Rains down electrified hail that stuns enemies and deals 6d6 mixed damage.",
+        "description_tr": "Düşmanları sersemleten ve 6d6 karışık hasar veren elektrikli dolu yağdırır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ea_chill_wind",
+          "ea_chain_lightning_shot"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "6d6",
+          "stun_chance": "40%",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ea_plasma_burn",
+        "name_en": "Plasma Burn",
+        "name_tr": "Plazma Yanığı",
+        "description_en": "Fires an arrow so hot it turns into plasma, dealing 8d8 damage and melting weapons.",
+        "description_tr": "O kadar sıcak bir ok fırlatır ki plazmaya dönüşür, 8d8 hasar verir ve silahları eritir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ea_meteor_arrow",
+          "ea_thunderbolt_snipe"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "damage": "8d8",
+          "disarm_chance": "50%"
+        }
+      },
+      {
+        "spell_key": "ea_glacier_quake",
+        "name_en": "Glacier Quake",
+        "name_tr": "Buzul Depremi",
+        "description_en": "Sends a shockwave through the ground that erupts into jagged ice spikes.",
+        "description_tr": "Yerden geçerek sivri buz dikenlerine dönüşen bir şok dalgası gönderir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 67,
+        "xp_cost": 715,
+        "prerequisites": [
+          "ea_blizzard_barrage",
+          "ea_petrifying_arrow"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "damage": "7d8",
+          "slow": "50%",
+          "radius": "12m"
+        }
+      },
+      {
+        "spell_key": "ea_primal_meteor",
+        "name_en": "Primal Meteor",
+        "name_tr": "İlkel Meteor",
+        "description_en": "Pulls a meteor from raw elemental space, dealing 10d10 fire/force damage in a 15m radius.",
+        "description_tr": "Saf element boşluğundan bir meteor çekerek 15m yarıçapta 10d10 ateş/güç hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 780,
+        "prerequisites": [
+          "ea_supernova_shot",
+          "ea_chaos_arrow"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "10d10",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "ea_storm_seeker",
+        "name_en": "Storm Seeker",
+        "name_tr": "Fırtına Arayıcı",
+        "description_en": "A sentient lightning bolt arrow that actively hunts down the most dangerous enemy.",
+        "description_tr": "En tehlikeli düşmanı aktif olarak avlayan bilinçli bir yıldırım oku.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 820,
+        "prerequisites": [
+          "ea_plasma_piercer",
+          "ea_seeking_element"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "damage": "9d10",
+          "auto_target": "Highest Threat",
+          "range": "100m"
+        }
+      },
+      {
+        "spell_key": "ea_elemental_ascension",
+        "name_en": "Elemental Ascension",
+        "name_tr": "Element Yükselişi",
+        "description_en": "For 3 rounds, every arrow fired automatically triggers a secondary fire, ice, lightning, and earth explosion.",
+        "description_tr": "3 tur boyunca, atılan her ok otomatik olarak ikincil bir ateş, buz, yıldırım ve toprak patlamasını tetikler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ea_primal_avatar",
+          "ea_thermal_shock",
+          "ea_fulgurite_spike"
+        ],
+        "icon": "✨",
+        "effects": {
+          "bonus_damage": "+4d8 per arrow",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ea_grand_ultimate_elemental_omega_shot",
+        "name_en": "Elemental Omega Shot",
+        "name_tr": "Element Omega Atışı",
+        "description_en": "The absolute pinnacle of elemental archery. Fires an arrow containing the world's core elements, erasing the target from existence.",
+        "description_tr": "Element okçuluğunun mutlak zirvesi. Dünyanın çekirdek elementlerini içeren bir ok fırlatarak hedefi varoluştan siler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ea_ultimate_thermal_eclipse",
+          "ea_ultimate_geostorm_cataclysm",
+          "ea_ultimate_primal_convergence"
+        ],
+        "icon": "🌈",
+        "effects": {
+          "damage": "25d12",
+          "execute_threshold": "20%",
+          "range": "150m"
+        }
+      }
+    ]
+  }
+]

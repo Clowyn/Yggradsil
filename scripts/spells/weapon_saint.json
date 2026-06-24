@@ -1,0 +1,1010 @@
+[
+  {
+    "subclass_key": "weapon_saint",
+    "tree_name_en": "Path of the Weapon Saint",
+    "tree_name_tr": "Silah Azizi Yolu",
+    "tree_desc_en": "The Path of the Weapon Saint binds the soul of the warrior directly to their arsenal. They wield weapons not as mere tools, but as extensions of their own spirit, mastering physical strikes, telekinetic manipulation, and soul-rending techniques.",
+    "tree_desc_tr": "Silah Azizi Yolu, savaşçının ruhunu doğrudan cephaneliğine bağlar. Silahları sadece birer araç olarak değil, kendi ruhlarının bir uzantısı olarak kullanırlar; fiziksel vuruşlarda, telekinetik yönlendirmede ve ruh parçalayan tekniklerde ustalaşırlar.",
+    "branches": [
+      "Weapon Bond",
+      "Telekinetic Mastery",
+      "Soul Edge",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "ws_bond_initiation",
+        "name_en": "Bond Initiation",
+        "name_tr": "Bağ Başlangıcı",
+        "description_en": "Forges a preliminary bond with a single weapon. The weapon can be summoned to your hand from up to 10m away as a bonus action, and deals an extra 1d4 force damage.",
+        "description_tr": "Tek bir silahla ön hazırlık bağı kurar. Silah, bonus eylem olarak 10 metreye kadar uzaktan ele çağrılabilir ve fazladan 1d4 güç hasarı verir.",
+        "branch": "Weapon Bond",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "summon_range": "10m",
+          "bonus_damage": "1d4 force"
+        }
+      },
+      {
+        "spell_key": "ws_weapon_recall",
+        "name_en": "Weapon Recall",
+        "name_tr": "Silah Çağrısı",
+        "description_en": "Thrown or dropped bonded weapons return to your hand instantly, ignoring obstacles. Enemies in the return path take 1d6 slashing damage. Range: 30m.",
+        "description_tr": "Fırlatılan veya düşürülen bağlı silahlar engelleri yok sayarak anında elinize döner. Dönüş yolundaki düşmanlar 1d6 kesici hasar alır. Menzil: 30m.",
+        "branch": "Weapon Bond",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 70,
+        "prerequisites": [
+          "ws_bond_initiation"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "range": "30m",
+          "return_damage": "1d6 slashing"
+        }
+      },
+      {
+        "spell_key": "ws_honed_edge",
+        "name_en": "Honed Edge",
+        "name_tr": "Bilenmiş Keski",
+        "description_en": "Your bond sharpens the weapon to a supernatural degree. For 1 minute, your weapon attacks score a critical hit on a roll of 19-20 and deal +2 damage.",
+        "description_tr": "Bağınız, silahı doğaüstü bir dereceye kadar keskinleştirir. 1 dakika boyunca silah saldırılarınız 19-20 zarında kritik vuruş yapar ve +2 hasar verir.",
+        "branch": "Weapon Bond",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ws_bond_initiation"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "duration": "1 minute",
+          "crit_range": "19-20",
+          "bonus_damage": "+2"
+        }
+      },
+      {
+        "spell_key": "ws_floating_blade",
+        "name_en": "Floating Blade",
+        "name_tr": "Uçan Kılıç",
+        "description_en": "You animate a one-handed weapon to float beside you. As a bonus action, it can attack a target within 15m, dealing 1d8 + your Intelligence modifier slashing damage.",
+        "description_tr": "Yanınızda süzülmesi için tek elli bir silahı canlandırırsınız. Bonus eylem olarak 15 metre içindeki bir hedefe saldırarak 1d8 + Zeka değiştiriciniz kadar kesici hasar verebilir.",
+        "branch": "Telekinetic Mastery",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪶",
+        "effects": {
+          "range": "15m",
+          "damage": "1d8+Int slashing"
+        }
+      },
+      {
+        "spell_key": "ws_phantom_throw",
+        "name_en": "Phantom Throw",
+        "name_tr": "Hayalet Fırlatışı",
+        "description_en": "Hurl your weapon with telekinetic force. It travels up to 20m, phasing through non-living matter to strike an enemy for 2d6 piercing damage, then returns instantly.",
+        "description_tr": "Silahınızı telekinetik güçle fırlatın. 20 metreye kadar ilerler, cansız maddelerin içinden geçerek bir düşmana 2d6 delici hasar verir ve anında geri döner.",
+        "branch": "Telekinetic Mastery",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 80,
+        "prerequisites": [
+          "ws_floating_blade"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "range": "20m",
+          "damage": "2d6 piercing",
+          "special": "Phases through objects"
+        }
+      },
+      {
+        "spell_key": "ws_telekinetic_push",
+        "name_en": "Telekinetic Push",
+        "name_tr": "Telekinetik İtiş",
+        "description_en": "Release a burst of mental energy. Enemies within a 10m cone take 2d8 bludgeoning damage and are pushed back 5m.",
+        "description_tr": "Zihinsel bir enerji patlaması serbest bırakın. 10 metrelik bir koni içindeki düşmanlar 2d8 ezici hasar alır ve 5 metre geriye itilir.",
+        "branch": "Telekinetic Mastery",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 120,
+        "prerequisites": [
+          "ws_floating_blade"
+        ],
+        "icon": "💨",
+        "effects": {
+          "area": "10m cone",
+          "damage": "2d8 bludgeoning",
+          "knockback": "5m"
+        }
+      },
+      {
+        "spell_key": "ws_spirit_slash",
+        "name_en": "Spirit Slash",
+        "name_tr": "Ruhsal Kesiş",
+        "description_en": "Infuse your weapon with soul energy. The next attack ignores physical armor and deals 1d10 necrotic damage directly to the target's life force.",
+        "description_tr": "Silahınızı ruh enerjisiyle doldurun. Bir sonraki saldırı fiziksel zırhı yok sayar ve doğrudan hedefin yaşam gücüne 1d10 nekrotik hasar verir.",
+        "branch": "Soul Edge",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "👻",
+        "effects": {
+          "armor_bypass": "True",
+          "damage": "1d10 necrotic"
+        }
+      },
+      {
+        "spell_key": "ws_ethereal_pierce",
+        "name_en": "Ethereal Pierce",
+        "name_tr": "Eterik Delme",
+        "description_en": "Lunge forward up to 8m, turning your blade ethereal to bypass shields. Deals 2d8 psychic damage and reduces the target's movement speed by 50% for 1 round.",
+        "description_tr": "Kılıcınızı kalkanları aşmak için eterik hale getirerek 8 metreye kadar ileri atılın. 2d8 psişik hasar verir ve hedefin hareket hızını 1 tur boyunca %50 azaltır.",
+        "branch": "Soul Edge",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 90,
+        "prerequisites": [
+          "ws_spirit_slash"
+        ],
+        "icon": "💫",
+        "effects": {
+          "range": "8m dash",
+          "damage": "2d8 psychic",
+          "status": "50% Slow"
+        }
+      },
+      {
+        "spell_key": "ws_soul_rend",
+        "name_en": "Soul Rend",
+        "name_tr": "Ruh Yırtışı",
+        "description_en": "A vicious sweep that tears at the soul. Deals 3d6 slashing damage. If the target fails a Wisdom save, they cannot cast spells or use magical abilities for 1 round.",
+        "description_tr": "Ruhu parçalayan acımasız bir savurma. 3d6 kesici hasar verir. Hedef Bilgelik kurtarışında başarısız olursa, 1 tur boyunca büyü yapamaz veya büyülü yetenekler kullanamaz.",
+        "branch": "Soul Edge",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "ws_spirit_slash"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "3d6 slashing",
+          "status": "Silence 1 round"
+        }
+      },
+      {
+        "spell_key": "ws_unbreakable_steel",
+        "name_en": "Unbreakable Steel",
+        "name_tr": "Kırılmaz Çelik",
+        "description_en": "Your weapon becomes completely indestructible. When you block an attack, you gain +3 AC, and the attacker takes 2d6 recoil damage.",
+        "description_tr": "Silahınız tamamen yok edilemez hale gelir. Bir saldırıyı engellediğinizde +3 Zırh Sınıfı kazanırsınız ve saldıran kişi 2d6 geri tepme hasarı alır.",
+        "branch": "Weapon Bond",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ws_honed_edge"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+3",
+          "recoil_damage": "2d6"
+        }
+      },
+      {
+        "spell_key": "ws_sentient_parry",
+        "name_en": "Sentient Parry",
+        "name_tr": "Bilinçli Savuşturma",
+        "description_en": "The bonded weapon moves slightly on its own to protect you. Grants a permanent +1 to AC and allows one free parry reaction per round, reducing incoming damage by 1d10 + your level.",
+        "description_tr": "Bağlı silah sizi korumak için kendi kendine hafifçe hareket eder. Kalıcı olarak +1 Zırh Sınıfı sağlar ve tur başına bir ücretsiz savuşturma reaksiyonu vererek gelen hasarı 1d10 + seviyeniz kadar azaltır.",
+        "branch": "Weapon Bond",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ws_weapon_recall"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "passive_ac": "+1",
+          "damage_reduction": "1d10 + level"
+        }
+      },
+      {
+        "spell_key": "ws_bonded_strike",
+        "name_en": "Bonded Strike",
+        "name_tr": "Bağlı Vuruş",
+        "description_en": "Channel your bond into a devastating blow. Deals 4d8 physical damage. If the target has struck you in the last minute, the damage is doubled.",
+        "description_tr": "Bağınızı yıkıcı bir vuruşa dönüştürün. 4d8 fiziksel hasar verir. Hedef son bir dakika içinde size vurduysa, hasar iki katına çıkar.",
+        "branch": "Weapon Bond",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ws_unbreakable_steel"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "4d8 physical",
+          "conditional_multiplier": "x2"
+        }
+      },
+      {
+        "spell_key": "ws_dancing_swords",
+        "name_en": "Dancing Swords",
+        "name_tr": "Dans Eden Kılıçlar",
+        "description_en": "You can animate up to 3 weapons at once. They form a defensive screen, granting +2 AC, and can strike out independently, dealing 1d8 damage each to targets within 15m.",
+        "description_tr": "Aynı anda en fazla 3 silahı canlandırabilirsiniz. Savunma ekranı oluşturarak +2 Zırh Sınıfı sağlarlar ve bağımsız olarak saldırıp 15m içindeki hedeflere her biri 1d8 hasar verebilirler.",
+        "branch": "Telekinetic Mastery",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ws_phantom_throw"
+        ],
+        "icon": "💃",
+        "effects": {
+          "summons": "3 weapons",
+          "ac_bonus": "+2",
+          "damage": "3x 1d8"
+        }
+      },
+      {
+        "spell_key": "ws_orbiting_guard",
+        "name_en": "Orbiting Guard",
+        "name_tr": "Yörüngesel Koruma",
+        "description_en": "Your floating blades spin rapidly around you in a 3m radius. Any enemy entering or starting their turn in this zone takes 3d6 slashing damage.",
+        "description_tr": "Uçan kılıçlarınız etrafınızda 3 metrelik bir yarıçapta hızla döner. Bu alana giren veya turuna burada başlayan her düşman 3d6 kesici hasar alır.",
+        "branch": "Telekinetic Mastery",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ws_dancing_swords"
+        ],
+        "icon": "🪐",
+        "effects": {
+          "radius": "3m",
+          "damage": "3d6 slashing"
+        }
+      },
+      {
+        "spell_key": "ws_mind_over_metal",
+        "name_en": "Mind Over Metal",
+        "name_tr": "Metale Hükmeden Zihin",
+        "description_en": "Disarm an opponent within 20m by forcefully pulling their weapon with your mind, or manipulate environmental metal objects to crush foes for 4d6 damage.",
+        "description_tr": "20 metre içindeki bir rakibin silahını zihninizle zorla çekerek onu silahsız bırakın veya çevredeki metal nesneleri yönlendirerek düşmanları ezip 4d6 hasar verin.",
+        "branch": "Telekinetic Mastery",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "ws_telekinetic_push"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "20m",
+          "damage": "4d6 bludgeoning",
+          "utility": "Disarm"
+        }
+      },
+      {
+        "spell_key": "ws_astral_cleave",
+        "name_en": "Astral Cleave",
+        "name_tr": "Astral Yarma",
+        "description_en": "Unleash an arc of astral energy that travels 15m. Hits all targets in a line, dealing 4d6 radiant and necrotic damage.",
+        "description_tr": "15 metre ilerleyen bir astral enerji yayı serbest bırakın. Bir hat üzerindeki tüm hedefleri vurarak 4d6 radyant ve nekrotik hasar verir.",
+        "branch": "Soul Edge",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 210,
+        "prerequisites": [
+          "ws_ethereal_pierce"
+        ],
+        "icon": "✨",
+        "effects": {
+          "area": "15m line",
+          "damage": "4d6 radiant/necrotic"
+        }
+      },
+      {
+        "spell_key": "ws_phantom_reach",
+        "name_en": "Phantom Reach",
+        "name_tr": "Hayalet Menzil",
+        "description_en": "Your weapon leaves afterimages that strike slightly after you do. For 1 minute, every successful melee attack deals a secondary hit for half the original damage.",
+        "description_tr": "Silahınız, siz vurduktan hemen sonra vuran ardıl görüntüler bırakır. 1 dakika boyunca, her başarılı yakın dövüş saldırısı orijinal hasarın yarısı kadar ikincil bir vuruş yapar.",
+        "branch": "Soul Edge",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ws_soul_rend"
+        ],
+        "icon": "📏",
+        "effects": {
+          "duration": "1 minute",
+          "buff": "Extra hit for 50% damage"
+        }
+      },
+      {
+        "spell_key": "ws_spirit_burn",
+        "name_en": "Spirit Burn",
+        "name_tr": "Ruh Yanığı",
+        "description_en": "Ignite the target's soul with a cursed strike. Deals 3d8 fire damage, and the target takes an additional 2d6 necrotic damage at the start of their turn for 3 rounds.",
+        "description_tr": "Lanetli bir vuruşla hedefin ruhunu ateşe verin. 3d8 ateş hasarı verir ve hedef 3 tur boyunca sırasının başında ek olarak 2d6 nekrotik hasar alır.",
+        "branch": "Soul Edge",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ws_astral_cleave"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "3d8 fire",
+          "dot": "2d6 necrotic for 3 rounds"
+        }
+      },
+      {
+        "spell_key": "ws_telepathic_bond",
+        "name_en": "Telepathic Bond",
+        "name_tr": "Telepatik Bağ",
+        "description_en": "Merge telekinesis with your weapon bond. You can now see through the hilt of your weapon as if you had eyes there, up to 100m away, and can mentally command it to patrol an area.",
+        "description_tr": "Telekineziyi silah bağınızla birleştirin. Artık silahınızın kabzasından, orada gözleriniz varmış gibi 100 metreye kadar görebilir ve zihinsel olarak bir bölgede devriye gezmesini emredebilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ws_weapon_recall",
+          "ws_floating_blade"
+        ],
+        "icon": "📡",
+        "effects": {
+          "utility": "Remote vision 100m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ws_soul_bonded_weapon",
+        "name_en": "Soul Bonded Weapon",
+        "name_tr": "Ruhla Bağlanmış Silah",
+        "description_en": "Your weapon binds directly to your soul instead of your body. It can no longer be stolen. If you die, the weapon vanishes into the ethereal plane until you are resurrected. Deals an extra 2d6 force damage.",
+        "description_tr": "Silahınız bedeninize değil doğrudan ruhunuza bağlanır. Artık çalınamaz. Eğer ölürseniz, silah siz dirilene kadar eterik düzlemde kaybolur. Fazladan 2d6 güç hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 270,
+        "prerequisites": [
+          "ws_bonded_strike",
+          "ws_ethereal_pierce"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "passive": "Unstealable, vanishes on death",
+          "bonus_damage": "2d6 force"
+        }
+      },
+      {
+        "spell_key": "ws_blood_pact",
+        "name_en": "Blood Pact",
+        "name_tr": "Kan Anlaşması",
+        "description_en": "You mix your vitality with the weapon. By sacrificing 10% of your max HP, your weapon deals an additional 3d6 necrotic damage and heals you for 50% of the total damage dealt for 3 rounds.",
+        "description_tr": "Yaşam gücünüzü silahla karıştırırsınız. Maksimum canınızın %10'unu feda ederek silahınızın fazladan 3d6 nekrotik hasar vermesini ve 3 tur boyunca verilen toplam hasarın %50'si kadar sizi iyileştirmesini sağlarsınız.",
+        "branch": "Weapon Bond",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "ws_bonded_strike"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "cost": "10% HP",
+          "bonus_damage": "3d6 necrotic",
+          "lifesteal": "50%",
+          "duration": "3 rounds"
+        }
+      },
+      {
+        "spell_key": "ws_symbiotic_healing",
+        "name_en": "Symbiotic Healing",
+        "name_tr": "Simbiyotik İyileşme",
+        "description_en": "The weapon absorbs ambient magic to knit your wounds. As a bonus action, restore 4d8 + 15 HP. Can be used 3 times per long rest.",
+        "description_tr": "Silah, yaralarınızı sarmak için ortamdaki büyüyü emer. Bonus eylem olarak 4d8 + 15 Can yeniler. Uzun dinlenme başına 3 kez kullanılabilir.",
+        "branch": "Weapon Bond",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ws_sentient_parry"
+        ],
+        "icon": "💚",
+        "effects": {
+          "healing": "4d8 + 15",
+          "uses": "3/long rest"
+        }
+      },
+      {
+        "spell_key": "ws_weapon_surge",
+        "name_en": "Weapon Surge",
+        "name_tr": "Silah Taşkını",
+        "description_en": "Unleash the stored energy of your bond in a 15m shockwave. Deals 6d6 force damage and knocks enemies prone. You gain haste for 2 rounds.",
+        "description_tr": "Bağınızın depolanan enerjisini 15 metrelik bir şok dalgasıyla serbest bırakın. 6d6 güç hasarı verir ve düşmanları yere serer. 2 tur boyunca hızlanma kazanırsınız.",
+        "branch": "Weapon Bond",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ws_blood_pact"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "range": "15m radius",
+          "damage": "6d6 force",
+          "status": "Prone",
+          "buff": "Haste 2 rounds"
+        }
+      },
+      {
+        "spell_key": "ws_blade_storm",
+        "name_en": "Blade Storm",
+        "name_tr": "Kılıç Fırtınası",
+        "description_en": "Command dozens of telekinetic spectral blades to rain down in a 15m radius. Targets take 6d8 slashing damage. Half damage on a successful Dexterity save.",
+        "description_tr": "Düzinelerce telekinetik spektral kılıca 15 metrelik bir alanda yağmasını emredin. Hedefler 6d8 kesici hasar alır. Başarılı bir Çeviklik kurtarışında yarı hasar alınır.",
+        "branch": "Telekinetic Mastery",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 380,
+        "prerequisites": [
+          "ws_dancing_swords"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "radius": "15m",
+          "damage": "6d8 slashing",
+          "save": "Dexterity for half"
+        }
+      },
+      {
+        "spell_key": "ws_telekinetic_execution",
+        "name_en": "Telekinetic Execution",
+        "name_tr": "Telekinetik İnfaz",
+        "description_en": "Focus all your mental might to drive a blade into a single target's vital spot from afar. Range 30m. Deals 8d8 piercing damage. If the target is below 20% HP, it is an instant kill (bosses take 50 extra damage instead).",
+        "description_tr": "Tüm zihinsel gücünüzü odaklayarak bir kılıcı uzaktan tek bir hedefin hayati noktasına saplayın. Menzil 30m. 8d8 delici hasar verir. Hedefin canı %20'nin altındaysa anında öldürür (patronlar bunun yerine 50 ekstra hasar alır).",
+        "branch": "Telekinetic Mastery",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ws_orbiting_guard"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "range": "30m",
+          "damage": "8d8 piercing",
+          "special": "Execute at 20% HP"
+        }
+      },
+      {
+        "spell_key": "ws_magnetic_pull",
+        "name_en": "Magnetic Pull",
+        "name_tr": "Manyetik Çekim",
+        "description_en": "Create a gravity well of metallic energy. Pulls all enemies within 25m towards a central point, pinning them for 1 round and dealing 4d8 force damage.",
+        "description_tr": "Metalik enerjiden oluşan bir yerçekimi kuyusu yaratın. 25m içindeki tüm düşmanları merkezi bir noktaya çeker, onları 1 tur sabitler ve 4d8 güç hasarı verir.",
+        "branch": "Telekinetic Mastery",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ws_mind_over_metal"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "radius": "25m",
+          "damage": "4d8 force",
+          "status": "Pinned 1 round"
+        }
+      },
+      {
+        "spell_key": "ws_soul_severing_strike",
+        "name_en": "Soul Severing Strike",
+        "name_tr": "Ruh Koparan Vuruş",
+        "description_en": "A precise strike aimed at the thread connecting body and soul. Deals 6d10 necrotic damage. On a critical hit, the target is paralyzed for 1 round.",
+        "description_tr": "Beden ile ruhu birbirine bağlayan ipliği hedefleyen kesin bir vuruş. 6d10 nekrotik hasar verir. Kritik vuruşta hedef 1 tur felç olur.",
+        "branch": "Soul Edge",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 370,
+        "prerequisites": [
+          "ws_phantom_reach"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "6d10 necrotic",
+          "status": "Paralyze on crit"
+        }
+      },
+      {
+        "spell_key": "ws_ghost_blade",
+        "name_en": "Ghost Blade",
+        "name_tr": "Hayalet Kılıç",
+        "description_en": "Your blade phases out of reality. For 3 rounds, your attacks completely ignore all physical armor, magical barriers, and damage resistances.",
+        "description_tr": "Kılıcınız gerçekliğin dışına çıkar. 3 tur boyunca saldırılarınız tüm fiziksel zırhları, büyülü bariyerleri ve hasar dirençlerini tamamen yok sayar.",
+        "branch": "Soul Edge",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ws_astral_cleave"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "duration": "3 rounds",
+          "buff": "Ignore armor/barriers/resistance"
+        }
+      },
+      {
+        "spell_key": "ws_inner_demon_manifestation",
+        "name_en": "Inner Demon Manifestation",
+        "name_tr": "İçsel İblis Tezahürü",
+        "description_en": "Manifest the dark energy of your soul. You gain temporary HP equal to twice your level, your eyes glow, and you project an aura of fear in a 10m radius.",
+        "description_tr": "Ruhunuzun karanlık enerjisini tezahür ettirin. Seviyenizin iki katı kadar geçici Can kazanırsınız, gözleriniz parlar ve 10 metrelik bir yarıçapta korku aurası yayarsınız.",
+        "branch": "Soul Edge",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 490,
+        "prerequisites": [
+          "ws_spirit_burn"
+        ],
+        "icon": "👹",
+        "effects": {
+          "temp_hp": "Level x2",
+          "aura": "10m Fear"
+        }
+      },
+      {
+        "spell_key": "ws_phantom_barrage",
+        "name_en": "Phantom Barrage",
+        "name_tr": "Hayalet Yaylım Ateşi",
+        "description_en": "Your floating weapons become ethereal. They unleash a volley of 6 phantom strikes on targets within 20m. Each strike deals 2d10 psychic damage and ignores cover.",
+        "description_tr": "Uçan silahlarınız eterik hale gelir. 20m içindeki hedeflere 6 hayalet vuruşluk bir yaylım ateşi başlatırlar. Her vuruş 2d10 psişik hasar verir ve siperi yok sayar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 390,
+        "prerequisites": [
+          "ws_dancing_swords",
+          "ws_spirit_slash"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "range": "20m",
+          "strikes": "6",
+          "damage": "2d10 psychic/strike"
+        }
+      },
+      {
+        "spell_key": "ws_trinity_strike",
+        "name_en": "Trinity Strike",
+        "name_tr": "Üçlü Vuruş",
+        "description_en": "Combine physical might, telekinetic force, and soul rending into a single attack. You dash up to 15m and strike for 4d8 physical, 4d8 force, and 4d8 necrotic damage.",
+        "description_tr": "Fiziksel kudreti, telekinetik gücü ve ruh parçalamayı tek bir saldırıda birleştirin. 15 metreye kadar atılır ve 4d8 fiziksel, 4d8 güç ve 4d8 nekrotik hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "ws_blood_pact",
+          "ws_telekinetic_execution",
+          "ws_ghost_blade"
+        ],
+        "icon": "🔺",
+        "effects": {
+          "range": "15m dash",
+          "damage": "4d8 phys + 4d8 force + 4d8 necrotic"
+        }
+      },
+      {
+        "spell_key": "ws_true_name_awakening",
+        "name_en": "True Name Awakening",
+        "name_tr": "Gerçek İsim Uyanışı",
+        "description_en": "You learn the true spirit name of your weapon. It transforms into an artifact-level weapon for 10 minutes, dealing an extra 4d10 force damage per hit and ignoring all physical resistances.",
+        "description_tr": "Silahınızın gerçek ruh adını öğrenirsiniz. 10 dakika boyunca eser seviyesinde bir silaha dönüşerek her vuruşta fazladan 4d10 güç hasarı verir ve tüm fiziksel dirençleri yok sayar.",
+        "branch": "Weapon Bond",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ws_weapon_surge"
+        ],
+        "icon": "🗣️",
+        "effects": {
+          "duration": "10 minutes",
+          "bonus_damage": "4d10 force",
+          "penetration": "Ignores physical resistance"
+        }
+      },
+      {
+        "spell_key": "ws_master_s_grip",
+        "name_en": "Master's Grip",
+        "name_tr": "Ustanın Tutuşu",
+        "description_en": "You can never be disarmed, and your strikes cannot be blocked or parried. Your weapon ignores AC bonuses from shields and spells, treating target AC as 10 + Dex.",
+        "description_tr": "Asla silahsız bırakılamazsınız ve vuruşlarınız engellenemez veya savuşturulamaz. Silahınız kalkanlardan ve büyülerden gelen Zırh Sınıfı bonuslarını yok sayarak hedefin ZS'sini 10 + Çeviklik olarak kabul eder.",
+        "branch": "Weapon Bond",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ws_symbiotic_healing",
+          "ws_blood_pact"
+        ],
+        "icon": "🗜️",
+        "effects": {
+          "passive": "Cannot be disarmed/blocked",
+          "ac_bypass": "Treats AC as 10+Dex"
+        }
+      },
+      {
+        "spell_key": "ws_living_arsenal",
+        "name_en": "Living Arsenal",
+        "name_tr": "Yaşayan Cephanelik",
+        "description_en": "Your body becomes a sheath for your weapon. You can store your weapon inside your body. While stored, you regenerate 20 HP per round. When drawn, the first strike deals an automatic critical hit with max damage.",
+        "description_tr": "Vücudunuz silahınız için bir kın haline gelir. Silahınızı vücudunuzun içinde saklayabilirsiniz. Saklıyken tur başına 20 Can yenilersiniz. Çekildiğinde, ilk vuruş maksimum hasarla otomatik olarak kritik vurur.",
+        "branch": "Weapon Bond",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 780,
+        "prerequisites": [
+          "ws_master_s_grip"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "regen": "20 HP/round",
+          "draw_attack": "Auto-crit max damage"
+        }
+      },
+      {
+        "spell_key": "ws_thousand_swords_formation",
+        "name_en": "Thousand Swords Formation",
+        "name_tr": "Bin Kılıç Dizilimi",
+        "description_en": "Conjure 1000 spectral swords that hover behind you. For the next 5 rounds, as a bonus action, you can unleash a barrage of 200 swords dealing 10d6 magical slashing damage in a 30m line.",
+        "description_tr": "Arkanızda süzülen 1000 spektral kılıç çağırın. Sonraki 5 tur boyunca, bonus eylem olarak 30 metrelik bir hat boyunca 10d6 büyülü kesici hasar veren 200 kılıçlık bir yaylım ateşi başlatabilirsiniz.",
+        "branch": "Telekinetic Mastery",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "ws_blade_storm"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "5 rounds",
+          "area": "30m line",
+          "damage": "10d6 magical slashing/round"
+        }
+      },
+      {
+        "spell_key": "ws_invisible_wielder",
+        "name_en": "Invisible Wielder",
+        "name_tr": "Görünmez Silahtar",
+        "description_en": "Telekinetically manipulate your primary weapon so fast it becomes invisible. Attacks with this weapon have advantage, cannot be parried, and deal an additional 6d8 psychic damage. Lasts 3 rounds.",
+        "description_tr": "Ana silahınızı telekinetik olarak o kadar hızlı kullanırsınız ki görünmez olur. Bu silahla yapılan saldırılar avantajlıdır, savuşturulamaz ve ekstra 6d8 psişik hasar verir. 3 tur sürer.",
+        "branch": "Telekinetic Mastery",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 760,
+        "prerequisites": [
+          "ws_telekinetic_execution"
+        ],
+        "icon": "🫥",
+        "effects": {
+          "duration": "3 rounds",
+          "buff": "Advantage, unparryable",
+          "bonus_damage": "6d8 psychic"
+        }
+      },
+      {
+        "spell_key": "ws_domain_of_blades",
+        "name_en": "Domain of Blades",
+        "name_tr": "Kılıçların Alanı",
+        "description_en": "Transform a 40m radius area into your personal domain. You can instantly teleport to any location within the domain where a weapon is present. Enemies inside take 2d10 damage for every 5m they move.",
+        "description_tr": "40 metrelik bir yarıçapı kişisel alanınıza dönüştürün. Alan içinde bir silahın bulunduğu herhangi bir yere anında ışınlanabilirsiniz. İçerideki düşmanlar hareket ettikleri her 5 metre için 2d10 hasar alır.",
+        "branch": "Telekinetic Mastery",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ws_magnetic_pull",
+          "ws_blade_storm"
+        ],
+        "icon": "⛩️",
+        "effects": {
+          "radius": "40m",
+          "utility": "Teleport to weapon",
+          "movement_penalty": "2d10 per 5m moved"
+        }
+      },
+      {
+        "spell_key": "ws_dimension_cutter",
+        "name_en": "Dimension Cutter",
+        "name_tr": "Boyut Kesen",
+        "description_en": "Slice through the fabric of space. Creates a 20m spatial rift that deals 10d8 force damage to all inside and teleports you instantly to the other side.",
+        "description_tr": "Uzay dokusunu kesin. İçerideki herkese 10d8 güç hasarı veren 20 metrelik bir uzaysal yarık yaratır ve sizi anında diğer tarafa ışınlar.",
+        "branch": "Soul Edge",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 630,
+        "prerequisites": [
+          "ws_ghost_blade"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "area": "20m line",
+          "damage": "10d8 force",
+          "utility": "Teleport 20m"
+        }
+      },
+      {
+        "spell_key": "ws_soul_reaper_s_dance",
+        "name_en": "Soul Reaper's Dance",
+        "name_tr": "Ruh Biçicinin Dansı",
+        "description_en": "Move with phantom grace, making an attack against up to 5 different targets within 25m. Each strike deals 5d10 psychic damage and heals you for half the damage dealt.",
+        "description_tr": "Hayaletimsi bir zarafetle hareket ederek 25m içindeki en fazla 5 farklı hedefe saldırı yapın. Her vuruş 5d10 psişik hasar verir ve sizi verilen hasarın yarısı kadar iyileştirir.",
+        "branch": "Soul Edge",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 690,
+        "prerequisites": [
+          "ws_soul_severing_strike"
+        ],
+        "icon": "💀",
+        "effects": {
+          "targets": "5",
+          "range": "25m",
+          "damage": "5d10 psychic",
+          "lifesteal": "50%"
+        }
+      },
+      {
+        "spell_key": "ws_absolute_severance",
+        "name_en": "Absolute Severance",
+        "name_tr": "Mutlak Koparma",
+        "description_en": "A flawless strike that cuts the very concept of magic. Deals 12d8 necrotic damage. Purges all magical buffs from the target and prevents them from being healed for 1 minute.",
+        "description_tr": "Büyü kavramının kendisini kesen kusursuz bir vuruş. 12d8 nekrotik hasar verir. Hedefteki tüm büyülü güçlendirmeleri siler ve 1 dakika boyunca iyileştirilmelerini engeller.",
+        "branch": "Soul Edge",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 770,
+        "prerequisites": [
+          "ws_dimension_cutter",
+          "ws_soul_severing_strike"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "12d8 necrotic",
+          "utility": "Dispel buffs",
+          "status": "Prevent healing 1 minute"
+        }
+      },
+      {
+        "spell_key": "ws_living_storm",
+        "name_en": "Living Storm",
+        "name_tr": "Yaşayan Fırtına",
+        "description_en": "Project your inner stored arsenal into a telekinetic hurricane. For 1 minute, an aura of flying blades surrounds you in a 10m radius, dealing 8d6 slashing damage to any enemy that enters.",
+        "description_tr": "İçinizde depolanan cephaneliği telekinetik bir kasırgaya yansıtın. 1 dakika boyunca, etrafınızı 10 metrelik bir yarıçapta saran uçan kılıçlar aurası oluşur ve giren her düşmana 8d6 kesici hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 670,
+        "prerequisites": [
+          "ws_living_arsenal",
+          "ws_blade_storm"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "duration": "1 minute",
+          "aura": "10m radius",
+          "damage": "8d6 slashing/round"
+        }
+      },
+      {
+        "spell_key": "ws_ethereal_domain",
+        "name_en": "Ethereal Domain",
+        "name_tr": "Eterik Alan",
+        "description_en": "Shift your Domain of Blades into the ethereal plane. Enemies trapped inside cannot teleport or use dimensional travel, and take 4d10 psychic damage at the start of their turns.",
+        "description_tr": "Kılıçların Alanı'nı eterik düzleme kaydırın. İçeride kapana kısılan düşmanlar ışınlanamaz veya boyutsal seyahat kullanamaz ve turlarının başında 4d10 psişik hasar alırlar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ws_domain_of_blades",
+          "ws_dimension_cutter"
+        ],
+        "icon": "🕋",
+        "effects": {
+          "area": "Same as Domain",
+          "utility": "Blocks teleportation",
+          "damage": "4d10 psychic/round"
+        }
+      },
+      {
+        "spell_key": "ws_spirit_forge",
+        "name_en": "Spirit Forge",
+        "name_tr": "Ruh Ocağı",
+        "description_en": "You forge your soul directly into the weapon's physical form. Permanently increases your critical multiplier by x1 (e.g. x2 becomes x3), but max HP is permanently reduced by 10%.",
+        "description_tr": "Ruhunuzu doğrudan silahın fiziksel formuna döversiniz. Kritik çarpanınızı kalıcı olarak x1 artırır (örn. x2 iken x3 olur), ancak maksimum Can kalıcı olarak %10 azalır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 760,
+        "prerequisites": [
+          "ws_master_s_grip",
+          "ws_soul_severing_strike"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "buff": "+x1 Critical Multiplier",
+          "penalty": "-10% Max HP permanent"
+        }
+      },
+      {
+        "spell_key": "ws_ultimate_avatar_of_steel",
+        "name_en": "Avatar of Steel",
+        "name_tr": "Çelik Avatarı",
+        "description_en": "Ultimate technique. You and your weapon merge perfectly. For 1 minute, you become immune to physical damage, your reach extends to 10m, and your attacks deal 10d10 + 50 force damage.",
+        "description_tr": "Nihai teknik. Siz ve silahınız mükemmel bir şekilde birleşirsiniz. 1 dakika boyunca fiziksel hasara bağışıklık kazanırsınız, menziliniz 10 metreye çıkar ve saldırılarınız 10d10 + 50 güç hasarı verir.",
+        "branch": "Weapon Bond",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ws_true_name_awakening",
+          "ws_living_arsenal"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "duration": "1 minute",
+          "immunity": "Physical damage",
+          "reach": "10m",
+          "damage": "10d10+50 force"
+        }
+      },
+      {
+        "spell_key": "ws_ultimate_telekinetic_emperor",
+        "name_en": "Telekinetic Emperor",
+        "name_tr": "Telekinetik İmparator",
+        "description_en": "Ultimate technique. Seize telekinetic control over the battlefield. You levitate 10m in the air, become immune to ranged attacks, and every round automatically deal 15d8 force damage to up to 10 enemies within 100m. Lasts 1 minute.",
+        "description_tr": "Nihai teknik. Savaş alanının telekinetik kontrolünü ele geçirin. Havada 10 metre yükselirsiniz, menzilli saldırılara bağışıklık kazanırsınız ve her tur otomatik olarak 100m içindeki 10'a kadar düşmana 15d8 güç hasarı verirsiniz. 1 dakika sürer.",
+        "branch": "Telekinetic Mastery",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "ws_thousand_swords_formation",
+          "ws_domain_of_blades"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "1 minute",
+          "immunity": "Ranged attacks",
+          "damage": "15d8 force/round",
+          "targets": "Up to 10"
+        }
+      },
+      {
+        "spell_key": "ws_ultimate_soul_eradication",
+        "name_en": "Soul Eradication",
+        "name_tr": "Ruh Yok Oluşu",
+        "description_en": "Ultimate technique. Strike a target's core being. Deals 25d10 untyped damage. If the target is killed, their soul is destroyed, preventing resurrection by any means short of a Wish spell.",
+        "description_tr": "Nihai teknik. Bir hedefin öz varlığına vurun. 25d10 türsüz hasar verir. Eğer hedef ölürse, ruhu yok edilir ve Dilek büyüsü dışında herhangi bir yolla diriltilmesi engellenir.",
+        "branch": "Soul Edge",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "ws_absolute_severance",
+          "ws_soul_reaper_s_dance"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "25d10 untyped",
+          "special": "Prevents resurrection"
+        }
+      },
+      {
+        "spell_key": "ws_omnipresent_blade",
+        "name_en": "Omnipresent Blade",
+        "name_tr": "Her Yerde Olan Kılıç",
+        "description_en": "Your weapon exists in all places simultaneously around you. You can make melee attacks against any target within 50m as if they were adjacent to you. Lasts for 3 rounds.",
+        "description_tr": "Silahınız etrafınızdaki her yerde aynı anda var olur. 50m içindeki herhangi bir hedefe sanki bitişiğinizdeymiş gibi yakın dövüş saldırıları yapabilirsiniz. 3 tur sürer.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ws_living_arsenal",
+          "ws_thousand_swords_formation"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "duration": "3 rounds",
+          "reach": "50m"
+        }
+      },
+      {
+        "spell_key": "ws_soul_shredding_tornado",
+        "name_en": "Soul Shredding Tornado",
+        "name_tr": "Ruh Parçalayan Hortum",
+        "description_en": "Merge 1000 swords into a massive cyclone of soul-cutting energy. Deals 15d10 force and necrotic damage in a 40m cylinder, silencing and blinding all survivors for 1 minute.",
+        "description_tr": "1000 kılıcı devasa bir ruh kesici enerji kasırgasına dönüştürün. 40 metrelik bir silindir içinde 15d10 güç ve nekrotik hasar verir, hayatta kalan herkesi 1 dakika boyunca susturur ve kör eder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "ws_thousand_swords_formation",
+          "ws_absolute_severance"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "area": "40m cylinder",
+          "damage": "15d10 force/necrotic",
+          "status": "Silence/Blind 1 min"
+        }
+      },
+      {
+        "spell_key": "ws_eternal_edge",
+        "name_en": "Eternal Edge",
+        "name_tr": "Sonsuz Kenar",
+        "description_en": "Once per week, your strike can permanently erase a non-boss enemy from existence, or permanently reduce a boss's max HP by 20%. The cut leaves a scar on reality.",
+        "description_tr": "Haftada bir kez, vuruşunuz patron olmayan bir düşmanı kalıcı olarak varoluştan silebilir veya bir patronun maksimum Canını kalıcı olarak %20 azaltabilir. Kesik, gerçeklikte bir yara izi bırakır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1180,
+        "prerequisites": [
+          "ws_true_name_awakening",
+          "ws_absolute_severance"
+        ],
+        "icon": "♾️",
+        "effects": {
+          "cooldown": "1 week",
+          "special": "Erase non-boss or -20% max HP boss"
+        }
+      },
+      {
+        "spell_key": "ws_grand_ultimate_saint_of_swords",
+        "name_en": "Saint of Swords",
+        "name_tr": "Kılıçların Azizi",
+        "description_en": "Grand Ultimate. You become the fundamental concept of the Sword. For 3 rounds, time stops for everyone else. You can make an unlimited number of attacks, each dealing 20d10 radiant force damage. When time resumes, reality shatters.",
+        "description_tr": "Büyük Nihai. Kılıç kavramının temeli olursunuz. 3 tur boyunca diğer herkes için zaman durur. Her biri 20d10 radyant güç hasarı veren sınırsız sayıda saldırı yapabilirsiniz. Zaman yeniden aktığında gerçeklik parçalanır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ws_ultimate_avatar_of_steel",
+          "ws_ultimate_telekinetic_emperor",
+          "ws_ultimate_soul_eradication"
+        ],
+        "icon": "👼",
+        "effects": {
+          "duration": "3 rounds",
+          "special": "Time Stop, Unlimited Attacks",
+          "damage": "20d10 radiant force"
+        }
+      }
+    ]
+  }
+]

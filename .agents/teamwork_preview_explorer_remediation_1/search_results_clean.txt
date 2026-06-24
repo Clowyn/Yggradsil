@@ -1,0 +1,49 @@
+D:\DnD\schema.sql:95: xp_total int DEFAULT 0,
+D:\DnD\schema.sql:96: xp_available int DEFAULT 0,
+D:\DnD\spell_schema.sql:150: IF (SELECT xp_available FROM characters WHERE id = char_id) < xp_val_cost THEN
+D:\DnD\spell_schema.sql:156: SET xp_available = xp_available - xp_val_cost
+D:\DnD\scripts\test-spell-tree.js:157: const xpAvailable = character.xp_available ?? 0;
+D:\DnD\scripts\test-spell-tree.js:214: xp_available: 500,
+D:\DnD\scripts\test-spell-tree.js:247: xp_available: 500,
+D:\DnD\scripts\test-spell-tree.js:257: xp_available: 500,
+D:\DnD\scripts\test-spell-tree.js:284: xp_available: 150,
+D:\DnD\scripts\test-spell-tree.js:289: // magic_missile: no prerequisites, xp_cost = 100, xp_available = 150 -> unlockable
+D:\DnD\scripts\test-spell-tree.js:297: // misty_step: prerequisite 'shield' (unlocked), xp_cost = 200, xp_available = 150 -> locked (due to XP)
+D:\DnD\scripts\verify-xp-distribution.js:118: xp_total: 1500,
+D:\DnD\scripts\verify-xp-distribution.js:119: xp_available: 1500,
+D:\DnD\scripts\verify-xp-distribution.js:122: console.log(`Character created. id=${char.id}, xp_total=${char.xp_total}, xp_available=${char.xp_available}, level=${char.level}`);
+D:\DnD\scripts\verify-xp-distribution.js:136: console.log(`After spell unlock: xp_total=${charAfterUnlock.xp_total}, xp_available=${charAfterUnlock.xp_available}, level=${charAfterUnlock.level}`);
+D:\DnD\scripts\verify-xp-distribution.js:145: // update({ xp_total: newXp, xp_available: newXp, level: newLevel })
+D:\DnD\scripts\verify-xp-distribution.js:146: const playerXp = charAfterUnlock.xp_total; // maps to xp_total
+D:\DnD\scripts\verify-xp-distribution.js:150: console.log(`Updating character with: xp_total=${newXp}, xp_available=${newXp}, level=${newLevel}`);
+D:\DnD\scripts\verify-xp-distribution.js:152: xp_total: newXp,
+D:\DnD\scripts\verify-xp-distribution.js:153: xp_available: newXp,
+D:\DnD\scripts\verify-xp-distribution.js:163: console.log(`xp_total: ${charFinal.xp_total}`);
+D:\DnD\scripts\verify-xp-distribution.js:164: console.log(`xp_available: ${charFinal.xp_available}`);
+D:\DnD\scripts\verify-xp-distribution.js:168: const expectedXpTotal = charAfterUnlock.xp_total + amountToDistribute; // 1500 - 1 = 1499
+D:\DnD\scripts\verify-xp-distribution.js:169: const expectedXpAvailable = charAfterUnlock.xp_available + amountToDistribute; // 500 - 1 = 499
+D:\DnD\scripts\verify-xp-distribution.js:173: console.log(`1. xp_total: ${charFinal.xp_total} (Expected: ${expectedXpTotal}) -> ${charFinal.xp_total === expectedXpTotal ? 'PASS' : 'FAIL'}`);
+D:\DnD\scripts\verify-xp-distribution.js:174: console.log(`2. xp_available: ${charFinal.xp_available} (Expected: ${expectedXpAvailable}) -> ${charFinal.xp_available === expectedXpAvailable ? 'PASS' : 'FAIL (XP REFUND EXPLOIT DETECTED)'}`);
+D:\DnD\scripts\verify-xp-distribution.js:177: if (charFinal.xp_available === newXp && newXp > expectedXpAvailable) {
+D:\DnD\src\components\character\CharacterCreation.tsx:115: xp_total: 0,
+D:\DnD\src\components\character\CharacterCreation.tsx:116: xp_available: 0,
+D:\DnD\src\components\gm\GMDashboard.tsx:169: xp_total: number;
+D:\DnD\src\components\gm\GMDashboard.tsx:170: xp_available: number;
+D:\DnD\src\components\gm\GMDashboard.tsx:261: xp: char.xp_total || 0,
+D:\DnD\src\components\gm\GMDashboard.tsx:356: xp_total: newXp,
+D:\DnD\src\components\gm\GMDashboard.tsx:357: xp_available: newXp, // Update pool for tree unlocks
+D:\DnD\src\components\gm\GMDashboard.tsx:439: xp_total: newCharXP,
+D:\DnD\src\components\gm\GMDashboard.tsx:440: xp_available: newCharXP,
+D:\DnD\src\components\gm\GMSpellManager.tsx:143: xp_available: 1000,
+D:\DnD\src\components\gm\GMSpellManager.tsx:148: xp_total: 1000,
+D:\DnD\src\components\gm\GMSpellManager.tsx:1021: <div>XP Total: <span className="text-white font-bold">{activeChar.xp_total}</span></div>
+D:\DnD\src\components\gm\GMSpellManager.tsx:1022: <div>XP Available: <span className="text-gold font-bold">{activeChar.xp_available}</span></div>
+D:\DnD\src\hooks\useSpellTree.ts:108: xp_available: 1000,
+D:\DnD\src\hooks\useSpellTree.ts:205: xp_available: mockXp
+D:\DnD\src\hooks\useSpellTree.ts:296: const xpAvailable = effectiveCharacter?.xp_available ?? 0;
+D:\DnD\src\hooks\useSpellTree.ts:328: const newXp = effectiveCharacter.xp_available - spell.xp_cost;
+D:\DnD\src\hooks\useSpellTree.ts:329: setCharacter((prev: any) => prev ? { ...prev, xp_available: newXp } : null);
+D:\DnD\src\hooks\useSpellTree.ts:559: xp: effectiveCharacter?.xp_available ?? 0,
+D:\DnD\src\lib\types.ts:89: xp_total: number;
+D:\DnD\src\lib\types.ts:90: xp_available: number;
+D:\DnD\src\pages\DashboardPage.tsx:84: value: activeCharacter.xp_total.toLocaleString(locale === 'en' ? 'en-US' : 'tr-TR'),

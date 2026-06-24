@@ -1,0 +1,39 @@
+diff --git a/src/contexts/CampaignContext.tsx b/src/contexts/CampaignContext.tsx
+--- a/src/contexts/CampaignContext.tsx
++++ b/src/contexts/CampaignContext.tsx
+@@ -2,3 +2,3 @@
+-import type { Campaign, CampaignMember } from '../lib/types';
++import type { Campaign, CampaignMember, Character } from '../lib/types';
+ import { useAuth } from './AuthContext';
+@@ -9,3 +9,3 @@
+   members: CampaignMember[];
+-  characters: any[];
++  characters: Character[];
+   activeCharacterId: string | null;
+@@ -29,3 +29,3 @@
+   const [members, setMembers] = useState<CampaignMember[]>([]);
+-  const [characters, setCharacters] = useState<any[]>([]);
++  const [characters, setCharacters] = useState<Character[]>([]);
+   const [activeCharacterId, setActiveCharacterId] = useState<string | null>(null);
+@@ -143,8 +143,18 @@
+           // Load characters for this campaign
+           const { data: charData, error: charError } = await supabase
+             .from('characters')
+-            .select('*')
++            .select(`
++              *,
++              race:race_definitions(
++                *,
++                tier:race_tiers(*)
++              ),
++              subclass:subclass_definitions(
++                *,
++                category:class_categories(*)
++              ),
++              profile:profiles(*)
++            `)
+             .eq('campaign_id', activeCampaignId);
+ 
+           if (charError) throw charError;
+-          setCharacters(charData || []);
++          setCharacters((charData as unknown as Character[]) || []);

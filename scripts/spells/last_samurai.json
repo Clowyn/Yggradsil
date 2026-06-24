@@ -1,0 +1,1008 @@
+[
+  {
+    "subclass_key": "last_samurai",
+    "tree_name_en": "The Way of the Last Samurai",
+    "tree_name_tr": "Son Samuray'ın Yolu",
+    "tree_desc_en": "Master the ancient arts of the Samurai. Wield twin blades with blinding speed, stand firm with unbreakable honor, or deliver singular, legendary strikes that shatter reality.",
+    "tree_desc_tr": "Samuray'ın kadim sanatlarında ustalaş. Çift bıçakla kör edici bir hızda saldır, kırılmaz bir onurla dimdik dur veya gerçekliği parçalayan efsanevi, eşsiz vuruşlar yap.",
+    "branches": [
+      "Twin Slash",
+      "Honor",
+      "Legendary Blade",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "ls_twin_strike",
+        "name_en": "Twin Strike",
+        "name_tr": "İkiz Vuruş",
+        "description_en": "Strike twice with your dual weapons, dealing 1d6 physical damage per hit.",
+        "description_tr": "Çift silahınla iki kez vurarak her vuruşta 1d6 fiziksel hasar ver.",
+        "branch": "Twin Slash",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "2x 1d6 physical",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "ls_swift_draw",
+        "name_en": "Swift Draw",
+        "name_tr": "Çevik Çekiş",
+        "description_en": "Instantly draw your weapons and strike in a 4m line, dealing 2d6 damage and increasing your movement speed by 2m for 1 turn.",
+        "description_tr": "Silahlarını aniden çekerek 4m'lik bir hatta saldır, 2d6 hasar ver ve hareket hızını 1 tur boyunca 2m artır.",
+        "branch": "Twin Slash",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ls_twin_strike"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "2d6 physical",
+          "range": "4m line",
+          "buff": "+2m movement speed (1 turn)"
+        }
+      },
+      {
+        "spell_key": "ls_crossing_blades",
+        "name_en": "Crossing Blades",
+        "name_tr": "Kesişen Bıçaklar",
+        "description_en": "Cross your blades to attack in an X pattern, dealing 3d6 damage and inflicting a bleeding effect (1d4 per turn for 2 turns).",
+        "description_tr": "Bıçaklarını çaprazlayarak X şeklinde saldır, 3d6 hasar ver ve kanama etkisi uygula (2 tur boyunca tur başına 1d4).",
+        "branch": "Twin Slash",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ls_swift_draw"
+        ],
+        "icon": "❌",
+        "effects": {
+          "damage": "3d6 physical",
+          "range": "3m",
+          "condition": "Bleeding (1d4/turn, 2 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_dancing_blade",
+        "name_en": "Dancing Blade",
+        "name_tr": "Dans Eden Kesik",
+        "description_en": "Perform a spinning attack hitting all enemies within 3m for 2d8 damage and gaining 10% evasion for 1 turn.",
+        "description_tr": "Etrafında dönerek 3m içindeki tüm düşmanlara 2d8 hasar ver ve 1 tur boyunca %10 kaçınma kazan.",
+        "branch": "Twin Slash",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ls_crossing_blades"
+        ],
+        "icon": "💃",
+        "effects": {
+          "damage": "2d8 physical",
+          "range": "3m radius",
+          "buff": "10% Evasion (1 turn)"
+        }
+      },
+      {
+        "spell_key": "ls_dual_flurry",
+        "name_en": "Dual Flurry",
+        "name_tr": "Çifte Bora",
+        "description_en": "Unleash a rapid series of 4 strikes, dealing 1d8 damage each. Critical hits restore 5 stamina.",
+        "description_tr": "Peş peşe 4 hızlı vuruş yap, her biri 1d8 hasar verir. Kritik vuruşlar 5 enerji yeniler.",
+        "branch": "Twin Slash",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ls_dancing_blade"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "4x 1d8 physical",
+          "range": "2m",
+          "special": "Crits restore 5 stamina"
+        }
+      },
+      {
+        "spell_key": "ls_whirlwind_slash",
+        "name_en": "Whirlwind Slash",
+        "name_tr": "Kasırga Kesiti",
+        "description_en": "A moving whirlwind attack. Move up to 5m, dealing 3d8 damage to enemies within 2m of your path.",
+        "description_tr": "Hareketli bir kasırga saldırısı. 5m'ye kadar ilerle, yolunun 2m yakınındaki düşmanlara 3d8 hasar ver.",
+        "branch": "Twin Slash",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "ls_dual_flurry"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "3d8 physical",
+          "range": "5m movement, 2m radius"
+        }
+      },
+      {
+        "spell_key": "ls_gale_strikes",
+        "name_en": "Gale Strikes",
+        "name_tr": "Fırtına Vuruşları",
+        "description_en": "Your attacks become infused with wind, extending your melee range by 2m and dealing an extra 1d6 wind damage for 3 turns.",
+        "description_tr": "Saldırılarına rüzgar aşılanır, yakın dövüş menzilini 2m artırır ve 3 tur boyunca fazladan 1d6 rüzgar hasarı verir.",
+        "branch": "Twin Slash",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ls_whirlwind_slash"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "buff": "+2m melee range, +1d6 wind damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_phantom_swords",
+        "name_en": "Phantom Swords",
+        "name_tr": "Hayalet Kılıçlar",
+        "description_en": "Summon spectral blades that mimic your attacks for 3 turns, dealing 50% of your damage as force damage.",
+        "description_tr": "Saldırılarını taklit eden spektral kılıçlar çağır, 3 tur boyunca verdiğin hasarın %50'si kadar güç (force) hasarı verir.",
+        "branch": "Twin Slash",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ls_gale_strikes"
+        ],
+        "icon": "👻",
+        "effects": {
+          "buff": "Additional 50% damage as Force",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_severing_wind",
+        "name_en": "Severing Wind",
+        "name_tr": "Koparan Rüzgar",
+        "description_en": "Swing your blades to unleash a shockwave of wind in a 10m cone, dealing 6d8 slashing damage and pushing enemies back 3m.",
+        "description_tr": "Bıçaklarını savurarak 10m'lik bir koni şeklinde rüzgar şoku gönder, 6d8 kesici hasar ver ve düşmanları 3m geri it.",
+        "branch": "Twin Slash",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ls_phantom_swords"
+        ],
+        "icon": "🍃",
+        "effects": {
+          "damage": "6d8 slashing",
+          "range": "10m cone",
+          "condition": "Pushback 3m"
+        }
+      },
+      {
+        "spell_key": "ls_thousand_cuts",
+        "name_en": "Thousand Cuts",
+        "name_tr": "Bin Kesik",
+        "description_en": "Target an enemy within 5m. Teleport around them, striking 10 times for 1d10 damage each. User is invulnerable during this attack.",
+        "description_tr": "5m içindeki bir düşmanı hedef al. Etrafında ışınlanarak her biri 1d10 hasar veren 10 vuruş yap. Kullanıcı bu saldırı sırasında hasar görmez.",
+        "branch": "Twin Slash",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ls_severing_wind"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "10x 1d10 physical",
+          "range": "5m",
+          "buff": "Invulnerability (during cast)"
+        }
+      },
+      {
+        "spell_key": "ls_crescent_dance",
+        "name_en": "Crescent Dance",
+        "name_tr": "Hilal Dansı",
+        "description_en": "Perform sweeping attacks in an 8m radius, dealing 8d8 damage and leaving an afterimage that repeats the attack next turn for half damage.",
+        "description_tr": "8m'lik bir yarıçapta savuran saldırılar yap, 8d8 hasar ver ve sonraki tur saldırıyı yarı hasarla tekrarlayan bir ardıl görüntü bırak.",
+        "branch": "Twin Slash",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ls_thousand_cuts"
+        ],
+        "icon": "🌙",
+        "effects": {
+          "damage": "8d8 physical",
+          "range": "8m radius",
+          "special": "Repeats next turn (50% damage)"
+        }
+      },
+      {
+        "spell_key": "ls_eclipse_slashes",
+        "name_en": "Eclipse Slashes",
+        "name_tr": "Tutulma Kesikleri",
+        "description_en": "Dash up to 15m, instantly striking all enemies in your path. Deals 10d10 damage and inflicts Deep Wounds (3d6 bleed for 3 turns).",
+        "description_tr": "15m'ye kadar atıl, yolundaki tüm düşmanlara anında vur. 10d10 hasar verir ve Derin Yaralar (3 tur boyunca 3d6 kanama) açar.",
+        "branch": "Twin Slash",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "ls_crescent_dance"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "10d10 physical",
+          "range": "15m dash",
+          "condition": "Deep Wounds (3d6 bleed/turn, 3 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_twin_dragon_rend",
+        "name_en": "Twin Dragon Rend",
+        "name_tr": "Çifte Ejder Yırtışı",
+        "description_en": "Manifest twin spectral dragons that consume the battlefield. Deals 15d12 damage in a 20m radius and reduces enemy armor by 50% for 3 turns.",
+        "description_tr": "Savaş alanını yutan iki hayalet ejderha yarat. 20m'lik bir alanda 15d12 hasar verir ve 3 tur boyunca düşman zırhını %50 azaltır.",
+        "branch": "Twin Slash",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ls_eclipse_slashes"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "15d12 force/slashing",
+          "range": "20m radius",
+          "debuff": "-50% Armor (3 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_honorable_stance",
+        "name_en": "Honorable Stance",
+        "name_tr": "Onurlu Duruş",
+        "description_en": "Adopt a defensive stance, increasing armor by +2 and reducing physical damage taken by 10% for 3 turns.",
+        "description_tr": "Savunmacı bir duruşa geçerek 3 tur boyunca zırhını +2 artır ve alınan fiziksel hasarı %10 azalt.",
+        "branch": "Honor",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "+2 Armor, 10% Physical Resistance",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_samurai_challenge",
+        "name_en": "Samurai Challenge",
+        "name_tr": "Samuray Meydan Okuması",
+        "description_en": "Challenge an enemy within 10m to a duel. They have disadvantage on attacks against anyone other than you, and you gain +1d4 damage against them for 3 turns.",
+        "description_tr": "10m içindeki bir düşmanı düelloya davet et. Senden başkasına yapacakları saldırılarda dezavantaja sahip olurlar ve sen onlara karşı 3 tur boyunca +1d4 hasar kazanırsın.",
+        "branch": "Honor",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ls_honorable_stance"
+        ],
+        "icon": "🎌",
+        "effects": {
+          "range": "10m",
+          "debuff": "Disadvantage vs others",
+          "buff": "+1d4 damage vs target",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_focused_mind",
+        "name_en": "Focused Mind",
+        "name_tr": "Odaklanmış Zihin",
+        "description_en": "Clear your mind of distractions. Cure one mental ailment (charm, fear, etc.) and gain advantage on Wisdom saving throws for 2 turns.",
+        "description_tr": "Zihnini dikkat dağıtıcılardan arındır. Zihinsel bir rahatsızlığı (büyülenme, korku vb.) iyileştir ve 2 tur boyunca Bilgelik kurtarma zarlarına avantaj kazan.",
+        "branch": "Honor",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ls_samurai_challenge"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "cleanse": "Cure 1 mental status",
+          "buff": "Advantage on WIS saves (2 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_deflecting_steel",
+        "name_en": "Deflecting Steel",
+        "name_tr": "Sektiren Çelik",
+        "description_en": "As a reaction, deflect incoming ranged physical attacks, reducing damage by 1d10 + your level.",
+        "description_tr": "Bir reaksiyon olarak, gelen menzilli fiziksel saldırıları sektirerek hasarı 1d10 + seviyen kadar azalt.",
+        "branch": "Honor",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ls_focused_mind"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "mitigation": "1d10 + Level damage reduction vs ranged"
+        }
+      },
+      {
+        "spell_key": "ls_warriors_resolve",
+        "name_en": "Warrior's Resolve",
+        "name_tr": "Savaşçının Azmi",
+        "description_en": "When your health falls below 50%, heal for 3d8+10 HP and gain 15% physical resistance for 2 turns.",
+        "description_tr": "Sağlığın %50'nin altına düştüğünde, 3d8+10 HP iyileş ve 2 tur boyunca %15 fiziksel direnç kazan.",
+        "branch": "Honor",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ls_deflecting_steel"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "trigger": "HP < 50%",
+          "healing": "3d8+10 HP",
+          "buff": "15% Physical Resistance (2 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_vengeful_counter",
+        "name_en": "Vengeful Counter",
+        "name_tr": "İntikamcı Kontra",
+        "description_en": "Enter a parry stance. The next melee attack against you is negated, and you instantly counterattack for 4d8 damage.",
+        "description_tr": "Savuşturma duruşuna geç. Sana yapılan ilk yakın dövüş saldırısı engellenir ve anında 4d8 hasarla karşı saldırı yaparsın.",
+        "branch": "Honor",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "ls_warriors_resolve"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "buff": "Negate next melee attack",
+          "damage": "4d8 physical counterattack"
+        }
+      },
+      {
+        "spell_key": "ls_stoic_guard",
+        "name_en": "Stoic Guard",
+        "name_tr": "Metanetli Koruma",
+        "description_en": "Project a 5m aura of resolve. Allies within the aura gain +3 armor and resistance to fear effects for 3 turns.",
+        "description_tr": "5m'lik bir azim halesi yansıt. Haledeki müttefikler 3 tur boyunca +3 zırh ve korku etkilerine karşı direnç kazanır.",
+        "branch": "Honor",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ls_vengeful_counter"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "range": "5m aura",
+          "buff": "+3 Armor, Fear resistance",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_ancestral_guidance",
+        "name_en": "Ancestral Guidance",
+        "name_tr": "Ataların Rehberliği",
+        "description_en": "Call upon the spirits of past samurais. Your next 3 attacks have advantage and deal an extra 2d8 spiritual damage.",
+        "description_tr": "Geçmiş samurayların ruhlarını çağır. Sonraki 3 saldırın avantajlı olur ve fazladan 2d8 ruhani hasar verir.",
+        "branch": "Honor",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ls_stoic_guard"
+        ],
+        "icon": "🏮",
+        "effects": {
+          "buff": "Advantage & +2d8 spirit damage on next 3 attacks"
+        }
+      },
+      {
+        "spell_key": "ls_iron_will",
+        "name_en": "Iron Will",
+        "name_tr": "Demir İrade",
+        "description_en": "Become immune to all crowd control effects for 2 turns and gain temporary HP equal to 20% of your max HP.",
+        "description_tr": "2 tur boyunca tüm kitle kontrol etkilerine bağışıklık kazan ve maksimum sağlığının %20'si kadar geçici HP elde et.",
+        "branch": "Honor",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ls_ancestral_guidance"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "buff": "CC Immunity (2 turns)",
+          "healing": "20% Max HP as Temp HP"
+        }
+      },
+      {
+        "spell_key": "ls_unyielding_spirit",
+        "name_en": "Unyielding Spirit",
+        "name_tr": "Boyun Eğmez Ruh",
+        "description_en": "When reduced to 0 HP, immediately revive with 25% HP and gain invulnerability for 1 turn. (Usable once per long rest).",
+        "description_tr": "0 HP'ye düştüğünde, %25 HP ile anında diril ve 1 tur boyunca dokunulmazlık kazan. (Uzun dinlenmede bir kez kullanılır).",
+        "branch": "Honor",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ls_iron_will"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "trigger": "On 0 HP",
+          "healing": "Revive at 25% HP",
+          "buff": "Invulnerability (1 turn)",
+          "special": "Once per long rest"
+        }
+      },
+      {
+        "spell_key": "ls_last_stand",
+        "name_en": "Last Stand",
+        "name_tr": "Son Direniş",
+        "description_en": "Plant your feet. For 3 turns, your movement speed becomes 0, but you take 50% less damage and deal double damage on counterattacks.",
+        "description_tr": "Yerine sağlam bas. 3 tur boyunca hareket hızın 0 olur, ancak %50 daha az hasar alırsın ve kontra saldırılarda iki kat hasar verirsin.",
+        "branch": "Honor",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ls_unyielding_spirit"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "debuff": "Movement 0",
+          "buff": "50% Damage Reduction, 2x Counterattack Damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_immortal_honor",
+        "name_en": "Immortal Honor",
+        "name_tr": "Ölümsüz Onur",
+        "description_en": "Radiate pure honorable energy. Allies within 15m cannot be reduced below 1 HP for 2 turns.",
+        "description_tr": "Saf onur enerjisi yay. 15m içindeki müttefikler 2 tur boyunca 1 HP'nin altına düşürülemez.",
+        "branch": "Honor",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "ls_last_stand"
+        ],
+        "icon": "🪷",
+        "effects": {
+          "range": "15m radius",
+          "buff": "Allies cannot fall below 1 HP",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ls_bushido_incarnate",
+        "name_en": "Bushido Incarnate",
+        "name_tr": "Bushido Tecellisi",
+        "description_en": "Embody the ultimate warrior code. For 5 turns, you gain +50% all resistances, +50% damage, and any enemy striking you takes 5d10 reflective damage.",
+        "description_tr": "Nihai savaşçı kodunu cisimleştir. 5 tur boyunca +%50 tüm dirençler, +%50 hasar kazanırsın ve sana vuran her düşman 5d10 yansıma hasarı alır.",
+        "branch": "Honor",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ls_immortal_honor"
+        ],
+        "icon": "👺",
+        "effects": {
+          "buff": "+50% All Resistances, +50% Damage",
+          "damage": "5d10 reflective damage",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "ls_heavy_cleave",
+        "name_en": "Heavy Cleave",
+        "name_tr": "Ağır Yarma",
+        "description_en": "A powerful two-handed overhead strike dealing 2d8 physical damage and slowing the target's movement by 2m for 1 turn.",
+        "description_tr": "Güçlü iki elli bir tepeden vuruş, 2d8 fiziksel hasar verir ve hedefin hareketini 1 tur boyunca 2m yavaşlatır.",
+        "branch": "Legendary Blade",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪓",
+        "effects": {
+          "damage": "2d8 physical",
+          "range": "2m",
+          "condition": "Slow 2m (1 turn)"
+        }
+      },
+      {
+        "spell_key": "ls_piercing_thrust",
+        "name_en": "Piercing Thrust",
+        "name_tr": "Delici Hamle",
+        "description_en": "Thrust your sword forward in a 5m line, dealing 2d10 damage. Ignores 50% of the target's armor.",
+        "description_tr": "Kılıcını 5m'lik bir hattan ileri sapla, 2d10 hasar ver. Hedefin zırhının %50'sini yok sayar.",
+        "branch": "Legendary Blade",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "ls_heavy_cleave"
+        ],
+        "icon": "🔱",
+        "effects": {
+          "damage": "2d10 physical",
+          "range": "5m line",
+          "special": "Ignores 50% Armor"
+        }
+      },
+      {
+        "spell_key": "ls_spirit_blade",
+        "name_en": "Spirit Blade",
+        "name_tr": "Ruhani Kılıç",
+        "description_en": "Infuse your sword with spirit energy. Your next attack within 2 turns deals an extra 3d6 force damage and has 100% accuracy.",
+        "description_tr": "Kılıcına ruh enerjisi aşıla. 2 tur içindeki bir sonraki saldırın fazladan 3d6 güç hasarı verir ve %100 isabet oranına sahip olur.",
+        "branch": "Legendary Blade",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ls_piercing_thrust"
+        ],
+        "icon": "❇️",
+        "effects": {
+          "buff": "Next attack gains +3d6 force damage, 100% Hit",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ls_earth_shatter",
+        "name_en": "Earth Shatter",
+        "name_tr": "Yeryüzü Parçalayan",
+        "description_en": "Slam your blade into the ground, dealing 3d8 damage to enemies in a 4m cone and knocking them prone.",
+        "description_tr": "Kılıcını yere çarparak 4m'lik bir koni içindeki düşmanlara 3d8 hasar ver ve onları yere ser (prone).",
+        "branch": "Legendary Blade",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "ls_spirit_blade"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "3d8 physical",
+          "range": "4m cone",
+          "condition": "Prone"
+        }
+      },
+      {
+        "spell_key": "ls_mythic_strike",
+        "name_en": "Mythic Strike",
+        "name_tr": "Mistik Vuruş",
+        "description_en": "A legendary horizontal slash that deals 4d10 damage to enemies within a 3m wide, 6m long line.",
+        "description_tr": "3m genişliğinde, 6m uzunluğundaki bir hat boyunca düşmanlara 4d10 hasar veren efsanevi yatay bir kesik.",
+        "branch": "Legendary Blade",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ls_earth_shatter"
+        ],
+        "icon": "✨",
+        "effects": {
+          "damage": "4d10 physical",
+          "range": "6m line (3m wide)"
+        }
+      },
+      {
+        "spell_key": "ls_dragon_fang",
+        "name_en": "Dragon Fang",
+        "name_tr": "Ejderha Dişi",
+        "description_en": "Leap up to 8m and crash down with a devastating strike, dealing 5d8 damage in a 3m radius.",
+        "description_tr": "8m'ye kadar zıpla ve yıkıcı bir vuruşla yere inerek 3m'lik yarıçapta 5d8 hasar ver.",
+        "branch": "Legendary Blade",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [
+          "ls_mythic_strike"
+        ],
+        "icon": "🦷",
+        "effects": {
+          "damage": "5d8 physical",
+          "range": "8m leap, 3m radius"
+        }
+      },
+      {
+        "spell_key": "ls_void_slash",
+        "name_en": "Void Slash",
+        "name_tr": "Hiçlik Kesiği",
+        "description_en": "Slash through the fabric of space. Target an enemy up to 10m away; deal 4d12 force damage instantly without moving.",
+        "description_tr": "Uzay dokusunu kes. 10m'ye kadar uzaklıktaki bir düşmanı hedef al; yerinden hareket etmeden anında 4d12 güç hasarı ver.",
+        "branch": "Legendary Blade",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ls_dragon_fang"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "4d12 force",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ls_heavenly_descent",
+        "name_en": "Heavenly Descent",
+        "name_tr": "Cennetin İnişi",
+        "description_en": "Summon a massive spectral sword from the sky that crashes down in a 5m radius, dealing 6d10 radiant damage and stunning enemies for 1 turn.",
+        "description_tr": "Gökten 5m yarıçapında yere çakılan devasa bir spektral kılıç çağır, 6d10 parlak hasar ver ve düşmanları 1 tur sersemlet.",
+        "branch": "Legendary Blade",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ls_void_slash"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "6d10 radiant",
+          "range": "5m radius",
+          "condition": "Stun (1 turn)"
+        }
+      },
+      {
+        "spell_key": "ls_crimson_arc",
+        "name_en": "Crimson Arc",
+        "name_tr": "Kızıl Kavis",
+        "description_en": "A wide sweeping attack in an 8m cone. Deals 7d8 slashing damage and heals you for 20% of the damage dealt.",
+        "description_tr": "8m'lik bir konide geniş çaplı savurma saldırısı. 7d8 kesici hasar verir ve verilen hasarın %20'si kadar seni iyileştirir.",
+        "branch": "Legendary Blade",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ls_heavenly_descent"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "7d8 slashing",
+          "range": "8m cone",
+          "healing": "20% Lifesteal"
+        }
+      },
+      {
+        "spell_key": "ls_mountain_cleaver",
+        "name_en": "Mountain Cleaver",
+        "name_tr": "Dağ Yaran",
+        "description_en": "A legendary strike capable of splitting mountains. Deals 10d12 damage to a single target. If it kills them, the remaining damage hits another enemy within 5m.",
+        "description_tr": "Dağları bölebilecek efsanevi bir vuruş. Tek bir hedefe 10d12 hasar verir. Eğer hedefi öldürürse, kalan hasar 5m içindeki başka bir düşmana isabet eder.",
+        "branch": "Legendary Blade",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ls_crimson_arc"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "damage": "10d12 physical",
+          "range": "Melee",
+          "special": "Overkill damage leaps to 5m"
+        }
+      },
+      {
+        "spell_key": "ls_star_fall_strike",
+        "name_en": "Star Fall Strike",
+        "name_tr": "Yıldız Düşüren Vuruş",
+        "description_en": "Channel cosmic energy into your blade. Deals 12d10 damage in a 10m line and leaves a trail of burning starlight (2d8 damage per turn) for 3 turns.",
+        "description_tr": "Bıçağına kozmik enerji kanalize et. 10m'lik bir hatta 12d10 hasar verir ve 3 tur boyunca yanan bir yıldız ışığı izi (tur başına 2d8 hasar) bırakır.",
+        "branch": "Legendary Blade",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ls_mountain_cleaver"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "12d10 radiant",
+          "range": "10m line",
+          "area_effect": "2d8 damage/turn trail (3 turns)"
+        }
+      },
+      {
+        "spell_key": "ls_soul_render",
+        "name_en": "Soul Render",
+        "name_tr": "Ruh Parçalayan",
+        "description_en": "A strike that targets the soul directly. Deals 15d10 necrotic damage, bypassing all armor and shields. Range: 3m.",
+        "description_tr": "Doğrudan ruhu hedef alan bir vuruş. Tüm zırh ve kalkanları yok sayarak 15d10 nekrotik hasar verir. Menzil: 3m.",
+        "branch": "Legendary Blade",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "ls_star_fall_strike"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "15d10 necrotic",
+          "range": "3m",
+          "special": "Ignores Armor and Shields"
+        }
+      },
+      {
+        "spell_key": "ls_blade_of_antiquity",
+        "name_en": "Blade of Antiquity",
+        "name_tr": "Kadimlerin Kılıcı",
+        "description_en": "Summon the ultimate legendary blade for 3 turns. Your attacks deal an additional 8d12 radiant damage and extend your melee range to 10m.",
+        "description_tr": "3 tur boyunca nihai efsanevi kılıcı çağır. Saldırıların fazladan 8d12 parlak hasar verir ve yakın dövüş menzilini 10m'ye çıkarır.",
+        "branch": "Legendary Blade",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ls_soul_render"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "buff": "+8d12 radiant damage, 10m Melee Range",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_honorable_twins",
+        "name_en": "Honorable Twins",
+        "name_tr": "Onurlu İkizler",
+        "description_en": "While wielding two weapons, you gain +2 AC. When you parry an attack, you strike back with both weapons for 3d6 damage each.",
+        "description_tr": "İki silah kullanırken +2 Zırh Sınıfı kazanırsın. Bir saldırıyı savuşturduğunda, her iki silahla da 3d6 hasarlık karşılık verirsin.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ls_dual_flurry",
+          "ls_vengeful_counter"
+        ],
+        "icon": "♊",
+        "effects": {
+          "buff": "+2 AC",
+          "trigger": "On parry: 2x 3d6 damage"
+        }
+      },
+      {
+        "spell_key": "ls_legendary_flurry",
+        "name_en": "Legendary Flurry",
+        "name_tr": "Efsanevi Bora",
+        "description_en": "Perform a leaping 5-hit combo, dealing 2d10 damage per hit to a single target. Range: 6m.",
+        "description_tr": "Tek bir hedefe her vuruşta 2d10 hasar veren, sıçramalı 5 vuruşluk bir kombo yap. Menzil: 6m.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "ls_whirlwind_slash",
+          "ls_dragon_fang"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "damage": "5x 2d10 physical",
+          "range": "6m leap"
+        }
+      },
+      {
+        "spell_key": "ls_stoic_strike",
+        "name_en": "Stoic Strike",
+        "name_tr": "Metanetli Vuruş",
+        "description_en": "Absorb an incoming attack and redirect its energy into a focused strike dealing 5d10 + (Absorbed Damage) in a 4m cone.",
+        "description_tr": "Gelen bir saldırıyı absorbe et ve enerjisini yönlendirerek 4m'lik konide 5d10 + (Emilen Hasar) kadar odaklı bir vuruş yap.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ls_stoic_guard",
+          "ls_void_slash"
+        ],
+        "icon": "🗻",
+        "effects": {
+          "damage": "5d10 + Absorbed Damage",
+          "range": "4m cone"
+        }
+      },
+      {
+        "spell_key": "ls_phantom_guard",
+        "name_en": "Phantom Guard",
+        "name_tr": "Hayalet Koruma",
+        "description_en": "Your phantom swords actively parry attacks for you, granting 25% evasion and dealing 2d8 damage to attackers for 3 turns.",
+        "description_tr": "Hayalet kılıçların senin için saldırıları aktif olarak savuşturur, 3 tur boyunca %25 kaçınma sağlar ve saldıranlara 2d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ls_phantom_swords",
+          "ls_ancestral_guidance"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "buff": "25% Evasion",
+          "damage": "2d8 counter damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_void_twins",
+        "name_en": "Void Twins",
+        "name_tr": "Hiçlik İkizleri",
+        "description_en": "Rip through space with dual blades, creating a 6m zone of vacuum. Enemies inside take 5d8 force damage per turn and have movement halved for 3 turns.",
+        "description_tr": "Çifte kılıçla uzayı yırtarak 6m'lik bir vakum bölgesi oluştur. İçerideki düşmanlar tur başına 5d8 güç hasarı alır ve hareket hızları 3 tur yarıya düşer.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ls_severing_wind",
+          "ls_heavenly_descent"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "range": "6m zone",
+          "damage": "5d8 force/turn",
+          "debuff": "Movement Halved",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_ancestral_arc",
+        "name_en": "Ancestral Arc",
+        "name_tr": "Ataların Kavisi",
+        "description_en": "An attack fueled by your ancestors. Deals 8d12 radiant damage in a 10m cone and heals all allies in the area for 3d8 HP.",
+        "description_tr": "Ataların tarafından desteklenen bir saldırı. 10m'lik konide 8d12 parlak hasar verir ve alandaki tüm müttefikleri 3d8 HP iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ls_unyielding_spirit",
+          "ls_mountain_cleaver"
+        ],
+        "icon": "🌈",
+        "effects": {
+          "damage": "8d12 radiant",
+          "healing": "3d8 AoE heal",
+          "range": "10m cone"
+        }
+      },
+      {
+        "spell_key": "ls_hurricane_of_honor",
+        "name_en": "Hurricane of Honor",
+        "name_tr": "Onur Kasırgası",
+        "description_en": "A stationary whirlwind of blades. For 2 turns, you are immune to displacement, and enemies entering a 5m radius take 6d10 damage per turn.",
+        "description_tr": "Sabit bir kılıç fırtınası. 2 tur boyunca yer değiştirme etkilerine bağışık olursun ve 5m yarıçapına giren düşmanlar tur başına 6d10 hasar alır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ls_thousand_cuts",
+          "ls_last_stand"
+        ],
+        "icon": "🎐",
+        "effects": {
+          "buff": "Immune to displacement",
+          "range": "5m radius",
+          "damage": "6d10 physical/turn",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ls_mountain_whirlwind",
+        "name_en": "Mountain Whirlwind",
+        "name_tr": "Dağ Kasırgası",
+        "description_en": "Spin with legendary force, creating a tornado that pulls enemies in from 15m and deals 10d10 slashing damage.",
+        "description_tr": "Efsanevi bir güçle dönerek 15m'den düşmanları içine çeken bir hortum yarat ve 10d10 kesici hasar ver.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ls_crescent_dance",
+          "ls_star_fall_strike"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "range": "15m pull",
+          "damage": "10d10 slashing"
+        }
+      },
+      {
+        "spell_key": "ls_unyielding_myth",
+        "name_en": "Unyielding Myth",
+        "name_tr": "Boyun Eğmez Efsane",
+        "description_en": "Become a mythic figure. For 3 turns, you ignore all crowd control, and your single-target attacks hit all enemies within 5m of the target.",
+        "description_tr": "Efsanevi bir figüre dönüş. 3 tur boyunca tüm kitle kontrolünü görmezden gelirsin ve tek hedefe yaptığın saldırılar hedefin 5m çevresindeki tüm düşmanlara isabet eder.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "ls_immortal_honor",
+          "ls_soul_render"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "buff": "CC Immunity",
+          "special": "Single-target attacks splash in 5m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ls_tri_style_mastery",
+        "name_en": "Tri-Style Mastery",
+        "name_tr": "Üçlü Stil Ustalığı",
+        "description_en": "Passive: Your dual attacks have 15% armor penetration, your parries heal 10% max HP, and your heavy strikes have a 20% chance to stun.",
+        "description_tr": "Pasif: Çifte saldırıların %15 zırh delmeye sahiptir, savuşturmaların maks HP'nin %10'unu iyileştirir ve ağır vuruşlarının %20 sersemletme şansı vardır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ls_eclipse_slashes",
+          "ls_last_stand",
+          "ls_star_fall_strike"
+        ],
+        "icon": "💠",
+        "effects": {
+          "passive": "Dual attacks ignore 15% Armor",
+          "healing": "Parries heal 10% Max HP",
+          "status": "Heavy strikes 20% Stun chance"
+        }
+      },
+      {
+        "spell_key": "ls_the_last_samurai",
+        "name_en": "The Last Samurai",
+        "name_tr": "Son Samuray",
+        "description_en": "Unleash the ultimate secret art. Time stops for 1 turn. You perform 10 massive strikes across the battlefield, dealing 20d20 total damage to all enemies within 30m, finishing with a devastating sheath that executes enemies below 20% HP.",
+        "description_tr": "Nihai gizli sanatı serbest bırak. Zaman 1 tur durur. Savaş alanında 30m içindeki tüm düşmanlara 20d20 toplam hasar veren 10 devasa vuruş yaparsın ve %20 HP altındaki düşmanları infaz eden yıkıcı bir kılıç kınına sokma hareketiyle bitirirsin.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ls_twin_dragon_rend",
+          "ls_bushido_incarnate",
+          "ls_blade_of_antiquity"
+        ],
+        "icon": "🌸",
+        "effects": {
+          "special": "Time stop (1 turn)",
+          "damage": "20d20 physical/radiant",
+          "range": "30m radius",
+          "condition": "Execute enemies below 20% HP"
+        }
+      }
+    ]
+  }
+]

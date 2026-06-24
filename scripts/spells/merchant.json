@@ -1,0 +1,1022 @@
+[
+  {
+    "subclass_key": "merchant",
+    "tree_name_en": "Merchant's Ledger",
+    "tree_name_tr": "Tüccarın Defteri",
+    "tree_desc_en": "The art of trade, overwhelming wealth, and ruthless deals. A true Merchant knows that everything, and everyone, has a price.",
+    "tree_desc_tr": "Ticaret, ezici servet ve acımasız anlaşmaların sanatı. Gerçek bir Tüccar her şeyin ve herkesin bir fiyatı olduğunu bilir.",
+    "branches": [
+      "Trade",
+      "Wealth",
+      "Deal"
+    ],
+    "spells": [
+      {
+        "spell_key": "mc_trade_barter",
+        "name_en": "Barter",
+        "name_tr": "Takas",
+        "description_en": "Trade 10% of your maximum HP for a burst of 50 MP.",
+        "description_tr": "Maksimum HP'nizin %10'unu 50 MP karşılığında takas edin.",
+        "branch": "Trade",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🤝",
+        "effects": {
+          "cost": "10% HP",
+          "gain": "50 MP"
+        }
+      },
+      {
+        "spell_key": "mc_trade_appraisal",
+        "name_en": "Appraisal",
+        "name_tr": "Değer Biçme",
+        "description_en": "Analyze the target, revealing weak points and reducing their Armor Class by 2 for 30s. Range 15m.",
+        "description_tr": "Hedefi analiz ederek zayıf noktalarını ortaya çıkarın ve 30 saniye boyunca Zırh Sınıfını (AC) 2 azaltın. Menzil 15m.",
+        "branch": "Trade",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "mc_trade_barter"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "armor_reduction": "2",
+          "duration": "30s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_trade_delivery",
+        "name_en": "Express Delivery",
+        "name_tr": "Ekspres Teslimat",
+        "description_en": "Throw a random heavy item from your inventory at high speed, dealing 2d6 bludgeoning damage. Range 15m.",
+        "description_tr": "Envanterinizden rastgele ağır bir eşyayı yüksek hızda fırlatarak 2d6 ezici hasar verin. Menzil 15m.",
+        "branch": "Trade",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mc_trade_appraisal"
+        ],
+        "icon": "📦",
+        "effects": {
+          "damage": "2d6 bludgeoning",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_coin_toss",
+        "name_en": "Coin Toss",
+        "name_tr": "Madeni Para Atışı",
+        "description_en": "Flick a gold coin infused with kinetic magic, dealing 1d8 piercing damage. Range 20m.",
+        "description_tr": "Kinetik büyüyle aşılanmış altın bir madeni parayı fırlatarak 1d8 delici hasar verin. Menzil 20m.",
+        "branch": "Wealth",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪙",
+        "effects": {
+          "damage": "1d8 piercing",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_golden_shield",
+        "name_en": "Golden Shield",
+        "name_tr": "Altın Kalkan",
+        "description_en": "Consume 20 gold to create a shimmering shield that absorbs up to 30 damage for 10s.",
+        "description_tr": "20 altın harcayarak 10 saniye boyunca 30 hasara kadar emen parıldayan bir kalkan oluşturun.",
+        "branch": "Wealth",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "mc_wealth_coin_toss"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield": "30 HP",
+          "duration": "10s",
+          "cost": "20 gold"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_pocket_change",
+        "name_en": "Pocket Change",
+        "name_tr": "Bozukluk",
+        "description_en": "Scatter a handful of coins in a 5m cone, dealing 1d6 damage to all enemies hit.",
+        "description_tr": "5m'lik bir koni alanına bir avuç bozuk para saçarak isabet alan tüm düşmanlara 1d6 hasar verin.",
+        "branch": "Wealth",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mc_wealth_golden_shield"
+        ],
+        "icon": "💰",
+        "effects": {
+          "damage": "1d6",
+          "radius": "5m cone"
+        }
+      },
+      {
+        "spell_key": "mc_deal_handshake",
+        "name_en": "Firm Handshake",
+        "name_tr": "Sıkı El Sıkışma",
+        "description_en": "Grab the target's hand in a magical binding grip. Deals 1d6 bludgeoning damage and prevents them from moving further than 2m from you for 3s.",
+        "description_tr": "Hedefin elini sihirli bir bağla tutun. 1d6 ezici hasar verir ve 3 saniye boyunca sizden 2m'den fazla uzaklaşmalarını engeller.",
+        "branch": "Deal",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🫱🏼‍🫲🏾",
+        "effects": {
+          "damage": "1d6 bludgeoning",
+          "duration": "3s",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "mc_deal_fine_print",
+        "name_en": "The Fine Print",
+        "name_tr": "İnce Yazı",
+        "description_en": "Place a tiny, hard-to-read curse on an enemy. For 10s, they take 1d4 psychic damage every time they cast a spell. Range 15m.",
+        "description_tr": "Bir düşmana okuması zor küçük bir lanet yerleştirin. 10 saniye boyunca, her büyü yaptıklarında 1d4 psişik hasar alırlar. Menzil 15m.",
+        "branch": "Deal",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "mc_deal_handshake"
+        ],
+        "icon": "📄",
+        "effects": {
+          "damage": "1d4 psychic per cast",
+          "duration": "10s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_loan",
+        "name_en": "Loan",
+        "name_tr": "Kredi",
+        "description_en": "Grant an ally 20 temporary HP instantly, but they take 5 irreducible damage when the effect ends after 15s. Range 10m.",
+        "description_tr": "Bir müttefike anında 20 geçici HP verin, ancak 15 saniye sonra etki bittiğinde 5 engellenemez hasar alırlar. Menzil 10m.",
+        "branch": "Deal",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "mc_deal_fine_print"
+        ],
+        "icon": "📝",
+        "effects": {
+          "temp_hp": "20",
+          "damage_after": "5",
+          "duration": "15s",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mc_trade_fair_exchange",
+        "name_en": "Fair Exchange",
+        "name_tr": "Adil Değişim",
+        "description_en": "Swap one negative status effect from yourself with one positive status effect from an enemy within 10m.",
+        "description_tr": "10m içindeki bir düşmandan kendinize olumlu bir statü etkisini alın ve kendi olumsuz etkinizi onlara aktarın.",
+        "branch": "Trade",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mc_trade_delivery"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "range": "10m",
+          "target": "1 enemy"
+        }
+      },
+      {
+        "spell_key": "mc_trade_smuggle",
+        "name_en": "Smuggle",
+        "name_tr": "Kaçakçılık",
+        "description_en": "Secretly teleport an ally up to 15m to an unoccupied space.",
+        "description_tr": "Bir müttefiki 15m'ye kadar gizlice boş bir alana ışınlayın.",
+        "branch": "Trade",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 225,
+        "prerequisites": [
+          "mc_trade_fair_exchange"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "range": "15m",
+          "target": "1 ally"
+        }
+      },
+      {
+        "spell_key": "mc_trade_discount",
+        "name_en": "Discount",
+        "name_tr": "İndirim",
+        "description_en": "Apply a magical coupon to yourself or an ally, reducing the MP cost of the next spell cast by 50%.",
+        "description_tr": "Kendinize veya bir müttefike sihirli bir kupon uygulayarak bir sonraki büyünün MP bedelini %50 azaltın.",
+        "branch": "Trade",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mc_trade_smuggle"
+        ],
+        "icon": "🏷️",
+        "effects": {
+          "cost_reduction": "50%",
+          "target": "self or ally"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_pay_to_win",
+        "name_en": "Pay to Win",
+        "name_tr": "Kazanmak İçin Öde",
+        "description_en": "Spend 50 gold to automatically make your next attack or spell a critical hit.",
+        "description_tr": "50 altın harcayarak bir sonraki saldırınızın veya büyünüzün otomatik olarak kritik vuruş olmasını sağlayın.",
+        "branch": "Wealth",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mc_wealth_pocket_change"
+        ],
+        "icon": "💳",
+        "effects": {
+          "cost": "50 gold",
+          "buff": "guaranteed critical hit"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_money_bag",
+        "name_en": "Heavy Money Bag",
+        "name_tr": "Ağır Para Kesesi",
+        "description_en": "Swing an incredibly heavy bag of coins, dealing 3d8 bludgeoning damage and knocking the target back 3m. Melee range.",
+        "description_tr": "İnanılmaz derecede ağır bir para kesesini savurarak 3d8 ezici hasar verin ve hedefi 3m geri savurun. Yakın dövüş menzili.",
+        "branch": "Wealth",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 225,
+        "prerequisites": [
+          "mc_wealth_pay_to_win"
+        ],
+        "icon": "🎒",
+        "effects": {
+          "damage": "3d8 bludgeoning",
+          "knockback": "3m",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_bribe_guard",
+        "name_en": "Bribe the Guard",
+        "name_tr": "Muhafıza Rüşvet",
+        "description_en": "Toss a pouch of gold to an enemy humanoid within 10m, forcing them to skip their next action.",
+        "description_tr": "10m içindeki insansı bir düşmana bir kese altın atarak bir sonraki turlarını pas geçmelerini sağlayın.",
+        "branch": "Wealth",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mc_wealth_money_bag"
+        ],
+        "icon": "🤫",
+        "effects": {
+          "range": "10m",
+          "effect": "skip turn"
+        }
+      },
+      {
+        "spell_key": "mc_deal_contract",
+        "name_en": "Blood Contract",
+        "name_tr": "Kan Sözleşmesi",
+        "description_en": "Bind your life force to an enemy for 15s. 30% of all damage you take is also dealt to them. Range 15m.",
+        "description_tr": "Yaşam gücünüzü 15 saniyeliğine bir düşmana bağlayın. Aldığınız tüm hasarın %30'u onlara da yansıtılır. Menzil 15m.",
+        "branch": "Deal",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "mc_deal_loan"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "duration": "15s",
+          "damage_share": "30%",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_debt_collection",
+        "name_en": "Debt Collection",
+        "name_tr": "Borç Tahsilatı",
+        "description_en": "Violently extract what you are owed. Deals 3d6 necrotic damage, plus an additional 1d6 for every debuff on the target. Melee range.",
+        "description_tr": "Size borçlu olunanı şiddetle tahsil edin. 3d6 nekrotik hasar ve hedefteki her zayıflatma için ek 1d6 hasar verir. Yakın dövüş.",
+        "branch": "Deal",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 225,
+        "prerequisites": [
+          "mc_deal_contract"
+        ],
+        "icon": "💼",
+        "effects": {
+          "damage": "3d6 necrotic + 1d6 per debuff",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "mc_deal_interest_rate",
+        "name_en": "Interest Rate",
+        "name_tr": "Faiz Oranı",
+        "description_en": "Curse an enemy so their movement speed decreases by 5% every second for 10s. Range 15m.",
+        "description_tr": "Bir düşmanı lanetleyerek hareket hızlarını 10 saniye boyunca her saniye %5 azaltın. Menzil 15m.",
+        "branch": "Deal",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "mc_deal_debt_collection"
+        ],
+        "icon": "📉",
+        "effects": {
+          "speed_reduction": "5% per sec",
+          "duration": "10s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_cross_insurance_fraud",
+        "name_en": "Insurance Fraud",
+        "name_tr": "Sigorta Dolandırıcılığı",
+        "description_en": "After taking damage, immediately reflect 200% of that damage back to the attacker as force damage, consuming 100 gold.",
+        "description_tr": "Hasar aldıktan sonra, 100 altın harcayarak hasarın %200'ünü saldıran kişiye güç hasarı olarak geri yansıtın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "mc_trade_fair_exchange",
+          "mc_deal_contract"
+        ],
+        "icon": "🤕",
+        "effects": {
+          "damage_reflection": "200%",
+          "cost": "100 gold",
+          "damage_type": "force"
+        }
+      },
+      {
+        "spell_key": "mc_cross_mercenary_payoff",
+        "name_en": "Mercenary Payoff",
+        "name_tr": "Paralı Asker Ödemesi",
+        "description_en": "Spend 200 gold to instantly summon two veteran mercenaries to fight alongside you for 30s.",
+        "description_tr": "200 altın harcayarak 30 saniye boyunca sizinle birlikte savaşacak iki usta paralı asker çağırın.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "mc_trade_smuggle",
+          "mc_wealth_pay_to_win"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "summons": "2 mercenaries",
+          "duration": "30s",
+          "cost": "200 gold"
+        }
+      },
+      {
+        "spell_key": "mc_trade_bulk_buy",
+        "name_en": "Bulk Buy",
+        "name_tr": "Toplu Alım",
+        "description_en": "Purchase multiple enhancements at once. Spend 150 gold to grant yourself and all allies within 10m +2 AC and +10m movement speed for 1 minute.",
+        "description_tr": "Tek seferde birden fazla güçlendirme satın alın. 150 altın harcayarak kendinize ve 10m içindeki tüm müttefiklere 1 dakika boyunca +2 AC ve +10m hareket hızı sağlayın.",
+        "branch": "Trade",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mc_trade_discount"
+        ],
+        "icon": "🛒",
+        "effects": {
+          "cost": "150 gold",
+          "ac_bonus": "2",
+          "speed_bonus": "10m",
+          "duration": "60s",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "mc_trade_outsourcing",
+        "name_en": "Outsourcing",
+        "name_tr": "Taşeronluk",
+        "description_en": "Summon a magical proxy to cast a spell you know, costing no MP but consuming 100 gold.",
+        "description_tr": "Bildiğiniz bir büyüyü yapması için sihirli bir vekil çağırın. Hiçbir MP harcamaz ancak 100 altın tüketir.",
+        "branch": "Trade",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 425,
+        "prerequisites": [
+          "mc_trade_bulk_buy"
+        ],
+        "icon": "👷",
+        "effects": {
+          "cost": "100 gold",
+          "mp_cost": "0",
+          "summon": "spell proxy"
+        }
+      },
+      {
+        "spell_key": "mc_trade_monopoly",
+        "name_en": "Monopoly",
+        "name_tr": "Tekel",
+        "description_en": "Claim exclusive rights to vitality. For 15s, any healing applied to enemies within 20m is redirected to you.",
+        "description_tr": "Yaşam gücü üzerinde tekel kurun. 15 saniye boyunca, 20m içindeki düşmanlara uygulanan tüm iyileştirmeler size yönlendirilir.",
+        "branch": "Trade",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mc_trade_outsourcing"
+        ],
+        "icon": "🎩",
+        "effects": {
+          "duration": "15s",
+          "radius": "20m",
+          "effect": "steal healing"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_coin_shower",
+        "name_en": "Coin Shower",
+        "name_tr": "Madeni Para Yağmuru",
+        "description_en": "Cause a torrential downpour of heavy coins in a 10m radius, dealing 4d6 bludgeoning damage to all enemies inside. Range 20m.",
+        "description_tr": "10m'lik bir alanda şiddetli bir ağır madeni para yağmuru başlatarak içerideki tüm düşmanlara 4d6 ezici hasar verin. Menzil 20m.",
+        "branch": "Wealth",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mc_wealth_bribe_guard"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "4d6 bludgeoning",
+          "radius": "10m",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_gilded_armor",
+        "name_en": "Gilded Armor",
+        "name_tr": "Yaldızlı Zırh",
+        "description_en": "Coat yourself in solid gold, gaining +5 AC and reflecting 2d6 piercing damage to melee attackers for 30s. Movement speed is halved.",
+        "description_tr": "Kendinizi som altınla kaplayarak +5 AC kazanın ve 30 saniye boyunca yakın dövüş saldırganlarına 2d6 delici hasar yansıtın. Hareket hızınız yarıya iner.",
+        "branch": "Wealth",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 425,
+        "prerequisites": [
+          "mc_wealth_coin_shower"
+        ],
+        "icon": "✨",
+        "effects": {
+          "ac_bonus": "5",
+          "damage_reflection": "2d6 piercing",
+          "duration": "30s",
+          "speed_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_bounty",
+        "name_en": "Place Bounty",
+        "name_tr": "Ödül Koyma",
+        "description_en": "Mark an enemy for death for 30s. Any ally who damages this enemy heals for 20% of the damage dealt. Range 20m.",
+        "description_tr": "30 saniyeliğine bir düşmanı ölüm için işaretleyin. Bu düşmana hasar veren herhangi bir müttefik, verdiği hasarın %20'si kadar iyileşir. Menzil 20m.",
+        "branch": "Wealth",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mc_wealth_gilded_armor"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "duration": "30s",
+          "heal_ratio": "20% of damage",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_nda",
+        "name_en": "Non-Disclosure Agreement",
+        "name_tr": "Gizlilik Anlaşması",
+        "description_en": "Magically seal an enemy's lips, silencing them and preventing verbal spellcasting for 5s. Range 15m.",
+        "description_tr": "Bir düşmanın dudaklarını sihirle mühürleyerek onları susturun ve 5 saniye boyunca sözlü büyü yapmalarını engelleyin. Menzil 15m.",
+        "branch": "Deal",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "mc_deal_interest_rate"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "duration": "5s",
+          "effect": "silence",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_loophole",
+        "name_en": "Loophole",
+        "name_tr": "Yasal Boşluk",
+        "description_en": "Find a flaw in reality's rules. For the next 10s, you have a 50% chance to completely evade any incoming attack or spell.",
+        "description_tr": "Gerçekliğin kurallarında bir kusur bulun. Sonraki 10 saniye boyunca, gelen herhangi bir saldırıdan veya büyüden tamamen kaçınma şansınız %50 olur.",
+        "branch": "Deal",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 425,
+        "prerequisites": [
+          "mc_deal_nda"
+        ],
+        "icon": "🔍",
+        "effects": {
+          "evasion_chance": "50%",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "mc_deal_breach_of_contract",
+        "name_en": "Breach of Contract",
+        "name_tr": "Sözleşme İhlali",
+        "description_en": "Set a trap on yourself. The next enemy to attack you within 30s takes 4d8 lightning damage and is stunned for 2s.",
+        "description_tr": "Kendinize bir tuzak kurun. 30 saniye içinde size saldıran ilk düşman 4d8 yıldırım hasarı alır ve 2 saniye boyunca sersemler.",
+        "branch": "Deal",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "mc_deal_loophole"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "4d8 lightning",
+          "stun_duration": "2s",
+          "trap_duration": "30s"
+        }
+      },
+      {
+        "spell_key": "mc_cross_golden_handshake",
+        "name_en": "Golden Handshake",
+        "name_tr": "Altın El Sıkışma",
+        "description_en": "Forcefully shake an enemy's hand, spending 200 gold to deal 5d6 force damage and steal their next action phase. Melee range.",
+        "description_tr": "Bir düşmanın elini zorla sıkarak 200 altın harcayın ve 5d6 güç hasarı verip sonraki tur eylemlerini çalın. Yakın dövüş.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 475,
+        "prerequisites": [
+          "mc_wealth_bounty",
+          "mc_deal_loophole"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "damage": "5d6 force",
+          "cost": "200 gold",
+          "effect": "steal action",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "mc_cross_insider_trading",
+        "name_en": "Insider Trading",
+        "name_tr": "İçeriden Öğrenenlerin Ticareti",
+        "description_en": "Read the target's intentions, gaining +10 AC against their attacks and advantage on saving throws against their spells for 15s. Range 15m.",
+        "description_tr": "Hedefin niyetini okuyarak 15 saniye boyunca onların saldırılarına karşı +10 AC ve büyülerine karşı kurtarma zarlarına avantaj kazanın. Menzil 15m.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 475,
+        "prerequisites": [
+          "mc_trade_monopoly",
+          "mc_deal_nda"
+        ],
+        "icon": "📈",
+        "effects": {
+          "ac_bonus": "10",
+          "saving_throw": "advantage",
+          "duration": "15s",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_cross_asset_freeze",
+        "name_en": "Asset Freeze",
+        "name_tr": "Mal Varlığı Dondurma",
+        "description_en": "Magically lock an enemy's inventory and mana. They cannot use items or cast spells for 6s. Range 20m.",
+        "description_tr": "Bir düşmanın envanterini ve manasını sihirle kilitleyin. 6 saniye boyunca eşya kullanamaz veya büyü yapamazlar. Menzil 20m.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 475,
+        "prerequisites": [
+          "mc_wealth_gilded_armor",
+          "mc_trade_bulk_buy"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "duration": "6s",
+          "effect": "item and spell lock",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_trade_hostile_takeover",
+        "name_en": "Hostile Takeover",
+        "name_tr": "Düşmanca Devralma",
+        "description_en": "Target an enemy summon or mind-controlled entity and buy out their loyalty. They become your permanent ally until they die. Range 20m.",
+        "description_tr": "Bir düşman yaratığını veya zihin kontrollü varlığı hedef alın ve sadakatlerini satın alın. Ölünceye kadar kalıcı müttefikiniz olurlar. Menzil 20m.",
+        "branch": "Trade",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mc_trade_monopoly"
+        ],
+        "icon": "🏢",
+        "effects": {
+          "range": "20m",
+          "effect": "mind control summon"
+        }
+      },
+      {
+        "spell_key": "mc_trade_black_market",
+        "name_en": "Black Market",
+        "name_tr": "Kara Borsa",
+        "description_en": "Tap into illicit powers. Grant an ally +50% damage for 20s, but their maximum HP is reduced by 25% for the duration.",
+        "description_tr": "Yasadışı güçlere erişin. Bir müttefike 20 saniye boyunca +%50 hasar verin, ancak süre boyunca maksimum HP'leri %25 azalır.",
+        "branch": "Trade",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mc_trade_hostile_takeover"
+        ],
+        "icon": "🕶️",
+        "effects": {
+          "damage_bonus": "50%",
+          "max_hp_reduction": "25%",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "mc_trade_free_shipping",
+        "name_en": "Free Shipping",
+        "name_tr": "Ücretsiz Kargo",
+        "description_en": "Instantly teleport to any ally within 50m, dropping a massive healing crate that heals them for 4d8+20 HP.",
+        "description_tr": "50m içindeki herhangi bir müttefike anında ışınlanarak onları 4d8+20 HP iyileştiren devasa bir şifa kasası bırakın.",
+        "branch": "Trade",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "mc_trade_black_market"
+        ],
+        "icon": "📦",
+        "effects": {
+          "healing": "4d8+20",
+          "range": "50m",
+          "effect": "teleport"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_rain_of_wealth",
+        "name_en": "Rain of Wealth",
+        "name_tr": "Servet Yağmuru",
+        "description_en": "Summon a catastrophic storm of gold bars in a 15m radius, dealing 8d6 bludgeoning damage and rooting enemies for 3s. Range 30m.",
+        "description_tr": "15m yarıçapında felaket getiren bir külçe altın fırtınası çağırarak 8d6 ezici hasar verin ve düşmanları 3 saniyeliğine yere sabitleyin. Menzil 30m.",
+        "branch": "Wealth",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mc_wealth_bounty"
+        ],
+        "icon": "☔",
+        "effects": {
+          "damage": "8d6 bludgeoning",
+          "radius": "15m",
+          "root_duration": "3s",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_liquidation",
+        "name_en": "Liquidation",
+        "name_tr": "Nakde Çevirme",
+        "description_en": "Shatter an enemy's armor, dealing 6d10 force damage and permanently reducing their AC by 5 for the rest of the encounter. Range 10m.",
+        "description_tr": "Bir düşmanın zırhını parçalayarak 6d10 güç hasarı verin ve AC'sini savaşın geri kalanı boyunca kalıcı olarak 5 azaltın. Menzil 10m.",
+        "branch": "Wealth",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mc_wealth_rain_of_wealth"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "6d10 force",
+          "ac_reduction": "5",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_midas_touch",
+        "name_en": "Midas Touch",
+        "name_tr": "Midas Dokunuşu",
+        "description_en": "Touch an enemy, transforming them into solid gold for 5s. They are stunned and immune to damage, but drop 500 gold when the effect ends. Melee.",
+        "description_tr": "Bir düşmana dokunarak onları 5 saniyeliğine som altına dönüştürün. Sersemlerler ve hasara karşı bağışıklık kazanırlar, ancak etki bittiğinde 500 altın düşürürler. Yakın dövüş.",
+        "branch": "Wealth",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "mc_wealth_liquidation"
+        ],
+        "icon": "🥇",
+        "effects": {
+          "duration": "5s",
+          "effect": "stun and invulnerability",
+          "gold_drop": "500",
+          "range": "melee"
+        }
+      },
+      {
+        "spell_key": "mc_deal_repo",
+        "name_en": "Repossession",
+        "name_tr": "Geri Alma",
+        "description_en": "Magically confiscate an enemy's equipped weapon for 5s, reducing their physical damage by 100% and preventing weapon skills. Range 15m.",
+        "description_tr": "Bir düşmanın kuşandığı silahına 5 saniyeliğine sihirle el koyarak fiziksel hasarlarını %100 azaltın ve silah yeteneklerini engelleyin. Menzil 15m.",
+        "branch": "Deal",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 700,
+        "prerequisites": [
+          "mc_deal_breach_of_contract"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "duration": "5s",
+          "damage_reduction": "100%",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_compound_interest",
+        "name_en": "Compound Interest",
+        "name_tr": "Bileşik Faiz",
+        "description_en": "Apply a ticking curse. The target takes 2d6 necrotic damage. Every turn for 4 turns, the damage doubles (4d6, 8d6, 16d6). Range 20m.",
+        "description_tr": "Tıklayan bir lanet uygulayın. Hedef 2d6 nekrotik hasar alır. Sonraki 4 tur boyunca her tur hasar ikiye katlanır (4d6, 8d6, 16d6). Menzil 20m.",
+        "branch": "Deal",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "mc_deal_repo"
+        ],
+        "icon": "📈",
+        "effects": {
+          "base_damage": "2d6 necrotic",
+          "turns": "4",
+          "scaling": "doubles per turn",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_sell_soul",
+        "name_en": "Sell Soul",
+        "name_tr": "Ruh Satışı",
+        "description_en": "Resurrect a fallen ally with full HP, but both you and the resurrected ally have your maximum HP halved for the next hour.",
+        "description_tr": "Düşmüş bir müttefiki tam HP ile diriltin, ancak önümüzdeki bir saat boyunca hem sizin hem de diriltilen müttefikin maksimum HP'si yarıya iner.",
+        "branch": "Deal",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "mc_deal_compound_interest"
+        ],
+        "icon": "💀",
+        "effects": {
+          "healing": "100%",
+          "max_hp_reduction": "50%",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "mc_cross_extortion",
+        "name_en": "Extortion",
+        "name_tr": "Haraç Kesme",
+        "description_en": "Demand payment from an enemy. They must instantly give you 10% of their total gold or suffer 10d6 psychic damage. Range 15m.",
+        "description_tr": "Bir düşmandan ödeme talep edin. Anında toplam altınlarının %10'unu size vermeliler, aksi takdirde 10d6 psişik hasar alırlar. Menzil 15m.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mc_wealth_liquidation",
+          "mc_deal_compound_interest"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "gold_steal": "10%",
+          "damage": "10d6 psychic",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "mc_cross_corporate_espionage",
+        "name_en": "Corporate Espionage",
+        "name_tr": "Kurumsal Casusluk",
+        "description_en": "Steal the last spell cast by an enemy within 30m. You can cast it once within the next minute without paying its MP cost.",
+        "description_tr": "30m içindeki bir düşmanın yaptığı son büyüyü çalın. Onu bir dakika içinde MP bedeli ödemeden bir kez yapabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mc_trade_hostile_takeover",
+          "mc_deal_repo"
+        ],
+        "icon": "🕵️‍♂️",
+        "effects": {
+          "range": "30m",
+          "effect": "copy spell",
+          "duration": "60s"
+        }
+      },
+      {
+        "spell_key": "mc_cross_blood_money",
+        "name_en": "Blood Money",
+        "name_tr": "Kan Parası",
+        "description_en": "Convert your own vitality into a lethal projectile. Sacrifice up to 50 HP; deal force damage equal to twice the sacrificed HP. Range 20m.",
+        "description_tr": "Kendi yaşam gücünüzü ölümcül bir mermiye dönüştürün. 50 HP'ye kadar feda edin; feda edilen HP'nin iki katı güç hasarı verin. Menzil 20m.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "mc_wealth_midas_touch",
+          "mc_deal_sell_soul"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "cost": "up to 50 HP",
+          "damage": "2x HP cost",
+          "damage_type": "force",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "mc_cross_economic_collapse",
+        "name_en": "Economic Collapse",
+        "name_tr": "Ekonomik Çöküş",
+        "description_en": "Crash the magical economy. Strip all positive buffs from enemies in a 20m radius, dealing 4d8 force damage for each buff removed.",
+        "description_tr": "Sihirli ekonomiyi çökertin. 20m'lik bir alandaki düşmanlardan tüm olumlu güçlendirmeleri kaldırarak, kaldırılan her güçlendirme için 4d8 güç hasarı verin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 875,
+        "prerequisites": [
+          "mc_trade_black_market",
+          "mc_wealth_rain_of_wealth"
+        ],
+        "icon": "📉",
+        "effects": {
+          "radius": "20m",
+          "damage_per_buff": "4d8 force"
+        }
+      },
+      {
+        "spell_key": "mc_trade_ultimate_merchant_prince",
+        "name_en": "Merchant Prince's Decree",
+        "name_tr": "Tüccar Prensin Fermanı",
+        "description_en": "Issue an absolute command. For 30s, all allies gain +50% damage and +50% movement speed. Any enemy that attempts to attack an ally takes 5d10 psychic damage per attack.",
+        "description_tr": "Mutlak bir emir verin. 30 saniye boyunca tüm müttefikler +%50 hasar ve +%50 hareket hızı kazanır. Bir müttefike saldırmaya çalışan herhangi bir düşman, saldırı başına 5d10 psişik hasar alır.",
+        "branch": "Trade",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mc_trade_free_shipping"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage_bonus": "50%",
+          "speed_bonus": "50%",
+          "punish_damage": "5d10 psychic per attack",
+          "duration": "30s"
+        }
+      },
+      {
+        "spell_key": "mc_wealth_ultimate_avalanche_of_gold",
+        "name_en": "Avalanche of Gold",
+        "name_tr": "Altın Çığı",
+        "description_en": "Crush your foes under the weight of immense wealth. Drops a literal mountain of coins in a 20m radius, dealing 20d10 bludgeoning damage and burying enemies (stunned) for 5s. Range 40m.",
+        "description_tr": "Düşmanlarınızı devasa servetinizin ağırlığı altında ezin. 20m'lik bir alana gerçek bir madeni para dağı düşürerek 20d10 ezici hasar verin ve düşmanları 5 saniye boyunca diri diri gömerek sersemletin. Menzil 40m.",
+        "branch": "Wealth",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mc_wealth_midas_touch"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "damage": "20d10 bludgeoning",
+          "radius": "20m",
+          "stun_duration": "5s",
+          "range": "40m"
+        }
+      },
+      {
+        "spell_key": "mc_deal_ultimate_devils_bargain",
+        "name_en": "Devil's Bargain",
+        "name_tr": "Şeytanın Pazarlığı",
+        "description_en": "Offer an irresistible deal. All enemies within a 30m radius must make a saving throw or be charmed, turning on their allies and fighting for you for 15s.",
+        "description_tr": "Karşı konulmaz bir anlaşma sunun. 30m içindeki tüm düşmanlar bir kurtarma zarı atmalıdır, aksi takdirde büyülenerek kendi müttefiklerine saldırır ve 15 saniye boyunca sizin için savaşırlar.",
+        "branch": "Deal",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "mc_deal_sell_soul"
+        ],
+        "icon": "👿",
+        "effects": {
+          "radius": "30m",
+          "effect": "charm",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "mc_cross_hostile_merger",
+        "name_en": "Hostile Merger",
+        "name_tr": "Düşmanca Birleşme",
+        "description_en": "Fuse yourself with a targeted enemy or ally for 20s. You control the combined entity, gaining their current HP as temporary HP and access to all their spells.",
+        "description_tr": "Kendinizi hedeflenen bir düşman veya müttefikle 20 saniyeliğine birleştirin. Birleştirilmiş varlığı kontrol edersiniz, onların mevcut HP'sini geçici HP olarak kazanır ve tüm büyülerine erişim sağlarsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "mc_trade_ultimate_merchant_prince",
+          "mc_deal_ultimate_devils_bargain"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "duration": "20s",
+          "effect": "fusion"
+        }
+      },
+      {
+        "spell_key": "mc_grand_ultimate_capitalism",
+        "name_en": "Unfettered Capitalism",
+        "name_tr": "Gem Vurulmamış Kapitalizm",
+        "description_en": "Liquidate everything. Consume 10% of your total gold. Deal absolute damage equal to the gold consumed divided by 10 to all enemies within 100m. Revive all fallen allies with full HP and grant them invincible shields for 10s.",
+        "description_tr": "Her şeyi nakde çevirin. Toplam altınınız %10'unu tüketin. 100m içindeki tüm düşmanlara tüketilen altının 10'a bölümü kadar mutlak hasar verin. Tüm düşmüş müttefikleri tam HP ile diriltin ve onlara 10 saniye boyunca yenilmezlik kalkanları verin.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "mc_trade_ultimate_merchant_prince",
+          "mc_wealth_ultimate_avalanche_of_gold",
+          "mc_deal_ultimate_devils_bargain"
+        ],
+        "icon": "🌐",
+        "effects": {
+          "cost": "10% total gold",
+          "damage": "gold/10 absolute",
+          "radius": "100m",
+          "shield_duration": "10s",
+          "healing": "100%"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,979 @@
+[
+  {
+    "subclass_key": "aura_fighter",
+    "tree_name_en": "Aura Fighter",
+    "tree_name_tr": "Aura Savaşçısı",
+    "tree_desc_en": "A perceptive warrior who reads opponent auras to detect their class, adapts their combat style to counter it, and unleashes precise ki strikes.",
+    "tree_desc_tr": "Sınıflarını tespit etmek için rakip auralarını okuyan, dövüş stilini buna göre uyarlayan ve hassas ki vuruşları serbest bırakan algısı yüksek bir savaşçı.",
+    "branches": [
+      "Aura Sense",
+      "Adaptive Combat",
+      "Ki Strike"
+    ],
+    "spells": [
+      {
+        "spell_key": "af_aura_vision",
+        "name_en": "Aura Vision",
+        "name_tr": "Aura Görüşü",
+        "description_en": "Reveals the aura of targets within 15m, detecting their primary class type and hidden presence.",
+        "description_tr": "15m içindeki hedeflerin aurasını açığa çıkararak ana sınıf türlerini ve gizlenmiş varlıkları tespit eder.",
+        "branch": "Aura Sense",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "range": "15m",
+          "duration": "10 min",
+          "utility": "Detect class & invisibility"
+        }
+      },
+      {
+        "spell_key": "af_intent_reading",
+        "name_en": "Intent Reading",
+        "name_tr": "Niyet Okuma",
+        "description_en": "Reads the opponent's subtle muscle twitches, granting +2 AC against their next attack.",
+        "description_tr": "Rakibin ufak kas seğirmelerini okuyarak bir sonraki saldırısına karşı +2 Zırh Sınıfı sağlar.",
+        "branch": "Aura Sense",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [
+          "af_aura_vision"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "ac_bonus": "+2",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "af_weakness_spotter",
+        "name_en": "Weakness Spotter",
+        "name_tr": "Zayıflık Avcısı",
+        "description_en": "Identifies vulnerabilities in armor or stance, adding 1d4 precision damage to your attacks.",
+        "description_tr": "Zırh veya duruştaki zayıflıkları belirleyerek saldırılara 1d4 isabet hasarı ekler.",
+        "branch": "Aura Sense",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "af_intent_reading"
+        ],
+        "icon": "🎯",
+        "effects": {
+          "damage_bonus": "1d4",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "af_vital_tracking",
+        "name_en": "Vital Tracking",
+        "name_tr": "Hayati Takip",
+        "description_en": "Tracks the specific health pool and stamina level of a target within 30m for 1 minute.",
+        "description_tr": "30m içindeki bir hedefin sağlık havuzunu ve dayanıklılık seviyesini 1 dakika boyunca takip eder.",
+        "branch": "Aura Sense",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 120,
+        "prerequisites": [
+          "af_aura_vision"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "range": "30m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "af_aura_pulse",
+        "name_en": "Aura Pulse",
+        "name_tr": "Aura Nabzı",
+        "description_en": "Emits a 10m pulse that highlights all living creatures and dispels low-level visual illusions.",
+        "description_tr": "10m çapında bir nabız yayarak tüm canlıları vurgular ve düşük seviyeli görsel illüzyonları dağıtır.",
+        "branch": "Aura Sense",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "af_weakness_spotter",
+          "af_vital_tracking"
+        ],
+        "icon": "📡",
+        "effects": {
+          "radius": "10m",
+          "utility": "Highlight & dispel"
+        }
+      },
+      {
+        "spell_key": "af_class_echo",
+        "name_en": "Class Echo",
+        "name_tr": "Sınıf Yankısı",
+        "description_en": "Identifies the specific subclass and highest attribute score of a target.",
+        "description_tr": "Hedefin belirli alt sınıfını ve en yüksek özellik puanını tanımlar.",
+        "branch": "Aura Sense",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 210,
+        "prerequisites": [
+          "af_aura_pulse"
+        ],
+        "icon": "👤",
+        "effects": {
+          "range": "20m",
+          "information": "Subclass & Highest Stat"
+        }
+      },
+      {
+        "spell_key": "af_preemptive_step",
+        "name_en": "Preemptive Step",
+        "name_tr": "Öngörülü Adım",
+        "description_en": "Move up to 3m as a reaction before an incoming melee attack connects.",
+        "description_tr": "Gelen bir yakın dövüş saldırısı isabet etmeden önce tepki olarak 3m'ye kadar hareket edin.",
+        "branch": "Aura Sense",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "af_class_echo"
+        ],
+        "icon": "👣",
+        "effects": {
+          "movement": "3m",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "af_mind_glimpse",
+        "name_en": "Mind Glimpse",
+        "name_tr": "Zihin Pırıltısı",
+        "description_en": "Read the target's surface thoughts to predict the exact spell or skill they will use next turn.",
+        "description_tr": "Hedefin yüzeysel düşüncelerini okuyarak bir sonraki tur kullanacakları büyüyü veya yeteneği tam olarak tahmin edin.",
+        "branch": "Aura Sense",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "af_class_echo"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "duration": "1 turn",
+          "utility": "Predict next action"
+        }
+      },
+      {
+        "spell_key": "af_flaw_expose",
+        "name_en": "Flaw Expose",
+        "name_tr": "Kusur İfşası",
+        "description_en": "Expose a critical flaw in the enemy's fighting style, reducing their AC by 3 for 3 turns.",
+        "description_tr": "Düşmanın dövüş stilindeki kritik bir kusuru ortaya çıkararak Zırh Sınıfını 3 tur boyunca 3 azaltır.",
+        "branch": "Aura Sense",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 360,
+        "prerequisites": [
+          "af_preemptive_step",
+          "af_mind_glimpse"
+        ],
+        "icon": "🔓",
+        "effects": {
+          "ac_reduction": "-3",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "af_anticipation_stance",
+        "name_en": "Anticipation Stance",
+        "name_tr": "Beklenti Duruşu",
+        "description_en": "Enter a state of hyper-awareness. You automatically counter the first melee attack against you this turn with 1d8 physical damage.",
+        "description_tr": "Yüksek farkındalık durumuna geçin. Bu tur size yapılan ilk yakın dövüş saldırısına otomatik olarak 1d8 fiziksel hasarla karşılık verirsiniz.",
+        "branch": "Aura Sense",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "af_flaw_expose"
+        ],
+        "icon": "🧘",
+        "effects": {
+          "damage": "1d8",
+          "type": "Auto-counter"
+        }
+      },
+      {
+        "spell_key": "af_aura_sever",
+        "name_en": "Aura Sever",
+        "name_tr": "Aura Kesiği",
+        "description_en": "Strike the target's ki flow, preventing them from using class-specific features for 1 turn.",
+        "description_tr": "Hedefin ki akışına vurarak 1 tur boyunca sınıfa özgü yeteneklerini kullanmalarını engeller.",
+        "branch": "Aura Sense",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "af_flaw_expose"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "duration": "1 turn",
+          "utility": "Disable class features"
+        }
+      },
+      {
+        "spell_key": "af_absolute_read",
+        "name_en": "Absolute Read",
+        "name_tr": "Mutlak Okuma",
+        "description_en": "Perfectly predict the target's movements. They cannot critically strike or dodge your attacks for 3 turns.",
+        "description_tr": "Hedefin hareketlerini kusursuzca tahmin edin. 3 tur boyunca kritik vuruş yapamazlar veya saldırılarınızdan kaçamazlar.",
+        "branch": "Aura Sense",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "af_anticipation_stance",
+          "af_aura_sever"
+        ],
+        "icon": "📖",
+        "effects": {
+          "duration": "3 turns",
+          "debuff": "No crits/dodges"
+        }
+      },
+      {
+        "spell_key": "af_soul_gaze",
+        "name_en": "Soul Gaze",
+        "name_tr": "Ruh Bakışı",
+        "description_en": "Peer into the target's soul, revealing their exact HP, level, and all skill cooldowns.",
+        "description_tr": "Hedefin ruhuna bakarak kesin Can değerini, seviyesini ve tüm yetenek bekleme sürelerini ortaya çıkarın.",
+        "branch": "Aura Sense",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "af_absolute_read"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "range": "20m",
+          "utility": "Reveal all stats/cooldowns"
+        }
+      },
+      {
+        "spell_key": "af_omniscient_eye",
+        "name_en": "Omniscient Eye",
+        "name_tr": "Her Şeyi Gören Göz",
+        "description_en": "Ultimate. Gain total situational awareness. For 3 turns, you are immune to surprises, critical hits, and your attacks have a 100% hit chance.",
+        "description_tr": "Nihai. Tam durumsal farkındalık kazanın. 3 tur boyunca baskınlara ve kritik vuruşlara karşı bağışıklık kazanırsınız ve saldırılarınızın isabet şansı %100 olur.",
+        "branch": "Aura Sense",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "af_soul_gaze"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "duration": "3 turns",
+          "hit_chance": "100%",
+          "immunity": "Surprise & Crits"
+        }
+      },
+      {
+        "spell_key": "af_shifting_guard",
+        "name_en": "Shifting Guard",
+        "name_tr": "Değişken Siper",
+        "description_en": "After taking damage, gain resistance to that specific damage type until the end of your next turn.",
+        "description_tr": "Hasar aldıktan sonra, bir sonraki turunuzun sonuna kadar o hasar türüne karşı direnç kazanırsınız.",
+        "branch": "Adaptive Combat",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "resistance": "Match last damage type",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "af_mimic_strike",
+        "name_en": "Mimic Strike",
+        "name_tr": "Taklit Vuruşu",
+        "description_en": "Your weapon damage type shifts to match the damage type of the last enemy that hit you.",
+        "description_tr": "Silah hasarı türünüz, size vuran son düşmanın hasar türüyle eşleşecek şekilde değişir.",
+        "branch": "Adaptive Combat",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [
+          "af_shifting_guard"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "damage_type": "Matches enemy",
+          "duration": "Until changed"
+        }
+      },
+      {
+        "spell_key": "af_fluid_footwork",
+        "name_en": "Fluid Footwork",
+        "name_tr": "Akışkan Adımlar",
+        "description_en": "Ignore difficult terrain penalties and gain +3m movement speed for 2 turns.",
+        "description_tr": "Zorlu arazi cezalarını görmezden gelin ve 2 tur boyunca +3m hareket hızı kazanın.",
+        "branch": "Adaptive Combat",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 110,
+        "prerequisites": [
+          "af_shifting_guard"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "speed_bonus": "+3m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "af_reactive_parry",
+        "name_en": "Reactive Parry",
+        "name_tr": "Tepkisel Savuşturma",
+        "description_en": "Use your reaction to parry a physical or spell attack, reducing incoming damage by 1d10 + STR modifier.",
+        "description_tr": "Bir fiziksel saldırıyı veya büyüyü savuşturmak için tepkinizi kullanarak gelen hasarı 1d10 + GÜÇ değiştiricisi kadar azaltın.",
+        "branch": "Adaptive Combat",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 140,
+        "prerequisites": [
+          "af_mimic_strike",
+          "af_fluid_footwork"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "damage_reduction": "1d10 + STR",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "af_elemental_adaptation",
+        "name_en": "Elemental Adaptation",
+        "name_tr": "Elementel Adaptasyon",
+        "description_en": "Focus your aura to gain resistance to one chosen elemental damage type for 10 minutes.",
+        "description_tr": "Auranızı odaklayarak 10 dakika boyunca seçili bir elementel hasar türüne karşı direnç kazanın.",
+        "branch": "Adaptive Combat",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "af_reactive_parry"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "duration": "10 min",
+          "resistance": "1 chosen element"
+        }
+      },
+      {
+        "spell_key": "af_form_breaker",
+        "name_en": "Form Breaker",
+        "name_tr": "Form Kırıcı",
+        "description_en": "A heavy strike designed to punish defensive stances. Deals 2d8 bludgeoning damage and ignores shields.",
+        "description_tr": "Savunma duruşlarını cezalandırmak için tasarlanmış ağır bir vuruş. 2d8 ezme hasarı verir ve kalkanları yok sayar.",
+        "branch": "Adaptive Combat",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "af_elemental_adaptation"
+        ],
+        "icon": "🔨",
+        "effects": {
+          "damage": "2d8 bludgeoning",
+          "utility": "Ignores shields"
+        }
+      },
+      {
+        "spell_key": "af_spell_deflection",
+        "name_en": "Spell Deflection",
+        "name_tr": "Büyü Saptırma",
+        "description_en": "Swat away a magical projectile within 5m, taking only half damage.",
+        "description_tr": "5m içindeki sihirli bir mermiyi savuşturarak yalnızca yarım hasar alın.",
+        "branch": "Adaptive Combat",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 260,
+        "prerequisites": [
+          "af_elemental_adaptation"
+        ],
+        "icon": "✨",
+        "effects": {
+          "range": "5m",
+          "damage_taken": "Half",
+          "type": "Reaction"
+        }
+      },
+      {
+        "spell_key": "af_counter_tempo",
+        "name_en": "Counter Tempo",
+        "name_tr": "Karşı Ritim",
+        "description_en": "If an opponent misses a melee attack against you, immediately make one attack against them.",
+        "description_tr": "Bir rakip size karşı yaptığı yakın dövüş saldırısını ıskalarsa, derhal ona bir saldırı yapın.",
+        "branch": "Adaptive Combat",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 290,
+        "prerequisites": [
+          "af_form_breaker",
+          "af_spell_deflection"
+        ],
+        "icon": "⏱️",
+        "effects": {
+          "type": "Reaction Attack"
+        }
+      },
+      {
+        "spell_key": "af_adaptive_plating",
+        "name_en": "Adaptive Plating",
+        "name_tr": "Adaptif Zırhlanma",
+        "description_en": "Solidify your aura just before impact, gaining temporary HP equal to 20% of the incoming damage.",
+        "description_tr": "Çarpışmadan hemen önce auranızı katılaştırarak, gelen hasarın %20'si kadar geçici Can kazanın.",
+        "branch": "Adaptive Combat",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "af_counter_tempo"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "temp_hp": "20% of damage",
+          "duration": "Instant"
+        }
+      },
+      {
+        "spell_key": "af_mage_slayer_stance",
+        "name_en": "Mage Slayer Stance",
+        "name_tr": "Büyücü Katili Duruşu",
+        "description_en": "Gain advantage on saving throws against spells and deal +2d6 damage against magic-casting classes.",
+        "description_tr": "Büyülere karşı kurtarma zarlarında avantaj kazanın ve büyü yapan sınıflara karşı +2d6 hasar verin.",
+        "branch": "Adaptive Combat",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "af_adaptive_plating"
+        ],
+        "icon": "🧙‍♂️",
+        "effects": {
+          "damage_bonus": "+2d6 vs casters",
+          "advantage": "Spell saves"
+        }
+      },
+      {
+        "spell_key": "af_beast_tamer_stance",
+        "name_en": "Beast Tamer Stance",
+        "name_tr": "Canavar Terbiyecisi Duruşu",
+        "description_en": "Master the movements of wild creatures, dealing +2d6 damage to beasts, summoned entities, and druidic forms.",
+        "description_tr": "Vahşi yaratıkların hareketlerinde ustalaşarak canavarlara, çağrılan varlıklara ve druid formlarına +2d6 hasar verin.",
+        "branch": "Adaptive Combat",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "af_adaptive_plating"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "damage_bonus": "+2d6 vs beasts/summons"
+        }
+      },
+      {
+        "spell_key": "af_mirror_stance",
+        "name_en": "Mirror Stance",
+        "name_tr": "Ayna Duruşu",
+        "description_en": "Perfectly copy one passive skill or stance of your opponent for 1 minute.",
+        "description_tr": "Rakibinizin bir pasif yeteneğini veya duruşunu 1 dakika boyunca kusursuzca kopyalayın.",
+        "branch": "Adaptive Combat",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "af_mage_slayer_stance",
+          "af_beast_tamer_stance"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "duration": "1 min",
+          "utility": "Copy passive"
+        }
+      },
+      {
+        "spell_key": "af_perfect_counter",
+        "name_en": "Perfect Counter",
+        "name_tr": "Kusursuz Karşılık",
+        "description_en": "Nullify one incoming physical attack completely and instantly retaliate with a strike dealing 4d10 physical damage.",
+        "description_tr": "Gelen bir fiziksel saldırıyı tamamen sıfırlayın ve anında 4d10 fiziksel hasar veren bir vuruşla misilleme yapın.",
+        "branch": "Adaptive Combat",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "af_mirror_stance"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "4d10 physical",
+          "nullify": "1 attack"
+        }
+      },
+      {
+        "spell_key": "af_chameleon_warrior",
+        "name_en": "Chameleon Warrior",
+        "name_tr": "Bukalemun Savaşçı",
+        "description_en": "Ultimate. Instantly adapt to any opponent's class. For 1 minute, you have advantage on all rolls against them and take half damage from their abilities.",
+        "description_tr": "Nihai. Herhangi bir rakibin sınıfına anında uyum sağlayın. 1 dakika boyunca onlara karşı tüm zarlarda avantaj elde eder ve yeteneklerinden yarım hasar alırsınız.",
+        "branch": "Adaptive Combat",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "af_perfect_counter"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "duration": "1 min",
+          "advantage": "All rolls vs target",
+          "damage_reduction": "50%"
+        }
+      },
+      {
+        "spell_key": "af_ki_fist",
+        "name_en": "Ki Fist",
+        "name_tr": "Ki Yumruğu",
+        "description_en": "Channel aura into your strikes, adding 1d6 force damage to your melee attacks for 3 turns.",
+        "description_tr": "Auranızı vuruşlarınıza yönlendirerek 3 tur boyunca yakın dövüş saldırılarınıza 1d6 güç hasarı ekleyin.",
+        "branch": "Ki Strike",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "👊",
+        "effects": {
+          "damage_bonus": "1d6 force",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "af_aura_slash",
+        "name_en": "Aura Slash",
+        "name_tr": "Aura Kesik",
+        "description_en": "Swing your weapon to launch a crescent of ki, dealing 1d8 slashing damage up to 10m away.",
+        "description_tr": "Silahınızı sallayarak kiden oluşan bir hilal fırlatın ve 10m uzağa kadar 1d8 kesici hasar verin.",
+        "branch": "Ki Strike",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "af_ki_fist"
+        ],
+        "icon": "🌙",
+        "effects": {
+          "damage": "1d8 slashing",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "af_pressure_point",
+        "name_en": "Pressure Point",
+        "name_tr": "Basınç Noktası",
+        "description_en": "Strike a vital ki node on the enemy, reducing their movement speed by 3m for 2 turns.",
+        "description_tr": "Düşmanın hayati bir ki düğümüne vurarak hareket hızını 2 tur boyunca 3m azaltın.",
+        "branch": "Ki Strike",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [
+          "af_ki_fist"
+        ],
+        "icon": "👈",
+        "effects": {
+          "speed_reduction": "-3m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "af_spirit_shove",
+        "name_en": "Spirit Shove",
+        "name_tr": "Ruh İtişi",
+        "description_en": "Unleash a blast of pure ki from your palm, pushing the target 5m directly away from you.",
+        "description_tr": "Avucunuzdan saf ki patlaması salıvererek hedefi sizden 5m geriye doğru itin.",
+        "branch": "Ki Strike",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "af_aura_slash",
+          "af_pressure_point"
+        ],
+        "icon": "💨",
+        "effects": {
+          "push": "5m"
+        }
+      },
+      {
+        "spell_key": "af_ki_surge",
+        "name_en": "Ki Surge",
+        "name_tr": "Ki Dalgalanması",
+        "description_en": "Empower your legs with ki, allowing you to dash and make an attack in the same action, dealing +2d6 damage.",
+        "description_tr": "Bacaklarınızı ki ile güçlendirerek aynı eylem içinde depar atıp saldırı yapmanızı sağlar, +2d6 hasar verir.",
+        "branch": "Ki Strike",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "af_spirit_shove"
+        ],
+        "icon": "🏃‍♂️",
+        "effects": {
+          "damage_bonus": "+2d6",
+          "utility": "Dash + Attack"
+        }
+      },
+      {
+        "spell_key": "af_aura_shockwave",
+        "name_en": "Aura Shockwave",
+        "name_tr": "Aura Şok Dalgası",
+        "description_en": "Slam the ground, creating a 5m radius shockwave that deals 3d6 force damage to all nearby enemies.",
+        "description_tr": "Yere vurarak 5m yarıçapında tüm yakın düşmanlara 3d6 güç hasarı veren bir şok dalgası yaratın.",
+        "branch": "Ki Strike",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "af_ki_surge"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "3d6 force",
+          "radius": "5m"
+        }
+      },
+      {
+        "spell_key": "af_nerve_strike",
+        "name_en": "Nerve Strike",
+        "name_tr": "Sinir Vuruşu",
+        "description_en": "Disrupt the target's nervous system with a precise ki strike, imposing disadvantage on their next attack.",
+        "description_tr": "Hassas bir ki vuruşuyla hedefin sinir sistemini bozarak bir sonraki saldırılarında dezavantaj almalarına neden olun.",
+        "branch": "Ki Strike",
+        "tier": 2,
+        "min_level": 31,
+        "xp_cost": 240,
+        "prerequisites": [
+          "af_ki_surge"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "debuff": "Disadvantage on next attack"
+        }
+      },
+      {
+        "spell_key": "af_phantom_blow",
+        "name_en": "Phantom Blow",
+        "name_tr": "Hayalet Vuruş",
+        "description_en": "Your ki phase-shifts your weapon briefly, causing your next attack to completely ignore physical armor.",
+        "description_tr": "Kiniz silahınızı kısa bir süreliğine fazdan geçirerek bir sonraki saldırınızın fiziksel zırhı tamamen yok saymasını sağlar.",
+        "branch": "Ki Strike",
+        "tier": 2,
+        "min_level": 37,
+        "xp_cost": 280,
+        "prerequisites": [
+          "af_aura_shockwave",
+          "af_nerve_strike"
+        ],
+        "icon": "👻",
+        "effects": {
+          "utility": "Ignores armor",
+          "duration": "1 attack"
+        }
+      },
+      {
+        "spell_key": "af_ki_explosion",
+        "name_en": "Ki Explosion",
+        "name_tr": "Ki Patlaması",
+        "description_en": "Overload a point within 10m with ki energy, detonating it for an 8m AoE dealing 5d8 force damage.",
+        "description_tr": "10m içindeki bir noktayı ki enerjisiyle aşırı yükleyerek patlatın ve 8m alan hasarı içinde 5d8 güç hasarı verin.",
+        "branch": "Ki Strike",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "af_phantom_blow"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "5d8 force",
+          "range": "10m",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "af_aura_bind",
+        "name_en": "Aura Bind",
+        "name_tr": "Aura Bağlama",
+        "description_en": "Send tendrils of ki into the target's shadow, paralyzing them for 1 turn unless they pass a STR save.",
+        "description_tr": "Hedefin gölgesine ki kollarını göndererek, GÜÇ kurtarmasını geçemezlerse 1 tur boyunca felç edin.",
+        "branch": "Ki Strike",
+        "tier": 3,
+        "min_level": 47,
+        "xp_cost": 410,
+        "prerequisites": [
+          "af_ki_explosion"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "duration": "1 turn",
+          "status": "Paralyzed"
+        }
+      },
+      {
+        "spell_key": "af_resonating_strike",
+        "name_en": "Resonating Strike",
+        "name_tr": "Yankılanan Vuruş",
+        "description_en": "Plant latent ki inside the target. They take 2d6 force damage at the start of their next 3 turns.",
+        "description_tr": "Hedefin içine gizli ki yerleştirin. Hedef, sonraki 3 turunun başında 2d6 güç hasarı alır.",
+        "branch": "Ki Strike",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "af_ki_explosion"
+        ],
+        "icon": "🔔",
+        "effects": {
+          "damage": "2d6 force per turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "af_ki_meteor",
+        "name_en": "Ki Meteor",
+        "name_tr": "Ki Meteoru",
+        "description_en": "Leap into the air and crash down clad in dense ki, dealing 8d10 force damage in a 15m radius.",
+        "description_tr": "Havaya sıçrayın ve yoğun kiye bürünmüş halde yere çarparak 15m yarıçapında 8d10 güç hasarı verin.",
+        "branch": "Ki Strike",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 620,
+        "prerequisites": [
+          "af_aura_bind",
+          "af_resonating_strike"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "8d10 force",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "af_soul_shatter",
+        "name_en": "Soul Shatter",
+        "name_tr": "Ruh Parçalama",
+        "description_en": "A devastating strike directly to the core. Deals 6d12 force damage and reduces the target's maximum HP by the damage taken.",
+        "description_tr": "Doğrudan merkeze yönelik yıkıcı bir vuruş. 6d12 güç hasarı verir ve hedefin maksimum canını alınan hasar kadar azaltır.",
+        "branch": "Ki Strike",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "af_ki_meteor"
+        ],
+        "icon": "💔",
+        "effects": {
+          "damage": "6d12 force",
+          "debuff": "Max HP reduction"
+        }
+      },
+      {
+        "spell_key": "af_asura_strike",
+        "name_en": "Asura Strike",
+        "name_tr": "Asura Vuruşu",
+        "description_en": "Ultimate. Channel the totality of your ki into a single, world-shaking blow. Deals 15d10 force damage and bypasses all resistances and immunities.",
+        "description_tr": "Nihai. Kinizin tamamını tek, dünyayı sarsan bir vuruşa yönlendirin. 15d10 güç hasarı verir ve tüm dirençleri ve bağışıklıkları aşar.",
+        "branch": "Ki Strike",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "af_soul_shatter"
+        ],
+        "icon": "👹",
+        "effects": {
+          "damage": "15d10 force",
+          "utility": "Ignores resistances/immunities"
+        }
+      },
+      {
+        "spell_key": "af_insightful_blow",
+        "name_en": "Insightful Blow",
+        "name_tr": "İçgörülü Vuruş",
+        "description_en": "Strike exactly at the revealed weak point of an aura, adding +3d6 precision damage.",
+        "description_tr": "Bir auranın açığa çıkmış zayıf noktasına tam olarak vurarak +3d6 isabet hasarı ekler.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 230,
+        "prerequisites": [
+          "af_weakness_spotter",
+          "af_aura_slash"
+        ],
+        "icon": "💡",
+        "effects": {
+          "damage_bonus": "+3d6"
+        }
+      },
+      {
+        "spell_key": "af_adaptive_ki",
+        "name_en": "Adaptive Ki",
+        "name_tr": "Adaptif Ki",
+        "description_en": "Change your ki damage type to match the target's deepest vulnerability for 1 minute.",
+        "description_tr": "Ki hasar türünüzü 1 dakika boyunca hedefin en derin zayıflığıyla eşleşecek şekilde değiştirin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "af_elemental_adaptation",
+          "af_ki_surge"
+        ],
+        "icon": "🌈",
+        "effects": {
+          "duration": "1 min",
+          "damage_type": "Target Vulnerability"
+        }
+      },
+      {
+        "spell_key": "af_predictive_dodge",
+        "name_en": "Predictive Dodge",
+        "name_tr": "Öngörülü Kaçınma",
+        "description_en": "Sense an attack before it begins, dodging it with 100% success. Usable once per combat.",
+        "description_tr": "Bir saldırıyı başlamadan önce hissederek %100 başarıyla kaçının. Çatışma başına bir kez kullanılabilir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "af_preemptive_step",
+          "af_form_breaker"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "dodge_chance": "100%",
+          "limit": "Once per combat"
+        }
+      },
+      {
+        "spell_key": "af_aura_theft",
+        "name_en": "Aura Theft",
+        "name_tr": "Aura Hırsızlığı",
+        "description_en": "Strike through the enemy's aura to steal one of their active class buffs for yourself.",
+        "description_tr": "Düşmanın aurasını delip geçerek onların aktif sınıf güçlendirmelerinden birini kendiniz için çalın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 660,
+        "prerequisites": [
+          "af_flaw_expose",
+          "af_phantom_blow"
+        ],
+        "icon": "🧛‍♂️",
+        "effects": {
+          "utility": "Steal 1 active buff"
+        }
+      },
+      {
+        "spell_key": "af_class_breaker",
+        "name_en": "Class Breaker",
+        "name_tr": "Sınıf Kırıcı",
+        "description_en": "Disrupt the enemy's core identity, disabling their subclass features for 2 turns and dealing 6d8 damage.",
+        "description_tr": "Düşmanın temel kimliğini bozarak alt sınıf özelliklerini 2 tur devre dışı bırakın ve 6d8 hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "af_mage_slayer_stance",
+          "af_resonating_strike"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "damage": "6d8 force",
+          "duration": "2 turns",
+          "debuff": "Disable subclass features"
+        }
+      },
+      {
+        "spell_key": "af_mind_body_sync",
+        "name_en": "Mind Body Sync",
+        "name_tr": "Zihin Beden Senkronu",
+        "description_en": "Instantly sync your read of the enemy with your defense. Counter an attack while taking zero damage from it.",
+        "description_tr": "Düşmanı okumanızı savunmanızla anında senkronize edin. Bir saldırıya karşı sıfır hasar alarak karşılık verin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "af_anticipation_stance",
+          "af_adaptive_plating"
+        ],
+        "icon": "☯️",
+        "effects": {
+          "damage_taken": "0",
+          "type": "Counterattack"
+        }
+      },
+      {
+        "spell_key": "af_karmic_retribution",
+        "name_en": "Karmic Retribution",
+        "name_tr": "Karmik İlahi Adalet",
+        "description_en": "Predict a devastating blow and reflect 200% of its intended damage back at the attacker as pure force damage.",
+        "description_tr": "Yıkıcı bir vuruşu tahmin edin ve amaçlanan hasarının %200'ünü saf güç hasarı olarak saldırgana geri yansıtın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "af_absolute_read",
+          "af_perfect_counter"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage_reflect": "200% as force damage"
+        }
+      },
+      {
+        "spell_key": "af_aura_god_incarnate",
+        "name_en": "Aura God Incarnate",
+        "name_tr": "Aura Tanrısı Enkarnasyonu",
+        "description_en": "Grand Ultimate. Become the transcendent master of all combat forms. For 1 minute, you are immune to all class-specific effects, gain a 30m teleport speed, and deal 10d10+50 damage on all hits.",
+        "description_tr": "Büyük Nihai. Tüm dövüş formlarının aşkın ustası olun. 1 dakika boyunca tüm sınıfa özgü etkilere bağışıklık kazanırsınız, 30m ışınlanma hızı kazanırsınız ve tüm vuruşlarda 10d10+50 hasar verirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "af_omniscient_eye",
+          "af_chameleon_warrior",
+          "af_asura_strike"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "1 min",
+          "immunity": "Class effects",
+          "speed": "30m teleport",
+          "damage_bonus": "10d10+50"
+        }
+      }
+    ]
+  }
+]

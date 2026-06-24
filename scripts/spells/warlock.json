@@ -1,0 +1,1031 @@
+[
+  {
+    "subclass_key": "warlock",
+    "tree_name_en": "Warlock's Patronus",
+    "tree_name_tr": "Büyücünün Hamisi",
+    "tree_desc_en": "Channel the devastating power of your otherworldly Patron. Specialize in Eldritch Power, Pact Magic, and Dark Pacts, creating burst damage windows where you reign supreme for 3 turns.",
+    "tree_desc_tr": "Başka dünyadan Haminin yıkıcı gücünü kanalize et. Kadim Güç, Antlaşma Büyüsü ve Karanlık Antlaşmalar üzerine uzmanlaşarak 3 tur boyunca mutlak hakimiyet kuracağın ani hasar pencereleri yarat.",
+    "branches": [
+      "Eldritch Power",
+      "Pact Magic",
+      "Dark Pact"
+    ],
+    "spells": [
+      {
+        "spell_key": "wl_eldritch_blast",
+        "name_en": "Eldritch Blast",
+        "name_tr": "Kadim Işın",
+        "description_en": "Fire a beam of crackling energy dealing 1d10 force damage.",
+        "description_tr": "Çatırdayan bir enerji ışını fırlatarak 1d10 güç hasarı ver.",
+        "branch": "Eldritch Power",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💥",
+        "effects": {
+          "damage": "1d10",
+          "damage_type": "force",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "wl_force_repel",
+        "name_en": "Force Repel",
+        "name_tr": "Güç İtimi",
+        "description_en": "Push a target 5m away and deal 1d8 force damage.",
+        "description_tr": "Bir hedefi 5m uzağa it ve 1d8 güç hasarı ver.",
+        "branch": "Eldritch Power",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "wl_eldritch_blast"
+        ],
+        "icon": "💨",
+        "effects": {
+          "damage": "1d8",
+          "damage_type": "force",
+          "push": "5m"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_spear",
+        "name_en": "Eldritch Spear",
+        "name_tr": "Kadim Mızrak",
+        "description_en": "A long-range blast up to 30m dealing 2d10 force damage.",
+        "description_tr": "30m menzile kadar ulaşabilen ve 2d10 güç hasarı veren uzak mesafe ışını.",
+        "branch": "Eldritch Power",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "wl_eldritch_blast"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "2d10",
+          "damage_type": "force",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "wl_agonizing_blast",
+        "name_en": "Agonizing Blast",
+        "name_tr": "Istırap Işını",
+        "description_en": "For 3 turns, infuse your blasts with agony, increasing their damage by 50%.",
+        "description_tr": "3 tur boyunca ışınlarına ıstırap aşılayarak hasarlarını %50 artır.",
+        "branch": "Eldritch Power",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wl_eldritch_spear"
+        ],
+        "icon": "😣",
+        "effects": {
+          "buff": true,
+          "blast_damage_multiplier": 1.5,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_barrage",
+        "name_en": "Eldritch Barrage",
+        "name_tr": "Kadim Yaylım",
+        "description_en": "Fire 3 consecutive blasts, each dealing 1d10 force damage.",
+        "description_tr": "Art arda 3 ışın fırlat, her biri 1d10 güç hasarı verir.",
+        "branch": "Eldritch Power",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wl_eldritch_spear"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "1d10",
+          "hits": 3,
+          "damage_type": "force"
+        }
+      },
+      {
+        "spell_key": "wl_force_shield",
+        "name_en": "Force Shield",
+        "name_tr": "Güç Kalkanı",
+        "description_en": "Surround yourself with a force field, gaining +3 AC and 15 temp HP for 3 turns.",
+        "description_tr": "Kendini bir güç alanıyla sar, 3 tur boyunca +3 Zırh Sınıfı ve 15 geçici Can Puanı kazan.",
+        "branch": "Eldritch Power",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 275,
+        "prerequisites": [
+          "wl_force_repel"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": 3,
+          "temp_hp": 15,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_chain",
+        "name_en": "Eldritch Chain",
+        "name_tr": "Kadim Zincir",
+        "description_en": "Your blast chains to 2 additional targets within 5m, dealing 2d8 force damage to each.",
+        "description_tr": "Işının 5m içindeki fazladan 2 hedefe sekerek her birine 2d8 güç hasarı verir.",
+        "branch": "Eldritch Power",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wl_eldritch_barrage"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "2d8",
+          "damage_type": "force",
+          "chain_targets": 2,
+          "chain_range": "5m"
+        }
+      },
+      {
+        "spell_key": "wl_repelling_blast",
+        "name_en": "Repelling Blast",
+        "name_tr": "İtici Işın",
+        "description_en": "A massive force pushes the target 10m away and knocks them prone, dealing 4d8 damage.",
+        "description_tr": "Devasa bir güç hedefi 10m uzağa itip yere serer, 4d8 hasar verir.",
+        "branch": "Eldritch Power",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 375,
+        "prerequisites": [
+          "wl_force_repel"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "4d8",
+          "damage_type": "force",
+          "push": "10m",
+          "prone": true
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_storm",
+        "name_en": "Eldritch Storm",
+        "name_tr": "Kadim Fırtına",
+        "description_en": "Call down a storm of pure force in a 5m AoE dealing 5d10 force damage.",
+        "description_tr": "5m alan içinde saf güçten oluşan bir fırtına çağırarak 5d10 güç hasarı ver.",
+        "branch": "Eldritch Power",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 425,
+        "prerequisites": [
+          "wl_eldritch_barrage"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "5d10",
+          "damage_type": "force",
+          "aoe": "5m"
+        }
+      },
+      {
+        "spell_key": "wl_force_singularity",
+        "name_en": "Force Singularity",
+        "name_tr": "Güç Tekilliği",
+        "description_en": "Create a gravity well. All enemies within 10m are pulled to the center and take 4d10 force damage.",
+        "description_tr": "Bir yerçekimi kuyusu yarat. 10m içindeki tüm düşmanlar merkeze çekilir ve 4d10 güç hasarı alır.",
+        "branch": "Eldritch Power",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 475,
+        "prerequisites": [
+          "wl_eldritch_chain",
+          "wl_force_shield"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "damage": "4d10",
+          "damage_type": "force",
+          "aoe": "10m",
+          "pull_to_center": true
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_beam",
+        "name_en": "Eldritch Beam",
+        "name_tr": "Kadim Hüzme",
+        "description_en": "Unleash a 15m line of concentrated force, dealing 6d10 damage to all in its path.",
+        "description_tr": "15m uzunluğunda bir hat boyunca yoğunlaşmış bir güç hüzmesi sal, yoluna çıkan herkese 6d10 hasar ver.",
+        "branch": "Eldritch Power",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wl_agonizing_blast"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "damage": "6d10",
+          "damage_type": "force",
+          "line": "15m"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_annihilation",
+        "name_en": "Eldritch Annihilation",
+        "name_tr": "Kadim Yok Oluş",
+        "description_en": "Overwhelm a single target with absolute force, dealing 10d10 force damage.",
+        "description_tr": "Tek bir hedefi mutlak güçle ezerek 10d10 güç hasarı ver.",
+        "branch": "Eldritch Power",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 650,
+        "prerequisites": [
+          "wl_eldritch_beam"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "10d10",
+          "damage_type": "force",
+          "single_target": true
+        }
+      },
+      {
+        "spell_key": "wl_force_quake",
+        "name_en": "Force Quake",
+        "name_tr": "Güç Depremi",
+        "description_en": "Shatter the ground in a 10m radius, dealing 8d10 force damage and knocking everyone prone.",
+        "description_tr": "10m yarıçapında yeri parçalayarak 8d10 güç hasarı ver ve herkesi yere ser.",
+        "branch": "Eldritch Power",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "wl_repelling_blast",
+          "wl_force_singularity"
+        ],
+        "icon": "🫨",
+        "effects": {
+          "damage": "8d10",
+          "damage_type": "force",
+          "aoe": "10m",
+          "prone": true
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_avatar",
+        "name_en": "Eldritch Avatar",
+        "name_tr": "Kadim Avatar",
+        "description_en": "Channel the Patron's energy. For 3 turns, you can cast two Eldritch spells per turn.",
+        "description_tr": "Haminin enerjisine kanalize ol. 3 tur boyunca tur başına iki Kadim büyü yapabilirsin.",
+        "branch": "Eldritch Power",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "wl_eldritch_storm"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "buff": true,
+          "extra_casts": 1,
+          "spell_type_restriction": "Eldritch",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_supernova",
+        "name_en": "Eldritch Supernova",
+        "name_tr": "Kadim Süpernova",
+        "description_en": "ULTIMATE: Detonate a massive force explosion in a 20m radius, dealing 15d12 force damage and stunning survivors for 1 turn.",
+        "description_tr": "NİHAİ: 20m yarıçapında devasa bir güç patlaması yaratarak 15d12 güç hasarı ver ve hayatta kalanları 1 tur sersemlet.",
+        "branch": "Eldritch Power",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wl_eldritch_annihilation",
+          "wl_force_quake",
+          "wl_eldritch_avatar"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "15d12",
+          "damage_type": "force",
+          "aoe": "20m",
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wl_pact_weapon",
+        "name_en": "Pact Weapon",
+        "name_tr": "Antlaşma Silahı",
+        "description_en": "Summon a magical weapon for 3 turns that deals 1d8 + Charisma modifier magic damage.",
+        "description_tr": "3 tur boyunca 1d8 + Karizma değiştiricisi kadar büyü hasarı veren büyülü bir silah çağır.",
+        "branch": "Pact Magic",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "summon_weapon": true,
+          "damage": "1d8+CHA",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_hex",
+        "name_en": "Hex",
+        "name_tr": "Uğursuzluk",
+        "description_en": "Curse a target for 3 turns. Your attacks deal an extra 1d6 necrotic damage to them.",
+        "description_tr": "Bir hedefi 3 tur boyunca lanetle. Saldırıların ona fazladan 1d6 nekrotik hasar verir.",
+        "branch": "Pact Magic",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🧿",
+        "effects": {
+          "debuff": true,
+          "extra_damage_taken": "1d6 necrotic",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_pact_familiar",
+        "name_en": "Pact Familiar",
+        "name_tr": "Antlaşma Yoldaşı",
+        "description_en": "Summon an otherworldly familiar for 3 turns to fight alongside you, dealing 1d6 damage per turn.",
+        "description_tr": "3 tur boyunca seninle savaşması için başka dünyadan bir yoldaş çağır, tur başına 1d6 hasar verir.",
+        "branch": "Pact Magic",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🦇",
+        "effects": {
+          "summon": true,
+          "damage_per_turn": "1d6",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_patrons_grace",
+        "name_en": "Patron's Grace",
+        "name_tr": "Haminin Lütfu",
+        "description_en": "The Patron heals you for 2d8 and cleanses one negative status effect.",
+        "description_tr": "Hami seni 2d8 iyileştirir ve bir olumsuz durum etkisini temizler.",
+        "branch": "Pact Magic",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wl_pact_familiar"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "heal": "2d8",
+          "cleanse": 1
+        }
+      },
+      {
+        "spell_key": "wl_hex_blade",
+        "name_en": "Hex Blade",
+        "name_tr": "Uğursuzluk Kılıcı",
+        "description_en": "Enhance your weapon for 3 turns, making it deal an additional 2d6 necrotic damage.",
+        "description_tr": "Silahını 3 tur boyunca güçlendirerek fazladan 2d6 nekrotik hasar vermesini sağla.",
+        "branch": "Pact Magic",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wl_pact_weapon",
+          "wl_hex"
+        ],
+        "icon": "🪄",
+        "effects": {
+          "weapon_buff": true,
+          "extra_damage": "2d6",
+          "damage_type": "necrotic",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_pact_armor",
+        "name_en": "Pact Armor",
+        "name_tr": "Antlaşma Zırhı",
+        "description_en": "Gain an otherworldly armor for 3 turns, granting resistance to non-magical damage.",
+        "description_tr": "3 tur boyunca büyüsel olmayan hasara karşı direnç sağlayan başka dünyadan bir zırh kazan.",
+        "branch": "Pact Magic",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 275,
+        "prerequisites": [
+          "wl_pact_weapon"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "resistance": "non-magical",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_mystic_arcanum",
+        "name_en": "Mystic Arcanum",
+        "name_tr": "Mistik Sır",
+        "description_en": "Instantly refresh the cooldowns of all your tier 1 and 2 spells.",
+        "description_tr": "Tüm 1. ve 2. aşama büyülerinin bekleme sürelerini anında sıfırla.",
+        "branch": "Pact Magic",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wl_hex"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "cooldown_reset": "tier 1-2"
+        }
+      },
+      {
+        "spell_key": "wl_patrons_wrath",
+        "name_en": "Patron's Wrath",
+        "name_tr": "Haminin Gazabı",
+        "description_en": "Deal 4d10 psychic damage to a target currently under your Hex.",
+        "description_tr": "Şu anda Uğursuzluk etkisi altında olan bir hedefe 4d10 psişik hasar ver.",
+        "branch": "Pact Magic",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 375,
+        "prerequisites": [
+          "wl_hex_blade"
+        ],
+        "icon": "💢",
+        "effects": {
+          "damage": "4d10",
+          "damage_type": "psychic",
+          "requires": "Hex"
+        }
+      },
+      {
+        "spell_key": "wl_hex_storm",
+        "name_en": "Hex Storm",
+        "name_tr": "Uğursuzluk Fırtınası",
+        "description_en": "Curse all enemies in a 10m radius for 3 turns, making them vulnerable to your damage.",
+        "description_tr": "10m yarıçapındaki tüm düşmanları 3 tur boyunca lanetleyerek senin hasarına karşı savunmasız hale getir.",
+        "branch": "Pact Magic",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 425,
+        "prerequisites": [
+          "wl_hex_blade"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "aoe_hex": true,
+          "aoe": "10m",
+          "vulnerability": "self_damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_pact_summoning",
+        "name_en": "Pact Summoning",
+        "name_tr": "Antlaşma Çağrısı",
+        "description_en": "Summon a lesser fiend for 3 turns that has 50% of your max HP and deals 3d6 damage.",
+        "description_tr": "3 tur boyunca maksimum Can Puanının %50'sine sahip olan ve 3d6 hasar veren zayıf bir iblis çağır.",
+        "branch": "Pact Magic",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 475,
+        "prerequisites": [
+          "wl_pact_familiar"
+        ],
+        "icon": "👾",
+        "effects": {
+          "summon": "lesser_fiend",
+          "summon_hp": "50% max HP",
+          "summon_damage": "3d6",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_arcanum_burst",
+        "name_en": "Arcanum Burst",
+        "name_tr": "Sır Patlaması",
+        "description_en": "Consume all active Hexes on the battlefield, dealing 5d10 damage to each affected target.",
+        "description_tr": "Savaş alanındaki tüm aktif Uğursuzlukları tüketerek etkilenen her hedefe 5d10 hasar ver.",
+        "branch": "Pact Magic",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wl_mystic_arcanum",
+          "wl_hex_storm"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "consume_hexes": true,
+          "damage": "5d10",
+          "damage_type": "force"
+        }
+      },
+      {
+        "spell_key": "wl_patrons_vessel",
+        "name_en": "Patron's Vessel",
+        "name_tr": "Haminin Kabı",
+        "description_en": "Become the Patron's martial vessel. For 3 turns, your weapon attacks automatically critically hit.",
+        "description_tr": "Haminin savaşçı kabı ol. 3 tur boyunca silah saldırıların otomatik olarak kritik vuruş yapar.",
+        "branch": "Pact Magic",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 650,
+        "prerequisites": [
+          "wl_patrons_wrath"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "buff": true,
+          "auto_crit": "weapon_attacks",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_hex_mastery",
+        "name_en": "Hex Mastery",
+        "name_tr": "Uğursuzluk Ustalığı",
+        "description_en": "Your Hex now also reduces the target's Armor Class and saving throws by 3 for 3 turns.",
+        "description_tr": "Uğursuzluk büyün artık hedefin Zırh Sınıfını ve kurtarma zarlarını 3 tur boyunca 3 düşürür.",
+        "branch": "Pact Magic",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 750,
+        "prerequisites": [
+          "wl_hex_storm"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "passive": true,
+          "hex_upgrade": true,
+          "ac_reduction": 3,
+          "saving_throw_reduction": 3
+        }
+      },
+      {
+        "spell_key": "wl_pact_overload",
+        "name_en": "Pact Overload",
+        "name_tr": "Antlaşma Aşırı Yükü",
+        "description_en": "Sacrifice 20% of your max HP to gain +100% damage to all spells for 3 turns.",
+        "description_tr": "3 tur boyunca tüm büyülerde +%100 hasar kazanmak için maksimum Can Puanının %20'sini feda et.",
+        "branch": "Pact Magic",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "wl_arcanum_burst"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "sacrifice_hp": "20%",
+          "spell_damage_bonus": "100%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_pact_apotheosis",
+        "name_en": "Pact Apotheosis",
+        "name_tr": "Antlaşma Yücelişi",
+        "description_en": "ULTIMATE: Summon a towering aspect of your Patron. For 3 turns, it automatically deals 10d12 damage per turn to all enemies within 15m.",
+        "description_tr": "NİHAİ: Haminin devasa bir silüetini çağır. 3 tur boyunca 15m içindeki tüm düşmanlara otomatik olarak her tur 10d12 hasar verir.",
+        "branch": "Pact Magic",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wl_patrons_vessel",
+          "wl_hex_mastery",
+          "wl_pact_overload"
+        ],
+        "icon": "👑",
+        "effects": {
+          "summon_aspect": true,
+          "auto_damage": "10d12",
+          "aoe": "15m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_dark_bargain",
+        "name_en": "Dark Bargain",
+        "name_tr": "Karanlık Pazarlık",
+        "description_en": "Trade 10% of your current HP to gain advantage on all attacks for 3 turns.",
+        "description_tr": "3 tur boyunca tüm saldırılarda avantaj kazanmak için mevcut Can Puanının %10'unu takas et.",
+        "branch": "Dark Pact",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🤝",
+        "effects": {
+          "sacrifice_current_hp": "10%",
+          "advantage": "all_attacks",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_life_drain",
+        "name_en": "Life Drain",
+        "name_tr": "Yaşam Emişi",
+        "description_en": "Drain a target's life force, dealing 2d6 necrotic damage and healing yourself for the damage dealt.",
+        "description_tr": "Bir hedefin yaşam gücünü emerek 2d6 nekrotik hasar ver ve verdiğin hasar kadar iyileş.",
+        "branch": "Dark Pact",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 125,
+        "prerequisites": [],
+        "icon": "🩸",
+        "effects": {
+          "damage": "2d6",
+          "damage_type": "necrotic",
+          "lifesteal": "100%"
+        }
+      },
+      {
+        "spell_key": "wl_hellish_rebuke",
+        "name_en": "Hellish Rebuke",
+        "name_tr": "Cehennem Azarı",
+        "description_en": "As a reaction when taking damage, surround your attacker in hellfire dealing 2d10 fire damage.",
+        "description_tr": "Hasar aldığında tepki olarak saldıranı cehennem ateşiyle sararak 2d10 ateş hasarı ver.",
+        "branch": "Dark Pact",
+        "tier": 1,
+        "min_level": 20,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🔥",
+        "effects": {
+          "reaction": true,
+          "damage": "2d10",
+          "damage_type": "fire"
+        }
+      },
+      {
+        "spell_key": "wl_blood_pact",
+        "name_en": "Blood Pact",
+        "name_tr": "Kan Antlaşması",
+        "description_en": "For 3 turns, your spells cost health instead of mana, and deal 25% extra damage.",
+        "description_tr": "3 tur boyunca büyülerin mana yerine can harcar ve %25 fazladan hasar verir.",
+        "branch": "Dark Pact",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "wl_dark_bargain"
+        ],
+        "icon": "💉",
+        "effects": {
+          "health_cost": true,
+          "damage_bonus": "25%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_soul_harvest",
+        "name_en": "Soul Harvest",
+        "name_tr": "Ruh Hasadı",
+        "description_en": "Rip a soul shard from a target, dealing 3d8 necrotic damage. Gain a soul shard if they die.",
+        "description_tr": "Hedefin ruhundan bir parça kopararak 3d8 nekrotik hasar ver. Ölürlerse bir ruh parçası kazanırsın.",
+        "branch": "Dark Pact",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 250,
+        "prerequisites": [
+          "wl_life_drain"
+        ],
+        "icon": "🫙",
+        "effects": {
+          "damage": "3d8",
+          "damage_type": "necrotic",
+          "generate_soul_shard": "on_kill"
+        }
+      },
+      {
+        "spell_key": "wl_dark_flight",
+        "name_en": "Dark Flight",
+        "name_tr": "Karanlık Uçuş",
+        "description_en": "Manifest abyssal wings for 3 turns, gaining a flying speed of 15m and dodging ground attacks.",
+        "description_tr": "3 tur boyunca uçurum kanatları oluştur, 15m uçma hızı kazan ve yer saldırılarından kaçın.",
+        "branch": "Dark Pact",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 275,
+        "prerequisites": [
+          "wl_hellish_rebuke"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "fly_speed": "15m",
+          "dodge_ground_attacks": true,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_infernal_gaze",
+        "name_en": "Infernal Gaze",
+        "name_tr": "Cehennem Bakışı",
+        "description_en": "Lock eyes with a target, inflicting Fear for 3 turns and dealing 3d8 psychic damage.",
+        "description_tr": "Bir hedefle göz göze gel, 3 tur boyunca Korku aşıla ve 3d8 psişik hasar ver.",
+        "branch": "Dark Pact",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "wl_soul_harvest"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "fear": "3 turns",
+          "damage": "3d8",
+          "damage_type": "psychic"
+        }
+      },
+      {
+        "spell_key": "wl_shadow_veil",
+        "name_en": "Shadow Veil",
+        "name_tr": "Gölge Peçesi",
+        "description_en": "Blend into the shadows, gaining invisibility and +50% movement speed for 3 turns.",
+        "description_tr": "Gölgelere karışarak 3 tur boyunca görünmezlik ve +%50 hareket hızı kazan.",
+        "branch": "Dark Pact",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 375,
+        "prerequisites": [
+          "wl_dark_flight"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "invisibility": true,
+          "movement_speed_bonus": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_abyssal_flame",
+        "name_en": "Abyssal Flame",
+        "name_tr": "Uçurum Alevi",
+        "description_en": "Conjure dark flames dealing 6d8 hellfire damage that ignores fire resistance.",
+        "description_tr": "Ateş direncini yok sayan ve 6d8 cehennem ateşi hasarı veren karanlık alevler yarat.",
+        "branch": "Dark Pact",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 425,
+        "prerequisites": [
+          "wl_infernal_gaze"
+        ],
+        "icon": "💜",
+        "effects": {
+          "damage": "6d8",
+          "damage_type": "hellfire",
+          "ignore_resistance": "fire"
+        }
+      },
+      {
+        "spell_key": "wl_soul_rend",
+        "name_en": "Soul Rend",
+        "name_tr": "Ruh Yırtığı",
+        "description_en": "Consume a soul shard to deal 8d8 necrotic damage and silence the target for 1 turn.",
+        "description_tr": "Bir ruh parçasını tüketerek 8d8 nekrotik hasar ver ve hedefi 1 tur sustur.",
+        "branch": "Dark Pact",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 475,
+        "prerequisites": [
+          "wl_soul_harvest"
+        ],
+        "icon": "💔",
+        "effects": {
+          "consume_soul_shard": 1,
+          "damage": "8d8",
+          "damage_type": "necrotic",
+          "silence": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wl_dark_sacrifice",
+        "name_en": "Dark Sacrifice",
+        "name_tr": "Karanlık Kurban",
+        "description_en": "Deal damage to an ally equal to 15% of their max HP to double the damage of your next spell.",
+        "description_tr": "Bir müttefikine maksimum Can Puanının %15'i kadar hasar vererek bir sonraki büyünün hasarını ikiye katla.",
+        "branch": "Dark Pact",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wl_blood_pact"
+        ],
+        "icon": "🔪",
+        "effects": {
+          "ally_damage": "15% max HP",
+          "next_spell_damage_multiplier": 2.0
+        }
+      },
+      {
+        "spell_key": "wl_fiendish_form",
+        "name_en": "Fiendish Form",
+        "name_tr": "İblis Formu",
+        "description_en": "Transform into a fiend for 3 turns. Gain +50% max HP and your attacks deal +4d10 fire damage.",
+        "description_tr": "3 tur boyunca bir iblise dönüş. +%50 maksimum Can Puanı kazan ve saldırıların fazladan 4d10 ateş hasarı verir.",
+        "branch": "Dark Pact",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "wl_abyssal_flame"
+        ],
+        "icon": "😈",
+        "effects": {
+          "transform": true,
+          "max_hp_bonus": "50%",
+          "extra_attack_damage": "4d10 fire",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_hellfire_eruption",
+        "name_en": "Hellfire Eruption",
+        "name_tr": "Cehennem Ateşi Patlaması",
+        "description_en": "Erupt hellfire from the ground in a 10m AoE, dealing 8d10 mixed fire and necrotic damage.",
+        "description_tr": "Yerden 10m alan içinde cehennem ateşi fışkırtarak 8d10 karışık ateş ve nekrotik hasar ver.",
+        "branch": "Dark Pact",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 775,
+        "prerequisites": [
+          "wl_abyssal_flame"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "8d10",
+          "damage_type": "fire/necrotic",
+          "aoe": "10m"
+        }
+      },
+      {
+        "spell_key": "wl_soul_devour",
+        "name_en": "Soul Devour",
+        "name_tr": "Ruh Yiyici",
+        "description_en": "Consume up to 3 soul shards. Each shard heals you for 25% max HP and extends your active Patron buffs by 1 turn.",
+        "description_tr": "En fazla 3 ruh parçasını tüket. Her parça seni maksimum Can Puanının %25'i kadar iyileştirir ve aktif Hami güçlendirmelerini 1 tur uzatır.",
+        "branch": "Dark Pact",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 850,
+        "prerequisites": [
+          "wl_soul_rend"
+        ],
+        "icon": "🍷",
+        "effects": {
+          "consume_soul_shard": "up to 3",
+          "heal_per_shard": "25% max HP",
+          "extend_buffs_per_shard": "1 turn"
+        }
+      },
+      {
+        "spell_key": "wl_contract_of_doom",
+        "name_en": "Contract of Doom",
+        "name_tr": "Kıyamet Sözleşmesi",
+        "description_en": "ULTIMATE: Mark a target. After 3 turns, they take 20d12 necrotic damage. If they die from this, you permanently gain +1 to a random stat (max 5 times).",
+        "description_tr": "NİHAİ: Bir hedefi işaretle. 3 tur sonra 20d12 nekrotik hasar alırlar. Bundan ölürlerse, kalıcı olarak rastgele bir istatistiğe +1 kazanırsın (en fazla 5 kez).",
+        "branch": "Dark Pact",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "wl_fiendish_form",
+          "wl_hellfire_eruption",
+          "wl_soul_devour"
+        ],
+        "icon": "📜",
+        "effects": {
+          "mark": true,
+          "delayed_damage": "20d12",
+          "damage_type": "necrotic",
+          "delay": "3 turns",
+          "permanent_stat_gain": "+1 random stat (on kill)"
+        }
+      },
+      {
+        "spell_key": "wl_eldritch_hex",
+        "name_en": "Eldritch Hex",
+        "name_tr": "Kadim Uğursuzluk",
+        "description_en": "Cross-Branch: Inflict a heavy curse. The target is Hexed for 3 turns and instantly takes 5d10 force damage.",
+        "description_tr": "Çapraz Dal: Ağır bir lanet uygula. Hedef 3 tur boyunca Uğursuzluğa uğrar ve anında 5d10 güç hasarı alır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "wl_eldritch_storm",
+          "wl_hex_storm"
+        ],
+        "icon": "⚛️",
+        "effects": {
+          "damage": "5d10",
+          "damage_type": "force",
+          "debuff": "Hex",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_dark_arcanum",
+        "name_en": "Dark Arcanum",
+        "name_tr": "Karanlık Sır",
+        "description_en": "Cross-Branch: Sacrifice 15% of your HP to instantly reset the cooldowns of your tier 3 and 4 Patron transformation spells.",
+        "description_tr": "Çapraz Dal: 3. ve 4. aşama Hami dönüşüm büyülerinin bekleme sürelerini anında sıfırla, bunun için Can Puanının %15'ini feda et.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "wl_arcanum_burst",
+          "wl_dark_sacrifice"
+        ],
+        "icon": "🗝️",
+        "effects": {
+          "sacrifice_hp": "15%",
+          "cooldown_reset": "tier 3-4 transformations"
+        }
+      },
+      {
+        "spell_key": "wl_abyssal_blast",
+        "name_en": "Abyssal Blast",
+        "name_tr": "Uçurum Işını",
+        "description_en": "Cross-Branch: Fire a corrupted blast dealing 10d10 necrotic/force damage and applying Fear for 3 turns.",
+        "description_tr": "Çapraz Dal: 10d10 nekrotik/güç hasarı veren ve 3 tur boyunca Korku uygulayan yozlaşmış bir ışın fırlat.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 800,
+        "prerequisites": [
+          "wl_eldritch_avatar",
+          "wl_fiendish_form"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "10d10",
+          "damage_type": "necrotic/force",
+          "fear": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_patrons_chosen",
+        "name_en": "Patron's Chosen",
+        "name_tr": "Haminin Seçilmişi",
+        "description_en": "Cross-Branch Passive: When you activate Eldritch Avatar, Patron's Vessel, or Fiendish Form, you gain half the benefits of the other two for 3 turns.",
+        "description_tr": "Çapraz Dal Pasif: Kadim Avatar, Haminin Kabı veya İblis Formu yeteneklerinden birini etkinleştirdiğinde, diğer ikisinin de etkilerinin yarısını 3 tur boyunca kazanırsın.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "wl_eldritch_avatar",
+          "wl_patrons_vessel",
+          "wl_fiendish_form"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "passive": true,
+          "synergy": "form_benefits",
+          "effectiveness": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "wl_absolute_pact",
+        "name_en": "Absolute Pact",
+        "name_tr": "Mutlak Antlaşma",
+        "description_en": "GRAND ULTIMATE: Time stops for all enemies for 3 turns. You gain infinite mana and double damage. Requires all 3 branch ultimates. Once per long rest.",
+        "description_tr": "BÜYÜK NİHAİ: Tüm düşmanlar için zaman 3 tur durur. Sınırsız mana ve iki kat hasar kazanırsın. Tüm 3 dal nihaisi gerektirir. Uzun dinlenme başına bir kez.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "wl_eldritch_supernova",
+          "wl_pact_apotheosis",
+          "wl_contract_of_doom"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "time_stop": "3 turns",
+          "infinite_mana": true,
+          "damage_multiplier": 2.0,
+          "once_per_long_rest": true
+        }
+      }
+    ]
+  }
+]

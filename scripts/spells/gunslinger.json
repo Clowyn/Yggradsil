@@ -1,0 +1,983 @@
+[
+  {
+    "subclass_key": "gunslinger",
+    "tree_name_en": "Gunslinger Arts",
+    "tree_name_tr": "Silahşor Sanatları",
+    "tree_desc_en": "Mastery over dual pistols, rapid fire, trick shots, and unmatched agility to dominate the battlefield like a true desperado.",
+    "tree_desc_tr": "Savaş alanına gerçek bir eşkıya gibi hükmetmek için çifte tabancalar, seri ateş, hileli atışlar ve eşsiz çeviklik üzerinde ustalık.",
+    "branches": [
+      "Rapid Fire",
+      "Trick Shot",
+      "Agility",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "gs_quick_draw",
+        "name_en": "Quick Draw",
+        "name_tr": "Hızlı Çekim",
+        "description_en": "Draw your weapon instantly. Your first attack in combat deals an additional 1d8 damage.",
+        "description_tr": "Silahınızı anında çekin. Savaştaki ilk saldırınız fazladan 1d8 hasar verir.",
+        "branch": "Rapid Fire",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "damage": "1d8",
+          "action": "free"
+        }
+      },
+      {
+        "spell_key": "gs_double_tap",
+        "name_en": "Double Tap",
+        "name_tr": "Çifte Vuruş",
+        "description_en": "Fire two quick shots at a single target within 15m. Each shot deals 1d6 piercing damage.",
+        "description_tr": "15m içindeki bir hedefe iki hızlı atış yapın. Her atış 1d6 delici hasar verir.",
+        "branch": "Rapid Fire",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 80,
+        "prerequisites": [
+          "gs_quick_draw"
+        ],
+        "icon": "✌️",
+        "effects": {
+          "damage": "2x 1d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "gs_fanning_the_hammer",
+        "name_en": "Fanning the Hammer",
+        "name_tr": "Tetik Tokatlama",
+        "description_en": "Unleash up to 6 rapid shots in a 5m cone. Each shot deals 1d4 piercing damage.",
+        "description_tr": "5m'lik bir koni içine 6 hızlı atış yapın. Her atış 1d4 delici hasar verir.",
+        "branch": "Rapid Fire",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "gs_double_tap"
+        ],
+        "icon": "🖐️",
+        "effects": {
+          "damage": "6x 1d4",
+          "area": "5m cone"
+        }
+      },
+      {
+        "spell_key": "gs_hail_of_bullets",
+        "name_en": "Hail of Bullets",
+        "name_tr": "Mermi Dolusu",
+        "description_en": "Spray bullets in a 10m cone. Targets take 3d6 damage and their movement speed is halved for 1 turn.",
+        "description_tr": "10m'lik bir koniye mermi püskürtün. Hedefler 3d6 hasar alır ve hareket hızları 1 tur yarıya iner.",
+        "branch": "Rapid Fire",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "gs_fanning_the_hammer"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "damage": "3d6",
+          "area": "10m cone",
+          "slow": "50%"
+        }
+      },
+      {
+        "spell_key": "gs_suppressive_fire",
+        "name_en": "Suppressive Fire",
+        "name_tr": "Baskı Ateşi",
+        "description_en": "Target a 15m radius area. Enemies within suffer a -2 penalty to their attack rolls due to heavy fire.",
+        "description_tr": "15m yarıçaplı bir alanı hedef alın. İçerideki düşmanlar yoğun ateş nedeniyle saldırı zarlarında -2 ceza alır.",
+        "branch": "Rapid Fire",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 240,
+        "prerequisites": [
+          "gs_hail_of_bullets"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "area": "15m radius",
+          "debuff": "-2 Attack"
+        }
+      },
+      {
+        "spell_key": "gs_rapid_reload",
+        "name_en": "Rapid Reload",
+        "name_tr": "Seri Dolduruş",
+        "description_en": "Reload your weapons instantly as a free action and gain +20% attack speed for 2 turns.",
+        "description_tr": "Silahlarınızı serbest eylem olarak anında doldurun ve 2 tur boyunca +%20 saldırı hızı kazanın.",
+        "branch": "Rapid Fire",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "gs_suppressive_fire"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "buff": "+20% Attack Speed",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gs_bullet_storm",
+        "name_en": "Bullet Storm",
+        "name_tr": "Mermi Fırtınası",
+        "description_en": "Simultaneously shoot up to 8 targets within a 15m radius, dealing 2d8 damage to each.",
+        "description_tr": "15m yarıçap içindeki en fazla 8 hedefe aynı anda ateş ederek her birine 2d8 hasar verin.",
+        "branch": "Rapid Fire",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "gs_rapid_reload"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "2d8 per target",
+          "area": "15m radius"
+        }
+      },
+      {
+        "spell_key": "gs_relentless_assault",
+        "name_en": "Relentless Assault",
+        "name_tr": "Aralıksız Saldırı",
+        "description_en": "Each consecutive hit on the same target adds +1d6 damage to the next shot.",
+        "description_tr": "Aynı hedefe yapılan her ardışık isabet, bir sonraki atışa +1d6 hasar ekler.",
+        "branch": "Rapid Fire",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "gs_bullet_storm"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "buff": "+1d6 Damage per hit"
+        }
+      },
+      {
+        "spell_key": "gs_akimbo_fury",
+        "name_en": "Akimbo Fury",
+        "name_tr": "Çifte Öfke",
+        "description_en": "Mastery of dual wielding grants you +30% attack speed and +10% critical strike chance for 3 turns.",
+        "description_tr": "Çifte silah ustalığı size 3 tur boyunca +%30 saldırı hızı ve +%10 kritik vuruş şansı sağlar.",
+        "branch": "Rapid Fire",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "gs_relentless_assault"
+        ],
+        "icon": "🔫",
+        "effects": {
+          "buff": "+30% Attack Speed, +10% Crit",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_lead_rain",
+        "name_en": "Lead Rain",
+        "name_tr": "Kurşun Yağmuru",
+        "description_en": "Rain down bullets in a massive 20m cone, dealing 6d6 piercing damage to all caught inside.",
+        "description_tr": "Devasa bir 20m koni içine kurşun yağdırarak içerideki herkese 6d6 delici hasar verin.",
+        "branch": "Rapid Fire",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "gs_akimbo_fury"
+        ],
+        "icon": "☔",
+        "effects": {
+          "damage": "6d6",
+          "area": "20m cone"
+        }
+      },
+      {
+        "spell_key": "gs_execution_volley",
+        "name_en": "Execution Volley",
+        "name_tr": "İnfaz Yaylımı",
+        "description_en": "Fire 4 lethal shots at a single target below 30% HP. Each shot deals 2d10 damage.",
+        "description_tr": "%30 HP altındaki tek bir hedefe 4 ölümcül atış yapın. Her atış 2d10 hasar verir.",
+        "branch": "Rapid Fire",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "gs_lead_rain"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "4x 2d10",
+          "condition": "Target <30% HP"
+        }
+      },
+      {
+        "spell_key": "gs_frenzy_fire",
+        "name_en": "Frenzy Fire",
+        "name_tr": "Çılgın Ateş",
+        "description_en": "Gain 3 attacks per action for 3 turns, but your accuracy is reduced by 10%.",
+        "description_tr": "3 tur boyunca her eylem için 3 saldırı kazanın, ancak isabetliliğiniz %10 azalır.",
+        "branch": "Rapid Fire",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "gs_execution_volley"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "buff": "3 attacks per action",
+          "debuff": "-10% Accuracy",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_showdown",
+        "name_en": "Showdown",
+        "name_tr": "Büyük Hesaplaşma",
+        "description_en": "Ultimate. Instantly fire 12 devastating shots at all enemies within a 30m radius. Each shot deals 3d10 damage.",
+        "description_tr": "Ulti. 30m yarıçap içindeki tüm düşmanlara anında 12 yıkıcı atış yapın. Her atış 3d10 hasar verir.",
+        "branch": "Rapid Fire",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gs_frenzy_fire"
+        ],
+        "icon": "🤠",
+        "effects": {
+          "damage": "12x 3d10",
+          "area": "30m radius"
+        }
+      },
+      {
+        "spell_key": "gs_ricochet_shot",
+        "name_en": "Ricochet Shot",
+        "name_tr": "Seken Atış",
+        "description_en": "Fire a bullet that bounces from the target to 1 additional enemy within 5m. Deals 1d8 damage to both.",
+        "description_tr": "Hedeften 5m içindeki 1 ek düşmana seken bir mermi ateşleyin. İkisine de 1d8 hasar verir.",
+        "branch": "Trick Shot",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🪃",
+        "effects": {
+          "damage": "1d8",
+          "bounce": "1 target within 5m"
+        }
+      },
+      {
+        "spell_key": "gs_knee_capper",
+        "name_en": "Knee Capper",
+        "name_tr": "Diz Kırıcı",
+        "description_en": "Aim for the legs, dealing 1d10 damage and reducing the target's speed by 50% for 2 turns.",
+        "description_tr": "Bacaklara nişan alarak 1d10 hasar verin ve hedefin hızını 2 tur boyunca %50 azaltın.",
+        "branch": "Trick Shot",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [
+          "gs_ricochet_shot"
+        ],
+        "icon": "🦵",
+        "effects": {
+          "damage": "1d10",
+          "slow": "50%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gs_piercing_bullet",
+        "name_en": "Piercing Bullet",
+        "name_tr": "Delici Kurşun",
+        "description_en": "Fire a high-velocity round in a 20m line that passes through all enemies, dealing 2d6 damage.",
+        "description_tr": "Tüm düşmanların içinden geçen 20m'lik bir hatta yüksek hızlı bir mermi ateşleyerek 2d6 hasar verin.",
+        "branch": "Trick Shot",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 130,
+        "prerequisites": [
+          "gs_knee_capper"
+        ],
+        "icon": "🧵",
+        "effects": {
+          "damage": "2d6",
+          "area": "20m line"
+        }
+      },
+      {
+        "spell_key": "gs_disarming_shot",
+        "name_en": "Disarming Shot",
+        "name_tr": "Silah Düşüren Atış",
+        "description_en": "A precision shot that deals 2d8 damage and forces the target to drop their weapon or lose 30% damage for 1 turn.",
+        "description_tr": "2d8 hasar veren ve hedefi silahını düşürmeye veya 1 tur boyunca %30 hasar kaybetmeye zorlayan hassas bir atış.",
+        "branch": "Trick Shot",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "gs_piercing_bullet"
+        ],
+        "icon": "🧤",
+        "effects": {
+          "damage": "2d8",
+          "debuff": "Disarm or -30% Damage"
+        }
+      },
+      {
+        "spell_key": "gs_explosive_round",
+        "name_en": "Explosive Round",
+        "name_tr": "Patlayıcı Mermi",
+        "description_en": "Fire a specialized bullet that detonates in a 5m radius, dealing 3d6 fire damage.",
+        "description_tr": "5m yarıçapında patlayan özel bir mermi ateşleyerek 3d6 ateş hasarı verin.",
+        "branch": "Trick Shot",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gs_disarming_shot"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "3d6 Fire",
+          "area": "5m radius"
+        }
+      },
+      {
+        "spell_key": "gs_blind_fire",
+        "name_en": "Blind Fire",
+        "name_tr": "Kör Ateş",
+        "description_en": "Shoot from cover without looking. Ignores 50% of cover AC bonuses and deals 2d8 damage.",
+        "description_tr": "Bakmadan siperden ateş edin. Siper AC bonuslarının %50'sini yok sayar ve 2d8 hasar verir.",
+        "branch": "Trick Shot",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 290,
+        "prerequisites": [
+          "gs_explosive_round"
+        ],
+        "icon": "🙈",
+        "effects": {
+          "damage": "2d8",
+          "bypass": "50% Cover"
+        }
+      },
+      {
+        "spell_key": "gs_heart_seeker",
+        "name_en": "Heart Seeker",
+        "name_tr": "Kalp Arayan",
+        "description_en": "A calculated shot that completely ignores the target's armor, dealing 4d6 piercing damage.",
+        "description_tr": "Hedefin zırhını tamamen yok sayan, hesaplanmış bir atış, 4d6 delici hasar verir.",
+        "branch": "Trick Shot",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "gs_blind_fire"
+        ],
+        "icon": "💘",
+        "effects": {
+          "damage": "4d6",
+          "bypass": "Armor"
+        }
+      },
+      {
+        "spell_key": "gs_shrapnel_burst",
+        "name_en": "Shrapnel Burst",
+        "name_tr": "Şarapnel Patlaması",
+        "description_en": "The bullet shatters mid-air into a 15m cone, dealing 4d8 piercing damage and causing bleeding (1d6/turn).",
+        "description_tr": "Mermi havada parçalanarak 15m'lik bir koniye dağılır, 4d8 delici hasar ve kanama (1d6/tur) verir.",
+        "branch": "Trick Shot",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 440,
+        "prerequisites": [
+          "gs_heart_seeker"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d8",
+          "area": "15m cone",
+          "dot": "1d6 Bleed"
+        }
+      },
+      {
+        "spell_key": "gs_chain_reaction",
+        "name_en": "Chain Reaction",
+        "name_tr": "Zincirleme Reaksiyon",
+        "description_en": "A trick shot that ricochets up to 4 times between targets within 10m of each other, gaining +1d6 damage per bounce.",
+        "description_tr": "Birbirinden 10m uzaklıktaki hedefler arasında 4 defaya kadar seken, her sekmede +1d6 hasar kazanan hileli bir atış.",
+        "branch": "Trick Shot",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "gs_shrapnel_burst"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "bounce": "4 targets",
+          "damage_scaling": "+1d6 per bounce"
+        }
+      },
+      {
+        "spell_key": "gs_fatal_rebound",
+        "name_en": "Fatal Rebound",
+        "name_tr": "Ölümcül Sekiş",
+        "description_en": "Bounce a bullet off 3 walls to hit an enemy perfectly in their blind spot for an automatic critical hit dealing 6d8 damage.",
+        "description_tr": "Kör noktasındaki bir düşmanı mükemmel şekilde vurmak için mermiyi 3 duvardan sektirerek 6d8 hasar veren otomatik bir kritik vuruş yapın.",
+        "branch": "Trick Shot",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 680,
+        "prerequisites": [
+          "gs_chain_reaction"
+        ],
+        "icon": "📐",
+        "effects": {
+          "damage": "6d8",
+          "guarantee": "Critical Hit"
+        }
+      },
+      {
+        "spell_key": "gs_dead_eye",
+        "name_en": "Dead Eye",
+        "name_tr": "Ölü Gözü",
+        "description_en": "Your next ranged attack gains 100% critical chance and its critical damage multiplier is doubled.",
+        "description_tr": "Bir sonraki menzilli saldırınız %100 kritik şansı kazanır ve kritik hasar çarpanı iki katına çıkar.",
+        "branch": "Trick Shot",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 780,
+        "prerequisites": [
+          "gs_fatal_rebound"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "buff": "100% Crit, 2x Crit Multiplier"
+        }
+      },
+      {
+        "spell_key": "gs_incendiary_shot",
+        "name_en": "Incendiary Shot",
+        "name_tr": "Kundakçı Atışı",
+        "description_en": "Fire a super-heated bullet that deals 4d10 damage and sets the target ablaze for 2d6 burn damage per turn for 3 turns.",
+        "description_tr": "4d10 hasar veren ve hedefi 3 tur boyunca tur başına 2d6 yanık hasarıyla ateşe veren aşırı ısınmış bir mermi ateşleyin.",
+        "branch": "Trick Shot",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "gs_dead_eye"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "4d10",
+          "dot": "2d6 Burn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_bullet_time",
+        "name_en": "Bullet Time",
+        "name_tr": "Mermi Zamanı",
+        "description_en": "Ultimate. Time drastically slows for 2 turns. You gain 2 extra actions per turn, and your ranged attacks automatically hit.",
+        "description_tr": "Ulti. Zaman 2 tur boyunca büyük ölçüde yavaşlar. Tur başına 2 ekstra eylem kazanırsınız ve menzilli saldırılarınız otomatik olarak isabet eder.",
+        "branch": "Trick Shot",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gs_incendiary_shot"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "buff": "+2 Actions, Auto-hit",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gs_combat_roll",
+        "name_en": "Combat Roll",
+        "name_tr": "Savaş Taklası",
+        "description_en": "Roll up to 5m without provoking opportunity attacks. Your next attack gains advantage.",
+        "description_tr": "Fırsat saldırılarını kışkırtmadan 5m'ye kadar takla atın. Bir sonraki saldırınız avantaj kazanır.",
+        "branch": "Agility",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🤸",
+        "effects": {
+          "movement": "5m",
+          "buff": "Advantage"
+        }
+      },
+      {
+        "spell_key": "gs_evasive_maneuver",
+        "name_en": "Evasive Maneuver",
+        "name_tr": "Kaçınma Manevrası",
+        "description_en": "Heighten your reflexes, gaining +3 AC and +10% dodge chance for 2 turns.",
+        "description_tr": "Reflekslerinizi güçlendirerek 2 tur boyunca +3 AC ve +%10 kaçınma şansı kazanın.",
+        "branch": "Agility",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "gs_combat_roll"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "buff": "+3 AC, +10% Dodge",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gs_quick_step",
+        "name_en": "Quick Step",
+        "name_tr": "Hızlı Adım",
+        "description_en": "Increase your movement speed by 10m for 3 turns, making you a slippery target.",
+        "description_tr": "Hareket hızınızı 3 tur boyunca 10m artırarak sizi kaygan bir hedef haline getirir.",
+        "branch": "Agility",
+        "tier": 1,
+        "min_level": 16,
+        "xp_cost": 140,
+        "prerequisites": [
+          "gs_evasive_maneuver"
+        ],
+        "icon": "👟",
+        "effects": {
+          "buff": "+10m Speed",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_sidestep",
+        "name_en": "Sidestep",
+        "name_tr": "Yana Kayma",
+        "description_en": "Use your reaction to completely dodge an incoming ranged attack with a 75% success rate.",
+        "description_tr": "Gelen bir menzilli saldırıdan %75 başarı oranıyla tamamen kaçınmak için tepkinizi kullanın.",
+        "branch": "Agility",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 220,
+        "prerequisites": [
+          "gs_quick_step"
+        ],
+        "icon": "🚶",
+        "effects": {
+          "action": "Reaction",
+          "dodge_chance": "75%"
+        }
+      },
+      {
+        "spell_key": "gs_dash_and_shoot",
+        "name_en": "Dash and Shoot",
+        "name_tr": "Atıl ve Vur",
+        "description_en": "Move up to your speed and fire a shot at any point during the movement, dealing 2d8 damage.",
+        "description_tr": "Hızınız kadar hareket edin ve hareket sırasında herhangi bir noktada ateş ederek 2d8 hasar verin.",
+        "branch": "Agility",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "gs_sidestep"
+        ],
+        "icon": "💨",
+        "effects": {
+          "movement": "Speed",
+          "damage": "2d8"
+        }
+      },
+      {
+        "spell_key": "gs_smoke_screen",
+        "name_en": "Smoke Screen",
+        "name_tr": "Sis Perdesi",
+        "description_en": "Throw a smoke bomb that creates a 10m cloud, granting heavy obscurement for 3 turns.",
+        "description_tr": "10m'lik bir bulut oluşturan ve 3 tur boyunca yoğun gizlenme sağlayan bir sis bombası atın.",
+        "branch": "Agility",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "gs_dash_and_shoot"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "area": "10m radius",
+          "buff": "Heavy Obscurement",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_phantom_dodge",
+        "name_en": "Phantom Dodge",
+        "name_tr": "Hayalet Kaçışı",
+        "description_en": "For 3 turns, you have a 30% chance to completely phase out and negate any incoming attack.",
+        "description_tr": "3 tur boyunca, tamamen faz dışı kalıp gelen herhangi bir saldırıyı boşa çıkarma şansınız %30'dur.",
+        "branch": "Agility",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 410,
+        "prerequisites": [
+          "gs_smoke_screen"
+        ],
+        "icon": "👻",
+        "effects": {
+          "buff": "30% Negate Attack",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_return_fire",
+        "name_en": "Return Fire",
+        "name_tr": "Karşı Ateş",
+        "description_en": "When an enemy misses you with an attack, you can use a reaction to instantly shoot them for 3d6 damage.",
+        "description_tr": "Bir düşman size yaptığı saldırıyı ıskaladığında, tepki kullanarak onu anında vurup 3d6 hasar verebilirsiniz.",
+        "branch": "Agility",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "gs_phantom_dodge"
+        ],
+        "icon": "🔙",
+        "effects": {
+          "action": "Reaction",
+          "damage": "3d6"
+        }
+      },
+      {
+        "spell_key": "gs_adrenaline_rush",
+        "name_en": "Adrenaline Rush",
+        "name_tr": "Adrenalin Patlaması",
+        "description_en": "Heal for 20% of your maximum HP and instantly clear all movement-impairing effects.",
+        "description_tr": "Maksimum HP'nizin %20'sini iyileştirin ve hareketi kısıtlayan tüm etkileri anında temizleyin.",
+        "branch": "Agility",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "gs_return_fire"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "heal": "20% Max HP",
+          "cleanse": "Movement Impairments"
+        }
+      },
+      {
+        "spell_key": "gs_mirage_step",
+        "name_en": "Mirage Step",
+        "name_tr": "Serap Adımı",
+        "description_en": "Teleport up to 15m, leaving behind a confusing afterimage that distracts enemies.",
+        "description_tr": "15m'ye kadar ışınlanın ve arkanızda düşmanların dikkatini dağıtan kafa karıştırıcı bir görüntü bırakın.",
+        "branch": "Agility",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "gs_adrenaline_rush"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "movement": "15m Teleport",
+          "summon": "Afterimage Decoy"
+        }
+      },
+      {
+        "spell_key": "gs_untouchable",
+        "name_en": "Untouchable",
+        "name_tr": "Dokunulmaz",
+        "description_en": "Become completely immune to all ranged attacks and area-of-effect damage for 1 turn.",
+        "description_tr": "1 tur boyunca tüm menzilli saldırılara ve alan etkili hasara karşı tamamen bağışık olun.",
+        "branch": "Agility",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "gs_mirage_step"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "buff": "Immune to Ranged/AoE",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "gs_gun_fu",
+        "name_en": "Gun Fu",
+        "name_tr": "Silah Sanatı",
+        "description_en": "Your ranged attacks no longer suffer disadvantage in melee range, and you deal +4d6 bonus damage to enemies within 3m.",
+        "description_tr": "Menzilli saldırılarınız yakın dövüş mesafesinde artık dezavantaj çekmez ve 3m içindeki düşmanlara +4d6 bonus hasar verirsiniz.",
+        "branch": "Agility",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "gs_untouchable"
+        ],
+        "icon": "🥋",
+        "effects": {
+          "buff": "No melee penalty, +4d6 damage within 3m"
+        }
+      },
+      {
+        "spell_key": "gs_western_wind",
+        "name_en": "Western Wind",
+        "name_tr": "Batı Rüzgarı",
+        "description_en": "Ultimate. For 3 turns, your movement speed is doubled, you automatically dodge the first 3 attacks each turn, and reloading is instantaneous.",
+        "description_tr": "Ulti. 3 tur boyunca hareket hızınız iki katına çıkar, her tur ilk 3 saldırıdan otomatik olarak kaçınırsınız ve doldurma anında gerçekleşir.",
+        "branch": "Agility",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "gs_gun_fu"
+        ],
+        "icon": "🌵",
+        "effects": {
+          "buff": "2x Speed, 3 Auto-dodges/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "gs_sliding_shot",
+        "name_en": "Sliding Shot",
+        "name_tr": "Kayan Atış",
+        "description_en": "Slide aggressively up to 8m and fire 2 quick shots during the slide. Deals 2x 2d6 damage.",
+        "description_tr": "Agresif bir şekilde 8m'ye kadar kayın ve kayma sırasında 2 hızlı atış yapın. 2x 2d6 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "gs_combat_roll",
+          "gs_double_tap"
+        ],
+        "icon": "🏂",
+        "effects": {
+          "movement": "8m Slide",
+          "damage": "2x 2d6"
+        }
+      },
+      {
+        "spell_key": "gs_vaulting_trick",
+        "name_en": "Vaulting Trick",
+        "name_tr": "Atlama Hilesi",
+        "description_en": "Leap dynamically over an obstacle while firing a ricocheting bullet that deals 3d6 damage to 2 targets.",
+        "description_tr": "Bir engelin üzerinden dinamik bir şekilde atlarken 2 hedefe 3d6 hasar veren seken bir mermi ateşleyin.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "gs_evasive_maneuver",
+          "gs_ricochet_shot"
+        ],
+        "icon": "🦘",
+        "effects": {
+          "damage": "3d6",
+          "targets": "2"
+        }
+      },
+      {
+        "spell_key": "gs_running_gunner",
+        "name_en": "Running Gunner",
+        "name_tr": "Koşan Nişancı",
+        "description_en": "Sprint 15m while spraying suppressive fire in a 10m radius around your path, dealing 3d8 damage.",
+        "description_tr": "Yolunuz etrafındaki 10m yarıçapa baskı ateşi püskürterek 15m koşun ve 3d8 hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 420,
+        "prerequisites": [
+          "gs_suppressive_fire",
+          "gs_dash_and_shoot"
+        ],
+        "icon": "🏇",
+        "effects": {
+          "movement": "15m Sprint",
+          "damage": "3d8",
+          "area": "10m radius around path"
+        }
+      },
+      {
+        "spell_key": "gs_scatter_shot",
+        "name_en": "Scatter Shot",
+        "name_tr": "Saçmalı Atış",
+        "description_en": "Fire a customized shell that breaks into mini-explosives in a 15m cone, dealing 4d6 fire and piercing damage.",
+        "description_tr": "15m'lik bir koni içinde mini patlayıcılara dönüşen özel bir fişek ateşleyerek 4d6 ateş ve delici hasar verin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "gs_explosive_round",
+          "gs_hail_of_bullets"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "4d6 Fire/Piercing",
+          "area": "15m cone"
+        }
+      },
+      {
+        "spell_key": "gs_acrobatic_ricochet",
+        "name_en": "Acrobatic Ricochet",
+        "name_tr": "Akrobatik Sekme",
+        "description_en": "Perform a backflip to dodge and fire a trick bullet that ricochets 5 times, dealing 2d8 damage per hit.",
+        "description_tr": "Kaçınmak için geriye doğru takla atın ve 5 kez sekerek vuruş başına 2d8 hasar veren hileli bir mermi ateşleyin.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 490,
+        "prerequisites": [
+          "gs_phantom_dodge",
+          "gs_chain_reaction"
+        ],
+        "icon": "🎪",
+        "effects": {
+          "movement": "5m Flip",
+          "damage": "5x 2d8"
+        }
+      },
+      {
+        "spell_key": "gs_dance_of_death",
+        "name_en": "Dance of Death",
+        "name_tr": "Ölüm Dansı",
+        "description_en": "Enter a trance for 2 turns where you automatically fire back at any enemy that attacks you, dealing 3d10 damage per reaction.",
+        "description_tr": "Size saldıran herhangi bir düşmana otomatik olarak karşılık vererek tepki başına 3d10 hasar verdiğiniz 2 turluk bir transa girin.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "gs_bullet_storm",
+          "gs_return_fire"
+        ],
+        "icon": "💃",
+        "effects": {
+          "buff": "Auto-counter attacks",
+          "damage": "3d10 per counter",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "gs_focused_fury",
+        "name_en": "Focused Fury",
+        "name_tr": "Odaklanmış Öfke",
+        "description_en": "Channel your aggression into pristine accuracy. Your next 2 attacks are guaranteed critical hits dealing 5d8 damage.",
+        "description_tr": "Saldırganlığınızı kusursuz bir isabetliliğe kanalize edin. Sonraki 2 saldırınız 5d8 hasar veren garantili kritik vuruşlardır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 820,
+        "prerequisites": [
+          "gs_dead_eye",
+          "gs_akimbo_fury"
+        ],
+        "icon": "😡",
+        "effects": {
+          "damage": "2x 5d8",
+          "guarantee": "Critical Hits"
+        }
+      },
+      {
+        "spell_key": "gs_shadow_bullet",
+        "name_en": "Shadow Bullet",
+        "name_tr": "Gölge Kurşun",
+        "description_en": "Fire a covert, armor-piercing shot from within a smokescreen that deals 6d8 damage and entirely bypasses magical shields.",
+        "description_tr": "Bir sis perdesinin içinden 6d8 hasar veren ve büyülü kalkanları tamamen atlayan gizli, zırh delici bir atış yapın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 860,
+        "prerequisites": [
+          "gs_smoke_screen",
+          "gs_heart_seeker"
+        ],
+        "icon": "🌑",
+        "effects": {
+          "damage": "6d8",
+          "bypass": "Shields & Armor"
+        }
+      },
+      {
+        "spell_key": "gs_desperado_tactics",
+        "name_en": "Desperado Tactics",
+        "name_tr": "Eşkıya Taktikleri",
+        "description_en": "Teleport to 3 random locations within a 20m area, firing a powerful piercing shot from each that deals 4d8 damage.",
+        "description_tr": "20m'lik bir alan içindeki rastgele 3 yere ışınlanın ve her birinden 4d8 hasar veren güçlü bir delici atış yapın.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "gs_lead_rain",
+          "gs_fatal_rebound",
+          "gs_mirage_step"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "movement": "3x Teleports",
+          "damage": "3x 4d8"
+        }
+      },
+      {
+        "spell_key": "gs_high_noon",
+        "name_en": "High Noon",
+        "name_tr": "Tam Öğle Vakti",
+        "description_en": "The sun glares down. Target up to 6 enemies within 50m. They take 10d10 damage, or are instantly killed if they are minor foes.",
+        "description_tr": "Güneş göz kamaştırır. 50m içinde 6'ya kadar düşmanı hedef alın. 10d10 hasar alırlar veya küçük düşmanlarsa anında öldürülürler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "gs_incendiary_shot",
+          "gs_execution_volley",
+          "gs_gun_fu"
+        ],
+        "icon": "🕛",
+        "effects": {
+          "damage": "10d10",
+          "targets": "6",
+          "special": "Instant kill minor foes"
+        }
+      },
+      {
+        "spell_key": "gs_gunslingers_requiem",
+        "name_en": "Gunslinger's Requiem",
+        "name_tr": "Silahşorun Ağıtı",
+        "description_en": "Grand Ultimate. Time freezes. Unleash 24 ethereal shots dealing 4d10 damage each, distributed among enemies within 60m. Resuming time stuns survivors for 1 turn.",
+        "description_tr": "Görkemli Ulti. Zaman donar. 60m içindeki düşmanlara dağıtılarak her biri 4d10 hasar veren 24 ruhani atış serbest bırakın. Zamanın devam etmesi hayatta kalanları 1 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "gs_showdown",
+          "gs_bullet_time",
+          "gs_western_wind"
+        ],
+        "icon": "🪦",
+        "effects": {
+          "damage": "24x 4d10",
+          "area": "60m radius",
+          "debuff": "Stun",
+          "duration": "1 turn"
+        }
+      }
+    ]
+  }
+]

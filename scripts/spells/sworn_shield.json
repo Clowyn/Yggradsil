@@ -1,0 +1,993 @@
+[
+  {
+    "subclass_key": "sworn_shield",
+    "tree_name_en": "Vow of the Aegis",
+    "tree_name_tr": "Aegis Yemini",
+    "tree_desc_en": "Binds to allies, absorbing their magical burdens and manifesting protective guardian spirits to become the ultimate shield.",
+    "tree_desc_tr": "Müttefiklere bağlanarak onların büyüsel yüklerini emer ve koruyucu ruhlar çağırarak nihai kalkan haline gelir.",
+    "branches": [
+      "Oath Bond",
+      "Magic Absorption",
+      "Guardian Spirit"
+    ],
+    "spells": [
+      {
+        "spell_key": "sws_oath_of_protection",
+        "name_en": "Oath of Protection",
+        "name_tr": "Koruma Yemini",
+        "description_en": "Links to an ally within 15 meters. You take 20% of the damage they receive.",
+        "description_tr": "15 metre içindeki bir müttefike bağlanır. Aldıkları hasarın %20'sini siz üstlenirsiniz.",
+        "branch": "Oath Bond",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🤝",
+        "effects": {
+          "link_range": "15m",
+          "damage_share": "20%"
+        }
+      },
+      {
+        "spell_key": "sws_shared_burden",
+        "name_en": "Shared Burden",
+        "name_tr": "Paylaşılan Yük",
+        "description_en": "Enhances your link. You now absorb 30% of physical damage taken by the linked ally.",
+        "description_tr": "Bağınızı güçlendirir. Bağlı müttefikin aldığı fiziksel hasarın %30'unu emersiniz.",
+        "branch": "Oath Bond",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "sws_oath_of_protection"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "damage_type": "physical",
+          "share": "30%"
+        }
+      },
+      {
+        "spell_key": "sws_vow_of_vitality",
+        "name_en": "Vow of Vitality",
+        "name_tr": "Canlılık Yemini",
+        "description_en": "Grants the linked ally rapid health regeneration for 10 seconds.",
+        "description_tr": "Bağlı müttefike 10 saniye boyunca hızlı can yenilenmesi sağlar.",
+        "branch": "Oath Bond",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "sws_oath_of_protection"
+        ],
+        "icon": "💖",
+        "effects": {
+          "hp_regen": "+5/s",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sws_life_tether",
+        "name_en": "Life Tether",
+        "name_tr": "Yaşam Bağı",
+        "description_en": "Extends link range to 30 meters. 50% of any healing you receive is also applied to the linked ally.",
+        "description_tr": "Bağ menzilini 30 metreye çıkarır. Aldığınız her iyileştirmenin %50'si bağlı müttefike de uygulanır.",
+        "branch": "Oath Bond",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "sws_shared_burden",
+          "sws_vow_of_vitality"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "link_range": "30m",
+          "heal_transfer": "50%"
+        }
+      },
+      {
+        "spell_key": "sws_oathkeepers_stride",
+        "name_en": "Oathkeeper's Stride",
+        "name_tr": "Yemin Tutanın Adımı",
+        "description_en": "Instantly dash up to 30 meters to place yourself between your linked ally and danger.",
+        "description_tr": "Kendinizi bağlı müttefikiniz ve tehlike arasına yerleştirmek için 30 metreye kadar anında atılın.",
+        "branch": "Oath Bond",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 250,
+        "prerequisites": [
+          "sws_life_tether"
+        ],
+        "icon": "🏃",
+        "effects": {
+          "dash_range": "30m"
+        }
+      },
+      {
+        "spell_key": "sws_empathic_shield",
+        "name_en": "Empathic Shield",
+        "name_tr": "Empatik Kalkan",
+        "description_en": "Projects a 100 HP temporary shield around your linked ally.",
+        "description_tr": "Bağlı müttefikinizin etrafında 100 HP'lik geçici bir kalkan oluşturur.",
+        "branch": "Oath Bond",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "sws_life_tether"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "shield": "100 HP",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "sws_martyrs_pledge",
+        "name_en": "Martyr's Pledge",
+        "name_tr": "Şehit Sözü",
+        "description_en": "For 10 seconds, take 50% of the ally's incoming damage while gaining +30 Armor to withstand it.",
+        "description_tr": "10 saniye boyunca müttefikin aldığı hasarın %50'sini üstlenirken, buna dayanmak için +30 Zırh kazanırsınız.",
+        "branch": "Oath Bond",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 400,
+        "prerequisites": [
+          "sws_oathkeepers_stride",
+          "sws_empathic_shield"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage_share": "50%",
+          "armor_bonus": "+30",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sws_unbreakable_vow",
+        "name_en": "Unbreakable Vow",
+        "name_tr": "Bozulmaz Yemin",
+        "description_en": "Your link becomes infinite in line-of-sight, and you become completely immune to knockback effects.",
+        "description_tr": "Bağınız görüş alanı içinde sonsuz menzile ulaşır ve savrulma etkilerine karşı tamamen bağışıklık kazanırsınız.",
+        "branch": "Oath Bond",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 450,
+        "prerequisites": [
+          "sws_martyrs_pledge"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "range": "infinite (LoS)",
+          "knockback_immune": "true"
+        }
+      },
+      {
+        "spell_key": "sws_blood_pact",
+        "name_en": "Blood Pact",
+        "name_tr": "Kan Anlaşması",
+        "description_en": "Sacrifice 10% of your current health to instantly restore 20% of your linked ally's health.",
+        "description_tr": "Bağlı müttefikinizin canının %20'sini anında yenilemek için mevcut canınızın %10'unu feda edersiniz.",
+        "branch": "Oath Bond",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sws_martyrs_pledge"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "cost": "10% HP",
+          "heal": "20% Ally HP"
+        }
+      },
+      {
+        "spell_key": "sws_vow_of_defiance",
+        "name_en": "Vow of Defiance",
+        "name_tr": "Meydan Okuma Yemini",
+        "description_en": "For 8 seconds, 30% of the damage you absorb through your bond is reflected back to the attacker.",
+        "description_tr": "8 saniye boyunca, bağınız aracılığıyla emdiğiniz hasarın %30'u saldırgana geri yansıtılır.",
+        "branch": "Oath Bond",
+        "tier": 4,
+        "min_level": 62,
+        "xp_cost": 650,
+        "prerequisites": [
+          "sws_unbreakable_vow",
+          "sws_blood_pact"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "reflect": "30%",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "sws_soul_link",
+        "name_en": "Soul Link",
+        "name_tr": "Ruh Bağı",
+        "description_en": "Expand your bond to link up to 3 allies simultaneously. Damage taken by any of them is evenly distributed among all linked targets.",
+        "description_tr": "Aynı anda 3 müttefike kadar bağlanmak için bağınızı genişletin. Herhangi birinin aldığı hasar tüm bağlı hedefler arasında eşit olarak dağıtılır.",
+        "branch": "Oath Bond",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "sws_vow_of_defiance"
+        ],
+        "icon": "💞",
+        "effects": {
+          "max_allies": 3,
+          "damage_share": "evenly distributed"
+        }
+      },
+      {
+        "spell_key": "sws_oath_of_eternity",
+        "name_en": "Oath of Eternity",
+        "name_tr": "Sonsuzluk Yemini",
+        "description_en": "If a linked ally would die, they are instead prevented from dying and instantly healed for 30% of their max HP. Ends the link.",
+        "description_tr": "Eğer bağlı bir müttefik ölecekse, ölümü engellenir ve anında maksimum canının %30'u kadar iyileşir. Bağı sonlandırır.",
+        "branch": "Oath Bond",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sws_vow_of_defiance"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "death_prevent": "true",
+          "heal_on_trigger": "30%"
+        }
+      },
+      {
+        "spell_key": "sws_aegis_incarnate",
+        "name_en": "Aegis Incarnate",
+        "name_tr": "Beden Bulmuş Aegis",
+        "description_en": "For 12 seconds, a linked ally deals +50% damage. During this time, you take 80% of all damage directed at them.",
+        "description_tr": "12 saniye boyunca bağlı müttefik +%50 hasar verir. Bu süre zarfında ona yöneltilen tüm hasarın %80'ini siz alırsınız.",
+        "branch": "Oath Bond",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "sws_soul_link",
+          "sws_oath_of_eternity"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "ally_damage_bonus": "+50%",
+          "damage_taken_share": "80%",
+          "duration": "12s"
+        }
+      },
+      {
+        "spell_key": "sws_ultimate_sacred_covenant",
+        "name_en": "Ultimate: Sacred Covenant",
+        "name_tr": "Nihai: Kutsal Sözleşme",
+        "description_en": "Ultimate. Bind to all allies within 30 meters. For 10 seconds, they are completely invulnerable, and you absorb 100% of all damage they would have taken.",
+        "description_tr": "Nihai. 30 metre içindeki tüm müttefiklere bağlanır. 10 saniye boyunca onlar tamamen hasar görmez olur ve alacakları tüm hasarın %100'ünü siz emersiniz.",
+        "branch": "Oath Bond",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sws_aegis_incarnate"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "radius": "30m",
+          "invulnerability": "10s",
+          "damage_absorption": "100%"
+        }
+      },
+      {
+        "spell_key": "sws_spell_siphon",
+        "name_en": "Spell Siphon",
+        "name_tr": "Büyü Sifonu",
+        "description_en": "Absorbs a single incoming magic projectile, nullifying its damage completely.",
+        "description_tr": "Gelen tek bir büyü mermisini emerek hasarını tamamen sıfırlar.",
+        "branch": "Magic Absorption",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌀",
+        "effects": {
+          "absorb_chance": "100%",
+          "target": "magic projectile"
+        }
+      },
+      {
+        "spell_key": "sws_mana_drain",
+        "name_en": "Mana Drain",
+        "name_tr": "Mana Çekişi",
+        "description_en": "Drains 10 mana per second from an enemy within 10 meters for 5 seconds.",
+        "description_tr": "10 metre içindeki bir düşmandan 5 saniye boyunca saniyede 10 mana çeker.",
+        "branch": "Magic Absorption",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [
+          "sws_spell_siphon"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "mana_drain": "10/s",
+          "range": "10m",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "sws_arcane_sponge",
+        "name_en": "Arcane Sponge",
+        "name_tr": "Arkana Süngeri",
+        "description_en": "Passively reduces all magic damage taken by 10%.",
+        "description_tr": "Alınan tüm büyü hasarını pasif olarak %10 azaltır.",
+        "branch": "Magic Absorption",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 120,
+        "prerequisites": [
+          "sws_spell_siphon"
+        ],
+        "icon": "🧽",
+        "effects": {
+          "magic_damage_reduction": "10%",
+          "type": "passive"
+        }
+      },
+      {
+        "spell_key": "sws_nullify_magic",
+        "name_en": "Nullify Magic",
+        "name_tr": "Büyü İptali",
+        "description_en": "Directly counter and dispel an incoming magic spell. Has a 20-second cooldown.",
+        "description_tr": "Gelen bir büyüyü doğrudan karşılar ve dağıtır. 20 saniye bekleme süresi vardır.",
+        "branch": "Magic Absorption",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 220,
+        "prerequisites": [
+          "sws_mana_drain",
+          "sws_arcane_sponge"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "counter": "magic spell",
+          "cooldown": "20s"
+        }
+      },
+      {
+        "spell_key": "sws_absorb_elements",
+        "name_en": "Absorb Elements",
+        "name_tr": "Element Emilimi",
+        "description_en": "Absorb incoming elemental damage. Your next physical attack deals an extra 2d6 damage of that element.",
+        "description_tr": "Gelen element hasarını emer. Bir sonraki fiziksel saldırınız o elementten fazladan 2d6 hasar verir.",
+        "branch": "Magic Absorption",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 260,
+        "prerequisites": [
+          "sws_nullify_magic"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "absorb_type": "elemental",
+          "next_attack_bonus": "2d6"
+        }
+      },
+      {
+        "spell_key": "sws_magic_sink",
+        "name_en": "Magic Sink",
+        "name_tr": "Büyü Gideri",
+        "description_en": "Draws all area-of-effect spells within a 10m radius towards yourself for 3 seconds.",
+        "description_tr": "10m yarıçapındaki tüm alan etkili büyüleri 3 saniye boyunca kendinize çeker.",
+        "branch": "Magic Absorption",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "sws_nullify_magic"
+        ],
+        "icon": "🧲",
+        "effects": {
+          "pull_radius": "10m",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "sws_spell_mirror",
+        "name_en": "Spell Mirror",
+        "name_tr": "Büyü Aynası",
+        "description_en": "For 5 seconds, all spells you absorb are instead reflected back at their casters.",
+        "description_tr": "5 saniye boyunca, emdiğiniz tüm büyüler bunun yerine onları yapanlara geri yansıtılır.",
+        "branch": "Magic Absorption",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 420,
+        "prerequisites": [
+          "sws_absorb_elements",
+          "sws_magic_sink"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "reflect_chance": "100%",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "sws_arcane_conversion",
+        "name_en": "Arcane Conversion",
+        "name_tr": "Arkana Dönüşümü",
+        "description_en": "Every time you absorb a spell, you instantly regain 50 HP.",
+        "description_tr": "Bir büyüyü her emdiğinizde, anında 50 HP geri kazanırsınız.",
+        "branch": "Magic Absorption",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 460,
+        "prerequisites": [
+          "sws_spell_mirror"
+        ],
+        "icon": "♻️",
+        "effects": {
+          "magic_to_hp": "50 HP per spell"
+        }
+      },
+      {
+        "spell_key": "sws_void_shield",
+        "name_en": "Void Shield",
+        "name_tr": "Hiçlik Kalkanı",
+        "description_en": "Creates a 500 HP shield that only absorbs magic damage. Lasts 10 seconds.",
+        "description_tr": "Sadece büyü hasarını emen 500 HP'lik bir kalkan oluşturur. 10 saniye sürer.",
+        "branch": "Magic Absorption",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sws_spell_mirror"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "magic_shield": "500 HP",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sws_devour_magic",
+        "name_en": "Devour Magic",
+        "name_tr": "Büyü Yutan",
+        "description_en": "Completely consumes and dispels a magical zone within 15 meters.",
+        "description_tr": "15 metre içindeki sihirli bir bölgeyi tamamen tüketir ve dağıtır.",
+        "branch": "Magic Absorption",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 700,
+        "prerequisites": [
+          "sws_arcane_conversion",
+          "sws_void_shield"
+        ],
+        "icon": "🦖",
+        "effects": {
+          "devour_radius": "15m",
+          "zone_dispel": "true"
+        }
+      },
+      {
+        "spell_key": "sws_mana_overload",
+        "name_en": "Mana Overload",
+        "name_tr": "Mana Aşırı Yüklemesi",
+        "description_en": "Release all absorbed magic as a massive 10m area blast, dealing 8d6 pure damage.",
+        "description_tr": "Emilen tüm büyüyü devasa bir 10m alan patlaması olarak serbest bırakır ve 8d6 saf hasar verir.",
+        "branch": "Magic Absorption",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "sws_devour_magic"
+        ],
+        "icon": "💥",
+        "effects": {
+          "blast_radius": "10m",
+          "pure_damage": "8d6"
+        }
+      },
+      {
+        "spell_key": "sws_spell_warden",
+        "name_en": "Spell Warden",
+        "name_tr": "Büyü Gardiyanı",
+        "description_en": "Emits an aura that silences all enemies within 15 meters for 3 seconds.",
+        "description_tr": "15 metre içindeki tüm düşmanları 3 saniye boyunca susturan bir aura yayar.",
+        "branch": "Magic Absorption",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sws_devour_magic"
+        ],
+        "icon": "🤐",
+        "effects": {
+          "silence_radius": "15m",
+          "duration": "3s"
+        }
+      },
+      {
+        "spell_key": "sws_black_hole_aegis",
+        "name_en": "Black Hole Aegis",
+        "name_tr": "Kara Delik Aegis'i",
+        "description_en": "For 5 seconds, all magic attacks within 30 meters are forcefully pulled into your shield.",
+        "description_tr": "5 saniye boyunca, 30 metre içindeki tüm büyü saldırıları zorla kalkanınıza çekilir.",
+        "branch": "Magic Absorption",
+        "tier": 5,
+        "min_level": 84,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sws_mana_overload",
+          "sws_spell_warden"
+        ],
+        "icon": "⚫",
+        "effects": {
+          "pull_radius": "30m",
+          "duration": "5s"
+        }
+      },
+      {
+        "spell_key": "sws_ultimate_magic_singularity",
+        "name_en": "Ultimate: Magic Singularity",
+        "name_tr": "Nihai: Büyü Tekilliği",
+        "description_en": "Ultimate. For 15 seconds, you absorb ALL magic within 50 meters, rendering your team completely immune to magical effects and damage.",
+        "description_tr": "Nihai. 15 saniye boyunca 50 metre içindeki TÜM büyüleri emerek takımınızı büyü etkilerine ve hasarına karşı tamamen bağışık hale getirirsiniz.",
+        "branch": "Magic Absorption",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sws_black_hole_aegis"
+        ],
+        "icon": "✨",
+        "effects": {
+          "radius": "50m",
+          "duration": "15s",
+          "magic_immunity": "true"
+        }
+      },
+      {
+        "spell_key": "sws_summon_ward",
+        "name_en": "Summon Ward",
+        "name_tr": "Koruyucu Çağrısı",
+        "description_en": "Summon a stationary spirit shield with 100 HP that lasts for 15 seconds.",
+        "description_tr": "15 saniye süren 100 HP'ye sahip sabit bir ruh kalkanı çağırır.",
+        "branch": "Guardian Spirit",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🗿",
+        "effects": {
+          "shield_hp": "100",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sws_spirit_companion",
+        "name_en": "Spirit Companion",
+        "name_tr": "Ruhani Yoldaş",
+        "description_en": "A small guardian spirit follows you, granting a passive 15% chance to block attacks.",
+        "description_tr": "Küçük bir koruyucu ruh sizi takip ederek saldırıları engelleme konusunda pasif %15 şans verir.",
+        "branch": "Guardian Spirit",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [
+          "sws_summon_ward"
+        ],
+        "icon": "👻",
+        "effects": {
+          "block_chance": "15%",
+          "duration": "passive"
+        }
+      },
+      {
+        "spell_key": "sws_ethereal_armor",
+        "name_en": "Ethereal Armor",
+        "name_tr": "Eterik Zırh",
+        "description_en": "Cover yourself in spirit energy, gaining +15 Armor for 10 seconds.",
+        "description_tr": "Kendinizi ruh enerjisiyle kaplayarak 10 saniye boyunca +15 Zırh kazanırsınız.",
+        "branch": "Guardian Spirit",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "sws_summon_ward"
+        ],
+        "icon": "🧥",
+        "effects": {
+          "armor_bonus": "+15",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sws_guardian_totem",
+        "name_en": "Guardian Totem",
+        "name_tr": "Muhafız Totemi",
+        "description_en": "Places a totem that grants +20 Armor to all allies within 10 meters for 20 seconds.",
+        "description_tr": "20 saniye boyunca 10 metre içindeki tüm müttefiklere +20 Zırh sağlayan bir totem yerleştirir.",
+        "branch": "Guardian Spirit",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 230,
+        "prerequisites": [
+          "sws_spirit_companion",
+          "sws_ethereal_armor"
+        ],
+        "icon": "🗼",
+        "effects": {
+          "totem_radius": "10m",
+          "armor_bonus": "+20",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sws_spirit_taunt",
+        "name_en": "Spirit Taunt",
+        "name_tr": "Ruhani Kışkırtma",
+        "description_en": "Your spirit companion taunts enemies within 5 meters, forcing them to attack it for 4 seconds.",
+        "description_tr": "Ruhani yoldaşınız 5 metre içindeki düşmanları kışkırtarak 4 saniye boyunca kendisine saldırmaya zorlar.",
+        "branch": "Guardian Spirit",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 270,
+        "prerequisites": [
+          "sws_guardian_totem"
+        ],
+        "icon": "📣",
+        "effects": {
+          "taunt_radius": "5m",
+          "duration": "4s"
+        }
+      },
+      {
+        "spell_key": "sws_phantom_bulwark",
+        "name_en": "Phantom Bulwark",
+        "name_tr": "Hayalet Siper",
+        "description_en": "Summon a 5m wide wall of spirits that completely blocks all projectiles for 8 seconds.",
+        "description_tr": "8 saniye boyunca tüm mermileri tamamen engelleyen 5 metre genişliğinde bir ruhlar duvarı çağırır.",
+        "branch": "Guardian Spirit",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "sws_guardian_totem"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "wall_width": "5m",
+          "projectile_block": "100%",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "sws_ancestral_guardian",
+        "name_en": "Ancestral Guardian",
+        "name_tr": "Atasal Muhafız",
+        "description_en": "Summon a fierce ancestral spirit that fights alongside you, dealing 2d8 damage per hit.",
+        "description_tr": "Sizinle birlikte savaşan ve vuruş başına 2d8 hasar veren vahşi bir atasal ruh çağırır.",
+        "branch": "Guardian Spirit",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 430,
+        "prerequisites": [
+          "sws_spirit_taunt",
+          "sws_phantom_bulwark"
+        ],
+        "icon": "🐺",
+        "effects": {
+          "damage": "2d8",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sws_guardian_link",
+        "name_en": "Guardian Link",
+        "name_tr": "Muhafız Bağı",
+        "description_en": "Link your spirit to an ally within 20m. The spirit takes 30% of their damage.",
+        "description_tr": "Ruhunuzu 20m içindeki bir müttefike bağlayın. Ruh onların aldığı hasarın %30'unu üstlenir.",
+        "branch": "Guardian Spirit",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 470,
+        "prerequisites": [
+          "sws_ancestral_guardian"
+        ],
+        "icon": "🎗️",
+        "effects": {
+          "spirit_damage_take": "30%",
+          "link_range": "20m"
+        }
+      },
+      {
+        "spell_key": "sws_ethereal_intervention",
+        "name_en": "Ethereal Intervention",
+        "name_tr": "Eterik Müdahale",
+        "description_en": "Your spirit teleports to an ally in danger, instantly shielding them for 200 HP.",
+        "description_tr": "Ruhunuz tehlikedeki bir müttefike ışınlanır ve anında onları 200 HP ile kalkanlar.",
+        "branch": "Guardian Spirit",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "sws_ancestral_guardian"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "teleport": "ally location",
+          "shield": "200 HP"
+        }
+      },
+      {
+        "spell_key": "sws_avatar_of_protection",
+        "name_en": "Avatar of Protection",
+        "name_tr": "Koruma Avatarı",
+        "description_en": "Your spirit transforms into a 10m dome shield, protecting everyone inside for 10 seconds.",
+        "description_tr": "Ruhunuz 10 metrelik bir kubbe kalkana dönüşerek içerideki herkesi 10 saniye boyunca korur.",
+        "branch": "Guardian Spirit",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 720,
+        "prerequisites": [
+          "sws_guardian_link",
+          "sws_ethereal_intervention"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "dome_radius": "10m",
+          "duration": "10s"
+        }
+      },
+      {
+        "spell_key": "sws_spirit_bastion",
+        "name_en": "Spirit Bastion",
+        "name_tr": "Ruhani Kale",
+        "description_en": "The spirit dome expands to 15m and reduces all incoming damage by 40% for 8 seconds.",
+        "description_tr": "Ruhani kubbe 15 metreye genişler ve gelen tüm hasarı 8 saniye boyunca %40 azaltır.",
+        "branch": "Guardian Spirit",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 820,
+        "prerequisites": [
+          "sws_avatar_of_protection"
+        ],
+        "icon": "🏯",
+        "effects": {
+          "damage_reduction": "40%",
+          "radius": "15m",
+          "duration": "8s"
+        }
+      },
+      {
+        "spell_key": "sws_guardian_angel",
+        "name_en": "Guardian Angel",
+        "name_tr": "Koruyucu Melek",
+        "description_en": "Your spirit sacrifices itself to automatically revive a fallen ally with 50% HP. 10m cooldown.",
+        "description_tr": "Ruhunuz kendini feda ederek düşmüş bir müttefiki otomatik olarak %50 HP ile diriltir. 10dk bekleme süresi.",
+        "branch": "Guardian Spirit",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "sws_avatar_of_protection"
+        ],
+        "icon": "👼",
+        "effects": {
+          "revive_hp": "50%",
+          "cooldown": "10m"
+        }
+      },
+      {
+        "spell_key": "sws_legion_of_shields",
+        "name_en": "Legion of Shields",
+        "name_tr": "Kalkanlar Lejyonu",
+        "description_en": "Summon 10 guardian spirits to form an impenetrable phalanx, granting an 80% block chance to allies behind them.",
+        "description_tr": "Geçilmez bir falanks oluşturmak için 10 koruyucu ruh çağırır ve arkalarındaki müttefiklere %80 engelleme şansı verir.",
+        "branch": "Guardian Spirit",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "sws_spirit_bastion",
+          "sws_guardian_angel"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "spirits": 10,
+          "block_chance": "80%",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sws_ultimate_valkyries_descent",
+        "name_en": "Ultimate: Valkyrie's Descent",
+        "name_tr": "Nihai: Valkürün İnişi",
+        "description_en": "Ultimate. Summon a massive Valkyrie spirit. For 15 seconds, all allies within 40m gain 90% damage reduction and massive regeneration.",
+        "description_tr": "Nihai. Devasa bir Valkür ruhu çağırır. 15 saniye boyunca 40m içindeki tüm müttefikler %90 hasar azaltma ve muazzam yenilenme kazanır.",
+        "branch": "Guardian Spirit",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sws_legion_of_shields"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "radius": "40m",
+          "damage_reduction": "90%",
+          "hp_regen": "+100/s",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sws_spell_share",
+        "name_en": "Spell Share",
+        "name_tr": "Büyü Paylaşımı",
+        "description_en": "Transfers absorbed magic energy to a linked ally, granting them 50 mana instantly.",
+        "description_tr": "Emilen büyü enerjisini bağlı bir müttefike aktararak onlara anında 50 mana verir.",
+        "branch": "Oath Bond",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "sws_empathic_shield",
+          "sws_magic_sink"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "mana_transfer": "50",
+          "cooldown": "5s"
+        }
+      },
+      {
+        "spell_key": "sws_arcane_spirit",
+        "name_en": "Arcane Spirit",
+        "name_tr": "Arkana Ruhu",
+        "description_en": "Your guardian spirits now absorb magic. Each absorbed spell increases their size and power by 10% (max 5 stacks).",
+        "description_tr": "Koruyucu ruhlarınız artık büyüyü emer. Emilen her büyü, boyutlarını ve güçlerini %10 artırır (en fazla 5 yük).",
+        "branch": "Magic Absorption",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sws_void_shield",
+          "sws_ethereal_intervention"
+        ],
+        "icon": "💠",
+        "effects": {
+          "size_increase": "10%",
+          "power_increase": "10%",
+          "max_stacks": 5
+        }
+      },
+      {
+        "spell_key": "sws_vow_of_ancestors",
+        "name_en": "Vow of the Ancestors",
+        "name_tr": "Ataların Yemini",
+        "description_en": "Any ally you are linked to gains their own temporary spirit companion for 20 seconds.",
+        "description_tr": "Bağlı olduğunuz her müttefik, 20 saniye boyunca kendi geçici ruhani yoldaşını kazanır.",
+        "branch": "Guardian Spirit",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 480,
+        "prerequisites": [
+          "sws_blood_pact",
+          "sws_ethereal_intervention"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "ally_spirit": "true",
+          "duration": "20s"
+        }
+      },
+      {
+        "spell_key": "sws_trinity_ward",
+        "name_en": "Trinity Ward",
+        "name_tr": "Üçlü Koruma",
+        "description_en": "Creates a spirit link that connects, absorbs magic, and summons a guardian at the ally's location for 15 seconds.",
+        "description_tr": "15 saniye boyunca müttefikin konumunda birleştiren, büyü emen ve bir koruyucu çağıran bir ruh bağı oluşturur.",
+        "branch": "Oath Bond",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sws_soul_link",
+          "sws_spell_warden",
+          "sws_guardian_angel"
+        ],
+        "icon": "🔱",
+        "effects": {
+          "trinity_link": "true",
+          "duration": "15s"
+        }
+      },
+      {
+        "spell_key": "sws_empathic_absorption",
+        "name_en": "Empathic Absorption",
+        "name_tr": "Empatik Emilim",
+        "description_en": "Whenever a linked ally takes magic damage globally, you automatically absorb 50% of it.",
+        "description_tr": "Bağlı bir müttefik küresel olarak ne zaman büyü hasarı alsa, otomatik olarak %50'sini emersiniz.",
+        "branch": "Magic Absorption",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sws_soul_link",
+          "sws_spell_warden"
+        ],
+        "icon": "🎭",
+        "effects": {
+          "global_absorb": "50%",
+          "damage_type": "magic"
+        }
+      },
+      {
+        "spell_key": "sws_mana_spirit",
+        "name_en": "Mana Spirit",
+        "name_tr": "Mana Ruhu",
+        "description_en": "Your guardian spirit feeds on magical energy. Every spell it blocks restores 20 mana to you.",
+        "description_tr": "Koruyucu ruhunuz büyü enerjisiyle beslenir. Engellediği her büyü size 20 mana geri kazandırır.",
+        "branch": "Guardian Spirit",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "sws_spell_warden",
+          "sws_guardian_angel"
+        ],
+        "icon": "🦋",
+        "effects": {
+          "mana_regen": "20 per blocked spell"
+        }
+      },
+      {
+        "spell_key": "sws_spirit_vow",
+        "name_en": "Spirit Vow",
+        "name_tr": "Ruh Yemini",
+        "description_en": "Bind your very soul to your guardian spirit. You are immune to death as long as the spirit lives (up to 10s).",
+        "description_tr": "Ruhunuzu doğrudan koruyucu ruhunuza bağlayın. Ruh yaşadığı sürece ölüme karşı bağışık olursunuz (en fazla 10 sn).",
+        "branch": "Oath Bond",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "sws_aegis_incarnate",
+          "sws_legion_of_shields"
+        ],
+        "icon": "💫",
+        "effects": {
+          "death_immunity": "10s",
+          "soul_bound": "true"
+        }
+      },
+      {
+        "spell_key": "sws_grand_ultimate_absolute_aegis",
+        "name_en": "Grand Ultimate: Absolute Aegis",
+        "name_tr": "Yüce Nihai: Mutlak Aegis",
+        "description_en": "Become the ultimate Sworn Shield. Binds all allies within 100m. Grants 100% damage immunity for 15s. Explodes outward with double the absorbed damage at the end.",
+        "description_tr": "Nihai Yeminli Kalkan olun. 100m içindeki tüm müttefikleri bağlar. 15 saniyeliğine %100 hasar bağışıklığı verir. Sonunda emilen hasarın iki katı ile dışa doğru patlar.",
+        "branch": "Oath Bond",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "sws_ultimate_sacred_covenant",
+          "sws_ultimate_magic_singularity",
+          "sws_ultimate_valkyries_descent"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "radius": "100m",
+          "damage_immunity": "100%",
+          "duration": "15s",
+          "final_damage": "absorbed * 2"
+        }
+      }
+    ]
+  }
+]

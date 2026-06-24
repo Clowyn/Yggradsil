@@ -1,0 +1,1022 @@
+[
+  {
+    "subclass_key": "elementalist_mage",
+    "tree_name_en": "Elemental Mastery",
+    "tree_name_tr": "Element Ustalığı",
+    "tree_desc_en": "Masters the four prime elements to summon elementals, control the battlefield, and unleash devastating area-of-effect destruction.",
+    "tree_desc_tr": "Savaş alanını kontrol etmek, yıkıcı alan hasarları vermek ve elementalleri çağırmak için dört ana elementte ustalaşır.",
+    "branches": [
+      "Fire",
+      "Water",
+      "Earth",
+      "Air",
+      "Cross-Branch"
+    ],
+    "spells": [
+      {
+        "spell_key": "em_firebolt",
+        "name_en": "Firebolt",
+        "name_tr": "Ateş Oku",
+        "description_en": "Hurls a small bolt of fire towards a single target up to 30m away, dealing 1d10 fire damage.",
+        "description_tr": "30m uzaklığa kadar tek bir hedefe küçük bir ateş oku fırlatarak 1d10 ateş hasarı verir.",
+        "branch": "Fire",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🏹",
+        "effects": {
+          "damage": "1d10",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "em_ignite",
+        "name_en": "Ignite",
+        "name_tr": "Tutuştur",
+        "description_en": "Sets a target ablaze within 20m, causing them to burn for 2d6 fire damage over 3 turns.",
+        "description_tr": "20m içindeki bir hedefi tutuşturarak, 3 tur boyunca toplam 2d6 ateş hasarı almasını sağlar.",
+        "branch": "Fire",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "em_firebolt"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "2d6",
+          "duration": "3 turns",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "em_fireball",
+        "name_en": "Fireball",
+        "name_tr": "Ateş Topu",
+        "description_en": "Shoots a sphere of flame that detonates in a 6m radius up to 40m away, dealing 6d6 fire damage.",
+        "description_tr": "40m uzaklığa kadar gidebilen ve 6m yarıçapta patlayarak 6d6 ateş hasarı veren bir ateş topu fırlatır.",
+        "branch": "Fire",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "em_ignite"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "6d6",
+          "range": "40m",
+          "radius": "6m"
+        }
+      },
+      {
+        "spell_key": "em_minor_fire_elemental",
+        "name_en": "Minor Fire Elemental",
+        "name_tr": "Küçük Ateş Elementali",
+        "description_en": "Summons a Minor Fire Elemental. Its stats scale at 50% of your caster level. Lasts 5 turns.",
+        "description_tr": "Küçük bir Ateş Elementali çağırır. İstatistikleri büyücü seviyenizin %50'si ile ölçeklenir. 5 tur sürer.",
+        "branch": "Fire",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "em_fireball"
+        ],
+        "icon": "🦎",
+        "effects": {
+          "duration": "5 turns",
+          "scaling": "50% caster level"
+        }
+      },
+      {
+        "spell_key": "em_wall_of_fire",
+        "name_en": "Wall of Fire",
+        "name_tr": "Ateş Duvarı",
+        "description_en": "Creates a 15m long wall of blazing fire. Any creature passing through takes 5d8 fire damage.",
+        "description_tr": "15m uzunluğunda alevden bir duvar yaratır. İçinden geçen her yaratık 5d8 ateş hasarı alır.",
+        "branch": "Fire",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "em_minor_fire_elemental"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "damage": "5d8",
+          "length": "15m"
+        }
+      },
+      {
+        "spell_key": "em_combustion",
+        "name_en": "Combustion",
+        "name_tr": "Yanma",
+        "description_en": "Instantly detonates burning effects on enemies within 20m, dealing 8d6 fire damage and stunning them for 1 turn.",
+        "description_tr": "20m içindeki düşmanların üzerindeki yanma etkilerini anında patlatarak 8d6 ateş hasarı verir ve 1 tur sersemletir.",
+        "branch": "Fire",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "em_wall_of_fire"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "8d6",
+          "range": "20m",
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "em_meteor_strike",
+        "name_en": "Meteor Strike",
+        "name_tr": "Meteor Çarpması",
+        "description_en": "Calls down a massive meteor from the sky hitting a 10m radius area, dealing 12d6 fire and 4d6 bludgeoning damage. 60m range.",
+        "description_tr": "Gökyüzünden 10m yarıçaplı bir alana devasa bir meteor indirerek 12d6 ateş ve 4d6 ezme hasarı verir. 60m menzil.",
+        "branch": "Fire",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "em_combustion"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "damage": "12d6 fire, 4d6 bludgeoning",
+          "range": "60m",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "em_major_fire_elemental",
+        "name_en": "Major Fire Elemental",
+        "name_tr": "Büyük Ateş Elementali",
+        "description_en": "Summons a Major Fire Elemental with stats equal to 100% of your caster level. Lasts for 10 turns.",
+        "description_tr": "İstatistikleri büyücü seviyenizin %100'üne eşit olan Büyük bir Ateş Elementali çağırır. 10 tur sürer.",
+        "branch": "Fire",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "em_meteor_strike"
+        ],
+        "icon": "👹",
+        "effects": {
+          "duration": "10 turns",
+          "scaling": "100% caster level"
+        }
+      },
+      {
+        "spell_key": "em_inferno",
+        "name_en": "Inferno",
+        "name_tr": "Cehennem Ateşi",
+        "description_en": "Engulfs a 15m radius in hellfire, dealing 20d6 fire damage over 5 turns and melting armor by 30%. 40m range.",
+        "description_tr": "15m yarıçaplı bir alanı cehennem ateşiyle kaplayarak 5 tur boyunca 20d6 ateş hasarı verir ve zırhı %30 eritir. 40m menzil.",
+        "branch": "Fire",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "em_major_fire_elemental"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "20d6",
+          "duration": "5 turns",
+          "range": "40m",
+          "radius": "15m",
+          "armor_reduction": "30%"
+        }
+      },
+      {
+        "spell_key": "em_firelord_avatar",
+        "name_en": "Firelord Avatar",
+        "name_tr": "Ateş Lordu Avatarı",
+        "description_en": "Transforms you into a Firelord Avatar for 5 turns. Grants flight, fire immunity, and your spells deal an extra 10d6 fire damage.",
+        "description_tr": "Sizi 5 turluğuna Ateş Lordu Avatarına dönüştürür. Uçma, ateş bağışıklığı kazandırır ve büyüleriniz ekstra 10d6 ateş hasarı verir.",
+        "branch": "Fire",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "em_inferno"
+        ],
+        "icon": "👑",
+        "effects": {
+          "duration": "5 turns",
+          "bonus_damage": "10d6",
+          "immunity": "fire"
+        }
+      },
+      {
+        "spell_key": "em_water_whip",
+        "name_en": "Water Whip",
+        "name_tr": "Su Kırbacı",
+        "description_en": "Forms a whip of water to strike a target 15m away, dealing 1d8 bludgeoning damage and pulling them 5m closer.",
+        "description_tr": "15m uzaktaki bir hedefe su kırbacıyla vurarak 1d8 ezme hasarı verir ve hedefi 5m kendinize çeker.",
+        "branch": "Water",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪢",
+        "effects": {
+          "damage": "1d8",
+          "range": "15m",
+          "pull": "5m"
+        }
+      },
+      {
+        "spell_key": "em_frostbite",
+        "name_en": "Frostbite",
+        "name_tr": "Soğuk Isırması",
+        "description_en": "Chills a target within 20m, dealing 1d6 cold damage and slowing their movement speed by 50% for 2 turns.",
+        "description_tr": "20m içindeki bir hedefi dondurarak 1d6 soğuk hasarı verir ve hareket hızını 2 tur boyunca %50 yavaşlatır.",
+        "branch": "Water",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "em_water_whip"
+        ],
+        "icon": "❄️",
+        "effects": {
+          "damage": "1d6",
+          "range": "20m",
+          "slow": "50%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "em_healing_rain",
+        "name_en": "Healing Rain",
+        "name_tr": "Şifa Yağmuru",
+        "description_en": "Calls down a gentle rain over an 8m radius area up to 30m away, healing allies for 3d8 HP.",
+        "description_tr": "30m uzaklığa kadar 8m yarıçaplı bir alana şifa yağmuru indirerek müttefikleri 3d8 HP iyileştirir.",
+        "branch": "Water",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "em_frostbite"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "healing": "3d8",
+          "range": "30m",
+          "radius": "8m"
+        }
+      },
+      {
+        "spell_key": "em_minor_water_elemental",
+        "name_en": "Minor Water Elemental",
+        "name_tr": "Küçük Su Elementali",
+        "description_en": "Summons a Minor Water Elemental. Its stats scale at 50% of your caster level. Lasts 5 turns.",
+        "description_tr": "Küçük bir Su Elementali çağırır. İstatistikleri büyücü seviyenizin %50'si ile ölçeklenir. 5 tur sürer.",
+        "branch": "Water",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "em_healing_rain"
+        ],
+        "icon": "💧",
+        "effects": {
+          "duration": "5 turns",
+          "scaling": "50% caster level"
+        }
+      },
+      {
+        "spell_key": "em_ice_lance",
+        "name_en": "Ice Lance",
+        "name_tr": "Buz Mızrağı",
+        "description_en": "Fires a sharp lance of ice up to 30m, dealing 5d10 cold damage and ignoring 50% of the target's armor.",
+        "description_tr": "30m'ye kadar keskin bir buz mızrağı fırlatarak 5d10 soğuk hasarı verir ve hedefin zırhının %50'sini yok sayar.",
+        "branch": "Water",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "em_minor_water_elemental"
+        ],
+        "icon": "🧊",
+        "effects": {
+          "damage": "5d10",
+          "range": "30m",
+          "armor_pierce": "50%"
+        }
+      },
+      {
+        "spell_key": "em_tidal_wave",
+        "name_en": "Tidal Wave",
+        "name_tr": "Gelgit Dalgası",
+        "description_en": "Unleashes a wave of water in a 10x10m area, dealing 6d8 bludgeoning damage and knocking all targets prone.",
+        "description_tr": "10x10m'lik bir alana su dalgası göndererek 6d8 ezme hasarı verir ve tüm hedefleri yere serer.",
+        "branch": "Water",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "em_ice_lance"
+        ],
+        "icon": "🏄",
+        "effects": {
+          "damage": "6d8",
+          "area": "10x10m",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "em_blizzard",
+        "name_en": "Blizzard",
+        "name_tr": "Kar Fırtınası",
+        "description_en": "Creates a raging blizzard in a 15m radius, dealing 8d8 cold damage and freezing targets solid for 1 turn.",
+        "description_tr": "15m yarıçaplı bir alanda şiddetli bir kar fırtınası yaratarak 8d8 soğuk hasarı verir ve hedefleri 1 tur dondurur.",
+        "branch": "Water",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "em_tidal_wave"
+        ],
+        "icon": "🌨️",
+        "effects": {
+          "damage": "8d8",
+          "radius": "15m",
+          "freeze": "1 turn"
+        }
+      },
+      {
+        "spell_key": "em_major_water_elemental",
+        "name_en": "Major Water Elemental",
+        "name_tr": "Büyük Su Elementali",
+        "description_en": "Summons a Major Water Elemental with stats equal to 100% of your caster level. Lasts for 10 turns.",
+        "description_tr": "İstatistikleri büyücü seviyenizin %100'üne eşit olan Büyük bir Su Elementali çağırır. 10 tur sürer.",
+        "branch": "Water",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "em_blizzard"
+        ],
+        "icon": "🐋",
+        "effects": {
+          "duration": "10 turns",
+          "scaling": "100% caster level"
+        }
+      },
+      {
+        "spell_key": "em_tsunami",
+        "name_en": "Tsunami",
+        "name_tr": "Tsunami",
+        "description_en": "Summons a massive tsunami that pushes enemies 30m back, dealing 15d8 bludgeoning damage across a 20m wide line.",
+        "description_tr": "Düşmanları 30m geriye iten ve 20m genişliğinde bir hatta 15d8 ezme hasarı veren devasa bir tsunami çağırır.",
+        "branch": "Water",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "em_major_water_elemental"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "15d8",
+          "push": "30m",
+          "width": "20m"
+        }
+      },
+      {
+        "spell_key": "em_leviathan_avatar",
+        "name_en": "Leviathan Avatar",
+        "name_tr": "Leviathan Avatarı",
+        "description_en": "Transforms you into a Leviathan Avatar for 5 turns. Grants massive regeneration (50 HP/turn), water breathing, and applies freeze on all attacks.",
+        "description_tr": "Sizi 5 turluğuna Leviathan Avatarına dönüştürür. Devasa yenilenme (50 HP/tur), suda nefes alma ve tüm saldırılarda dondurma etkisi kazandırır.",
+        "branch": "Water",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "em_tsunami"
+        ],
+        "icon": "🐙",
+        "effects": {
+          "duration": "5 turns",
+          "regen": "50 HP/turn",
+          "effect": "freeze on attack"
+        }
+      },
+      {
+        "spell_key": "em_magic_stone",
+        "name_en": "Magic Stone",
+        "name_tr": "Sihirli Taş",
+        "description_en": "Hurls a magically imbued stone up to 25m away, dealing 1d10 bludgeoning damage.",
+        "description_tr": "25m uzağa büyülü bir taş fırlatarak 1d10 ezme hasarı verir.",
+        "branch": "Earth",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🪨",
+        "effects": {
+          "damage": "1d10",
+          "range": "25m"
+        }
+      },
+      {
+        "spell_key": "em_tremor",
+        "name_en": "Tremor",
+        "name_tr": "Sarsıntı",
+        "description_en": "Strikes the ground, causing a 10m radius tremor that deals 2d6 bludgeoning damage with a 25% chance to knock targets prone.",
+        "description_tr": "Yere vurarak 10m yarıçapında bir sarsıntı yaratır. 2d6 ezme hasarı verir ve hedefleri %25 ihtimalle yere serer.",
+        "branch": "Earth",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "em_magic_stone"
+        ],
+        "icon": "🫨",
+        "effects": {
+          "damage": "2d6",
+          "radius": "10m",
+          "prone_chance": "25%"
+        }
+      },
+      {
+        "spell_key": "em_stone_armor",
+        "name_en": "Stone Armor",
+        "name_tr": "Taş Zırh",
+        "description_en": "Encases yourself or an ally in stone armor for 5 turns, granting +5 AC and 30 temporary HP. 15m range.",
+        "description_tr": "Kendinizi veya bir müttefiki 5 turluğuna taş zırhla kaplayarak +5 AC ve 30 geçici HP kazandırır. 15m menzil.",
+        "branch": "Earth",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "em_tremor"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "bonus_ac": "5",
+          "temp_hp": "30",
+          "duration": "5 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "em_minor_earth_elemental",
+        "name_en": "Minor Earth Elemental",
+        "name_tr": "Küçük Toprak Elementali",
+        "description_en": "Summons a Minor Earth Elemental. Its stats scale at 50% of your caster level. Lasts 5 turns.",
+        "description_tr": "Küçük bir Toprak Elementali çağırır. İstatistikleri büyücü seviyenizin %50'si ile ölçeklenir. 5 tur sürer.",
+        "branch": "Earth",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "em_stone_armor"
+        ],
+        "icon": "🗿",
+        "effects": {
+          "duration": "5 turns",
+          "scaling": "50% caster level"
+        }
+      },
+      {
+        "spell_key": "em_spike_growth",
+        "name_en": "Spike Growth",
+        "name_tr": "Dikenli Büyüme",
+        "description_en": "Turns the ground in a 10m radius into vicious spikes for 3 turns. Deals 4d4 piercing damage for every 2m a target moves.",
+        "description_tr": "10m yarıçaplı zemini 3 turluğuna acımasız dikenlere çevirir. Bir hedef hareket ettiği her 2m için 4d4 delme hasarı alır.",
+        "branch": "Earth",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "em_minor_earth_elemental"
+        ],
+        "icon": "🌵",
+        "effects": {
+          "damage": "4d4 per 2m",
+          "radius": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "em_boulder_toss",
+        "name_en": "Boulder Toss",
+        "name_tr": "Kaya Fırlatma",
+        "description_en": "Hurls a massive boulder up to 30m away, dealing 8d6 bludgeoning damage and stunning the target for 1 turn.",
+        "description_tr": "30m uzağa devasa bir kaya fırlatarak 8d6 ezme hasarı verir ve hedefi 1 tur sersemletir.",
+        "branch": "Earth",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "em_spike_growth"
+        ],
+        "icon": "🎳",
+        "effects": {
+          "damage": "8d6",
+          "range": "30m",
+          "stun": "1 turn"
+        }
+      },
+      {
+        "spell_key": "em_earthquake",
+        "name_en": "Earthquake",
+        "name_tr": "Deprem",
+        "description_en": "Triggers a devastating earthquake in a 20m radius. Deals 10d6 bludgeoning damage, knocks targets prone, and destroys structures.",
+        "description_tr": "20m yarıçaplı bir alanda yıkıcı bir deprem tetikler. 10d6 ezme hasarı verir, hedefleri yere serer ve yapıları yok eder.",
+        "branch": "Earth",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "em_boulder_toss"
+        ],
+        "icon": "🏚️",
+        "effects": {
+          "damage": "10d6",
+          "radius": "20m",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "em_major_earth_elemental",
+        "name_en": "Major Earth Elemental",
+        "name_tr": "Büyük Toprak Elementali",
+        "description_en": "Summons a Major Earth Elemental with stats equal to 100% of your caster level. Lasts for 10 turns.",
+        "description_tr": "İstatistikleri büyücü seviyenizin %100'üne eşit olan Büyük bir Toprak Elementali çağırır. 10 tur sürer.",
+        "branch": "Earth",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "em_earthquake"
+        ],
+        "icon": "🧌",
+        "effects": {
+          "duration": "10 turns",
+          "scaling": "100% caster level"
+        }
+      },
+      {
+        "spell_key": "em_petrify",
+        "name_en": "Petrify",
+        "name_tr": "Taşa Çevirme",
+        "description_en": "Attempts to turn a target within 15m into solid stone. If they fail a constitution save, they are permanently petrified.",
+        "description_tr": "15m içindeki bir hedefi katı taşa çevirmeye çalışır. Dayanıklılık zarında başarısız olurlarsa kalıcı olarak taşlaşırlar.",
+        "branch": "Earth",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "em_major_earth_elemental"
+        ],
+        "icon": "🗽",
+        "effects": {
+          "range": "15m",
+          "status": "permanent petrification"
+        }
+      },
+      {
+        "spell_key": "em_titan_avatar",
+        "name_en": "Titan Avatar",
+        "name_tr": "Titan Avatarı",
+        "description_en": "Transforms you into a Titan Avatar for 5 turns. Grants +100 Max HP, immunity to physical control effects, and melee strikes deal 8d10 damage.",
+        "description_tr": "Sizi 5 turluğuna Titan Avatarına dönüştürür. +100 Maksimum HP, fiziksel kontrol etkilerine bağışıklık kazandırır ve yakın dövüş saldırıları 8d10 hasar verir.",
+        "branch": "Earth",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "em_petrify"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "duration": "5 turns",
+          "max_hp_bonus": "100",
+          "melee_damage": "8d10"
+        }
+      },
+      {
+        "spell_key": "em_gust",
+        "name_en": "Gust",
+        "name_tr": "Rüzgar Esintisi",
+        "description_en": "Blasts a target within 15m with a strong gust of wind, pushing them 10m away and interrupting spellcasting.",
+        "description_tr": "15m içindeki bir hedefe güçlü bir rüzgar esintisi göndererek onları 10m uzağa iter ve büyü yapmalarını engeller.",
+        "branch": "Air",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌬️",
+        "effects": {
+          "range": "15m",
+          "push": "10m",
+          "interrupt": "true"
+        }
+      },
+      {
+        "spell_key": "em_static_shock",
+        "name_en": "Static Shock",
+        "name_tr": "Statik Şok",
+        "description_en": "Shocks a target within 20m for 2d8 lightning damage, which then jumps to 1 additional target within 5m.",
+        "description_tr": "20m içindeki bir hedefi şoklayarak 2d8 yıldırım hasarı verir, hasar 5m içindeki 1 ek hedefe daha sıçrar.",
+        "branch": "Air",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "em_gust"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "2d8",
+          "range": "20m",
+          "jump_targets": "1"
+        }
+      },
+      {
+        "spell_key": "em_levitate",
+        "name_en": "Levitate",
+        "name_tr": "Havaya Kaldırma",
+        "description_en": "Grants you the ability to float up to 10m in the air for 5 turns, ignoring ground hazards and gaining +30% movement speed.",
+        "description_tr": "Sana 5 tur boyunca havada 10m'ye kadar süzülme yeteneği verir. Zemin tehlikelerini yok sayar ve +%30 hareket hızı kazandırır.",
+        "branch": "Air",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 200,
+        "prerequisites": [
+          "em_static_shock"
+        ],
+        "icon": "🎈",
+        "effects": {
+          "duration": "5 turns",
+          "height": "10m",
+          "movement_speed": "+30%"
+        }
+      },
+      {
+        "spell_key": "em_minor_air_elemental",
+        "name_en": "Minor Air Elemental",
+        "name_tr": "Küçük Hava Elementali",
+        "description_en": "Summons a Minor Air Elemental. Its stats scale at 50% of your caster level. Lasts 5 turns.",
+        "description_tr": "Küçük bir Hava Elementali çağırır. İstatistikleri büyücü seviyenizin %50'si ile ölçeklenir. 5 tur sürer.",
+        "branch": "Air",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "em_levitate"
+        ],
+        "icon": "🧚",
+        "effects": {
+          "duration": "5 turns",
+          "scaling": "50% caster level"
+        }
+      },
+      {
+        "spell_key": "em_lightning_bolt",
+        "name_en": "Lightning Bolt",
+        "name_tr": "Yıldırım Düşmesi",
+        "description_en": "Unleashes a powerful stroke of electrical energy in a 30m long line, dealing 8d6 lightning damage to all in its path.",
+        "description_tr": "30m uzunluğunda bir hat boyunca güçlü bir elektrik enerjisi serbest bırakarak yoluna çıkan herkese 8d6 yıldırım hasarı verir.",
+        "branch": "Air",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 400,
+        "prerequisites": [
+          "em_minor_air_elemental"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "8d6",
+          "line": "30m"
+        }
+      },
+      {
+        "spell_key": "em_wind_wall",
+        "name_en": "Wind Wall",
+        "name_tr": "Rüzgar Duvarı",
+        "description_en": "Summons a 20m wide wall of strong winds. It completely blocks physical projectiles and deals 4d6 slashing damage to enemies crossing it.",
+        "description_tr": "20m genişliğinde güçlü rüzgar duvarı çağırır. Fiziksel mermileri tamamen engeller ve içinden geçen düşmanlara 4d6 kesme hasarı verir.",
+        "branch": "Air",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "em_lightning_bolt"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "width": "20m",
+          "damage": "4d6",
+          "block_projectiles": "true"
+        }
+      },
+      {
+        "spell_key": "em_chain_lightning",
+        "name_en": "Chain Lightning",
+        "name_tr": "Zincirleme Yıldırım",
+        "description_en": "Strikes a target with 10d8 lightning damage, then jumps to 4 additional targets within 10m of each other.",
+        "description_tr": "Bir hedefe 10d8 yıldırım hasarı ile vurur, ardından birbirine 10m mesafedeki 4 ek hedefe sıçrar.",
+        "branch": "Air",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "em_wind_wall"
+        ],
+        "icon": "⛓️",
+        "effects": {
+          "damage": "10d8",
+          "jump_targets": "4",
+          "jump_range": "10m"
+        }
+      },
+      {
+        "spell_key": "em_major_air_elemental",
+        "name_en": "Major Air Elemental",
+        "name_tr": "Büyük Hava Elementali",
+        "description_en": "Summons a Major Air Elemental with stats equal to 100% of your caster level. Lasts for 10 turns.",
+        "description_tr": "İstatistikleri büyücü seviyenizin %100'üne eşit olan Büyük bir Hava Elementali çağırır. 10 tur sürer.",
+        "branch": "Air",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "em_chain_lightning"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "duration": "10 turns",
+          "scaling": "100% caster level"
+        }
+      },
+      {
+        "spell_key": "em_tornado",
+        "name_en": "Tornado",
+        "name_tr": "Kasırga",
+        "description_en": "Creates a massive 10m wide tornado that moves 10m per turn for 4 turns. It deals 12d6 slashing damage and lifts targets into the air.",
+        "description_tr": "4 tur boyunca tur başına 10m hareket eden devasa bir kasırga (10m genişliğinde) yaratır. 12d6 kesme hasarı verir ve hedefleri havaya kaldırır.",
+        "branch": "Air",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "em_major_air_elemental"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "12d6",
+          "width": "10m",
+          "movement": "10m per turn",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "em_tempest_avatar",
+        "name_en": "Tempest Avatar",
+        "name_tr": "Fırtına Avatarı",
+        "description_en": "Transforms you into a Tempest Avatar for 5 turns. Grants 30m fly speed, 50% dodge chance, and a passive lightning aura dealing 5d6 damage.",
+        "description_tr": "Sizi 5 turluğuna Fırtına Avatarına dönüştürür. 30m uçma hızı, %50 kaçınma şansı ve 5d6 hasar veren pasif yıldırım aurası kazandırır.",
+        "branch": "Air",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "em_tornado"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "duration": "5 turns",
+          "fly_speed": "30m",
+          "dodge": "50%",
+          "aura_damage": "5d6"
+        }
+      },
+      {
+        "spell_key": "em_steam_cloud",
+        "name_en": "Steam Cloud",
+        "name_tr": "Buhar Bulutu",
+        "description_en": "Mixes extreme heat and water to create a 15m radius scalding steam cloud. Targets inside take 3d6 fire damage and are blinded for 2 turns.",
+        "description_tr": "Aşırı ısı ve suyu karıştırarak 15m yarıçaplı kaynar bir buhar bulutu yaratır. İçerideki hedefler 3d6 ateş hasarı alır ve 2 tur boyunca kör olurlar.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [
+          "em_ignite",
+          "em_frostbite"
+        ],
+        "icon": "♨️",
+        "effects": {
+          "damage": "3d6",
+          "radius": "15m",
+          "status": "blind",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "em_magma_eruption",
+        "name_en": "Magma Eruption",
+        "name_tr": "Magma Patlaması",
+        "description_en": "Causes lava to erupt in a 10m radius up to 30m away. Deals 6d8 fire damage and turns the area into difficult terrain burning for 2d6 per turn.",
+        "description_tr": "30m uzağa kadar 10m yarıçaplı bir alanda lav patlamasına neden olur. 6d8 ateş hasarı verir ve alanı her tur 2d6 yanan zorlu araziye dönüştürür.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "em_fireball",
+          "em_stone_armor"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "6d8",
+          "radius": "10m",
+          "burn_damage": "2d6 per turn",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "em_supercell",
+        "name_en": "Supercell",
+        "name_tr": "Süper Hücre",
+        "description_en": "Summons a heavy storm covering a 30m area. Allies inside heal for 2d8 per turn while enemies are struck by lightning for 4d8 damage.",
+        "description_tr": "30m'lik alanı kaplayan ağır bir fırtına çağırır. İçerideki müttefikler tur başına 2d8 iyileşirken, düşmanlara yıldırım çarparak 4d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "em_healing_rain",
+          "em_lightning_bolt"
+        ],
+        "icon": "⛈️",
+        "effects": {
+          "healing": "2d8",
+          "damage": "4d8",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "em_sandstorm",
+        "name_en": "Sandstorm",
+        "name_tr": "Kum Fırtınası",
+        "description_en": "Conjures a fierce 15m radius sandstorm that deals 5d6 slashing damage per turn, reduces visibility to 2m, and silences all spellcasters inside.",
+        "description_tr": "Tur başına 5d6 kesme hasarı veren, görüş mesafesini 2m'ye düşüren ve içerideki tüm büyücüleri susturan şiddetli bir 15m yarıçaplı kum fırtınası yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "em_spike_growth",
+          "em_wind_wall"
+        ],
+        "icon": "🏜️",
+        "effects": {
+          "damage": "5d6",
+          "radius": "15m",
+          "visibility": "2m",
+          "status": "silence"
+        }
+      },
+      {
+        "spell_key": "em_mudslide",
+        "name_en": "Mudslide",
+        "name_tr": "Çamur Kayması",
+        "description_en": "Unleashes a 20m cone of thick mud. Deals 6d6 bludgeoning damage and completely coats enemies, slowing them by 75% for 3 turns.",
+        "description_tr": "20m'lik koni şeklinde yoğun çamur serbest bırakır. 6d6 ezme hasarı verir ve düşmanları tamamen kaplayarak onları 3 tur boyunca %75 yavaşlatır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "em_tidal_wave",
+          "em_boulder_toss"
+        ],
+        "icon": "🟤",
+        "effects": {
+          "damage": "6d6",
+          "cone": "20m",
+          "slow": "75%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "em_plasma_ray",
+        "name_en": "Plasma Ray",
+        "name_tr": "Plazma Işını",
+        "description_en": "Fires a concentrated beam of superheated plasma. Deals 12d10 combined fire and lightning damage, melting 50% of the target's armor. 40m range.",
+        "description_tr": "Aşırı ısınmış plazmadan oluşan yoğun bir ışın fırlatır. Toplam 12d10 ateş ve yıldırım hasarı verir, hedefin zırhının %50'sini eritir. 40m menzil.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "em_combustion",
+          "em_chain_lightning"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "damage": "12d10",
+          "range": "40m",
+          "armor_melt": "50%"
+        }
+      },
+      {
+        "spell_key": "em_volcanic_ash",
+        "name_en": "Volcanic Ash",
+        "name_tr": "Volkanik Kül",
+        "description_en": "A massive 40m ash cloud billows from the ground, dealing 8d6 fire damage. The toxic ash chokes enemies, causing silence and a 50% miss chance for 3 turns.",
+        "description_tr": "Yerden 40m'lik devasa bir kül bulutu yükselir ve 8d6 ateş hasarı verir. Zehirli kül düşmanları boğarak 3 tur boyunca susturma ve %50 ıskalama şansı verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "em_magma_eruption",
+          "em_sandstorm"
+        ],
+        "icon": "🌫️",
+        "effects": {
+          "damage": "8d6",
+          "radius": "40m",
+          "status": "silence",
+          "miss_chance": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "em_glacial_quake",
+        "name_en": "Glacial Quake",
+        "name_tr": "Buzul Depremi",
+        "description_en": "Instantly freezes and shatters the ground in a 25m radius. Deals 10d8 cold damage, causes severe bleeding, and stuns all enemies for 2 turns.",
+        "description_tr": "25m yarıçaplı alanı anında dondurur ve parçalar. 10d8 soğuk hasarı verir, şiddetli kanamaya neden olur ve tüm düşmanları 2 tur sersemletir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "em_blizzard",
+          "em_earthquake"
+        ],
+        "icon": "🏔️",
+        "effects": {
+          "damage": "10d8",
+          "radius": "25m",
+          "status": "bleed, stun",
+          "stun_duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "em_geyser_surge",
+        "name_en": "Geyser Surge",
+        "name_tr": "Gayzer Fışkırması",
+        "description_en": "Boiling water bursts from the earth in a 15m radius. Deals 12d8 fire and 10d8 bludgeoning damage, lifting targets 20m into the air before they crash down.",
+        "description_tr": "15m yarıçaplı bir alanda kaynar su fışkırır. 12d8 ateş ve 10d8 ezme hasarı verir, hedefleri yere çarpmadan önce 20m havaya kaldırır.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "em_inferno",
+          "em_tsunami"
+        ],
+        "icon": "⛲",
+        "effects": {
+          "damage": "12d8 fire, 10d8 bludgeoning",
+          "radius": "15m",
+          "lift": "20m"
+        }
+      },
+      {
+        "spell_key": "em_elemental_convergence",
+        "name_en": "Elemental Convergence",
+        "name_tr": "Elementlerin Birleşimi",
+        "description_en": "Calls upon all four elements. Summons an Elemental Overlord (150% caster level) and unleashes a 50m blast dealing 10d10 of each element's damage. Permanently alters the battlefield.",
+        "description_tr": "Dört elementin hepsini çağırır. Bir Elementbeyi (%150 büyücü seviyesi) çağırır ve 50m'lik devasa bir patlama ile her elementten 10d10 hasar verir. Savaş alanını kalıcı olarak değiştirir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "em_firelord_avatar",
+          "em_leviathan_avatar",
+          "em_titan_avatar",
+          "em_tempest_avatar"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "40d10 total",
+          "radius": "50m",
+          "summon": "Elemental Overlord (150%)"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1017 @@
+[
+  {
+    "subclass_key": "oracle_summoner",
+    "tree_name_en": "Oracle Summoner",
+    "tree_name_tr": "Kahin Çağırıcı",
+    "tree_desc_en": "Summon ethereal beings, spirits from the future, and celestial guardians to foresee attacks and bend reality.",
+    "tree_desc_tr": "Saldırıları önceden görmek ve gerçekliği bükmek için ruhani varlıkları, gelecekten gelen ruhları ve semavi muhafızları çağırın.",
+    "branches": [
+      "Celestial",
+      "Spirit",
+      "Premonition"
+    ],
+    "spells": [
+      {
+        "spell_key": "ors_celestial_mote",
+        "name_en": "Celestial Mote",
+        "name_tr": "Semavi Zerre",
+        "description_en": "Summon a glowing celestial mote to strike foes. Deals 1d6 radiant damage.",
+        "description_tr": "Düşmanları vurması için parlayan semavi bir zerre çağırır. 1d6 parlak hasar verir.",
+        "branch": "Celestial",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🌟",
+        "effects": {
+          "damage": "1d6",
+          "range": "10m",
+          "damage_type": "radiant"
+        }
+      },
+      {
+        "spell_key": "ors_star_sprite",
+        "name_en": "Star Sprite",
+        "name_tr": "Yıldız Perisi",
+        "description_en": "Summon a tiny star sprite that provides light and heals 1 ally for 1d4 HP over 2 turns.",
+        "description_tr": "Işık saçan ve 1 dostu 2 tur boyunca 1d4 SB iyileştiren küçük bir yıldız perisi çağırır.",
+        "branch": "Celestial",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🧚‍♀️",
+        "effects": {
+          "healing": "1d4",
+          "duration": "2 turns",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "ors_minor_angel",
+        "name_en": "Minor Angel",
+        "name_tr": "Küçük Melek",
+        "description_en": "Summon a minor angel that attacks with a light blade, dealing 1d8 radiant damage to an enemy.",
+        "description_tr": "Işıktan kılıcıyla saldıran küçük bir melek çağırır, bir düşmana 1d8 parlak hasar verir.",
+        "branch": "Celestial",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ors_celestial_mote"
+        ],
+        "icon": "👼",
+        "effects": {
+          "damage": "1d8",
+          "range": "5m",
+          "damage_type": "radiant"
+        }
+      },
+      {
+        "spell_key": "ors_aegis_orb",
+        "name_en": "Aegis Orb",
+        "name_tr": "Kalkan Küresi",
+        "description_en": "Summon an orb of light that orbits an ally, granting +2 AC for 3 turns.",
+        "description_tr": "Bir dostun etrafında dönen ve 3 tur boyunca +2 ZS sağlayan bir ışık küresi çağırır.",
+        "branch": "Celestial",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "ors_star_sprite"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": 2,
+          "duration": "3 turns",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_celestial_hound",
+        "name_en": "Celestial Hound",
+        "name_tr": "Semavi Tazı",
+        "description_en": "Summon a celestial hound that tracks and bites an enemy for 2d6 radiant damage. It moves up to 15m to strike.",
+        "description_tr": "Düşmanın izini süren ve onu ısırarak 2d6 parlak hasar veren semavi bir tazı çağırır. Vurmak için 15m'ye kadar hareket eder.",
+        "branch": "Celestial",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "ors_minor_angel"
+        ],
+        "icon": "🐕",
+        "effects": {
+          "damage": "2d6",
+          "range": "15m",
+          "damage_type": "radiant"
+        }
+      },
+      {
+        "spell_key": "ors_sun_flare_wisp",
+        "name_en": "Sun Flare Wisp",
+        "name_tr": "Güneş Parıltısı Alevciği",
+        "description_en": "Summon a wisp that explodes in a 5m radius, dealing 3d6 radiant/fire damage with a 30% chance to blind for 1 turn.",
+        "description_tr": "5m yarıçapında patlayarak 3d6 parlak/ateş hasarı veren ve %30 ihtimalle 1 tur kör eden bir alevcik çağırır.",
+        "branch": "Celestial",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ors_aegis_orb"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "3d6",
+          "radius": "5m",
+          "blind_chance": "30%",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ors_guardian_cherub",
+        "name_en": "Guardian Cherub",
+        "name_tr": "Koruyucu Kerub",
+        "description_en": "Summon a cherub that intercepts 1 attack per turn targeting an ally, absorbing up to 15 damage for 3 turns.",
+        "description_tr": "Bir dosta yönelik her tur 1 saldırının arasına giren ve 3 tur boyunca 15 hasara kadar emen bir kerub çağırır.",
+        "branch": "Celestial",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ors_sun_flare_wisp"
+        ],
+        "icon": "👶",
+        "effects": {
+          "damage_absorption": 15,
+          "duration": "3 turns",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_starlight_valkyrie",
+        "name_en": "Starlight Valkyrie",
+        "name_tr": "Yıldızışığı Valkür",
+        "description_en": "Summon a valkyrie that swoops down, dealing 4d8 radiant damage to targets in a 20m line.",
+        "description_tr": "Aşağı süzülerek 20m'lik bir hat üzerindeki hedeflere 4d8 parlak hasar veren bir valkür çağırır.",
+        "branch": "Celestial",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 380,
+        "prerequisites": [
+          "ors_celestial_hound"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "damage": "4d8",
+          "area": "20m line",
+          "damage_type": "radiant"
+        }
+      },
+      {
+        "spell_key": "ors_constellation_weaver",
+        "name_en": "Constellation Weaver",
+        "name_tr": "Takımyıldız Dokumacı",
+        "description_en": "Summon a weaver that ties enemies in starry threads, restraining them and dealing 3d6 radiant damage.",
+        "description_tr": "Düşmanları yıldızlı iplerle bağlayarak kısıtlayan ve 3d6 parlak hasar veren bir dokumacı çağırır.",
+        "branch": "Celestial",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ors_starlight_valkyrie"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "3d6",
+          "status": "restrained",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_moon_blessing_spirit",
+        "name_en": "Moon Blessing Spirit",
+        "name_tr": "Ay Kutsaması Ruhu",
+        "description_en": "Summons a spirit that bathes an area in moonlight, restoring 3d8 HP to all allies within 10m.",
+        "description_tr": "Bir alanı ay ışığıyla yıkayarak 10m içindeki tüm dostları 3d8 SB iyileştiren bir ruh çağırır.",
+        "branch": "Celestial",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ors_guardian_cherub"
+        ],
+        "icon": "🌕",
+        "effects": {
+          "healing": "3d8",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_archangel_avatar",
+        "name_en": "Archangel Avatar",
+        "name_tr": "Başmelek Avatarı",
+        "description_en": "Summon a powerful archangel avatar that deals 6d8 radiant damage and projects an aura granting +4 AC to allies in 15m.",
+        "description_tr": "6d8 parlak hasar veren ve 15m içindeki dostlara +4 ZS sağlayan bir aura yayan güçlü bir başmelek avatarı çağırır.",
+        "branch": "Celestial",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ors_starlight_valkyrie"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "damage": "6d8",
+          "ac_bonus": 4,
+          "aura_radius": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_solar_charioteer",
+        "name_en": "Solar Charioteer",
+        "name_tr": "Güneş Savaş Arabacısı",
+        "description_en": "Summon a fiery chariot that crashes through enemies in a 15m line, dealing 8d6 radiant damage and knocking them prone.",
+        "description_tr": "Düşmanların arasından geçerek 15m'lik bir hatta 8d6 parlak hasar veren ve onları yere seren ateşten bir savaş arabası çağırır.",
+        "branch": "Celestial",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ors_constellation_weaver"
+        ],
+        "icon": "🌞",
+        "effects": {
+          "damage": "8d6",
+          "area": "15m line",
+          "status": "prone"
+        }
+      },
+      {
+        "spell_key": "ors_supernova_elemental",
+        "name_en": "Supernova Elemental",
+        "name_tr": "Süpernova Elementali",
+        "description_en": "Summon an elemental of dying star energy that radiates 4d6 radiant/fire damage per turn to all enemies within 10m for 3 turns.",
+        "description_tr": "3 tur boyunca 10m içindeki tüm düşmanlara her tur 4d6 parlak/ateş hasarı yayan ölen bir yıldızın elementalini çağırır.",
+        "branch": "Celestial",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ors_moon_blessing_spirit"
+        ],
+        "icon": "💥",
+        "effects": {
+          "damage": "4d6",
+          "radius": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ors_seraph_of_the_cosmos",
+        "name_en": "Seraph of the Cosmos",
+        "name_tr": "Kozmosun Serafı",
+        "description_en": "(Ultimate) Summon a multi-winged Seraph. Deals 12d10 radiant damage in a 20m radius and grants absolute immunity to dark magic for 3 turns.",
+        "description_tr": "(Ulti) Çok kanatlı bir Seraf çağırır. 20m yarıçapında 12d10 parlak hasar verir ve 3 tur boyunca karanlık büyüye mutlak bağışıklık sağlar.",
+        "branch": "Celestial",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ors_archangel_avatar",
+          "ors_solar_charioteer",
+          "ors_supernova_elemental"
+        ],
+        "icon": "💠",
+        "effects": {
+          "damage": "12d10",
+          "radius": "20m",
+          "immunity": "dark magic",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ors_echo_spirit",
+        "name_en": "Echo Spirit",
+        "name_tr": "Yankı Ruhu",
+        "description_en": "Summon a spirit that perfectly mimics the summoner's last spell or attack at 50% power.",
+        "description_tr": "Çağırıcının son büyüsünü veya saldırısını %50 güçle kusursuzca taklit eden bir ruh çağırır.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "power_scaling": "50%"
+        }
+      },
+      {
+        "spell_key": "ors_ancestral_shield",
+        "name_en": "Ancestral Shield",
+        "name_tr": "Atasal Kalkan",
+        "description_en": "Summon a spirit ancestor to grant 10 temporary HP to an ally within 10m.",
+        "description_tr": "10m içindeki bir dosta 10 geçici SB sağlaması için atalardan bir ruh çağırır.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "🗿",
+        "effects": {
+          "temp_hp": 10,
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_future_wisp",
+        "name_en": "Future Wisp",
+        "name_tr": "Gelecek Alevciği",
+        "description_en": "Summon a wisp from the future that guides an ally's hand, granting +1d4 to their next attack roll.",
+        "description_tr": "Bir dostun elini yönlendirerek sonraki saldırı zarına +1d4 ekleyen gelecekten bir alevcik çağırır.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 110,
+        "prerequisites": [
+          "ors_echo_spirit"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "attack_bonus": "1d4",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_poltergeist_shove",
+        "name_en": "Poltergeist Shove",
+        "name_tr": "Gürültücü Ruh İtişi",
+        "description_en": "Summon a poltergeist to aggressively push an enemy 5m backwards and deal 1d6 force damage.",
+        "description_tr": "Bir düşmanı agresifçe 5m geriye iten ve 1d6 güç hasarı veren gürültücü bir ruh çağırır.",
+        "branch": "Spirit",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 140,
+        "prerequisites": [
+          "ors_ancestral_shield"
+        ],
+        "icon": "👻",
+        "effects": {
+          "damage": "1d6",
+          "knockback": "5m",
+          "damage_type": "force"
+        }
+      },
+      {
+        "spell_key": "ors_ethereal_knight",
+        "name_en": "Ethereal Knight",
+        "name_tr": "Ruhani Şövalye",
+        "description_en": "Summon an ethereal knight that strikes an enemy with a spectral sword for 2d8 force damage.",
+        "description_tr": "Düşmana hayalet bir kılıçla saldırarak 2d8 güç hasarı veren ruhani bir şövalye çağırır.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "ors_future_wisp"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "damage": "2d8",
+          "range": "5m",
+          "damage_type": "force"
+        }
+      },
+      {
+        "spell_key": "ors_spirit_link_totem",
+        "name_en": "Spirit Link Totem",
+        "name_tr": "Ruh Bağı Totemi",
+        "description_en": "Summon a spectral totem for 3 turns. Damage taken by allies within 10m is split evenly among them.",
+        "description_tr": "3 turluğuna hayalet bir totem çağırır. 10m içindeki dostların aldığı hasar aralarında eşit olarak paylaştırılır.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 240,
+        "prerequisites": [
+          "ors_poltergeist_shove"
+        ],
+        "icon": "🪬",
+        "effects": {
+          "damage_split": true,
+          "duration": "3 turns",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_phantom_steed",
+        "name_en": "Phantom Steed",
+        "name_tr": "Hayalet Binek",
+        "description_en": "Summon a fast spirit steed for 1 hour, granting the rider +20m movement speed and the ability to move through minor obstacles.",
+        "description_tr": "1 saatliğine binicisine +20m hareket hızı ve küçük engellerin içinden geçme yeteneği sağlayan hızlı bir ruhani binek çağırır.",
+        "branch": "Spirit",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 290,
+        "prerequisites": [
+          "ors_spirit_link_totem"
+        ],
+        "icon": "🐎",
+        "effects": {
+          "speed_bonus": "20m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ors_guardian_of_tomorrow",
+        "name_en": "Guardian of Tomorrow",
+        "name_tr": "Yarının Muhafızı",
+        "description_en": "Summon a guardian that warns of impending attacks, granting advantage on saving throws to allies in 10m for 2 turns.",
+        "description_tr": "Yaklaşan saldırılara karşı uyararak 10m içindeki dostlara 2 tur boyunca kurtarma zarlarında avantaj sağlayan bir muhafız çağırır.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 390,
+        "prerequisites": [
+          "ors_ethereal_knight"
+        ],
+        "icon": "👁️",
+        "effects": {
+          "advantage_saves": true,
+          "radius": "10m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ors_vengeful_wraith",
+        "name_en": "Vengeful Wraith",
+        "name_tr": "İntikamcı İfrit",
+        "description_en": "Summon a wraith that relentlessly attacks the last enemy who damaged the summoner, dealing 4d6 necrotic/force damage.",
+        "description_tr": "Çağırıcıya hasar veren son düşmana acımasızca saldırarak 4d6 nekrotik/güç hasarı veren bir ifrit çağırır.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 440,
+        "prerequisites": [
+          "ors_spirit_link_totem"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "4d6",
+          "damage_type": "necrotic/force"
+        }
+      },
+      {
+        "spell_key": "ors_spirit_storm_caller",
+        "name_en": "Spirit Storm Caller",
+        "name_tr": "Ruh Fırtınası Çağırıcısı",
+        "description_en": "Summon a spirit that rains ethereal lightning in a 10m radius, dealing 5d6 lightning/force damage to enemies.",
+        "description_tr": "10m yarıçapında ruhani yıldırımlar yağdırarak düşmanlara 5d6 yıldırım/güç hasarı veren bir ruh çağırır.",
+        "branch": "Spirit",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "ors_phantom_steed"
+        ],
+        "icon": "🌩️",
+        "effects": {
+          "damage": "5d6",
+          "radius": "10m",
+          "damage_type": "lightning/force"
+        }
+      },
+      {
+        "spell_key": "ors_future_self_echo",
+        "name_en": "Future Self Echo",
+        "name_tr": "Gelecekteki Benlik Yankısı",
+        "description_en": "Summon an echo of your future self. For 2 turns, it copies every spell you cast at the same targets for 50% effect.",
+        "description_tr": "Gelecekteki benliğinizin bir yankısını çağırır. 2 tur boyunca, yaptığınız her büyüyü aynı hedeflere %50 etkiyle kopyalar.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ors_guardian_of_tomorrow"
+        ],
+        "icon": "🪞",
+        "effects": {
+          "spell_copy": "50%",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ors_legion_of_ancestors",
+        "name_en": "Legion of Ancestors",
+        "name_tr": "Atalar Lejyonu",
+        "description_en": "Summon a phalanx of spirits forming a 15m wall. Blocks enemy movement and deals 6d6 force damage to those attempting to cross.",
+        "description_tr": "15m'lik bir duvar oluşturan ruhlardan bir falanks çağırır. Düşman hareketini engeller ve geçmeye çalışanlara 6d6 güç hasarı verir.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ors_vengeful_wraith"
+        ],
+        "icon": "🎖️",
+        "effects": {
+          "damage": "6d6",
+          "wall_length": "15m",
+          "movement_block": true
+        }
+      },
+      {
+        "spell_key": "ors_ethereal_dragon",
+        "name_en": "Ethereal Dragon",
+        "name_tr": "Ruhani Ejderha",
+        "description_en": "Summon a spectral dragon that breathes ethereal fire in a 15m cone, dealing 8d8 force damage and ignoring all armor.",
+        "description_tr": "15m'lik bir koni şeklinde ruhani ateş püskürten, 8d8 güç hasarı veren ve tüm zırhları yok sayan hayalet bir ejderha çağırır.",
+        "branch": "Spirit",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "ors_spirit_storm_caller"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "8d8",
+          "area": "15m cone",
+          "armor_penetration": true
+        }
+      },
+      {
+        "spell_key": "ors_spirit_king_incarnate",
+        "name_en": "Spirit King Incarnate",
+        "name_tr": "Ruh Kralı Tezahürü",
+        "description_en": "(Ultimate) Summon the Spirit King. Grants 50 Temp HP to all allies and unleashes a shockwave dealing 10d10 force damage to all enemies within 30m.",
+        "description_tr": "(Ulti) Ruh Kralı'nı çağırır. Tüm dostlara 50 Geçici SB sağlar ve 30m içindeki tüm düşmanlara 10d10 güç hasarı veren bir şok dalgası salar.",
+        "branch": "Spirit",
+        "tier": 5,
+        "min_level": 92,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "ors_future_self_echo",
+          "ors_legion_of_ancestors",
+          "ors_ethereal_dragon"
+        ],
+        "icon": "👑",
+        "effects": {
+          "temp_hp": 50,
+          "damage": "10d10",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "ors_omen_raven",
+        "name_en": "Omen Raven",
+        "name_tr": "Alamet Kuzgunu",
+        "description_en": "Summon a raven of premonition that marks a target. The next attack against them deals an additional 1d8 damage.",
+        "description_tr": "Bir hedefi işaretleyen bir öngörü kuzgunu çağırır. Ona yapılan sonraki saldırı fazladan 1d8 hasar verir.",
+        "branch": "Premonition",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🐦‍⬛",
+        "effects": {
+          "bonus_damage": "1d8",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "ors_delayed_strike_ward",
+        "name_en": "Delayed Strike Ward",
+        "name_tr": "Gecikmeli Vuruş Mührü",
+        "description_en": "Place a summoned ethereal trap. It triggers when an enemy enters its 3m space, striking for 2d6 psychic damage.",
+        "description_tr": "Çağrılmış ruhani bir tuzak yerleştirir. Bir düşman 3m'lik alanına girdiğinde tetiklenir ve 2d6 psişik hasar vurur.",
+        "branch": "Premonition",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "⏳",
+        "effects": {
+          "damage": "2d6",
+          "trigger_radius": "3m",
+          "damage_type": "psychic"
+        }
+      },
+      {
+        "spell_key": "ors_glimpse_sprite",
+        "name_en": "Glimpse Sprite",
+        "name_tr": "Görü Perisi",
+        "description_en": "Summon a sprite that grants 1 ally a brief vision of the immediate future, granting advantage on their next attack roll.",
+        "description_tr": "Bir dosta yakın geleceğin kısa bir görüsünü sağlayarak sonraki saldırı zarında avantaj veren bir peri çağırır.",
+        "branch": "Premonition",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 120,
+        "prerequisites": [
+          "ors_omen_raven"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "advantage_attack": true,
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_fates_dice",
+        "name_en": "Fate's Dice",
+        "name_tr": "Kaderin Zarları",
+        "description_en": "Summon spectral dice to decide fate. Roll 1d6: odds deal 2d6 psychic damage to target enemy, evens heal a targeted ally for 2d6 HP.",
+        "description_tr": "Kaderi belirlemek için hayalet zarlar çağırır. 1d6 atılır: tekler hedef düşmana 2d6 psişik hasar verir, çiftler hedef dostu 2d6 SB iyileştirir.",
+        "branch": "Premonition",
+        "tier": 1,
+        "min_level": 19,
+        "xp_cost": 150,
+        "prerequisites": [
+          "ors_delayed_strike_ward"
+        ],
+        "icon": "🎲",
+        "effects": {
+          "damage": "2d6",
+          "healing": "2d6",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_prophecy_weaver",
+        "name_en": "Prophecy Weaver",
+        "name_tr": "Kehanet Dokumacı",
+        "description_en": "Summon a weaver that tangles an enemy's timeline, reducing their speed by 5m and AC by 2 for 3 turns.",
+        "description_tr": "Düşmanın zaman çizelgesini karıştıran, hızını 5m ve ZS'sini 2 azaltan bir dokumacı çağırır, 3 tur sürer.",
+        "branch": "Premonition",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ors_glimpse_sprite"
+        ],
+        "icon": "🕸️",
+        "effects": {
+          "speed_reduction": "5m",
+          "ac_reduction": 2,
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ors_trap_of_foresight",
+        "name_en": "Trap of Foresight",
+        "name_tr": "Öngörü Tuzağı",
+        "description_en": "Summon an invisible ethereal trap. It violently triggers for 3d8 force damage if an enemy attempts to cast a spell near it.",
+        "description_tr": "Görünmez ruhani bir tuzak çağırır. Bir düşman yakınında büyü yapmaya çalışırsa şiddetle tetiklenerek 3d8 güç hasarı verir.",
+        "branch": "Premonition",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 230,
+        "prerequisites": [
+          "ors_fates_dice"
+        ],
+        "icon": "🪤",
+        "effects": {
+          "damage": "3d8",
+          "trigger": "spell cast",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_visionary_owl",
+        "name_en": "Visionary Owl",
+        "name_tr": "Vizyoner Baykuş",
+        "description_en": "Summon an owl of pure foresight that reveals all invisible, stealthed, or disguised entities within a 20m radius.",
+        "description_tr": "20m yarıçapındaki tüm görünmez, gizlenmiş veya kılık değiştirmiş varlıkları ortaya çıkaran saf öngörüden oluşmuş bir baykuş çağırır.",
+        "branch": "Premonition",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 270,
+        "prerequisites": [
+          "ors_prophecy_weaver"
+        ],
+        "icon": "🦉",
+        "effects": {
+          "reveal": true,
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "ors_oracle_sphinx",
+        "name_en": "Oracle Sphinx",
+        "name_tr": "Kahin Sfenks",
+        "description_en": "Summon a sphinx that asks a riddle. Target must make an INT save or be paralyzed for 1 turn and take 4d8 psychic damage.",
+        "description_tr": "Bilmeceler soran bir sfenks çağırır. Hedef ZEKA zarı atmalıdır, başarısız olursa 1 tur felç olur ve 4d8 psişik hasar alır.",
+        "branch": "Premonition",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ors_trap_of_foresight"
+        ],
+        "icon": "🦁",
+        "effects": {
+          "damage": "4d8",
+          "status": "paralyzed",
+          "duration": "1 turn",
+          "save": "INT"
+        }
+      },
+      {
+        "spell_key": "ors_karma_mirror",
+        "name_en": "Karma Mirror",
+        "name_tr": "Karma Aynası",
+        "description_en": "Summon a mirror entity that surrounds an ally, reflecting 50% of all incoming damage back to attackers for 3 turns.",
+        "description_tr": "Bir dostun etrafını saran ve gelen tüm hasarın %50'sini 3 tur boyunca saldıranlara geri yansıtan bir ayna varlık çağırır.",
+        "branch": "Premonition",
+        "tier": 3,
+        "min_level": 51,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ors_visionary_owl"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "reflect": "50%",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ors_timeline_fracture",
+        "name_en": "Timeline Fracture",
+        "name_tr": "Zaman Çizelgesi Kırılması",
+        "description_en": "Summon a temporal anomaly in a 10m radius. Enemies take 5d6 psychic damage and must roll twice and use the lower result for saves for 2 turns.",
+        "description_tr": "10m yarıçapında zamansal bir anormallik çağırır. Düşmanlar 5d6 psişik hasar alır ve 2 tur boyunca kurtarma zarlarını iki kez atıp düşük olanı kullanmak zorundadır.",
+        "branch": "Premonition",
+        "tier": 3,
+        "min_level": 57,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ors_oracle_sphinx"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "5d6",
+          "disadvantage_saves": true,
+          "duration": "2 turns",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_doombringer_herald",
+        "name_en": "Doombringer Herald",
+        "name_tr": "Kıyamet Habercisi",
+        "description_en": "Summon a herald of the end. After a 2-turn delay, it explodes in inevitable doom, dealing 10d6 necrotic/psychic damage in a 20m radius.",
+        "description_tr": "Sonun habercisini çağırır. 2 turluk gecikmenin ardından kaçınılmaz bir kıyametle patlayarak 20m yarıçapında 10d6 nekrotik/psişik hasar verir.",
+        "branch": "Premonition",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 680,
+        "prerequisites": [
+          "ors_oracle_sphinx"
+        ],
+        "icon": "🔔",
+        "effects": {
+          "damage": "10d6",
+          "radius": "20m",
+          "delay": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ors_fate_rewinder",
+        "name_en": "Fate Rewinder",
+        "name_tr": "Kader Geri Sarıcı",
+        "description_en": "Summon a spirit that rewinds time for 1 ally, instantly restoring their HP to what it was at the start of their last turn.",
+        "description_tr": "1 dost için zamanı geriye saran ve canını anında bir önceki turunun başındaki haline getiren bir ruh çağırır.",
+        "branch": "Premonition",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 780,
+        "prerequisites": [
+          "ors_karma_mirror"
+        ],
+        "icon": "⏪",
+        "effects": {
+          "healing": "restore previous state",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_destiny_warden",
+        "name_en": "Destiny Warden",
+        "name_tr": "Kader Muhafızı",
+        "description_en": "Summon a warden of fate that completely nullifies the next 3 critical hits or fatal blows against any allies within 15m.",
+        "description_tr": "15m içindeki dostlara gelecek olan sonraki 3 kritik vuruşu veya ölümcül darbeyi tamamen geçersiz kılan bir kader muhafızı çağırır.",
+        "branch": "Premonition",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ors_timeline_fracture"
+        ],
+        "icon": "⚖️",
+        "effects": {
+          "nullify_crits": 3,
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_avatar_of_fate",
+        "name_en": "Avatar of Fate",
+        "name_tr": "Kaderin Avatarı",
+        "description_en": "(Ultimate) Summon the Avatar of Fate. 10d10 psychic damage on entry. For 2 turns, all ally attacks in 20m auto-crit, and all enemy attacks have disadvantage.",
+        "description_tr": "(Ulti) Kaderin Avatarını çağırır. Girişte 10d10 psişik hasar verir. 2 tur boyunca 20m içindeki tüm dost saldırıları otomatik kritik vurur ve düşman saldırıları dezavantajlı olur.",
+        "branch": "Premonition",
+        "tier": 5,
+        "min_level": 94,
+        "xp_cost": 1400,
+        "prerequisites": [
+          "ors_doombringer_herald",
+          "ors_fate_rewinder",
+          "ors_destiny_warden"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "10d10",
+          "auto_crit": true,
+          "disadvantage_attacks": true,
+          "duration": "2 turns",
+          "radius": "20m"
+        }
+      },
+      {
+        "spell_key": "ors_star_ghost",
+        "name_en": "Star Ghost",
+        "name_tr": "Yıldız Hayaleti",
+        "description_en": "Summon a spirit woven of starlight. It floats through obstacles and strikes a target for 3d6 radiant and 1d6 force damage.",
+        "description_tr": "Yıldız ışığından dokunmuş bir ruh çağırır. Engellerin içinden süzülerek bir hedefe 3d6 parlak ve 1d6 güç hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 31,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ors_aegis_orb",
+          "ors_ethereal_knight"
+        ],
+        "icon": "💫",
+        "effects": {
+          "damage": "3d6 radiant, 1d6 force",
+          "range": "15m",
+          "ignore_cover": true
+        }
+      },
+      {
+        "spell_key": "ors_constellation_of_destiny",
+        "name_en": "Constellation of Destiny",
+        "name_tr": "Kader Takımyıldızı",
+        "description_en": "Summon a starry map on the ground (10m radius). Allies standing on it gain +3 AC and add +1d6 radiant to their attacks for 3 turns.",
+        "description_tr": "Yerde yıldızlı bir harita çağırır (10m yarıçap). Üzerinde duran dostlar 3 tur boyunca +3 ZS kazanır ve saldırılarına +1d6 parlak hasar ekler.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 420,
+        "prerequisites": [
+          "ors_starlight_valkyrie",
+          "ors_trap_of_foresight"
+        ],
+        "icon": "🗺️",
+        "effects": {
+          "ac_bonus": 3,
+          "bonus_damage": "1d6 radiant",
+          "duration": "3 turns",
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "ors_echo_of_doom",
+        "name_en": "Echo of Doom",
+        "name_tr": "Kıyamet Yankısı",
+        "description_en": "Summon a terrifying spirit that mimics an enemy's future death. Deals 6d6 psychic/force damage and frightens the target for 1 turn.",
+        "description_tr": "Düşmanın gelecekteki ölümünü taklit eden korkutucu bir ruh çağırır. 6d6 psişik/güç hasarı verir ve hedefi 1 tur korkutur.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ors_guardian_of_tomorrow",
+          "ors_oracle_sphinx"
+        ],
+        "icon": "😱",
+        "effects": {
+          "damage": "6d6",
+          "status": "frightened",
+          "duration": "1 turn",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_trinity_wisp",
+        "name_en": "Trinity Wisp",
+        "name_tr": "Üçleme Alevciği",
+        "description_en": "Summon three distinct wisps that orbit you, granting +4 to all saves, 20 Temp HP, and counter-attacking attackers for 2d8 radiant damage.",
+        "description_tr": "Etrafınızda dönen, tüm kurtarma zarlarına +4, 20 Geçici SB sağlayan ve saldıranlara 2d8 parlak hasarla karşılık veren üç farklı alevcik çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 69,
+        "xp_cost": 720,
+        "prerequisites": [
+          "ors_moon_blessing_spirit",
+          "ors_spirit_storm_caller",
+          "ors_karma_mirror"
+        ],
+        "icon": "❇️",
+        "effects": {
+          "save_bonus": 4,
+          "temp_hp": 20,
+          "counter_damage": "2d8 radiant",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ors_ethereal_archangel",
+        "name_en": "Ethereal Archangel",
+        "name_tr": "Ruhani Başmelek",
+        "description_en": "Summon an angel phased between planes. It is immune to physical attacks and unleashes a blast dealing 8d8 radiant/force damage in a 15m radius.",
+        "description_tr": "Boyutlar arasına geçmiş bir melek çağırır. Fiziksel saldırılara karşı bağışıktır ve 15m yarıçapında 8d8 parlak/güç hasarı veren bir patlama salar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "ors_archangel_avatar",
+          "ors_ethereal_dragon"
+        ],
+        "icon": "⚜️",
+        "effects": {
+          "damage": "8d8",
+          "radius": "15m",
+          "immunity": "physical"
+        }
+      },
+      {
+        "spell_key": "ors_chronos_wraith",
+        "name_en": "Chronos Wraith",
+        "name_tr": "Zaman İfriti",
+        "description_en": "Summon a time wraith that ages an enemy rapidly, dealing 8d8 necrotic/psychic damage and reducing their movement speed by 10m for 3 turns.",
+        "description_tr": "Bir düşmanı hızla yaşlandıran, 8d8 nekrotik/psişik hasar veren ve 3 tur boyunca hareket hızını 10m azaltan bir zaman ifriti çağırır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 77,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ors_legion_of_ancestors",
+          "ors_fate_rewinder"
+        ],
+        "icon": "⌛",
+        "effects": {
+          "damage": "8d8",
+          "speed_reduction": "10m",
+          "duration": "3 turns",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "ors_prophet_of_the_sun",
+        "name_en": "Prophet of the Sun",
+        "name_tr": "Güneş Peygamberi",
+        "description_en": "Summon a solar prophet that predicts enemy movements, calling down 3 beams of light where enemies *will* be. Each deals 5d10 radiant damage in a 5m radius.",
+        "description_tr": "Düşmanların *olacağı* yerlere 3 ışık huzmesi indiren bir güneş peygamberi çağırır. Her biri 5m yarıçapında 5d10 parlak hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ors_supernova_elemental",
+          "ors_destiny_warden"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "damage": "5d10 per beam",
+          "radius": "5m per beam",
+          "strikes": 3
+        }
+      },
+      {
+        "spell_key": "ors_omniscience_convergence",
+        "name_en": "Omniscience Convergence",
+        "name_tr": "Her Şeyi Bilme Birleşimi",
+        "description_en": "(Grand Ultimate) Summon the Omniscient Entity. It heals all allies to full, resurrects dead allies within 30m, and deals 20d12 radiant/psychic/force damage to all enemies, erasing them from the current timeline.",
+        "description_tr": "(Büyük Ulti) Her Şeyi Bilen Varlığı çağırır. Tüm dostları tamamen iyileştirir, 30m içindeki ölü dostları diriltir ve tüm düşmanlara 20d12 parlak/psişik/güç hasarı vererek onları mevcut zaman çizelgesinden siler.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ors_seraph_of_the_cosmos",
+          "ors_spirit_king_incarnate",
+          "ors_avatar_of_fate"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "damage": "20d12",
+          "healing": "100%",
+          "resurrect": true,
+          "radius": "30m"
+        }
+      }
+    ]
+  }
+]

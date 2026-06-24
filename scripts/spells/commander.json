@@ -1,0 +1,948 @@
+[
+  {
+    "subclass_key": "commander",
+    "tree_name_en": "Commander's Authority",
+    "tree_name_tr": "Komutanın Otoritesi",
+    "tree_desc_en": "Master the art of war through tactical brilliance, inspiring leadership, and unbreakable formations.",
+    "tree_desc_tr": "Taktiksel deha, ilham verici liderlik ve kırılmaz dizilişlerle savaş sanatında ustalaşın.",
+    "branches": [
+      "Tactics",
+      "Morale",
+      "Formation"
+    ],
+    "spells": [
+      {
+        "spell_key": "cm_tactics_mark",
+        "name_en": "Mark Target",
+        "name_tr": "Hedef İşaretleme",
+        "description_en": "Mark an enemy up to 30m away. Allies gain +1d4 damage against the marked target for 3 turns.",
+        "description_tr": "30m uzaklığa kadar bir düşmanı işaretlersiniz. Müttefikler işaretli hedefe karşı 3 tur boyunca fazladan 1d4 hasar vurur.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "damage": "1d4 bonus",
+          "range": "30m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_reposition",
+        "name_en": "Tactical Retreat",
+        "name_tr": "Taktiksel Geri Çekilme",
+        "description_en": "Command up to 3 allies to immediately move up to 10m without provoking attacks of opportunity.",
+        "description_tr": "En fazla 3 müttefike fırsat saldırısı yemeden anında 10m hareket etme emri verirsiniz.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🔄",
+        "effects": {
+          "range": "10m movement"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_strike",
+        "name_en": "Coordinated Strike",
+        "name_tr": "Koordineli Saldırı",
+        "description_en": "You and one ally within 15m make an immediate attack against a single target, dealing an extra 1d8 damage each.",
+        "description_tr": "Siz ve 15m içindeki bir müttefikiniz aynı hedefe anında saldırı yapar, her biriniz fazladan 1d8 hasar verirsiniz.",
+        "branch": "Tactics",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cm_tactics_mark"
+        ],
+        "icon": "⚔️",
+        "effects": {
+          "damage": "1d8 bonus",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_flank",
+        "name_en": "Flanking Maneuver",
+        "name_tr": "Kanat Manevrası",
+        "description_en": "Allies within 20m gain advantage on melee attacks when positioned on opposite sides of an enemy.",
+        "description_tr": "20m içindeki müttefikler, bir düşmanın zıt taraflarında konumlandıklarında yakın dövüş saldırılarında avantaj kazanır.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "cm_tactics_reposition"
+        ],
+        "icon": "🤺",
+        "effects": {
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_weakness",
+        "name_en": "Expose Weakness",
+        "name_tr": "Zayıflığı Açığa Çıkarma",
+        "description_en": "Reveal vulnerabilities in a 15m radius. Reduces enemy armor class by 2 and resistance by 10% for 3 turns.",
+        "description_tr": "15m yarıçapındaki zayıflıkları ortaya çıkarır. Düşmanların zırh sınıfını 2, dirençlerini %10 düşürür. 3 tur sürer.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "cm_tactics_strike"
+        ],
+        "icon": "🔍",
+        "effects": {
+          "range": "15m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_ambush",
+        "name_en": "Prepare Ambush",
+        "name_tr": "Pusu Hazırlığı",
+        "description_en": "Allies in a 20m area become invisible for 1 turn. Their next attack deals an extra 3d6 damage and stuns for 1 turn.",
+        "description_tr": "20m alandaki müttefikler 1 tur görünmez olur. Sonraki saldırıları fazladan 3d6 hasar verir ve 1 tur sersemletir.",
+        "branch": "Tactics",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 250,
+        "prerequisites": [],
+        "icon": "🌿",
+        "effects": {
+          "damage": "3d6 bonus",
+          "range": "20m radius",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_focus",
+        "name_en": "Focus Fire",
+        "name_tr": "Odaklanmış Ateş",
+        "description_en": "Designate a primary target. All allied attacks against this target within 40m ignore 30% of their armor and deal 2d8 bonus damage for 2 turns.",
+        "description_tr": "Ana bir hedef belirlersiniz. 40m içindeki bu hedefe yapılan tüm müttefik saldırıları zırhın %30'unu yok sayar ve 2 tur boyunca 2d8 ilave hasar verir.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cm_tactics_weakness"
+        ],
+        "icon": "👁️‍🗨️",
+        "effects": {
+          "damage": "2d8 bonus",
+          "range": "40m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_interrupt",
+        "name_en": "Disruptive Command",
+        "name_tr": "Bozucu Emir",
+        "description_en": "Shout a command that interrupts enemy spellcasting and channelings within a 20m radius. Deals 2d10 psychic damage.",
+        "description_tr": "20m yarıçaptaki düşman büyülerini ve odaklanmalarını kesen bir emir bağırırsınız. 2d10 psişik hasar verir.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 400,
+        "prerequisites": [],
+        "icon": "🗣️",
+        "effects": {
+          "damage": "2d10 psychic",
+          "range": "20m radius"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_vantage",
+        "name_en": "Vantage Point",
+        "name_tr": "Hakim Nokta",
+        "description_en": "Claim an area. Allies standing in a 10m radius gain +20m range to all ranged attacks and +2 to hit for 4 turns.",
+        "description_tr": "Bir alan sahiplenirsiniz. 10m yarıçapta duran müttefikler 4 tur boyunca tüm menzilli saldırılarda +20m menzil ve isabet için +2 kazanır.",
+        "branch": "Tactics",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cm_tactics_ambush"
+        ],
+        "icon": "⛰️",
+        "effects": {
+          "range": "10m radius",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_overwhelm",
+        "name_en": "Overwhelming Force",
+        "name_tr": "Ezici Güç",
+        "description_en": "Allies within 30m gain an extra action this turn. All attacks deal an additional 4d6 damage.",
+        "description_tr": "30m içindeki müttefikler bu tur ekstra bir eylem hakkı kazanır. Tüm saldırılar fazladan 4d6 hasar verir.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cm_tactics_focus"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "4d6 bonus",
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_blitz",
+        "name_en": "Blitzkrieg",
+        "name_tr": "Yıldırım Harekatı",
+        "description_en": "Give your team a massive burst of speed. Movement speed increases by 20m and the first attack this turn is an automatic critical hit.",
+        "description_tr": "Takımınıza muazzam bir hız patlaması verirsiniz. Hareket hızı 20m artar ve bu tur yapılan ilk saldırı otomatik olarak kritik hasar verir.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [],
+        "icon": "⚡",
+        "effects": {
+          "range": "20m movement bonus",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_counter",
+        "name_en": "Counter-Offensive",
+        "name_tr": "Karşı Taarruz",
+        "description_en": "For 2 turns, whenever an ally within 25m is attacked, they can immediately make a counter-attack as a free reaction dealing 3d10 damage.",
+        "description_tr": "2 tur boyunca, 25m içindeki bir müttefik saldırıya uğradığında, anında ücretsiz tepki olarak 3d10 hasar veren bir karşı saldırı yapabilir.",
+        "branch": "Tactics",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cm_tactics_interrupt"
+        ],
+        "icon": "↩️",
+        "effects": {
+          "damage": "3d10 counter",
+          "range": "25m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_mastermind",
+        "name_en": "Tactical Mastermind",
+        "name_tr": "Taktik Dehası",
+        "description_en": "Analyze the entire battlefield. You perfectly predict enemy movements for 3 turns, giving all allies evasion and guaranteed hits against them.",
+        "description_tr": "Tüm savaş alanını analiz edersiniz. 3 tur boyunca düşman hareketlerini kusursuz tahmin ederek müttefiklere kaçınma ve kesin isabet sağlarsınız.",
+        "branch": "Tactics",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "cm_tactics_overwhelm"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_checkmate",
+        "name_en": "Checkmate",
+        "name_tr": "Şah Mat",
+        "description_en": "Trap an enemy in a tactical web. A single target within 30m cannot move, dodge, or use abilities for 2 turns, and takes 50% more damage.",
+        "description_tr": "Bir düşmanı taktiksel ağa hapsedersiniz. 30m içindeki tek bir hedef 2 tur boyunca hareket edemez, kaçınamaz, yetenek kullanamaz ve %50 daha fazla hasar alır.",
+        "branch": "Tactics",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cm_tactics_blitz"
+        ],
+        "icon": "♟️",
+        "effects": {
+          "range": "30m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_tactics_ultimate",
+        "name_en": "Absolute Victory",
+        "name_tr": "Mutlak Zafer",
+        "description_en": "TACTICS ULTIMATE. All allies gain infinite movement for 1 turn, their attacks bypass all resistances and immunities, dealing 10d10 bonus true damage.",
+        "description_tr": "TAKTİK ULTİSİ. Tüm müttefikler 1 tur boyunca sınırsız hareket kazanır, saldırıları tüm direnç ve bağışıklıkları aşar ve 10d10 ekstra gerçek hasar verir.",
+        "branch": "Tactics",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cm_tactics_mastermind",
+          "cm_tactics_checkmate"
+        ],
+        "icon": "👑",
+        "effects": {
+          "damage": "10d10 true bonus",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "cm_morale_rally",
+        "name_en": "Rallying Cry",
+        "name_tr": "Toplanma Çağrısı",
+        "description_en": "Shout to restore 1d8+4 HP to all allies within 15m and cure fear effects.",
+        "description_tr": "Bağırarak 15m içindeki tüm müttefiklerin 1d8+4 HP iyileşmesini sağlar ve korku etkilerini silersiniz.",
+        "branch": "Morale",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🎺",
+        "effects": {
+          "healing": "1d8+4",
+          "range": "15m radius"
+        }
+      },
+      {
+        "spell_key": "cm_morale_courage",
+        "name_en": "Bolster Courage",
+        "name_tr": "Cesaretlendirme",
+        "description_en": "Grant a single ally within 20m 2d6 temporary HP and immunity to mind-altering effects for 3 turns.",
+        "description_tr": "20m içindeki bir müttefike 2d6 geçici HP ve 3 tur boyunca zihin değiştiren etkilere karşı bağışıklık kazandırırsınız.",
+        "branch": "Morale",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🦁",
+        "effects": {
+          "healing": "2d6 temp HP",
+          "range": "20m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_charge",
+        "name_en": "Charge Command",
+        "name_tr": "Hücum Emri",
+        "description_en": "Inspire your allies to charge. Allies within 20m gain +5m movement speed and deal 1d6 extra damage on melee attacks for 2 turns.",
+        "description_tr": "Müttefiklerinize hücum ilhamı verirsiniz. 20m içindeki müttefikler 2 tur boyunca +5m hareket hızı kazanır ve yakın dövüşte ekstra 1d6 hasar verir.",
+        "branch": "Morale",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [
+          "cm_morale_rally"
+        ],
+        "icon": "🏇",
+        "effects": {
+          "damage": "1d6 bonus",
+          "range": "20m radius",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_determination",
+        "name_en": "Iron Determination",
+        "name_tr": "Demir İrade",
+        "description_en": "Allies within 15m cannot have their HP reduced below 1 for the next turn.",
+        "description_tr": "15m içindeki müttefiklerin Can Puanı sonraki tur boyunca 1'in altına düşemez.",
+        "branch": "Morale",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "cm_morale_courage"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "15m radius",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "cm_morale_inspiration",
+        "name_en": "Inspiring Presence",
+        "name_tr": "İlham Verici Varlık",
+        "description_en": "Passive aura. Allies within a 10m radius gain +2 to all saving throws and regenerate 2 HP per turn.",
+        "description_tr": "Pasif aura. 10m yarıçaptaki müttefikler tüm kurtarma zarlarına +2 kazanır ve tur başına 2 HP yeniler.",
+        "branch": "Morale",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [],
+        "icon": "✨",
+        "effects": {
+          "healing": "2 HP/turn",
+          "range": "10m radius passive"
+        }
+      },
+      {
+        "spell_key": "cm_morale_defiance",
+        "name_en": "Defiant Stand",
+        "name_tr": "Meydan Okuyan Duruş",
+        "description_en": "When an ally within 20m falls below 30% HP, they instantly heal for 3d8 HP and gain 20% damage reduction for 2 turns.",
+        "description_tr": "20m içindeki bir müttefikin Can Puanı %30'un altına düştüğünde, anında 3d8 HP iyileşir ve 2 tur boyunca %20 hasar azaltma kazanır.",
+        "branch": "Morale",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "cm_morale_determination"
+        ],
+        "icon": "✊",
+        "effects": {
+          "healing": "3d8",
+          "range": "20m radius",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_frenzy",
+        "name_en": "Battle Frenzy",
+        "name_tr": "Savaş Çılgınlığı",
+        "description_en": "Allies within 15m attack twice per action but take 1d4 damage themselves each time they attack for 3 turns.",
+        "description_tr": "15m içindeki müttefikler eylem başına iki kez saldırır ancak 3 tur boyunca her saldırdıklarında kendileri de 1d4 hasar alır.",
+        "branch": "Morale",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cm_morale_charge"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d4 self damage",
+          "range": "15m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_surge",
+        "name_en": "Adrenaline Surge",
+        "name_tr": "Adrenalin Patlaması",
+        "description_en": "Target ally instantly recovers from all debuffs and restores 50% of their missing health and stamina.",
+        "description_tr": "Hedef müttefik tüm zayıflatmalardan anında kurtulur ve eksik can ile dayanıklılığının %50'sini geri kazanır.",
+        "branch": "Morale",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "cm_morale_inspiration"
+        ],
+        "icon": "💉",
+        "effects": {
+          "healing": "50% missing HP/Stamina"
+        }
+      },
+      {
+        "spell_key": "cm_morale_hope",
+        "name_en": "Beacon of Hope",
+        "name_tr": "Umut Işığı",
+        "description_en": "Emit a glowing aura of 20m. All healing received by allies in this area is doubled, and they gain 4d6 temporary HP each turn for 3 turns.",
+        "description_tr": "20m parlayan bir aura yayarsınız. Bu alandaki müttefiklerin aldığı tüm iyileştirmeler ikiye katlanır ve 3 tur boyunca her tur 4d6 geçici HP kazanırlar.",
+        "branch": "Morale",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [],
+        "icon": "🕊️",
+        "effects": {
+          "healing": "4d6 temp HP/turn",
+          "range": "20m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_unstoppable",
+        "name_en": "Unstoppable March",
+        "name_tr": "Durdurulamaz Yürüyüş",
+        "description_en": "Allies within 30m become immune to all crowd control effects and movement impairments for 4 turns.",
+        "description_tr": "30m içindeki müttefikler 4 tur boyunca tüm kitle kontrol etkilerine ve hareket kısıtlamalarına karşı bağışıklık kazanır.",
+        "branch": "Morale",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cm_morale_frenzy"
+        ],
+        "icon": "🚂",
+        "effects": {
+          "range": "30m radius",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_glory",
+        "name_en": "Blaze of Glory",
+        "name_tr": "Zafer Parıltısı",
+        "description_en": "If an ally would die within the next 3 turns, they instead stay alive at 1 HP, becoming invulnerable for 1 turn and dealing double damage.",
+        "description_tr": "Önümüzdeki 3 tur içinde bir müttefik ölecek olursa, bunun yerine 1 Can Puanında hayatta kalır, 1 tur hasar almaz olur ve iki kat hasar verir.",
+        "branch": "Morale",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "cm_morale_defiance"
+        ],
+        "icon": "🌅",
+        "effects": {
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_morale_resilience",
+        "name_en": "Unbreakable Resilience",
+        "name_tr": "Kırılmaz Direnç",
+        "description_en": "Grant a massive shield of 100 temporary HP to all allies within 25m, lasting until broken.",
+        "description_tr": "25m içindeki tüm müttefiklere kırılana kadar süren 100 geçici Can Puanlık devasa bir kalkan sağlarsınız.",
+        "branch": "Morale",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [],
+        "icon": "💎",
+        "effects": {
+          "healing": "100 temp HP",
+          "range": "25m radius"
+        }
+      },
+      {
+        "spell_key": "cm_morale_immortal",
+        "name_en": "Immortal Will",
+        "name_tr": "Ölümsüz İrade",
+        "description_en": "Revive one fallen ally within 15m with 100% HP and grant them a fiery aura that burns nearby enemies for 5d10 damage per turn.",
+        "description_tr": "15m içindeki düşmüş bir müttefiki %100 Can Puanı ile canlandırır ve onlara yakındaki düşmanlara her tur 5d10 hasar veren ateşten bir aura sağlarsınız.",
+        "branch": "Morale",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "cm_morale_glory"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "damage": "5d10 aura/turn",
+          "healing": "100% Revive",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "cm_morale_legend",
+        "name_en": "Living Legend",
+        "name_tr": "Yaşayan Efsane",
+        "description_en": "Your mere presence inspires greatness. Allies within 40m gain +5 to all stats and regenerate 10% max HP per turn for the rest of the encounter.",
+        "description_tr": "Sırf varlığınız mükemmelliğe ilham verir. 40m içindeki müttefikler çatışma sonuna dek tüm istatistiklerde +5 kazanır ve tur başına %10 azami HP yeniler.",
+        "branch": "Morale",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cm_morale_unstoppable"
+        ],
+        "icon": "📜",
+        "effects": {
+          "healing": "10% max HP/turn",
+          "range": "40m radius"
+        }
+      },
+      {
+        "spell_key": "cm_morale_ultimate",
+        "name_en": "Heart of the Legion",
+        "name_tr": "Lejyonun Kalbi",
+        "description_en": "MORALE ULTIMATE. All allies within 50m are fully healed, revived if dead, and gain a massive aura dealing 8d8 holy damage to all enemies around them for 5 turns.",
+        "description_tr": "MORAL ULTİSİ. 50m içindeki tüm müttefikler tamamen iyileşir, ölüler dirilir ve 5 tur boyunca etraflarındaki tüm düşmanlara 8d8 kutsal hasar veren devasa bir aura kazanırlar.",
+        "branch": "Morale",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cm_morale_immortal",
+          "cm_morale_legend"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "damage": "8d8 holy aura",
+          "healing": "100% Heal + Revive",
+          "range": "50m radius",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "cm_form_shield",
+        "name_en": "Shield Wall",
+        "name_tr": "Kalkan Duvarı",
+        "description_en": "Allies standing adjacent to each other gain +2 Armor Class and reduce incoming physical damage by 3.",
+        "description_tr": "Bitişik duran müttefikler +2 Zırh Sınıfı kazanır ve gelen fiziksel hasarı 3 azaltır.",
+        "branch": "Formation",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "range": "Adjacent"
+        }
+      },
+      {
+        "spell_key": "cm_form_phalanx",
+        "name_en": "Phalanx Stance",
+        "name_tr": "Falanks Duruşu",
+        "description_en": "Allies in a tight formation (within 2m) gain reach with melee weapons and reflect 1d4 damage back to melee attackers.",
+        "description_tr": "Sıkı dizilişteki (2m içinde) müttefikler yakın dövüş silahlarında menzil kazanır ve yakın dövüşçülere 1d4 hasar yansıtır.",
+        "branch": "Formation",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "cm_form_shield"
+        ],
+        "icon": "🪖",
+        "effects": {
+          "damage": "1d4 reflect",
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "cm_form_guard",
+        "name_en": "Close Guard",
+        "name_tr": "Yakın Koruma",
+        "description_en": "Bind an ally to you. Whenever they take damage within 5m, you intercept 50% of it.",
+        "description_tr": "Bir müttefiki kendinize bağlarsınız. 5m içindeyken hasar aldıklarında, hasarın %50'sini siz üstlenirsiniz.",
+        "branch": "Formation",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 125,
+        "prerequisites": [],
+        "icon": "🤝",
+        "effects": {
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "cm_form_turtle",
+        "name_en": "Turtle Formation",
+        "name_tr": "Kaplumbağa Dizilişi",
+        "description_en": "Allies within a 5m radius gain 50% resistance to ranged attacks and spell projectiles, but movement speed is halved for 3 turns.",
+        "description_tr": "5m yarıçapındaki müttefikler menzilli saldırılara ve büyü mermilerine karşı %50 direnç kazanır, ancak hareket hızları 3 tur yarıya düşer.",
+        "branch": "Formation",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "cm_form_phalanx"
+        ],
+        "icon": "🐢",
+        "effects": {
+          "range": "5m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_form_wedge",
+        "name_en": "Wedge Formation",
+        "name_tr": "Kama Dizilişi",
+        "description_en": "Form a triangle. The ally at the tip gains +4 to attack rolls and deals 2d6 extra damage, while allies behind gain +2 AC.",
+        "description_tr": "Bir üçgen oluşturursunuz. Uçtaki müttefik saldırı zarlarına +4 kazanır ve fazladan 2d6 hasar verir, arkadakiler +2 AC kazanır.",
+        "branch": "Formation",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 225,
+        "prerequisites": [],
+        "icon": "📐",
+        "effects": {
+          "damage": "2d6 extra (tip)"
+        }
+      },
+      {
+        "spell_key": "cm_form_square",
+        "name_en": "Hollow Square",
+        "name_tr": "Boşluklu Kare",
+        "description_en": "Allies form a defensive square. Enemies cannot flank them, and any enemy entering the 5m square takes 3d6 piercing damage.",
+        "description_tr": "Müttefikler savunma karesi oluşturur. Düşmanlar onları kanatlayamaz ve 5m'lik kareye giren her düşman 3d6 delici hasar alır.",
+        "branch": "Formation",
+        "tier": 2,
+        "min_level": 35,
+        "xp_cost": 275,
+        "prerequisites": [
+          "cm_form_turtle"
+        ],
+        "icon": "🔲",
+        "effects": {
+          "damage": "3d6 piercing",
+          "range": "5m area"
+        }
+      },
+      {
+        "spell_key": "cm_form_aegis",
+        "name_en": "Aegis Aura",
+        "name_tr": "Kalkan Aurası",
+        "description_en": "Project a 10m defensive aura. All allies inside take 20% less damage from all sources and cannot be critically hit.",
+        "description_tr": "10m'lik savunma aurası yansıtırsınız. İçerdeki tüm müttefikler tüm kaynaklardan %20 daha az hasar alır ve onlara kritik vurulamaz.",
+        "branch": "Formation",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "cm_form_guard"
+        ],
+        "icon": "❇️",
+        "effects": {
+          "range": "10m aura"
+        }
+      },
+      {
+        "spell_key": "cm_form_skirmish",
+        "name_en": "Skirmish Line",
+        "name_tr": "Avcı Hattı",
+        "description_en": "Spread out formation. Allies who are more than 5m away from any other ally gain +10m movement speed and +3 Evasion.",
+        "description_tr": "Dağınık diziliş. Diğer herhangi bir müttefikten 5m'den daha uzakta olan müttefikler +10m hareket hızı ve +3 Kaçınma kazanır.",
+        "branch": "Formation",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 400,
+        "prerequisites": [],
+        "icon": "🏹",
+        "effects": {
+          "range": "Spread > 5m"
+        }
+      },
+      {
+        "spell_key": "cm_form_fortress",
+        "name_en": "Moving Fortress",
+        "name_tr": "Yürüyen Kale",
+        "description_en": "For 3 turns, allies in a 10m radius share a collective health pool. Damage taken is distributed evenly among all participants.",
+        "description_tr": "3 tur boyunca 10m yarıçaptaki müttefikler ortak can havuzu paylaşır. Alınan hasar tüm katılımcılar arasında eşit dağıtılır.",
+        "branch": "Formation",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cm_form_square"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "range": "10m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_form_bastion",
+        "name_en": "Bastion of Defense",
+        "name_tr": "Savunma Burcu",
+        "description_en": "Transform a 15m area into a bastion. Allies inside are immune to forced movement, and enemies entering the area are slowed by 70%.",
+        "description_tr": "15m'lik alanı bir burca dönüştürürsünüz. İçerdeki müttefikler zorunlu harekete bağışıklıdır ve alana giren düşmanlar %70 yavaşlar.",
+        "branch": "Formation",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "cm_form_aegis"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "range": "15m radius"
+        }
+      },
+      {
+        "spell_key": "cm_form_pincer",
+        "name_en": "Pincer Movement",
+        "name_tr": "Kıskaç Hareketi",
+        "description_en": "Command two groups to flank. Enemies caught between two allies who are at least 10m apart take double damage from both for 2 turns.",
+        "description_tr": "İki grubu kuşatmaya yönlendirirsiniz. Aralarında en az 10m bulunan iki müttefikin arasında kalan düşmanlar her ikisinden de 2 tur çift hasar alır.",
+        "branch": "Formation",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cm_form_wedge"
+        ],
+        "icon": "🦀",
+        "effects": {
+          "range": "10m apart gap",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_form_phalanx_adv",
+        "name_en": "Iron Phalanx",
+        "name_tr": "Demir Falanks",
+        "description_en": "The ultimate defensive line. Allies within 10m become an impenetrable wall, reflecting all melee attacks and spells back at the attackers for 1 turn.",
+        "description_tr": "Nihai savunma hattı. 10m içindeki müttefikler aşılmaz bir duvar haline gelir, tüm yakın dövüş ve büyü saldırılarını 1 tur saldıranlara yansıtır.",
+        "branch": "Formation",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "cm_form_fortress"
+        ],
+        "icon": "🦾",
+        "effects": {
+          "range": "10m radius",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "cm_form_impenetrable",
+        "name_en": "Impenetrable Line",
+        "name_tr": "Aşılmaz Hat",
+        "description_en": "Draw a 20m wide line on the battlefield. No enemy can cross this line by any means (physical or magical) for 3 turns.",
+        "description_tr": "Savaş alanına 20m genişliğinde bir çizgi çekersiniz. Hiçbir düşman 3 tur boyunca fiziksel veya büyülü yollarla bu çizgiyi geçemez.",
+        "branch": "Formation",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "cm_form_bastion"
+        ],
+        "icon": "🛑",
+        "effects": {
+          "range": "20m line",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_form_vanguard",
+        "name_en": "Vanguard's Shield",
+        "name_tr": "Öncü Kalkanı",
+        "description_en": "Summon a colossal ethereal shield in front of your formation (15m wide). It absorbs up to 5000 damage before shattering.",
+        "description_tr": "Dizilişinizin önüne devasa bir ruhani kalkan çağırırsınız (15m genişliğinde). Kırılmadan önce 5000 hasara kadar emer.",
+        "branch": "Formation",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "cm_form_phalanx_adv"
+        ],
+        "icon": "🪬",
+        "effects": {
+          "healing": "5000 absorb",
+          "range": "15m line"
+        }
+      },
+      {
+        "spell_key": "cm_form_ultimate",
+        "name_en": "Indestructible Citadel",
+        "name_tr": "Yıkılmaz Hisar",
+        "description_en": "FORMATION ULTIMATE. You and allies within 30m become immune to all damage and negative effects for 2 turns. Incoming damage heals you instead.",
+        "description_tr": "DİZİLİŞ ULTİSİ. Siz ve 30m içindeki müttefikler 2 tur tüm hasar ve negatif etkilere karşı bağışık olursunuz. Gelen hasar sizi iyileştirir.",
+        "branch": "Formation",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cm_form_impenetrable",
+          "cm_form_vanguard"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "range": "30m radius",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "cm_cross_tactics_morale",
+        "name_en": "War Cry",
+        "name_tr": "Savaş Narası",
+        "description_en": "Unleash a terrifying roar. Enemies within 20m are frightened (run away 10m) and defense is lowered by 30%. Allies gain +3d6 damage.",
+        "description_tr": "Korkunç bir kükreme salarsınız. 20m içindeki düşmanlar korkar (10m kaçar) ve savunmaları %30 düşer. Müttefikler +3d6 hasar kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "cm_tactics_mark",
+          "cm_morale_rally"
+        ],
+        "icon": "📢",
+        "effects": {
+          "damage": "3d6 bonus",
+          "range": "20m radius"
+        }
+      },
+      {
+        "spell_key": "cm_cross_form_tactics",
+        "name_en": "Strategic Chokepoint",
+        "name_tr": "Stratejik Darboğaz",
+        "description_en": "Create magical barriers forcing enemies into a 5m wide corridor, and allies deal 50% more AoE damage in that zone.",
+        "description_tr": "Düşmanları 5m genişliğinde bir koridora zorlayan büyülü bariyerler yaratırsınız, müttefikler bu bölgeye %50 daha fazla alan hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "cm_form_turtle",
+          "cm_tactics_focus"
+        ],
+        "icon": "🗜️",
+        "effects": {
+          "range": "5m corridor"
+        }
+      },
+      {
+        "spell_key": "cm_cross_morale_form",
+        "name_en": "Brotherhood of Blood",
+        "name_tr": "Kan Kardeşliği",
+        "description_en": "Link up to 5 allies within 20m. For 3 turns, whenever one heals, all others heal for 50%. If one takes damage, others gain +10% attack.",
+        "description_tr": "20m içindeki en fazla 5 müttefiki bağlarsınız. 3 tur boyunca biri iyileşirse diğerleri %50 iyileşir. Biri hasar alırsa diğerleri +%10 saldırı kazanır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 750,
+        "prerequisites": [
+          "cm_morale_defiance",
+          "cm_form_aegis"
+        ],
+        "icon": "🧬",
+        "effects": {
+          "range": "20m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_cross_warlord",
+        "name_en": "Warlord's Decree",
+        "name_tr": "Savaş Beyinin Fermanı",
+        "description_en": "Issue a grand command. For 3 turns, all allies within 40m ignore enemy armor, cannot be killed, and immediately cleanse all debuffs.",
+        "description_tr": "Yüce bir emir verirsiniz. 3 tur boyunca 40m içindeki müttefikler düşman zırhını yok sayar, öldürülemezler ve tüm zayıflatmalardan arınırlar.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1300,
+        "prerequisites": [
+          "cm_tactics_overwhelm",
+          "cm_morale_unstoppable",
+          "cm_form_bastion"
+        ],
+        "icon": "📯",
+        "effects": {
+          "range": "40m radius",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "cm_cross_grand_ultimate",
+        "name_en": "Supreme Commander",
+        "name_tr": "Yüksek Komutan",
+        "description_en": "GRAND ULTIMATE. For 1 minute: allies take two full turns per round, enemies' speed is reduced to 10%, and commands deal 20d20 divine damage to all enemies.",
+        "description_tr": "BÜYÜK ULTİ. 1 dakika boyunca: müttefikler tur başına iki tam el oynar, düşmanların hızı %10'a düşer ve emirleriniz tüm düşmanlara 20d20 kutsal hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "cm_tactics_ultimate",
+          "cm_morale_ultimate",
+          "cm_form_ultimate"
+        ],
+        "icon": "🌍",
+        "effects": {
+          "damage": "20d20 divine",
+          "duration": "1 minute"
+        }
+      }
+    ]
+  }
+]

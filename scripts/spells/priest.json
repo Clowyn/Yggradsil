@@ -1,0 +1,975 @@
+[
+  {
+    "subclass_key": "priest",
+    "tree_name_en": "Divine Providence",
+    "tree_name_tr": "İlahi Takdir",
+    "tree_desc_en": "A master of holy magic, specializing in powerful heals, absolute purification, and unbreakable divine shields.",
+    "tree_desc_tr": "Güçlü şifalar, mutlak arınma ve kırılmaz ilahi kalkanlar konusunda uzmanlaşmış kutsal büyü ustası.",
+    "branches": [
+      "Healing",
+      "Purification",
+      "Divine Shield"
+    ],
+    "spells": [
+      {
+        "spell_key": "pr_minor_heal",
+        "name_en": "Minor Heal",
+        "name_tr": "Küçük Şifa",
+        "description_en": "Heals a touched target for 1d8 + Wisdom modifier hit points.",
+        "description_tr": "Dokunulan bir hedefe 1d8 + Bilgelik değiştiricisi kadar can yeniler.",
+        "branch": "Healing",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🩹",
+        "effects": {
+          "healing": "1d8",
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_healing_word",
+        "name_en": "Healing Word",
+        "name_tr": "Şifa Sözü",
+        "description_en": "A swift word of healing that restores 1d4 + Wisdom modifier hit points to a target within 15m.",
+        "description_tr": "15m içindeki bir hedefe 1d4 + Bilgelik değiştiricisi kadar can yenileyen hızlı bir şifa sözü.",
+        "branch": "Healing",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "pr_minor_heal"
+        ],
+        "icon": "💬",
+        "effects": {
+          "healing": "1d4",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "pr_soothing_light",
+        "name_en": "Soothing Light",
+        "name_tr": "Yatıştırıcı Işık",
+        "description_en": "Bathes the target in light, healing 2d6 HP over 3 turns.",
+        "description_tr": "Hedefi ışıkla yıkarak 3 tur boyunca 2d6 can yeniler.",
+        "branch": "Healing",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pr_healing_word"
+        ],
+        "icon": "🕯️",
+        "effects": {
+          "healing": "2d6",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "pr_detect_poison",
+        "name_en": "Detect Poison",
+        "name_tr": "Zehir Sezme",
+        "description_en": "Detects the presence and nature of poisons and diseases within a 10m radius.",
+        "description_tr": "10m yarıçapındaki zehirlerin ve hastalıkların varlığını ve türünü tespit eder.",
+        "branch": "Purification",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧪",
+        "effects": {
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "pr_purify_food",
+        "name_en": "Purify Food and Drink",
+        "name_tr": "Yiyecek ve İçecek Arındırma",
+        "description_en": "Removes all diseases and poisons from non-magical food and drink within a 2m radius.",
+        "description_tr": "2m yarıçapındaki büyülü olmayan yiyecek ve içeceklerdeki tüm hastalıkları ve zehirleri temizler.",
+        "branch": "Purification",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "pr_detect_poison"
+        ],
+        "icon": "🥖",
+        "effects": {
+          "range": "2m"
+        }
+      },
+      {
+        "spell_key": "pr_lesser_restoration",
+        "name_en": "Lesser Restoration",
+        "name_tr": "Küçük Arınma",
+        "description_en": "Cures one disease or one condition (blinded, deafened, paralyzed, or poisoned) on a touched creature.",
+        "description_tr": "Dokunulan bir yaratıktaki bir hastalığı veya bir durumu (kör, sağır, felçli veya zehirli) iyileştirir.",
+        "branch": "Purification",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pr_purify_food"
+        ],
+        "icon": "✨",
+        "effects": {
+          "range": "touch",
+          "removes": "1 condition"
+        }
+      },
+      {
+        "spell_key": "pr_shield_of_faith",
+        "name_en": "Shield of Faith",
+        "name_tr": "İnanç Kalkanı",
+        "description_en": "A shimmering field appears and surrounds a creature within 15m, granting a +2 bonus to AC for 10 minutes.",
+        "description_tr": "15m içindeki bir yaratığın etrafında parlayan bir kalkan belirir ve 10 dakika boyunca Zırh Sınıfına +2 bonus sağlar.",
+        "branch": "Divine Shield",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🛡️",
+        "effects": {
+          "ac_bonus": "+2",
+          "range": "15m",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "pr_sanctuary",
+        "name_en": "Sanctuary",
+        "name_tr": "Sığınak",
+        "description_en": "Wards a creature within 10m. Any enemy targeting them must succeed on a Wisdom saving throw or lose the attack. Lasts 1 minute.",
+        "description_tr": "10m içindeki bir yaratığı korur. Onu hedef alan herhangi bir düşman Bilgelik kurtarma zarı atmalıdır, aksi takdirde saldırıyı boşa harcar. 1 dakika sürer.",
+        "branch": "Divine Shield",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 75,
+        "prerequisites": [
+          "pr_shield_of_faith"
+        ],
+        "icon": "🕊️",
+        "effects": {
+          "range": "10m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "pr_protection_evil",
+        "name_en": "Protection from Evil",
+        "name_tr": "Kötülükten Korunma",
+        "description_en": "Protects a touched creature from aberrations, celestials, elementals, fey, fiends, and undead for 10 minutes. They have disadvantage on attacks against the target.",
+        "description_tr": "Dokunulan yaratığı 10 dakika boyunca sapkınlıklardan, göksellerden, elementallerden, perilerden, iblislerden ve ölümsüzlerden korur. Bu yaratıklar hedefe karşı saldırılarda dezavantajlı olur.",
+        "branch": "Divine Shield",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 100,
+        "prerequisites": [
+          "pr_sanctuary"
+        ],
+        "icon": "🧿",
+        "effects": {
+          "range": "touch",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "pr_cure_wounds",
+        "name_en": "Cure Wounds",
+        "name_tr": "Yara İyileştirme",
+        "description_en": "A creature you touch regains a number of hit points equal to 2d8 + your spellcasting ability modifier.",
+        "description_tr": "Dokunduğunuz bir yaratık 2d8 + büyü yapma yeteneği değiştiriciniz kadar can geri kazanır.",
+        "branch": "Healing",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "pr_soothing_light"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "healing": "2d8",
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_mass_healing_word",
+        "name_en": "Mass Healing Word",
+        "name_tr": "Toplu Şifa Sözü",
+        "description_en": "As you call out words of restoration, up to 6 creatures of your choice within 15m regain 1d4 + your spellcasting ability modifier HP.",
+        "description_tr": "Şifa sözleri haykırdığınızda, 15m içindeki seçtiğiniz en fazla 6 yaratık 1d4 + büyü yapma yeteneği değiştiriciniz kadar can geri kazanır.",
+        "branch": "Healing",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pr_cure_wounds"
+        ],
+        "icon": "📣",
+        "effects": {
+          "healing": "1d4",
+          "range": "15m",
+          "targets": "6"
+        }
+      },
+      {
+        "spell_key": "pr_beacon_of_hope",
+        "name_en": "Beacon of Hope",
+        "name_tr": "Umut Işığı",
+        "description_en": "Grants up to 6 creatures within 10m advantage on Wisdom saves and death saves, and maximizes any healing they receive for 1 minute.",
+        "description_tr": "10m içindeki en fazla 6 yaratığa Bilgelik ve ölüm kurtarma zarlarında avantaj sağlar ve 1 dakika boyunca aldıkları tüm şifayı en üst düzeye çıkarır.",
+        "branch": "Healing",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pr_mass_healing_word"
+        ],
+        "icon": "🌅",
+        "effects": {
+          "range": "10m",
+          "duration": "1 min",
+          "targets": "6"
+        }
+      },
+      {
+        "spell_key": "pr_remove_curse",
+        "name_en": "Remove Curse",
+        "name_tr": "Lanet Kaldırma",
+        "description_en": "At your touch, all curses affecting one creature or object end.",
+        "description_tr": "Dokunuşunuzla, bir yaratığı veya nesneyi etkileyen tüm lanetler sona erer.",
+        "branch": "Purification",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "pr_lesser_restoration"
+        ],
+        "icon": "🪬",
+        "effects": {
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_cleanse_mind",
+        "name_en": "Cleanse Mind",
+        "name_tr": "Zihin Temizleme",
+        "description_en": "Removes charm, fear, and psychic afflictions from a target within 10m, restoring mental clarity.",
+        "description_tr": "10m içindeki bir hedeften cazibe, korku ve psişik rahatsızlıkları kaldırarak zihinsel berraklığı geri kazandırır.",
+        "branch": "Purification",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pr_remove_curse"
+        ],
+        "icon": "🧠",
+        "effects": {
+          "range": "10m",
+          "removes": "charm/fear"
+        }
+      },
+      {
+        "spell_key": "pr_dispel_magic",
+        "name_en": "Dispel Magic",
+        "name_tr": "Büyü Bozma",
+        "description_en": "Choose one creature, object, or magical effect within 30m. Any spell of 3rd tier or lower on the target ends.",
+        "description_tr": "30m içindeki bir yaratık, nesne veya büyü etkisini seçin. Hedefteki 3. aşama veya daha düşük tüm büyüler sona erer.",
+        "branch": "Purification",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pr_cleanse_mind"
+        ],
+        "icon": "🪄",
+        "effects": {
+          "range": "30m"
+        }
+      },
+      {
+        "spell_key": "pr_warding_bond",
+        "name_en": "Warding Bond",
+        "name_tr": "Koruyucu Bağ",
+        "description_en": "Links yourself to a touched ally. While within 15m, the ally gains +1 AC, +1 saving throws, and resistance to all damage. You take the same amount of damage they take.",
+        "description_tr": "Kendinizi dokunulan bir müttefike bağlar. 15m içinde kaldıkça müttefik +1 ZS, +1 kurtarma zarı ve tüm hasarlara karşı direnç kazanır. Onların aldığı hasarın aynısını siz de alırsınız.",
+        "branch": "Divine Shield",
+        "tier": 2,
+        "min_level": 21,
+        "xp_cost": 175,
+        "prerequisites": [
+          "pr_protection_evil"
+        ],
+        "icon": "🔗",
+        "effects": {
+          "range": "15m",
+          "ac_bonus": "+1"
+        }
+      },
+      {
+        "spell_key": "pr_magic_circle",
+        "name_en": "Magic Circle",
+        "name_tr": "Büyülü Çember",
+        "description_en": "Creates a 3m radius cylinder of magical energy. Chosen creature types cannot enter or affect targets inside. Lasts 1 hour.",
+        "description_tr": "3m yarıçapında büyülü bir enerji silindiri oluşturur. Seçilen yaratık türleri içeri giremez veya içeridekileri etkileyemez. 1 saat sürer.",
+        "branch": "Divine Shield",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "pr_warding_bond"
+        ],
+        "icon": "⭕",
+        "effects": {
+          "radius": "3m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "pr_divine_barrier",
+        "name_en": "Divine Barrier",
+        "name_tr": "Kutsal Bariyer",
+        "description_en": "Summons a glowing wall of light 6m long and 3m high. It blocks physical projectiles and absorbs up to 50 magical damage.",
+        "description_tr": "6m uzunluğunda ve 3m yüksekliğinde parlayan bir ışık duvarı çağırır. Fiziksel mermileri engeller ve 50'ye kadar büyü hasarını emer.",
+        "branch": "Divine Shield",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pr_magic_circle"
+        ],
+        "icon": "🧱",
+        "effects": {
+          "wall_length": "6m",
+          "absorption": "50 damage"
+        }
+      },
+      {
+        "spell_key": "pr_cleansing_touch",
+        "name_en": "Cleansing Touch",
+        "name_tr": "Arındırıcı Dokunuş",
+        "description_en": "A potent touch that heals 1d8 HP and instantly removes one minor debuff or tier 1 curse.",
+        "description_tr": "1d8 can yenileyen ve bir küçük zayıflatmayı veya 1. aşama laneti anında kaldıran güçlü bir dokunuş.",
+        "branch": "Healing, Purification",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 250,
+        "prerequisites": [
+          "pr_cure_wounds",
+          "pr_remove_curse"
+        ],
+        "icon": "🤝",
+        "effects": {
+          "healing": "1d8",
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_radiant_ward",
+        "name_en": "Radiant Ward",
+        "name_tr": "Parlak Koruma",
+        "description_en": "Shields a target for 20 temporary HP. When the shield breaks, it emits a flash, blinding enemies within 3m for 1 turn.",
+        "description_tr": "Bir hedefi 20 geçici can ile korur. Kalkan kırıldığında bir parlama yayar ve 3m içindeki düşmanları 1 turluğuna kör eder.",
+        "branch": "Purification, Divine Shield",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 275,
+        "prerequisites": [
+          "pr_cleanse_mind",
+          "pr_magic_circle"
+        ],
+        "icon": "🔆",
+        "effects": {
+          "shield": "20 hp",
+          "blind_radius": "3m"
+        }
+      },
+      {
+        "spell_key": "pr_greater_heal",
+        "name_en": "Greater Heal",
+        "name_tr": "Büyük Şifa",
+        "description_en": "A surge of positive energy heals a creature you touch for 4d8 + Wisdom modifier hit points.",
+        "description_tr": "Pozitif enerji dalgası, dokunduğunuz bir yaratığı 4d8 + Bilgelik değiştiricisi kadar canla iyileştirir.",
+        "branch": "Healing",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "pr_beacon_of_hope"
+        ],
+        "icon": "💖",
+        "effects": {
+          "healing": "4d8",
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_revivify",
+        "name_en": "Revivify",
+        "name_tr": "Hayata Döndürme",
+        "description_en": "Touch a creature that has died within the last minute, returning it to life with 1 hit point.",
+        "description_tr": "Son bir dakika içinde ölmüş bir yaratığa dokunarak onu 1 canla hayata döndürür.",
+        "branch": "Healing",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pr_greater_heal"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "range": "touch",
+          "revive": "1 hp"
+        }
+      },
+      {
+        "spell_key": "pr_healing_aura",
+        "name_en": "Healing Aura",
+        "name_tr": "Şifa Halesi",
+        "description_en": "Emanates a 10m aura. Allies inside regain 1d6 HP at the start of your turn for 1 minute.",
+        "description_tr": "10m'lik bir hale yayar. İçerideki müttefikler 1 dakika boyunca turunuzun başında 1d6 can geri kazanır.",
+        "branch": "Healing",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pr_revivify"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "radius": "10m",
+          "healing": "1d6/turn",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "pr_greater_restoration",
+        "name_en": "Greater Restoration",
+        "name_tr": "Büyük Arınma",
+        "description_en": "Imbues a touched creature with positive energy, reducing exhaustion, or ending one charm, petrification, curse, or ability score reduction.",
+        "description_tr": "Dokunulan bir yaratığı pozitif enerjiyle doldurarak yorgunluğu azaltır veya bir cazibe, taşlaşma, lanet veya yetenek puanı azalmasını sona erdirir.",
+        "branch": "Purification",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "pr_dispel_magic"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_purifying_flame",
+        "name_en": "Purifying Flame",
+        "name_tr": "Arındırıcı Alev",
+        "description_en": "Hurls a bolt of holy fire 20m. Deals 4d6 radiant damage and purges magical buffs from the target.",
+        "description_tr": "20m uzağa kutsal bir ateş topu fırlatır. 4d6 parlak hasar verir ve hedefteki büyü güçlendirmelerini arındırır.",
+        "branch": "Purification",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pr_greater_restoration"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "4d6",
+          "range": "20m"
+        }
+      },
+      {
+        "spell_key": "pr_aura_of_purity",
+        "name_en": "Aura of Purity",
+        "name_tr": "Safiyet Halesi",
+        "description_en": "A 10m aura that grants allies advantage on saving throws against being blinded, charmed, deafened, frightened, paralyzed, or poisoned for 10 minutes.",
+        "description_tr": "10m'lik bir hale, müttefiklere 10 dakika boyunca kör, cazibeli, sağır, korkmuş, felçli veya zehirli olmaya karşı kurtarma zarlarında avantaj sağlar.",
+        "branch": "Purification",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pr_purifying_flame"
+        ],
+        "icon": "💠",
+        "effects": {
+          "radius": "10m",
+          "duration": "10 mins"
+        }
+      },
+      {
+        "spell_key": "pr_aura_of_life",
+        "name_en": "Aura of Life",
+        "name_tr": "Yaşam Halesi",
+        "description_en": "A 10m aura. Non-hostile creatures within have resistance to necrotic damage and their maximum HP cannot be reduced.",
+        "description_tr": "10m'lik bir hale. İçindeki düşman olmayan yaratıklar nekrotik hasara karşı dirence sahip olur ve maksimum canları azaltılamaz.",
+        "branch": "Divine Shield",
+        "tier": 3,
+        "min_level": 41,
+        "xp_cost": 350,
+        "prerequisites": [
+          "pr_divine_barrier"
+        ],
+        "icon": "🌱",
+        "effects": {
+          "radius": "10m",
+          "resistance": "necrotic"
+        }
+      },
+      {
+        "spell_key": "pr_death_ward",
+        "name_en": "Death Ward",
+        "name_tr": "Ölüm Koruması",
+        "description_en": "Touched creature is protected for 8 hours. The first time it would drop to 0 HP, it drops to 1 HP instead, and the spell ends.",
+        "description_tr": "Dokunulan yaratık 8 saat boyunca korunur. 0 cana düşeceği ilk seferde bunun yerine 1 cana düşer ve büyü sona erer.",
+        "branch": "Divine Shield",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "pr_aura_of_life"
+        ],
+        "icon": "⏳",
+        "effects": {
+          "range": "touch",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "pr_guardian_of_faith",
+        "name_en": "Guardian of Faith",
+        "name_tr": "İnanç Muhafızı",
+        "description_en": "Summons a spectral guardian in an unoccupied space within 10m. It deals 20 radiant damage to hostile creatures that move within 3m of it. Lasts 8 hours or until it deals 60 damage.",
+        "description_tr": "10m içinde boş bir alanda spektral bir muhafız çağırır. 3m yakınına gelen düşman yaratıklara 20 parlak hasar verir. 8 saat veya 60 hasar verene kadar sürer.",
+        "branch": "Divine Shield",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pr_death_ward"
+        ],
+        "icon": "👼",
+        "effects": {
+          "damage": "20",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "pr_sheltering_light",
+        "name_en": "Sheltering Light",
+        "name_tr": "Barındıran Işık",
+        "description_en": "A 5m zone that grants 10 temporary HP per turn and heals 1d4 HP. Lasts 3 turns.",
+        "description_tr": "Tur başına 10 geçici can sağlayan ve 1d4 can yenileyen 5m'lik bir bölge. 3 tur sürer.",
+        "branch": "Healing, Divine Shield",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 450,
+        "prerequisites": [
+          "pr_greater_heal",
+          "pr_aura_of_life"
+        ],
+        "icon": "🏕️",
+        "effects": {
+          "radius": "5m",
+          "shield": "10/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "pr_panacea",
+        "name_en": "Panacea",
+        "name_tr": "Her Derde Deva",
+        "description_en": "Heals a target for 3d8 HP and removes all active poisons, diseases, and curses instantly.",
+        "description_tr": "Bir hedefi 3d8 canla iyileştirir ve tüm aktif zehirleri, hastalıkları ve lanetleri anında kaldırır.",
+        "branch": "Healing, Purification",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 500,
+        "prerequisites": [
+          "pr_healing_aura",
+          "pr_aura_of_purity"
+        ],
+        "icon": "⚕️",
+        "effects": {
+          "healing": "3d8",
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_heal",
+        "name_en": "Heal",
+        "name_tr": "İyileştirme",
+        "description_en": "Choose a creature within 15m. It regains 70 hit points and is cured of blindness, deafness, and any diseases.",
+        "description_tr": "15m içinden bir yaratık seçin. 70 can geri kazanır ve körlük, sağırlık ve hastalıklardan kurtulur.",
+        "branch": "Healing",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "pr_healing_aura"
+        ],
+        "icon": "💞",
+        "effects": {
+          "healing": "70",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "pr_mass_cure_wounds",
+        "name_en": "Mass Cure Wounds",
+        "name_tr": "Toplu Yara İyileştirme",
+        "description_en": "A wave of healing energy washes out from a point within 15m. Up to 6 creatures in a 10m radius regain 3d8 + Wisdom modifier hit points.",
+        "description_tr": "15m içindeki bir noktadan şifa enerjisi dalgası yayılır. 10m yarıçapındaki en fazla 6 yaratık 3d8 + Bilgelik değiştiricisi kadar can kazanır.",
+        "branch": "Healing",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pr_heal"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "healing": "3d8",
+          "radius": "10m",
+          "range": "15m"
+        }
+      },
+      {
+        "spell_key": "pr_resurrection",
+        "name_en": "Resurrection",
+        "name_tr": "Diriliş",
+        "description_en": "Restores life to a deceased creature touched, provided it hasn't been dead for more than a century. Closes all mortal wounds and restores missing body parts.",
+        "description_tr": "Dokunulan ölü bir yaratığı, yüzyıldan uzun süredir ölü olmaması şartıyla hayata döndürür. Tüm ölümcül yaraları kapatır ve eksik vücut parçalarını onarır.",
+        "branch": "Healing",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pr_mass_cure_wounds"
+        ],
+        "icon": "🦅",
+        "effects": {
+          "range": "touch"
+        }
+      },
+      {
+        "spell_key": "pr_cleanse_area",
+        "name_en": "Cleanse Area",
+        "name_tr": "Bölge Arındırma",
+        "description_en": "Purifies a 20m radius. Destroys unnatural fog, dark magic surfaces, and deals 6d6 radiant damage to undead.",
+        "description_tr": "20m yarıçapında bir alanı arındırır. Doğal olmayan sisi, kara büyü yüzeylerini yok eder ve ölümsüzlere 6d6 parlak hasar verir.",
+        "branch": "Purification",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "pr_aura_of_purity"
+        ],
+        "icon": "🏞️",
+        "effects": {
+          "radius": "20m",
+          "damage": "6d6"
+        }
+      },
+      {
+        "spell_key": "pr_banishment",
+        "name_en": "Banishment",
+        "name_tr": "Sürgün",
+        "description_en": "Attempts to send one creature within 15m to another plane of existence. The target must succeed on a Charisma saving throw or be banished for 1 minute.",
+        "description_tr": "15m içindeki bir yaratığı başka bir varoluş düzlemine göndermeye çalışır. Hedef bir Karizma kurtarma zarında başarılı olamazsa 1 dakika boyunca sürgün edilir.",
+        "branch": "Purification",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pr_cleanse_area"
+        ],
+        "icon": "🚪",
+        "effects": {
+          "range": "15m",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "pr_holy_word",
+        "name_en": "Holy Word",
+        "name_tr": "Kutsal Kelam",
+        "description_en": "Utter a divine word. Celestials, elementals, fey, fiends, and undead within 10m suffer 5d8 radiant damage and are deafened or blinded.",
+        "description_tr": "Kutsal bir kelam söyleyin. 10m içindeki gökseller, elementaller, periler, iblisler ve ölümsüzler 5d8 parlak hasar alır ve sağır veya kör olurlar.",
+        "branch": "Purification",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pr_banishment"
+        ],
+        "icon": "📖",
+        "effects": {
+          "radius": "10m",
+          "damage": "5d8"
+        }
+      },
+      {
+        "spell_key": "pr_globe_of_invulnerability",
+        "name_en": "Globe of Invulnerability",
+        "name_tr": "Yenilmezlik Küresi",
+        "description_en": "An immobile, faintly shimmering 3m radius barrier springs into existence around you. Any spell of 5th tier or lower cast from outside the barrier can't affect creatures within it.",
+        "description_tr": "Etrafınızda hareketsiz, hafifçe parlayan 3m yarıçaplı bir bariyer belirir. Bariyerin dışından yapılan 5. aşama veya daha düşük hiçbir büyü içerideki yaratıkları etkileyemez.",
+        "branch": "Divine Shield",
+        "tier": 4,
+        "min_level": 61,
+        "xp_cost": 600,
+        "prerequisites": [
+          "pr_guardian_of_faith"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "pr_wall_of_light",
+        "name_en": "Wall of Light",
+        "name_tr": "Işık Duvarı",
+        "description_en": "Creates a 15m long, 3m high wall of radiant energy. Undead passing through take 4d8 damage, and allies inside gain half-cover.",
+        "description_tr": "15m uzunluğunda, 3m yüksekliğinde parlak enerjiden bir duvar oluşturur. İçinden geçen ölümsüzler 4d8 hasar alır ve içerdeki müttefikler yarım siper kazanır.",
+        "branch": "Divine Shield",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "pr_globe_of_invulnerability"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "wall_length": "15m",
+          "damage": "4d8"
+        }
+      },
+      {
+        "spell_key": "pr_holy_aura",
+        "name_en": "Holy Aura",
+        "name_tr": "Kutsal Hale",
+        "description_en": "Divine light radiates from you in a 10m radius. Allies have advantage on all saving throws, and enemies have disadvantage on attack rolls against them.",
+        "description_tr": "Sizden 10m yarıçapında ilahi bir ışık yayılır. Müttefikler tüm kurtarma zarlarında avantaj sağlar ve düşmanların onlara karşı saldırı zarlarında dezavantajı olur.",
+        "branch": "Divine Shield",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 800,
+        "prerequisites": [
+          "pr_wall_of_light"
+        ],
+        "icon": "💫",
+        "effects": {
+          "radius": "10m"
+        }
+      },
+      {
+        "spell_key": "pr_hallowed_ground",
+        "name_en": "Hallowed Ground",
+        "name_tr": "Kutsal Toprak",
+        "description_en": "Sanctifies a 15m area for 1 minute. Allies gain +3 AC, and any curses cast inside are immediately nullified.",
+        "description_tr": "15m'lik bir alanı 1 dakikalığına kutsar. Müttefikler +3 ZS kazanır ve içeride yapılan tüm lanetler anında iptal edilir.",
+        "branch": "Purification, Divine Shield",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 750,
+        "prerequisites": [
+          "pr_cleanse_area",
+          "pr_globe_of_invulnerability"
+        ],
+        "icon": "🏛️",
+        "effects": {
+          "radius": "15m",
+          "duration": "1 min",
+          "ac_bonus": "+3"
+        }
+      },
+      {
+        "spell_key": "pr_martyrs_grace",
+        "name_en": "Martyr's Grace",
+        "name_tr": "Şehidin Lütfu",
+        "description_en": "Sacrifice 50% of your current HP to restore an ally to full HP and grant them a 50 HP shield.",
+        "description_tr": "Mevcut canınızın %50'sini feda ederek bir müttefikinizin canını tamamen yeniler ve onlara 50 canlık bir kalkan sağlarsınız.",
+        "branch": "Healing, Divine Shield",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 850,
+        "prerequisites": [
+          "pr_resurrection",
+          "pr_holy_aura"
+        ],
+        "icon": "❤️‍🔥",
+        "effects": {
+          "range": "touch",
+          "shield": "50 hp",
+          "healing": "100%"
+        }
+      },
+      {
+        "spell_key": "pr_divine_regeneration",
+        "name_en": "Divine Regeneration",
+        "name_tr": "Kutsal Yenilenme",
+        "description_en": "Target regains 4d8 + 15 HP immediately, and regenerates 10 HP at the start of each of their turns for 1 minute. Severed body parts regrow.",
+        "description_tr": "Hedef anında 4d8 + 15 can geri kazanır ve 1 dakika boyunca her turunun başında 10 can yeniler. Kopmuş vücut parçaları yeniden büyür.",
+        "branch": "Healing",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "pr_resurrection"
+        ],
+        "icon": "❤️‍🩹",
+        "effects": {
+          "healing": "4d8 + 15",
+          "regen": "10/turn",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "pr_ultimate_healing",
+        "name_en": "Breath of the Goddess",
+        "name_tr": "Tanrıçanın Nefesi",
+        "description_en": "ULTIMATE: A divine breath flows through a 30m radius. All allies are healed for 100 HP, and all fallen allies are revived with 50% HP. Once per day.",
+        "description_tr": "ULTİMAT: 30m yarıçapında ilahi bir nefes akar. Tüm müttefikler 100 can iyileşir ve düşmüş tüm müttefikler %50 canla diriltilir. Günde bir kez.",
+        "branch": "Healing",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pr_divine_regeneration"
+        ],
+        "icon": "🌬️",
+        "effects": {
+          "radius": "30m",
+          "healing": "100 hp",
+          "revive": "50%"
+        }
+      },
+      {
+        "spell_key": "pr_curse_immunity",
+        "name_en": "Curse Immunity",
+        "name_tr": "Lanet Bağışıklığı",
+        "description_en": "Grants a touched ally permanent immunity to all curses and hexes for 24 hours. Any existing curses are shattered.",
+        "description_tr": "Dokunulan bir müttefike 24 saat boyunca tüm lanetlere ve büyülere karşı kalıcı bağışıklık sağlar. Mevcut tüm lanetler paramparça olur.",
+        "branch": "Purification",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "pr_holy_word"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "range": "touch",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "pr_ultimate_purification",
+        "name_en": "Light of Absolution",
+        "name_tr": "Mutlak Arınma Işığı",
+        "description_en": "ULTIMATE: A blinding pillar of light descends from the heavens (20m radius). Evaporates all dark magic, curses, and deals 15d10 radiant damage to fiends and undead.",
+        "description_tr": "ULTİMAT: Göklerden kör edici bir ışık sütunu iner (20m yarıçap). Tüm kara büyüleri, lanetleri buharlaştırır ve iblislere ve ölümsüzlere 15d10 parlak hasar verir.",
+        "branch": "Purification",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pr_curse_immunity"
+        ],
+        "icon": "☀️",
+        "effects": {
+          "radius": "20m",
+          "damage": "15d10"
+        }
+      },
+      {
+        "spell_key": "pr_aegis_of_the_gods",
+        "name_en": "Aegis of the Gods",
+        "name_tr": "Tanrıların Kalkanı",
+        "description_en": "Conjures an impenetrable golden dome (10m radius) that blocks all physical and magical attacks from outside for 3 turns. Nothing can pass through.",
+        "description_tr": "Dışarıdan gelen tüm fiziksel ve büyüsel saldırıları 3 tur boyunca engelleyen delinmez altın bir kubbe (10m yarıçap) çağırır. Hiçbir şey içinden geçemez.",
+        "branch": "Divine Shield",
+        "tier": 5,
+        "min_level": 81,
+        "xp_cost": 1000,
+        "prerequisites": [
+          "pr_holy_aura"
+        ],
+        "icon": "🏰",
+        "effects": {
+          "radius": "10m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "pr_ultimate_shield",
+        "name_en": "Bastion of Heaven",
+        "name_tr": "Cennetin Kalesi",
+        "description_en": "ULTIMATE: Grants up to 8 allies an unbreakable divine shield for 2 turns. While shielded, they reflect 100% of damage taken back to the attacker.",
+        "description_tr": "ULTİMAT: En fazla 8 müttefike 2 tur boyunca kırılmaz ilahi bir kalkan sağlar. Kalkanlıyken, alınan hasarın %100'ünü saldırgana geri yansıtırlar.",
+        "branch": "Divine Shield",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "pr_aegis_of_the_gods"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "duration": "2 turns",
+          "reflect": "100%",
+          "targets": "8"
+        }
+      },
+      {
+        "spell_key": "pr_avatar_of_mercy",
+        "name_en": "Avatar of Mercy",
+        "name_tr": "Merhamet Avatarı",
+        "description_en": "Transform into an angelic being for 1 minute. You gain flying speed, emit a 15m aura that heals allies 15 HP/turn, purifies debuffs, and grants +5 AC.",
+        "description_tr": "1 dakikalığına melek benzeri bir varlığa dönüşün. Uçma hızı kazanırsınız, müttefikleri turda 15 can iyileştiren, zayıflatmaları arındıran ve +5 ZS sağlayan 15m'lik bir hale yayarsınız.",
+        "branch": "Healing, Purification, Divine Shield",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "pr_divine_regeneration",
+          "pr_curse_immunity",
+          "pr_aegis_of_the_gods"
+        ],
+        "icon": "🪽",
+        "effects": {
+          "radius": "15m",
+          "healing": "15/turn",
+          "ac_bonus": "+5",
+          "duration": "1 min"
+        }
+      },
+      {
+        "spell_key": "pr_grand_ultimate",
+        "name_en": "Miracle of the Divine",
+        "name_tr": "İlahi Mucize",
+        "description_en": "GRAND ULTIMATE: Time stops as divine light washes over the battlefield. Fully heals, purifies, and revives all allies, and grants them invulnerability for 3 turns. Costs 50% of your maximum HP.",
+        "description_tr": "BÜYÜK ULTİMAT: İlahi ışık savaş alanını yıkarken zaman durur. Tüm müttefikleri tamamen iyileştirir, arındırır, diriltir ve onlara 3 tur boyunca yenilmezlik sağlar. Maksimum canınızın %50'sine mal olur.",
+        "branch": "Healing, Purification, Divine Shield",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "pr_ultimate_healing",
+          "pr_ultimate_purification",
+          "pr_ultimate_shield"
+        ],
+        "icon": "👑",
+        "effects": {
+          "healing": "100%",
+          "duration": "3 turns"
+        }
+      }
+    ]
+  }
+]

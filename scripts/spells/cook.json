@@ -1,0 +1,1009 @@
+[
+  {
+    "subclass_key": "cook",
+    "tree_name_en": "Culinary Arts",
+    "tree_name_tr": "Aşçılık Sanatları",
+    "tree_desc_en": "Master the art of combat cooking, using healing meals, boiling soups, and razor-sharp cleavers to slice through enemies and nourish allies.",
+    "tree_desc_tr": "İyileştirici yemekler, kaynayan çorbalar ve jilet gibi keskin satırlar kullanarak düşmanları dilimlemek ve müttefikleri beslemek için savaş aşçılığı sanatında ustalaşın.",
+    "branches": [
+      "Meal",
+      "Soup",
+      "Cleaver"
+    ],
+    "spells": [
+      {
+        "spell_key": "ck_trail_rations",
+        "name_en": "Trail Rations",
+        "name_tr": "Yol Kumanyası",
+        "description_en": "Prepare basic trail rations. Heals 1d6+2 HP and provides a 1-hour buff granting +1 to all saving throws.",
+        "description_tr": "Temel yol kumanyası hazırlayın. 1d6+2 Can yeniler ve 1 saat boyunca tüm kurtarma zarlarına +1 bonus sağlayan bir güçlendirme verir.",
+        "branch": "Meal",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🥖",
+        "effects": {
+          "healing": "1d6+2",
+          "duration": "1 hour",
+          "buff": "+1 saves"
+        }
+      },
+      {
+        "spell_key": "ck_sugar_rush",
+        "name_en": "Sugar Rush",
+        "name_tr": "Şeker Patlaması",
+        "description_en": "Consume a highly caffeinated, sugary treat. Gain +3m movement speed and 1 additional action for 2 turns.",
+        "description_tr": "Yüksek kafeinli, şekerli bir atıştırmalık tüketin. 2 tur boyunca +3m hareket hızı ve 1 ek eylem kazanın.",
+        "branch": "Meal",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 70,
+        "prerequisites": [],
+        "icon": "🍬",
+        "effects": {
+          "speed": "+3m",
+          "actions": "+1 action",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ck_hearty_stew",
+        "name_en": "Hearty Stew",
+        "name_tr": "Doyurucu Yahni",
+        "description_en": "Serve a hearty stew that grants the consumer 15 temporary HP and resistance to cold damage for 1 hour.",
+        "description_tr": "Tüketene 15 geçici Can ve 1 saat boyunca soğuk hasarına karşı direnç sağlayan doyurucu bir yahni servis edin.",
+        "branch": "Meal",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 100,
+        "prerequisites": [
+          "ck_trail_rations"
+        ],
+        "icon": "🍲",
+        "effects": {
+          "temp_hp": 15,
+          "resistance": "cold",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ck_spicy_bite",
+        "name_en": "Spicy Bite",
+        "name_tr": "Baharatlı Lokma",
+        "description_en": "Eat a spicy pepper to ignite your spirit. Your next 3 attacks deal an additional 1d4 fire damage.",
+        "description_tr": "Ruhunuzu ateşlemek için acı bir biber yiyin. Sonraki 3 saldırınız fazladan 1d4 ateş hasarı verir.",
+        "branch": "Meal",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 200,
+        "prerequisites": [
+          "ck_hearty_stew"
+        ],
+        "icon": "🌶️",
+        "effects": {
+          "damage": "1d4 fire",
+          "duration": "3 attacks"
+        }
+      },
+      {
+        "spell_key": "ck_protein_bar",
+        "name_en": "Protein Bar",
+        "name_tr": "Protein Barı",
+        "description_en": "Create a dense protein bar. Consumer gains +2 to Strength checks and saving throws, and +5m carrying capacity for 1 hour.",
+        "description_tr": "Yoğun bir protein barı oluşturun. Tüketen kişi 1 saat boyunca Güç zarlarına +2 bonus ve +5m taşıma kapasitesi kazanır.",
+        "branch": "Meal",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "ck_sugar_rush"
+        ],
+        "icon": "🍫",
+        "effects": {
+          "buff": "+2 STR checks/saves",
+          "capacity": "+5m",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ck_revitalizing_tea",
+        "name_en": "Revitalizing Tea",
+        "name_tr": "Canlandırıcı Çay",
+        "description_en": "Brew a cup of herbal tea that instantly removes 1 condition (poison, paralysis, or blind) and restores 2d6 HP.",
+        "description_tr": "1 durumu (zehir, felç veya körlük) anında kaldıran ve 2d6 Can yenileyen bir fincan bitki çayı demleyin.",
+        "branch": "Meal",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ck_spicy_bite"
+        ],
+        "icon": "🍵",
+        "effects": {
+          "healing": "2d6",
+          "cure": "1 condition"
+        }
+      },
+      {
+        "spell_key": "ck_heroes_feast_lite",
+        "name_en": "Adventurer's Banquet",
+        "name_tr": "Maceracı Ziyafeti",
+        "description_en": "Prepare an adventurer's banquet for up to 6 allies. Heals 4d8 HP, cures all diseases, and grants +2 to attack rolls for 2 hours.",
+        "description_tr": "6 müttefike kadar maceracı ziyafeti hazırlayın. 4d8 Can yeniler, tüm hastalıkları iyileştirir ve 2 saat boyunca saldırı zarlarına +2 bonus verir.",
+        "branch": "Meal",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 400,
+        "prerequisites": [
+          "ck_revitalizing_tea"
+        ],
+        "icon": "🍱",
+        "effects": {
+          "healing": "4d8",
+          "buff": "+2 attack",
+          "targets": 6,
+          "duration": "2 hours"
+        }
+      },
+      {
+        "spell_key": "ck_iron_ration",
+        "name_en": "Iron Ration",
+        "name_tr": "Demir Kumanya",
+        "description_en": "Consume an incredibly tough ration. Gain resistance to slashing, piercing, and bludgeoning damage for 3 turns.",
+        "description_tr": "İnanılmaz derecede sert bir kumanya tüketin. 3 tur boyunca kesici, delici ve ezici hasarlara karşı direnç kazanın.",
+        "branch": "Meal",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "ck_protein_bar"
+        ],
+        "icon": "🥩",
+        "effects": {
+          "resistance": "physical damage",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_focus_mint",
+        "name_en": "Focus Mint",
+        "name_tr": "Odak Nanesi",
+        "description_en": "Eat a sharp mint. Gain advantage on Concentration checks and +2 to Intelligence and Wisdom checks for 1 hour.",
+        "description_tr": "Keskin bir nane yiyin. 1 saat boyunca Odaklanma zarlarında avantaj ve Zeka ile Bilgelik zarlarına +2 bonus kazanın.",
+        "branch": "Meal",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ck_iron_ration"
+        ],
+        "icon": "🌿",
+        "effects": {
+          "advantage": "Concentration",
+          "buff": "+2 INT/WIS",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ck_miracle_biscuit",
+        "name_en": "Miracle Biscuit",
+        "name_tr": "Mucizevi Bisküvi",
+        "description_en": "Quickly consume a magical biscuit as a bonus action to instantly restore 50% of your maximum HP.",
+        "description_tr": "Maksimum Canınızın %50'sini anında yenilemek için bonus eylem olarak sihirli bir bisküviyi hızla tüketin.",
+        "branch": "Meal",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 700,
+        "prerequisites": [
+          "ck_heroes_feast_lite"
+        ],
+        "icon": "🍘",
+        "effects": {
+          "healing": "50% max HP",
+          "action_type": "Bonus Action"
+        }
+      },
+      {
+        "spell_key": "ck_dragons_breath_chili",
+        "name_en": "Dragon's Breath Chili",
+        "name_tr": "Ejder Nefesi Biberi",
+        "description_en": "Eat a legendary chili. You can exhale fire in a 5m cone as a bonus action, dealing 4d6 fire damage. Lasts 1 minute.",
+        "description_tr": "Efsanevi bir acı biber yiyin. Bonus eylem olarak 5m koni şeklinde ateş üfleyerek 4d6 ateş hasarı verebilirsiniz. 1 dakika sürer.",
+        "branch": "Meal",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 750,
+        "prerequisites": [
+          "ck_focus_mint"
+        ],
+        "icon": "🐉",
+        "effects": {
+          "damage": "4d6 fire",
+          "range": "5m cone",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ck_elixir_of_vitality",
+        "name_en": "Elixir of Vitality",
+        "name_tr": "Hayat İksiri",
+        "description_en": "Drink a perfectly balanced elixir. Maximum HP increases by 20 and you regenerate 2 HP per turn for 8 hours.",
+        "description_tr": "Mükemmel dengelenmiş bir iksir için. Maksimum Canınız 20 artar ve 8 saat boyunca her tur 2 Can yenilersiniz.",
+        "branch": "Meal",
+        "tier": 4,
+        "min_level": 78,
+        "xp_cost": 850,
+        "prerequisites": [
+          "ck_miracle_biscuit"
+        ],
+        "icon": "🍷",
+        "effects": {
+          "max_hp": "+20",
+          "regen": "2 HP/turn",
+          "duration": "8 hours"
+        }
+      },
+      {
+        "spell_key": "ck_ambrosia_slice",
+        "name_en": "Ambrosia Slice",
+        "name_tr": "Tanrıların Lokması",
+        "description_en": "Serve a slice of divine ambrosia. Fully heals the target and grants immunity to all negative status effects for 1 minute.",
+        "description_tr": "İlahi bir ambrosia dilimi servis edin. Hedefi tamamen iyileştirir ve 1 dakika boyunca tüm olumsuz durumlara karşı bağışıklık kazandırır.",
+        "branch": "Meal",
+        "tier": 5,
+        "min_level": 85,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "ck_elixir_of_vitality"
+        ],
+        "icon": "🍰",
+        "effects": {
+          "healing": "100%",
+          "immunity": "Status effects",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ck_feast_of_champions",
+        "name_en": "Feast of Champions",
+        "name_tr": "Şampiyonlar Şöleni",
+        "description_en": "Conjure the ultimate feast. Fully heals the entire party, grants +30 maximum HP, and gives advantage on all saving throws for 24 hours.",
+        "description_tr": "Nihai ziyafeti yaratın. Tüm partiyi tamamen iyileştirir, +30 maksimum Can sağlar ve 24 saat boyunca tüm kurtarma zarlarında avantaj verir.",
+        "branch": "Meal",
+        "tier": 5,
+        "min_level": 95,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ck_ambrosia_slice"
+        ],
+        "icon": "👑",
+        "effects": {
+          "healing": "100% party",
+          "max_hp": "+30",
+          "advantage": "All saves",
+          "duration": "24 hours"
+        }
+      },
+      {
+        "spell_key": "ck_boiling_splash",
+        "name_en": "Boiling Splash",
+        "name_tr": "Kaynar Sıçrama",
+        "description_en": "Throw boiling hot water at an enemy within 5m, dealing 1d8 fire damage and blinding them for 1 turn.",
+        "description_tr": "5m içindeki bir düşmana kaynar su fırlatarak 1d8 ateş hasarı verin ve 1 tur boyunca kör edin.",
+        "branch": "Soup",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "💧",
+        "effects": {
+          "damage": "1d8 fire",
+          "status": "Blind",
+          "duration": "1 turn",
+          "range": "5m"
+        }
+      },
+      {
+        "spell_key": "ck_sticky_broth",
+        "name_en": "Sticky Broth",
+        "name_tr": "Yapışkan Et Suyu",
+        "description_en": "Toss a viscous broth up to 10m. The target's movement speed is halved and they cannot dash for 2 turns.",
+        "description_tr": "10m'ye kadar yapışkan bir et suyu fırlatın. Hedefin hareket hızı yarıya düşer ve 2 tur boyunca atılamaz (dash).",
+        "branch": "Soup",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🥣",
+        "effects": {
+          "speed": "-50%",
+          "status": "Cannot dash",
+          "duration": "2 turns",
+          "range": "10m"
+        }
+      },
+      {
+        "spell_key": "ck_aromatic_steam",
+        "name_en": "Aromatic Steam",
+        "name_tr": "Aromatik Buhar",
+        "description_en": "Release a 3m radius cloud of soothing steam. Allies inside regain 1d4 HP per turn for 3 turns.",
+        "description_tr": "3m yarıçapında rahatlatıcı bir buhar bulutu salın. İçindeki müttefikler 3 tur boyunca her tur 1d4 Can yeniler.",
+        "branch": "Soup",
+        "tier": 1,
+        "min_level": 14,
+        "xp_cost": 120,
+        "prerequisites": [
+          "ck_boiling_splash"
+        ],
+        "icon": "♨️",
+        "effects": {
+          "healing": "1d4/turn",
+          "radius": "3m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_acidic_soup",
+        "name_en": "Acidic Soup",
+        "name_tr": "Asitli Çorba",
+        "description_en": "Splash corrosive soup. Deals 2d6 acid damage and permanently reduces the target's Armor Class by 1 (max 3 times).",
+        "description_tr": "Aşındırıcı çorba sıçratın. 2d6 asit hasarı verir ve hedefin Zırh Sınıfını kalıcı olarak 1 düşürür (en fazla 3 kez).",
+        "branch": "Soup",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 210,
+        "prerequisites": [
+          "ck_aromatic_steam"
+        ],
+        "icon": "🧪",
+        "effects": {
+          "damage": "2d6 acid",
+          "debuff": "-1 AC (max -3)"
+        }
+      },
+      {
+        "spell_key": "ck_soup_eruption",
+        "name_en": "Soup Eruption",
+        "name_tr": "Çorba Patlaması",
+        "description_en": "Slam a pot of boiling soup, causing it to erupt. Deals 3d6 fire damage in a 3m radius around you.",
+        "description_tr": "Kaynayan bir çorba tenceresini yere vurarak patlatın. Etrafınızdaki 3m yarıçapında 3d6 ateş hasarı verir.",
+        "branch": "Soup",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 260,
+        "prerequisites": [
+          "ck_sticky_broth"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "3d6 fire",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "ck_grease_spill",
+        "name_en": "Grease Spill",
+        "name_tr": "Yağ Döküntüsü",
+        "description_en": "Spill slippery cooking grease in a 5m area. Creatures entering or starting their turn must pass a Dexterity save or fall prone. Lasts 5 turns.",
+        "description_tr": "5m'lik bir alana kaygan yemek yağı dökün. Giren veya turuna başlayan yaratıklar Çeviklik zarı atmalıdır, aksi takdirde yere düşerler. 5 tur sürer.",
+        "branch": "Soup",
+        "tier": 2,
+        "min_level": 39,
+        "xp_cost": 290,
+        "prerequisites": [
+          "ck_soup_eruption"
+        ],
+        "icon": "🧈",
+        "effects": {
+          "radius": "5m",
+          "status": "Prone on failed save",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "ck_scalding_wave",
+        "name_en": "Scalding Wave",
+        "name_tr": "Haşlayan Dalga",
+        "description_en": "Send a 10m cone of scalding soup from your ladle. Deals 5d6 fire damage and pushes enemies back 3m.",
+        "description_tr": "Kepçenizden 10m koni şeklinde haşlayıcı çorba gönderin. 5d6 ateş hasarı verir ve düşmanları 3m geriye iter.",
+        "branch": "Soup",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 380,
+        "prerequisites": [
+          "ck_acidic_soup"
+        ],
+        "icon": "🌊",
+        "effects": {
+          "damage": "5d6 fire",
+          "range": "10m cone",
+          "knockback": "3m"
+        }
+      },
+      {
+        "spell_key": "ck_healing_vapors",
+        "name_en": "Healing Vapors",
+        "name_tr": "İyileştirici Buharlar",
+        "description_en": "Place a boiling pot that emits a 5m radius cloud. Heals allies for 3d6 HP and obscures vision for enemies for 3 turns.",
+        "description_tr": "5m yarıçapında bulut yayan kaynayan bir tencere yerleştirin. Müttefikleri 3d6 Can iyileştirir ve 3 tur boyunca düşmanların görüşünü engeller.",
+        "branch": "Soup",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "ck_grease_spill"
+        ],
+        "icon": "🧖",
+        "effects": {
+          "healing": "3d6",
+          "status": "Obscure vision",
+          "radius": "5m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_chowder_bomb",
+        "name_en": "Chowder Bomb",
+        "name_tr": "Çorba Bombası",
+        "description_en": "Hurl an exploding clam chowder up to 15m. Deals 4d8 bludgeoning damage and slows targets by 50% for 2 turns.",
+        "description_tr": "15m'ye kadar patlayan bir istiridye çorbası fırlatın. 4d8 ezici hasar verir ve hedefleri 2 tur boyunca %50 yavaşlatır.",
+        "branch": "Soup",
+        "tier": 3,
+        "min_level": 59,
+        "xp_cost": 490,
+        "prerequisites": [
+          "ck_scalding_wave"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "4d8 bludgeoning",
+          "status": "Slow 50%",
+          "range": "15m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ck_toxic_brew",
+        "name_en": "Toxic Brew",
+        "name_tr": "Zehirli Karışım",
+        "description_en": "Force an enemy to swallow a toxic brew. Deals 6d8 poison damage and poisons them for 1 minute (1d6 damage per turn).",
+        "description_tr": "Bir düşmanı zehirli bir karışım yutmaya zorlayın. 6d8 zehir hasarı verir ve 1 dakika boyunca zehirler (her tur 1d6 hasar).",
+        "branch": "Soup",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 650,
+        "prerequisites": [
+          "ck_chowder_bomb"
+        ],
+        "icon": "☠️",
+        "effects": {
+          "damage": "6d8 poison",
+          "dot": "1d6 poison/turn",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ck_magma_potage",
+        "name_en": "Magma Potage",
+        "name_tr": "Magma Çorbası",
+        "description_en": "Pour out a soup so hot it mimics lava, creating a 4m pool. Creatures inside take 5d10 fire damage per turn. Lasts 4 turns.",
+        "description_tr": "O kadar sıcak bir çorba dökün ki lavı taklit eder, 4m'lik bir havuz oluşturur. İçindeki yaratıklar her tur 5d10 ateş hasarı alır. 4 tur sürer.",
+        "branch": "Soup",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 780,
+        "prerequisites": [
+          "ck_healing_vapors"
+        ],
+        "icon": "🫕",
+        "effects": {
+          "damage": "5d10 fire/turn",
+          "radius": "4m",
+          "duration": "4 turns"
+        }
+      },
+      {
+        "spell_key": "ck_nourishing_rain",
+        "name_en": "Nourishing Rain",
+        "name_tr": "Besleyici Yağmur",
+        "description_en": "Shoot soup into the sky, creating a 10m radius nourishing rain. Allies regain 10 HP at the start of their turns for 5 turns.",
+        "description_tr": "Çorbayı gökyüzüne atarak 10m yarıçapında besleyici bir yağmur yaratın. Müttefikler 5 tur boyunca turlarının başında 10 Can yeniler.",
+        "branch": "Soup",
+        "tier": 4,
+        "min_level": 79,
+        "xp_cost": 880,
+        "prerequisites": [
+          "ck_toxic_brew"
+        ],
+        "icon": "🌧️",
+        "effects": {
+          "healing": "10 HP/turn",
+          "radius": "10m",
+          "duration": "5 turns"
+        }
+      },
+      {
+        "spell_key": "ck_tsunami_of_stew",
+        "name_en": "Tsunami of Stew",
+        "name_tr": "Yahni Tsunamisi",
+        "description_en": "Unleash a massive 15m wide wave of boiling stew. Pushes enemies 10m away, knocks them prone, and deals 8d8 fire/bludgeoning damage.",
+        "description_tr": "15m genişliğinde devasa bir kaynar yahni dalgası serbest bırakın. Düşmanları 10m uzağa iter, yere düşürür ve 8d8 ateş/ezici hasar verir.",
+        "branch": "Soup",
+        "tier": 5,
+        "min_level": 86,
+        "xp_cost": 1150,
+        "prerequisites": [
+          "ck_magma_potage"
+        ],
+        "icon": "🍜",
+        "effects": {
+          "damage": "8d8 fire/bludgeoning",
+          "width": "15m",
+          "knockback": "10m",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "ck_cauldron_of_disaster",
+        "name_en": "Cauldron of Disaster",
+        "name_tr": "Felaket Kazanı",
+        "description_en": "Summon a giant spectral cauldron that violently erupts. Deals 10d10 mixed fire and acid damage in a 20m radius every turn for 3 turns.",
+        "description_tr": "Şiddetle patlayan devasa spektral bir kazan çağırın. 3 tur boyunca her tur 20m yarıçapında 10d10 karışık ateş ve asit hasarı verir.",
+        "branch": "Soup",
+        "tier": 5,
+        "min_level": 96,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ck_tsunami_of_stew"
+        ],
+        "icon": "🥘",
+        "effects": {
+          "damage": "10d10 fire/acid per turn",
+          "radius": "20m",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_chop",
+        "name_en": "Chop",
+        "name_tr": "Doğrama",
+        "description_en": "A basic melee strike with a cleaver. Deals 1d8 slashing damage and inflicts a bleed effect for 2 damage per turn for 2 turns.",
+        "description_tr": "Satırla temel bir yakın dövüş saldırısı. 1d8 kesici hasar verir ve 2 tur boyunca her tur 2 hasar veren bir kanama etkisi uygular.",
+        "branch": "Cleaver",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🔪",
+        "effects": {
+          "damage": "1d8 slashing",
+          "dot": "2 bleed/turn",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ck_tenderize",
+        "name_en": "Tenderize",
+        "name_tr": "Yumuşatma",
+        "description_en": "Strike with the flat of the blade. Deals 1d6 bludgeoning damage and gives the target disadvantage on their next attack.",
+        "description_tr": "Bıçağın düz kısmıyla vurun. 1d6 ezici hasar verir ve hedefin bir sonraki saldırısında dezavantajlı olmasını sağlar.",
+        "branch": "Cleaver",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 90,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "damage": "1d6 bludgeoning",
+          "debuff": "Disadvantage on next attack"
+        }
+      },
+      {
+        "spell_key": "ck_quick_slice",
+        "name_en": "Quick Slice",
+        "name_tr": "Hızlı Kesik",
+        "description_en": "Make a rapid, shallow cut as a bonus action. Deals 1d4 slashing damage and increases your next attack's accuracy by +2.",
+        "description_tr": "Bonus eylem olarak hızlı ve sığ bir kesik atın. 1d4 kesici hasar verir ve bir sonraki saldırınızın isabetliliğini +2 artırır.",
+        "branch": "Cleaver",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 130,
+        "prerequisites": [
+          "ck_chop"
+        ],
+        "icon": "🗡️",
+        "effects": {
+          "damage": "1d4 slashing",
+          "buff": "+2 accuracy next attack",
+          "action_type": "Bonus Action"
+        }
+      },
+      {
+        "spell_key": "ck_butchers_hook",
+        "name_en": "Butcher's Hook",
+        "name_tr": "Kasap Kancası",
+        "description_en": "Throw a meat hook up to 8m. Deals 1d6 piercing damage and pulls the target 5m towards you.",
+        "description_tr": "8m'ye kadar bir et kancası fırlatın. 1d6 delici hasar verir ve hedefi size doğru 5m çeker.",
+        "branch": "Cleaver",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 220,
+        "prerequisites": [
+          "ck_tenderize"
+        ],
+        "icon": "🪝",
+        "effects": {
+          "damage": "1d6 piercing",
+          "range": "8m",
+          "pull": "5m"
+        }
+      },
+      {
+        "spell_key": "ck_filet",
+        "name_en": "Filet",
+        "name_tr": "Fileto Çıkarma",
+        "description_en": "Precisely slice an enemy. Deals 2d8 slashing damage. Deals double damage to beasts and monstrosities.",
+        "description_tr": "Bir düşmanı hassas bir şekilde dilimleyin. 2d8 kesici hasar verir. Canavarlara ve yaratıklara iki kat hasar verir.",
+        "branch": "Cleaver",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 270,
+        "prerequisites": [
+          "ck_quick_slice"
+        ],
+        "icon": "🥩",
+        "effects": {
+          "damage": "2d8 slashing",
+          "bonus": "Double damage to beasts/monstrosities"
+        }
+      },
+      {
+        "spell_key": "ck_heavy_cleave",
+        "name_en": "Heavy Cleave",
+        "name_tr": "Ağır Satır Darbesi",
+        "description_en": "A powerful two-handed chop. Deals 3d6 slashing damage and forces a Strength save to avoid being knocked prone.",
+        "description_tr": "Güçlü bir iki elle doğrama. 3d6 kesici hasar verir ve yere düşmemek için bir Güç kurtarma zarı atılmasını zorunlu kılar.",
+        "branch": "Cleaver",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "ck_filet"
+        ],
+        "icon": "🪓",
+        "effects": {
+          "damage": "3d6 slashing",
+          "status": "Prone on failed save"
+        }
+      },
+      {
+        "spell_key": "ck_whirlwind_chop",
+        "name_en": "Whirlwind Chop",
+        "name_tr": "Kasırga Doğrayışı",
+        "description_en": "Spin furiously with your cleavers. Deals 4d6 slashing damage to all enemies within a 2m radius.",
+        "description_tr": "Satırlarınızla öfkeyle dönün. 2m yarıçapındaki tüm düşmanlara 4d6 kesici hasar verir.",
+        "branch": "Cleaver",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 410,
+        "prerequisites": [
+          "ck_heavy_cleave"
+        ],
+        "icon": "🌪️",
+        "effects": {
+          "damage": "4d6 slashing",
+          "radius": "2m"
+        }
+      },
+      {
+        "spell_key": "ck_sever_tendon",
+        "name_en": "Sever Tendon",
+        "name_tr": "Tendon Kesme",
+        "description_en": "Target a vital mobility muscle. Deals 3d8 slashing damage and reduces the target's movement speed to 0 for 1 turn.",
+        "description_tr": "Hayati bir hareket kasını hedef alın. 3d8 kesici hasar verir ve hedefin hareket hızını 1 tur boyunca 0'a düşürür.",
+        "branch": "Cleaver",
+        "tier": 3,
+        "min_level": 55,
+        "xp_cost": 470,
+        "prerequisites": [
+          "ck_butchers_hook"
+        ],
+        "icon": "✂️",
+        "effects": {
+          "damage": "3d8 slashing",
+          "speed": "0m",
+          "duration": "1 turn"
+        }
+      },
+      {
+        "spell_key": "ck_meat_grinder",
+        "name_en": "Meat Grinder",
+        "name_tr": "Kıyma Makinesi",
+        "description_en": "Unleash 3 rapid strikes, each dealing 1d8 slashing damage. Target bleeds for 1d6 damage per turn for 3 turns.",
+        "description_tr": "Her biri 1d8 kesici hasar veren 3 hızlı vuruş yapın. Hedef 3 tur boyunca her tur 1d6 kanama hasarı alır.",
+        "branch": "Cleaver",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "ck_whirlwind_chop"
+        ],
+        "icon": "⚙️",
+        "effects": {
+          "damage": "3x 1d8 slashing",
+          "dot": "1d6 bleed/turn",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_jugular_strike",
+        "name_en": "Jugular Strike",
+        "name_tr": "Şahdamar Vuruşu",
+        "description_en": "A lethal strike to the neck. Deals 6d8 slashing damage and inflicts severe bleeding (2d8 damage per turn) until magically healed.",
+        "description_tr": "Boyna ölümcül bir vuruş. 6d8 kesici hasar verir ve sihirle iyileştirilene kadar şiddetli kanamaya (her tur 2d8 hasar) neden olur.",
+        "branch": "Cleaver",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 680,
+        "prerequisites": [
+          "ck_meat_grinder"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "6d8 slashing",
+          "dot": "2d8 bleed/turn"
+        }
+      },
+      {
+        "spell_key": "ck_armor_carve",
+        "name_en": "Armor Carve",
+        "name_tr": "Zırh Yontma",
+        "description_en": "Methodically dismantle the enemy's defenses. Deals 4d8 slashing damage and permanently reduces their AC by 2.",
+        "description_tr": "Düşmanın savunmasını metodik olarak parçalayın. 4d8 kesici hasar verir ve Zırh Sınıfını (AC) kalıcı olarak 2 düşürür.",
+        "branch": "Cleaver",
+        "tier": 4,
+        "min_level": 75,
+        "xp_cost": 800,
+        "prerequisites": [
+          "ck_sever_tendon"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "damage": "4d8 slashing",
+          "debuff": "-2 AC"
+        }
+      },
+      {
+        "spell_key": "ck_flying_cleaver",
+        "name_en": "Flying Cleaver",
+        "name_tr": "Uçan Satır",
+        "description_en": "Throw your cleaver with deadly precision up to 15m. Deals 5d10 slashing damage, ignores half-cover, and magically returns to your hand.",
+        "description_tr": "Satırınızı 15m'ye kadar ölümcül bir hassasiyetle fırlatın. 5d10 kesici hasar verir, yarım siperi yok sayar ve sihirli bir şekilde elinize döner.",
+        "branch": "Cleaver",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "ck_jugular_strike"
+        ],
+        "icon": "🪃",
+        "effects": {
+          "damage": "5d10 slashing",
+          "range": "15m",
+          "bonus": "Returns to hand"
+        }
+      },
+      {
+        "spell_key": "ck_decapitate",
+        "name_en": "Decapitate",
+        "name_tr": "Boyun Vurma",
+        "description_en": "Attempt to take off the target's head. Deals 10d10 slashing damage. If the target is left with 50 HP or less, they are instantly killed.",
+        "description_tr": "Hedefin kafasını koparmaya çalışın. 10d10 kesici hasar verir. Hedefin 50 veya daha az Canı kalırsa, anında ölürler.",
+        "branch": "Cleaver",
+        "tier": 5,
+        "min_level": 88,
+        "xp_cost": 1250,
+        "prerequisites": [
+          "ck_flying_cleaver"
+        ],
+        "icon": "💀",
+        "effects": {
+          "damage": "10d10 slashing",
+          "status": "Instakill if HP <= 50"
+        }
+      },
+      {
+        "spell_key": "ck_master_butcher",
+        "name_en": "Master Butcher",
+        "name_tr": "Usta Kasap",
+        "description_en": "Enter a state of unparalleled butchery. For 1 minute, all melee attacks deal +3d8 slashing damage, score critical hits on 18-20, and ignore physical resistances.",
+        "description_tr": "Eşsiz bir kasaplık durumuna girin. 1 dakika boyunca tüm yakın dövüş saldırıları +3d8 kesici hasar verir, 18-20 arası zarlarda kritik vurur ve fiziksel dirençleri yok sayar.",
+        "branch": "Cleaver",
+        "tier": 5,
+        "min_level": 98,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "ck_decapitate"
+        ],
+        "icon": "👨‍🍳",
+        "effects": {
+          "damage": "+3d8 slashing",
+          "buff": "Crit 18-20, ignore resistance",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ck_spicy_meatball",
+        "name_en": "Spicy Meatball",
+        "name_tr": "Acılı Köfte",
+        "description_en": "Throw a meatball that explodes in a 3m radius. Deals 2d6 fire damage to enemies and heals allies for 1d6.",
+        "description_tr": "3m yarıçapında patlayan bir köfte fırlatın. Düşmanlara 2d6 ateş hasarı verir ve müttefikleri 1d6 iyileştirir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 240,
+        "prerequisites": [
+          "ck_hearty_stew",
+          "ck_boiling_splash"
+        ],
+        "icon": "🧆",
+        "effects": {
+          "damage": "2d6 fire",
+          "healing": "1d6",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "ck_blood_sausage",
+        "name_en": "Blood Sausage",
+        "name_tr": "Kan Sosis",
+        "description_en": "Drain the vitality of bleeding foes. Whenever you deal bleed damage, you gain 1d8 temporary HP (lasts 1 hour).",
+        "description_tr": "Kanayan düşmanların canlılığını em. Kanama hasarı verdiğinizde, 1d8 geçici Can kazanırsınız (1 saat sürer).",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 280,
+        "prerequisites": [
+          "ck_spicy_bite",
+          "ck_tenderize"
+        ],
+        "icon": "🌭",
+        "effects": {
+          "buff": "1d8 Temp HP on bleed proc",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ck_flaming_cleaver",
+        "name_en": "Flaming Cleaver",
+        "name_tr": "Alevli Satır",
+        "description_en": "Coat your cleaver in boiling grease and ignite it. Your melee attacks deal an extra 2d6 fire damage and ignite targets for 3 turns.",
+        "description_tr": "Satırınızı kaynayan yağa bulayın ve ateşleyin. Yakın dövüş saldırılarınız fazladan 2d6 ateş hasarı verir ve hedefleri 3 tur boyunca tutuşturur.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 50,
+        "xp_cost": 430,
+        "prerequisites": [
+          "ck_soup_eruption",
+          "ck_heavy_cleave"
+        ],
+        "icon": "🔥",
+        "effects": {
+          "damage": "+2d6 fire",
+          "status": "Ignite",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "ck_vampiric_feast",
+        "name_en": "Vampiric Feast",
+        "name_tr": "Vampir Ziyafeti",
+        "description_en": "Quickly harvest and consume a piece of a freshly defeated enemy. Restores 4d8 HP and grants +2 Strength for 1 hour.",
+        "description_tr": "Yeni yenilmiş bir düşmanın bir parçasını hızla toplayıp tüketin. 4d8 Can yeniler ve 1 saat boyunca +2 Güç verir.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 480,
+        "prerequisites": [
+          "ck_heroes_feast_lite",
+          "ck_sever_tendon"
+        ],
+        "icon": "🦇",
+        "effects": {
+          "healing": "4d8",
+          "buff": "+2 STR",
+          "duration": "1 hour"
+        }
+      },
+      {
+        "spell_key": "ck_iron_chef_stance",
+        "name_en": "Iron Chef Stance",
+        "name_tr": "Demir Şef Duruşu",
+        "description_en": "Adopt an imposing cooking stance. Gain +2 AC, immunity to fire damage, and your attacks inflict a 1d8 burn for 1 minute.",
+        "description_tr": "Etkileyici bir aşçı duruşu benimseyin. 1 dakika boyunca +2 ZS (AC) ve ateş hasarına bağışıklık kazanın, saldırılarınız 1d8 yanık uygular.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 70,
+        "xp_cost": 720,
+        "prerequisites": [
+          "ck_focus_mint",
+          "ck_toxic_brew",
+          "ck_meat_grinder"
+        ],
+        "icon": "🍳",
+        "effects": {
+          "buff": "+2 AC, Fire Immunity",
+          "damage": "+1d8 burn on hit",
+          "duration": "1 minute"
+        }
+      },
+      {
+        "spell_key": "ck_soup_tornado",
+        "name_en": "Soup Tornado",
+        "name_tr": "Çorba Hortumu",
+        "description_en": "Spin with your cleavers while spewing boiling soup. Creates a 5m tornado dealing 6d6 slashing and 4d6 fire damage per turn for 2 turns.",
+        "description_tr": "Kaynar çorba püskürtürken satırlarınızla dönün. 2 tur boyunca her tur 6d6 kesici ve 4d6 ateş hasarı veren 5m'lik bir hortum yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 820,
+        "prerequisites": [
+          "ck_scalding_wave",
+          "ck_whirlwind_chop"
+        ],
+        "icon": "🌀",
+        "effects": {
+          "damage": "6d6 slashing, 4d6 fire per turn",
+          "radius": "5m",
+          "duration": "2 turns"
+        }
+      },
+      {
+        "spell_key": "ck_banquet_of_carnage",
+        "name_en": "Banquet of Carnage",
+        "name_tr": "Katliam Ziyafeti",
+        "description_en": "Summon a spectral feast on the battlefield. Any enemy killed within 15m drops a healing orb (heals 3d10). Allies within range deal +2d8 damage.",
+        "description_tr": "Savaş alanında spektral bir ziyafet çağırın. 15m içinde öldürülen her düşman bir iyileştirme küresi düşürür (3d10 iyileştirir). Menzildeki müttefikler +2d8 hasar verir.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 82,
+        "xp_cost": 1100,
+        "prerequisites": [
+          "ck_miracle_biscuit",
+          "ck_armor_carve"
+        ],
+        "icon": "🍖",
+        "effects": {
+          "buff": "+2d8 ally damage",
+          "healing": "3d10 per orb",
+          "radius": "15m"
+        }
+      },
+      {
+        "spell_key": "ck_hells_kitchen",
+        "name_en": "Hell's Kitchen",
+        "name_tr": "Cehennem Mutfağı",
+        "description_en": "Trap all enemies within a 30m radius inside a demonic kitchen for 1 minute. Enemies take 5d10 fire and 5d10 slashing damage each turn, are slowed by 50%, and all damage they take heals you and your allies.",
+        "description_tr": "30m yarıçapındaki tüm düşmanları 1 dakika boyunca şeytani bir mutfağa hapsedin. Düşmanlar her tur 5d10 ateş ve 5d10 kesici hasar alır, %50 yavaşlarlar ve aldıkları tüm hasar sizi ve müttefiklerinizi iyileştirir.",
+        "branch": "Grand Ultimate",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 2000,
+        "prerequisites": [
+          "ck_feast_of_champions",
+          "ck_cauldron_of_disaster",
+          "ck_master_butcher"
+        ],
+        "icon": "👹",
+        "effects": {
+          "damage": "5d10 fire, 5d10 slashing per turn",
+          "debuff": "50% slow",
+          "healing": "100% lifesteal aura",
+          "radius": "30m",
+          "duration": "1 minute"
+        }
+      }
+    ]
+  }
+]

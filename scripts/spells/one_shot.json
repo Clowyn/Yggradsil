@@ -1,0 +1,934 @@
+[
+  {
+    "subclass_key": "one_shot",
+    "tree_name_en": "Way of the One Shot",
+    "tree_name_tr": "Tek Atışın Yolu",
+    "tree_desc_en": "Mastery of single, devastating attacks that take time to prepare but guarantee absolute annihilation.",
+    "tree_desc_tr": "Hazırlanması zaman alan ama mutlak yok ediş garantileyen tek ve yıkıcı saldırıların ustalığı.",
+    "branches": [
+      "Charge",
+      "Destruction",
+      "Penetration"
+    ],
+    "spells": [
+      {
+        "spell_key": "os_charge_stance",
+        "name_en": "Charge Stance",
+        "name_tr": "Güç Toplama Duruşu",
+        "description_en": "Assume a stationary stance. You cannot move, but your next ranged attack gains +1d8 damage.",
+        "description_tr": "Sabit bir duruşa geçersiniz. Hareket edemezsiniz ancak bir sonraki menzilli saldırınız fazladan 1d8 hasar kazanır.",
+        "branch": "Charge",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🧘",
+        "effects": {
+          "damage": "+1d8",
+          "movement": "0m"
+        }
+      },
+      {
+        "spell_key": "os_deep_breath",
+        "name_en": "Deep Breath",
+        "name_tr": "Derin Nefes",
+        "description_en": "Spend a bonus action to control your breathing, allowing you to reroll 1s and 2s on your next damage roll.",
+        "description_tr": "Nefesinizi kontrol etmek için bir bonus eylem harcarsınız. Bir sonraki hasar zarınızdaki 1 ve 2'leri yeniden atmanızı sağlar.",
+        "branch": "Charge",
+        "tier": 1,
+        "min_level": 3,
+        "xp_cost": 75,
+        "prerequisites": [],
+        "icon": "🌬️",
+        "effects": {
+          "reroll": "1-2"
+        }
+      },
+      {
+        "spell_key": "os_heavy_draw",
+        "name_en": "Heavy Draw",
+        "name_tr": "Ağır Çekim",
+        "description_en": "Pull your weapon with extreme force. Your attack is delayed by 1 initiative count, but deals +1d10 damage.",
+        "description_tr": "Silahınızı aşırı bir güçle çekersiniz. Saldırınız inisiyatif sırasında 1 sıra gecikir ancak +1d10 hasar verir.",
+        "branch": "Charge",
+        "tier": 1,
+        "min_level": 5,
+        "xp_cost": 100,
+        "prerequisites": [],
+        "icon": "🏹",
+        "effects": {
+          "damage": "+1d10",
+          "initiative": "-1"
+        }
+      },
+      {
+        "spell_key": "os_patience",
+        "name_en": "Patience",
+        "name_tr": "Sabır",
+        "description_en": "If you end your turn without attacking, your first attack on the next turn gains Advantage.",
+        "description_tr": "Eğer turunuzu saldırmadan bitirirseniz, bir sonraki turdaki ilk saldırınız Avantaj kazanır.",
+        "branch": "Charge",
+        "tier": 1,
+        "min_level": 7,
+        "xp_cost": 120,
+        "prerequisites": [],
+        "icon": "⏳",
+        "effects": {
+          "advantage": "next turn"
+        }
+      },
+      {
+        "spell_key": "os_focused_sight",
+        "name_en": "Focused Sight",
+        "name_tr": "Odaklanmış Görüş",
+        "description_en": "Concentrate on a distant target. Increases your maximum effective range by 20m for the next shot.",
+        "description_tr": "Uzak bir hedefe odaklanırsınız. Bir sonraki atışınız için maksimum etkili menzilinizi 20m artırır.",
+        "branch": "Charge",
+        "tier": 1,
+        "min_level": 10,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "👁️",
+        "effects": {
+          "range": "+20m"
+        }
+      },
+      {
+        "spell_key": "os_crushing_shot",
+        "name_en": "Crushing Shot",
+        "name_tr": "Ezen Atış",
+        "description_en": "A heavy projectile that deals 2d8 bludgeoning damage and pushes the target back 2m.",
+        "description_tr": "2d8 ezme hasarı veren ve hedefi 2m geriye iten ağır bir mermi atarsınız.",
+        "branch": "Destruction",
+        "tier": 1,
+        "min_level": 1,
+        "xp_cost": 50,
+        "prerequisites": [],
+        "icon": "🔨",
+        "effects": {
+          "damage": "2d8",
+          "knockback": "2m"
+        }
+      },
+      {
+        "spell_key": "os_shatter_cover",
+        "name_en": "Shatter Cover",
+        "name_tr": "Sipere Yıkım",
+        "description_en": "Your shot deals double damage to non-magical objects, doors, and structural cover.",
+        "description_tr": "Atışınız büyülü olmayan nesnelere, kapılara ve yapısal siperlere iki kat hasar verir.",
+        "branch": "Destruction",
+        "tier": 1,
+        "min_level": 4,
+        "xp_cost": 80,
+        "prerequisites": [],
+        "icon": "🧱",
+        "effects": {
+          "damage_multiplier": "2x to objects"
+        }
+      },
+      {
+        "spell_key": "os_concussive_blast",
+        "name_en": "Concussive Blast",
+        "name_tr": "Sarsıcı Patlama",
+        "description_en": "The sheer force of your shot creates a sonic boom. The target must succeed on a Constitution save or be deafened and dazed for 1 turn.",
+        "description_tr": "Atışınızın ham gücü bir ses patlaması yaratır. Hedef Dayanıklılık kurtarmasında başarısız olursa 1 tur boyunca sağır ve sersemlemiş olur.",
+        "branch": "Destruction",
+        "tier": 1,
+        "min_level": 8,
+        "xp_cost": 130,
+        "prerequisites": [],
+        "icon": "💥",
+        "effects": {
+          "duration": "1 turn",
+          "status": "Deafened/Dazed"
+        }
+      },
+      {
+        "spell_key": "os_heavy_caliber",
+        "name_en": "Heavy Caliber",
+        "name_tr": "Ağır Kalibre",
+        "description_en": "Passive. You use specialized, dense ammunition. All your ranged attacks deal a flat +2 extra damage.",
+        "description_tr": "Pasif. Özel, yoğun mühimmat kullanırsınız. Tüm menzilli saldırılarınız fazladan sabit +2 hasar verir.",
+        "branch": "Destruction",
+        "tier": 1,
+        "min_level": 12,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "⚖️",
+        "effects": {
+          "damage": "+2"
+        }
+      },
+      {
+        "spell_key": "os_armor_pierce",
+        "name_en": "Armor Pierce",
+        "name_tr": "Zırh Delici",
+        "description_en": "Your precise shot targets the weak points of armor, effectively reducing the target's Armor Class by 2 against this attack.",
+        "description_tr": "Kesin atışınız zırhın zayıf noktalarını hedefler ve bu saldırıya karşı hedefin Zırh Sınıfını (AC) 2 düşürür.",
+        "branch": "Penetration",
+        "tier": 1,
+        "min_level": 2,
+        "xp_cost": 60,
+        "prerequisites": [],
+        "icon": "🗡️",
+        "effects": {
+          "armor_reduction": "2"
+        }
+      },
+      {
+        "spell_key": "os_needle_shot",
+        "name_en": "Needle Shot",
+        "name_tr": "İğne Atışı",
+        "description_en": "A perfectly streamlined shot dealing 1d10 piercing damage that ignores AC bonuses from physical shields.",
+        "description_tr": "Fiziksel kalkanlardan gelen AC bonuslarını yok sayan ve 1d10 delici hasar veren kusursuz aerodinamik bir atış.",
+        "branch": "Penetration",
+        "tier": 1,
+        "min_level": 6,
+        "xp_cost": 110,
+        "prerequisites": [],
+        "icon": "🪡",
+        "effects": {
+          "damage": "1d10",
+          "ignores": "shield AC"
+        }
+      },
+      {
+        "spell_key": "os_clean_through",
+        "name_en": "Clean Through",
+        "name_tr": "Delip Geçen",
+        "description_en": "If this attack reduces a target to 0 HP, the projectile continues, hitting an enemy directly behind them within 5m for half damage.",
+        "description_tr": "Eğer bu saldırı bir hedefin canını 0'a düşürürse, mermi devam eder ve hemen arkasındaki 5m içindeki bir düşmana yarı hasar verir.",
+        "branch": "Penetration",
+        "tier": 1,
+        "min_level": 9,
+        "xp_cost": 140,
+        "prerequisites": [],
+        "icon": "🧵",
+        "effects": {
+          "range": "5m",
+          "damage": "half damage to second target"
+        }
+      },
+      {
+        "spell_key": "os_vital_spot",
+        "name_en": "Vital Spot",
+        "name_tr": "Hayati Nokta",
+        "description_en": "If you spend at least one bonus action aiming, your weapon attack scores a critical hit on a roll of 19 or 20.",
+        "description_tr": "Nişan almak için en az bir bonus eylem harcarsanız, silah saldırınız 19 veya 20 zarında kritik vuruş yapar.",
+        "branch": "Penetration",
+        "tier": 1,
+        "min_level": 13,
+        "xp_cost": 150,
+        "prerequisites": [],
+        "icon": "🎯",
+        "effects": {
+          "crit_range": "19-20"
+        }
+      },
+      {
+        "spell_key": "os_steady_hands",
+        "name_en": "Steady Hands",
+        "name_tr": "Titremeyen Eller",
+        "description_en": "Requires: Charge Stance, Armor Pierce. Your charged shots no longer suffer disadvantage from enemies within 1.5m.",
+        "description_tr": "Gereksinim: Güç Toplama Duruşu, Zırh Delici. Güç toplanmış atışlarınız artık 1.5m içindeki düşmanlardan dolayı dezavantaj almaz.",
+        "branch": "Cross-Branch",
+        "tier": 1,
+        "min_level": 15,
+        "xp_cost": 150,
+        "prerequisites": [
+          "os_charge_stance",
+          "os_armor_pierce"
+        ],
+        "icon": "🤲",
+        "effects": {
+          "negates_disadvantage": "within 1.5m"
+        }
+      },
+      {
+        "spell_key": "os_brutal_impact",
+        "name_en": "Brutal Impact",
+        "name_tr": "Acımasız Çarpışma",
+        "description_en": "Requires: Crushing Shot, Heavy Draw. A delayed heavy attack that deals 3d10 damage and knocks the target prone.",
+        "description_tr": "Gereksinim: Ezen Atış, Ağır Çekim. 3d10 hasar veren ve hedefi yere seren (prone) gecikmeli ağır bir saldırı.",
+        "branch": "Cross-Branch",
+        "tier": 1,
+        "min_level": 18,
+        "xp_cost": 150,
+        "prerequisites": [
+          "os_crushing_shot",
+          "os_heavy_draw"
+        ],
+        "icon": "☄️",
+        "effects": {
+          "damage": "3d10",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "os_overcharge",
+        "name_en": "Overcharge",
+        "name_tr": "Aşırı Yükleme",
+        "description_en": "You can hold your attack for up to 3 turns without firing. For each turn held, add +2d10 damage to the eventual shot.",
+        "description_tr": "Saldırınızı ateş etmeden 3 tura kadar bekletebilirsiniz. Bekletilen her tur için nihai atışa +2d10 hasar eklenir.",
+        "branch": "Charge",
+        "tier": 2,
+        "min_level": 22,
+        "xp_cost": 180,
+        "prerequisites": [
+          "os_charge_stance"
+        ],
+        "icon": "🔋",
+        "effects": {
+          "damage": "+2d10 per turn",
+          "max_turns": "3"
+        }
+      },
+      {
+        "spell_key": "os_zen_focus",
+        "name_en": "Zen Focus",
+        "name_tr": "Zen Odaklanması",
+        "description_en": "While aiming or charging a shot, you cannot have your concentration broken by taking damage.",
+        "description_tr": "Nişan alırken veya güç toplarken hasar almanız konsantrasyonunuzu bozamaz.",
+        "branch": "Charge",
+        "tier": 2,
+        "min_level": 26,
+        "xp_cost": 200,
+        "prerequisites": [
+          "os_patience"
+        ],
+        "icon": "🪷",
+        "effects": {
+          "concentration": "unbreakable by damage"
+        }
+      },
+      {
+        "spell_key": "os_heartbeat_sync",
+        "name_en": "Heartbeat Sync",
+        "name_tr": "Kalp Atışı Senkronu",
+        "description_en": "Time your shot between your heartbeats. Your next attack gains a +5 bonus to the attack roll.",
+        "description_tr": "Atışınızı kalp atışlarınızın arasına denk getirirsiniz. Bir sonraki saldırınız saldırı zarına +5 bonus kazanır.",
+        "branch": "Charge",
+        "tier": 2,
+        "min_level": 30,
+        "xp_cost": 250,
+        "prerequisites": [
+          "os_deep_breath"
+        ],
+        "icon": "🫀",
+        "effects": {
+          "attack_bonus": "+5"
+        }
+      },
+      {
+        "spell_key": "os_devastating_strike",
+        "name_en": "Devastating Strike",
+        "name_tr": "Yıkıcı Vuruş",
+        "description_en": "Fires a brutal shot dealing 4d10 damage. Targets must succeed on a Strength saving throw or be pushed 4m and knocked prone.",
+        "description_tr": "4d10 hasar veren vahşi bir atış. Hedefler Güç kurtarmasında başarılı olamazsa 4m geriye itilir ve yere serilir.",
+        "branch": "Destruction",
+        "tier": 2,
+        "min_level": 24,
+        "xp_cost": 190,
+        "prerequisites": [
+          "os_crushing_shot"
+        ],
+        "icon": "🧨",
+        "effects": {
+          "damage": "4d10",
+          "knockback": "4m",
+          "status": "Prone"
+        }
+      },
+      {
+        "spell_key": "os_explosive_tip",
+        "name_en": "Explosive Tip",
+        "name_tr": "Patlayıcı Uç",
+        "description_en": "Modifies your projectile to detonate on impact, dealing an additional 2d6 fire damage to all creatures within a 3m radius.",
+        "description_tr": "Merminizin çarpma anında patlamasını sağlar; 3m yarıçaptaki tüm yaratıklara fazladan 2d6 ateş hasarı verir.",
+        "branch": "Destruction",
+        "tier": 2,
+        "min_level": 28,
+        "xp_cost": 220,
+        "prerequisites": [
+          "os_concussive_blast"
+        ],
+        "icon": "💣",
+        "effects": {
+          "damage": "2d6 fire",
+          "radius": "3m"
+        }
+      },
+      {
+        "spell_key": "os_sunder_armor",
+        "name_en": "Sunder Armor",
+        "name_tr": "Zırh Parçalama",
+        "description_en": "A targeted strike that damages equipment. Permanently reduces the target's AC by 1 until their armor is repaired.",
+        "description_tr": "Ekipmana hasar veren hedefli bir vuruş. Zırhları onarılana kadar hedefin AC değerini kalıcı olarak 1 düşürür.",
+        "branch": "Destruction",
+        "tier": 2,
+        "min_level": 32,
+        "xp_cost": 280,
+        "prerequisites": [
+          "os_shatter_cover"
+        ],
+        "icon": "🛡️",
+        "effects": {
+          "armor_reduction": "1 permanent"
+        }
+      },
+      {
+        "spell_key": "os_line_breaker",
+        "name_en": "Line Breaker",
+        "name_tr": "Hat Kırıcı",
+        "description_en": "Your shot pierces through the first target to strike a second target in a straight line, dealing full damage to both.",
+        "description_tr": "Atışınız ilk hedefi delip geçerek düz bir çizgideki ikinci hedefi de vurur, her ikisine de tam hasar verir.",
+        "branch": "Penetration",
+        "tier": 2,
+        "min_level": 25,
+        "xp_cost": 200,
+        "prerequisites": [
+          "os_clean_through"
+        ],
+        "icon": "➖",
+        "effects": {
+          "pierce": "2 targets"
+        }
+      },
+      {
+        "spell_key": "os_find_the_gap",
+        "name_en": "Find the Gap",
+        "name_tr": "Boşluğu Bul",
+        "description_en": "Your incredible accuracy allows your attacks to ignore half cover and three-quarters cover.",
+        "description_tr": "İnanılmaz isabet oranınız sayesinde saldırılarınız yarım siperi ve üç çeyrek siperi yok sayar.",
+        "branch": "Penetration",
+        "tier": 2,
+        "min_level": 29,
+        "xp_cost": 240,
+        "prerequisites": [
+          "os_armor_pierce"
+        ],
+        "icon": "🧩",
+        "effects": {
+          "ignores": "half and 3/4 cover"
+        }
+      },
+      {
+        "spell_key": "os_shield_breaker",
+        "name_en": "Shield Breaker",
+        "name_tr": "Kalkan Kırıcı",
+        "description_en": "A specialized anti-magic shot. Instantly shatters the 'Shield' spell and deals 3d8 piercing damage.",
+        "description_tr": "Özel bir anti-büyü atışı. 'Kalkan' (Shield) büyüsünü anında paramparça eder ve 3d8 delici hasar verir.",
+        "branch": "Penetration",
+        "tier": 2,
+        "min_level": 34,
+        "xp_cost": 290,
+        "prerequisites": [
+          "os_needle_shot"
+        ],
+        "icon": "🔮",
+        "effects": {
+          "damage": "3d8",
+          "dispels": "Shield spell"
+        }
+      },
+      {
+        "spell_key": "os_perfect_aim",
+        "name_en": "Perfect Aim",
+        "name_tr": "Kusursuz Nişan",
+        "description_en": "Requires: Zen Focus, Find the Gap. Spending a full turn aiming guarantees that your next shot automatically hits (no attack roll needed).",
+        "description_tr": "Gereksinim: Zen Odaklanması, Boşluğu Bul. Tam bir turu nişan almaya harcamak, bir sonraki atışınızın otomatik olarak isabet etmesini garanti eder (zar atılmaz).",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 36,
+        "xp_cost": 300,
+        "prerequisites": [
+          "os_zen_focus",
+          "os_find_the_gap"
+        ],
+        "icon": "💯",
+        "effects": {
+          "accuracy": "Auto-hit after 1 turn aim"
+        }
+      },
+      {
+        "spell_key": "os_collateral_damage",
+        "name_en": "Collateral Damage",
+        "name_tr": "İkincil Hasar",
+        "description_en": "Requires: Explosive Tip, Line Breaker. Your piercing shots explode upon exiting each target, dealing 2d6 force damage in a 2m radius at every exit point.",
+        "description_tr": "Gereksinim: Patlayıcı Uç, Hat Kırıcı. Delici atışlarınız her hedeften çıkışında patlayarak, her çıkış noktasında 2m yarıçapta 2d6 güç hasarı verir.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 38,
+        "xp_cost": 300,
+        "prerequisites": [
+          "os_explosive_tip",
+          "os_line_breaker"
+        ],
+        "icon": "🎆",
+        "effects": {
+          "damage": "2d6 force",
+          "radius": "2m per exit"
+        }
+      },
+      {
+        "spell_key": "os_momentum_shift",
+        "name_en": "Momentum Shift",
+        "name_tr": "Momentum Kayması",
+        "description_en": "Requires: Overcharge, Devastating Strike. Immediately after firing a shot charged for at least 1 turn, you can take a second attack as a free action.",
+        "description_tr": "Gereksinim: Aşırı Yükleme, Yıkıcı Vuruş. En az 1 tur güç toplanmış bir atışı yaptıktan hemen sonra, ücretsiz eylem olarak ikinci bir saldırı yapabilirsiniz.",
+        "branch": "Cross-Branch",
+        "tier": 2,
+        "min_level": 40,
+        "xp_cost": 300,
+        "prerequisites": [
+          "os_overcharge",
+          "os_devastating_strike"
+        ],
+        "icon": "🔄",
+        "effects": {
+          "extra_attack": "Free action"
+        }
+      },
+      {
+        "spell_key": "os_lethal_tempo",
+        "name_en": "Lethal Tempo",
+        "name_tr": "Ölümcül Tempo",
+        "description_en": "Each consecutive turn you land a successful hit, your critical multiplier increases by 0.5x (up to a max of 3x damage).",
+        "description_tr": "Başarılı isabet sağladığınız her ardışık tur, kritik hasar çarpanınız 0.5x artar (maksimum 3x hasara kadar).",
+        "branch": "Charge",
+        "tier": 3,
+        "min_level": 42,
+        "xp_cost": 350,
+        "prerequisites": [
+          "os_heartbeat_sync"
+        ],
+        "icon": "🎼",
+        "effects": {
+          "crit_multiplier": "+0.5x per turn",
+          "max_multiplier": "3x"
+        }
+      },
+      {
+        "spell_key": "os_absolute_stillness",
+        "name_en": "Absolute Stillness",
+        "name_tr": "Mutlak Hareketsizlik",
+        "description_en": "While aiming, you blend perfectly with your surroundings, becoming invisible as long as you do not move or speak.",
+        "description_tr": "Nişan alırken çevrenizle mükemmel bir şekilde bütünleşirsiniz; hareket etmediğiniz veya konuşmadığınız sürece görünmez olursunuz.",
+        "branch": "Charge",
+        "tier": 3,
+        "min_level": 46,
+        "xp_cost": 380,
+        "prerequisites": [
+          "os_zen_focus"
+        ],
+        "icon": "🫥",
+        "effects": {
+          "status": "Invisibility"
+        }
+      },
+      {
+        "spell_key": "os_annihilation_round",
+        "name_en": "Annihilation Round",
+        "name_tr": "Yok Ediş Mermisi",
+        "description_en": "Fires a devastating projectile dealing 6d12 damage and throwing the target 5m into the air.",
+        "description_tr": "6d12 hasar veren ve hedefi 5m havaya fırlatan son derece yıkıcı bir mermi ateşler.",
+        "branch": "Destruction",
+        "tier": 3,
+        "min_level": 44,
+        "xp_cost": 360,
+        "prerequisites": [
+          "os_devastating_strike"
+        ],
+        "icon": "☢️",
+        "effects": {
+          "damage": "6d12",
+          "knockup": "5m"
+        }
+      },
+      {
+        "spell_key": "os_rupture_organs",
+        "name_en": "Rupture Organs",
+        "name_tr": "Organ Parçalama",
+        "description_en": "The kinetic shockwave of the hit damages internal organs. The target bleeds for 1d10 damage at the start of their turns for 3 turns.",
+        "description_tr": "Vuruşun kinetik şok dalgası iç organlara hasar verir. Hedef 3 tur boyunca her turunun başında 1d10 kanama hasarı alır.",
+        "branch": "Destruction",
+        "tier": 3,
+        "min_level": 48,
+        "xp_cost": 400,
+        "prerequisites": [
+          "os_explosive_tip"
+        ],
+        "icon": "🩸",
+        "effects": {
+          "damage": "1d10 bleed",
+          "duration": "3 turns"
+        }
+      },
+      {
+        "spell_key": "os_bunker_buster",
+        "name_en": "Bunker Buster",
+        "name_tr": "Sığınak Delici",
+        "description_en": "Ignores all physical cover. Completely punches through stone walls, wood, or dirt up to 1m thick to hit the target.",
+        "description_tr": "Tüm fiziksel siperleri yok sayar. Hedefi vurmak için 1m kalınlığa kadar taş, tahta veya toprak duvarları tamamen delip geçer.",
+        "branch": "Destruction",
+        "tier": 3,
+        "min_level": 52,
+        "xp_cost": 450,
+        "prerequisites": [
+          "os_sunder_armor"
+        ],
+        "icon": "🕳️",
+        "effects": {
+          "ignores": "all physical cover",
+          "penetration": "1m thick walls"
+        }
+      },
+      {
+        "spell_key": "os_railgun_shot",
+        "name_en": "Railgun Shot",
+        "name_tr": "Elektromanyetik Atış",
+        "description_en": "Fires a hyper-velocity shot that hits every creature in a 50m long, 1m wide line. Deals 5d10 piercing damage to all.",
+        "description_tr": "50m uzunluğunda ve 1m genişliğinde bir çizgideki tüm yaratıkları vuran hiper hızlı bir atış. Herkese 5d10 delici hasar verir.",
+        "branch": "Penetration",
+        "tier": 3,
+        "min_level": 45,
+        "xp_cost": 370,
+        "prerequisites": [
+          "os_line_breaker"
+        ],
+        "icon": "⚡",
+        "effects": {
+          "damage": "5d10",
+          "area": "50m line",
+          "width": "1m"
+        }
+      },
+      {
+        "spell_key": "os_ignore_resistance",
+        "name_en": "Ignore Resistance",
+        "name_tr": "Direnci Yok Say",
+        "description_en": "Your attacks are so forceful they treat the target's damage resistance as normal, and damage immunity as resistance.",
+        "description_tr": "Saldırılarınız o kadar güçlüdür ki hedefin hasar direncini normalmiş gibi, hasar bağışıklığını ise dirençmiş gibi kabul eder.",
+        "branch": "Penetration",
+        "tier": 3,
+        "min_level": 49,
+        "xp_cost": 420,
+        "prerequisites": [
+          "os_find_the_gap"
+        ],
+        "icon": "🚫",
+        "effects": {
+          "penetration": "bypasses resistance/immunity"
+        }
+      },
+      {
+        "spell_key": "os_phantom_bullet",
+        "name_en": "Phantom Bullet",
+        "name_tr": "Hayalet Mermi",
+        "description_en": "The projectile phases out of reality. It travels up to 5m through completely solid barriers before materializing into the target.",
+        "description_tr": "Mermi gerçeklikten çıkar. Hedefin içinde maddileşmeden önce tamamen katı engellerin içinden 5m'ye kadar seyahat eder.",
+        "branch": "Penetration",
+        "tier": 3,
+        "min_level": 54,
+        "xp_cost": 460,
+        "prerequisites": [
+          "os_shield_breaker"
+        ],
+        "icon": "👻",
+        "effects": {
+          "penetration": "5m through solid barriers"
+        }
+      },
+      {
+        "spell_key": "os_inevitable_end",
+        "name_en": "Inevitable End",
+        "name_tr": "Kaçınılmaz Son",
+        "description_en": "Requires: Heartbeat Sync, Annihilation Round. A shot charged for at least 2 turns instantly executes any target below 50 HP upon impact.",
+        "description_tr": "Gereksinim: Kalp Atışı Senkronu, Yok Ediş Mermisi. Çarpma anında, en az 2 tur güç toplanmış bir atış 50 Canın altındaki herhangi bir hedefi anında infaz eder.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 56,
+        "xp_cost": 500,
+        "prerequisites": [
+          "os_heartbeat_sync",
+          "os_annihilation_round"
+        ],
+        "icon": "💀",
+        "effects": {
+          "execute": "< 50 HP"
+        }
+      },
+      {
+        "spell_key": "os_triple_pierce",
+        "name_en": "Triple Pierce",
+        "name_tr": "Üçlü Delme",
+        "description_en": "Requires: Line Breaker, Rupture Organs. The shot pierces up to 3 targets in a line, creating a 3m sonic boom dealing 2d8 thunder damage at each point.",
+        "description_tr": "Gereksinim: Hat Kırıcı, Organ Parçalama. Atış bir çizgideki en fazla 3 hedefi deler ve her noktada 2d8 gök gürültüsü hasarı veren 3m'lik bir ses patlaması yaratır.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 58,
+        "xp_cost": 500,
+        "prerequisites": [
+          "os_line_breaker",
+          "os_rupture_organs"
+        ],
+        "icon": "🍢",
+        "effects": {
+          "pierce": "3 targets",
+          "damage": "2d8 thunder per hit"
+        }
+      },
+      {
+        "spell_key": "os_breathless_focus",
+        "name_en": "Breathless Focus",
+        "name_tr": "Nefessiz Odak",
+        "description_en": "Requires: Absolute Stillness, Find the Gap. Aiming for 2 turns allows your shot to completely bypass non-magical armor, treating the target's AC as 10 + their Dexterity.",
+        "description_tr": "Gereksinim: Mutlak Hareketsizlik, Boşluğu Bul. 2 tur boyunca nişan almak, atışınızın büyülü olmayan zırhları tamamen es geçerek hedefin AC'sini 10 + Çeviklik olarak kabul etmesini sağlar.",
+        "branch": "Cross-Branch",
+        "tier": 3,
+        "min_level": 60,
+        "xp_cost": 500,
+        "prerequisites": [
+          "os_absolute_stillness",
+          "os_find_the_gap"
+        ],
+        "icon": "😶",
+        "effects": {
+          "armor_bypass": "Target AC = 10 + Dex"
+        }
+      },
+      {
+        "spell_key": "os_supreme_charge",
+        "name_en": "Supreme Charge",
+        "name_tr": "Yüce Güç Toplama",
+        "description_en": "You can now hold your attack for up to 5 turns. Each turn adds +3d12 damage to the final shot.",
+        "description_tr": "Artık saldırınızı 5 tura kadar bekletebilirsiniz. Bekletilen her tur, nihai atışa +3d12 hasar ekler.",
+        "branch": "Charge",
+        "tier": 4,
+        "min_level": 64,
+        "xp_cost": 650,
+        "prerequisites": [
+          "os_overcharge"
+        ],
+        "icon": "🌟",
+        "effects": {
+          "damage": "+3d12 per turn",
+          "max_turns": "5"
+        }
+      },
+      {
+        "spell_key": "os_time_dilation_aim",
+        "name_en": "Time Dilation Aim",
+        "name_tr": "Zaman Genleşmeli Nişan",
+        "description_en": "Your perception accelerates. You can take two Aim or Charge actions in a single turn, halving the preparation time.",
+        "description_tr": "Algınız hızlanır. Tek bir turda iki Nişan Alma veya Güç Toplama eylemi yapabilir, böylece hazırlık süresini yarıya indirebilirsiniz.",
+        "branch": "Charge",
+        "tier": 4,
+        "min_level": 68,
+        "xp_cost": 750,
+        "prerequisites": [
+          "os_absolute_stillness"
+        ],
+        "icon": "🕰️",
+        "effects": {
+          "action": "2 Aim/Charge per turn"
+        }
+      },
+      {
+        "spell_key": "os_cataclysmic_impact",
+        "name_en": "Cataclysmic Impact",
+        "name_tr": "Afet Yaratan Çarpışma",
+        "description_en": "A devastating strike that deals 10d10 damage and completely shatters the ground in a 10m radius, turning it into difficult terrain.",
+        "description_tr": "10d10 hasar veren ve 10m yarıçapındaki zemini tamamen parçalayarak zorlu araziye çeviren yıkıcı bir vuruş.",
+        "branch": "Destruction",
+        "tier": 4,
+        "min_level": 65,
+        "xp_cost": 650,
+        "prerequisites": [
+          "os_annihilation_round"
+        ],
+        "icon": "🌋",
+        "effects": {
+          "damage": "10d10",
+          "radius": "10m",
+          "terrain": "Difficult Terrain"
+        }
+      },
+      {
+        "spell_key": "os_limb_sever",
+        "name_en": "Limb Sever",
+        "name_tr": "Uzuv Koparma",
+        "description_en": "Your accuracy is terrifying. If you score a critical hit, you sever one of the target's limbs, permanently maiming them.",
+        "description_tr": "İsabet oranınız korkutucudur. Eğer kritik vuruş yaparsanız, hedefin uzuvlarından birini kopararak onları kalıcı olarak sakatlarsınız.",
+        "branch": "Destruction",
+        "tier": 4,
+        "min_level": 72,
+        "xp_cost": 800,
+        "prerequisites": [
+          "os_rupture_organs"
+        ],
+        "icon": "🪚",
+        "effects": {
+          "crit_effect": "Sever Limb"
+        }
+      },
+      {
+        "spell_key": "os_absolute_pierce",
+        "name_en": "Absolute Pierce",
+        "name_tr": "Mutlak Delme",
+        "description_en": "Your projectile transcends physical limits. It cannot be blocked or deflected by any means, including Wall of Force or Prismatic Sphere.",
+        "description_tr": "Merminiz fiziksel sınırları aşar. Güç Duvarı (Wall of Force) veya Prizmatik Küre dahil hiçbir yöntemle engellenemez veya saptırılamaz.",
+        "branch": "Penetration",
+        "tier": 4,
+        "min_level": 66,
+        "xp_cost": 700,
+        "prerequisites": [
+          "os_ignore_resistance"
+        ],
+        "icon": "🌠",
+        "effects": {
+          "ignores": "Magical barriers"
+        }
+      },
+      {
+        "spell_key": "os_infinite_line",
+        "name_en": "Infinite Line",
+        "name_tr": "Sonsuz Çizgi",
+        "description_en": "The range of your line-piercing shots is extended to the maximum limit of your unaided vision, stopping only at impenetrable terrain.",
+        "description_tr": "Çizgi delen atışlarınızın menzili çıplak gözle görebildiğiniz maksimum sınıra kadar uzatılır, sadece aşılamaz arazilerde durur.",
+        "branch": "Penetration",
+        "tier": 4,
+        "min_level": 74,
+        "xp_cost": 850,
+        "prerequisites": [
+          "os_railgun_shot"
+        ],
+        "icon": "📏",
+        "effects": {
+          "range": "Visual limit"
+        }
+      },
+      {
+        "spell_key": "os_god_killer_round",
+        "name_en": "God Killer Round",
+        "name_tr": "Tanrı Katili Mermisi",
+        "description_en": "Requires: Bunker Buster, Ignore Resistance. A shot imbued with anti-divine essence. It ignores damage invulnerabilities and temporary hit points entirely.",
+        "description_tr": "Gereksinim: Sığınak Delici, Direnci Yok Say. İlahi karşıtı özle aşılanmış bir atış. Hasar dokunulmazlıklarını ve geçici can puanlarını tamamen yok sayar.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 76,
+        "xp_cost": 900,
+        "prerequisites": [
+          "os_bunker_buster",
+          "os_ignore_resistance"
+        ],
+        "icon": "🔱",
+        "effects": {
+          "ignores": "Invulnerability, Temp HP"
+        }
+      },
+      {
+        "spell_key": "os_stored_potential",
+        "name_en": "Stored Potential",
+        "name_tr": "Depolanmış Potansiyel",
+        "description_en": "Requires: Supreme Charge, Cataclysmic Impact. If your fully charged shot misses, the kinetic energy is magically preserved for your next shot within 1 minute.",
+        "description_tr": "Gereksinim: Yüce Güç Toplama, Afet Yaratan Çarpışma. Eğer tam güç toplanmış atışınız isabet etmezse, kinetik enerji 1 dakika içindeki bir sonraki atışınız için büyülü olarak korunur.",
+        "branch": "Cross-Branch",
+        "tier": 4,
+        "min_level": 80,
+        "xp_cost": 900,
+        "prerequisites": [
+          "os_supreme_charge",
+          "os_cataclysmic_impact"
+        ],
+        "icon": "🏺",
+        "effects": {
+          "miss_recovery": "Keep charge on miss"
+        }
+      },
+      {
+        "spell_key": "os_ultimate_golden_ratio",
+        "name_en": "Ultimate: The Golden Ratio",
+        "name_tr": "Ulti: Altın Oran",
+        "description_en": "Charge Ultimate. Aim for 3 turns. Your next attack automatically rolls maximum possible damage and multiplies the final total by 3.",
+        "description_tr": "Güç Toplama Ultisi. 3 tur nişan alın. Bir sonraki saldırınız otomatik olarak mümkün olan en yüksek hasarı atar ve nihai toplamı 3 ile çarpar.",
+        "branch": "Charge",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "os_supreme_charge",
+          "os_time_dilation_aim"
+        ],
+        "icon": "📐",
+        "effects": {
+          "damage": "Max roll * 3",
+          "cast_time": "3 turns"
+        }
+      },
+      {
+        "spell_key": "os_ultimate_meteor_strike",
+        "name_en": "Ultimate: Meteor Strike",
+        "name_tr": "Ulti: Meteor Çarpması",
+        "description_en": "Destruction Ultimate. Fires a shot dealing 20d12 damage to the primary target. The resulting explosion deals 10d12 fire/bludgeoning damage in a 30m radius.",
+        "description_tr": "Yıkım Ultisi. Ana hedefe 20d12 hasar veren bir atış yapar. Ortaya çıkan patlama 30m yarıçapında 10d12 ateş/ezme hasarı verir.",
+        "branch": "Destruction",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "os_cataclysmic_impact",
+          "os_limb_sever"
+        ],
+        "icon": "🎇",
+        "effects": {
+          "damage": "20d12 target, 10d12 aoe",
+          "radius": "30m"
+        }
+      },
+      {
+        "spell_key": "os_ultimate_tachyon_arrow",
+        "name_en": "Ultimate: Tachyon Arrow",
+        "name_tr": "Ulti: Takyon Oku",
+        "description_en": "Penetration Ultimate. The projectile travels faster than time. Automatically hits before the target can react, ignoring all armor, shields, and immunities.",
+        "description_tr": "Delme Ultisi. Mermi zamandan daha hızlı seyahat eder. Hedef tepki veremeden otomatik olarak vurur; tüm zırhları, kalkanları ve bağışıklıkları yok sayar.",
+        "branch": "Penetration",
+        "tier": 5,
+        "min_level": 90,
+        "xp_cost": 1200,
+        "prerequisites": [
+          "os_absolute_pierce",
+          "os_infinite_line"
+        ],
+        "icon": "💫",
+        "effects": {
+          "accuracy": "Auto-hit",
+          "ignores": "All defenses/immunities"
+        }
+      },
+      {
+        "spell_key": "os_grand_ultimate_big_bang",
+        "name_en": "Grand Ultimate: The Big Bang",
+        "name_tr": "Büyük Ulti: Büyük Patlama",
+        "description_en": "Requires all Ultimates. Aim for 5 turns. A single shot dealing 50d20 damage, piercing everything in a 1000m line. Triggers a 50m radius annihilation. You take 10d20 recoil damage.",
+        "description_tr": "Tüm Ultileri gerektirir. 5 tur nişan alın. 1000m'lik bir çizgideki her şeyi delen, 50d20 hasar veren tek bir atış. 50m yarıçaplı bir yok oluş tetikler. 10d20 geri tepme hasarı alırsınız.",
+        "branch": "Cross-Branch",
+        "tier": 5,
+        "min_level": 100,
+        "xp_cost": 1500,
+        "prerequisites": [
+          "os_ultimate_golden_ratio",
+          "os_ultimate_meteor_strike",
+          "os_ultimate_tachyon_arrow"
+        ],
+        "icon": "🌌",
+        "effects": {
+          "damage": "50d20",
+          "range": "1000m line",
+          "radius": "50m",
+          "recoil": "10d20 damage"
+        }
+      }
+    ]
+  }
+]
