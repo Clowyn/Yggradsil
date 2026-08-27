@@ -115,7 +115,9 @@ export function DashboardPage() {
             {locale === 'en'
               ? 'Your adventure awaits in'
               : 'Maceranız sizi bekliyor:'}{' '}
-            <span className="text-gold/80 font-medium">{campaign?.name}</span>
+            <span className="text-gold/80 font-medium">
+              {campaign?.name || (locale === 'tr' ? 'Gölgeler Diyarı' : 'The Realm of Shadows')}
+            </span>
           </p>
 
           {/* Party info */}

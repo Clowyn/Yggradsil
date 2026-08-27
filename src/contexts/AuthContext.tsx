@@ -130,8 +130,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Sign up failed: no user returned.');
     }
 
-    // 2. All new signups default to 'player' role (Admin/GM must be assigned)
-    const role: UserRole = 'player';
+    // 2. Determine initial role: first registered user becomes 'admin', subsequent users are 'player'
+    let role: UserRole = 'player';
+    try {
+      const { count } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+      if (count === 0) {
+        role = 'admin';
+      }
+    } catch (err) {
+      console.warn('Could not count profiles, defaulting to player:', err);
+    }
 
     // 3. Create profile in database
     const { error: profileError } = await supabase.from('profiles').insert({
