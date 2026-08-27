@@ -94,6 +94,7 @@ export interface Character {
   race?: RaceDefinition;
   subclass?: SubclassDefinition;
   profile?: Profile;
+  campaign?: Campaign;
 }
 
 export interface CharacterStat {
@@ -208,6 +209,7 @@ export interface CampaignMember {
   campaign_id: string;
   profile_id: string;
   role: UserRole;
+  joined_at?: string;
   profile?: Profile;
 }
 

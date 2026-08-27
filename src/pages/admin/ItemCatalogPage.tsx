@@ -6,7 +6,6 @@ import {
   Package,
   AlertCircle,
   Loader2,
-  Sparkles,
 } from 'lucide-react';
 import { useAdminItems } from '../../hooks/useAdminItems';
 import { AdminTable, type AdminColumn } from '../../components/admin/AdminTable';

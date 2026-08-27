@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, Clock, Code, ChevronDown, ChevronRight } from 'lucide-react';
+import { Clock, Code, ChevronDown, ChevronRight } from 'lucide-react';
 import { useAdminLogs } from '../../hooks/useAdminLogs';
 import { AdminTable, type AdminColumn } from '../../components/admin/AdminTable';
 import type { AdminLog } from '../../lib/types';

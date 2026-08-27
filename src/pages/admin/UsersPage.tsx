@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Trash2, Shield, User, Sparkles, AlertCircle } from 'lucide-react';
+import { Trash2, Sparkles, AlertCircle } from 'lucide-react';
 import { useAdminUsers, type AdminUserRecord } from '../../hooks/useAdminUsers';
 import { AdminTable, type AdminColumn } from '../../components/admin/AdminTable';
 import { AdminSearchBar } from '../../components/admin/AdminSearchBar';

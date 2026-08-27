@@ -48,10 +48,11 @@ export function useAdminUsers(initialPageSize = 20) {
 
       // Fetch character counts for retrieved users
       if (data && data.length > 0) {
-        const userIds = data.map((u) => u.id);
+        const ids = data.map((u) => u.id);
         const { data: charCounts } = await supabase
           .from('characters')
-          .select('profile_id');
+          .select('profile_id')
+          .in('profile_id', ids);
 
         const countsMap: Record<string, number> = {};
         charCounts?.forEach((c) => {

@@ -9,7 +9,6 @@ import {
   Loader2,
   UserPlus,
   UserMinus,
-  Shield,
 } from 'lucide-react';
 import { useAdminCampaigns, type AdminCampaignRecord } from '../../hooks/useAdminCampaigns';
 import { AdminTable, type AdminColumn } from '../../components/admin/AdminTable';

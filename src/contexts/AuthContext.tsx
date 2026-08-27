@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { Profile, Locale } from '../lib/types';
+import type { Profile, Locale, UserRole } from '../lib/types';
 import { supabase } from '../lib/supabase';
 
 interface AuthState {
