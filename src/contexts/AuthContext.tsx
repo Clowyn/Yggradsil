@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase';
 interface AuthState {
   user: { id: string; email: string } | null;
   profile: Profile | null;
+  isAdmin: boolean;
   isGM: boolean;
   loading: boolean;
   locale: Locale;
@@ -28,7 +29,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [locale, setLocale] = useState<Locale>('en');
 
-  const isGM = profile?.role === 'gm';
+  const isAdmin = profile?.role === 'admin';
+  const isGM = profile?.role === 'gm' || profile?.role === 'admin';
 
   // Listen for auth state changes
   useEffect(() => {
@@ -128,18 +130,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Sign up failed: no user returned.');
     }
 
-    // 2. Determine if this is the first profile (make it GM if it is, else Player)
-    let role: 'gm' | 'player' = 'player';
-    try {
-      const { count } = await supabase
-        .from('profiles')
-        .select('*', { count: 'exact', head: true });
-      if (count === 0) {
-        role = 'gm';
-      }
-    } catch (err) {
-      console.warn('Could not count profiles, defaulting to player:', err);
-    }
+    // 2. All new signups default to 'player' role (Admin/GM must be assigned)
+    const role: UserRole = 'player';
 
     // 3. Create profile in database
     const { error: profileError } = await supabase.from('profiles').insert({
@@ -173,6 +165,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         profile,
+        isAdmin,
         isGM,
         loading,
         locale,

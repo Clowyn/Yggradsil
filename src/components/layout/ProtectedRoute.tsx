@@ -4,11 +4,13 @@ import { useAuth } from '../../contexts/AuthContext';
 export function ProtectedRoute({
   children,
   requireGM = false,
+  requireAdmin = false,
 }: {
   children: React.ReactNode;
   requireGM?: boolean;
+  requireAdmin?: boolean;
 }) {
-  const { user, isGM, loading } = useAuth();
+  const { user, isGM, isAdmin, loading } = useAuth();
 
   if (loading) {
     return (
@@ -19,7 +21,9 @@ export function ProtectedRoute({
   }
 
   if (!user) return <Navigate to="/login" replace />;
+  if (requireAdmin && !isAdmin) return <Navigate to="/" replace />;
   if (requireGM && !isGM) return <Navigate to="/" replace />;
 
   return <>{children}</>;
 }
+

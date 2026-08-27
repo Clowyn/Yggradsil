@@ -58,56 +58,64 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
           activeCampaignId = membershipData[0].campaign_id;
         } else {
           // If no membership found:
-          if (profile.role === 'gm') {
-            // GM might have created a campaign that doesn't have them in campaign_members.
-            // Let's search if they own any campaign.
-            const { data: gmCampaigns, error: gmError } = await supabase
+          if (profile.role === 'gm' || profile.role === 'admin') {
+            // Check if user owns any campaign
+            const { data: gmCampaigns } = await supabase
               .from('campaigns')
               .select('id')
               .eq('gm_id', user.id)
               .limit(1);
 
-            if (gmError) throw gmError;
-
             if (gmCampaigns && gmCampaigns.length > 0) {
               activeCampaignId = gmCampaigns[0].id;
-              // Add GM to campaign_members for consistency
               await supabase.from('campaign_members').insert({
                 campaign_id: activeCampaignId,
                 profile_id: user.id,
                 role: 'gm',
               });
             } else {
-              // Create a default campaign for this GM!
-              const { data: newCampaign, error: createError } = await supabase
+              // Check if any campaign exists in DB
+              const { data: existingCamps } = await supabase
                 .from('campaigns')
-                .insert({
-                  name: 'The Realm of Shadows',
-                  gm_id: user.id,
-                  settings: { fog_radius: 80 }
-                })
-                .select()
-                .single();
+                .select('id')
+                .limit(1);
 
-              if (createError) throw createError;
-              activeCampaignId = newCampaign.id;
+              if (existingCamps && existingCamps.length > 0) {
+                activeCampaignId = existingCamps[0].id;
+                await supabase.from('campaign_members').insert({
+                  campaign_id: activeCampaignId,
+                  profile_id: user.id,
+                  role: 'gm',
+                });
+              } else {
+                // Create a default story/campaign
+                const { data: newCampaign, error: createError } = await supabase
+                  .from('campaigns')
+                  .insert({
+                    name: 'Gölgeler Diyarı',
+                    gm_id: user.id,
+                    settings: { fog_radius: 80 },
+                  })
+                  .select()
+                  .single();
 
-              // Add GM to campaign_members
-              await supabase.from('campaign_members').insert({
-                campaign_id: activeCampaignId,
-                profile_id: user.id,
-                role: 'gm',
-              });
+                if (!createError && newCampaign) {
+                  activeCampaignId = newCampaign.id;
+                  await supabase.from('campaign_members').insert({
+                    campaign_id: activeCampaignId,
+                    profile_id: user.id,
+                    role: 'gm',
+                  });
+                }
+              }
             }
           } else {
             // Player has no campaign membership.
-            // Automatically add them to the first campaign in the database!
-            const { data: allCampaigns, error: campListError } = await supabase
+            // Check if any campaign exists in the database
+            const { data: allCampaigns } = await supabase
               .from('campaigns')
               .select('id')
               .limit(1);
-
-            if (campListError) throw campListError;
 
             if (allCampaigns && allCampaigns.length > 0) {
               activeCampaignId = allCampaigns[0].id;
@@ -116,6 +124,26 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
                 profile_id: user.id,
                 role: 'player',
               });
+            } else {
+              // No campaign exists in entire DB yet: create default campaign
+              const { data: newCampaign, error: createError } = await supabase
+                .from('campaigns')
+                .insert({
+                  name: 'Gölgeler Diyarı',
+                  gm_id: user.id,
+                  settings: { fog_radius: 80 },
+                })
+                .select()
+                .single();
+
+              if (!createError && newCampaign) {
+                activeCampaignId = newCampaign.id;
+                await supabase.from('campaign_members').insert({
+                  campaign_id: activeCampaignId,
+                  profile_id: user.id,
+                  role: 'player',
+                });
+              }
             }
           }
         }

@@ -10,7 +10,8 @@ import {
   Crown,
   ChevronLeft,
   Menu,
-  Sparkles
+  Sparkles,
+  Settings,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -32,7 +33,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export function Sidebar({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void }) {
-  const { profile, isGM } = useAuth();
+  const { profile, isGM, isAdmin } = useAuth();
   const filteredItems = NAV_ITEMS.filter((item) => !item.gmOnly || isGM);
 
   return (
@@ -123,8 +124,8 @@ export function Sidebar({ isOpen, onToggle }: { isOpen: boolean; onToggle: () =>
         <div className="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </div>
 
-      {/* User info */}
-      <div className={`p-4 border-t border-glass-border flex flex-col justify-center ${isOpen ? '' : 'items-center'} shrink-0 min-h-[80px] w-full`}>
+      {/* User info & Admin access */}
+      <div className={`p-4 border-t border-glass-border flex flex-col gap-3 justify-center ${isOpen ? '' : 'items-center'} shrink-0 w-full`}>
         <div className={`flex items-center gap-3 w-full ${isOpen ? '' : 'justify-center'}`}>
           {/* Avatar */}
           <div className="relative shrink-0">
@@ -149,11 +150,25 @@ export function Sidebar({ isOpen, onToggle }: { isOpen: boolean; onToggle: () =>
                 {profile?.username ?? 'Adventurer'}
               </p>
               <p className="text-[11px] text-parchment-dim font-inter truncate">
-                {isGM ? '⚜️ Game Master' : '⚔️ Player'}
+                {isAdmin ? '🛡️ Domain Admin' : isGM ? '⚜️ Game Master' : '⚔️ Player'}
               </p>
             </motion.div>
           )}
         </div>
+
+        {/* Admin Panel Entry Button */}
+        {isAdmin && (
+          <NavLink
+            to="/admin"
+            title={!isOpen ? 'Admin Panel' : undefined}
+            className={`flex items-center gap-2 py-2 rounded-lg bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-700/60 text-neutral-300 hover:text-white transition-all text-xs font-inter font-medium ${
+              isOpen ? 'px-3 justify-start' : 'justify-center p-2'
+            }`}
+          >
+            <Settings size={15} className="text-neutral-400 shrink-0" />
+            {isOpen && <span>Admin Panel</span>}
+          </NavLink>
+        )}
       </div>
     </motion.aside>
   );

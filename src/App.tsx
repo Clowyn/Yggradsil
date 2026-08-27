@@ -9,6 +9,13 @@ import { SpellTreePage } from './pages/SpellTreePage';
 import { MapPage } from './pages/MapPage';
 import { InventoryPage } from './pages/InventoryPage';
 import { GMPage } from './pages/GMPage';
+import { AdminLayout } from './components/admin/AdminLayout';
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { UsersPage } from './pages/admin/UsersPage';
+import { CharactersPage } from './pages/admin/CharactersPage';
+import { CampaignsPage } from './pages/admin/CampaignsPage';
+import { ItemCatalogPage } from './pages/admin/ItemCatalogPage';
+import { LogsPage } from './pages/admin/LogsPage';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
@@ -108,6 +115,69 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            {/* Domain Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <AdminDashboardPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <UsersPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/characters"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <CharactersPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/campaigns"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <CampaignsPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/items"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <ItemCatalogPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/logs"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLayout>
+                    <LogsPage />
+                  </AdminLayout>
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </CampaignProvider>

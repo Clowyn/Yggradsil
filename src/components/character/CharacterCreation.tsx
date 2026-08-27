@@ -77,12 +77,12 @@ export function CharacterCreation() {
         return;
       }
       if (campaignLoading) {
-        alert(locale === 'tr' ? 'Kampanya yükleniyor, lütfen bekleyin...' : 'Campaign is still loading, please wait...');
+        alert(locale === 'tr' ? 'Hikaye yükleniyor, lütfen bekleyin...' : 'Story is still loading, please wait...');
         return;
       }
       if (!campaign) {
         console.error('Campaign is null. Check browser console for RLS or Supabase errors.');
-        alert(locale === 'tr' ? 'Aktif kampanya bulunamadı! Lütfen sayfayı yenileyin.' : 'No active campaign found! Please refresh the page or check the browser console for errors.');
+        alert(locale === 'tr' ? 'Aktif hikaye bulunamadı! Lütfen sayfayı yenileyin.' : 'No active story found! Please refresh the page or check the browser console for errors.');
         return;
       }
 

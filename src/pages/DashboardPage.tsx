@@ -213,7 +213,7 @@ export function DashboardPage() {
                 <p className="text-xs text-parchment-dim font-inter mt-0.5">
                   {locale === 'en'
                     ? 'Manage your campaign, players, and encounters'
-                    : 'Kampanyanızı, oyuncuları ve karşılaşmaları yönetin'}
+                    : 'Hikayenizi, oyuncuları ve karşılaşmaları yönetin'}
                 </p>
               </div>
             </motion.div>

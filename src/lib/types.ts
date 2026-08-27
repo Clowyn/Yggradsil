@@ -2,7 +2,7 @@
 // D&D Companion App — Core Type Definitions
 // ============================================================
 
-export type UserRole = 'gm' | 'player';
+export type UserRole = 'admin' | 'gm' | 'player';
 export type Locale = 'tr' | 'en';
 
 export interface Profile {
@@ -268,3 +268,29 @@ export interface CharacterSpell {
   unlocked_at?: string;
   spell?: SpellNode;
 }
+
+// --- Admin System ---
+export interface AdminLog {
+  id: string;
+  admin_id: string | null;
+  action: string;
+  target_type: string;
+  target_id: string | null;
+  details: Record<string, any>;
+  created_at: string;
+  admin?: Profile;
+}
+
+export interface AdminStats {
+  totalUsers: number;
+  roleBreakdown: {
+    admin: number;
+    gm: number;
+    player: number;
+  };
+  totalCharacters: number;
+  totalCampaigns: number;
+  totalItems: number;
+  totalSpells: number;
+}
+
