@@ -80,9 +80,32 @@ export function CharacterCreation() {
         alert(locale === 'tr' ? 'Hikaye yükleniyor, lütfen bekleyin...' : 'Story is still loading, please wait...');
         return;
       }
-      if (!campaign) {
+      let activeCampaign = campaign;
+      if (!activeCampaign) {
+        // Fallback: resolve or create a campaign on the fly
+        const { data: campList } = await supabase.from('campaigns').select('*').limit(1);
+        if (campList && campList.length > 0) {
+          activeCampaign = campList[0];
+        } else {
+          const { data: newCamp } = await supabase.from('campaigns').insert({
+            name: 'Gölgeler Diyarı',
+            settings: { fog_radius: 80 }
+          }).select().single();
+          if (newCamp) activeCampaign = newCamp;
+        }
+
+        if (activeCampaign) {
+          await supabase.from('campaign_members').upsert({
+            campaign_id: activeCampaign.id,
+            profile_id: user.id,
+            role: 'player'
+          });
+        }
+      }
+
+      if (!activeCampaign) {
         console.error('Campaign is null. Check browser console for RLS or Supabase errors.');
-        alert(locale === 'tr' ? 'Aktif hikaye bulunamadı! Lütfen sayfayı yenileyin.' : 'No active story found! Please refresh the page or check the browser console for errors.');
+        alert(locale === 'tr' ? 'Aktif hikaye bulunamadı! Lütfen Supabase SQL Editor üzerinden admin_migration.sql dosyasını çalıştırdığınızdan emin olun.' : 'No active story found! Please ensure admin_migration.sql has been executed in Supabase SQL Editor.');
         return;
       }
 
@@ -107,7 +130,7 @@ export function CharacterCreation() {
         .from('characters')
         .insert({
           profile_id: user.id,
-          campaign_id: campaign.id,
+          campaign_id: activeCampaign.id,
           name: characterName,
           race_id: raceData.id,
           subclass_id: subclassData.id,
@@ -139,7 +162,7 @@ export function CharacterCreation() {
       // 5. Add a default map token for this character
       await supabase.from('map_tokens').insert({
         character_id: charData.id,
-        campaign_id: campaign.id,
+        campaign_id: activeCampaign.id,
         x_position: 600,
         y_position: 400,
         color: '#ffd700',

@@ -150,54 +150,70 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
 
         if (activeCampaignId) {
           // Load campaign details
-          const { data: campDetails, error: detailsError } = await supabase
+          let { data: campDetails } = await supabase
             .from('campaigns')
             .select('*')
             .eq('id', activeCampaignId)
-            .single();
+            .maybeSingle();
 
-          if (detailsError) throw detailsError;
-          setCampaign(campDetails);
-
-          // Load campaign members (including their profiles)
-          const { data: memberDetails, error: memberError } = await supabase
-            .from('campaign_members')
-            .select('*, profile:profiles(*)')
-            .eq('campaign_id', activeCampaignId);
-
-          if (memberError) throw memberError;
-          setMembers(memberDetails || []);
-
-          // Load characters for this campaign
-          const { data: charData, error: charError } = await supabase
-            .from('characters')
-            .select(`
-              *,
-              race:race_definitions(
-                *,
-                tier:race_tiers(*)
-              ),
-              subclass:subclass_definitions(
-                *,
-                category:class_categories(*)
-              ),
-              profile:profiles(*)
-            `)
-            .eq('campaign_id', activeCampaignId);
-
-          if (charError) throw charError;
-          setCharacters((charData as unknown as Character[]) || []);
-
-          // Set active character
-          if (charData && charData.length > 0) {
-            const userCharacter = (charData as unknown as Character[]).find((c: Character) => c.profile_id === user.id);
-            if (userCharacter) {
-              setActiveCharacterId(userCharacter.id);
-            } else if (profile.role === 'gm') {
-              setActiveCharacterId(charData[0].id); // GM defaults to first character if they don't have one
+          if (!campDetails) {
+            // If activeCampaignId didn't return a campaign, try to get any campaign
+            const { data: fallbackCamp } = await supabase
+              .from('campaigns')
+              .select('*')
+              .limit(1)
+              .maybeSingle();
+            if (fallbackCamp) {
+              campDetails = fallbackCamp;
+              activeCampaignId = fallbackCamp.id;
             }
           }
 
+          if (campDetails) {
+            setCampaign(campDetails);
+
+            // Load campaign members safely
+            try {
+              const { data: memberDetails } = await supabase
+                .from('campaign_members')
+                .select('*, profile:profiles(*)')
+                .eq('campaign_id', campDetails.id);
+              setMembers(memberDetails || []);
+            } catch (mErr) {
+              console.warn('Could not load campaign members:', mErr);
+            }
+
+            // Load characters safely
+            try {
+              const { data: charData } = await supabase
+                .from('characters')
+                .select(`
+                  *,
+                  race:race_definitions(
+                    *,
+                    tier:race_tiers(*)
+                  ),
+                  subclass:subclass_definitions(
+                    *,
+                    category:class_categories(*)
+                  ),
+                  profile:profiles(*)
+                `)
+                .eq('campaign_id', campDetails.id);
+
+              if (charData) {
+                setCharacters((charData as unknown as Character[]) || []);
+                const userCharacter = (charData as unknown as Character[]).find((c: Character) => c.profile_id === user.id);
+                if (userCharacter) {
+                  setActiveCharacterId(userCharacter.id);
+                } else if (profile?.role === 'gm' || profile?.role === 'admin') {
+                  setActiveCharacterId(charData[0]?.id || null);
+                }
+              }
+            } catch (cErr) {
+              console.warn('Could not load characters:', cErr);
+            }
+          }
         } else {
           setCampaign(null);
           setMembers([]);

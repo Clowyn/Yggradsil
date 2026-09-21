@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
           setUser({ id: session.user.id, email: session.user.email ?? '' });
-          await fetchProfile(session.user.id);
+          await fetchProfile(session.user.id, session.user.email);
         } else {
           setUser(null);
           setProfile(null);
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email ?? '' });
-        await fetchProfile(session.user.id);
+        await fetchProfile(session.user.id, session.user.email);
       } else {
         setUser(null);
         setProfile(null);
@@ -69,21 +69,53 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = async (userId: string, email?: string) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error('Error fetching profile:', error);
-        setProfile(null);
-      } else {
+      }
+
+      if (data) {
         setProfile(data);
         if (data.locale) {
           setLocale(data.locale as Locale);
+        }
+      } else {
+        console.warn('Profile record missing for user, creating default profile...');
+        let role: UserRole = 'player';
+        try {
+          const { count } = await supabase
+            .from('profiles')
+            .select('*', { count: 'exact', head: true });
+          if (count === 0) {
+            role = 'admin';
+          }
+        } catch {
+          // ignore
+        }
+
+        const username = email ? email.split('@')[0] : 'Adventurer';
+        const { data: newProfile, error: insertError } = await supabase
+          .from('profiles')
+          .insert({
+            id: userId,
+            username,
+            role,
+            locale,
+          })
+          .select()
+          .single();
+
+        if (!insertError && newProfile) {
+          setProfile(newProfile);
+        } else {
+          setProfile(null);
         }
       }
     } catch (err) {
