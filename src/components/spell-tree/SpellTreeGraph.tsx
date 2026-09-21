@@ -26,7 +26,7 @@ const getMiniMapNodeColor = (node: Node): string => {
 };
 
 function SpellTreeFlow() {
-  const { activeCharacterId } = useCampaign();
+  const { activeCharacterId, characters, setActiveCharacterId } = useCampaign();
   const { locale } = useAuth();
 
   const {
@@ -384,7 +384,27 @@ function SpellTreeFlow() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        {character && (
+        {characters && characters.length > 1 ? (
+          <div className="flex items-center gap-2 mb-3 bg-black/40 rounded px-2.5 py-1.5 border border-gold/20">
+            <Users size={14} className="text-gold shrink-0" />
+            <div className="flex flex-col flex-1 min-w-0">
+              <span className="text-[9px] text-parchment/50 uppercase leading-none">
+                {locale === 'tr' ? 'Seçili Karakter' : 'Active Character'}
+              </span>
+              <select
+                value={activeCharacterId || ''}
+                onChange={(e) => setActiveCharacterId(e.target.value)}
+                className="bg-transparent text-xs text-gold font-bold outline-none cursor-pointer mt-0.5 w-full truncate border-none p-0"
+              >
+                {characters.map(char => (
+                  <option key={char.id} value={char.id} className="bg-obsidian text-parchment">
+                    {char.name} ({char.subclass?.name_tr || char.subclass?.name_en || char.subclass?.key || 'Temel'})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        ) : character ? (
           <div className="flex items-center gap-2 mb-3 bg-black/30 rounded px-2.5 py-1.5 border border-white/5">
             <Users size={12} className="text-gold/70" />
             <div className="flex flex-col">
@@ -392,7 +412,7 @@ function SpellTreeFlow() {
               <span className="text-xs text-gold font-bold leading-tight mt-0.5">{character.name}</span>
             </div>
           </div>
-        )}
+        ) : null}
         <div className="flex items-center gap-2 mb-1">
           <Sparkles className="w-4 h-4 text-[#ffd700]" />
           <span className="text-xs text-gray-400 uppercase tracking-widest font-cinzel font-semibold">

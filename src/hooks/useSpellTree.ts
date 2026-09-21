@@ -484,7 +484,7 @@ export function useSpellTree(characterId: string | null) {
 
   // Filter spell trees based on character's details
   const visibleTrees = useMemo(() => {
-    if (!effectiveCharacter) return spellTrees;
+    if (!effectiveCharacter) return [];
 
     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
     const subclassKey = effectiveCharacter.subclass?.key;
@@ -492,7 +492,7 @@ export function useSpellTree(characterId: string | null) {
 
     return spellTrees.filter(tree => {
       if (!tree.assignments || tree.assignments.length === 0) {
-        return true;
+        return false;
       }
       return tree.assignments.some(assign => {
         // Check min_level
@@ -507,11 +507,12 @@ export function useSpellTree(characterId: string | null) {
         if (assign.race_key && raceKey !== assign.race_key) {
           return false;
         }
-        // Check subclass_key - only render trees for the character's specific subclass (or general class trees)
-        if (subclassKey && assign.subclass_key && assign.subclass_key !== subclassKey) {
-          return false;
+        // Check subclass_key - strictly require matching subclass if tree is subclass-specific
+        if (assign.subclass_key) {
+          return assign.subclass_key === subclassKey;
         }
-        return true;
+        // If tree has no subclass_key, only show if class_key matches
+        return Boolean(assign.class_key && assign.class_key === classCategoryKey);
       });
     });
   }, [spellTrees, effectiveCharacter]);
@@ -619,7 +620,7 @@ export function useSpellTree(characterId: string | null) {
     const activeSubclasses = SUBCLASSES.filter(sub => {
       if (sub.category_key !== classCategoryKey) return false;
       if (subclassKey) return sub.key === subclassKey;
-      return true;
+      return false;
     });
 
     const classNodes: Node[] = CLASS_CATEGORIES.filter(c => c.key === classCategoryKey).map((cls) => ({
@@ -760,7 +761,7 @@ export function useSpellTree(characterId: string | null) {
     const activeSubclasses = SUBCLASSES.filter(sub => {
       if (sub.category_key !== classCategoryKey) return false;
       if (subclassKey) return sub.key === subclassKey;
-      return true;
+      return false;
     });
     const visibleSpellMap = new Map(visibleSpells.map(s => [s.spell_key, s]));
     const treeMap = new Map(visibleTrees.map(t => [t.id, t]));

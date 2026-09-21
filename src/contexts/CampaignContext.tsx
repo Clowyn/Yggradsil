@@ -27,7 +27,27 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [members, setMembers] = useState<CampaignMember[]>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [activeCharacterId, setActiveCharacterId] = useState<string | null>(null);
+  const [activeCharacterId, setActiveCharacterIdState] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem('dnd_active_character_id');
+    } catch {
+      return null;
+    }
+  });
+
+  const setActiveCharacterId = useCallback((id: string | null) => {
+    setActiveCharacterIdState(id);
+    try {
+      if (id) {
+        localStorage.setItem('dnd_active_character_id', id);
+      } else {
+        localStorage.removeItem('dnd_active_character_id');
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   const [loading, setLoading] = useState(() => Boolean(user && profile));
 
   // Track user to only clear state on actual logout transition
@@ -210,12 +230,26 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
                 .eq('campaign_id', campDetails.id);
 
               if (charData) {
-                setCharacters((charData as unknown as Character[]) || []);
-                const userCharacter = (charData as unknown as Character[]).find((c: Character) => c.profile_id === user.id);
-                if (userCharacter) {
-                  setActiveCharacterId(userCharacter.id);
-                } else if (profile?.role === 'gm' || profile?.role === 'admin') {
-                  setActiveCharacterId(charData[0]?.id || null);
+                const allChars = (charData as unknown as Character[]) || [];
+                setCharacters(allChars);
+
+                let savedId: string | null = null;
+                try {
+                  savedId = localStorage.getItem('dnd_active_character_id');
+                } catch {
+                  // ignore
+                }
+
+                const savedChar = savedId ? allChars.find(c => c.id === savedId) : null;
+                if (savedChar) {
+                  setActiveCharacterId(savedChar.id);
+                } else {
+                  const userCharacter = allChars.find((c: Character) => c.profile_id === user.id);
+                  if (userCharacter) {
+                    setActiveCharacterId(userCharacter.id);
+                  } else if (profile?.role === 'gm' || profile?.role === 'admin') {
+                    setActiveCharacterId(allChars[0]?.id || null);
+                  }
                 }
               }
             } catch (cErr) {
