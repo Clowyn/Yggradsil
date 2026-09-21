@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, type ReactNode } from 'react';
 import type { Profile, Locale, UserRole } from '../lib/types';
 import { supabase } from '../lib/supabase';
 
@@ -32,44 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAdmin = profile?.role === 'admin';
   const isGM = profile?.role === 'gm' || profile?.role === 'admin';
 
-  // Listen for auth state changes
-  useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user) {
-          setUser({ id: session.user.id, email: session.user.email ?? '' });
-          await fetchProfile(session.user.id, session.user.email);
-        } else {
-          setUser(null);
-          setProfile(null);
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error('Error checking auth session:', err);
-        setLoading(false);
-      }
-    };
-
-    checkSession();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        setUser({ id: session.user.id, email: session.user.email ?? '' });
-        await fetchProfile(session.user.id, session.user.email);
-      } else {
-        setUser(null);
-        setProfile(null);
-        setLoading(false);
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  const fetchProfile = async (userId: string, email?: string) => {
+  const fetchProfile = useCallback(async (userId: string, email?: string) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -124,9 +87,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [locale]);
 
-  const handleSetLocale = async (newLocale: Locale) => {
+  // Listen for auth state changes
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          setUser({ id: session.user.id, email: session.user.email ?? '' });
+          await fetchProfile(session.user.id, session.user.email);
+        } else {
+          setUser(null);
+          setProfile(null);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error('Error checking auth session:', err);
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        setUser({ id: session.user.id, email: session.user.email ?? '' });
+        await fetchProfile(session.user.id, session.user.email);
+      } else {
+        setUser(null);
+        setProfile(null);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [fetchProfile]);
+
+  const handleSetLocale = useCallback(async (newLocale: Locale) => {
     setLocale(newLocale);
     if (user) {
       try {
@@ -138,18 +138,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error('Failed to save locale preference:', err);
       }
     }
-  };
+  }, [user]);
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = useCallback(async (email: string, password: string) => {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       setLoading(false);
       throw error;
     }
-  };
+  }, []);
 
-  const signUp = async (email: string, password: string, username: string) => {
+  const signUp = useCallback(async (email: string, password: string, username: string) => {
     setLoading(true);
     // 1. Sign up user in Supabase auth
     const { data, error: authError } = await supabase.auth.signUp({ email, password });
@@ -187,9 +187,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       throw profileError;
     }
-  };
+  }, [locale]);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     setLoading(true);
     try {
       await supabase.auth.signOut();
@@ -200,23 +200,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  const value = useMemo<AuthState>(() => ({
+    user,
+    profile,
+    isAdmin,
+    isGM,
+    loading,
+    locale,
+    setLocale: handleSetLocale,
+    signIn,
+    signUp,
+    signOut,
+  }), [user, profile, isAdmin, isGM, loading, locale, handleSetLocale, signIn, signUp, signOut]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        profile,
-        isAdmin,
-        isGM,
-        loading,
-        locale,
-        setLocale: handleSetLocale,
-        signIn,
-        signUp,
-        signOut,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

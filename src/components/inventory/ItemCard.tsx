@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -27,7 +27,7 @@ interface ItemCardProps {
   onEquipToggle?: (id: string) => void;
 }
 
-export function ItemCard({ id, item, onEquipToggle }: ItemCardProps) {
+export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: ItemCardProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const {
@@ -158,4 +158,4 @@ export function ItemCard({ id, item, onEquipToggle }: ItemCardProps) {
       </motion.div>
     </div>
   );
-}
+});

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
@@ -12,7 +12,7 @@ interface SpellNodeData {
   isActiveSubclassTree?: boolean;
 }
 
-export function SpellNode({ data }: NodeProps) {
+function SpellNodeComponent({ data }: NodeProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const nodeRef = useRef<HTMLDivElement>(null);
   const { locale } = useAuth();
@@ -29,7 +29,7 @@ export function SpellNode({ data }: NodeProps) {
   const getNodeStyles = (): string => {
     const base = `
       relative flex flex-col items-center justify-center rounded-full
-      select-none transition-all duration-300
+      select-none transition-all duration-200
       border-2 w-[110px] h-[110px]
     `;
 
@@ -37,7 +37,7 @@ export function SpellNode({ data }: NodeProps) {
       return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed opacity-30 grayscale`;
     }
 
-    const cursorClass = 'cursor-pointer';
+    const cursorClass = 'cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200';
 
     switch (status) {
       case 'unlocked':
@@ -66,11 +66,9 @@ export function SpellNode({ data }: NodeProps) {
         className="!bg-transparent !border-0 !w-2 !h-2"
       />
 
-      <motion.div
+      <div
         ref={nodeRef}
         className={getNodeStyles()}
-        whileHover={isDimmed ? undefined : { scale: 1.12 }}
-        whileTap={isDimmed ? undefined : { scale: 0.95 }}
         onMouseEnter={() => {
           if (!isDimmed) {
             setShowTooltip(true);
@@ -89,49 +87,36 @@ export function SpellNode({ data }: NodeProps) {
         }}
         style={{
           ...(!isDimmed && status === 'unlocked'
-            ? { boxShadow: `0 0 20px ${nodeColor}44, 0 0 40px ${nodeColor}22, inset 0 0 15px ${nodeColor}11` }
+            ? { boxShadow: `0 0 16px ${nodeColor}44, 0 0 28px ${nodeColor}22, inset 0 0 10px ${nodeColor}11` }
             : {}),
         }}
       >
-        {/* R3. Divine Light Effect (Active Subclass Tree Root Node) */}
+        {/* R3. Optimized Divine Light Effect (Active Subclass Tree Root Node) */}
         {isSubclassRoot && isActiveSubclassTree && (
           <>
-            {/* Outer soft light beam */}
+            {/* Outer soft light beam - uses gradient feathering instead of heavy blur */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[3000px] pointer-events-none -z-20"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[700px] pointer-events-none -z-20 rounded-full"
               style={{
-                background: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.0) 0%, rgba(251, 191, 36, 0.12) 30%, rgba(251, 191, 36, 0.18) 50%, rgba(251, 191, 36, 0.08) 70%, rgba(251, 191, 36, 0.0) 100%)',
-                filter: 'blur(45px)',
-                borderRadius: '50%',
+                background: 'radial-gradient(ellipse at center, rgba(251, 191, 36, 0.16) 0%, rgba(251, 191, 36, 0.05) 50%, transparent 75%)',
+                willChange: 'opacity',
               }}
             />
             {/* Pulsing inner glow column */}
             <div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[3000px] pointer-events-none -z-10 animate-pulse"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70px] h-[600px] pointer-events-none -z-10 animate-pulse"
               style={{
-                background: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.0) 0%, rgba(251, 191, 36, 0.25) 45%, rgba(255, 223, 100, 0.3) 50%, rgba(251, 191, 36, 0.25) 55%, rgba(251, 191, 36, 0.0) 100%)',
-                filter: 'blur(10px)',
-                animationDuration: '4s',
-              }}
-            />
-            {/* Core high-intensity light shaft above the node */}
-            <div 
-              className="absolute bottom-1/2 left-1/2 -translate-x-1/2 w-[16px] h-[1500px] pointer-events-none -z-10"
-              style={{
-                background: 'linear-gradient(to top, rgba(251, 191, 36, 0.5) 0%, rgba(255, 255, 255, 0.7) 100%)',
-                filter: 'blur(3px)',
-                opacity: 0.8,
+                background: 'linear-gradient(to bottom, transparent 0%, rgba(251, 191, 36, 0.22) 30%, rgba(255, 223, 100, 0.28) 50%, rgba(251, 191, 36, 0.22) 70%, transparent 100%)',
+                animationDuration: '3.5s',
               }}
             />
             {/* Ethereal burst radiating at the node center */}
-            <motion.div
-              className="absolute w-[180px] h-[180px] rounded-full pointer-events-none -z-10"
+            <div
+              className="absolute w-[160px] h-[160px] rounded-full pointer-events-none -z-10 animate-pulse"
               style={{
-                background: 'radial-gradient(circle, rgba(251, 191, 36, 0.45) 0%, rgba(251, 191, 36, 0.15) 55%, transparent 70%)',
-                filter: 'blur(6px)',
+                background: 'radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(251, 191, 36, 0.1) 50%, transparent 70%)',
+                animationDuration: '3s',
               }}
-              animate={{ scale: [0.95, 1.1, 0.95], opacity: [0.7, 1.0, 0.7] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
           </>
         )}
@@ -139,30 +124,25 @@ export function SpellNode({ data }: NodeProps) {
         {/* R4. Dark Mist Effect (Inactive/Sibling Subclass Tree Root Node) */}
         {isSubclassRoot && isDimmed && (
           <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] pointer-events-none -z-20 animate-pulse"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] pointer-events-none -z-20 rounded-full animate-pulse"
             style={{
-              background: 'radial-gradient(circle, rgba(88, 28, 135, 0.15) 0%, rgba(15, 23, 42, 0.3) 50%, transparent 70%)',
-              filter: 'blur(25px)',
-              animationDuration: '6s',
+              background: 'radial-gradient(circle, rgba(88, 28, 135, 0.2) 0%, rgba(15, 23, 42, 0.3) 50%, transparent 75%)',
+              animationDuration: '5s',
             }}
           />
         )}
 
-        {/* Runic spin ring for unlocked */}
+        {/* Runic spin ring for unlocked (GPU off-thread quad rotation) */}
         {!isDimmed && status === 'unlocked' && (
           <div
-            className="absolute inset-[-5px] rounded-full border-2 border-dashed opacity-60 animate-spin"
-            style={{ borderColor: nodeColor, animationDuration: '25s' }}
+            className="absolute inset-[-5px] rounded-full border-2 border-dashed opacity-60 animate-spin pointer-events-none"
+            style={{ borderColor: nodeColor, animationDuration: '25s', willChange: 'transform' }}
           />
         )}
 
-        {/* Pulsing green ring for unlockable */}
+        {/* Pulsing green ring for unlockable (Off-thread GPU CSS animation) */}
         {!isDimmed && status === 'unlockable' && (
-          <motion.div
-            className="absolute inset-[-6px] rounded-full border-2 border-[#4ade80]"
-            animate={{ opacity: [0.3, 0.8, 0.3], scale: [1, 1.08, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
+          <div className="absolute inset-[-6px] rounded-full border-2 border-[#4ade80] pointer-events-none animate-unlockable-ring" />
         )}
 
         {/* Icon */}
@@ -201,11 +181,9 @@ export function SpellNode({ data }: NodeProps) {
             {spell.xp_cost} XP
           </div>
         )}
-      </motion.div>
+      </div>
 
-
-
-      {/* Tooltip */}
+      {/* Tooltip (optimized background without expensive backdrop-filter) */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div
@@ -216,7 +194,7 @@ export function SpellNode({ data }: NodeProps) {
             className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-50 pointer-events-none"
           >
             <div
-              className="glass rounded-xl p-4 min-w-[240px] max-w-[280px]"
+              className="bg-[#0e0e18]/95 border border-white/10 rounded-xl p-4 min-w-[240px] max-w-[280px] shadow-2xl"
               style={{
                 borderColor: `${nodeColor}44`,
                 boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 20px ${nodeColor}22`,
@@ -286,3 +264,21 @@ export function SpellNode({ data }: NodeProps) {
     </>
   );
 }
+
+function areSpellNodePropsEqual(prev: NodeProps, next: NodeProps): boolean {
+  const prevData = prev.data as unknown as SpellNodeData | undefined;
+  const nextData = next.data as unknown as SpellNodeData | undefined;
+  if (!prevData || !nextData) return false;
+
+  return (
+    prev.id === next.id &&
+    prevData.status === nextData.status &&
+    prevData.isDimmed === nextData.isDimmed &&
+    prevData.isActiveSubclassTree === nextData.isActiveSubclassTree &&
+    prevData.nodeColor === nextData.nodeColor &&
+    prev.selected === next.selected &&
+    prevData.spell?.id === nextData.spell?.id
+  );
+}
+
+export const SpellNode = memo(SpellNodeComponent, areSpellNodePropsEqual);

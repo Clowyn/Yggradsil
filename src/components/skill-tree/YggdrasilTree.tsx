@@ -12,6 +12,10 @@ import { SkillEdge } from './SkillEdge';
 
 const nodeTypes = { skillNode: SkillNode };
 const edgeTypes = { skillEdge: SkillEdge };
+const getSkillMiniMapNodeColor = (node: Node) => {
+  const d = node.data as Record<string, unknown>;
+  return (d?.statColor as string) ?? '#333';
+};
 
 // ─── YggdrasilTree ─────────────────────────────────────────────
 
@@ -99,6 +103,10 @@ export function YggdrasilTree() {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodeClick={onNodeClick}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
+        onlyRenderVisibleElements={true}
         fitView
         fitViewOptions={{ padding: 0.3 }}
         minZoom={0.2}
@@ -116,10 +124,7 @@ export function YggdrasilTree() {
           className="!bottom-4 !left-4"
         />
         <MiniMap
-          nodeColor={(node) => {
-            const d = node.data as Record<string, unknown>;
-            return (d?.statColor as string) ?? '#333';
-          }}
+          nodeColor={getSkillMiniMapNodeColor}
           maskColor="rgba(10, 10, 15, 0.85)"
           className="!bottom-4 !right-4"
         />

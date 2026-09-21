@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { type StatKey, STAT_INFO } from '../../lib/types';
 
 interface RaceClassCardProps {
@@ -14,7 +14,7 @@ interface RaceClassCardProps {
   image?: string;
 }
 
-export function RaceClassCard({
+export const RaceClassCard = memo(function RaceClassCard({
   title,
   subtitle,
   description,
@@ -166,4 +166,4 @@ export function RaceClassCard({
       )}
     </button>
   );
-}
+});

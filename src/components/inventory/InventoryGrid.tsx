@@ -140,11 +140,11 @@ export function InventoryGrid() {
       const { active, over } = event;
       if (!over || active.id === over.id) return;
 
-      const oldIdx = slots.findIndex((s) => s.id === active.id);
-      const newIdx = slots.findIndex((s) => s.id === over.id);
-      if (oldIdx === -1 || newIdx === -1) return;
-
       setSlots((prev) => {
+        const oldIdx = prev.findIndex((s) => s.id === active.id);
+        const newIdx = prev.findIndex((s) => s.id === over.id);
+        if (oldIdx === -1 || newIdx === -1) return prev;
+
         const next = [...prev];
         const activeSlot = { ...next[oldIdx] };
         const overSlot = { ...next[newIdx] };
@@ -155,15 +155,15 @@ export function InventoryGrid() {
 
         // Update their logical types and the underlying item's equipped status based on the new slot index
         next[oldIdx].type = oldIdx < EQUIP_SLOTS ? 'equipped' : 'bag';
-        if (next[oldIdx].item) next[oldIdx].item.equipped = next[oldIdx].type === 'equipped';
+        if (next[oldIdx].item) next[oldIdx].item = { ...next[oldIdx].item, equipped: next[oldIdx].type === 'equipped' };
 
         next[newIdx].type = newIdx < EQUIP_SLOTS ? 'equipped' : 'bag';
-        if (next[newIdx].item) next[newIdx].item.equipped = next[newIdx].type === 'equipped';
+        if (next[newIdx].item) next[newIdx].item = { ...next[newIdx].item, equipped: next[newIdx].type === 'equipped' };
 
         return next;
       });
     },
-    [slots],
+    [],
   );
 
   const handleEquipToggle = useCallback((id: string) => {

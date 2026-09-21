@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import type { SkillNodeData } from '../../hooks/useSkillTree';
 import { SkillTooltip } from './SkillTooltip';
 
 // ─── SkillNode ─────────────────────────────────────────────────
 
-export function SkillNode({ data }: NodeProps) {
+function SkillNodeComponent({ data }: NodeProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const nodeData = data as unknown as SkillNodeData;
   const { skill, status, statColor, nodeKind } = nodeData;
@@ -24,24 +24,25 @@ export function SkillNode({ data }: NodeProps) {
   const getNodeStyles = (): string => {
     const base = `
       relative flex flex-col items-center justify-center rounded-full
-      cursor-pointer select-none transition-all duration-300
+      cursor-pointer select-none transition-all duration-200
+      hover:scale-110 active:scale-95 transition-transform duration-200
       border-2 ${sizeClass}
     `;
 
     if (isCore) {
       return `${base} border-[#ffd700] bg-gradient-to-b from-[#2a1f0e] to-[#1a0f05]
-        shadow-[0_0_30px_rgba(255,215,0,0.4),0_0_60px_rgba(255,215,0,0.15)]`;
+        shadow-[0_0_24px_rgba(255,215,0,0.35)]`;
     }
 
     if (isBranchRoot) {
       return `${base} bg-gradient-to-b from-[#1a0a2e] to-[#0a0a0f]
-        shadow-[0_0_20px_rgba(255,215,0,0.2)]`;
+        shadow-[0_0_16px_rgba(255,215,0,0.2)]`;
     }
 
     switch (status) {
       case 'unlocked':
         return `${base} border-[#ffd700] bg-gradient-to-b from-[#2a1f0e] to-[#15100a]
-          shadow-[0_0_20px_rgba(255,215,0,0.35),inset_0_0_15px_rgba(255,215,0,0.1)]`;
+          shadow-[0_0_16px_rgba(255,215,0,0.3)]`;
       case 'unlockable':
         return `${base} border-[#4ade80] bg-gradient-to-b from-[#0a2e1a] to-[#0a0a0f]
           skill-unlockable`;
@@ -67,16 +68,14 @@ export function SkillNode({ data }: NodeProps) {
       )}
 
       {/* Node body */}
-      <motion.div
+      <div
         className={getNodeStyles()}
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.95 }}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         style={{
           ...(isBranchRoot ? { borderColor: statColor } : {}),
           ...(status === 'unlocked' && !isCore && !isBranchRoot
-            ? { boxShadow: `0 0 20px ${statColor}44, 0 0 40px ${statColor}22, inset 0 0 15px ${statColor}11` }
+            ? { boxShadow: `0 0 16px ${statColor}44, 0 0 28px ${statColor}22` }
             : {}),
         }}
       >
@@ -90,11 +89,7 @@ export function SkillNode({ data }: NodeProps) {
 
         {/* Glowing pulse ring for unlockable */}
         {status === 'unlockable' && (
-          <motion.div
-            className="absolute inset-[-6px] rounded-full border-2 border-[#4ade80]"
-            animate={{ opacity: [0.3, 0.8, 0.3], scale: [1, 1.08, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
+          <div className="absolute inset-[-6px] rounded-full border-2 border-[#4ade80] pointer-events-none animate-unlockable-ring" />
         )}
 
         {/* Icon */}
@@ -122,11 +117,11 @@ export function SkillNode({ data }: NodeProps) {
             {skill.xpCost} XP
           </div>
         )}
-      </motion.div>
+      </div>
 
       {/* Skill name label */}
       <div
-        className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-bold whitespace-nowrap tracking-wide text-center max-w-[120px] truncate"
+        className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-bold whitespace-nowrap tracking-wide text-center max-w-[120px] truncate pointer-events-none"
         style={{
           color: status === 'locked' ? '#555' : isCore ? '#ffd700' : statColor,
           fontFamily: "'Cinzel', serif",
@@ -152,3 +147,20 @@ export function SkillNode({ data }: NodeProps) {
     </>
   );
 }
+
+function areSkillNodePropsEqual(prev: NodeProps, next: NodeProps): boolean {
+  const prevData = prev.data as unknown as SkillNodeData | undefined;
+  const nextData = next.data as unknown as SkillNodeData | undefined;
+  if (!prevData || !nextData) return false;
+
+  return (
+    prev.id === next.id &&
+    prevData.status === nextData.status &&
+    prevData.statColor === nextData.statColor &&
+    prevData.nodeKind === nextData.nodeKind &&
+    prev.selected === next.selected &&
+    prevData.skill?.id === nextData.skill?.id
+  );
+}
+
+export const SkillNode = memo(SkillNodeComponent, areSkillNodePropsEqual);

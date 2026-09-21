@@ -202,6 +202,22 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
+@keyframes unlockable-ring {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+.animate-unlockable-ring {
+  animation: unlockable-ring 2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 .skill-unlock-burst {
   animation: skill-unlock-pulse 0.6s ease-out;
 }

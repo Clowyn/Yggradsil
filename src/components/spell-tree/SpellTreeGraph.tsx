@@ -21,6 +21,9 @@ import { type SpellNode as SpellNodeType } from '../../lib/types';
 
 const nodeTypes = { spellNode: SpellNode };
 const edgeTypes = { spellEdge: SpellEdge };
+const getMiniMapNodeColor = (node: Node): string => {
+  return (node.data?.nodeColor as string) || '#3b82f6';
+};
 
 function SpellTreeFlow() {
   const { activeCharacterId } = useCampaign();
@@ -29,6 +32,7 @@ function SpellTreeFlow() {
   const {
     nodes,
     edges,
+    visibleSpells,
     onNodeClick,
     xp,
     unlockedCount,
@@ -42,24 +46,34 @@ function SpellTreeFlow() {
   const [activeBranchFilter, setActiveBranchFilter] = useState<string | null>(null);
   const [isFilterMinimized, setIsFilterMinimized] = useState(false);
 
-  // Helper to retrieve the original spell definition of a node
-  const visibleSpells = useMemo(() => {
-    return nodes.map(n => n.data.spell).filter(Boolean) as SpellNodeType[];
-  }, [nodes]);
+  const spellById = useMemo(() => new Map(visibleSpells.map(s => [s.id, s])), [visibleSpells]);
+  const spellByKey = useMemo(() => new Map(visibleSpells.map(s => [s.spell_key, s])), [visibleSpells]);
+  const childrenMap = useMemo(() => {
+    const map = new Map<string, SpellNodeType[]>();
+    visibleSpells.forEach(s => {
+      if (s.prerequisites) {
+        s.prerequisites.forEach(pKey => {
+          const list = map.get(pKey);
+          if (list) list.push(s);
+          else map.set(pKey, [s]);
+        });
+      }
+    });
+    return map;
+  }, [visibleSpells]);
 
-  // Ancestors & descendants calculation for Milestone 3 selection path focus
+  // Ancestors & descendants calculation for selection path focus (O(V+E) indexed graph walk)
   const getActivePathIds = useCallback((selectedId: string): Set<string> => {
     const activeIds = new Set<string>();
     activeIds.add(selectedId);
 
-    const selectedSpell = visibleSpells.find(s => s.id === selectedId);
+    const selectedSpell = spellById.get(selectedId);
     if (!selectedSpell) return activeIds;
 
     // Recursively add ancestors
     const addAncestors = (spellKey: string) => {
-      const spell = visibleSpells.find(s => s.spell_key === spellKey);
-      if (!spell) return;
-      if (activeIds.has(spell.id)) return;
+      const spell = spellByKey.get(spellKey);
+      if (!spell || activeIds.has(spell.id)) return;
       activeIds.add(spell.id);
       if (spell.prerequisites) {
         spell.prerequisites.forEach(preKey => addAncestors(preKey));
@@ -70,38 +84,34 @@ function SpellTreeFlow() {
       selectedSpell.prerequisites.forEach(preKey => addAncestors(preKey));
     }
 
-    // Recursively add descendants
+    // Recursively add descendants using childrenMap
     const addDescendants = (spellKey: string) => {
-      const children = visibleSpells.filter(
-        s => s.prerequisites && s.prerequisites.includes(spellKey)
-      );
+      const children = childrenMap.get(spellKey);
+      if (!children) return;
       children.forEach(child => {
-        if (activeIds.has(child.id)) return;
-        activeIds.add(child.id);
-        addDescendants(child.spell_key);
+        if (!activeIds.has(child.id)) {
+          activeIds.add(child.id);
+          addDescendants(child.spell_key);
+        }
       });
     };
 
     addDescendants(selectedSpell.spell_key);
 
     return activeIds;
-  }, [visibleSpells]);
+  }, [spellById, spellByKey, childrenMap]);
 
   const activePathIds = useMemo(() => {
     if (!selectedNodeId) return null;
     return getActivePathIds(selectedNodeId);
   }, [selectedNodeId, getActivePathIds]);
 
-  // Adjust nodes opacity based on selected path and school filter
+  // Adjust nodes opacity based on selected path and school filter (pure compositor opacity without GPU filter passes)
   const processedNodes = useMemo<Node[]>(() => {
-    return nodes.map(node => {
-      let opacity = 1.0;
-      let filter = 'none';
+    const filterLower = activeBranchFilter?.toLowerCase();
 
-      if (node.data?.isDimmed) {
-        opacity = 0.35;
-        filter = 'grayscale(80%) brightness(45%) contrast(85%)';
-      }
+    return nodes.map(node => {
+      let opacity = node.data?.isDimmed ? 0.35 : 1.0;
 
       if (activePathIds) {
         if (activePathIds.has(node.id)) {
@@ -111,63 +121,77 @@ function SpellTreeFlow() {
         }
       }
 
-      if (activeBranchFilter) {
-        const spell = node.data.spell as any;
-        if (spell && spell.branch && spell.branch.toLowerCase() !== activeBranchFilter.toLowerCase()) {
+      if (filterLower) {
+        const spell = node.data?.spell as SpellNodeType | undefined;
+        if (spell && spell.branch && spell.branch.toLowerCase() !== filterLower) {
           opacity = 0.15;
         }
+      }
+
+      if (opacity === 1.0 && !node.style?.opacity) {
+        return node;
       }
 
       return {
         ...node,
         style: {
+          ...node.style,
           opacity,
-          filter,
         },
       };
     });
   }, [nodes, activePathIds, activeBranchFilter]);
 
-  // Adjust edges opacity based on selected path and branch filter
+  // Adjust edges opacity based on selected path and branch filter with O(1) Map lookups
   const processedEdges = useMemo<Edge[]>(() => {
+    const nodeMap = new Map(nodes.map(n => [n.id, n]));
+    const filterLower = activeBranchFilter?.toLowerCase();
+
     return edges.map(edge => {
       let opacity = 1.0;
       
-      const sourceNode = nodes.find(n => n.id === edge.source);
-      const targetNode = nodes.find(n => n.id === edge.target);
-      const isSourceDimmed = sourceNode?.data?.isDimmed;
-      const isTargetDimmed = targetNode?.data?.isDimmed;
+      const sourceNode = nodeMap.get(edge.source);
+      const targetNode = nodeMap.get(edge.target);
+      const isSourceDimmed = Boolean(sourceNode?.data?.isDimmed);
+      const isTargetDimmed = Boolean(targetNode?.data?.isDimmed);
+      const isDimmed = isSourceDimmed || isTargetDimmed;
 
-      if (isSourceDimmed || isTargetDimmed) {
+      if (isDimmed) {
         opacity = 0.15;
       }
 
       if (activePathIds) {
         if (activePathIds.has(edge.source) && activePathIds.has(edge.target)) {
-          opacity = isSourceDimmed || isTargetDimmed ? 0.15 : 1.0;
+          opacity = isDimmed ? 0.15 : 1.0;
         } else {
           opacity = 0.15;
         }
       }
 
-      if (activeBranchFilter) {
-        const sourceSpell = sourceNode?.data.spell as any;
-        const targetSpell = targetNode?.data.spell as any;
+      if (filterLower) {
+        const sourceSpell = sourceNode?.data?.spell as SpellNodeType | undefined;
+        const targetSpell = targetNode?.data?.spell as SpellNodeType | undefined;
 
-        const sourceMatches = sourceSpell?.branch && sourceSpell.branch.toLowerCase() === activeBranchFilter.toLowerCase();
-        const targetMatches = targetSpell?.branch && targetSpell.branch.toLowerCase() === activeBranchFilter.toLowerCase();
+        const sourceMatches = sourceSpell?.branch && sourceSpell.branch.toLowerCase() === filterLower;
+        const targetMatches = targetSpell?.branch && targetSpell.branch.toLowerCase() === filterLower;
 
         if (!sourceMatches || !targetMatches) {
           opacity = 0.15;
         }
       }
 
+      const isDimmedEdge = isDimmed || opacity < 0.5;
+
       return {
         ...edge,
+        data: {
+          ...edge.data,
+          isDimmed: isDimmedEdge,
+        },
         style: {
           ...edge.style,
           opacity,
-          transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'opacity 0.25s ease',
         },
       };
     });
@@ -405,6 +429,10 @@ function SpellTreeFlow() {
         edgeTypes={edgeTypes}
         onNodeClick={handleNodeClick}
         onPaneClick={handlePaneClick}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
+        onlyRenderVisibleElements={true}
         fitView
         fitViewOptions={{ padding: 0.3 }}
         minZoom={0.2}
@@ -415,10 +443,7 @@ function SpellTreeFlow() {
         <Background color="#160826" gap={40} size={1} />
         <Controls showInteractive={false} className="!bottom-4 !right-4" />
         <MiniMap
-          nodeColor={(node) => {
-            const d = node.data as any;
-            return d?.nodeColor || '#3b82f6';
-          }}
+          nodeColor={getMiniMapNodeColor}
           maskColor="rgba(10, 10, 15, 0.85)"
           className="!bottom-[80px] !right-4"
         />

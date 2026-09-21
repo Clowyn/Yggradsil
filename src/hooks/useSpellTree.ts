@@ -141,6 +141,8 @@ function calculateSpellCoordinates(
   spells: SpellNode[]
 ): Record<string, { x: number; y: number }> {
   const positions: Record<string, { x: number; y: number }> = {};
+  const spellMap = new Map<string, SpellNode>();
+  spells.forEach((s) => spellMap.set(s.spell_key, s));
 
   // Determine unique primary branches deterministically
   const allBranches = Array.from(
@@ -181,7 +183,7 @@ function calculateSpellCoordinates(
     if (visiting.has(spellKey)) return 0;
     visiting.add(spellKey);
 
-    const s = spells.find((x) => x.spell_key === spellKey);
+    const s = spellMap.get(spellKey);
     if (!s) {
       visiting.delete(spellKey);
       return 0;
@@ -193,7 +195,7 @@ function calculateSpellCoordinates(
     }
     let maxD = 0;
     s.prerequisites.forEach((pKey) => {
-      const parent = spells.find((x) => x.spell_key === pKey);
+      const parent = spellMap.get(pKey);
       if (parent && parent.tier === s.tier) {
         maxD = Math.max(maxD, getDepth(pKey) + 1);
       }
@@ -248,29 +250,31 @@ function calculateSpellCoordinates(
     const y = parseFloat(yStr);
     const M = levelSpells.length;
 
-    const getSortKey = (s: SpellNode): number => {
-      if (!s.prerequisites || s.prerequisites.length === 0) {
-        return getCol(s.branch);
+    const sortKeyMap = new Map<string, number>();
+    levelSpells.forEach((s) => {
+      let key = getCol(s.branch);
+      if (s.prerequisites && s.prerequisites.length > 0) {
+        let sum = 0;
+        let count = 0;
+        s.prerequisites.forEach((pKey) => {
+          const parent = spellMap.get(pKey);
+          if (parent) {
+            sum += getCol(parent.branch);
+            count++;
+          }
+        });
+        if (count > 0) key = sum / count;
       }
-      let sum = 0;
-      let count = 0;
-      s.prerequisites.forEach((pKey) => {
-        const parent = spells.find((x) => x.spell_key === pKey);
-        if (parent) {
-          sum += getCol(parent.branch);
-          count++;
-        }
-      });
-      return count > 0 ? sum / count : getCol(s.branch);
-    };
+      sortKeyMap.set(s.spell_key, key);
+    });
 
     const sortedSpells = [...levelSpells].sort((a, b) => {
       const colA = getCol(a.branch);
       const colB = getCol(b.branch);
       if (colA !== colB) return colA - colB;
 
-      const skA = getSortKey(a);
-      const skB = getSortKey(b);
+      const skA = sortKeyMap.get(a.spell_key) ?? 0;
+      const skB = sortKeyMap.get(b.spell_key) ?? 0;
       if (skA !== skB) return skA - skB;
 
       return a.spell_key.localeCompare(b.spell_key);
@@ -288,15 +292,80 @@ function calculateSpellCoordinates(
   return positions;
 }
 
-export function useSpellTree(characterId: string | null) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isFallbackMode, setIsFallbackMode] = useState(false);
+// Module-level coordinates cache by tree
+const treeCoordinatesCache = new Map<string, Record<string, { x: number; y: number }>>();
 
-  const [spellTrees, setSpellTrees] = useState<SpellTree[]>([]);
-  const [spells, setSpells] = useState<SpellNode[]>([]);
+function getOrCalculateSpellCoordinates(treeId: string, spellsInTree: SpellNode[]): Record<string, { x: number; y: number }> {
+  const cacheKey = `${treeId}_${spellsInTree.length}`;
+  let cached = treeCoordinatesCache.get(cacheKey);
+  if (!cached) {
+    cached = calculateSpellCoordinates(spellsInTree);
+    treeCoordinatesCache.set(cacheKey, cached);
+  }
+  return cached;
+}
+
+// In-memory static cache for spell tree definitions across tab navigation
+let cachedSpellTrees: SpellTree[] | null = null;
+let cachedSpells: SpellNode[] | null = null;
+let staticFetchPromise: Promise<{ trees: SpellTree[]; spells: SpellNode[] }> | null = null;
+
+async function fetchStaticSpellData(): Promise<{ trees: SpellTree[]; spells: SpellNode[] }> {
+  if (cachedSpellTrees && cachedSpells) {
+    return { trees: cachedSpellTrees, spells: cachedSpells };
+  }
+  if (!staticFetchPromise) {
+    staticFetchPromise = (async () => {
+      const { data: treesData, error: treesError } = await supabase
+        .from('spell_trees')
+        .select('*, assignments:spell_tree_assignments(*)');
+
+      if (treesError) throw treesError;
+
+      let spellsData: any[] = [];
+      let from = 0;
+      const limit = 1000;
+      let hasMore = true;
+
+      while (hasMore) {
+        const to = from + limit - 1;
+        const { data: chunk, error: spellsError } = await supabase
+          .from('spells')
+          .select('*')
+          .range(from, to);
+
+        if (spellsError) throw spellsError;
+        if (chunk && chunk.length > 0) {
+          spellsData = [...spellsData, ...chunk];
+          if (chunk.length < limit) {
+            hasMore = false;
+          } else {
+            from += limit;
+          }
+        } else {
+          hasMore = false;
+        }
+      }
+
+      cachedSpellTrees = treesData || [];
+      cachedSpells = spellsData || [];
+      return { trees: cachedSpellTrees, spells: cachedSpells };
+    })().finally(() => {
+      staticFetchPromise = null;
+    });
+  }
+  return staticFetchPromise;
+}
+
+export function useSpellTree(characterId: string | null) {
+  const [loading, setLoading] = useState(() => !cachedSpells && Boolean(characterId));
+  const [error, setError] = useState<string | null>(null);
+  const [isFallbackMode, setIsFallbackMode] = useState(() => !characterId);
+
+  const [spellTrees, setSpellTrees] = useState<SpellTree[]>(() => cachedSpellTrees || MOCK_SPELL_TREES);
+  const [spells, setSpells] = useState<SpellNode[]>(() => cachedSpells || MOCK_SPELLS);
   const [characterSpells, setCharacterSpells] = useState<CharacterSpell[]>([]);
-  const [character, setCharacter] = useState<any | null>(null);
+  const [character, setCharacter] = useState<any | null>(() => (!characterId ? MOCK_CHARACTER : null));
 
   // Fallback mock states (for interactivity in offline mode)
   const [mockUnlockedKeys, setMockUnlockedKeys] = useState<Set<string>>(new Set(['blood_bolt']));
@@ -304,69 +373,35 @@ export function useSpellTree(characterId: string | null) {
 
   useEffect(() => {
     if (!characterId) {
-      setIsFallbackMode(true);
-      setSpellTrees(MOCK_SPELL_TREES);
-      setSpells(MOCK_SPELLS);
-      setCharacter(MOCK_CHARACTER);
-      setCharacterSpells([]);
-      setLoading(false);
       return;
     }
 
     const loadData = async () => {
-      setLoading(true);
+      if (!cachedSpells) {
+        setLoading(true);
+      }
       setError(null);
       try {
-        const { data: charData, error: charError } = await supabase
-          .from('characters')
-          .select('*, subclass:subclass_definitions(*, category:class_categories(*)), race:race_definitions(*)')
-          .eq('id', characterId)
-          .single();
+        const [staticData, charRes, charSpellsRes] = await Promise.all([
+          fetchStaticSpellData(),
+          supabase
+            .from('characters')
+            .select('*, subclass:subclass_definitions(*, category:class_categories(*)), race:race_definitions(*)')
+            .eq('id', characterId)
+            .single(),
+          supabase
+            .from('character_spells')
+            .select('*, spell:spells(*)')
+            .eq('character_id', characterId)
+        ]);
 
-        if (charError) throw charError;
+        if (charRes.error) throw charRes.error;
+        if (charSpellsRes.error) throw charSpellsRes.error;
 
-        const { data: treesData, error: treesError } = await supabase
-          .from('spell_trees')
-          .select('*, assignments:spell_tree_assignments(*)');
-
-        if (treesError) throw treesError;
-
-        let spellsData: any[] = [];
-        let from = 0;
-        const limit = 1000;
-        let hasMore = true;
-
-        while (hasMore) {
-          const to = from + limit - 1;
-          const { data: chunk, error: spellsError } = await supabase
-            .from('spells')
-            .select('*')
-            .range(from, to);
-
-          if (spellsError) throw spellsError;
-          if (chunk && chunk.length > 0) {
-            spellsData = [...spellsData, ...chunk];
-            if (chunk.length < limit) {
-              hasMore = false;
-            } else {
-              from += limit;
-            }
-          } else {
-            hasMore = false;
-          }
-        }
-
-        const { data: charSpellsData, error: charSpellsError } = await supabase
-          .from('character_spells')
-          .select('*, spell:spells(*)')
-          .eq('character_id', characterId);
-
-        if (charSpellsError) throw charSpellsError;
-
-        setCharacter(charData);
-        setSpellTrees(treesData || []);
-        setSpells(spellsData || []);
-        setCharacterSpells(charSpellsData || []);
+        setCharacter(charRes.data);
+        setSpellTrees(staticData.trees);
+        setSpells(staticData.spells);
+        setCharacterSpells(charSpellsRes.data || []);
         setIsFallbackMode(false);
       } catch (err: any) {
         const errMsg = err?.message || err?.details || String(err);
@@ -629,53 +664,54 @@ export function useSpellTree(characterId: string | null) {
       spellsByTree[spell.spell_tree_id].push(spell);
     });
     
-    // Calculate coordinates and build React Flow nodes
-    Object.values(spellsByTree).forEach((spellsInTree) => {
-      const relativePositions = calculateSpellCoordinates(spellsInTree);
+    const treeMap = new Map(visibleTrees.map(t => [t.id, t]));
+    const subclassIndexMap = new Map(activeSubclasses.map((s, idx) => [s.key, idx]));
+
+    // Calculate coordinates and build React Flow nodes with tree-level caching
+    Object.entries(spellsByTree).forEach(([treeId, spellsInTree]) => {
+      const relativePositions = getOrCalculateSpellCoordinates(treeId, spellsInTree);
+      const tree = treeMap.get(treeId);
+
+      let treeOffsetX = 0;
+      let treeOffsetY = 0;
+      let treeIsDimmed = false;
+      let treeIsActiveSubclass = false;
+
+      if (tree && tree.assignments) {
+        const assign = tree.assignments.find(a => a.subclass_key === subclassKey) || 
+                       tree.assignments.find(a => a.class_key === classCategoryKey) || 
+                       tree.assignments[0];
+        if (assign && assign.subclass_key) {
+          const sibIdx = subclassIndexMap.get(assign.subclass_key) ?? -1;
+          if (sibIdx !== -1) {
+            treeOffsetX = (sibIdx - (activeSubclasses.length - 1) / 2) * TREE_SPACING;
+            treeOffsetY = SUBCLASS_Y;
+          }
+          const isCharacterSubclass = assign.subclass_key === subclassKey;
+          treeIsDimmed = !isCharacterSubclass;
+          treeIsActiveSubclass = isCharacterSubclass;
+        } else if (assign && assign.class_key) {
+          treeOffsetY = SUBCLASS_Y;
+          treeIsDimmed = false;
+          treeIsActiveSubclass = true;
+        }
+      }
       
       spellsInTree.forEach(spell => {
         const status = getSpellStatus(spell);
         const nodeColor = BRANCH_COLORS[spell.branch || 'Base'] || '#3b82f6';
-        
         const relPos = relativePositions[spell.spell_key] || { x: 0, y: 0 };
-        let spellX = relPos.x;
-        let spellY = relPos.y;
-        let isDimmed = false;
-        let isActiveSubclassTree = false;
-        
-        const tree = visibleTrees.find(t => t.id === spell.spell_tree_id);
-        if (tree && tree.assignments) {
-          const assign = tree.assignments.find(a => a.subclass_key === subclassKey) || 
-                         tree.assignments.find(a => a.class_key === classCategoryKey) || 
-                         tree.assignments[0];
-          if (assign && assign.subclass_key) {
-            const sibIdx = activeSubclasses.findIndex(s => s.key === assign.subclass_key);
-            if (sibIdx !== -1) {
-              const subclassX = (sibIdx - (activeSubclasses.length - 1) / 2) * TREE_SPACING;
-              const subclassY = SUBCLASS_Y;
-              spellX += subclassX;
-              spellY += subclassY;
-            }
-            const isCharacterSubclass = assign.subclass_key === subclassKey;
-            isDimmed = !isCharacterSubclass;
-            isActiveSubclassTree = isCharacterSubclass;
-          } else if (assign && assign.class_key) {
-            spellY += SUBCLASS_Y;
-            isDimmed = false;
-            isActiveSubclassTree = true;
-          }
-        }
         
         spellNodes.push({
           id: spell.id,
           type: 'spellNode',
-          position: { x: spellX, y: spellY },
+          position: { x: relPos.x + treeOffsetX, y: relPos.y + treeOffsetY },
           data: {
             spell,
             status,
             nodeColor,
-            isDimmed,
-            isActiveSubclassTree,
+            isDimmed: treeIsDimmed,
+            isActiveSubclassTree: treeIsActiveSubclass,
           },
           sourcePosition: Position.Bottom,
           targetPosition: Position.Top,
@@ -692,13 +728,15 @@ export function useSpellTree(characterId: string | null) {
     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
     const subclassKey = effectiveCharacter.subclass?.key;
     const activeSubclasses = SUBCLASSES.filter(sub => sub.category_key === classCategoryKey);
+    const visibleSpellMap = new Map(visibleSpells.map(s => [s.spell_key, s]));
+    const treeMap = new Map(visibleTrees.map(t => [t.id, t]));
 
     const result: Edge[] = [];
 
     visibleSpells.forEach(spell => {
       if (spell.prerequisites && spell.prerequisites.length > 0) {
         spell.prerequisites.forEach(prereqKey => {
-          const parentSpell = visibleSpells.find(s => s.spell_key === prereqKey);
+          const parentSpell = visibleSpellMap.get(prereqKey);
           if (!parentSpell) return;
 
           const parentStatus = getSpellStatus(parentSpell);
@@ -738,13 +776,14 @@ export function useSpellTree(characterId: string | null) {
     const subclassSpellEdges: Edge[] = [];
     visibleSpells.forEach(spell => {
       if (!spell.prerequisites || spell.prerequisites.length === 0) {
-        const tree = visibleTrees.find(t => t.id === spell.spell_tree_id);
+        const tree = treeMap.get(spell.spell_tree_id);
         if (tree && tree.assignments) {
           const assign = tree.assignments.find(a => a.subclass_key === subclassKey) || tree.assignments.find(a => a.class_key === classCategoryKey) || tree.assignments[0];
           if (assign) {
             const sourceId = assign.subclass_key 
               ? `subclass-${assign.subclass_key}` 
               : `class-${assign.class_key}`;
+            const isDimmed = assign.subclass_key ? assign.subclass_key !== subclassKey : false;
             
             subclassSpellEdges.push({
               id: `edge-${sourceId}-spell-${spell.id}`,
@@ -753,7 +792,8 @@ export function useSpellTree(characterId: string | null) {
               type: 'spellEdge',
               data: { 
                 status: getSpellStatus(spell) === 'unlocked' ? 'unlocked' : 'partial', 
-                color: '#c0c0c0' 
+                color: '#c0c0c0',
+                isDimmed,
               },
             });
           }
@@ -771,6 +811,7 @@ export function useSpellTree(characterId: string | null) {
     error,
     nodes,
     edges,
+    visibleSpells,
     onNodeClick,
     xp: effectiveCharacter?.xp_available ?? 0,
     unlockedCount: unlockedSpellKeys.size,

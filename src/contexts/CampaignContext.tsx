@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef, type ReactNode } from 'react';
 import type { Campaign, CampaignMember, Character } from '../lib/types';
 import { useAuth } from './AuthContext';
 import { supabase } from '../lib/supabase';
@@ -28,18 +28,26 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
   const [members, setMembers] = useState<CampaignMember[]>([]);
   const [characters, setCharacters] = useState<Character[]>([]);
   const [activeCharacterId, setActiveCharacterId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => Boolean(user && profile));
+
+  // Track user to only clear state on actual logout transition
+  const wasLoggedInRef = useRef(Boolean(user && profile));
 
   // Load campaign for user
   useEffect(() => {
     if (!user || !profile) {
-      setCampaign(null);
-      setMembers([]);
-      setCharacters([]);
-      setActiveCharacterId(null);
-      setLoading(false);
+      if (wasLoggedInRef.current) {
+        wasLoggedInRef.current = false;
+        setCampaign(null);
+        setMembers([]);
+        setCharacters([]);
+        setActiveCharacterId(null);
+        setLoading(false);
+      }
       return;
     }
+
+    wasLoggedInRef.current = true;
 
     const loadCampaignData = async () => {
       setLoading(true);
@@ -278,7 +286,7 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     };
   }, [campaign?.id, activeCharacterId]);
 
-  const createCampaign = async (name: string) => {
+  const createCampaign = useCallback(async (name: string) => {
     if (!user) return;
     setLoading(true);
     try {
@@ -316,9 +324,9 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
-  const joinCampaign = async (campaignId: string) => {
+  const joinCampaign = useCallback(async (campaignId: string) => {
     if (!user) return;
     setLoading(true);
     try {
@@ -350,19 +358,29 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  const value = useMemo<CampaignState>(() => ({
+    campaign,
+    members,
+    characters,
+    activeCharacterId,
+    setActiveCharacterId,
+    loading,
+    createCampaign,
+    joinCampaign,
+  }), [
+    campaign,
+    members,
+    characters,
+    activeCharacterId,
+    loading,
+    createCampaign,
+    joinCampaign,
+  ]);
 
   return (
-    <CampaignContext.Provider value={{ 
-      campaign, 
-      members, 
-      characters,
-      activeCharacterId,
-      setActiveCharacterId,
-      loading, 
-      createCampaign, 
-      joinCampaign 
-    }}>
+    <CampaignContext.Provider value={value}>
       {children}
     </CampaignContext.Provider>
   );
