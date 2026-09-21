@@ -88,6 +88,22 @@ const MOCK_SPELLS: SpellNode[] = [
 
 const MOCK_SPELL_TREES: SpellTree[] = [
   {
+    id: 'mock-psychomage-tree',
+    name_tr: 'Psikomag Ağacı',
+    name_en: 'Psychomage Tree',
+    description_tr: 'Zihinsel ve psişik güçler.',
+    description_en: 'Mental and psionic powers.',
+    assignments: [
+      {
+        id: 'mock-assign-psychomage',
+        spell_tree_id: 'mock-psychomage-tree',
+        class_key: 'mage',
+        subclass_key: 'psychomage',
+        min_level: 1
+      }
+    ]
+  },
+  {
     id: 'mock-blood-mage-tree',
     name_tr: 'Kan Büyücüsü Ağacı',
     name_en: 'Blood Mage Tree',
@@ -123,17 +139,22 @@ const MOCK_SPELL_TREES: SpellTree[] = [
 
 const MOCK_CHARACTER = {
   id: 'mock-character-id',
-  name: 'Mock Mage',
+  name: 'jhn',
   level: 5,
   xp_available: 1000,
   subclass: {
-    key: 'blood_mage',
+    key: 'psychomage',
+    name_tr: 'Psikomag',
+    name_en: 'Psychomage',
     category: {
-      key: 'mage'
+      key: 'mage',
+      name_tr: 'Büyücü',
+      name_en: 'Mage'
     }
   },
   race: {
-    key: 'human'
+    key: 'brain_eater',
+    name: 'Brain Eater'
   }
 };
 
@@ -466,6 +487,7 @@ export function useSpellTree(characterId: string | null) {
     if (!effectiveCharacter) return spellTrees;
 
     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
+    const subclassKey = effectiveCharacter.subclass?.key;
     const raceKey = effectiveCharacter.race?.key;
 
     return spellTrees.filter(tree => {
@@ -483,6 +505,10 @@ export function useSpellTree(characterId: string | null) {
         }
         // Check race_key
         if (assign.race_key && raceKey !== assign.race_key) {
+          return false;
+        }
+        // Check subclass_key - only render trees for the character's specific subclass (or general class trees)
+        if (subclassKey && assign.subclass_key && assign.subclass_key !== subclassKey) {
           return false;
         }
         return true;
@@ -590,7 +616,11 @@ export function useSpellTree(characterId: string | null) {
     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
     const subclassKey = effectiveCharacter.subclass?.key;
 
-    const activeSubclasses = SUBCLASSES.filter(sub => sub.category_key === classCategoryKey);
+    const activeSubclasses = SUBCLASSES.filter(sub => {
+      if (sub.category_key !== classCategoryKey) return false;
+      if (subclassKey) return sub.key === subclassKey;
+      return true;
+    });
 
     const classNodes: Node[] = CLASS_CATEGORIES.filter(c => c.key === classCategoryKey).map((cls) => ({
       id: `class-${cls.key}`,
@@ -727,7 +757,11 @@ export function useSpellTree(characterId: string | null) {
     
     const classCategoryKey = effectiveCharacter.subclass?.category?.key;
     const subclassKey = effectiveCharacter.subclass?.key;
-    const activeSubclasses = SUBCLASSES.filter(sub => sub.category_key === classCategoryKey);
+    const activeSubclasses = SUBCLASSES.filter(sub => {
+      if (sub.category_key !== classCategoryKey) return false;
+      if (subclassKey) return sub.key === subclassKey;
+      return true;
+    });
     const visibleSpellMap = new Map(visibleSpells.map(s => [s.spell_key, s]));
     const treeMap = new Map(visibleTrees.map(t => [t.id, t]));
 
