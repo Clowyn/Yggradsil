@@ -1,5 +1,6 @@
 import { chromium } from '@playwright/test';
 import { preview } from 'vite';
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -108,15 +109,30 @@ const mockCharacter = {
   race: {
     id: 'race-1',
     name: 'High Elf',
+    name_en: 'High Elf',
+    name_tr: 'Yüksek Elf',
     description_en: 'Graceful and attuned to ancient arcane arts.',
     description_tr: 'Kadim büyü sanatlarına yatkın zarif elfler.',
     stat_bonuses: { INT: 2, DEX: 1 },
+    tier: {
+      id: 'tier-1',
+      key: 'common',
+      name_en: 'Common',
+      name_tr: 'Yaygın',
+    },
   },
   subclass: {
     id: 'subclass-1',
     name_en: 'Evoker',
     name_tr: 'Çağırıcı',
     key: 'evoker',
+    category_key: 'mage',
+    category: {
+      id: 'cat-1',
+      key: 'mage',
+      name_en: 'Mage',
+      name_tr: 'Büyücü',
+    },
     ability_name_en: 'Sculpt Spells',
     ability_name_tr: 'Büyü Şekillendirme',
     ability_desc_en: 'Create pockets of relative safety within the effects of your evocation spells.',
@@ -126,6 +142,7 @@ const mockCharacter = {
     icon_url: null,
     base_stats: { INT: 15, CON: 14, DEX: 13, WIS: 12, STR: 10, CHA: 8 },
   },
+  profile: mockProfile,
 };
 
 const mockStats = [
@@ -280,28 +297,46 @@ async function captureTarget({ targetName, rootDir, port, suffix }) {
 
     const page = await context.newPage();
 
-    // Setup authentic session in localStorage
+    // Setup authentic session in localStorage for all potential client keys
     await page.addInitScript(({ sessionData }) => {
-      window.localStorage.setItem('sb-cpyiinhfcgeqxubzhacw-auth-token', JSON.stringify(sessionData));
+      const serialized = JSON.stringify(sessionData);
+      window.localStorage.setItem('sb-cpyiinhfcgeqxubzhacw-auth-token', serialized);
+      window.localStorage.setItem('sb-placeholder-auth-token', serialized);
+      window.localStorage.setItem('sb-127-auth-token', serialized);
+      window.localStorage.setItem('sb-localhost-auth-token', serialized);
+      window.localStorage.setItem('supabase.auth.token', serialized);
       window.localStorage.setItem('dnd_active_character_id', 'char-1');
     }, { sessionData: mockSession });
 
-    // Intercept Supabase API calls
+    // Intercept Supabase API calls regardless of host/domain
     await page.route('**/*', async (route) => {
       const url = route.request().url();
-      if (url.includes('supabase.co')) {
-        if (url.includes('/auth/v1/user') || url.includes('/auth/v1/session')) {
+      const isAuthOrRest = url.includes('/auth/v1/') || url.includes('/rest/v1/') || url.includes('supabase.co');
+
+      if (isAuthOrRest) {
+        if (url.includes('/auth/v1/user')) {
           return route.fulfill({
             status: 200,
             contentType: 'application/json',
             body: JSON.stringify(mockSession.user),
           });
         }
-        if (url.includes('/rest/v1/profiles')) {
+        if (url.includes('/auth/v1/session') || url.includes('/auth/v1/token') || url.includes('/auth/v1/')) {
           return route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify(mockProfile),
+            body: JSON.stringify(mockSession),
+          });
+        }
+        if (url.includes('/rest/v1/profiles')) {
+          const accept = route.request().headers()['accept'] || '';
+          const body = accept.includes('vnd.pgrst.object+json')
+            ? JSON.stringify(mockProfile)
+            : JSON.stringify([mockProfile]);
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body,
           });
         }
         if (url.includes('/rest/v1/campaign_members')) {
@@ -312,17 +347,25 @@ async function captureTarget({ targetName, rootDir, port, suffix }) {
           });
         }
         if (url.includes('/rest/v1/campaigns')) {
+          const accept = route.request().headers()['accept'] || '';
+          const body = accept.includes('vnd.pgrst.object+json')
+            ? JSON.stringify(mockCampaign)
+            : JSON.stringify([mockCampaign]);
           return route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify(mockCampaign),
+            body,
           });
         }
         if (url.includes('/rest/v1/characters')) {
+          const accept = route.request().headers()['accept'] || '';
+          const body = accept.includes('vnd.pgrst.object+json')
+            ? JSON.stringify(mockCharacter)
+            : JSON.stringify([mockCharacter]);
           return route.fulfill({
             status: 200,
             contentType: 'application/json',
-            body: JSON.stringify([mockCharacter]),
+            body,
           });
         }
         if (url.includes('/rest/v1/character_stats')) {
@@ -390,9 +433,23 @@ async function captureTarget({ targetName, rootDir, port, suffix }) {
       // Allow dynamic data and animations to settle
       await page.waitForTimeout(1200);
 
+      const currentUrl = page.url();
+      if (currentUrl.includes('/login')) {
+        throw new Error(`CRITICAL AUTH FAILURE: Route ${r.path} in ${targetName} was redirected to /login!`);
+      }
+      const pageText = await page.textContent('body');
+      if (pageText?.includes('ENTER THE REALM') || pageText?.includes('Sign in to continue your adventure')) {
+        throw new Error(`CRITICAL AUTH FAILURE: Route ${r.path} in ${targetName} displayed unauthenticated login form!`);
+      }
+
       const filePath = path.join(outDir, fileName);
       await page.screenshot({ path: filePath, fullPage: false });
       console.log(`Saved ${filePath}`);
+
+      if (suffix === '_after') {
+        const plainPath = path.join(outDir, `${prefix}_${r.name}.png`);
+        fs.copyFileSync(filePath, plainPath);
+      }
     }
 
     // If mobile, capture off-canvas drawer open state if hamburger exists
@@ -428,9 +485,40 @@ async function captureTarget({ targetName, rootDir, port, suffix }) {
   console.log(`Screenshots for ${targetName} completed!`);
 }
 
+function ensureBaselineWorktree(baselineDir) {
+  if (!fs.existsSync(baselineDir)) {
+    console.log(`Creating baseline worktree at ${baselineDir} from commit 23e1e9c...`);
+    execSync('git worktree add ../dnd-baseline 23e1e9c', { stdio: 'inherit' });
+  }
+
+  // Ensure node_modules exists in baselineDir via junction if missing
+  const baselineNodeModules = path.join(baselineDir, 'node_modules');
+  if (!fs.existsSync(baselineNodeModules)) {
+    console.log('Creating node_modules junction in baseline...');
+    execSync(`cmd /c mklink /J "${baselineNodeModules}" "${path.resolve('node_modules')}"`, { stdio: 'inherit' });
+  }
+
+  // Ensure .env.local is copied to baseline
+  const localEnv = path.resolve('.env.local');
+  const baselineEnv = path.join(baselineDir, '.env.local');
+  if (fs.existsSync(localEnv)) {
+    fs.copyFileSync(localEnv, baselineEnv);
+    console.log('Copied .env.local to baseline worktree.');
+  }
+
+  // Ensure baseline dist exists
+  const baselineDist = path.join(baselineDir, 'dist');
+  if (!fs.existsSync(baselineDist)) {
+    console.log('Building baseline worktree...');
+    execSync('npm run build', { cwd: baselineDir, stdio: 'inherit' });
+  }
+}
+
 async function main() {
   const baselineDir = path.resolve('../dnd-baseline');
   const currentDir = path.resolve('.');
+
+  ensureBaselineWorktree(baselineDir);
 
   // 1. Capture BEFORE screenshots from baseline if baseline exists
   if (fs.existsSync(baselineDir)) {

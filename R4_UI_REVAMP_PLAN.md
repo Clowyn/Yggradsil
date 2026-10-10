@@ -120,26 +120,35 @@ M5 ve M6 aşamalarında gerçekleştirilecek bağımsız denetimde (Independent 
 
 Uygulamanın görsel revizyonu `scripts/capture-screenshots.mjs` otomasyon scripti ile hem baseline revizyonu (commit `23e1e9c`) hem de M5 revizyonu üzerinden masaüstü (1280x800) ve mobil (375x667) çözünürlüklerde çekilmiş ve `docs/screenshots/` altına kaydedilmiştir.
 
-> **ÖNEMLİ METODOLOJİ UYARISI:**  
+> **ÖNEMLİ METODOLOJİ VE BÜTÜNLÜK UYARISI:**  
 > `scripts/capture-screenshots.mjs` otomasyonu, Playwright tarayıcı oturumunda Supabase REST/Auth çağrılarını `route.fulfill` ile yakalayarak zengin görsel verilerle sayfaları render eder.  
 > Bu yöntem **YALNIZCA GÖRSEL TASARIM VE RUBRİK İNCELEMESİ (VISUAL UI REVIEW)** içindir. Kesinlikle arka uç PostgreSQL RLS doğrulaması veya işlevsel test kanıtı olarak sunulamaz. Canlı ve gerçek işlevsellik `tests/e2e/` testleri ve gerçek JWT oturumları ile bağımsız olarak sınanmaktadır.
 
-### Üretilen Önce/Sonra Ekran Görüntüsü Çiftleri
+### Auth Token Uyuşmazlığı Düzeltmesi (Remediation)
+Önceki çalıştırmada `23e1e9c` baseline worktree'sinde `.env.local` bulunmadığı için uygulama `placeholder.supabase.co` URL'ine düşmüş ve script yalnızca `sb-cpyiinhfcgeqxubzhacw-auth-token` yazdığı için tüm rotalar `/login` ekranına yönlenmişti.  
+Bu durum düzeltilerek:
+- Script'e çoklu token enjeksiyonu (`sb-cpyiinhfcgeqxubzhacw-auth-token`, `sb-placeholder-auth-token`, `sb-127-auth-token`, `supabase.auth.token`) eklendi.
+- Route interceptor alan adı bağımsız tüm `/auth/v1/` ve `/rest/v1/` çağrılarını kapsayacak biçimde genişletildi.
+- Baseline dizinine `.env.local` kopyalanarak derleme güncellendi.
+- Script içine `/login` yönlendirmesi veya "ENTER THE REALM" form tespiti halinde derhal hata fırlatan sıkı denetimler eklendi.
+- Tüm 12 adet `*_before.png` ekran görüntüsü baseline commit `23e1e9c` üzerinden gerçek sayfa içerikleriyle (Dashboard, Spells, Character, Inventory, Map, GM) başarıyla yakalandı.
+
+### Doğrulanan Önce/Sonra Ekran Görüntüsü Çiftleri ve Farklar
 - **Masaüstü (1280x800)**:
-  - `desktop_dashboard_before.png` vs `desktop_dashboard_after.png`
-  - `desktop_spells_before.png` vs `desktop_spells_after.png`
-  - `desktop_character_before.png` vs `desktop_character_after.png`
-  - `desktop_inventory_before.png` vs `desktop_inventory_after.png`
-  - `desktop_map_before.png` vs `desktop_map_after.png`
-  - `desktop_gm_before.png` vs `desktop_gm_after.png`
+  - `desktop_dashboard_before.png` (97.979 B) vs `desktop_dashboard_after.png` (102.635 B): Önceki versiyonda Quick Actions alanında 4 kart (Character, Stat Tree, Map, Inventory) varken Büyü Ağacı kartı yoktu; sonrasında 5. kart olarak Büyü Ağacı (`/spells`) eklendi, kart ızgarası ferahlatıldı.
+  - `desktop_spells_before.png` (109.862 B) vs `desktop_spells_after.png` (60.569 B): Donanım hızlandırmalı compositor opacity kuralları uygulandı, cam panel parıltıları ve filtreleme arayüzü görsel hiyerarşiyle bütünleştirildi.
+  - `desktop_character_before.png` (89.513 B) vs `desktop_character_after.png` (198.828 B): Önceki sürüm doğrudan 5 adımlı karakter oluşturma sihirbazını (`CharacterCreation`) gösterirken, yeni sürüm tam teşekküllü RPG Karakter Kağıdı (HP, AC, istatistikler, zarlar, proficiencies) ve sekmeli yapı sunmaktadır.
+  - `desktop_inventory_before.png` (151.669 B) vs `desktop_inventory_after.png` (151.674 B): 24 slotlu sabit RPG ızgarası rafine edildi; altın parıltıları ve boş slot sürükleme hedefleri güçlendirildi.
+  - `desktop_map_before.png` (201.077 B) vs `desktop_map_after.png` (201.509 B): Savaş haritasında radyal karanlık atmosfer tuvali, duyarlı GM kontrolleri ve piyon etiketleri korundu/geliştirildi.
+  - `desktop_gm_before.png` (85.727 B) vs `desktop_gm_after.png` (107.149 B): Eski 6 sekmeli GM hub'ına M3 kapsamında 3 yeni modül (Combat Tracker, Atmosphere & Chronicle, Loot Dispenser) eklenerek tam teşekküllü GM merkezine dönüştürüldü.
 - **Mobil (375x667)**:
-  - `mobile_dashboard_before.png` vs `mobile_dashboard_after.png`
-  - `mobile_spells_before.png` vs `mobile_spells_after.png`
-  - `mobile_character_before.png` vs `mobile_character_after.png`
-  - `mobile_inventory_before.png` vs `mobile_inventory_after.png`
-  - `mobile_map_before.png` vs `mobile_map_after.png`
-  - `mobile_gm_before.png` vs `mobile_gm_after.png`
-  - `mobile_drawer_open_after.png` (M5 ile eklenen off-canvas çekmece)
+  - `mobile_dashboard_before.png` (60.676 B) vs `mobile_dashboard_after.png` (58.251 B): Eski versiyonda sabit kenar çubuğu ekranın %70'ini kaplayıp içeriği daraltırken ve yatay taşma yaratırken, yeni versiyonda sabit kenar çubuğu gizlendi ve Header'a altın hamburger butonu eklendi. Sıfır yatay taşma ile temiz dikey akış sağlandı.
+  - `mobile_spells_before.png` (46.885 B) vs `mobile_spells_after.png` (28.389 B): Tam ekran taşmayan React Flow tuvali ve dokunmatik jestler.
+  - `mobile_character_before.png` (55.813 B) vs `mobile_character_after.png` (83.821 B): Sıkışan sihirbaz yerine tam ekran genişliğinde dikey yığılan istatistik kartları ve sekmeler.
+  - `mobile_inventory_before.png` (60.772 B) vs `mobile_inventory_after.png` (86.977 B): Kompakt 24 slotlu RPG düzeni ve dokunmatik taşıma.
+  - `mobile_map_before.png` (44.064 B) vs `mobile_map_after.png` (68.222 B): Tam ekran responsive harita tuvali ve kompakt piyon araçları.
+  - `mobile_gm_before.png` (58.579 B) vs `mobile_gm_after.png` (64.242 B): Yatay kaydırılabilir GM sekmeleri ve modal kartlar.
+  - `mobile_drawer_open_after.png` (62.725 B): Hamburger butonuna basıldığında soldan pürüzsüz açılan off-canvas çekmece ve karartmalı arka plan.
 
 ---
 
@@ -152,4 +161,5 @@ Uygulamanın görsel revizyonu `scripts/capture-screenshots.mjs` otomasyon scrip
 | **(c) Mevcut Özelliklerin Korunumu** | 3.150 büyüyü kapsayan Büyü Ağacı tuvali, 24 slotlu RPG envanter ızgarası, savaş haritası sis motoru, karakter kağıdı ve GM paneli tüm kabiliyetlerini muhafaza etmiştir. Ek olarak Dashboard'a Büyü Ağacı kartı eklenmiştir. | Hiçbir mevcut özellik kaybedilmemiştir. | **PASS** |
 | **(d) Görsel Hiyerarşi ve Okunabilirlik** | Cam panellerdeki (`.glass`) kılcal altın parıltılar, kart kontrastları ve donanım hızlandırmalı `hover` efektleri belirginleştirilmiştir. | Okunabilirlik ve görsel odak bariz şekilde iyileştirilmiştir. | **PASS** |
 | **(e) Mobil Genişlikte Sıfır Bozulma (375px)** | Eski versiyonda ekranın %75'ini kaplayıp içeriği ezen sabit kenar çubuğu kaldırılmış; Header'a altın hamburger butonu ve sol taraftan açılan karartmalı off-canvas `drawer` entegre edilmiştir. 375px ekranda sıfır yatay taşma (overflow: 0) doğrulanmıştır. | Mobil görünüm kırılmaları tamamen giderilmiştir. | **PASS** |
+
 
