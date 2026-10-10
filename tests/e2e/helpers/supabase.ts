@@ -1,23 +1,35 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { SUPABASE_CONFIG, TEST_USERS } from './auth';
+import { SUPABASE_CONFIG, getAuthenticatedSession } from './auth';
 
 /**
- * Creates a Supabase client using anon key.
+ * Creates an anonymous Supabase client using anon key without user session.
  */
-export function getSupabaseClient(): SupabaseClient {
+export function getAnonSupabaseClient(): SupabaseClient {
   return createClient(SUPABASE_CONFIG.supabaseUrl, SUPABASE_CONFIG.supabaseAnonKey);
 }
 
 /**
- * Creates a Supabase client authenticated as a specific user with custom Bearer token header or session.
+ * Convenience alias for general querying.
  */
-export function getAuthenticatedClient(role: 'gm' | 'player' = 'player'): SupabaseClient {
-  const user = TEST_USERS[role];
+export function getSupabaseClient(): SupabaseClient {
+  return getAnonSupabaseClient();
+}
+
+/**
+ * Creates an authentic Supabase client authenticated as the specified role.
+ * Obtains genuine session via signInWithPassword and attaches real user JWT Bearer token.
+ * Does NOT forge tokens or inject anon keys.
+ */
+export async function getAuthenticatedSupabaseClient(role: 'gm' | 'player' = 'player'): Promise<SupabaseClient> {
+  const session = await getAuthenticatedSession(role);
   return createClient(SUPABASE_CONFIG.supabaseUrl, SUPABASE_CONFIG.supabaseAnonKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
     global: {
       headers: {
-        // Pass user identifier for mock test isolation if configured
-        'x-test-user-id': user.id,
+        Authorization: `Bearer ${session.access_token}`,
       },
     },
   });
@@ -34,4 +46,4 @@ export const GM_TABLES = [
   'campaign_loot_chests',
 ] as const;
 
-export type GMTableName = typeof GM_TABLES[number];
+export type GMTableName = (typeof GM_TABLES)[number];

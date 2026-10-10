@@ -5,12 +5,15 @@ import {
   Crown, Users, Zap, Backpack, TreePine, Map,
   Plus, Minus, Send, Sparkles,
   Package, Shield, Sword, Heart, Clock,
-  Trash2, Check, X
+  Trash2, Check, X, Swords, CloudRain, Coins, ShieldAlert
 } from 'lucide-react';
 import { useCampaign } from '../../contexts/CampaignContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
 import { GMSpellManager } from './GMSpellManager';
+import { GMCombatTracker } from './GMCombatTracker';
+import { GMAtmosphereManager } from './GMAtmosphereManager';
+import { GMLootDispenser } from './GMLootDispenser';
 import type { RaceDefinition, SubclassDefinition, StatKey } from '../../lib/types';
 
 // ─── Types ──────────────────────────────────────────────────────
@@ -131,10 +134,13 @@ const STAT_COLORS: Record<string, string> = {
 
 // ─── Tab definitions ────────────────────────────────────────────
 
-type TabKey = 'overview' | 'party' | 'xp' | 'inventory' | 'stats' | 'spells';
+type TabKey = 'overview' | 'combat' | 'atmosphere' | 'loot' | 'party' | 'xp' | 'inventory' | 'stats' | 'spells';
 
 const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
   { key: 'overview', label: 'Overview', icon: <Crown size={16} /> },
+  { key: 'combat', label: 'Combat Tracker', icon: <Swords size={16} /> },
+  { key: 'atmosphere', label: 'Atmosphere & Chronicle', icon: <CloudRain size={16} /> },
+  { key: 'loot', label: 'Loot Dispenser', icon: <Coins size={16} /> },
   { key: 'party', label: 'Party', icon: <Users size={16} /> },
   { key: 'xp', label: 'XP', icon: <Zap size={16} /> },
   { key: 'inventory', label: 'Inventory', icon: <Backpack size={16} /> },
@@ -146,7 +152,7 @@ const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
 
 export function GMDashboard() {
   const { campaign, members } = useCampaign();
-  const { locale } = useAuth();
+  const { locale, isGM } = useAuth();
 
   const [activeTab, setActiveTab] = useState<TabKey>('overview');
   const [players, setPlayers] = useState<DemoPlayer[]>([]);
@@ -493,6 +499,22 @@ export function GMDashboard() {
     }
   };
 
+  if (!isGM) {
+    return (
+      <div className="w-full max-w-[900px] mx-auto text-center py-16 px-4">
+        <div className="glass p-8 rounded-2xl border border-red-500/20 max-w-md mx-auto space-y-4 shadow-[0_0_30px_rgba(239,68,68,0.1)]">
+          <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto text-red-400">
+            <ShieldAlert className="w-8 h-8" />
+          </div>
+          <h2 className="text-xl font-cinzel font-bold text-red-300">Yasak Bölge (GM Only)</h2>
+          <p className="text-xs text-gray-400 font-inter leading-relaxed">
+            Bu kontrol paneline ve GM modüllerine yalnızca Oyun Yöneticileri (GM) erişebilir. Zindan kapıları sıradan maceracılara kapalıdır.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="w-full text-center py-12 text-gray-500 font-inter">
@@ -524,12 +546,12 @@ export function GMDashboard() {
       </div>
 
       {/* Tab Bar */}
-      <div className="flex gap-1 mb-6 glass rounded-xl p-1.5 border border-white/5">
+      <div className="flex gap-1 mb-6 glass rounded-xl p-1.5 border border-white/5 overflow-x-auto scrollbar-thin">
         {TABS.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 shrink-0 ${
               activeTab === tab.key
                 ? 'bg-gradient-to-r from-[#ffd700]/20 to-[#ff8c00]/10 text-[#ffd700] border border-[#ffd700]/30 shadow-[0_0_15px_rgba(255,215,0,0.1)]'
                 : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
@@ -552,6 +574,15 @@ export function GMDashboard() {
         >
           {activeTab === 'overview' && (
             <OverviewTab players={players} xpLog={xpLog} onNavigate={setActiveTab} />
+          )}
+          {activeTab === 'combat' && (
+            <GMCombatTracker />
+          )}
+          {activeTab === 'atmosphere' && (
+            <GMAtmosphereManager />
+          )}
+          {activeTab === 'loot' && (
+            <GMLootDispenser />
           )}
           {activeTab === 'party' && (
             <PartyTab
@@ -758,9 +789,12 @@ function OverviewTab({
   ];
 
   const NAV_BUTTONS = [
+    { label: 'Combat Tracker', icon: Swords, color: '#ef4444', desc: 'Encounter & initiative order', action: () => onNavigate('combat') },
+    { label: 'Atmosphere & Lore', icon: CloudRain, color: '#38bdf8', desc: 'Weather & session chronicles', action: () => onNavigate('atmosphere') },
+    { label: 'Loot Dispenser', icon: Coins, color: '#ffd700', desc: 'Chest vault & inventory items', action: () => onNavigate('loot') },
     { label: 'Battle Map', icon: Map, color: '#dc143c', desc: 'Open the fog of war map', action: () => navigate('/map') },
     { label: 'Manage Items', icon: Package, color: '#a855f7', desc: 'View & edit player gear', action: () => onNavigate('inventory') },
-    { label: 'Distribute XP', icon: Zap, color: '#ffd700', desc: 'Award experience points', action: () => onNavigate('xp') },
+    { label: 'Distribute XP', icon: Zap, color: '#eab308', desc: 'Award experience points', action: () => onNavigate('xp') },
   ];
 
   return (
@@ -793,7 +827,7 @@ function OverviewTab({
       {/* Quick Actions */}
       <div>
         <h3 className="text-xs font-cinzel font-bold text-gray-400 uppercase tracking-widest mb-3">Quick Actions</h3>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {NAV_BUTTONS.map((btn, i) => {
             const inner = (
               <motion.div

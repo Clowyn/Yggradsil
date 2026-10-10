@@ -1,47 +1,49 @@
-# E2E Test Suite Architecture & Infrastructure Plan (`TEST_INFRA.md`)
+# E2E Test Suite Architecture & Infrastructure Specification (`TEST_INFRA.md`)
 
 ## 1. Overview
-The D&D Campaign Management web application uses Playwright (`@playwright/test`) for comprehensive, deterministic End-to-End (E2E) functional verification. The test suite exercises both frontend client behavior and backend Supabase Row Level Security (RLS) policies across GM and Player roles.
+The D&D Campaign Management web application uses Playwright (`@playwright/test`) for comprehensive, transparent End-to-End (E2E) functional verification. The test suite exercises both frontend client behavior across GM and Player roles and backend Supabase Row Level Security (RLS) policies using authentic JWT authentication.
 
 ---
 
-## 2. Test Architecture & Directory Layout
+## 2. Directory Layout
 
 ```
 d:/DnD/
-├── playwright.config.ts          # Playwright test configuration & Vite webServer harness
+├── playwright.config.ts                    # Playwright runner configuration & Vite dev harness
 ├── tests/
 │   └── e2e/
 │       ├── helpers/
-│       │   ├── auth.ts           # Session injector & console error monitor
-│       │   └── supabase.ts       # Direct Supabase client & GM table contracts
-│       ├── 01-route-health.spec.ts         # Tier 1: Route health & zero console errors
-│       ├── 02-gm-modules-crud.spec.ts      # Tier 2 & 4: GM modules CRUD & reload persistence
-│       ├── 03-player-security-rls.spec.ts   # Tier 2: Player UI security & RLS query rejection
-│       └── 04-bug-regressions.spec.ts      # Tier 3: Critical bug regression verifications
-├── TEST_INFRA.md                 # Test architecture specification (this document)
-└── TEST_READY.md                 # Test suite readiness & execution guide
+│       │   ├── auth.ts                     # Authentic login, JWT injection & console error collector
+│       │   └── supabase.ts                 # Direct authenticated Supabase clients & table contracts
+│       ├── 01-route-health.spec.ts         # Tier 1: Authenticated route navigation & 0 console errors
+│       ├── 02-gm-modules-crud.spec.ts      # Tier 2 & 4: UI-driven GM module CRUD & reload persistence
+│       ├── 03-player-security-rls.spec.ts   # Tier 2: Player UI restrictions & authentic JWT RLS rejection
+│       └── 04-bug-regressions.spec.ts      # Tier 3: Bug regression verifications
+├── TEST_INFRA.md                           # Test architecture & infrastructure (this document)
+└── TEST_READY.md                           # Test readiness, prerequisites & execution guide
 ```
 
 ---
 
 ## 3. Authentication & Session Strategy
 
-### The Challenge
-Public Supabase auth endpoints apply strict IP and domain rate limiting (`email rate limit exceeded`), causing test suites that sign up new accounts on every run to become flaky or blocked.
+### The Flaw in Legacy Test Setups
+Previous implementations injected the `anonKey` as `access_token` into browser `localStorage`, bypassing actual authentication. As a result:
+- Player RLS rejection tests passed due to anonymity rather than the `player` role.
+- GM write tests never validated actual GM authorization.
+- Tests silently returned early if tables were missing, giving a false sense of completion.
 
-### The Solution: Deterministic Pre-authenticated Session Injection
-Instead of creating ephemeral users through HTTP signup calls, `tests/e2e/helpers/auth.ts` uses Playwright's `page.addInitScript()` to inject a validated Supabase session into `window.localStorage` under the project-specific key `sb-<ref>-auth-token` before the application script executes.
-- **GM Account**:
-  - Profile ID: `092418bf-d638-4329-ac49-7404e442c85b`
-  - Username: `Alcyone`
-  - Database Role: `'gm'`
-- **Player Account**:
-  - Profile ID: `b86cd534-eb67-46fa-9ad0-6c5e63d4ae42`
-  - Username: `Bob Valor`
-  - Database Role: `'player'`
-
-This guarantees sub-second, 100% deterministic authentication without network latency or external rate limits.
+### The Authentic Authentication Architecture
+1. **Real Credential Sourcing**:
+   - Environment variables `E2E_GM_EMAIL`, `E2E_GM_PASSWORD`, `E2E_PLAYER_EMAIL`, and `E2E_PLAYER_PASSWORD` are loaded from `process.env` or `.env.local`.
+   - If missing, tests **explicitly throw an `[AUTHENTICATION ERROR]`** explaining that test credentials must be configured. They never forge dummy tokens or silently pass.
+2. **Authentic Token Acquisition**:
+   - `getAuthenticatedSession(role)` calls `supabase.auth.signInWithPassword({ email, password })`.
+   - Supabase Auth returns a genuine `Session` containing cryptographic JWT `access_token` and `refresh_token` signed by Supabase.
+   - An in-memory cache preserves sessions across test cases during a run to prevent triggering auth rate limits.
+3. **Deterministic Browser Injection**:
+   - `setupAuthSession(page, role)` injects the authentic `Session` into `window.localStorage` under `sb-${projectRef}-auth-token` using `page.addInitScript()`.
+   - On initial page load, `AuthContext.tsx` reads this valid session, queries `profiles` with the authentic JWT, and sets `user`, `profile`, and role state.
 
 ---
 
@@ -49,63 +51,76 @@ This guarantees sub-second, 100% deterministic authentication without network la
 
 ### Tier 1: Route Health & Zero Console Errors (`01-route-health.spec.ts`)
 - **Routes Covered**: `/`, `/dashboard`, `/character`, `/stat-tree`, `/spells`, `/inventory`, `/map`, `/gm`, `/admin`.
-- **GM Verification**: Opens every route and asserts that core DOM containers render properly.
+- **GM Verification**: Navigates to every route with an authentic GM session, asserting page elements render and zero uncaught runtime errors occur.
 - **Player Verification**:
-  - Permitted routes (`/`, `/dashboard`, `/character`, `/stat-tree`, `/spells`, `/inventory`, `/map`) open and render player data.
+  - Permitted routes render player content.
   - Restricted routes (`/gm`, `/admin`) trigger `ProtectedRoute` and redirect to `/`.
-- **Integrity Assertion**: A dedicated `ConsoleErrorCollector` monitors `page.on('console')` and `page.on('pageerror')`, asserting `0` uncaught runtime errors during every navigation.
+- **Integrity Assertion**: `ConsoleErrorCollector` monitors `page.on('console')` and `page.on('pageerror')`, verifying 0 unhandled exceptions.
 
-### Tier 2 & 4: GM Module CRUD & Reload Persistence (`02-gm-modules-crud.spec.ts`)
-- **Module 1 (Combat Tracker)**:
-  - `campaign_encounters`: Creates encounter (`name`, `status`, `round`, `notes`).
-  - `encounter_combatants`: Adds combatant (`name`, `initiative`, `hp_current`, `hp_max`, `ac`, `is_npc`).
-  - Updates status to `active` and advances round to `2`.
-  - Executes `page.reload()` and asserts that updated status and round persist.
-  - Cleans up / deletes test record.
+### Tier 2 & 4: GM Module UI CRUD & Reload Persistence (`02-gm-modules-crud.spec.ts`)
+- **Strict UI-Driven Verification**:
+  - All operations interact directly with the DOM in `GMDashboard.tsx` (opening tabs, filling modal inputs, clicking submit buttons).
+  - Verifies data updates on the page, calls `page.reload()`, and verifies persistence on the reloaded page.
+- **Module 1 (Combat & Initiative Tracker)**:
+  - Creates encounter via UI modal (`[data-testid="encounter-name-input"]`).
+  - Adds combatant via UI modal (`[data-testid="add-combatant-btn"]`).
+  - Advances round via UI button (`[data-testid="next-round-btn"]`).
+  - Reloads and asserts persistence in DOM.
+  - Cleans up encounter.
 - **Module 2 (Atmosphere & Session Chronicle)**:
-  - `session_chronicles`: Creates chronicle entry (`session_number`, `title`, `summary`, `is_published`, `gm_secrets`).
-  - Updates chronicle summary.
-  - Executes `page.reload()` and asserts persistence.
-  - Cleans up / deletes test record.
-- **Module 3 (Loot Dispenser)**:
-  - `campaign_loot_chests`: Creates chest entry (`name`, `gold_amount`, `description`, `items`).
-  - Updates chest state (`is_looted: true`, modifies gold amount).
-  - Executes `page.reload()` and asserts persistence.
-  - Cleans up / deletes test record.
-- **Progressive Testability**: Handles migration pipelines cleanly via schema inspection so tests execute reliably across all implementation milestones.
+  - Creates chronicle via UI modal (`[data-testid="create-session-btn"]`, `[data-testid="session-title-input"]`).
+  - Adjusts environment settings via UI trigger.
+  - Reloads and asserts chronicle persistence.
+- **Module 3 (Loot Dispenser & Vault)**:
+  - Creates loot chest via UI modal (`[data-testid="create-chest-btn"]`, `[data-testid="chest-name-input"]`).
+  - Reloads and asserts chest persistence.
+- **No Early Returns**: All `if (!tableExists) return;` statements have been completely removed. If tabs or inputs are missing, tests fail explicitly.
 
-### Tier 2: Player Security & RLS Rejection (`03-player-security-rls.spec.ts`)
-- **UI Access Control**:
-  - Asserts that player sessions do not render any GM navigation links or GM badges in `Sidebar.tsx`.
-  - Asserts that navigating to `/gm` immediately redirects to `/`.
-  - Asserts that navigating to `/admin` immediately redirects to `/`.
-- **Database & RLS Rejection**:
-  - Exercises direct queries against all 5 GM tables (`campaign_encounters`, `encounter_combatants`, `campaign_environments`, `session_chronicles`, `campaign_loot_chests`).
-  - Asserts that `INSERT`, `UPDATE`, and `DELETE` queries by an unauthorized player session are strictly rejected by PostgreSQL RLS.
-- **Anti-Privilege Escalation**:
-  - Simulates a player attempting `UPDATE profiles SET role = 'admin'` or `'gm'`.
-  - Re-queries the true database record and asserts the role remains strictly `'player'`.
+### Tier 2: Player Security & Authentic RLS Rejection (`03-player-security-rls.spec.ts`)
+- **UI Restrictions**:
+  - Asserts that player sessions do not render GM links or badges in the sidebar.
+  - Asserts that navigation to `/gm` or `/admin` redirects to `/`.
+- **Authentic Database RLS Rejection**:
+  - Obtains `getAuthenticatedSupabaseClient('player')` with real player JWT in `Authorization: Bearer <token>`.
+  - Executes `INSERT`, `UPDATE`, and `DELETE` queries against all 5 GM tables (`campaign_encounters`, `encounter_combatants`, `campaign_environments`, `session_chronicles`, `campaign_loot_chests`).
+  - Asserts that queries are rejected by PostgreSQL with code `42501` (insufficient privilege) or RLS policy violation.
+- **Privilege Escalation Protection**:
+  - Player attempts `UPDATE profiles SET role = 'admin' WHERE id = player.id`.
+  - Asserts that query is rejected or that database profile role remains strictly `'player'`.
 
 ### Tier 3: Bug Regression Suite (`04-bug-regressions.spec.ts`)
 - **Bug 1 (`ItemCard.tsx`)**:
-  - Verifies that empty inventory slots are active drop targets with `setNodeRef` attached and do NOT have `disabled` or `aria-disabled="true"`.
-  - Verifies that dragging items over empty slots executes safely without sortable crashes.
+  - Verifies empty inventory slots are active drop targets without `disabled` or `aria-disabled="true"`.
 - **Bug 2 (`GameMap.tsx`)**:
-  - Verifies that tokens without a `label` property render safely on the Canvas using fallback initials (`'T'`) without triggering `TypeError: Cannot read properties of undefined (reading 'split')`.
+  - Verifies canvas renders safely when tokens lack `label`, using fallback logic without throwing `TypeError`.
 - **Bug 3 (`GMDashboard.tsx`)**:
-  - Verifies the XP distribution formula: when awarding XP to a character with spent XP, `xp_total` and `xp_available` increment additively without resetting `xp_available` to `newXp` or wiping spent XP balance.
+  - Verifies the XP distribution formula: awarding XP increments `xp_total` and `xp_available` additively without wiping spent XP balance.
 
 ---
 
-## 5. Execution & CI Command
-To run the full test suite locally or in CI:
+## 5. Execution Prerequisites & Commands
 
+### Prerequisites
+1. Run migrations in Supabase SQL Editor:
+   - `supabase/migrations/01_security_and_rls_hardening.sql`
+   - `supabase/migrations/02_schema_consistency.sql`
+   - `supabase/migrations/03_new_gm_modules.sql`
+2. Configure `.env.local`:
+   ```bash
+   E2E_GM_EMAIL="..."
+   E2E_GM_PASSWORD="..."
+   E2E_PLAYER_EMAIL="..."
+   E2E_PLAYER_PASSWORD="..."
+   ```
+
+### Running Tests
 ```powershell
+# Run all tests
 npx playwright test
-```
 
-To run with UI or debug mode:
-
-```powershell
+# Run with Playwright UI inspector
 npx playwright test --ui
+
+# Verify test linting (0 errors)
+npx eslint tests/
 ```

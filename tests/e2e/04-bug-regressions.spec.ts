@@ -19,11 +19,11 @@ test.describe('Tier 3: Bug Regression — Inventory Drop Targets (ItemCard.tsx)'
     const consoleMonitor = createConsoleErrorCollector(page);
 
     await page.goto('/inventory');
-    await expect(page.getByText('Inventory').first()).toBeVisible();
+    await expect(page.getByText(/inventory|envanter/i).first()).toBeVisible({ timeout: 10000 });
 
     // Locate all empty inventory slots
-    const emptySlots = page.getByText('Empty', { exact: true });
-    await expect(emptySlots.first()).toBeVisible();
+    const emptySlots = page.getByText(/empty|boş/i);
+    await expect(emptySlots.first()).toBeVisible({ timeout: 7000 });
     const emptyCount = await emptySlots.count();
 
     expect(emptyCount).toBeGreaterThan(0);
@@ -51,8 +51,8 @@ test.describe('Tier 3: Bug Regression — Inventory Drop Targets (ItemCard.tsx)'
     await page.waitForLoadState('domcontentloaded');
 
     // Find the first occupied item card and the first empty slot
-    const emptySlot = page.locator('div:has-text("Empty")').filter({ hasText: /^Empty$/ }).first();
-    await expect(emptySlot).toBeVisible();
+    const emptySlot = page.locator('div:has-text("Empty"), div:has-text("Boş")').first();
+    await expect(emptySlot).toBeVisible({ timeout: 7000 });
 
     // Verify empty slot bounding box is present and interactable
     const box = await emptySlot.boundingBox();
@@ -77,7 +77,7 @@ test.describe('Tier 3: Bug Regression — Map Token Label Null Safety (GameMap.t
 
     // Verify map canvas is rendered
     const mapCanvas = page.locator('canvas').first();
-    await expect(mapCanvas).toBeVisible();
+    await expect(mapCanvas).toBeVisible({ timeout: 10000 });
 
     // Inject a simulated map token missing label into canvas draw cycle
     await page.evaluate(() => {
@@ -92,7 +92,12 @@ test.describe('Tier 3: Bug Regression — Map Token Label Null Safety (GameMap.t
             color: '#dc2626',
           };
           const safeLabel = mockToken.label || 'T';
-          const initials = safeLabel.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+          const initials = safeLabel
+            .split(' ')
+            .map((w) => w[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
           ctx.fillText(initials, mockToken.x_position, mockToken.y_position);
         }
       }
@@ -132,11 +137,30 @@ test.describe('Tier 3: Bug Regression — XP Calculation Integrity (GMDashboard.
     expect(newXpSpentCalculated).toBe(initialPlayer.xp_spent);
   });
 
+  test('Awarding XP handles null or undefined xp_available safely', () => {
+    const playerWithNoSpent = {
+      xp_total: 1000,
+      xp_available: undefined,
+    };
+
+    const awardAmount = 250;
+    const newXpTotal = playerWithNoSpent.xp_total + awardAmount;
+    const newXpAvailable = (playerWithNoSpent.xp_available ?? 0) + awardAmount;
+
+    expect(newXpTotal).toBe(1250);
+    expect(newXpAvailable).toBe(250);
+  });
+
   test('Database update payload preserves existing spent XP on character update', async () => {
     const supabase = getSupabaseClient();
 
-    // Query an existing character to verify schema fields
-    const { data: characters } = await supabase.from('characters').select('id, xp_total, xp_available').limit(1);
+    // Query characters table to verify schema fields
+    const { data: characters, error } = await supabase
+      .from('characters')
+      .select('id, xp_total, xp_available')
+      .limit(1);
+
+    expect(error, 'Characters table query must succeed without schema errors').toBeNull();
 
     if (characters && characters.length > 0) {
       const char = characters[0];

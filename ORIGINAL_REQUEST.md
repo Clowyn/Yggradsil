@@ -454,3 +454,22 @@ All rules in `.agents/AGENTS.md` must be followed: React Flow transform ban, fix
 ## Follow-up — 2026-10-10T14:55:55Z
 
 KULLANICI TALİMATI: M2 hata düzeltmeleri / checkpoint commit'i atıldığı anda (veya herhangi bir ilk commit atıldığında), sonraki adımlara (Milestone 3, GM modülleri, UI revamp vb.) GEÇMEYİN. Commit işlemi tamamlandıktan hemen sonra bütün süreci PAUSE / DURAKLATMA durumuna alın ve durumu kullanıcıya bildirin. Başka bir değişiklik veya sonraki milestone başlatmayın.
+
+
+## Follow-up — 2026-10-10T19:08:28Z
+
+KULLANICI: "Devam et" — PAUSE kaldırıldı. Sunucu yeniden başladığı için orkestratör ve alt ajanlar durdu; lütfen orkestratörü canlandırıp M3 (GM modülleri UI + veri katmanı), M4 (performans uygulaması + önce/sonra ölçümleri) ve M5 (UI revizyonu + bağımsız rubrik incelemesi) aşamalarına devam edin. Kullanıcı tarafından bir sonraki checkpoint'te durma talimatı YOKTUR; tüm kabul kriterleri karşılanana kadar devam edin.
+
+ANCAK önce aşağıdaki doğrulama sorunlarını düzeltin — üst seviye denetimde mevcut "45/45 PASS" sonucunun kabul kriterlerini KARŞILAMADIĞI tespit edildi:
+
+1. SAHTE AUTH: tests/e2e/helpers/auth.ts `access_token` olarak ANON KEY enjekte ediyor. Bu yüzden tüm Supabase istekleri anonim gidiyor: "oyuncu RLS reddi" testleri rolden değil anonimlikten geçiyor, GM yazma testleri ise gerçek GM yetkisini hiç denemiyor. Testler gerçek oturumla (supabase.auth.signInWithPassword ile alınan gerçek JWT) çalışmalı. Test hesabı kimlik bilgileri .env.local'deki env değişkenlerinden okunmalı (ör. E2E_GM_EMAIL / E2E_GM_PASSWORD / E2E_PLAYER_EMAIL / E2E_PLAYER_PASSWORD); bunlar commit edilmemeli ve raporlara yazılmamalı. Değişkenler yoksa testler AÇIKÇA FAIL etmeli (sessizce geçmemeli).
+
+2. SESSİZ GEÇEN TESTLER: 02-gm-modules-crud.spec.ts tablo yoksa `return` ile PASS sayılıyor. Tablo/kolon eksikse test FAIL olmalı. Hiçbir kabul testi early-return/skip ile geçmiş sayılamaz.
+
+3. UI ÜZERİNDEN DOĞRULAMA: GM modül testleri CRUD işlemlerini doğrudan supabase client ile değil, GM arayüzündeki gerçek modül UI'ı üzerinden yapmalı, ardından page.reload() sonrası kalıcılığı UI'da doğrulamalı. RLS reddi ise ayrıca gerçek player JWT'si ile doğrudan Supabase sorgularıyla doğrulanmalı.
+
+4. MIGRATION DURUMU: .env.local yalnızca VITE_SUPABASE_URL ve VITE_SUPABASE_ANON_KEY içeriyor; yani migration'lar canlı DB'ye uygulanamaz ve şu an UYGULANMAMIŞ durumda. R6 gereği: migration dosyalarını tamamlayın/sonlandırın, kullanıcının SQL Editor'da çalıştırması gereken dosyaları ve sırasını net raporlayın. 01_security_and_rls_hardening.sql mevcut canlı politikaları değiştirdiği için, her politika değişikliğinin mevcut oyuncu/GM akışlarını kırmadığını kodla çapraz kontrol edin ve raporda risk notu düşün.
+
+5. KULLANICI BAĞIMLILIĞI: Migration uygulanması ve test hesabı kimlik bilgileri kullanıcıya bağlı. Bunlar olmadan yapılabilecek her şeyi (kod, UI, migration dosyaları, testler, build/lint, performans ölçümü, ekran görüntüleri) bitirin. Canlı DB gerektiren testler için hazır olduğunuzda bana kullanıcıdan istenecek adımların net bir listesini gönderin (hangi migration'lar hangi sırayla, hangi env değişkenleri, test hesaplarının rolleri). Kullanıcı bunları sağladıktan sonra testler gerçek ortamda koşturulup sonuçlar raporlanacak.
+
+TEST_READY.md ve R1 raporundaki "fixed" durumlarını yeni gerçek test sonuçlarına göre güncelleyin; doğrulanmamış hiçbir şeyi PASS olarak raporlamayın.

@@ -168,6 +168,7 @@ export interface InventoryItem {
   item_definition_id: string;
   quantity: number;
   equipped: boolean;
+  slot_index?: number;
   acquired_at: string;
   item_definition?: ItemDefinition;
 }
@@ -294,5 +295,101 @@ export interface AdminStats {
   totalCampaigns: number;
   totalItems: number;
   totalSpells: number;
+}
+
+// --- GM Modules (Combat, Atmosphere, Loot) ---
+export type EncounterStatus = 'preparing' | 'active' | 'completed';
+
+export interface CampaignEncounter {
+  id: string;
+  campaign_id: string;
+  name: string;
+  status: EncounterStatus;
+  round: number;
+  active_combatant_id: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type DndCondition =
+  | 'blinded'
+  | 'charmed'
+  | 'deafened'
+  | 'frightened'
+  | 'grappled'
+  | 'incapacitated'
+  | 'invisible'
+  | 'paralyzed'
+  | 'petrified'
+  | 'poisoned'
+  | 'prone'
+  | 'restrained'
+  | 'stunned'
+  | 'unconscious'
+  | 'exhaustion';
+
+export interface EncounterCombatant {
+  id: string;
+  encounter_id: string;
+  character_id: string | null;
+  name: string;
+  initiative: number;
+  hp_current: number;
+  hp_max: number;
+  hp_temp: number;
+  ac: number;
+  is_npc: boolean;
+  is_hidden: boolean;
+  conditions: DndCondition[];
+  sort_order: number;
+}
+
+export type EnvironmentWeather = 'clear' | 'fog' | 'rain' | 'storm' | 'ash' | 'sunny';
+export type EnvironmentTimeOfDay = 'dawn' | 'noon' | 'dusk' | 'midnight' | 'twilight';
+export type EnvironmentDangerLevel = 'safe' | 'low' | 'normal' | 'high' | 'deadly';
+
+export interface CampaignEnvironment {
+  id: string;
+  campaign_id: string;
+  weather: EnvironmentWeather;
+  time_of_day: EnvironmentTimeOfDay;
+  ambient_preset: string;
+  danger_level: EnvironmentDangerLevel;
+  updated_at: string;
+}
+
+export interface SessionChronicle {
+  id: string;
+  campaign_id: string;
+  session_number: number;
+  title: string;
+  summary: string;
+  in_game_date: string | null;
+  is_published: boolean;
+  gm_secrets: string | null;
+  created_at: string;
+}
+
+export interface LootItem {
+  id?: string;
+  name: string;
+  rarity?: ItemRarity;
+  type?: ItemType;
+  quantity: number;
+  icon?: string;
+  properties?: Record<string, unknown>;
+  item_definition_id?: string;
+}
+
+export interface CampaignLootChest {
+  id: string;
+  campaign_id: string;
+  name: string;
+  description: string | null;
+  is_looted: boolean;
+  gold_amount: number;
+  items: LootItem[];
+  created_at: string;
 }
 
