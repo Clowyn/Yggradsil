@@ -340,65 +340,130 @@ function getOrCalculateSpellCoordinates(treeId: string, spellsInTree: SpellNode[
   return cached;
 }
 
-// In-memory static cache for spell tree definitions across tab navigation
+// In-memory cache for spell tree definitions and tree-scoped spells
+export const spellTreeCache = new Map<string, SpellNode[]>();
 let cachedSpellTrees: SpellTree[] | null = null;
-let cachedSpells: SpellNode[] | null = null;
-let staticFetchPromise: Promise<{ trees: SpellTree[]; spells: SpellNode[] }> | null = null;
+let fetchTreesPromise: Promise<SpellTree[]> | null = null;
+const pendingTreeFetches = new Map<string, Promise<SpellNode[]>>();
 
-async function fetchStaticSpellData(): Promise<{ trees: SpellTree[]; spells: SpellNode[] }> {
-  if (cachedSpellTrees && cachedSpells) {
-    return { trees: cachedSpellTrees, spells: cachedSpells };
+export async function fetchSpellTrees(): Promise<SpellTree[]> {
+  if (cachedSpellTrees) {
+    return cachedSpellTrees;
   }
-  if (!staticFetchPromise) {
-    staticFetchPromise = (async () => {
-      const { data: treesData, error: treesError } = await supabase
+  if (!fetchTreesPromise) {
+    fetchTreesPromise = (async () => {
+      const { data, error } = await supabase
         .from('spell_trees')
         .select('*, assignments:spell_tree_assignments(*)');
 
-      if (treesError) throw treesError;
-
-      let spellsData: SpellNode[] = [];
-      let from = 0;
-      const limit = 1000;
-      let hasMore = true;
-
-      while (hasMore) {
-        const to = from + limit - 1;
-        const { data: chunk, error: spellsError } = await supabase
-          .from('spells')
-          .select('*')
-          .range(from, to);
-
-        if (spellsError) throw spellsError;
-        if (chunk && chunk.length > 0) {
-          spellsData = [...spellsData, ...chunk];
-          if (chunk.length < limit) {
-            hasMore = false;
-          } else {
-            from += limit;
-          }
-        } else {
-          hasMore = false;
-        }
-      }
-
-      cachedSpellTrees = treesData || [];
-      cachedSpells = spellsData || [];
-      return { trees: cachedSpellTrees, spells: cachedSpells };
+      if (error) throw error;
+      cachedSpellTrees = data || [];
+      return cachedSpellTrees;
     })().finally(() => {
-      staticFetchPromise = null;
+      fetchTreesPromise = null;
     });
   }
-  return staticFetchPromise;
+  return fetchTreesPromise;
+}
+
+export async function fetchSpellsForTree(treeId: string): Promise<SpellNode[]> {
+  const cached = spellTreeCache.get(treeId);
+  if (cached) {
+    return cached;
+  }
+  const pending = pendingTreeFetches.get(treeId);
+  if (pending) {
+    return pending;
+  }
+
+  const fetchPromise = (async () => {
+    const { data, error } = await supabase
+      .from('spells')
+      .select('*')
+      .eq('spell_tree_id', treeId);
+
+    if (error) throw error;
+    const loadedSpells = (data as SpellNode[]) || [];
+    spellTreeCache.set(treeId, loadedSpells);
+    return loadedSpells;
+  })().finally(() => {
+    pendingTreeFetches.delete(treeId);
+  });
+
+  pendingTreeFetches.set(treeId, fetchPromise);
+  return fetchPromise;
+}
+
+export async function fetchSpellsForTrees(treeIds: string[]): Promise<SpellNode[]> {
+  if (treeIds.length === 0) return [];
+  const results: SpellNode[] = [];
+  const treeSpellsArray = await Promise.all(treeIds.map(id => fetchSpellsForTree(id)));
+  for (const treeSpells of treeSpellsArray) {
+    results.push(...treeSpells);
+  }
+  return results;
+}
+
+export async function fetchStaticSpellData(targetTreeId?: string): Promise<{ trees: SpellTree[]; spells: SpellNode[] }> {
+  const trees = await fetchSpellTrees();
+  if (targetTreeId) {
+    const spells = await fetchSpellsForTree(targetTreeId);
+    return { trees, spells };
+  }
+  const allCached = Array.from(spellTreeCache.values()).flat();
+  return { trees, spells: allCached };
+}
+
+export function getMatchingTreeIds(
+  character: SpellTreeCharacter | null,
+  trees: SpellTree[],
+  isFallback = false
+): string[] {
+  if (!character) return [];
+  if (isFallback) {
+    return trees.map(t => t.id);
+  }
+
+  const classCategoryKey = character.subclass?.category?.key;
+  const subclassKey = character.subclass?.key;
+  const raceKey = character.race?.key;
+  const charLevel = character.level ?? 1;
+
+  let matched = trees.filter(tree => {
+    if (!tree.assignments || tree.assignments.length === 0) return false;
+    return tree.assignments.some(assign => {
+      if (charLevel < (assign.min_level ?? 1)) return false;
+      if (assign.class_key && classCategoryKey !== assign.class_key) return false;
+      if (assign.race_key && raceKey !== assign.race_key) return false;
+      if (assign.subclass_key) return assign.subclass_key === subclassKey;
+      return Boolean(assign.class_key && assign.class_key === classCategoryKey);
+    });
+  });
+
+  if (matched.length === 0 && subclassKey) {
+    matched = trees.filter(tree => {
+      if (!tree.assignments || tree.assignments.length === 0) return false;
+      return tree.assignments.some(assign => assign.subclass_key === subclassKey);
+    });
+  }
+
+  if (matched.length === 0 && classCategoryKey) {
+    matched = trees.filter(tree => {
+      if (!tree.assignments || tree.assignments.length === 0) return false;
+      return tree.assignments.some(assign => assign.class_key === classCategoryKey);
+    });
+  }
+
+  return matched.map(t => t.id);
 }
 
 export function useSpellTree(characterId: string | null) {
-  const [loading, setLoading] = useState(() => !cachedSpells && Boolean(characterId));
+  const [loading, setLoading] = useState(() => Boolean(characterId));
   const [error, setError] = useState<string | null>(null);
   const [isFallbackMode, setIsFallbackMode] = useState(() => !characterId);
 
   const [spellTrees, setSpellTrees] = useState<SpellTree[]>(() => cachedSpellTrees || MOCK_SPELL_TREES);
-  const [spells, setSpells] = useState<SpellNode[]>(() => cachedSpells || MOCK_SPELLS);
+  const [spells, setSpells] = useState<SpellNode[]>(() => (!characterId ? MOCK_SPELLS : []));
   const [characterSpells, setCharacterSpells] = useState<CharacterSpell[]>([]);
   const [character, setCharacter] = useState<SpellTreeCharacter | null>(() => (!characterId ? MOCK_CHARACTER : null));
 
@@ -412,13 +477,11 @@ export function useSpellTree(characterId: string | null) {
     }
 
     const loadData = async () => {
-      if (!cachedSpells) {
-        setLoading(true);
-      }
+      setLoading(true);
       setError(null);
       try {
-        const [staticData, charRes, charSpellsRes] = await Promise.all([
-          fetchStaticSpellData(),
+        const [treesData, charRes, charSpellsRes] = await Promise.all([
+          fetchSpellTrees(),
           supabase
             .from('characters')
             .select('*, subclass:subclass_definitions(*, category:class_categories(*)), race:race_definitions(*)')
@@ -433,10 +496,17 @@ export function useSpellTree(characterId: string | null) {
         if (charRes.error) throw charRes.error;
         if (charSpellsRes.error) throw charSpellsRes.error;
 
-        setCharacter(charRes.data as unknown as SpellTreeCharacter);
-        setSpellTrees(staticData.trees);
-        setSpells(staticData.spells);
+        const charData = charRes.data as unknown as SpellTreeCharacter;
+        setCharacter(charData);
+        setSpellTrees(treesData);
         setCharacterSpells(charSpellsRes.data || []);
+
+        const targetTreeIds = getMatchingTreeIds(charData, treesData);
+        const scopedSpells = targetTreeIds.length > 0
+          ? await fetchSpellsForTrees(targetTreeIds)
+          : [];
+
+        setSpells(scopedSpells);
         setIsFallbackMode(false);
       } catch (err: unknown) {
         const errMsg = err instanceof Error ? err.message : String(err);
@@ -499,37 +569,9 @@ export function useSpellTree(characterId: string | null) {
   // Filter spell trees based on character's details
   const visibleTrees = useMemo(() => {
     if (!effectiveCharacter) return [];
-
-    const classCategoryKey = effectiveCharacter.subclass?.category?.key;
-    const subclassKey = effectiveCharacter.subclass?.key;
-    const raceKey = effectiveCharacter.race?.key;
-
-    return spellTrees.filter(tree => {
-      if (!tree.assignments || tree.assignments.length === 0) {
-        return false;
-      }
-      return tree.assignments.some(assign => {
-        // Check min_level
-        if (effectiveCharacter.level < (assign.min_level ?? 1)) {
-          return false;
-        }
-        // Check class_key
-        if (assign.class_key && classCategoryKey !== assign.class_key) {
-          return false;
-        }
-        // Check race_key
-        if (assign.race_key && raceKey !== assign.race_key) {
-          return false;
-        }
-        // Check subclass_key - strictly require matching subclass if tree is subclass-specific
-        if (assign.subclass_key) {
-          return assign.subclass_key === subclassKey;
-        }
-        // If tree has no subclass_key, only show if class_key matches
-        return Boolean(assign.class_key && assign.class_key === classCategoryKey);
-      });
-    });
-  }, [spellTrees, effectiveCharacter]);
+    const targetTreeIds = new Set(getMatchingTreeIds(effectiveCharacter, spellTrees, isFallbackMode));
+    return spellTrees.filter(tree => targetTreeIds.has(tree.id));
+  }, [spellTrees, effectiveCharacter, isFallbackMode]);
 
   // Filter out spells that are not linked to the visible spell trees
   const visibleSpells = useMemo(() => {
