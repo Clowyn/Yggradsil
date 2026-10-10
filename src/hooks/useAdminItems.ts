@@ -45,16 +45,24 @@ export function useAdminItems(initialPageSize = 20) {
 
       setItems(data || []);
       setTotalCount(count ?? 0);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin items:', err);
-      setError(err.message || 'Failed to fetch items');
+      setError(err instanceof Error ? err.message : 'Failed to fetch items');
     } finally {
       setLoading(false);
     }
   }, [page, pageSize, search, rarityFilter, typeFilter]);
 
   useEffect(() => {
-    fetchItems();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchItems();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchItems]);
 
   // Create item definition
@@ -80,7 +88,7 @@ export function useAdminItems(initialPageSize = 20) {
 
       await fetchItems();
       return newItem;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error creating item definition:', err);
       throw err;
     }
@@ -109,7 +117,7 @@ export function useAdminItems(initialPageSize = 20) {
       }
 
       await fetchItems();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating item definition:', err);
       throw err;
     }
@@ -156,7 +164,7 @@ export function useAdminItems(initialPageSize = 20) {
 
       setItems((prev) => prev.filter((i) => i.id !== id));
       setTotalCount((prev) => Math.max(0, prev - 1));
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error deleting item definition:', err);
       throw err;
     }

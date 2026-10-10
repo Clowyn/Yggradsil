@@ -81,16 +81,24 @@ export function useAdminCampaigns(initialPageSize = 20) {
       }
 
       setTotalCount(count ?? 0);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin campaigns:', err);
-      setError(err.message || 'Failed to fetch campaigns');
+      setError(err instanceof Error ? err.message : 'Failed to fetch campaigns');
     } finally {
       setLoading(false);
     }
   }, [page, pageSize, search]);
 
   useEffect(() => {
-    fetchCampaigns();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchCampaigns();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchCampaigns]);
 
   // Create campaign
@@ -137,7 +145,7 @@ export function useAdminCampaigns(initialPageSize = 20) {
 
       await fetchCampaigns();
       return newCamp;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error creating campaign:', err);
       throw err;
     }
@@ -172,7 +180,7 @@ export function useAdminCampaigns(initialPageSize = 20) {
       }
 
       await fetchCampaigns();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating campaign:', err);
       throw err;
     }
@@ -232,7 +240,7 @@ export function useAdminCampaigns(initialPageSize = 20) {
 
       setCampaigns((prev) => prev.filter((c) => c.id !== campId));
       setTotalCount((prev) => Math.max(0, prev - 1));
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error deleting campaign:', err);
       throw err;
     }

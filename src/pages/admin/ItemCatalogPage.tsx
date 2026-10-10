@@ -106,7 +106,7 @@ export function ItemCatalogPage() {
   const handleCreateSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setActionError(null);
-    let parsedProps = {};
+    let parsedProps: Record<string, unknown>;
     try {
       parsedProps = JSON.parse(createForm.propertiesJson || '{}');
     } catch {
@@ -127,8 +127,8 @@ export function ItemCatalogPage() {
         properties: parsedProps,
       });
       setIsCreateOpen(false);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to create item definition');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to create item definition');
     } finally {
       setIsCreating(false);
     }
@@ -154,7 +154,7 @@ export function ItemCatalogPage() {
     e.preventDefault();
     if (!editTarget) return;
     setActionError(null);
-    let parsedProps = {};
+    let parsedProps: Record<string, unknown>;
     try {
       parsedProps = JSON.parse(editForm.propertiesJson || '{}');
     } catch {
@@ -175,8 +175,8 @@ export function ItemCatalogPage() {
         properties: parsedProps,
       });
       setEditTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update item definition');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update item definition');
     } finally {
       setIsUpdating(false);
     }
@@ -197,8 +197,8 @@ export function ItemCatalogPage() {
     try {
       await deleteItem(deleteTarget.id);
       setDeleteTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to delete item definition');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete item definition');
     } finally {
       setIsDeleting(false);
     }

@@ -86,16 +86,24 @@ export function useAdminStats() {
       } catch (logErr) {
         console.warn('Could not fetch recent admin logs:', logErr);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin statistics:', err);
-      setError(err.message || 'Failed to fetch statistics');
+      setError(err instanceof Error ? err.message : 'Failed to fetch statistics');
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchStats();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchStats();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchStats]);
 
   return { stats, recentLogs, loading, error, refetch: fetchStats };

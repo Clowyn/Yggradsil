@@ -92,8 +92,8 @@ export function CampaignsPage() {
     try {
       await createCampaign(createForm.name.trim(), createForm.gm_id, createForm.fog_radius);
       setIsCreateOpen(false);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to create campaign');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to create campaign');
     } finally {
       setIsCreating(false);
     }
@@ -122,8 +122,8 @@ export function CampaignsPage() {
         settings: { fog_radius: editForm.fog_radius },
       });
       setEditTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update campaign');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update campaign');
     } finally {
       setIsUpdating(false);
     }
@@ -144,8 +144,8 @@ export function CampaignsPage() {
     try {
       await deleteCampaign(deleteTarget.id);
       setDeleteTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to delete campaign');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete campaign');
     } finally {
       setIsDeleting(false);
     }
@@ -160,8 +160,8 @@ export function CampaignsPage() {
       const list = await getCampaignMembers(camp.id);
       setMembersList(list);
       setSelectedNewProfileId(allProfiles[0]?.id || '');
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to load campaign members');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to load campaign members');
     } finally {
       setLoadingMembers(false);
     }
@@ -174,8 +174,8 @@ export function CampaignsPage() {
       await addMember(membersTarget.id, selectedNewProfileId, newMemberRole);
       const updated = await getCampaignMembers(membersTarget.id);
       setMembersList(updated);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to add member');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to add member');
     }
   };
 
@@ -184,8 +184,8 @@ export function CampaignsPage() {
     try {
       await removeMember(memberId, membersTarget.id);
       setMembersList((prev) => prev.filter((m) => m.id !== memberId));
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to remove member');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to remove member');
     }
   };
 
@@ -196,8 +196,8 @@ export function CampaignsPage() {
       setMembersList((prev) =>
         prev.map((m) => (m.id === memberId ? { ...m, role } : m))
       );
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update member role');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update member role');
     }
   };
 

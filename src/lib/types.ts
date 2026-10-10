@@ -257,7 +257,7 @@ export interface SpellNode {
   tier: number;
   prerequisites: string[];
   position: { x: number; y: number };
-  effects: Record<string, any>;
+  effects: Record<string, unknown>;
   icon?: string;
   created_at?: string;
 }
@@ -278,7 +278,7 @@ export interface AdminLog {
   action: string;
   target_type: string;
   target_id: string | null;
-  details: Record<string, any>;
+  details: Record<string, unknown>;
   created_at: string;
   admin?: Profile;
 }

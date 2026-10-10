@@ -55,16 +55,24 @@ export function useAdminCharacters(initialPageSize = 20) {
 
       setCharacters((data as unknown as Character[]) || []);
       setTotalCount(count ?? 0);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin characters:', err);
-      setError(err.message || 'Failed to fetch characters');
+      setError(err instanceof Error ? err.message : 'Failed to fetch characters');
     } finally {
       setLoading(false);
     }
   }, [page, pageSize, search, campaignFilter, profileFilter]);
 
   useEffect(() => {
-    fetchCharacters();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchCharacters();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchCharacters]);
 
   // Update character
@@ -106,7 +114,7 @@ export function useAdminCharacters(initialPageSize = 20) {
       }
 
       await fetchCharacters();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating character:', err);
       throw err;
     }
@@ -142,7 +150,7 @@ export function useAdminCharacters(initialPageSize = 20) {
       }
 
       await fetchCharacters();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error transferring character:', err);
       throw err;
     }
@@ -212,7 +220,7 @@ export function useAdminCharacters(initialPageSize = 20) {
 
       setCharacters((prev) => prev.filter((c) => c.id !== charId));
       setTotalCount((prev) => Math.max(0, prev - 1));
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error deleting character:', err);
       throw err;
     }
@@ -242,7 +250,7 @@ export function useAdminCharacters(initialPageSize = 20) {
       }
 
       await fetchCharacters();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error bulk deleting characters:', err);
       throw err;
     }
@@ -276,7 +284,7 @@ export function useAdminCharacters(initialPageSize = 20) {
       }
 
       await fetchCharacters();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating bulk levels:', err);
       throw err;
     }

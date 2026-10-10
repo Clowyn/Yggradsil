@@ -23,8 +23,8 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
     }
     try {
       await signUp(email, password, username);
-    } catch (err: any) {
-      setError(err.message || 'Failed to create account. Please try again.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to create account. Please try again.');
     }
   };
 

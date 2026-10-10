@@ -47,7 +47,8 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
 
 function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
   tokens.forEach((token) => {
-    const { x_position: x, y_position: y, color, label } = token;
+    const { x_position: x, y_position: y, color } = token;
+    const safeLabel = token.label || 'T';
 
     // Outer glow
     const glow = ctx.createRadialGradient(x, y, 0, x, y, TOKEN_RADIUS + 8);
@@ -70,7 +71,7 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     ctx.stroke();
 
     // Initials
-    const initials = label
+    const initials = safeLabel
       .split(' ')
       .map((w) => w[0])
       .join('')
@@ -86,7 +87,7 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     // Name label below
     ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
     ctx.font = '9px Inter, sans-serif';
-    ctx.fillText(label, x, y + TOKEN_RADIUS + 12);
+    ctx.fillText(token.label || '', x, y + TOKEN_RADIUS + 12);
   });
 }
 

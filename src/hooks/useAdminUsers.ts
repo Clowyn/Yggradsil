@@ -68,16 +68,24 @@ export function useAdminUsers(initialPageSize = 20) {
       } else {
         setUsers([]);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin users:', err);
-      setError(err.message || 'Failed to fetch users');
+      setError(err instanceof Error ? err.message : 'Failed to fetch users');
     } finally {
       setLoading(false);
     }
   }, [page, pageSize, search, roleFilter]);
 
   useEffect(() => {
-    fetchUsers();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchUsers();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchUsers]);
 
   // Update role
@@ -112,7 +120,7 @@ export function useAdminUsers(initialPageSize = 20) {
       setUsers((prev) =>
         prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
       );
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error updating user role:', err);
       throw err;
     }
@@ -220,7 +228,7 @@ export function useAdminUsers(initialPageSize = 20) {
       // Update state
       setUsers((prev) => prev.filter((u) => u.id !== userId));
       setTotalCount((prev) => Math.max(0, prev - 1));
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error deleting user:', err);
       throw err;
     }

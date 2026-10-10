@@ -34,7 +34,7 @@ function SpellNodeComponent({ data }: NodeProps) {
     `;
 
     if (isDimmed) {
-      return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed opacity-30 grayscale`;
+      return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed opacity-30`;
     }
 
     const cursorClass = 'cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200';
@@ -46,7 +46,7 @@ function SpellNodeComponent({ data }: NodeProps) {
         return `${base} ${cursorClass} border-[#4ade80] bg-gradient-to-b from-[#0a2e1a] to-[#0a0a0f]`;
       case 'locked':
       default:
-        return `${base} ${cursorClass} border-[#333] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] opacity-50 grayscale`;
+        return `${base} ${cursorClass} border-[#333] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] opacity-50`;
     }
   };
 

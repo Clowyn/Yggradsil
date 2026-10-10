@@ -137,7 +137,21 @@ const MOCK_SPELL_TREES: SpellTree[] = [
   }
 ];
 
-const MOCK_CHARACTER = {
+interface SpellTreeCharacter {
+  id: string;
+  name: string;
+  level: number;
+  xp_available: number;
+  subclass?: {
+    key?: string;
+    name_tr?: string;
+    name_en?: string;
+    category?: { key?: string; name_tr?: string; name_en?: string };
+  } | null;
+  race?: { key?: string; name?: string } | null;
+}
+
+const MOCK_CHARACTER: SpellTreeCharacter = {
   id: 'mock-character-id',
   name: 'jhn',
   level: 5,
@@ -343,7 +357,7 @@ async function fetchStaticSpellData(): Promise<{ trees: SpellTree[]; spells: Spe
 
       if (treesError) throw treesError;
 
-      let spellsData: any[] = [];
+      let spellsData: SpellNode[] = [];
       let from = 0;
       const limit = 1000;
       let hasMore = true;
@@ -386,7 +400,7 @@ export function useSpellTree(characterId: string | null) {
   const [spellTrees, setSpellTrees] = useState<SpellTree[]>(() => cachedSpellTrees || MOCK_SPELL_TREES);
   const [spells, setSpells] = useState<SpellNode[]>(() => cachedSpells || MOCK_SPELLS);
   const [characterSpells, setCharacterSpells] = useState<CharacterSpell[]>([]);
-  const [character, setCharacter] = useState<any | null>(() => (!characterId ? MOCK_CHARACTER : null));
+  const [character, setCharacter] = useState<SpellTreeCharacter | null>(() => (!characterId ? MOCK_CHARACTER : null));
 
   // Fallback mock states (for interactivity in offline mode)
   const [mockUnlockedKeys, setMockUnlockedKeys] = useState<Set<string>>(new Set(['blood_bolt']));
@@ -419,13 +433,13 @@ export function useSpellTree(characterId: string | null) {
         if (charRes.error) throw charRes.error;
         if (charSpellsRes.error) throw charSpellsRes.error;
 
-        setCharacter(charRes.data);
+        setCharacter(charRes.data as unknown as SpellTreeCharacter);
         setSpellTrees(staticData.trees);
         setSpells(staticData.spells);
         setCharacterSpells(charSpellsRes.data || []);
         setIsFallbackMode(false);
-      } catch (err: any) {
-        const errMsg = err?.message || err?.details || String(err);
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : String(err);
         if (errMsg.includes('relation not found') || errMsg.includes('schema cache')) {
           console.warn('Database error (relation/schema cache), falling back to mock data:', err);
         } else {
@@ -536,7 +550,7 @@ export function useSpellTree(characterId: string | null) {
 
     // Level prerequisite check
     const level = effectiveCharacter?.level ?? 1;
-    const levelPrereq = (spell as any).level_prerequisite ?? (spell as any).min_level ?? 0;
+    const levelPrereq = (spell as SpellNode & { level_prerequisite?: number }).level_prerequisite ?? spell.min_level ?? 0;
     if (level < levelPrereq) {
       return 'locked';
     }
@@ -583,7 +597,7 @@ export function useSpellTree(characterId: string | null) {
 
         // Update local React state immediately to trigger re-renders
         const newXp = effectiveCharacter.xp_available - spell.xp_cost;
-        setCharacter((prev: any) => prev ? { ...prev, xp_available: newXp } : null);
+        setCharacter((prev) => prev ? { ...prev, xp_available: newXp } : null);
         setCharacterSpells(prev => [
           ...prev,
           {
@@ -603,7 +617,7 @@ export function useSpellTree(characterId: string | null) {
 
   // Node click handler for React Flow integration
   const onNodeClick = useCallback((_event: React.MouseEvent, node: Node) => {
-    const data = node.data as any;
+    const data = node.data as { spell?: SpellNode; isDimmed?: boolean } | undefined;
     if (data?.isDimmed) return; // Prevent interaction with dimmed trees
     if (data && data.spell) {
       unlockSpell(data.spell);

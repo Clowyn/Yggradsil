@@ -166,7 +166,15 @@ export function GMSpellManager() {
   };
 
   useEffect(() => {
-    loadData();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        loadData();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   // Tree Form Reset
@@ -327,10 +335,10 @@ export function GMSpellManager() {
       alert('Cannot perform write operations in offline mock mode.');
       return;
     }
-    let parsedEffects = {};
+    let parsedEffects: Record<string, unknown>;
     try {
       parsedEffects = JSON.parse(effectsJson);
-    } catch (err) {
+    } catch {
       alert(locale === 'tr' ? 'Etkiler JSON formatı geçersiz.' : 'Effects JSON format is invalid.');
       return;
     }

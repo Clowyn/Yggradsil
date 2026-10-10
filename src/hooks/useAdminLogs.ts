@@ -44,16 +44,24 @@ export function useAdminLogs(initialPageSize = 25) {
 
       setLogs((data as unknown as AdminLog[]) || []);
       setTotalCount(count ?? 0);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching admin logs:', err);
-      setError(err.message || 'Failed to fetch audit logs');
+      setError(err instanceof Error ? err.message : 'Failed to fetch audit logs');
     } finally {
       setLoading(false);
     }
   }, [page, pageSize, actionFilter, targetTypeFilter]);
 
   useEffect(() => {
-    fetchLogs();
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchLogs();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, [fetchLogs]);
 
   return {

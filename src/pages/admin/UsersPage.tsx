@@ -48,8 +48,8 @@ export function UsersPage() {
     try {
       await deleteUser(deleteTarget.id);
       setDeleteTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to delete user');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete user');
     } finally {
       setIsDeleting(false);
     }
@@ -59,8 +59,8 @@ export function UsersPage() {
     setActionError(null);
     try {
       await updateUserRole(userId, newRole);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update role');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update role');
     }
   };
 

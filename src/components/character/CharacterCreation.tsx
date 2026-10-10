@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { RaceTierKey } from '../../lib/types';
+import type { RaceTierKey, StatKey } from '../../lib/types';
 import { RaceTierSelector } from './RaceTierSelector';
 import { RaceSelector } from './RaceSelector';
 import { ClassCategorySelector } from './ClassCategorySelector';
@@ -148,7 +148,7 @@ export function CharacterCreation() {
         const classBonus = (subclassData.base_stats as Record<string, number>)?.[stat] ?? 0;
         return {
           character_id: charData.id,
-          stat_key: stat as any,
+          stat_key: stat as StatKey,
           base_value: 10 + raceBonus + classBonus,
           bonus_value: 0
         };

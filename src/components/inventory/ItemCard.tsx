@@ -37,7 +37,7 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
     transform,
     transition,
     isDragging,
-  } = useSortable({ id, disabled: !item });
+  } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -47,7 +47,7 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
 
   if (!item) {
     return (
-      <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="w-full aspect-square rounded-lg border-2 border-dashed border-white/10 bg-white/[0.02] flex items-center justify-center">
+      <div ref={setNodeRef} style={style} {...attributes} className="w-full aspect-square rounded-lg border-2 border-dashed border-white/10 bg-white/[0.02] flex items-center justify-center">
         <span className="text-xs text-gray-700">Empty</span>
       </div>
     );

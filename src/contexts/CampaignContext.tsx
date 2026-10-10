@@ -270,7 +270,7 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     };
 
     loadCampaignData();
-  }, [user, profile]);
+  }, [user, profile, setActiveCharacterId]);
 
   useEffect(() => {
     if (!campaign?.id) return;
@@ -318,7 +318,7 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [campaign?.id, activeCharacterId]);
+  }, [campaign?.id, activeCharacterId, setActiveCharacterId]);
 
   const createCampaign = useCallback(async (name: string) => {
     if (!user) return;
@@ -408,6 +408,7 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
     members,
     characters,
     activeCharacterId,
+    setActiveCharacterId,
     loading,
     createCampaign,
     joinCampaign,

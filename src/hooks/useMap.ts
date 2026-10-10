@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { MapToken } from '../lib/types';
+import { useAuth } from '../contexts/AuthContext';
 
 // ─── Demo Map State ────────────────────────────────────────────
 
@@ -67,9 +68,9 @@ const INITIAL_TOKENS: MapToken[] = [
 // ─── Hook ──────────────────────────────────────────────────────
 
 export function useMap() {
+  const { isGM } = useAuth();
   const [mapState, setMapState] = useState<MapStateLocal>(INITIAL_MAP_STATE);
   const [tokens, setTokens] = useState<MapToken[]>(INITIAL_TOKENS);
-  const [isGM] = useState(true);
 
   const updateTokenPosition = useCallback((id: string, x: number, y: number) => {
     setTokens((prev) =>

@@ -49,7 +49,7 @@ function SkillNodeComponent({ data }: NodeProps) {
       case 'locked':
       default:
         return `${base} border-[#333] bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d]
-          opacity-50 grayscale`;
+          opacity-50`;
     }
   };
 

@@ -22,6 +22,7 @@ interface DemoPlayer {
   className: string;
   level: number;
   xp: number;
+  xp_available?: number;
   color: string;
   hp: { current: number; max: number };
   ac: number;
@@ -254,7 +255,7 @@ export function GMDashboard() {
     const dexStat = statsMap['DEX'] || 10;
     const baseAC = 10 + Math.floor((dexStat - 10) / 2);
     const equippedArmor = char.inventory?.find((i) => i.equipped && i.item_definition?.type === 'armor');
-    const ac = equippedArmor?.item_definition ? parseInt((equippedArmor.item_definition.properties as any)?.AC || '10', 10) : baseAC;
+    const ac = equippedArmor?.item_definition ? parseInt((equippedArmor.item_definition.properties as Record<string, string> | null)?.AC || '10', 10) : baseAC;
 
     return {
       id: char.id,
@@ -263,6 +264,7 @@ export function GMDashboard() {
       className: char.subclass ? (locale === 'en' ? char.subclass.name_en : char.subclass.name_tr) : 'Unknown',
       level: char.level || 1,
       xp: char.xp_total || 0,
+      xp_available: char.xp_available ?? 0,
       color: colors[colorIndex],
       hp: { current: maxHP, max: maxHP },
       ac,
@@ -352,13 +354,14 @@ export function GMDashboard() {
 
     const newXp = Math.max(0, player.xp + amount);
     const newLevel = Math.floor(newXp / 1000) + 1;
+    const newXpAvailable = Math.max(0, (player.xp_available ?? 0) + amount);
 
     try {
       const { error } = await supabase
         .from('characters')
         .update({
           xp_total: newXp,
-          xp_available: newXp, // Update pool for tree unlocks
+          xp_available: newXpAvailable,
           level: newLevel,
           updated_at: new Date().toISOString()
         })
@@ -368,7 +371,7 @@ export function GMDashboard() {
       
       // Update local state
       setPlayers(prev => prev.map(p =>
-        p.id === playerId ? { ...p, xp: newXp, level: newLevel } : p
+        p.id === playerId ? { ...p, xp: newXp, xp_available: newXpAvailable, level: newLevel } : p
       ));
 
       setXpLog(prev => [{

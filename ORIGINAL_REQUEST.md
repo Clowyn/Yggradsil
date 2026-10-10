@@ -388,3 +388,69 @@ The "Filter by Branch" panel in `SpellTreeGraph.tsx` is currently rigid, dark, a
 - [ ] `npx tsc --noEmit` passes with no errors.
 - [ ] The React app compiles and runs successfully.
 
+
+
+## Follow-up — 2026-10-10T13:58:11Z
+
+Review the existing D&D campaign-management web app end to end (React 19 + TypeScript + Vite + Tailwind v4 + React Flow + Framer Motion + Supabase, dark-fantasy RPG theme). Produce audit and planning reports, then implement the UI revamp, the new GM control modules and the fixes for the broken functions. All reports must be written in **Turkish**.
+
+Working directory: d:\DnD (work directly on the current main branch; commit at logical checkpoints so each step can be reverted)
+Integrity mode: development
+
+Reference material inside the repo: `PROJECT.md`, `PROJECT_SUMMARY.md`, `README.md`, `ORIGINAL_REQUEST.md`, the `*.sql` files, `supabase/`, and the project rules in `.agents/AGENTS.md` (these rules are binding; see R6).
+
+## Requirements
+
+### R1. Audit report: architectural/logical gaps and broken functions
+Inspect the whole codebase (frontend, contexts/hooks, Supabase schema, RLS policies, migrations/seeds) and list the architectural and logical gaps. Find the functions that are broken or behave incorrectly, and write a fix plan for each one. Every finding gets a severity, a file/line reference and evidence (a reproduction step, an error message or a code excerpt).
+
+### R2. Research report on potential new features
+Research features that would add value to the app (player and GM experience, real-time play, content management, etc.). For each one, state its value, its rough cost and its dependencies, and prioritize them.
+
+### R3. Optimization plan for a smoother web experience
+Measure the current performance (bundle size, initial load, re-renders, large React Flow graphs, Supabase query patterns, etc.) and write a prioritized optimization plan. Apply the optimizations that fall within reasonable scope and report the before/after measurements.
+
+### R4. UI revamp (faithful to the theme and the core structure)
+Plan a more modern, smoother and clearer interface, then implement it. The current dark-fantasy theme (color palette, fonts, gold accents, glass panels) and the core page/navigation structure must be preserved. Existing features must not be lost.
+
+### R5. New GM control modules
+Add at least 3 new GM control modules, chosen based on the audit and research results. Data must persist in Supabase, and every module must be accessible only to GMs at both the UI level and the database (RLS) level.
+
+### R6. Database and project rules
+The team may connect to the live Supabase database with the credentials in `.env.local` and run migrations. Safety rules:
+- Every migration must also be saved as a file in the repo, and it must be idempotent (`IF NOT EXISTS`, etc.).
+- Never run destructive operations on existing data (DROP TABLE, TRUNCATE, mass DELETE/UPDATE, removing columns that hold data). Take a backup before any change that requires one.
+- If the credentials are not sufficient to run migrations, write the migrations as files and report which ones the user must run manually and in what order.
+- `.env.local` must not be committed, and its contents must not be written into reports.
+
+All rules in `.agents/AGENTS.md` must be followed: React Flow transform ban, fixed-slot inventory, DB <-> TypeScript name consistency, RLS role checks through SECURITY DEFINER helper functions, and the large React Flow performance rules.
+
+## Acceptance Criteria
+
+### Reports
+- [ ] The R1, R2 and R3 reports and the R4 UI plan exist in the repo as Turkish markdown documents.
+- [ ] Every R1 finding has a severity, a file:line reference and evidence. Every broken function has a status: "fixed (commit)" or "not fixed (reason)".
+- [ ] In the R3 report, at least the production bundle size and the initial load time are measured, with before/after values.
+
+### Build quality
+- [ ] `npm run build` completes with zero errors.
+- [ ] `npm run lint` completes with zero errors.
+
+### Functional verification (Playwright)
+- [ ] An automated Playwright scenario opens every route in the app with both a GM account and a player account (use existing test accounts, or create and document dedicated test accounts). No uncaught console errors are thrown.
+- [ ] For each new GM module, the scenario shows that a GM can create, update and delete data and that the data persists after a page reload.
+- [ ] A player account gets no access to the GM modules in the UI, and its direct Supabase queries to the GM tables are rejected by RLS (verified with a script).
+- [ ] The bugs marked "fixed" in R1 are shown to no longer reproduce, by test or reproduction script.
+
+### UI revamp (independent review)
+- [ ] Before/after screenshots exist for the main pages (desktop and mobile widths).
+- [ ] An independent reviewer agent (not the one who implemented the changes) checks the screenshots against this rubric, item by item, and records the result: (a) theme palette and fonts preserved, (b) navigation structure preserved, (c) no existing feature lost, (d) visual hierarchy/readability improved, (e) no layout breakage at mobile width.
+
+### Data safety
+- [ ] All migrations are in the repo as idempotent files. No destructive operation has been run on the live database, and this is listed in the report with the migration log.
+- [ ] `.env.local` does not appear in git history.
+
+
+## Follow-up — 2026-10-10T14:55:55Z
+
+KULLANICI TALİMATI: M2 hata düzeltmeleri / checkpoint commit'i atıldığı anda (veya herhangi bir ilk commit atıldığında), sonraki adımlara (Milestone 3, GM modülleri, UI revamp vb.) GEÇMEYİN. Commit işlemi tamamlandıktan hemen sonra bütün süreci PAUSE / DURAKLATMA durumuna alın ve durumu kullanıcıya bildirin. Başka bir değişiklik veya sonraki milestone başlatmayın.

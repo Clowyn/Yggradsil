@@ -95,8 +95,8 @@ export function CharactersPage() {
       await deleteCharacter(deleteTarget.id);
       setDeleteTarget(null);
       setSelectedIds((prev) => prev.filter((id) => id !== deleteTarget.id));
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to delete character');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete character');
     } finally {
       setIsDeleting(false);
     }
@@ -122,8 +122,8 @@ export function CharactersPage() {
     try {
       await updateCharacter(editTarget.id, editForm);
       setEditTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update character');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update character');
     } finally {
       setIsUpdating(false);
     }
@@ -144,8 +144,8 @@ export function CharactersPage() {
     try {
       await transferCharacter(transferTarget.id, newOwnerId);
       setTransferTarget(null);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to transfer character');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to transfer character');
     } finally {
       setIsTransferring(false);
     }
@@ -172,8 +172,8 @@ export function CharactersPage() {
     try {
       await bulkDeleteCharacters(selectedIds);
       setSelectedIds([]);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to bulk delete');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to bulk delete');
     }
   };
 
@@ -181,8 +181,8 @@ export function CharactersPage() {
     setActionError(null);
     try {
       await bulkUpdateLevel(selectedIds, delta);
-    } catch (err: any) {
-      setActionError(err.message || 'Failed to update bulk levels');
+    } catch (err: unknown) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update bulk levels');
     }
   };
 

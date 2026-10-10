@@ -1,0 +1,119 @@
+# R4: Kullanıcı Arayüzü Yenileme ve Tasarım Planı
+## (UI Revamp Plan: Dark-Fantasy Aesthetic & Responsive Experience)
+
+**Proje**: D&D Sefer Yönetim Web Uygulaması (React 19 + TypeScript + Vite + Tailwind CSS v4 + React Flow + Framer Motion + Supabase)  
+**Tarih**: 2026-10-10  
+**Durum**: Tamamlandı / Temel Referans Dokümanı  
+**Yetkili Alt Ajan**: worker_m1_docs_db  
+**Gözlem ve Araştırma Kaynakları**: `explorer_survey_perf_ui/handoff.md`, `ORIGINAL_REQUEST.md`, `PROJECT.md`, `.agents/AGENTS.md`
+
+---
+
+## 1. Giriş ve Tasarım Felsefesi
+
+Bu plan; D&D Sefer Yönetim Web Uygulaması'nın arayüzünü daha modern, akıcı, görsel hiyerarşisi net ve mobil cihazlarda kusursuz çalışan bir seviyeye yükseltmeyi hedefler. 
+
+Tasarım revizyonunun en temel ilkesi: **Karanlık fantezi (dark-fantasy) RPG temasını ve mevcut sayfa/navigasyon omurgasını kesinlikle bozmadan korumaktır.** Hiçbir mevcut özellik kaybedilmeyecek, arka planlar aydınlatılmayacak, karanlık zindan ve kadim büyü atmosferi korunurken arayüzün okunabilirliği, etkileşim kalitesi ve mobil uyumu zirveye taşınacaktır.
+
+---
+
+## 2. Korunan Tasarım Unsurları ve Tasarım Belirteçleri (Design Tokens)
+
+### 2.1 Renk Paleti (Color Tokens)
+Uygulama `src/index.css` dosyasında Tailwind v4 `@theme` yapısıyla tanımlanan zengin karanlık paleti kullanmaya devam edecektir:
+
+- **Derin Arka Planlar (Void & Abyss)**:
+  - `--color-abyss`: `#0a0a0f` (Kök sayfa arka planı, zifiri karanlık)
+  - `--color-void`: `#0f0f18` (Kart ve panel arka planları)
+  - `--color-obsidian`: `#151520` (İç kaplar, modallar, giriş alanları)
+  - `--color-shadow`: `#1a0a2e` (Mor-eflatun gölgeler ve mistik derinlik)
+- **Kraliyet Altın Vurguları (Royal Gold)**:
+  - `--color-gold`: `#ffd700` (Birincil butonlar, aktif düğümler, parıltılar)
+  - `--color-gold-bright`: `#ffed4a` (Hover durumları, kritik vurgular)
+  - `--color-gold-dim`: `#b8860b` (İkincil kenarlıklar, sönük simgeler)
+- **Mistik Aksiyon Renkleri**:
+  - `--color-crimson`: `#dc143c` (Can puanı, tehlike, silme aksiyonları)
+  - `--color-arcane`: `#6366f1` (Büyü yuvaları, mana, mistik düğümler)
+  - `--color-emerald`: `#10b981` (İyileştirme, başarı, onay bildirimleri)
+  - `--color-parchment`: `#d4c5a9` (Gövde metinleri, antik parşömen hissi)
+
+### 2.2 Tipografi (Typography)
+- **Başlıklar ve Epik Vurgular**: `Cinzel` (serif, kadim Orta Çağ fantezi hissi). Sayfa başlıklarında, kart isimlerinde, büyü adlarında ve butonlarda kullanılır.
+- **Sayısal Değerler, Formlar ve Gövde Metinleri**: `Inter` (sans-serif, yüksek okunabilirlik). Can puanı, zırh sınıfı, zar sonuçları ve uzun metinlerde kullanılır.
+
+### 2.3 Cam Paneller (Glassmorphism)
+- Mevcut `.glass` sınıfı (`background: rgba(255, 255, 255, 0.05)`, `backdrop-filter: blur(12px)`) korunacak; kenarlıklarına hafif altın kılcal çizgiler (`border: 1px solid rgba(255, 215, 0, 0.12)`) ve iç ışıma gölgeleri eklenerek "büyülü zırh plakası" estetiği pekiştirilecektir.
+
+---
+
+## 3. Tespit Edilen Kullanıcı Deneyimi Açıkları ve Çözüm Planı
+
+### 3.1 Mobil Kenar Çubuğu Çekmecesi (Responsive Mobile Drawer Overlay)
+- **Mevcut Sorun**: `Sidebar.tsx`, mobil cihazlarda (<768px) sabit 280px veya simge modunda 80px yer kaplamakta; 375px'lik bir mobil ekranda ana içeriğe neredeyse hiç yer bırakmamaktadır.
+- **Çözüm Planı**:
+  1. Masaüstünde (`md:block`, >=768px): Mevcut genişleyen (280px) veya simgeye küçülen (80px) kenar çubuğu davranışı korunur.
+  2. Mobilde (`<768px`): Kenar çubuğu varsayılan olarak ekran dışına gizlenir (`-translate-x-full`).
+  3. `Header` üzerindeki mobil hamburger butonuna tıklandığında, kenar çubuğu ekranın solundan pürüzsüzce kayarak açılan karartmalı bir **çekmece (drawer overlay)** haline gelir.
+  4. Çekmece açıkken arka plandaki sayfa karartılır (`bg-black/70 backdrop-blur-sm`). Arka plana veya bir menü bağlantısına tıklandığında çekmece otomatik olarak kapanır.
+
+### 3.2 Header Mobil Hamburger Butonu ve Düzeni
+- **Mevcut Sorun**: `Header.tsx` içinde kenar çubuğunu açıp kapatacak mobil bir buton bulunmamaktadır.
+- **Çözüm Planı**:
+  1. `Header.tsx` sol başına yalnızca mobil ekranlarda görünen (`block md:hidden`) şık, altın çerçeveli bir hamburger butonu (`Menu` / `X` ikonu) eklenir.
+  2. Aktif karakter seçici rozeti ve dil değiştirici buton mobilde taşma yapmayacak şekilde kompaktlaştırılır.
+
+### 3.3 İçerik Dolgusu (Responsive Padding)
+- **Mevcut Sorun**: `AppLayout` içindeki `<main className="p-6">` mobilde 48px yatay alan harcayarak dar ekranlarda içerik sıkışmasına yol açmaktadır.
+- **Çözüm Planı**: Dolgu `p-3 sm:p-6` olarak güncellenir; böylece 375px ekranda ana içerik alanı 351px'e çıkarılarak ferahlatılır.
+
+### 3.4 Ana Gösterge Paneli (Dashboard) Büyü Ağacı Kartı
+- **Mevcut Sorun**: `DashboardPage.tsx` üzerindeki `NAV_CARDS` grid yapısında `/character`, `/stat-tree`, `/map`, `/inventory` bulunmakta ancak 3.150 büyüyü barındıran `/spells` bağlantısı bulunmamaktadır.
+- **Çözüm Planı**: `NAV_CARDS` dizisine 5. kart olarak Büyü Ağacı (`Sparkles` ikonu, kehribar/altın gradyanı `from-amber-500/20 to-amber-700/5`, "Antik büyüleri ve dalları keşfedin" açıklaması) eklenir. Kart ızgarası mobilde tek sütun, tablette 2 sütun, masaüstünde responsive olarak düzenlenir.
+
+### 3.5 Karakter Sayfası Görünüm Ayrımı (Sheet vs. Creation)
+- **Mevcut Sorun**: `/character` sayfasına giren oyuncular bir karaktere sahip olsalar dahi sadece karakter yaratma sihirbazını görmektedir.
+- **Çözüm Planı**: Aktif karakter varsa doğrudan tam donanımlı `CharacterSheet` (Can puanı, zırh sınıfı, yetenek skorları, kurtarma zarları, seviye atlama) görüntülenmeli; karakteri olmayanlar veya yeni karakter eklemek isteyenler için `CharacterCreation` bir sekme veya modal olarak sunulmalıdır.
+
+### 3.6 Mikro-Etkileşimler ve Görsel Derinlik
+- Donanım hızlandırmalı geçişler: Kartlarda ve butonlarda `hover:border-gold/50`, `active:scale-[0.98]`.
+- Erişilebilirlik: Tüm buton ve form elemanlarına altın renkli odak halkaları (`focus-visible:ring-2 focus-visible:ring-gold/60`).
+- Sayfa yükleme geçişlerinde pürüzsüz `opacity` geçişleri.
+
+---
+
+## 4. Ekran Genişliği ve Cihaz Test Matrisi
+
+Uygulamanın görsel revizyonu aşağıdaki cihaz çözünürlüklerinde doğrulanacaktır:
+
+| Hedef Cihaz | Genişlik | Beklenen Görünüm Davranışı |
+|---|:---:|---|
+| **Mobil (iPhone SE)** | **375px** | Sidebar gizli drawer modunda, Header hamburger menüsü aktif, p-3 dolgu, tek sütun kartlar, sıfır yatay taşma |
+| **Mobil (iPhone 14 / Modern)** | **390px** | Tek sütun kartlar, kompakt karakter rozeti, pürüzsüz drawer kayması |
+| **Tablet (iPad / Dikey)** | **768px** | İki sütun kartlar, daraltılmış 80px simge sidebar veya drawer geçişi |
+| **Masaüstü (Laptop)** | **1280px** | 280px sabit sidebar, 3 veya 5 sütun dashboard kartları, tam ekran harita ve büyü ağacı |
+| **Geniş Ekran (Desktop)** | **1920px** | Maksimum genişlik sınırlayıcısı (`max-w-7xl`), ortalanmış düzen |
+
+---
+
+## 5. Bağımsız UI İnceleme Rubriği (Independent UI Review Rubric)
+
+M5 ve M6 aşamalarında gerçekleştirilecek bağımsız denetimde (Independent UI Review), masaüstü (1280px) ve mobil (375px) ekran görüntülerinin aşağıdaki 5 maddelik rubrik üzerinden incelenmesi zorunludur:
+
+1. **(a) Tema Paleti ve Tipografi Korunumu (Theme Palette & Fonts Preserved)**:
+   - Abyss, Void, Obsidian arka planları ve kraliyet altını aksanları korunmuş mu?
+   - Başlıklarda Cinzel, gövdede Inter kullanılıyor mu? Aydınlık mod sızıntısı var mı?
+2. **(b) Navigasyon Yapısının Korunumu (Navigation Structure Preserved)**:
+   - Sidebar ve Header omurgası, rota bağlantıları yerinde mi?
+3. **(c) Mevcut Özelliklerin Korunumu (No Existing Feature Lost)**:
+   - Büyü Ağacı, Harita, Stat Ağacı, Envanter ve GM paneli işlevlerini eksiksiz koruyor mu?
+4. **(d) Görsel Hiyerarşi ve Okunabilirlik (Visual Hierarchy & Readability Improved)**:
+   - Kartlar, butonlar, sayaçlar ve form alanları belirginleşmiş, göz yormayan bir kontrast sağlanmış mı?
+5. **(e) Mobil Genişlikte Sıfır Bozulma (No Layout Breakage at Mobile Width - 375px)**:
+   - Kenar çubuğu içeriği ezmeden drawer olarak açılıyor mu?
+   - 375px genişlikte yatay kaydırma çubuğu (horizontal overflow) çıkmadan tüm bileşenler düzgün render ediliyor mu?
+
+---
+
+## 6. Sonuç ve Uygulama Sırası
+
+Bu plan, kod tabanına M5 aşamasında uygulanacaktır. Öncesinde M2'de lint/hata düzeltmeleri, M3'te yeni GM modülleri ve M4'te performans iyileştirmeleri tamamlanarak sağlam bir altyapı üzerine görsel yenileme inşa edilecektir.

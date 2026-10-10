@@ -18,8 +18,8 @@ export function LoginForm({ onToggle }: LoginFormProps) {
     setError('');
     try {
       await signIn(email, password);
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in. Please check your credentials.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to sign in. Please check your credentials.');
     }
   };
 
