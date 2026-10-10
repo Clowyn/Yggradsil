@@ -40,13 +40,19 @@ function PageFallback() {
 
 function AppLayout({ children }: { children: ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
     <div className="flex h-screen bg-abyss overflow-hidden">
-      <Sidebar isOpen={isSidebarOpen} onToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+        isMobileOpen={isMobileOpen}
+        onMobileClose={() => setIsMobileOpen(false)}
+      />
       <div className="flex flex-col flex-1 overflow-hidden relative">
-        <Header />
-        <main className="flex-1 overflow-y-auto p-6">
+        <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6">
           <Suspense fallback={<PageFallback />}>
             {children}
           </Suspense>

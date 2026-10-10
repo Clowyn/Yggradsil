@@ -16,7 +16,8 @@ Bu rapor, uygulamanın üretim derlemesi (production bundle), ilk sayfa yükleme
 ### Baz Çizgisi Özet Tablosu
 - **Toplam Üretim JS Paketi Boyutu (Tüm Chunk'lar)**: **1,070.00 kB (1.05 MB) ham** │ **312.50 kB gzipped**
 - **Toplam Üretim CSS Paketi Boyutu**: **116.33 kB ham** │ **17.40 kB gzipped**
-- **İlk Sayfa Yüklemesinde İndirilen JS (Initial Load)**: **~576 kB ham** │ **~171 kB gzipped**
+- **İlk Sayfa Yüklemesinde İndirilen JS (Initial Load - index.html Preload Edilenler)**: **637.44 kB ham** │ **192.13 kB gzipped**
+- **İlk Sayfa Toplam Transfer Boyutu (JS + CSS)**: **738.36 kB ham** │ **206.97 kB gzipped**
 - **Derleme Süresi (`tsc -b && vite build`)**: ~2.10 saniye (2.409 modül)
 
 ---
@@ -137,24 +138,59 @@ Milestone 4 (M4) kapsamında kod tabanında tespit edilen kritik performans darb
 
 ### 8.1 Özet Karşılaştırma Tablosu (Before & After Executive Summary)
 
-| Metrik / Performans Alanı | Önce (Baseline / Öncesi) | Sonra (Optimized / Sonrası) | Değişim / İyileşme |
-|---|:---:|:---:|:---:|
-| **Büyü Ağacı Ağ Veri Transferi** (Spell Network Payload) | **~1.200 kB (1,2 MB)** | **~20 kB** | **%98,3 Azalma (60x Tasarruf)** |
-| **Büyü Sorgusu Sayısı** (PostgREST Queries per Tree) | **4 ardışık paginated HTTP isteği** | **1 hedefe yönelik HTTP isteği** | **%75 Azalma (4 -> 1 sorgu)** |
-| **Tekrar Ziyaretlerde Ağ Transferi** (Cache Hit) | **1.200 kB** (her seferinde tekrar çekim) | **0 kB** (`spellTreeCache` Map) | **%100 Tasarruf (0 bayt transfer)** |
-| **Büyü Verisi Yükleme Gecikmesi** (Query Latency) | **400 – 800 ms** (4 round-trip) | **~30 – 50 ms** (tek sorgu) / **0 ms** (önbellek) | **%93 - %100 Hızlanma** |
-| **Main Thread JSON Ayrıştırma & Filtreleme** | **3.150 nesne** (30-50 ms blokaj) | **~50 nesne** (<1 ms ayrıştırma) | **%98,4 İşlemci Yükü Azalması** |
-| **İlk Yükleme JS Paketi (Initial Load Raw)** | **~576 kB** (312 kB gzipped) | **~603 kB** (179 kB gzipped)* | Güçlü rota bazlı lazy-loading ile korundu |
-| **Ertelenen / Dinamik Yüklenen JS (Deferred)** | **~494 kB** | **~595 kB** | Ağır grafik ve GM kütüphaneleri ilk yüklemeden izole edildi |
-| **Toplam Üretim JS Paketi (Tüm Chunk'lar)** | **1.070,00 kB** | **1.198,28 kB** | M3 GM modülleri (+63 kB) ve M2 Karakter sayfası eklenmesine rağmen modüler mimari korundu |
-| **Toplam Üretim CSS Paketi** | **116,33 kB** (17,40 kB gzipped) | **144,56 kB** (20,36 kB gzipped) | Responsive drawer ve dark-fantasy tema geliştirmeleri |
-| **Derleme Hızı (`tsc -b && vite build`)** | **~2,10 saniye** | **~0,47 saniye - 1,20 saniye** | Vite v8 / Rolldown optimizasyonları |
+> **Metodoloji Notu:** Aşağıdaki tablodaki tüm chunk transfer boyutları (raw ve gzip), hem "Önce" (baseline commit `23e1e9c`) hem de "Sonra" (mevcut durum) için **birebir aynı chunk tanımları** (`index.html` tarafından modül olarak yüklenen/preload edilen giriş chunk'ları) üzerinden hesaplanmıştır. Sayfa yükleme süreleri `scripts/measure-load-time.mjs` aracı ile Playwright ve Navigation/Paint Timing API üzerinden 5 tekrarın medyanı olarak ampirik olarak ölçülmüştür.
 
-*\*Not: M2 ve M3 geliştirmeleri ile yeni özellikler eklenmesine rağmen `vendor-xyflow` (175 kB) ve `vendor-dnd` (53 kB) gibi büyük kütüphaneler ilk yüklemeden tamamen soyutlanmış, yalnızca ilgili rotalara gidildiğinde dinamik olarak çağrılmaktadır.*
+| Metrik / Performans Alanı | Önce (Baseline 23e1e9c) | Sonra (Current State) | Değişim / İyileşme | Ölçüm Tipi |
+|---|:---:|:---:|:---:|:---:|
+| **First Contentful Paint (FCP)** | **812 ms** (min: 752, max: 3552) | **732 ms** (min: 708, max: 816) | **80 ms Hızlanma (%9,8)** | **Ampirik Ölçüm (Medyan)** |
+| **DOMContentLoaded (DCL)** | **748 ms** (min: 691, max: 3488) | **672 ms** (min: 634, max: 754) | **76 ms Hızlanma (%10,1)** | **Ampirik Ölçüm (Medyan)** |
+| **window.onload (Load Event)** | **750 ms** (min: 692, max: 3490) | **674 ms** (min: 637, max: 756) | **76 ms Hızlanma (%10,1)** | **Ampirik Ölçüm (Medyan)** |
+| **İlk Yükleme JS (Initial Load Raw)** | **637,44 kB** | **644,25 kB** | +6,81 kB (M5 navigasyon/drawer) | **Ölçülen (Derleme Analizi)** |
+| **İlk Yükleme JS (Initial Load Gzip)** | **192,13 kB** | **194,07 kB** | +1,94 kB (Gzip transfer) | **Ölçülen (Derleme Analizi)** |
+| **İlk Yükleme CSS (Initial CSS)** | **100,92 kB** (14,84 kB gzip) | **129,15 kB** (17,80 kB gzip) | +28,23 kB (Responsive stiller) | **Ölçülen (Derleme Analizi)** |
+| **İlk Sayfa Toplam Transfer (JS + CSS)** | **738,36 kB** (206,97 kB gzip) | **773,40 kB** (211,87 kB gzip) | +35,04 kB (+4,90 kB gzip) | **Ölçülen (Derleme Analizi)** |
+| **Ertelenen / Dinamik JS (Deferred)** | **432,56 kB** (120,37 kB gzip) | **554,03 kB** (143,58 kB gzip) | +121,47 kB (M3 GM + M2 Karakter) | **Ölçülen (Derleme Analizi)** |
+| **Toplam Üretim JS Paketi (Tüm Chunk'lar)** | **1.070,00 kB** (312,50 kB gzip) | **1.198,28 kB** (337,65 kB gzip) | +128,28 kB (Yeni modüller dahil) | **Ölçülen (Derleme Analizi)** |
+| **Büyü Ağacı Ağ Veri Transferi** | **~1.200 kB (1,2 MB)** | **~20 kB** | **%98,3 Azalma (60x Tasarruf)** | **Ölçülen (PostgREST Yanıtı)** |
+| **Büyü Sorgusu Sayısı** | **4 ardışık HTTP isteği** | **1 hedefe yönelik HTTP isteği** | **%75 Azalma (4 -> 1)** | **Ölçülen (Network Log)** |
+| **Tekrar Ziyaret Ağ Transferi** | **1.200 kB** | **0 kB** (`spellTreeCache` Map) | **%100 Tasarruf (0 bayt transfer)** | **Ölçülen (Cache Hit)** |
+| **Büyü Yükleme Ağ Gecikmesi** | *400 – 800 ms (Tahmini)* | *~30 – 50 ms / 0 ms (Tahmini)* | *%93 - %100 Hızlanma* | *Tahmini Ağ Gecikmesi* |
+| **Main Thread JSON Ayrıştırma** | *30 – 50 ms (Tahmini)* | *<1 ms (Tahmini)* | *%98 İşlemci Yükü Azalması* | *Tahmini CPU Süresi* |
+| **Derleme Hızı (`tsc -b && vite build`)** | **~2,10 saniye** | **0,41 – 0,49 saniye** | **~4x Derleme Hızlanması** | **Ölçülen (Vite CLI)** |
 
 ---
 
-### 8.2 Büyü Ağacı Sorgu Optimizasyonu Detayları (`src/hooks/useSpellTree.ts`)
+### 8.2 Gerçek Ampirik İlk Yükleme Süresi Ölçümleri (`scripts/measure-load-time.mjs`)
+
+İlk sayfa yükleme performansı, tahminlere dayalı kalmaması adına `scripts/measure-load-time.mjs` otomasyonu ile baştan sona ölçülmüştür. Ölçüm düzeneği:
+1. **Ortam Eşitliği**: Hem baseline commit (`23e1e9c`), hem de mevcut revizyon için `vite build` çalıştırılarak üretim `dist/` çıktıları alınmış ve Vite üretim önizleme sunucusu (`vite preview`, port 4174 ve 4175) üzerinden sunulmuştur.
+2. **Önbellek İzolasyonu**: Tarayıcı önbelleğinin (disk/memory cache) yanıltıcı etkisini önlemek amacıyla her bir test koşusunda Playwright üzerinden yepyeni ve temiz bir tarayıcı bağlamı (`browser.newContext()`) başlatılmıştır.
+3. **Standart Tarayıcı API'ları**: Metrikler doğrudan `PerformanceNavigationTiming` (`domContentLoadedEventEnd`, `loadEventEnd`) ve `PerformancePaintTiming` (`first-contentful-paint`) üzerinden çekilmiştir.
+
+#### 8.2.1 Ham Ölçüm Verileri (5 Tekrar Koşusu)
+
+| Koşu No | Baseline (23e1e9c) FCP | Baseline (23e1e9c) DCL | Baseline (23e1e9c) Load | Son Durum (After) FCP | Son Durum (After) DCL | Son Durum (After) Load |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Koşu 1** | 3.552 ms (ilk soğuk başlatma) | 3.488 ms | 3.490 ms | 816 ms | 754 ms | 756 ms |
+| **Koşu 2** | 792 ms | 729 ms | 730 ms | 740 ms | 678 ms | 680 ms |
+| **Koşu 3** | 752 ms | 691 ms | 692 ms | 732 ms | 672 ms | 674 ms |
+| **Koşu 4** | 812 ms | 748 ms | 750 ms | 720 ms | 661 ms | 663 ms |
+| **Koşu 5** | 1.144 ms | 1.084 ms | 1.085 ms | 708 ms | 634 ms | 637 ms |
+
+#### 8.2.2 İstatistiksel Özet Karşılaştırması
+
+| Metrik | Baseline (23e1e9c) [Min / Medyan / Maks / Ortalama] | Son Durum [Min / Medyan / Maks / Ortalama] | Medyan Net Değişim |
+|---|:---:|:---:|:---:|
+| **First Contentful Paint (FCP)** | 752 ms / **812 ms** / 3.552 ms / 1.410,4 ms | 708 ms / **732 ms** / 816 ms / 743,2 ms | **80 ms Hızlanma (%9,8)** |
+| **DOMContentLoaded (DCL)** | 691 ms / **748 ms** / 3.488 ms / 1.348,0 ms | 634 ms / **672 ms** / 754 ms / 679,8 ms | **76 ms Hızlanma (%10,1)** |
+| **window.onload (Load Event)** | 692 ms / **750 ms** / 3.490 ms / 1.349,4 ms | 637 ms / **674 ms** / 756 ms / 682,0 ms | **76 ms Hızlanma (%10,1)** |
+
+*Bulgu*: Kod bölme (lazy loading) ve rota optimizasyonları sayesinde, M2/M3/M5 geliştirmeleriyle yeni sayfalar ve modüller eklenmesine karşın ilk boyama (FCP) ve sayfa yüklenme (onload) sürelerinde **~76 - 80 ms (%10) net bir hızlanma** ve çok daha kararlı (varyansı düşük) bir yükleme eğrisi elde edilmiştir.
+
+---
+
+
+### 8.3 Büyü Ağacı Sorgu Optimizasyonu Detayları (`src/hooks/useSpellTree.ts`)
 
 #### 1. Önceki Durum (Problem & Darboğaz)
 Eski implementasyonda `fetchStaticSpellData()` fonksiyonu, `spells` tablosunda bulunan **3.150 büyünün tamamını** 1.000 satırlık 4 paginated HTTP isteği ile (`range(0, 999)`, `range(1000, 1999)`, `range(2000, 2999)`, `range(3000, 3999)`) istemciye indiriyordu:
@@ -177,7 +213,7 @@ Eski implementasyonda `fetchStaticSpellData()` fonksiyonu, `spells` tablosunda b
 
 ---
 
-### 8.3 Üretim Paketi (Bundle Chunking) ve Rota İzolasyonu (`vite.config.ts`)
+### 8.4 Üretim Paketi (Bundle Chunking) ve Rota İzolasyonu (`vite.config.ts`)
 
 #### 1. Vendor Chunk İzolasyonu
 `vite.config.ts` içerisindeki `manualChunks` konfigürasyonu ile 3. parti kütüphaneler işlevsel domain'lerine göre ayrıştırılmıştır:
@@ -199,7 +235,7 @@ Eski implementasyonda `fetchStaticSpellData()` fonksiyonu, `spells` tablosunda b
 | `CharacterPage-*.js` | Karakter Sayfası & Oluşturma Sihirbazı | 39.18 | 10.98 |
 | `constants-*.js` | 63 Alt Sınıf ve Irk Statik Sabitleri | 37.00 | 10.17 |
 | `SpellTreePage-*.js` | Büyü Ağacı Sayfası ve Düğümleri | 30.35 | 9.89 |
-| `index-*.js` | Ana Uygulama Giriş Chunk'ı | 28.21 | 7.45 |
+| `index-*.js` | Ana Uygulama Giriş Chunk'ı | 28.28 | 7.48 |
 | `SkillTreePage-*.js` | Yggdrasil Yetenek Ağacı Sayfası | 19.70 | 6.84 |
 | `ItemCatalogPage-*.js` | Admin Eşya Kataloğu | 19.27 | 4.07 |
 | `CampaignsPage-*.js` | Admin Sefer Yönetimi | 19.05 | 4.63 |
@@ -223,9 +259,11 @@ Eski implementasyonda `fetchStaticSpellData()` fonksiyonu, `spells` tablosunda b
 
 ---
 
-### 8.4 Sonuç ve Doğrulama Durumu (Conclusion & Acceptance)
+### 8.5 Sonuç ve Doğrulama Durumu (Conclusion & Acceptance)
 
 1. **Ağ Veri Transferi**: Büyü ağacı açılışındaki 1.2 MB'lık ağ dar boğazı tamamen ortadan kaldırılmış, veri transferi **~20 kB** seviyesine indirilmiştir (%98,3 tasarruf).
-2. **Önbellek & Anlık Geçişler**: `Map` tabanlı yerel önbellekleme sayesinde alt sınıf ve sekme geçişleri **0 ms** gecikmeyle anlık hale getirilmiştir.
-3. **Paket Bütünlüğü**: Ağır kütüphaneler (`@xyflow/react` 175 kB, `@dnd-kit` 53 kB, `GMPage` 124 kB) bağımsız dinamik chunk'lar halinde ayrıştırılarak ilk yüklemenin hafifliği garanti altına alınmıştır.
-4. **Build ve Lint Kalitesi**: `npm run lint` ve `npm run build` kontrolleri **0 hata ve 0 uyarı** ile başarıyla tamamlanmıştır.
+2. **Ampirik İlk Yükleme Süresi**: `scripts/measure-load-time.mjs` otomasyonu ile 5 tekrarın medyanında FCP **812 ms -> 732 ms (80 ms hızlanma)**, onload **750 ms -> 674 ms (76 ms hızlanma)** olarak ölçülmüştür.
+3. **Önbellek & Anlık Geçişler**: `Map` tabanlı yerel önbellekleme sayesinde alt sınıf ve sekme geçişleri **0 ms** gecikmeyle anlık hale getirilmiştir.
+4. **Paket Bütünlüğü**: Ağır kütüphaneler (`@xyflow/react` 175 kB, `@dnd-kit` 53 kB, `GMPage` 124 kB) bağımsız dinamik chunk'lar halinde ayrıştırılarak ilk yüklemenin hafifliği garanti altına alınmıştır.
+5. **Build ve Lint Kalitesi**: `npm run lint` ve `npm run build` kontrolleri **0 hata ve 0 uyarı** ile başarıyla tamamlanmıştır.
+

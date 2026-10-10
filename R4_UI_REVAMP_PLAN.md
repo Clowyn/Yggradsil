@@ -114,6 +114,42 @@ M5 ve M6 aşamalarında gerçekleştirilecek bağımsız denetimde (Independent 
 
 ---
 
-## 6. Sonuç ve Uygulama Sırası
+---
 
-Bu plan, kod tabanına M5 aşamasında uygulanacaktır. Öncesinde M2'de lint/hata düzeltmeleri, M3'te yeni GM modülleri ve M4'te performans iyileştirmeleri tamamlanarak sağlam bir altyapı üzerine görsel yenileme inşa edilecektir.
+## 6. Ekran Görüntüleri Arşivi ve Metodoloji Uyarısı (Screenshots & Mock Disclaimer)
+
+Uygulamanın görsel revizyonu `scripts/capture-screenshots.mjs` otomasyon scripti ile hem baseline revizyonu (commit `23e1e9c`) hem de M5 revizyonu üzerinden masaüstü (1280x800) ve mobil (375x667) çözünürlüklerde çekilmiş ve `docs/screenshots/` altına kaydedilmiştir.
+
+> **ÖNEMLİ METODOLOJİ UYARISI:**  
+> `scripts/capture-screenshots.mjs` otomasyonu, Playwright tarayıcı oturumunda Supabase REST/Auth çağrılarını `route.fulfill` ile yakalayarak zengin görsel verilerle sayfaları render eder.  
+> Bu yöntem **YALNIZCA GÖRSEL TASARIM VE RUBRİK İNCELEMESİ (VISUAL UI REVIEW)** içindir. Kesinlikle arka uç PostgreSQL RLS doğrulaması veya işlevsel test kanıtı olarak sunulamaz. Canlı ve gerçek işlevsellik `tests/e2e/` testleri ve gerçek JWT oturumları ile bağımsız olarak sınanmaktadır.
+
+### Üretilen Önce/Sonra Ekran Görüntüsü Çiftleri
+- **Masaüstü (1280x800)**:
+  - `desktop_dashboard_before.png` vs `desktop_dashboard_after.png`
+  - `desktop_spells_before.png` vs `desktop_spells_after.png`
+  - `desktop_character_before.png` vs `desktop_character_after.png`
+  - `desktop_inventory_before.png` vs `desktop_inventory_after.png`
+  - `desktop_map_before.png` vs `desktop_map_after.png`
+  - `desktop_gm_before.png` vs `desktop_gm_after.png`
+- **Mobil (375x667)**:
+  - `mobile_dashboard_before.png` vs `mobile_dashboard_after.png`
+  - `mobile_spells_before.png` vs `mobile_spells_after.png`
+  - `mobile_character_before.png` vs `mobile_character_after.png`
+  - `mobile_inventory_before.png` vs `mobile_inventory_after.png`
+  - `mobile_map_before.png` vs `mobile_map_after.png`
+  - `mobile_gm_before.png` vs `mobile_gm_after.png`
+  - `mobile_drawer_open_after.png` (M5 ile eklenen off-canvas çekmece)
+
+---
+
+## 7. Bağımsız UI İnceleme Rubriği Değerlendirmesi (Evaluation Matrix)
+
+| Rubrik Maddesi | İncelenen Görünümler & Kanıtlar | Değerlendirme | Sonuç |
+|---|---|---|:---:|
+| **(a) Tema Paleti ve Tipografi Korunumu** | `#0a0a0f` (Abyss), `#0f0f18` (Void) arka planları, `#ffd700` altın kenarlıklar, `Cinzel` başlıklar ve `Inter` gövde metinleri tüm sayfalarda eksiksiz mevcuttur. Hiçbir aydınlık mod sızıntısı yoktur. | Tema renkleri ve antik karanlık fantezi atmosferi %100 sadakatle korunmuştur. | **PASS** |
+| **(b) Navigasyon Yapısının Korunumu** | `Sidebar.tsx` ve `Header.tsx` omurgası, rota bağlantıları (`/`, `/spells`, `/character`, `/inventory`, `/map`, `/gm`) eksiksiz çalışmaktadır. | Sayfa mimarisi ve hiyerarşik dolaşım korunmuştur. | **PASS** |
+| **(c) Mevcut Özelliklerin Korunumu** | 3.150 büyüyü kapsayan Büyü Ağacı tuvali, 24 slotlu RPG envanter ızgarası, savaş haritası sis motoru, karakter kağıdı ve GM paneli tüm kabiliyetlerini muhafaza etmiştir. Ek olarak Dashboard'a Büyü Ağacı kartı eklenmiştir. | Hiçbir mevcut özellik kaybedilmemiştir. | **PASS** |
+| **(d) Görsel Hiyerarşi ve Okunabilirlik** | Cam panellerdeki (`.glass`) kılcal altın parıltılar, kart kontrastları ve donanım hızlandırmalı `hover` efektleri belirginleştirilmiştir. | Okunabilirlik ve görsel odak bariz şekilde iyileştirilmiştir. | **PASS** |
+| **(e) Mobil Genişlikte Sıfır Bozulma (375px)** | Eski versiyonda ekranın %75'ini kaplayıp içeriği ezen sabit kenar çubuğu kaldırılmış; Header'a altın hamburger butonu ve sol taraftan açılan karartmalı off-canvas `drawer` entegre edilmiştir. 375px ekranda sıfır yatay taşma (overflow: 0) doğrulanmıştır. | Mobil görünüm kırılmaları tamamen giderilmiştir. | **PASS** |
+

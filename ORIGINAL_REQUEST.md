@@ -473,3 +473,16 @@ ANCAK önce aşağıdaki doğrulama sorunlarını düzeltin — üst seviye dene
 5. KULLANICI BAĞIMLILIĞI: Migration uygulanması ve test hesabı kimlik bilgileri kullanıcıya bağlı. Bunlar olmadan yapılabilecek her şeyi (kod, UI, migration dosyaları, testler, build/lint, performans ölçümü, ekran görüntüleri) bitirin. Canlı DB gerektiren testler için hazır olduğunuzda bana kullanıcıdan istenecek adımların net bir listesini gönderin (hangi migration'lar hangi sırayla, hangi env değişkenleri, test hesaplarının rolleri). Kullanıcı bunları sağladıktan sonra testler gerçek ortamda koşturulup sonuçlar raporlanacak.
 
 TEST_READY.md ve R1 raporundaki "fixed" durumlarını yeni gerçek test sonuçlarına göre güncelleyin; doğrulanmamış hiçbir şeyi PASS olarak raporlamayın.
+
+
+## Follow-up — 2026-10-10T19:56:16Z
+
+Üst seviye denetim notu — ekip "unknown model key MODEL_PLACEHOLDER_M322" hatasıyla durdu. Lütfen orkestratörü/alt ajanları geçerli bir modelle yeniden canlandırıp kaldığınız yerden devam edin (M5 commit'lenmemiş değişiklikler çalışma dizininde: App.tsx, Header.tsx, Sidebar.tsx, DashboardPage.tsx, docs/, scripts/capture-screenshots.mjs).
+
+Kalan işe ek olarak şu iki eksik düzeltilmeli:
+
+1. R3 — "İlk yükleme süresi" ÖLÇÜLMEMİŞ. Rapordaki 400-800 ms / 30-50 ms gibi değerler tahmin. Kabul kriteri: üretim bundle boyutu VE ilk yükleme süresi önce/sonra ÖLÇÜLMELİ. Önce = 23e1e9c (ekip öncesi baseline), Sonra = son durum. Her ikisi için `vite build` + `vite preview` ile aynı koşullarda (ör. Playwright navigation/paint timing: FCP, DOMContentLoaded, load; birkaç tekrar, medyan) ölçüm yapın; ölçüm script'ini repoya ekleyin ve ham sonuçları rapora yazın. Ayrıca tablo tutarsız: "Önce initial load ~576 kB (312 kB gzip)" — 312 kB gzip TÜM bundle'ın gzip'i idi, initial chunk'ın değil. Önce/sonra değerleri aynı tanımla (aynı chunk kümesi, raw + gzip) yeniden hesaplanmalı. Ölçülmeyen hiçbir değer ölçülmüş gibi sunulmasın; tahminler açıkça "tahmin" diye etiketlensin.
+
+2. R4 — "ÖNCE" ekran görüntüleri yok; docs/screenshots yalnızca sonrası gibi görünüyor. Kriter önce/sonra (masaüstü + mobil) ister. Önce görüntüleri revizyon öncesi bir commit'ten (23e1e9c veya M5 öncesi 8973d9e) aynı script ve aynı mock verilerle alın, isimlendirmede before/after ayrımı yapın. capture-screenshots.mjs Supabase yanıtlarını route.fulfill ile mock'luyor — bu yalnızca görsel inceleme için kabul edilebilir; bunu docs içinde açıkça belirtin ve bu görüntüleri işlevsel doğrulama kanıtı olarak sunmayın. Bağımsız rubrik incelemesi önce/sonra çiftleri üzerinden yapılmalı.
+
+Bitince: build/lint sonuçları, Playwright'ın kimlik bilgisi olmadan gerçekten (açıklayıcı hata ile) FAIL ettiğinin çıktısı ve kullanıcıya verilecek canlı DB eylem listesi (migration sırası + risk notları + gerekli env değişkenleri + test hesaplarının rolleri) ile final rapor gönderin.

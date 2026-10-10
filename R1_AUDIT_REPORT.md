@@ -25,9 +25,12 @@ Bu raporda tespit edilen her bir bulgu; önem derecesi, kesin dosya ve satır nu
 
 ## 2. Derleme ve Statik Kod Analizi (Build & Lint Status)
 
-- **`npm run build`**: Başarılı (`tsc -b && vite build` 2.409 modülü hatasız derlemekte ve üretim paketini oluşturmaktadır).
-- **`npm run lint`**: **BAŞARISIZ (Çıkış Kodu 1: 63 Hata, 3 Uyarı)**.
-  - **`react-hooks/set-state-in-effect` (Effect içinde eşzamanlı setState çağrısı - 7 adet)**:
+- **`npm run build`**: **BAŞARILI (0 HATA)** (`tsc -b && vite build` 2.414 modülü 0 hatayla başarıyla derlemekte ve üretim paketini oluşturmaktadır).
+- **`npm run lint`**:
+  - **Başlangıç Baz Çizgisi (Baseline)**: **63 Hata, 3 Uyarı (Toplam 66 Sorun)**.
+  - **Mevcut Doğrulanmış Durum (Commit 4c2074f ve Güncel)**: **BAŞARILI (0 HATA, 0 UYARI)**. ESLint tüm kod tabanında temiz çıkış kodu (0) vermektedir.
+  - *Giderilen Temel Hata Kategorileri*:
+
     - `src/components/gm/GMSpellManager.tsx:169:5` (`loadData()`)
     - `src/hooks/useAdminCampaigns.ts:93:5` (`fetchCampaigns()`)
     - `src/hooks/useAdminCharacters.ts:67:5` (`fetchCharacters()`)
@@ -335,26 +338,26 @@ Explorer 2 incelemesinde tespit edilen ve `01_security_and_rls_hardening.sql` il
 
 Aşağıdaki tablo, denetlenen tüm mimari ve fonksiyonel eksikliklerin güncel durumunu, ilgili kilometre taşını ve çözüm durumunu listeler:
 
-| Bulgu No | Bulgu Açıklaması | Önem Derecesi | İlgili Dosya:Satır | Durum | Kilometre Taşı |
-|:---:|---|:---:|---|:---:|:---:|
-| **B-01** | Karakter Sayfası (Sheet) Görünümü Eksikliği | Kritik | `src/pages/CharacterPage.tsx:24` | Düzeltildi (Commit: M2-fixes) | M2 |
-| **B-02** | Zar Atma (Dice Roller) Sistemi Bulunmaması | Yüksek | Tüm `src/` dizini | Planlandı / Geliştiriliyor | M2 / M5 |
-| **B-03** | Savaş ve Karşılaşma Takipçisi Eksikliği | Yüksek | Tüm `src/` dizini | Düzeltildi (DB: M1, UI: M3) | M1 / M3 |
-| **B-04** | Canlı Sohbet ve Sefer Günlüğü Eksikliği | Yüksek | Tüm `src/` dizini | Düzeltildi (DB: M1, UI: M3) | M1 / M3 |
-| **B-05** | Yetenek Ağacı Sahte Veri İzolasyonu | Kritik | `src/hooks/useSkillTree.ts:49` | Planlandı / Geliştiriliyor | M2 |
-| **B-06** | Envanter Sistemi Sahte Veri İzolasyonu | Kritik | `src/components/inventory/InventoryGrid.tsx:13` | Düzeltildi (DB: M1, UI: M2) | M1 / M2 |
-| **B-07** | Boş Yuvalara Drag Engeli (`disabled: !item`) | Yüksek | `src/components/inventory/ItemCard.tsx:40` | Düzeltildi (Commit: M2-fixes) | M2 |
-| **B-08** | Harita Sistemi Mock İzolasyonu & `isGM: true` | Kritik | `src/hooks/useMap.ts:72` | Düzeltildi (Commit: M2-fixes) | M2 |
-| **B-09** | Harita `token.label` Tanımsızlık Çökmesi | Yüksek | `src/components/map/GameMap.tsx:73` | Düzeltildi (Commit: M2-fixes) | M2 |
-| **B-10** | GM Eşya/Yetenek İşlemlerinin Kalıcı Olmaması | Kritik | `src/components/gm/GMDashboard.tsx:388` | Düzeltildi (DB: M1, UI: M3) | M1 / M3 |
-| **B-11** | `spell_schema.sql` Özyinelemeli RLS İhlali | Kritik | `spell_schema.sql:67` | Düzeltildi (Migration 01) | M1 |
-| **B-12** | React Flow Düğümlerinde `grayscale` Kullanımı | Orta | `src/components/spell-tree/SpellNode.tsx:37` | Düzeltildi (Commit: M2-fixes) | M2 |
-| **B-13** | Karakter Yaratımında `window.location.reload` | Orta | `src/components/character/CharacterCreation.tsx:174`| Planlandı / Geliştiriliyor | M2 |
-| **B-14** | Dashboard Kartlarında Büyü Ağacı Eksikliği | Orta | `src/pages/DashboardPage.tsx:30` | Planlandı / Geliştiriliyor | M5 |
-| **B-15** | GM XP Dağıtımında Harcanan XP İstismarı | Kritik | `src/components/gm/GMDashboard.tsx:360` | Düzeltildi (Commit: M2-fixes) | M1 / M2 |
-| **SEC-1**| Profil Rolü Yükseltme Güvenlik Zafiyeti | Kritik | `admin_migration.sql:119` | Düzeltildi (Migration 01) | M1 |
-| **SEC-2**| Gevşek RLS (`auth.uid() IS NOT NULL`) Politikaları | Yüksek | `admin_migration.sql:223` | Düzeltildi (Migration 01) | M1 |
-| **LINT** | 63 ESLint Hatası ve 3 Uyarı Temizliği | Yüksek | 15+ Dosya | Düzeltildi (Commit: M2-fixes) | M2 |
+| Bulgu No | Bulgu Açıklaması | Önem Derecesi | İlgili Dosya:Satır | Durum & Detay | Kilometre Taşı |
+|:---:|---|:---:|---|:---|:---:|
+| **B-01** | Karakter Sayfası (Sheet) Görünümü Eksikliği | Kritik | `src/pages/CharacterPage.tsx:24` | **Düzeltildi (Commit 4c2074f)** — `CharacterSheet.tsx` bileşeni eklendi. | M2 |
+| **B-02** | Zar Atma (Dice Roller) Sistemi Bulunmaması | Yüksek | Tüm `src/` dizini | **Düzeltilmedi (Kapsam Dışı)** — R2 araştırma raporunda P3 olarak önceliklendirildi; çekirdek sefer yönetim kapsamı dışındadır. | R2 / P3 |
+| **B-03** | Savaş ve Karşılaşma Takipçisi Eksikliği | Yüksek | Tüm `src/` dizini | **Düzeltildi (Commit 46f30ab & 03_new_gm_modules.sql)** — GM Combat Tracker modülü uygulandı. | M1 / M3 |
+| **B-04** | Canlı Sohbet ve Sefer Günlüğü Eksikliği | Yüksek | Tüm `src/` dizini | **Düzeltildi (Commit 46f30ab & 03_new_gm_modules.sql)** — Atmosphere & Chronicles modülü uygulandı. | M1 / M3 |
+| **B-05** | Yetenek Ağacı Sahte Veri İzolasyonu | Kritik | `src/hooks/useSkillTree.ts:49` | **Düzeltilmedi (Kapsam Dışı)** — Büyü Ağacı 3.150 büyü ile optimize edilmiş olup, Stat Ağacı DB şeması migration kapsamı dışında tutulmuştur. | M2 |
+| **B-06** | Envanter Sistemi Sahte Veri İzolasyonu | Kritik | `src/components/inventory/InventoryGrid.tsx:13` | **Düzeltildi (Commit 4c2074f & 02_schema_consistency.sql)** — 24 slotlu sabit RPG ızgarası uygulandı. | M1 / M2 |
+| **B-07** | Boş Yuvalara Drag Engeli (`disabled: !item`) | Yüksek | `src/components/inventory/ItemCard.tsx:40` | **Düzeltildi (Commit 4c2074f)** — Boş slotlar useSortable drop target yapıldı. | M2 |
+| **B-08** | Harita Sistemi Mock İzolasyonu & `isGM: true` | Kritik | `src/hooks/useMap.ts:72` | **Düzeltildi (Commit 4c2074f)** — Rol kontrolü `isGM` parametresi ile sağlandı. | M2 |
+| **B-09** | Harita `token.label` Tanımsızlık Çökmesi | Yüksek | `src/components/map/GameMap.tsx:73` | **Düzeltildi (Commit 4c2074f & 02_schema_consistency.sql)** — Null safety ve DB sütunu eklendi. | M1 / M2 |
+| **B-10** | GM Eşya/Yetenek İşlemlerinin Kalıcı Olmaması | Kritik | `src/components/gm/GMDashboard.tsx:388` | **Düzeltildi (Commit 46f30ab & 03_new_gm_modules.sql)** — Loot Dispenser ve sandık yönetimi uygulandı. | M1 / M3 |
+| **B-11** | `spell_schema.sql` Özyinelemeli RLS İhlali | Kritik | `spell_schema.sql:67` | **Düzeltildi (Commit 4c2074f & 01_security_and_rls_hardening.sql)** — `SECURITY DEFINER` yardımcıları yazıldı. | M1 |
+| **B-12** | React Flow Düğümlerinde `grayscale` Kullanımı | Orta | `src/components/spell-tree/SpellNode.tsx:37` | **Düzeltildi (Commit 4c2074f)** — `grayscale` kaldırılarak compositor `opacity` kullanıldı. | M2 |
+| **B-13** | Karakter Yaratımında `window.location.reload` | Orta | `src/components/character/CharacterCreation.tsx:174`| **Düzeltildi (Commit 4c2074f)** — Tam sayfa yenileme kaldırıldı, state-driven geçiş sağlandı. | M2 |
+| **B-14** | Dashboard Kartlarında Büyü Ağacı Eksikliği | Orta | `src/pages/DashboardPage.tsx:30` | **Düzeltildi (M5 UI Revamp)** — 5. kart olarak `/spells` Büyü Ağacı kartı eklendi. | M5 |
+| **B-15** | GM XP Dağıtımında Harcanan XP İstismarı | Kritik | `src/components/gm/GMDashboard.tsx:360` | **Düzeltildi (Commit 4c2074f & 02_schema_consistency.sql)** — `gm_award_xp` atomik RPC fonksiyonu yazıldı. | M1 / M2 |
+| **SEC-1**| Profil Rolü Yükseltme Güvenlik Zafiyeti | Kritik | `admin_migration.sql:119` | **Düzeltildi (Commit 4c2074f & 01_security_and_rls_hardening.sql)** — `protect_profile_role` trigger eklendi. | M1 |
+| **SEC-2**| Gevşek RLS (`auth.uid() IS NOT NULL`) Politikaları | Yüksek | `admin_migration.sql:223` | **Düzeltildi (Commit 4c2074f & 01_security_and_rls_hardening.sql)** — GM/Owner katı kuralı getirildi. | M1 |
+| **LINT** | 63 ESLint Hatası ve 3 Uyarı Temizliği | Yüksek | 15+ Dosya | **Düzeltildi (Commit 4c2074f)** — 0 hata ve 0 uyarı sağlandı. | M2 |
 
 ---
 

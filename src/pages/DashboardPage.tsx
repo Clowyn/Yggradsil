@@ -31,7 +31,9 @@ const NAV_CARDS = [
   {
     to: '/character',
     label: 'Character',
+    labelTr: 'Karakter',
     desc: 'Manage your hero',
+    descTr: 'Kahramanınızı yönetin',
     icon: <User size={24} />,
     gradient: 'from-gold/20 to-gold-dim/5',
     borderColor: 'border-gold/20 hover:border-gold/40',
@@ -39,15 +41,29 @@ const NAV_CARDS = [
   {
     to: '/stat-tree',
     label: 'Stat Tree',
+    labelTr: 'Stat Ağacı',
     desc: 'Unlock abilities',
+    descTr: 'Yeteneklerin kilitlerini açın',
     icon: <TreePine size={24} />,
     gradient: 'from-emerald/20 to-emerald/5',
     borderColor: 'border-emerald/20 hover:border-emerald/40',
   },
   {
+    to: '/spells',
+    label: 'Spell Tree',
+    labelTr: 'Büyü Ağacı',
+    desc: 'Master ancient magic',
+    descTr: 'Antik büyüleri ve dalları keşfedin',
+    icon: <Sparkles size={24} />,
+    gradient: 'from-amber-500/20 to-amber-700/5',
+    borderColor: 'border-amber-500/30 hover:border-amber-400/50',
+  },
+  {
     to: '/map',
     label: 'World Map',
+    labelTr: 'Dünya Haritası',
     desc: 'Explore the realm',
+    descTr: 'Diyarı keşfedin',
     icon: <Map size={24} />,
     gradient: 'from-arcane/20 to-arcane-dim/5',
     borderColor: 'border-arcane/20 hover:border-arcane/40',
@@ -55,7 +71,9 @@ const NAV_CARDS = [
   {
     to: '/inventory',
     label: 'Inventory',
+    labelTr: 'Envanter',
     desc: 'Your treasures',
+    descTr: 'Hazineleriniz ve eşyalarınız',
     icon: <Backpack size={24} />,
     gradient: 'from-crimson/20 to-crimson-dim/5',
     borderColor: 'border-crimson/20 hover:border-crimson/40',
@@ -99,7 +117,7 @@ export function DashboardPage() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="p-6 space-y-6 max-w-5xl mx-auto"
+      className="p-4 sm:p-6 space-y-6 max-w-5xl mx-auto"
     >
       {/* Welcome banner */}
       <motion.div variants={item} className="glass rounded-2xl p-6 relative overflow-hidden">
@@ -172,7 +190,7 @@ export function DashboardPage() {
         <h2 className="text-lg font-cinzel text-parchment mb-4">
           {locale === 'en' ? 'Quick Actions' : 'Hızlı İşlemler'}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {NAV_CARDS.map((card) => (
             <Link key={card.to} to={card.to}>
               <motion.div
@@ -185,11 +203,11 @@ export function DashboardPage() {
                 >
                   <span className="text-parchment">{card.icon}</span>
                 </div>
-                <h3 className="font-cinzel text-parchment text-sm font-semibold">
-                  {card.label}
+                <h3 className="font-cinzel text-parchment text-sm font-semibold tracking-wide">
+                  {locale === 'en' ? card.label : card.labelTr}
                 </h3>
                 <p className="text-xs text-parchment-dim font-inter mt-1">
-                  {card.desc}
+                  {locale === 'en' ? card.desc : card.descTr}
                 </p>
               </motion.div>
             </Link>
