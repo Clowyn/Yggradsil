@@ -215,32 +215,32 @@ export function GameMap() {
 
   return (
     <div className="relative w-full space-y-3">
-      {/* Tactical Radar Header & Telemetry */}
+      {/* Tactical Map Header & Telemetry */}
       <motion.div
         className="flex flex-wrap items-center justify-between gap-3"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         <div className="flex items-center gap-2">
-          <MapIcon className="w-5 h-5 text-gold animate-pulse" />
-          <h2 className="text-base sm:text-lg font-orbitron font-extrabold text-gold-gradient tracking-wider uppercase">
-            // SECTOR TACTICAL RADAR
+          <MapIcon className="w-5 h-5 text-amber-400" />
+          <h2 className="text-base sm:text-lg font-cinzel font-extrabold text-gold-gradient tracking-wider uppercase">
+            TACTICAL BATTLE MAP
           </h2>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1 rounded bg-black/60 border border-gold/30 text-[10px] font-mono text-parchment-dim shadow-[0_0_10px_rgba(0,240,255,0.1)]">
-          <span className="text-gold font-bold">GRID: 40x40</span>
-          <span className="text-white/20">|</span>
-          <span className="text-emerald">SAT-LINK: STABLE</span>
-          <span className="text-white/20">|</span>
-          <span className="text-gold-bright">TARGETS: {tokens.length}</span>
+        <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-black/50 border border-amber-900/30 text-[11px] font-cinzel text-amber-200/80 shadow-md">
+          <span className="text-amber-300 font-bold">GRID: 40x40</span>
+          <span className="text-amber-900">|</span>
+          <span className="text-emerald-400">WAR TABLE: ATTUNED</span>
+          <span className="text-amber-900">|</span>
+          <span className="text-amber-300">HEROES: {tokens.length}</span>
         </div>
       </motion.div>
 
       {/* Map Container */}
       <motion.div
         ref={containerRef}
-        className="relative cyber-panel rounded-lg overflow-hidden border border-gold/30 shadow-[0_0_30px_rgba(0,240,255,0.12)]"
+        className="relative arcane-glass rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl"
         style={{ width: W, height: H, maxWidth: '100%' }}
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -280,7 +280,7 @@ export function GameMap() {
         )}
 
         {/* Token count indicator */}
-        <div className="absolute bottom-3 left-3 bg-black/75 border border-gold/30 rounded px-3 py-1.5 flex items-center gap-2 shadow-[0_0_10px_rgba(0,240,255,0.15)]">
+        <div className="absolute bottom-3 left-3 bg-[#08090c]/85 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
           <div className="flex -space-x-1">
             {tokens.map((t) => (
               <div
@@ -290,8 +290,8 @@ export function GameMap() {
               />
             ))}
           </div>
-          <span className="text-[10px] font-mono text-gold font-bold">
-            {tokens.length} ACTIVE BEACONS
+          <span className="text-[10px] font-cinzel text-amber-200 font-bold">
+            {tokens.length} EXPEDITION TOKENS
           </span>
         </div>
       </motion.div>

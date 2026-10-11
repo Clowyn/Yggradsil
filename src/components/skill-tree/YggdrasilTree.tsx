@@ -37,7 +37,7 @@ export function YggdrasilTree() {
 
   return (
     <div className="relative w-full h-[calc(100vh-4rem)] bg-abyss rounded-xl overflow-hidden border border-glass-border">
-      {/* ── Unified Futuristic HUD Bar (Responsive, No Mobile Collision) ── */}
+      {/* ── Unified Yggdrasil Tree HUD Bar ── */}
       <motion.div
         className="absolute top-4 left-4 right-4 z-10 flex flex-col md:flex-row md:items-center justify-between gap-3 pointer-events-none"
         initial={{ opacity: 0, y: -20 }}
@@ -45,50 +45,50 @@ export function YggdrasilTree() {
         transition={{ duration: 0.4 }}
       >
         {/* Title Panel */}
-        <div className="holo-card px-4 py-2.5 border border-cyan-400/30 flex items-center gap-3 pointer-events-auto bg-black/85 backdrop-blur-md self-start shadow-[0_0_20px_rgba(0,240,255,0.15)]">
-          <div className="p-1.5 rounded-lg bg-emerald-400/10 text-emerald-400 border border-emerald-400/30">
+        <div className="arcane-glass px-4 py-2.5 border border-amber-900/35 flex items-center gap-3 pointer-events-auto bg-[#0e1017]/90 backdrop-blur-md self-start shadow-xl rounded-2xl">
+          <div className="p-1.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-900/40">
             <TreePine className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-sm sm:text-base font-orbitron font-bold text-white tracking-wide flex items-center gap-2">
-              <span>YGGDRASIL</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-400/20 text-emerald-300 border border-emerald-400/30">
-                NEU.03
+            <h2 className="text-sm sm:text-base font-cinzel font-bold text-amber-100 tracking-wide flex items-center gap-2">
+              <span>YGGDRASIL TREE</span>
+              <span className="text-[10px] font-cinzel px-2 py-0.5 rounded-full bg-emerald-950/40 text-emerald-300 border border-emerald-900/40">
+                ATTUNED
               </span>
             </h2>
-            <p className="text-[10px] text-parchment-dim font-mono tracking-wider uppercase">
+            <p className="text-[10px] text-amber-200/60 font-cinzel tracking-wider uppercase">
               The World Stat Tree
             </p>
           </div>
         </div>
 
         {/* XP Display Panel */}
-        <div className="holo-card px-4 py-2.5 border border-cyan-400/30 min-w-[220px] pointer-events-auto bg-black/85 backdrop-blur-md self-end md:self-auto shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+        <div className="arcane-glass px-4 py-2.5 border border-amber-900/35 min-w-[220px] pointer-events-auto bg-[#0e1017]/90 backdrop-blur-md self-end md:self-auto shadow-xl rounded-2xl">
           {activeCharacter && (
-            <div className="flex items-center gap-2 mb-1.5 bg-black/40 rounded px-2 py-1 border border-cyan-400/20">
-              <Users size={12} className="text-cyan-400" />
-              <span className="text-[10px] text-parchment-dim uppercase">OPERATOR:</span>
-              <span className="text-xs text-cyan-300 font-bold font-mono">{activeCharacter.name}</span>
+            <div className="flex items-center gap-2 mb-1.5 bg-black/40 rounded-xl px-2.5 py-1 border border-amber-900/30">
+              <Users size={12} className="text-amber-400" />
+              <span className="text-[10px] font-cinzel text-amber-200/60 uppercase">HERO:</span>
+              <span className="text-xs text-amber-200 font-bold font-cinzel">{activeCharacter.name}</span>
             </div>
           )}
           <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-1 text-[10px] font-mono text-parchment-dim uppercase">
-              <Sparkles className="w-3 h-3 text-cyan-400" />
+            <div className="flex items-center gap-1 text-[10px] font-cinzel text-amber-200/70 uppercase">
+              <Sparkles className="w-3 h-3 text-amber-400" />
               <span>Available XP</span>
             </div>
-            <div className="text-sm font-bold font-orbitron text-cyan-300">
+            <div className="text-sm font-bold font-cinzel text-amber-300">
               {xp.toLocaleString()} XP
             </div>
           </div>
-          <div className="flex items-center justify-between text-[10px] font-mono text-parchment-dim mt-1">
+          <div className="flex items-center justify-between text-[10px] font-cinzel text-amber-200/60 mt-1">
             <span>{unlockedCount} / {totalSkills} skills</span>
-            <span className="text-emerald font-semibold">
+            <span className="text-emerald-400 font-semibold">
               {totalSkills > 0 ? Math.round((unlockedCount / totalSkills) * 100) : 0}%
             </span>
           </div>
-          <div className="mt-1 w-full h-1 rounded-full bg-white/10 overflow-hidden">
+          <div className="mt-1 w-full h-1.5 rounded-full bg-black/60 overflow-hidden border border-amber-950/40">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-[0_0_6px_#00f0ff]"
+              className="h-full rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-amber-300 shadow-[0_0_6px_#f59e0b]"
               initial={{ width: 0 }}
               animate={{ width: `${totalSkills > 0 ? (unlockedCount / totalSkills) * 100 : 0}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}

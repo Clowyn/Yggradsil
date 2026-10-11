@@ -1,33 +1,31 @@
 import { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   User,
   TreePine,
-  Map,
+  Map as MapIcon,
   Backpack,
   Crown,
   Sparkles,
   Shield,
+  Heart,
   Flame,
-  Radio,
-  Cpu,
   ArrowRight,
-  Terminal,
-  Crosshair,
-  Wifi,
-  Zap,
-  Disc3,
-  RefreshCw,
+  BookOpen,
+  Users,
+  Scroll,
+  Compass,
+  Feather,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCampaign } from '../contexts/CampaignContext';
 import { playSound } from '../lib/audio';
 
-interface TelemetryLog {
+interface ChronicleLog {
   id: string;
   timestamp: string;
-  type: 'UPLINK' | 'RESONANCE' | 'RADAR' | 'CARGO' | 'SYSTEM';
+  type: 'RUNE' | 'QUEST' | 'SANCTUM' | 'PARTY' | 'FOLIO';
   text: string;
 }
 
@@ -37,32 +35,31 @@ export function DashboardPage() {
   const isTr = locale === 'tr';
 
   const [currentTime, setCurrentTime] = useState<string>('');
-  const [activeDeckTab, setActiveDeckTab] = useState<'modules' | 'metrics' | 'radar'>('modules');
-  const [isScanning, setIsScanning] = useState(false);
-  const [logs, setLogs] = useState<TelemetryLog[]>([
+  const [activeDeckTab, setActiveDeckTab] = useState<'charms' | 'expedition'>('charms');
+  const [logs, setLogs] = useState<ChronicleLog[]>([
     {
       id: '1',
-      timestamp: '13:40:12',
-      type: 'UPLINK',
-      text: 'Quantum entanglement synchronized with Party Core.',
+      timestamp: 'Session VIII',
+      type: 'QUEST',
+      text: 'The party shattered the Shadow Well and deciphered the Ancient Runic Gateway.',
     },
     {
       id: '2',
-      timestamp: '13:41:05',
-      type: 'RESONANCE',
-      text: 'Biometric telemetry verified: 100% chassis integrity.',
+      timestamp: 'Session VII',
+      type: 'RUNE',
+      text: 'Arcane resonances attuned across Yggdrasil. The Astral Spire revealed its sanctum.',
     },
     {
       id: '3',
-      timestamp: '13:41:48',
-      type: 'RADAR',
-      text: 'Orbital sensors active. Tactical grid loaded for Sector 07.',
+      timestamp: 'Session VI',
+      type: 'PARTY',
+      text: 'Expedition party gathered at the High Crossroads under the waning blood moon.',
     },
     {
       id: '4',
-      timestamp: '13:42:01',
-      type: 'CARGO',
-      text: 'Arsenal encryption verified. Nano-cargo compartments ready.',
+      timestamp: 'Session V',
+      type: 'SANCTUM',
+      text: 'Restored the Dragon Crest talisman to the Vault of the Archmage.',
     },
   ]);
 
@@ -70,235 +67,201 @@ export function DashboardPage() {
     const updateTime = () => {
       const now = new Date();
       setCurrentTime(
-        now.toISOString().replace('T', ' // ').substring(0, 19) + ' UTC'
+        now.toLocaleDateString(isTr ? 'tr-TR' : 'en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        })
       );
     };
     updateTime();
-    const interval = setInterval(updateTime, 1000);
+    const interval = setInterval(updateTime, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isTr]);
 
-  const triggerScan = () => {
-    playSound('scan');
-    setIsScanning(true);
-    const now = new Date();
-    const timeStr = now.toTimeString().substring(0, 8);
-    const newLog: TelemetryLog = {
+  const addCustomLog = (type: 'QUEST' | 'RUNE', message: string) => {
+    playSound('paper_flip');
+    const newLog: ChronicleLog = {
       id: String(Date.now()),
-      timestamp: timeStr,
-      type: 'RADAR',
-      text: isTr
-        ? `Taktik sensör taraması tamamlandı: ${members.length} operatör aktif rezonansta.`
-        : `Tactical sensor sweep complete: ${members.length} operators active in resonance.`,
+      timestamp: 'Just now',
+      type,
+      text: message,
     };
-    setLogs((prev) => [newLog, ...prev.slice(0, 6)]);
-    setTimeout(() => {
-      setIsScanning(false);
-      playSound('ping');
-    }, 1600);
-  };
-
-  const addCustomLog = (type: 'SYSTEM' | 'RESONANCE', message: string) => {
-    playSound('blip');
-    const now = new Date();
-    const timeStr = now.toTimeString().substring(0, 8);
-    setLogs((prev) => [
-      { id: String(Date.now()), timestamp: timeStr, type, text: message },
-      ...prev.slice(0, 6),
-    ]);
+    setLogs((prev) => [newLog, ...prev.slice(0, 5)]);
   };
 
   const activeCharacter = characters?.find((c) => c.id === activeCharacterId);
 
-  // Dynamic calculations for reactor
+  // Dynamic calculations
   const currentLevel = activeCharacter?.level ?? 1;
   const currentXp = activeCharacter?.xp_total ?? 0;
   const nextLevelXp = currentLevel * 1500;
   const xpPercent = Math.min(100, Math.round((currentXp / Math.max(nextLevelXp, 1)) * 100));
 
-  const navModules = useMemo(
+  const navCharms = useMemo(
     () => [
       {
         to: '/character',
-        code: 'BIO.02',
-        title: isTr ? 'Kahraman Matrisi' : 'Hero Matrix',
-        subtitle: isTr ? 'Siber Biyometrik Veriler' : 'Cybernetic Biometrics',
-        desc: isTr ? 'Nitelikler, donanım yuvaları ve zırh modülleri.' : 'Attributes, gear sockets & armor modules.',
-        telemetry: 'SYNCED',
-        badgeColor: 'border-cyan-400/40 text-cyan-400 bg-cyan-400/10',
-        icon: <User className="w-5 h-5 text-cyan-400" />,
-        glow: 'hover:shadow-[0_0_30px_rgba(0,240,255,0.25)]',
-        accent: 'from-cyan-500/20 to-transparent',
+        title: isTr ? 'Karakter Föyü' : 'Hero Folio',
+        subtitle: isTr ? 'Nitelikler & Zırh' : 'Attributes & Armaments',
+        desc: isTr
+          ? 'Karakter istatistikleri, pasif algılar ve kuşanılan kadim eşyalar.'
+          : 'Character attributes, passive perception & equipped relics.',
+        badge: 'FOLIO',
+        icon: <User className="w-5 h-5 text-amber-400" />,
+        accent: 'from-amber-500/10 to-transparent',
       },
       {
         to: '/stat-tree',
-        code: 'NEU.03',
-        title: isTr ? 'Nöral Statlar' : 'Neural Stats',
-        subtitle: isTr ? 'Sinaptik Yollar' : 'Synaptic Pathways',
-        desc: isTr ? 'Yggdrasil dünya ağacı üzerinden nöral güçlendirme.' : 'Neural augmentation across the world stat tree.',
-        telemetry: 'ONLINE',
-        badgeColor: 'border-emerald-400/40 text-emerald-400 bg-emerald-400/10',
+        title: isTr ? 'Yggdrasil Ağacı' : 'Yggdrasil Tree',
+        subtitle: isTr ? 'Kutsal Öz Dalları' : 'Sacred Essence Branches',
+        desc: isTr
+          ? 'Dünya ağacının derin köklerinden güç alan temel stat geliştirmeleri.'
+          : 'Core attribute ascension branching from the roots of the world tree.',
+        badge: 'ESSENCE',
         icon: <TreePine className="w-5 h-5 text-emerald-400" />,
-        glow: 'hover:shadow-[0_0_30px_rgba(0,255,157,0.25)]',
-        accent: 'from-emerald-500/20 to-transparent',
+        accent: 'from-emerald-500/10 to-transparent',
       },
       {
         to: '/spells',
-        code: 'ARC.04',
-        title: isTr ? 'Büyü Matrisi' : 'Spell Matrix',
-        subtitle: isTr ? 'Kuantum Frekansları' : 'Quantum Resonance',
-        desc: isTr ? 'Antik büyü düğümleri ve arkan frekans dalları.' : 'Ancient spell nodes & arcane phase pathways.',
-        telemetry: 'OPTIMAL',
-        badgeColor: 'border-purple-400/40 text-purple-400 bg-purple-400/10',
+        title: isTr ? 'Büyü Kitabı' : 'Spell Grimoire',
+        subtitle: isTr ? 'Kadim Rün Düğümleri' : 'Ancient Rune Nodes',
+        desc: isTr
+          ? 'Ateş, buz ve arkan büyü yolları; efsunlu büyüler ve yetenek rünleri.'
+          : 'Attuned spell matrix, elemental rites and sacred arcana.',
+        badge: 'GRIMOIRE',
         icon: <Sparkles className="w-5 h-5 text-purple-400" />,
-        glow: 'hover:shadow-[0_0_30px_rgba(168,85,247,0.25)]',
-        accent: 'from-purple-500/20 to-transparent',
+        accent: 'from-purple-500/10 to-transparent',
       },
       {
         to: '/map',
-        code: 'ORB.05',
-        title: isTr ? 'Sektör Radarı' : 'Sector Radar',
-        subtitle: isTr ? 'Yörüngesel Harita' : 'Orbital Recon Map',
-        desc: isTr ? 'Savaş alanı koordinatları ve taktiksel görüş ağı.' : 'Battlefield coordinates & fog-of-war tracking.',
-        telemetry: 'ACTIVE',
-        badgeColor: 'border-sky-400/40 text-sky-400 bg-sky-400/10',
-        icon: <Map className="w-5 h-5 text-sky-400" />,
-        glow: 'hover:shadow-[0_0_30px_rgba(56,189,248,0.25)]',
-        accent: 'from-sky-500/20 to-transparent',
+        title: isTr ? 'Savaş Haritası' : 'Battle Map',
+        subtitle: isTr ? 'Taktik Sefer Masası' : 'Tactical War Table',
+        desc: isTr
+          ? 'Savaş alanı sisleri, taktiksel ızgara ve dost/düşman piyonları.'
+          : 'Dynamic fog-of-war, terrain grid and tactical adventurer tokens.',
+        badge: 'RECON',
+        icon: <MapIcon className="w-5 h-5 text-sky-400" />,
+        accent: 'from-sky-500/10 to-transparent',
       },
       {
         to: '/inventory',
-        code: 'MAT.06',
-        title: isTr ? 'Kuantum Kargo' : 'Quantum Cargo',
-        subtitle: isTr ? 'Mühimmat Bölmesi' : 'Tactical Arsenal Bay',
-        desc: isTr ? 'Nano-eşya bölmeleri, kuantum para ve ekipman.' : 'Nano-item slots, credit balances & tactical gear.',
-        telemetry: 'SECURE',
-        badgeColor: 'border-pink-500/40 text-pink-400 bg-pink-500/10',
-        icon: <Backpack className="w-5 h-5 text-pink-400" />,
-        glow: 'hover:shadow-[0_0_30px_rgba(255,0,85,0.25)]',
-        accent: 'from-pink-500/20 to-transparent',
+        title: isTr ? 'Maceracı Çantası' : 'Adventurer Pack',
+        subtitle: isTr ? '24 Hazne & Hazine' : '24 Slots & Gold Cache',
+        desc: isTr
+          ? 'Efsanevi kılıçlar, iksirler, parşömenler ve altın sikke kesesi.'
+          : 'Fixed-slot inventory, legendary gear, potions and gold coin purse.',
+        badge: 'CARGO',
+        icon: <Backpack className="w-5 h-5 text-amber-500" />,
+        accent: 'from-amber-600/10 to-transparent',
       },
     ],
     [isTr]
   );
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto font-inter relative pb-12">
-      {/* ─── Ambient Holographic Laser Sweep Overlay ───────────────── */}
-      <AnimatePresence>
-        {isScanning && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 pointer-events-none z-50 overflow-hidden"
-          >
-            <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-laser-sweep shadow-[0_0_30px_#00f0ff]" />
-            <div className="absolute inset-0 bg-cyan-400/5 backdrop-blur-[1px]" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ─── Cockpit Directive Status Header ───────────────────────── */}
+    <div className="space-y-6 max-w-7xl mx-auto font-inter relative pb-16">
+      {/* ─── Hero Overview: War Table Header ───────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="holo-card p-4 sm:p-5 relative overflow-hidden border border-cyan-400/30"
+        className="arcane-glass p-5 sm:p-6 relative overflow-hidden border border-amber-900/30"
       >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-cyan-400/10 border border-cyan-400/40 text-[10px] font-mono text-cyan-400 font-bold tracking-widest uppercase flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,240,255,0.25)]">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                // APEX_NEXUS_COMMAND_V5
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="wax-seal-badge">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                CAMPAIGN WAR TABLE
               </span>
-              <span className="text-[11px] font-mono text-parchment-dim tracking-wider">
-                {currentTime || 'CHRONO_CALIBRATING...'}
+              <span className="text-xs font-cinzel text-amber-200/60 tracking-wider">
+                {currentTime}
               </span>
             </div>
 
-            <h1 className="text-xl sm:text-3xl font-orbitron font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-400 uppercase drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]">
-              {isTr ? 'KOMUTA KÖPRÜSÜ' : 'COMMAND BRIDGE'} // {profile?.username || 'AGENT'}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-cinzel font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 tracking-wide">
+              {isTr ? 'SEFER KONSOLU' : 'EXPEDITION COUNCIL'} • {profile?.username || 'WANDERER'}
             </h1>
 
-            <div className="flex items-center gap-2 text-xs font-mono text-parchment-dim">
-              <Radio size={13} className="text-emerald animate-pulse shrink-0" />
-              <span>{isTr ? 'AKTİF HAREKAT:' : 'ACTIVE MISSION:'}</span>
-              <span className="text-white font-bold tracking-wider px-2 py-0.5 rounded bg-black/50 border border-white/10">
-                {campaign?.name || (isTr ? 'GÖLGELER SEKTÖRÜ' : 'SECTOR OF SHADOWS')}
+            <div className="flex items-center gap-2.5 text-xs text-amber-200/80">
+              <Scroll size={14} className="text-amber-400 shrink-0" />
+              <span className="font-cinzel">{isTr ? 'AKTİF SERÜVEN:' : 'ACTIVE CAMPAIGN:'}</span>
+              <span className="font-cinzel text-amber-100 font-bold px-2.5 py-0.5 rounded-full bg-amber-950/40 border border-amber-900/40">
+                {campaign?.name || (isTr ? 'Gölgeler Diyarı Seferi' : 'Chronicles of Yggdrasil')}
               </span>
             </div>
           </div>
 
-          {/* Quick HUD Telemetry & Sonar Trigger */}
-          <div className="flex flex-wrap items-center gap-3 bg-black/60 p-2.5 sm:p-3 rounded-xl border border-cyan-400/20">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-cyan-950/40 border border-cyan-400/20 text-xs font-mono text-cyan-300">
-              <Wifi size={14} className="text-emerald animate-pulse" />
-              <span>12MS LATENCY</span>
+          {/* Quick Party Presence */}
+          <div className="flex flex-wrap items-center gap-3 bg-black/40 p-3 rounded-2xl border border-amber-900/30">
+            <div className="flex items-center gap-2 text-xs font-cinzel text-amber-200/90 px-3 py-1.5 rounded-xl bg-amber-950/30 border border-amber-900/30">
+              <Users size={14} className="text-amber-400" />
+              <span>
+                {members.length} {isTr ? 'Maceracı Hazır' : 'Adventurers Present'}
+              </span>
             </div>
 
             <button
-              onClick={triggerScan}
-              disabled={isScanning}
-              className="px-3.5 py-1.5 rounded-lg border border-cyan-400/50 bg-cyan-500/15 hover:bg-cyan-500/30 text-cyan-300 text-xs font-mono font-semibold tracking-wider flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)] active:scale-95 cursor-pointer disabled:opacity-50"
-              title="Ping orbital radar sensors"
+              onClick={() => {
+                playSound('paper_flip');
+                addCustomLog('RUNE', isTr ? 'Kutsal rünler şöminede parıldadı.' : 'Sacred runes gleamed in the hearth.');
+              }}
+              className="px-3.5 py-1.5 rounded-xl border border-amber-900/50 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 text-xs font-cinzel font-semibold tracking-wider flex items-center gap-2 transition-all cursor-pointer active:scale-95 shadow-sm"
+              title="Commune with the party"
             >
-              <Crosshair size={14} className={isScanning ? 'animate-spin' : ''} />
-              <span>{isScanning ? (isTr ? 'TARANIYOR...' : 'SCANNING...') : (isTr ? 'SONAR TARA' : 'PING RADAR')}</span>
+              <Feather size={14} className="text-amber-400" />
+              <span>{isTr ? 'NOT DÜŞ' : 'COMMUNE'}</span>
             </button>
           </div>
         </div>
       </motion.div>
 
-      {/* ─── Hero Centerpiece: Holographic Biometric Reactor ──────── */}
+      {/* ─── Hero Centerpiece: Adventurer's Medallion & War Table ─── */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         className="grid grid-cols-1 lg:grid-cols-12 gap-6"
       >
-        {/* Reactor Biometric Core (5 cols on lg) */}
-        <div className="lg:col-span-5 holo-card p-6 flex flex-col justify-between relative overflow-hidden border border-cyan-400/30">
-          {/* Subtle Ambient Radial Flare */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="flex items-center justify-between mb-4 relative z-10">
+        {/* Adventurer's Medallion (5 cols on lg) */}
+        <div className="lg:col-span-5 arcane-glass p-6 flex flex-col justify-between relative overflow-hidden border border-amber-900/30">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Disc3 size={16} className="text-cyan-400 animate-spin-slow" />
-              <span className="font-orbitron text-xs font-bold tracking-widest text-cyan-400 uppercase">
-                {isTr ? 'BİYOMETRİK ÇEKİRDEK' : 'BIOMETRIC CORE REACTOR'}
+              <Compass size={17} className="text-amber-400" />
+              <span className="font-cinzel text-xs font-bold tracking-widest text-amber-300 uppercase">
+                {isTr ? 'KAHRAMAN MADALYONU' : 'ADVENTURER MEDALLION'}
               </span>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald/10 border border-emerald/30 text-emerald font-semibold">
-              // SYNC 99.8%
+            <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-900/40 text-emerald-300 font-semibold">
+              VITALITY: FULL
             </span>
           </div>
 
-          {/* Central Reactor Visual */}
-          <div className="relative py-6 flex flex-col items-center justify-center">
-            {/* Multi-layered Rotating Tech Ring */}
-            <div className="relative w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
-              {/* Outer Ticked Ring */}
-              <div className="absolute inset-0 rounded-full border border-dashed border-cyan-400/30 animate-reactor-spin" />
-              {/* Counter Rotating Ring */}
-              <div className="absolute inset-2 rounded-full border border-cyan-400/20 animate-reactor-spin-reverse" />
+          {/* Central Medallion Visual */}
+          <div className="py-6 flex flex-col items-center justify-center relative">
+            <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+              {/* Outer Carved Brass Ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-amber-900/40 animate-spin-slow" />
+              <div className="absolute inset-2 rounded-full border border-amber-500/20" />
 
-              {/* Progress SVG Ring */}
+              {/* Progress Ring */}
               <svg className="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
                 <circle
                   cx="50"
                   cy="50"
                   r="42"
-                  className="stroke-cyan-950/60"
-                  strokeWidth="5"
+                  className="stroke-amber-950/40"
+                  strokeWidth="4"
                   fill="transparent"
                 />
                 <circle
                   cx="50"
                   cy="50"
                   r="42"
-                  className="stroke-cyan-400 transition-all duration-1000 ease-out drop-shadow-[0_0_8px_#00f0ff]"
-                  strokeWidth="5"
+                  className="stroke-amber-500 transition-all duration-1000 ease-out"
+                  strokeWidth="4"
                   strokeDasharray={264}
                   strokeDashoffset={264 - (264 * xpPercent) / 100}
                   strokeLinecap="round"
@@ -306,65 +269,67 @@ export function DashboardPage() {
                 />
               </svg>
 
-              {/* Central Core Display */}
-              <div className="absolute inset-6 rounded-full bg-gradient-to-br from-cyan-950/90 to-black border border-cyan-400/40 flex flex-col items-center justify-center p-3 text-center shadow-[inset_0_0_20px_rgba(0,240,255,0.25)]">
-                <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/60 flex items-center justify-center text-cyan-300 mb-1 shadow-[0_0_12px_rgba(0,240,255,0.4)]">
-                  <Zap size={16} className="animate-pulse" />
+              {/* Center Medallion Plate */}
+              <div className="absolute inset-5 rounded-full bg-gradient-to-br from-[#1c1f2e] via-[#0e1017] to-[#08090c] border border-amber-900/40 flex flex-col items-center justify-center p-3 text-center shadow-2xl">
+                <div className="w-9 h-9 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-300 mb-1 shadow-sm">
+                  <Flame size={18} className="animate-candle-flicker" />
                 </div>
-                <span className="font-orbitron text-xl sm:text-2xl font-black text-white tracking-wider">
+                <span className="font-cinzel text-xl sm:text-2xl font-black text-amber-100 tracking-wider">
                   LVL {currentLevel}
                 </span>
-                <span className="text-[10px] font-mono text-cyan-300 font-bold uppercase truncate max-w-[120px]">
-                  {activeCharacter?.name || (isTr ? 'Bilinmeyen' : 'Unknown')}
+                <span className="text-[11px] font-cinzel text-amber-300/90 font-bold uppercase truncate max-w-[120px]">
+                  {activeCharacter?.name || (isTr ? 'Valen Shadowflame' : 'Valen Shadowflame')}
                 </span>
               </div>
             </div>
 
-            {/* Spec Readout Badges */}
+            {/* Spec Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-              <span className="px-2.5 py-1 rounded bg-black/60 border border-purple-400/30 text-[11px] font-mono text-purple-300">
+              <span className="px-3 py-1 rounded-full bg-black/50 border border-amber-900/40 text-xs font-cinzel text-amber-200">
                 {activeCharacter?.race?.name || 'High Elf'}
               </span>
-              <span className="px-2.5 py-1 rounded bg-black/60 border border-pink-400/30 text-[11px] font-mono text-pink-300">
+              <span className="px-3 py-1 rounded-full bg-black/50 border border-amber-900/40 text-xs font-cinzel text-amber-200">
                 {activeCharacter?.subclass
-                  ? (isTr ? activeCharacter.subclass.name_tr : activeCharacter.subclass.name_en)
+                  ? isTr
+                    ? activeCharacter.subclass.name_tr
+                    : activeCharacter.subclass.name_en
                   : 'Evoker'}
               </span>
             </div>
           </div>
 
-          {/* Vitals Telemetry Matrix */}
-          <div className="space-y-3 mt-4 pt-4 border-t border-cyan-400/15 relative z-10">
-            {/* Vital HP Bar */}
+          {/* Vitals Telemetry */}
+          <div className="space-y-3 mt-4 pt-4 border-t border-amber-900/25">
+            {/* HP Bar */}
             <div>
-              <div className="flex items-center justify-between text-xs font-mono mb-1">
-                <span className="text-parchment-dim flex items-center gap-1.5">
-                  <Shield size={12} className="text-cyan-400" />
-                  {isTr ? 'HAYAT MATRİSİ (HP)' : 'VITAL INTEGRITY (HP)'}
+              <div className="flex items-center justify-between text-xs font-cinzel mb-1">
+                <span className="text-amber-200/70 flex items-center gap-1.5">
+                  <Heart size={13} className="text-rose-500" />
+                  {isTr ? 'Can Puanı (HP)' : 'Hit Points (HP)'}
                 </span>
-                <span className="text-cyan-300 font-bold">
-                  84 / 84 HP <span className="text-emerald">(100%)</span>
+                <span className="text-rose-300 font-bold">
+                  84 / 84 HP <span className="text-emerald-400">(100%)</span>
                 </span>
               </div>
-              <div className="w-full h-2 rounded-full bg-black/60 overflow-hidden border border-cyan-400/20">
-                <div className="h-full bg-gradient-to-r from-cyan-400 to-emerald w-full shadow-[0_0_8px_#00f0ff]" />
+              <div className="w-full h-2 rounded-full bg-black/60 overflow-hidden border border-rose-950/40">
+                <div className="h-full bg-gradient-to-r from-rose-700 to-rose-500 w-full shadow-sm" />
               </div>
             </div>
 
-            {/* Quantum XP Capacitor */}
+            {/* XP Bar */}
             <div>
-              <div className="flex items-center justify-between text-xs font-mono mb-1">
-                <span className="text-parchment-dim flex items-center gap-1.5">
-                  <Flame size={12} className="text-purple-400" />
-                  {isTr ? 'KUANTUM KAPASİTÖRÜ (XP)' : 'QUANTUM CAPACITOR (XP)'}
+              <div className="flex items-center justify-between text-xs font-cinzel mb-1">
+                <span className="text-amber-200/70 flex items-center gap-1.5">
+                  <Flame size={13} className="text-amber-400" />
+                  {isTr ? 'Deneyim (XP)' : 'Experience (XP)'}
                 </span>
-                <span className="text-purple-300 font-bold">
+                <span className="text-amber-300 font-bold">
                   {currentXp.toLocaleString()} / {nextLevelXp.toLocaleString()} XP
                 </span>
               </div>
-              <div className="w-full h-2 rounded-full bg-black/60 overflow-hidden border border-purple-400/20">
+              <div className="w-full h-2 rounded-full bg-black/60 overflow-hidden border border-amber-950/40">
                 <div
-                  className="h-full bg-gradient-to-r from-purple-500 to-cyan-400 transition-all duration-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]"
+                  className="h-full bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-500 shadow-sm"
                   style={{ width: `${xpPercent}%` }}
                 />
               </div>
@@ -372,127 +337,129 @@ export function DashboardPage() {
           </div>
         </div>
 
-        {/* Tactical Operations Bay (7 cols on lg) */}
+        {/* Tactical Actions & Expedition Bay (7 cols on lg) */}
         <div className="lg:col-span-7 flex flex-col gap-4">
           {/* Deck Tabs */}
-          <div className="flex items-center justify-between border-b border-cyan-400/20 pb-3">
+          <div className="flex items-center justify-between border-b border-amber-900/25 pb-3">
             <div className="flex items-center gap-2">
-              <Cpu size={18} className="text-cyan-400" />
-              <h2 className="font-orbitron text-sm sm:text-base font-bold text-white tracking-widest uppercase">
-                {isTr ? 'TAKTIK MODÜLLER' : 'TACTICAL DOCKING BAY'}
+              <BookOpen size={18} className="text-amber-400" />
+              <h2 className="font-cinzel text-sm sm:text-base font-bold text-amber-100 tracking-wider uppercase">
+                {isTr ? 'SERÜVEN KARTLARI' : 'EXPEDITION CHARMS'}
               </h2>
             </div>
 
-            <div className="flex items-center gap-1 bg-black/60 p-1 rounded-lg border border-cyan-400/20">
+            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-amber-900/30">
               <button
                 onClick={() => {
-                  playSound('click');
-                  setActiveDeckTab('modules');
+                  playSound('lock_click');
+                  setActiveDeckTab('charms');
                 }}
-                className={`px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
-                  activeDeckTab === 'modules'
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-sm'
-                    : 'text-parchment-dim hover:text-white'
+                className={`px-3 py-1 rounded-lg text-xs font-cinzel transition-all cursor-pointer ${
+                  activeDeckTab === 'charms'
+                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm'
+                    : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                {isTr ? 'MODÜLLER' : 'MODULES'}
+                {isTr ? 'TILSIMLAR' : 'CHARMS'}
               </button>
               <button
                 onClick={() => {
-                  playSound('click');
-                  setActiveDeckTab('radar');
+                  playSound('lock_click');
+                  setActiveDeckTab('expedition');
                 }}
-                className={`px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
-                  activeDeckTab === 'radar'
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-sm'
-                    : 'text-parchment-dim hover:text-white'
+                className={`px-3 py-1 rounded-lg text-xs font-cinzel transition-all cursor-pointer ${
+                  activeDeckTab === 'expedition'
+                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm'
+                    : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
-                {isTr ? 'RADAR' : 'RADAR'}
+                {isTr ? 'SEFER MASASI' : 'WAR TABLE'}
               </button>
             </div>
           </div>
 
-          {/* Tab 1: Module Cards */}
-          {activeDeckTab === 'modules' && (
+          {/* Tab 1: Navigation Charms */}
+          {activeDeckTab === 'charms' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {navModules.map((mod) => (
+              {navCharms.map((charm) => (
                 <Link
-                  key={mod.to}
-                  to={mod.to}
-                  onClick={() => playSound('click')}
+                  key={charm.to}
+                  to={charm.to}
+                  onClick={() => playSound('lock_click')}
                   className="group block"
                 >
                   <div
-                    className={`holo-card p-4 h-full flex flex-col justify-between border border-cyan-400/20 bg-gradient-to-br ${mod.accent} ${mod.glow} transition-all duration-300 cursor-pointer relative overflow-hidden`}
+                    className={`arcane-glass p-4 h-full flex flex-col justify-between border border-amber-900/30 bg-gradient-to-br ${charm.accent} hover:border-amber-500/40 transition-all duration-300 cursor-pointer relative overflow-hidden`}
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-mono text-parchment-dim tracking-widest">
-                        [{mod.code}]
+                      <span className="text-[10px] font-cinzel text-amber-300/70 tracking-widest uppercase">
+                        [{charm.badge}]
                       </span>
-                      <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border ${mod.badgeColor}`}>
-                        {mod.telemetry}
+                      <span className="text-[9px] font-cinzel font-bold px-2 py-0.5 rounded-full bg-amber-950/40 text-amber-300 border border-amber-900/40">
+                        OPEN
                       </span>
                     </div>
 
                     <div className="space-y-1 my-2">
-                      <div className="flex items-center gap-2">
-                        <div className="p-2 rounded-lg bg-black/50 border border-white/10 group-hover:scale-110 transition-transform">
-                          {mod.icon}
+                      <div className="flex items-center gap-2.5">
+                        <div className="p-2 rounded-xl bg-black/50 border border-amber-900/30 group-hover:scale-105 transition-transform">
+                          {charm.icon}
                         </div>
                         <div>
-                          <h3 className="font-orbitron text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-                            {mod.title}
+                          <h3 className="font-cinzel text-sm font-bold text-amber-100 group-hover:text-amber-300 transition-colors">
+                            {charm.title}
                           </h3>
-                          <p className="text-[10px] font-mono text-parchment-dim">
-                            {mod.subtitle}
+                          <p className="text-[10px] text-amber-200/60 font-cinzel">
+                            {charm.subtitle}
                           </p>
                         </div>
                       </div>
-                      <p className="text-xs text-parchment/70 font-rajdhani pt-2 line-clamp-2">
-                        {mod.desc}
+                      <p className="text-xs text-stone-300 pt-2 line-clamp-2 leading-relaxed">
+                        {charm.desc}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-xs font-mono text-cyan-400 group-hover:translate-x-1 transition-transform">
-                      <span>{isTr ? 'SİSTEMİ BAŞLAT' : 'LAUNCH DECK'}</span>
+                    <div className="mt-3 pt-2 border-t border-amber-900/20 flex items-center justify-between text-xs font-cinzel text-amber-400 group-hover:translate-x-1 transition-transform">
+                      <span>{isTr ? 'GÖRÜNTÜLE' : 'INSPECT'}</span>
                       <ArrowRight size={14} />
                     </div>
                   </div>
                 </Link>
               ))}
 
-              {/* GM Console Card if GM */}
+              {/* GM Chamber Card if GM */}
               {isGM && (
                 <Link
                   to="/gm"
-                  onClick={() => playSound('click')}
+                  onClick={() => playSound('lock_click')}
                   className="group block sm:col-span-2"
                 >
-                  <div className="holo-card p-4 border border-crimson/40 bg-gradient-to-r from-crimson/15 via-black/40 to-transparent hover:shadow-[0_0_30px_rgba(255,0,85,0.25)] transition-all cursor-pointer flex items-center justify-between">
+                  <div className="arcane-glass p-4 border border-rose-900/40 bg-gradient-to-r from-rose-950/20 via-black/40 to-transparent hover:border-rose-700/50 transition-all cursor-pointer flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-lg bg-crimson/20 border border-crimson/50 text-crimson">
+                      <div className="p-2.5 rounded-xl bg-rose-950/40 border border-rose-900/50 text-rose-300">
                         <Crown size={20} />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-mono text-crimson font-bold uppercase tracking-wider">
-                            // OVERSEER_CMD.07
+                          <span className="text-[10px] font-cinzel text-rose-400 font-bold uppercase tracking-wider">
+                            LOREMASTER COMMAND
                           </span>
-                          <span className="px-1.5 py-0.2 rounded bg-crimson text-black text-[9px] font-mono font-black">
+                          <span className="px-1.5 py-0.2 rounded bg-rose-900 text-rose-100 text-[9px] font-cinzel font-bold">
                             GM ONLY
                           </span>
                         </div>
-                        <h3 className="font-orbitron text-sm sm:text-base font-bold text-white group-hover:text-crimson transition-colors">
-                          {isTr ? 'GM YÖNETİM KONSOLU' : 'GAME MASTER OVERSEER DECK'}
+                        <h3 className="font-cinzel text-sm sm:text-base font-bold text-amber-100 group-hover:text-rose-300 transition-colors">
+                          {isTr ? 'GM KONTROL ODASI' : 'GAME MASTER OVERSEER CHAMBER'}
                         </h3>
-                        <p className="text-xs text-parchment-dim font-rajdhani">
-                          {isTr ? 'Savaş simülasyonu, hava koşulları ve eşya dağıtımı.' : 'Encounter simulation, atmospheric audio & loot dispensary.'}
+                        <p className="text-xs text-stone-400">
+                          {isTr
+                            ? 'Savaş simülatörü, hava durumu/ortam ve hazine sandığı dağıtımı.'
+                            : 'Encounter simulation, atmospheric chronicle & loot chest distribution.'}
                         </p>
                       </div>
                     </div>
-                    <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-crimson">
-                      <span>ACCESS</span>
+                    <div className="hidden sm:flex items-center gap-2 text-xs font-cinzel text-rose-300">
+                      <span>ENTER</span>
                       <ArrowRight size={16} />
                     </div>
                   </div>
@@ -501,124 +468,122 @@ export function DashboardPage() {
             </div>
           )}
 
-          {/* Tab 2: Interactive Sonar Radar Widget */}
-          {activeDeckTab === 'radar' && (
-            <div className="holo-card p-5 border border-cyan-400/30 flex flex-col items-center justify-center relative min-h-[320px]">
-              {/* Radar Screen */}
-              <div className="relative w-64 h-64 rounded-full border-2 border-cyan-400/30 bg-black/80 flex items-center justify-center overflow-hidden shadow-[inset_0_0_30px_rgba(0,240,255,0.2)]">
-                {/* Concentric rings */}
-                <div className="absolute inset-8 rounded-full border border-cyan-400/20" />
-                <div className="absolute inset-16 rounded-full border border-cyan-400/20" />
-                <div className="absolute inset-24 rounded-full border border-cyan-400/20" />
+          {/* Tab 2: War Table Expedition Overview */}
+          {activeDeckTab === 'expedition' && (
+            <div className="arcane-glass p-5 border border-amber-900/30 flex flex-col justify-between min-h-[320px]">
+              <div>
+                <div className="flex items-center justify-between pb-3 border-b border-amber-900/25 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Shield size={16} className="text-amber-400" />
+                    <h3 className="font-cinzel text-sm font-bold text-amber-100 uppercase">
+                      {isTr ? 'GÖLGE DİYARI SEFER HARİTASI' : 'SECTOR WAR TABLE & EXPEDITION'}
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-cinzel text-amber-300/80">
+                    {members.length} {isTr ? 'Maceracı Hazır' : 'Heroes Active'}
+                  </span>
+                </div>
 
-                {/* Crosshairs */}
-                <div className="absolute inset-x-0 h-px bg-cyan-400/20" />
-                <div className="absolute inset-y-0 w-px bg-cyan-400/20" />
-
-                {/* Sonar Beam Sweep */}
-                <div className="absolute inset-0 animate-radar-sweep bg-gradient-to-tr from-transparent via-transparent to-cyan-400/25 pointer-events-none" />
-
-                {/* Center Beacon */}
-                <div className="w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_12px_#00f0ff] z-10 animate-ping" />
-
-                {/* Party Blips */}
-                {members.map((m, idx) => {
-                  const angle = (idx * 360) / Math.max(members.length, 1);
-                  const rad = (angle * Math.PI) / 180;
-                  const dist = 75;
-                  const x = Math.cos(rad) * dist;
-                  const y = Math.sin(rad) * dist;
-                  return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                  {members.map((m) => (
                     <div
                       key={m.id}
-                      style={{ transform: `translate(${x}px, ${y}px)` }}
-                      className="absolute z-20 flex flex-col items-center cursor-pointer group"
-                      title={m.profile?.username}
+                      className="p-3 rounded-xl bg-black/40 border border-amber-900/25 flex items-center gap-3"
                     >
-                      <div className="w-3 h-3 rounded-full bg-emerald border border-black shadow-[0_0_8px_#00ff9d] group-hover:scale-150 transition-transform" />
-                      <span className="text-[9px] font-mono text-emerald mt-1 bg-black/80 px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {m.profile?.username}
-                      </span>
+                      <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-cinzel font-bold text-amber-300 text-xs">
+                        {m.profile?.username ? m.profile.username[0].toUpperCase() : 'A'}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-xs font-cinzel font-bold text-amber-200 truncate">
+                          {m.profile?.username || 'Wanderer'}
+                        </div>
+                        <div className="text-[10px] text-stone-400 uppercase">
+                          {m.role === 'gm' ? 'Dungeon Master' : 'Party Member'}
+                        </div>
+                      </div>
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between w-full text-xs font-mono text-parchment-dim">
-                <span>{members.length} {isTr ? 'OPERATÖR TESPİT EDİLDİ' : 'OPERATORS IN RANGE'}</span>
-                <button
-                  onClick={triggerScan}
-                  className="text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer"
+              <div className="pt-3 border-t border-amber-900/25 flex items-center justify-between text-xs font-cinzel text-amber-200/80">
+                <span>{isTr ? 'Harita Taktik Alanı Hazır' : 'Battle Map Position: Verified'}</span>
+                <Link
+                  to="/map"
+                  className="text-amber-400 hover:text-amber-200 flex items-center gap-1 font-bold transition-colors"
                 >
-                  <RefreshCw size={12} />
-                  <span>{isTr ? 'RE-KALİBRE ET' : 'RECALIBRATE'}</span>
-                </button>
+                  <span>{isTr ? 'Haritaya Git' : 'Open Battle Map'}</span>
+                  <ArrowRight size={14} />
+                </Link>
               </div>
             </div>
           )}
         </div>
       </motion.div>
 
-      {/* ─── Real-Time Quantum Telemetry Console Stream ────────────── */}
+      {/* ─── Real-Time Chronicles & Rumors Stream ────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="holo-card p-4 sm:p-5 border border-cyan-400/20 bg-black/75"
+        className="arcane-glass p-5 border border-amber-900/30 bg-[#08090c]/85"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b border-cyan-400/15">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b border-amber-900/25">
           <div className="flex items-center gap-2">
-            <Terminal size={16} className="text-cyan-400" />
-            <h3 className="font-orbitron text-xs sm:text-sm font-bold text-white tracking-widest uppercase">
-              // TELEMETRY_STREAM: YGGDRASIL.SYS
+            <Scroll size={16} className="text-amber-400" />
+            <h3 className="font-cinzel text-xs sm:text-sm font-bold text-amber-100 tracking-wider uppercase">
+              // CHRONICLES OF YGGDRASIL
             </h3>
           </div>
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => addCustomLog('SYSTEM', 'Chassis diagnostic: all servos optimal.')}
-              className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-parchment transition-all cursor-pointer border border-white/10"
+              onClick={() => addCustomLog('QUEST', 'The party secured the ancient sanctuary.')}
+              className="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-[10px] font-cinzel text-amber-200 transition-all cursor-pointer border border-amber-900/30"
             >
-              + DIAGNOSTIC
+              + INSCRIBE NOTE
             </button>
             <button
               onClick={() => {
-                playSound('blip');
+                playSound('paper_flip');
                 setLogs([]);
               }}
-              className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-parchment transition-all cursor-pointer border border-white/10"
+              className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-cinzel text-stone-300 transition-all cursor-pointer border border-white/10"
             >
               CLEAR
             </button>
-            <span className="text-[10px] font-mono text-emerald flex items-center gap-1 ml-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald animate-ping" />
-              LIVE
+            <span className="text-[10px] font-cinzel text-amber-400 flex items-center gap-1 ml-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              HEARTH LIT
             </span>
           </div>
         </div>
 
-        {/* Console Logs */}
-        <div className="space-y-1.5 font-mono text-xs max-h-40 overflow-y-auto pr-2 no-scrollbar">
+        {/* Chronicle Logs */}
+        <div className="space-y-1.5 text-xs max-h-40 overflow-y-auto pr-2 no-scrollbar">
           {logs.map((log) => (
             <div
               key={log.id}
-              className="flex items-start gap-2.5 text-parchment/80 hover:bg-white/[0.03] p-1 rounded transition-colors"
+              className="flex items-start gap-2.5 text-stone-300 hover:bg-white/[0.03] p-1.5 rounded-lg transition-colors"
             >
-              <span className="text-parchment-dim select-none shrink-0">[{log.timestamp}]</span>
+              <span className="text-amber-200/60 font-cinzel select-none shrink-0 text-[11px]">
+                [{log.timestamp}]
+              </span>
               <span
-                className={`font-bold select-none shrink-0 ${
-                  log.type === 'UPLINK'
-                    ? 'text-cyan-400'
-                    : log.type === 'RESONANCE'
+                className={`font-cinzel font-bold select-none shrink-0 text-[11px] ${
+                  log.type === 'QUEST'
+                    ? 'text-amber-400'
+                    : log.type === 'RUNE'
                     ? 'text-purple-400'
-                    : log.type === 'RADAR'
-                    ? 'text-emerald'
-                    : 'text-amber-400'
+                    : log.type === 'PARTY'
+                    ? 'text-emerald-400'
+                    : 'text-amber-200'
                 }`}
               >
                 [{log.type}]
               </span>
-              <span className="text-parchment">{log.text}</span>
+              <span className="text-stone-200 font-inter leading-relaxed">{log.text}</span>
             </div>
           ))}
         </div>

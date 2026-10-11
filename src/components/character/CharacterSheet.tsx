@@ -207,15 +207,15 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="cyber-panel cyber-cut rounded-lg p-6 border border-gold/40 relative overflow-hidden bg-black/80 shadow-[0_4px_30px_rgba(0,240,255,0.15)]"
+        className="arcane-glass rounded-2xl p-6 border border-amber-900/35 relative overflow-hidden bg-[#0e1017]/85 shadow-2xl"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
           <div className="flex items-center gap-5">
             {/* Avatar or Class Emblem */}
             <div className="relative">
-              <div className="w-20 h-20 rounded-xl bg-gradient-to-b from-[#2a1f0e] to-[#0a0a0f] border-2 border-gold flex items-center justify-center shadow-[0_0_20px_rgba(255,215,0,0.25)] overflow-hidden">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-b from-[#2a1f0e] to-[#0a0a0f] border-2 border-amber-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)] overflow-hidden">
                 {character.avatar_url ? (
                   <img
                     src={character.avatar_url}
@@ -228,7 +228,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                   </span>
                 )}
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-gold text-black font-cinzel font-bold text-xs px-2 py-0.5 rounded-md shadow-md border border-white/20">
+              <div className="absolute -bottom-2 -right-2 bg-amber-500 text-black font-cinzel font-bold text-xs px-2 py-0.5 rounded-lg shadow-md border border-white/20">
                 Lv. {level}
               </div>
             </div>
@@ -240,20 +240,20 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                   {character.name}
                 </h1>
                 {character.race?.tier && (
-                  <span className="text-[10px] font-inter uppercase tracking-widest px-2 py-0.5 rounded bg-gold/15 text-gold border border-gold/30">
+                  <span className="text-[10px] font-cinzel uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-950/40 text-amber-300 border border-amber-900/40">
                     {isTr ? character.race.tier.name_tr : character.race.tier.name_en}
                   </span>
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 mt-1 text-sm text-parchment/80 font-inter">
-                <span className="flex items-center gap-1.5 text-white/90 font-medium">
-                  <User size={14} className="text-gold" />
+              <div className="flex flex-wrap items-center gap-3 mt-1.5 text-sm text-stone-300 font-inter">
+                <span className="flex items-center gap-1.5 text-amber-100 font-medium font-cinzel">
+                  <User size={14} className="text-amber-400" />
                   {character.race?.name || (isTr ? 'Bilinmeyen Irk' : 'Unknown Race')}
                 </span>
-                <span className="text-white/30">•</span>
-                <span className="flex items-center gap-1.5 text-gold font-medium">
-                  <Flame size={14} className="text-gold" />
+                <span className="text-amber-900">•</span>
+                <span className="flex items-center gap-1.5 text-amber-300 font-medium font-cinzel">
+                  <Flame size={14} className="text-amber-400" />
                   {character.subclass
                     ? isTr
                       ? character.subclass.name_tr
@@ -264,8 +264,8 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                 </span>
                 {character.subclass?.category && (
                   <>
-                    <span className="text-white/30">•</span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-gray-300 border border-white/15">
+                    <span className="text-amber-900">•</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-black/40 text-stone-300 border border-amber-900/30 font-cinzel">
                       {isTr
                         ? character.subclass.category.name_tr
                         : character.subclass.category.name_en}
@@ -280,58 +280,58 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
           <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto justify-end">
             <Link
               to="/spells"
-              className="px-3.5 py-2 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-orbitron font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(0,240,255,0.15)]"
+              className="px-3.5 py-2 rounded-xl bg-purple-950/30 hover:bg-purple-900/40 text-purple-200 border border-purple-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
             >
-              <Sparkles size={14} className="text-cyan-400" />
-              {isTr ? 'Büyü Ağacı' : 'Spell Matrix'}
+              <Sparkles size={14} className="text-purple-400" />
+              {isTr ? 'Büyü Kitabı' : 'Grimoire'}
             </Link>
             <Link
               to="/stat-tree"
-              className="px-3.5 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs font-orbitron font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(0,255,157,0.15)]"
+              className="px-3.5 py-2 rounded-xl bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-200 border border-emerald-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
             >
               <Award size={14} className="text-emerald-400" />
-              {isTr ? 'Nöral Statlar' : 'Neural Stats'}
+              {isTr ? 'Yggdrasil Ağacı' : 'Yggdrasil Tree'}
             </Link>
             <Link
               to="/inventory"
-              className="px-3.5 py-2 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-400/40 text-xs font-orbitron font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(168,85,247,0.15)]"
+              className="px-3.5 py-2 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 text-amber-200 border border-amber-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
             >
-              <Backpack size={14} className="text-purple-400" />
-              {isTr ? 'Kuantum Kargo' : 'Quantum Cargo'}
+              <Backpack size={14} className="text-amber-400" />
+              {isTr ? 'Maceracı Çantası' : 'Adventurer Pack'}
             </Link>
             {onOpenCreation && (
               <button
                 type="button"
                 onClick={onOpenCreation}
-                className="px-3.5 py-2 rounded-lg bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-400/40 text-xs font-orbitron font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-[0_0_10px_rgba(255,0,85,0.15)]"
+                className="px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 border border-amber-500/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
               >
-                <Compass size={14} className="text-pink-400" />
-                {isTr ? 'Yeni Ajan Oluştur' : 'New Operator'}
+                <Compass size={14} className="text-amber-400" />
+                {isTr ? 'Yeni Maceracı' : 'New Adventurer'}
               </button>
             )}
           </div>
         </div>
 
         {/* XP Progress Bar */}
-        <div className="mt-5 pt-4 border-t border-white/10">
-          <div className="flex items-center justify-between text-xs mb-1.5 font-inter">
+        <div className="mt-5 pt-4 border-t border-amber-900/25">
+          <div className="flex items-center justify-between text-xs mb-1.5 font-cinzel">
             <div className="flex items-center gap-2">
-              <span className="text-gray-400 font-medium">
+              <span className="text-stone-400 font-medium">
                 {isTr ? 'Deneyim (XP):' : 'Experience Points:'}
               </span>
-              <span className="text-gold font-bold">{xpCurrent.toLocaleString()} XP</span>
-              <span className="text-gray-500">/ {nextLevelXp.toLocaleString()} XP</span>
+              <span className="text-amber-300 font-bold">{xpCurrent.toLocaleString()} XP</span>
+              <span className="text-stone-500">/ {nextLevelXp.toLocaleString()} XP</span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-xs text-emerald-400 font-medium bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
+              <span className="text-xs text-emerald-400 font-medium bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-900/40">
                 {isTr ? 'Harcanabilir XP:' : 'Available XP:'} {xpAvailable.toLocaleString()}
               </span>
-              <span className="text-gray-400 font-semibold">{xpProgressPercent}%</span>
+              <span className="text-stone-400 font-semibold">{xpProgressPercent}%</span>
             </div>
           </div>
-          <div className="w-full h-2 rounded-full bg-black/60 border border-white/10 overflow-hidden">
+          <div className="w-full h-2 rounded-full bg-black/60 border border-amber-950/40 overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-amber-600 via-gold to-yellow-300 shadow-[0_0_8px_rgba(255,215,0,0.5)]"
+              className="h-full bg-gradient-to-r from-amber-700 via-amber-500 to-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]"
               initial={{ width: 0 }}
               animate={{ width: `${xpProgressPercent}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -343,69 +343,69 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       {/* ─── Vitals Hero Row ─────────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         {/* HP */}
-        <div className="holo-card p-3.5 border border-red-500/40 bg-red-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(255,0,85,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-red-400 font-orbitron font-bold mb-1">
-            <Heart size={14} className="text-red-500 fill-red-500/20" />
+        <div className="arcane-glass p-3.5 border border-rose-900/40 bg-rose-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-rose-400 font-cinzel font-bold mb-1">
+            <Heart size={14} className="text-rose-500 fill-rose-500/20" />
             <span>{isTr ? 'Can Puanı' : 'Hit Points'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-red-200">
-            {currentHP} <span className="text-xs text-red-400/80">/ {maxHP}</span>
+          <div className="text-2xl font-cinzel font-extrabold text-rose-200">
+            {currentHP} <span className="text-xs text-rose-400/80">/ {maxHP}</span>
           </div>
-          <div className="w-full bg-black/50 h-1.5 rounded-full mt-2 overflow-hidden border border-red-900/50">
-            <div className="bg-gradient-to-r from-red-600 to-red-400 h-full w-full shadow-[0_0_6px_#ff0055]" />
+          <div className="w-full bg-black/50 h-1.5 rounded-full mt-2 overflow-hidden border border-rose-900/50">
+            <div className="bg-gradient-to-r from-rose-700 to-rose-400 h-full w-full shadow-sm" />
           </div>
         </div>
 
         {/* Armor Class */}
-        <div className="holo-card p-3.5 border border-cyan-400/40 bg-cyan-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(0,240,255,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-cyan-400 font-orbitron font-bold mb-1">
-            <Shield size={14} className="text-cyan-400" />
+        <div className="arcane-glass p-3.5 border border-amber-900/40 bg-amber-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-cinzel font-bold mb-1">
+            <Shield size={14} className="text-amber-400" />
             <span>{isTr ? 'Zırh Sınıfı (AC)' : 'Armor Class'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-cyan-200">{armorClass}</div>
-          <span className="text-[10px] text-cyan-400/70 font-mono mt-1">
+          <div className="text-2xl font-cinzel font-extrabold text-amber-200">{armorClass}</div>
+          <span className="text-[10px] text-amber-300/70 font-inter mt-1">
             {armorBonus > 0 ? (isTr ? '+3 Zırh dahil' : '+3 Armor bonus') : (isTr ? 'Temel Refleks' : 'Base Dexterity')}
           </span>
         </div>
 
         {/* Initiative */}
-        <div className="holo-card p-3.5 border border-amber-500/40 bg-amber-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(245,158,11,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-orbitron font-bold mb-1">
+        <div className="arcane-glass p-3.5 border border-amber-900/40 bg-amber-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-cinzel font-bold mb-1">
             <Sword size={14} className="text-amber-400" />
             <span>{isTr ? 'İnisiyatif' : 'Initiative'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-amber-200">{initiative}</div>
-          <span className="text-[10px] text-amber-400/70 font-mono mt-1">DEX mod</span>
+          <div className="text-2xl font-cinzel font-extrabold text-amber-200">{initiative}</div>
+          <span className="text-[10px] text-amber-300/70 font-inter mt-1">DEX mod</span>
         </div>
 
         {/* Speed */}
-        <div className="holo-card p-3.5 border border-emerald-500/40 bg-emerald-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(0,255,157,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-orbitron font-bold mb-1">
+        <div className="arcane-glass p-3.5 border border-emerald-900/40 bg-emerald-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-cinzel font-bold mb-1">
             <Activity size={14} className="text-emerald-400" />
             <span>{isTr ? 'Hız' : 'Speed'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-emerald-200">{speed} <span className="text-xs">ft</span></div>
-          <span className="text-[10px] text-emerald-400/70 font-mono mt-1">{isTr ? 'Standart hareket' : 'Base Movement'}</span>
+          <div className="text-2xl font-cinzel font-extrabold text-emerald-200">{speed} <span className="text-xs">ft</span></div>
+          <span className="text-[10px] text-emerald-300/70 font-inter mt-1">{isTr ? 'Standart hareket' : 'Base Movement'}</span>
         </div>
 
         {/* Proficiency Bonus */}
-        <div className="holo-card p-3.5 border border-purple-500/40 bg-purple-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-purple-400 font-orbitron font-bold mb-1">
+        <div className="arcane-glass p-3.5 border border-purple-900/40 bg-purple-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-purple-400 font-cinzel font-bold mb-1">
             <Zap size={14} className="text-purple-400" />
             <span>{isTr ? 'Yeterlilik' : 'Proficiency'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-purple-200">{profBonusStr}</div>
-          <span className="text-[10px] text-purple-400/70 font-mono mt-1">Tier {Math.ceil(level / 4)} bonus</span>
+          <div className="text-2xl font-cinzel font-extrabold text-purple-200">{profBonusStr}</div>
+          <span className="text-[10px] text-purple-300/70 font-inter mt-1">Tier {Math.ceil(level / 4)} bonus</span>
         </div>
 
         {/* Passive Perception */}
-        <div className="holo-card p-3.5 border border-cyan-400/40 bg-cyan-950/20 flex flex-col items-center justify-center text-center shadow-[0_0_15px_rgba(0,240,255,0.15)]">
-          <div className="flex items-center gap-1.5 text-xs text-cyan-400 font-orbitron font-bold mb-1">
-            <Eye size={14} className="text-cyan-400" />
+        <div className="arcane-glass p-3.5 border border-sky-900/40 bg-sky-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
+          <div className="flex items-center gap-1.5 text-xs text-sky-400 font-cinzel font-bold mb-1">
+            <Eye size={14} className="text-sky-400" />
             <span>{isTr ? 'Pasif Algı' : 'Passive Sense'}</span>
           </div>
-          <div className="text-2xl font-orbitron font-extrabold text-cyan-300">{passivePerception}</div>
-          <span className="text-[10px] text-cyan-400/70 font-mono mt-1">10 + WIS + Prof</span>
+          <div className="text-2xl font-cinzel font-extrabold text-sky-200">{passivePerception}</div>
+          <span className="text-[10px] text-sky-300/70 font-inter mt-1">10 + WIS + Prof</span>
         </div>
       </div>
 
@@ -422,35 +422,35 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
             <motion.div
               key={key}
               whileHover={{ scale: 1.02 }}
-              className="holo-card p-4 border border-cyan-400/20 hover:border-cyan-400/50 transition-all flex flex-col items-center relative overflow-hidden bg-black/60 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+              className="arcane-glass p-4 border border-amber-900/30 hover:border-amber-500/40 transition-all flex flex-col items-center relative overflow-hidden bg-[#0e1017]/85 shadow-lg rounded-2xl"
             >
-              <span className="text-xs font-orbitron font-bold text-gray-300 uppercase tracking-widest">
+              <span className="text-xs font-cinzel font-bold text-stone-300 uppercase tracking-widest">
                 {isTr ? label.tr : label.en}
               </span>
-              <span className="text-xs text-cyan-400 font-mono mt-0.5 font-bold">{key}</span>
+              <span className="text-xs text-amber-400 font-cinzel mt-0.5 font-bold">{key}</span>
 
               {/* Modifier Big Badge */}
-              <div className="my-2 text-2xl font-orbitron font-black text-cyan-300 drop-shadow-[0_0_8px_#00f0ff]">
+              <div className="my-2 text-2xl font-cinzel font-black text-amber-200 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
                 {statData.modStr}
               </div>
 
               {/* Raw Score */}
-              <div className="text-xs font-mono text-gray-400 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
-                Score: <strong className="text-white">{statData.score}</strong>
+              <div className="text-xs font-inter text-stone-400 bg-white/5 px-2.5 py-0.5 rounded-full border border-amber-900/20">
+                Score: <strong className="text-amber-100">{statData.score}</strong>
               </div>
 
               {/* Saving Throw Pill */}
               <div
-                className={`mt-3 w-full pt-2 border-t border-white/10 flex items-center justify-between text-[11px] font-inter px-1 ${
-                  proficient ? 'text-gold font-semibold' : 'text-gray-400'
+                className={`mt-3 w-full pt-2 border-t border-amber-900/20 flex items-center justify-between text-[11px] font-inter px-1 ${
+                  proficient ? 'text-amber-300 font-semibold' : 'text-stone-400'
                 }`}
                 title={proficient ? 'Proficient Saving Throw' : 'Saving Throw'}
               >
-                <span className="flex items-center gap-1">
-                  {proficient && <CheckCircle2 size={10} className="text-gold" />}
+                <span className="flex items-center gap-1 font-cinzel">
+                  {proficient && <CheckCircle2 size={11} className="text-amber-400" />}
                   {isTr ? 'Kurtarma' : 'Save'}
                 </span>
-                <span className="font-mono font-bold">{saveBonusStr}</span>
+                <span className="font-bold text-amber-200">{saveBonusStr}</span>
               </div>
             </motion.div>
           );
@@ -460,15 +460,15 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       {/* ─── Two-Column Detail Grid: Skills Matrix & Gear / Level Up ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Skills Matrix (7 cols) */}
-        <div className="lg:col-span-7 holo-card p-5 border border-cyan-400/20 bg-black/60 space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-cyan-400/15">
+        <div className="lg:col-span-7 arcane-glass p-5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-amber-900/25">
             <div className="flex items-center gap-2">
-              <Award className="text-cyan-400" size={18} />
-              <h3 className="text-sm font-orbitron font-bold text-white uppercase tracking-wider">
+              <Award className="text-amber-400" size={18} />
+              <h3 className="text-sm font-cinzel font-bold text-amber-100 uppercase tracking-wider">
                 {isTr ? 'Yetenekler ve Beceriler' : 'Skills & Proficiencies'}
               </h3>
             </div>
-            <span className="text-[11px] text-parchment-dim font-mono">
+            <span className="text-[11px] text-stone-400 font-cinzel">
               {isTr ? '18 Temel RYO Yeteneği' : '18 Core RPG Skills'}
             </span>
           </div>
@@ -483,24 +483,24 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
               return (
                 <div
                   key={skill.key}
-                  className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] border border-white/5 hover:border-gold/20 transition-all"
+                  className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-amber-900/15 hover:border-amber-500/30 transition-all"
                 >
                   <div className="flex items-center gap-2 truncate">
                     <div
                       className={`w-2 h-2 rounded-full ${
-                        skillProficient ? 'bg-gold shadow-[0_0_6px_#ffd700]' : 'bg-gray-700'
+                        skillProficient ? 'bg-amber-400 shadow-[0_0_6px_#f59e0b]' : 'bg-stone-700'
                       }`}
                     />
-                    <span className="text-parchment font-medium truncate">
+                    <span className="text-stone-200 font-medium truncate font-inter">
                       {isTr ? skill.nameTr : skill.nameEn}
                     </span>
-                    <span className="text-[10px] text-gray-500 font-mono uppercase">
+                    <span className="text-[10px] text-amber-200/50 font-cinzel uppercase">
                       ({skill.stat})
                     </span>
                   </div>
                   <span
-                    className={`font-mono font-bold ml-2 ${
-                      skillProficient ? 'text-gold' : 'text-gray-300'
+                    className={`font-bold ml-2 ${
+                      skillProficient ? 'text-amber-300 font-cinzel' : 'text-stone-400'
                     }`}
                   >
                     {totalBonusStr}
@@ -514,17 +514,17 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
         {/* Right Column: Equipped Gear Preview & Class Details (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
           {/* Equipped Items Preview */}
-          <div className="holo-card p-5 border border-cyan-400/20 bg-black/60 space-y-3">
-            <div className="flex items-center justify-between pb-3 border-b border-cyan-400/15">
+          <div className="arcane-glass p-5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl space-y-3 shadow-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-amber-900/25">
               <div className="flex items-center gap-2">
-                <Shield className="text-cyan-400" size={18} />
-                <h3 className="text-sm font-orbitron font-bold text-white uppercase tracking-wider">
-                  {isTr ? 'Kuşanılmış Eşyalar' : 'Equipped Gear'}
+                <Shield className="text-amber-400" size={18} />
+                <h3 className="text-sm font-cinzel font-bold text-amber-100 uppercase tracking-wider">
+                  {isTr ? 'Kuşanılmış Eşyalar' : 'Equipped Relics'}
                 </h3>
               </div>
               <Link
                 to="/inventory"
-                className="text-xs text-gold/80 hover:text-gold flex items-center gap-1 transition-colors"
+                className="text-xs text-amber-300/80 hover:text-amber-200 flex items-center gap-1 font-cinzel transition-colors"
               >
                 <span>{isTr ? 'Tüm Envanter' : 'Open Inventory'}</span>
                 <ChevronRight size={14} />

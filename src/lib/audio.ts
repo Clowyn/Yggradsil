@@ -1,6 +1,7 @@
 // ============================================================
-// Futuristic Cyber-HUD Web Audio Synthesizer
-// Lightweight zero-dependency sound effects for immersive UI
+// Organic Dark Fantasy Audio Synthesizer (Web Audio API)
+// Zero-dependency ambient sound effects: parchment rustles,
+// antique lock clicks, and stone/relic taps for Grimdark Arcane OS
 // ============================================================
 
 let audioCtx: AudioContext | null = null;
@@ -16,7 +17,9 @@ try {
 function getAudioContext(): AudioContext | null {
   if (typeof window === 'undefined') return null;
   if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     if (AudioContextClass) {
       audioCtx = new AudioContextClass();
     }
@@ -27,7 +30,18 @@ function getAudioContext(): AudioContext | null {
   return audioCtx;
 }
 
-export type SoundType = 'click' | 'blip' | 'ping' | 'scan' | 'unlock' | 'powerup' | 'alert';
+export type SoundType =
+  | 'paper_flip'
+  | 'lock_click'
+  | 'stone_tap'
+  | 'tome_open'
+  | 'click'
+  | 'blip'
+  | 'ping'
+  | 'scan'
+  | 'unlock'
+  | 'powerup'
+  | 'alert';
 
 export function playSound(type: SoundType) {
   if (isMuted) return;
@@ -38,109 +52,196 @@ export function playSound(type: SoundType) {
 
   try {
     switch (type) {
-      case 'click': {
-        const osc = ctx.createOscillator();
+      // 1. Parchment rustle / paper flip (Bandpassed pink/white noise envelope)
+      case 'paper_flip': {
+        const duration = 0.12;
+        const bufferSize = Math.floor(ctx.sampleRate * duration);
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.4));
+        }
+
+        const whiteNoise = ctx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1400, now);
+        filter.Q.setValueAtTime(1.5, now);
+
         const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(400, now + 0.04);
         gain.gain.setValueAtTime(0.04, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-        osc.connect(gain);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        whiteNoise.connect(filter);
+        filter.connect(gain);
         gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.05);
+
+        whiteNoise.start(now);
         break;
       }
 
+      // 2. Antique lock / brass latch click (High-Q resonant metallic snap)
+      case 'lock_click':
+      case 'click': {
+        // Metallic snap
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1850, now);
+        osc.frequency.exponentialRampToValueAtTime(320, now + 0.035);
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(2200, now);
+        filter.Q.setValueAtTime(6.0, now);
+
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.04);
+        break;
+      }
+
+      // 3. Heavy stone / carved wood tap (Low-frequency solid impact)
+      case 'stone_tap':
       case 'blip': {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(1200, now);
-        osc.frequency.exponentialRampToValueAtTime(1800, now + 0.06);
-        gain.gain.setValueAtTime(0.05, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(280, now);
+        osc.frequency.exponentialRampToValueAtTime(90, now + 0.07);
+
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
+
         osc.start(now);
-        osc.stop(now + 0.07);
+        osc.stop(now + 0.08);
         break;
       }
 
+      // 4. Arcane Tome open / leather binding rustle
+      case 'tome_open': {
+        const duration = 0.22;
+        const bufferSize = Math.floor(ctx.sampleRate * duration);
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = (Math.random() * 2 - 1) * Math.sin((i / bufferSize) * Math.PI);
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(650, now);
+        filter.frequency.linearRampToValueAtTime(1800, now + 0.15);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        noise.start(now);
+        break;
+      }
+
+      // 5. Crystal resonance / chime (ping)
       case 'ping': {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
+
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(1760, now); // A6
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.25);
-        gain.gain.setValueAtTime(0.06, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.frequency.setValueAtTime(1318.51, now); // E6
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.35); // E5
+
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
+
         osc.start(now);
-        osc.stop(now + 0.26);
+        osc.stop(now + 0.36);
         break;
       }
 
+      // 6. Arcane pulse / aura sweep (scan)
       case 'scan': {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(300, now);
-        osc.frequency.linearRampToValueAtTime(1200, now + 0.18);
-        gain.gain.setValueAtTime(0.03, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.21);
-        break;
-      }
 
-      case 'unlock': {
-        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          const noteTime = now + i * 0.06;
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, noteTime);
-          gain.gain.setValueAtTime(0.04, noteTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.1);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(noteTime);
-          osc.stop(noteTime + 0.11);
-        });
-        break;
-      }
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.linearRampToValueAtTime(440, now + 0.2);
 
-      case 'powerup': {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(350, now);
-        osc.frequency.exponentialRampToValueAtTime(1400, now + 0.2);
-        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.setValueAtTime(0.04, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
+
         osc.start(now);
         osc.stop(now + 0.23);
         break;
       }
 
+      // 7. Ancient Seal Unlocked (Harmonic sacred chord)
+      case 'unlock':
+      case 'powerup': {
+        // A minor harmonic chord: A4, C5, E5, A5
+        [440, 523.25, 659.25, 880].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const noteTime = now + idx * 0.05;
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, noteTime);
+
+          gain.gain.setValueAtTime(0.035, noteTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, noteTime + 0.25);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(noteTime);
+          osc.stop(noteTime + 0.26);
+        });
+        break;
+      }
+
+      // 8. Ominous warning bell / ward trigger (alert)
       case 'alert': {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(600, now);
-        gain.gain.setValueAtTime(0.04, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(370, now); // F#4
+        osc.frequency.exponentialRampToValueAtTime(185, now + 0.2);
+
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
+
         osc.start(now);
-        osc.stop(now + 0.13);
+        osc.stop(now + 0.21);
         break;
       }
     }

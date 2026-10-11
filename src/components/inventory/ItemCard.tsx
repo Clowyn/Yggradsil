@@ -47,8 +47,8 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
 
   if (!item) {
     return (
-      <div ref={setNodeRef} style={style} {...attributes} className="w-full aspect-square rounded-lg border-2 border-dashed border-white/10 bg-white/[0.02] flex items-center justify-center">
-        <span className="text-xs text-gray-700">Empty</span>
+      <div ref={setNodeRef} style={style} {...attributes} className="w-full aspect-square rounded-xl border-2 border-dashed border-amber-900/30 bg-black/30 flex items-center justify-center">
+        <span className="text-[11px] font-cinzel text-stone-600">Empty</span>
       </div>
     );
   }
@@ -60,10 +60,10 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <motion.div
         className={`
-          relative glass rounded-lg border-2 ${rarityClass}
+          relative arcane-glass rounded-xl border-2 ${rarityClass}
           cursor-grab active:cursor-grabbing
           w-full aspect-square flex flex-col items-center justify-center gap-1
-          hover:bg-white/8 transition-all duration-200
+          hover:bg-white/5 transition-all duration-200
           ${isDragging ? 'opacity-50 scale-95' : ''}
         `}
         whileHover={{ scale: 1.05 }}
@@ -75,7 +75,7 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
 
         {/* Name */}
         <span
-          className="text-[9px] font-bold text-center leading-tight px-1 truncate w-full"
+          className="text-[9px] font-cinzel font-bold text-center leading-tight px-1 truncate w-full"
           style={{ color: rarityColor }}
         >
           {item.name}
@@ -83,16 +83,16 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
 
         {/* Quantity badge */}
         {item.quantity > 1 && (
-          <div className="absolute top-1 right-1 min-w-[18px] h-[18px] rounded-full bg-black/70 border border-white/20 flex items-center justify-center">
-            <span className="text-[9px] font-bold text-white">{item.quantity}</span>
+          <div className="absolute top-1 right-1 min-w-[18px] h-[18px] rounded-full bg-black/80 border border-amber-900/40 flex items-center justify-center">
+            <span className="text-[9px] font-bold text-amber-200">{item.quantity}</span>
           </div>
         )}
 
         {/* Equipped indicator */}
         {item.equipped && (
           <div className="absolute top-1 left-1">
-            <div className="w-3 h-3 rounded-full bg-[#ffd700] flex items-center justify-center shadow-[0_0_6px_#ffd700]">
-              <span className="text-[7px] text-black font-bold">E</span>
+            <div className="w-3.5 h-3.5 rounded-full bg-amber-400 flex items-center justify-center shadow-[0_0_6px_#f59e0b]">
+              <span className="text-[8px] text-black font-cinzel font-bold">E</span>
             </div>
           </div>
         )}
@@ -111,12 +111,12 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
         {/* Tooltip */}
         {showTooltip && (
           <motion.div
-            className="absolute left-full ml-2 top-0 z-50 glass rounded-xl p-3 min-w-[200px] pointer-events-none"
+            className="absolute left-full ml-2 top-0 z-50 arcane-glass rounded-xl p-3 min-w-[200px] pointer-events-none"
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
             style={{
-              borderColor: `${rarityColor}44`,
-              boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 15px ${rarityColor}22`,
+              borderColor: `${rarityColor}66`,
+              boxShadow: `0 8px 32px rgba(0,0,0,0.8), 0 0 15px ${rarityColor}22`,
             }}
           >
             <div className="flex items-center gap-2 mb-1">

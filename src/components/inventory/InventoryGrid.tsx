@@ -210,7 +210,7 @@ export function InventoryGrid() {
 
   return (
     <motion.div
-      className="w-full max-w-[680px] holo-card p-5 sm:p-6 border border-cyan-400/30 bg-black/80 shadow-[0_0_30px_rgba(0,240,255,0.12)]"
+      className="w-full max-w-[680px] arcane-glass p-5 sm:p-6 border border-amber-900/35 bg-[#0e1017]/85 shadow-2xl rounded-2xl"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -218,22 +218,22 @@ export function InventoryGrid() {
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={allIds} strategy={rectSortingStrategy}>
           {activeCharacter && (
-            <div className="mb-4 text-xs font-mono bg-black/60 px-3 py-1.5 rounded inline-flex items-center gap-2 border border-cyan-400/30">
-              <Users size={12} className="text-cyan-400" />
-              <span className="text-parchment-dim">// OPERATOR_LOADOUT:</span>
-              <span className="text-cyan-300 font-bold">{activeCharacter.name}</span>
+            <div className="mb-4 text-xs font-cinzel bg-black/40 px-3.5 py-1.5 rounded-xl inline-flex items-center gap-2 border border-amber-900/30">
+              <Users size={13} className="text-amber-400" />
+              <span className="text-amber-200/60 uppercase">ADVENTURER LOADOUT:</span>
+              <span className="text-amber-300 font-bold">{activeCharacter.name}</span>
             </div>
           )}
 
           {/* Equipped Section */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3">
-              <Shield className="w-4 h-4 text-cyan-400" />
-              <h3 className="text-xs font-orbitron font-bold text-cyan-300 uppercase tracking-widest">
-                // ACTIVE_LOADOUT
+              <Shield className="w-4 h-4 text-amber-400" />
+              <h3 className="text-xs font-cinzel font-bold text-amber-200 uppercase tracking-wider">
+                EQUIPPED RELICS & ARMAMENTS
               </h3>
-              <span className="text-[10px] font-mono text-emerald ml-auto font-semibold">
-                {equippedItemsCount} / {EQUIP_SLOTS} SLOTS MOUNTED
+              <span className="text-[10px] font-cinzel text-amber-300/80 ml-auto font-semibold">
+                {equippedItemsCount} / {EQUIP_SLOTS} SLOTS ATTIRED
               </span>
             </div>
 
@@ -245,16 +245,16 @@ export function InventoryGrid() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent mb-5" />
+          <div className="h-px bg-gradient-to-r from-transparent via-amber-500/25 to-transparent mb-5" />
 
           {/* Bag Section */}
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-3">
-              <Backpack className="w-4 h-4 text-parchment-dim" />
-              <h3 className="text-xs font-orbitron font-bold text-white uppercase tracking-widest">
-                // QUANTUM_CARGO_BAY
+              <Backpack className="w-4 h-4 text-amber-400/80" />
+              <h3 className="text-xs font-cinzel font-bold text-amber-100 uppercase tracking-wider">
+                ADVENTURER'S PACK (20 SLOTS)
               </h3>
-              <span className="text-[10px] font-mono text-parchment-dim ml-auto">
+              <span className="text-[10px] font-cinzel text-stone-400 ml-auto">
                 {bagItemsCount} / {TOTAL_SLOTS - EQUIP_SLOTS} SLOTS OCCUPIED
               </span>
             </div>
@@ -268,13 +268,13 @@ export function InventoryGrid() {
         </SortableContext>
       </DndContext>
 
-      {/* Credits Counter */}
-      <div className="flex items-center justify-end gap-2 mt-4 bg-black/60 border border-gold/20 rounded px-4 py-2 shadow-inner">
-        <Coins className="w-4 h-4 text-gold" />
-        <span className="text-xs font-orbitron font-bold text-gold-gradient">
+      {/* Gold Purse Counter */}
+      <div className="flex items-center justify-end gap-2 mt-4 bg-black/50 border border-amber-900/30 rounded-xl px-4 py-2 shadow-inner">
+        <Coins className="w-4 h-4 text-amber-400" />
+        <span className="text-sm font-cinzel font-extrabold text-gold-gradient">
           {gold.toLocaleString()}
         </span>
-        <span className="text-[10px] font-mono text-parchment-dim uppercase tracking-wider">CREDITS</span>
+        <span className="text-[10px] font-cinzel text-amber-300/80 uppercase tracking-wider">GOLD COINS</span>
       </div>
     </motion.div>
   );

@@ -7,6 +7,8 @@ import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { AdminLayout } from './components/admin/AdminLayout';
 
+import { FloatingDock } from './components/layout/FloatingDock';
+
 // Lazy-loaded pages for route-based code-splitting
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then(m => ({ default: m.DashboardPage })));
@@ -30,13 +32,13 @@ function PageFallback() {
     <div className="flex h-full min-h-[300px] w-full items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <div className="relative w-12 h-12 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border-2 border-gold/20 border-t-gold animate-spin" />
-          <div className="w-4 h-4 rounded-full bg-gold/40 animate-pulse" />
+          <div className="absolute inset-0 rounded-full border-2 border-amber-500/20 border-t-amber-400 animate-spin" />
+          <div className="w-4 h-4 rounded-full bg-amber-500/40 animate-pulse" />
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-gold animate-ping" />
-          <span className="text-[11px] font-orbitron text-gold/80 tracking-widest uppercase">
-            UPLINK_SYNCHRONIZING...
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+          <span className="text-[11px] font-cinzel text-amber-200/80 tracking-widest uppercase">
+            COMMUNING WITH REALM...
           </span>
         </div>
       </div>
@@ -45,27 +47,22 @@ function PageFallback() {
 }
 
 function AppLayout({ children }: { children: ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-abyss cyber-grid-bg overflow-hidden relative selection:bg-gold/30 selection:text-white">
-      {/* Subtle top laser scanning beam */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent pointer-events-none z-50 opacity-70" />
-
+    <div className="flex h-screen bg-[#08090c] arcane-bg overflow-hidden relative selection:bg-amber-500/30 selection:text-amber-100">
       <Sidebar
-        isOpen={isSidebarOpen}
-        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
         isMobileOpen={isMobileOpen}
         onMobileClose={() => setIsMobileOpen(false)}
       />
       <div className="flex flex-col flex-1 overflow-hidden relative">
         <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto p-3 sm:p-6 relative">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 pb-28 sm:pb-32 relative">
           <Suspense fallback={<PageFallback />}>
             {children}
           </Suspense>
         </main>
+        <FloatingDock />
       </div>
     </div>
   );

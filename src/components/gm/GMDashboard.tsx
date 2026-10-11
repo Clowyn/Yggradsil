@@ -532,36 +532,36 @@ export function GMDashboard() {
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-11 h-11 rounded-xl bg-crimson/20 border border-crimson/40 flex items-center justify-center shadow-[0_0_15px_rgba(255,0,85,0.25)]">
-          <Crown className="w-5 h-5 text-crimson" />
+        <div className="w-12 h-12 rounded-2xl bg-rose-950/40 border border-rose-900/50 flex items-center justify-center shadow-lg">
+          <Crown className="w-6 h-6 text-rose-300" />
         </div>
         <div>
-          <h1 className="text-xl font-orbitron font-extrabold text-white tracking-wide uppercase flex items-center gap-2">
-            <span>Game Master Overseer</span>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-crimson/20 text-crimson border border-crimson/40">
-              CMD.07
+          <h1 className="text-xl font-cinzel font-extrabold text-amber-100 tracking-wide uppercase flex items-center gap-2">
+            <span>LOREMASTER OVERSEER CHAMBER</span>
+            <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-rose-950/40 text-rose-300 border border-rose-900/50">
+              GM SANCTUM
             </span>
           </h1>
-          <p className="text-[11px] text-parchment-dim font-mono tracking-wider uppercase">
-            {campaign?.name ?? 'Campaign'} — {members.length} OPERATORS LINKED
+          <p className="text-[11px] text-amber-200/70 font-cinzel tracking-wider uppercase">
+            {campaign?.name ?? 'Campaign'} — {members.length} ADVENTURERS ASSEMBLED
           </p>
         </div>
       </div>
 
       {/* Tab Bar */}
-      <div className="flex gap-1.5 mb-6 holo-card p-1.5 border border-cyan-400/20 bg-black/70 overflow-x-auto scrollbar-thin">
+      <div className="flex gap-1.5 mb-6 arcane-glass p-1.5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl overflow-x-auto no-scrollbar shadow-lg">
         {TABS.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
               activeTab === tab.key
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
-                : 'text-parchment-dim hover:text-white hover:bg-white/5'
+                ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                : 'text-stone-400 hover:text-amber-200 hover:bg-white/5'
             }`}
           >
             {tab.icon}
-            <span className="hidden sm:inline font-orbitron text-[11px]">{tab.label}</span>
+            <span className="hidden sm:inline text-[11px]">{tab.label}</span>
           </button>
         ))}
       </div>
