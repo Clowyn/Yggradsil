@@ -185,12 +185,12 @@ export function DashboardPage() {
   );
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto font-inter relative pb-16">
+    <div className="space-y-6 w-full max-w-[1680px] mx-auto font-inter relative pb-28 px-2 sm:px-4">
       {/* ─── Hero Overview: War Table Header ───────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="arcane-glass p-5 sm:p-6 relative overflow-hidden border border-amber-900/30"
+        className="arcane-glass p-5 sm:p-6 lg:p-7 relative overflow-hidden border border-amber-900/30"
       >
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
           <div className="space-y-2">
@@ -231,10 +231,10 @@ export function DashboardPage() {
                 playSound('paper_flip');
                 addCustomLog('RUNE', isTr ? 'Kutsal rünler şöminede parıldadı.' : 'Sacred runes gleamed in the hearth.');
               }}
-              className="px-3.5 py-1.5 rounded-xl border border-amber-900/50 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 text-xs font-cinzel font-semibold tracking-wider flex items-center gap-2 transition-all cursor-pointer active:scale-95 shadow-sm"
+              className="px-5 py-2.5 rounded-xl border border-amber-900/50 bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 text-xs sm:text-sm font-cinzel font-bold tracking-wider flex items-center gap-2 transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-md"
               title="Commune with the party"
             >
-              <Feather size={14} className="text-amber-400" />
+              <Feather size={15} className="text-amber-400" />
               <span>{isTr ? 'NOT DÜŞ' : 'COMMUNE'}</span>
             </button>
           </div>
@@ -248,8 +248,8 @@ export function DashboardPage() {
         transition={{ delay: 0.1 }}
         className="grid grid-cols-1 lg:grid-cols-12 gap-6"
       >
-        {/* Adventurer's Medallion (5 cols on lg) */}
-        <div className="lg:col-span-5 arcane-glass p-6 flex flex-col justify-between relative overflow-hidden border border-amber-900/30">
+        {/* Adventurer's Medallion (4 cols on xl) */}
+        <div className="lg:col-span-5 xl:col-span-4 arcane-glass p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden border border-amber-900/30">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Compass size={17} className="text-amber-400" />
@@ -360,26 +360,26 @@ export function DashboardPage() {
           </div>
         </div>
 
-        {/* Tactical Actions & Expedition Bay (7 cols on lg) */}
-        <div className="lg:col-span-7 flex flex-col gap-4">
+        {/* Tactical Actions & Expedition Bay (7 cols on lg, 8 cols on xl) */}
+        <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-4">
           {/* Deck Tabs */}
           <div className="flex items-center justify-between border-b border-amber-900/25 pb-3">
             <div className="flex items-center gap-2">
-              <BookOpen size={18} className="text-amber-400" />
+              <BookOpen size={19} className="text-amber-400" />
               <h2 className="font-cinzel text-sm sm:text-base font-bold text-amber-100 tracking-wider uppercase">
                 {isTr ? 'SERÜVEN KARTLARI' : 'EXPEDITION CHARMS'}
               </h2>
             </div>
 
-            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-amber-900/30">
+            <div className="flex items-center gap-1.5 bg-black/40 p-1.5 rounded-xl border border-amber-900/30">
               <button
                 onClick={() => {
                   playSound('lock_click');
                   setActiveDeckTab('charms');
                 }}
-                className={`px-3 py-1 rounded-lg text-xs font-cinzel transition-all cursor-pointer ${
+                className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
                   activeDeckTab === 'charms'
-                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm'
+                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm font-bold'
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
@@ -390,9 +390,9 @@ export function DashboardPage() {
                   playSound('lock_click');
                   setActiveDeckTab('expedition');
                 }}
-                className={`px-3 py-1 rounded-lg text-xs font-cinzel transition-all cursor-pointer ${
+                className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
                   activeDeckTab === 'expedition'
-                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm'
+                    ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm font-bold'
                     : 'text-stone-400 hover:text-stone-200'
                 }`}
               >
@@ -403,7 +403,7 @@ export function DashboardPage() {
 
           {/* Tab 1: Navigation Charms */}
           {activeDeckTab === 'charms' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {navCharms.map((charm) => (
                 <Link
                   key={charm.to}
@@ -412,7 +412,7 @@ export function DashboardPage() {
                   className="group block"
                 >
                   <div
-                    className={`arcane-glass p-5 min-h-[168px] h-full flex flex-col justify-between border border-amber-900/35 hover:border-amber-400/50 hover:shadow-[0_0_24px_rgba(245,158,11,0.18)] bg-gradient-to-br ${charm.accent} transition-all duration-300 cursor-pointer relative overflow-hidden rounded-2xl`}
+                    className={`arcane-glass p-5 min-h-[175px] h-full flex flex-col justify-between border border-amber-900/35 hover:border-amber-400/50 hover:shadow-[0_0_24px_rgba(245,158,11,0.18)] bg-gradient-to-br ${charm.accent} transition-all duration-300 cursor-pointer relative overflow-hidden rounded-2xl`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[10px] font-cinzel text-amber-300/80 font-bold tracking-widest uppercase">
@@ -442,9 +442,9 @@ export function DashboardPage() {
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-amber-900/25 flex items-center justify-between text-xs font-cinzel text-amber-400 group-hover:translate-x-1 transition-transform">
+                    <div className="mt-3 pt-2 border-t border-amber-900/25 flex items-center justify-between text-xs sm:text-sm font-cinzel font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
                       <span>{isTr ? 'GÖRÜNTÜLE' : 'INSPECT'}</span>
-                      <ArrowRight size={14} />
+                      <ArrowRight size={15} />
                     </div>
                   </div>
                 </Link>
@@ -524,7 +524,7 @@ export function DashboardPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => addCustomLog('QUEST', 'The party secured the ancient sanctuary.')}
-              className="px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-[10px] font-cinzel text-amber-200 transition-all cursor-pointer border border-amber-900/30"
+              className="px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-xs font-cinzel font-bold text-amber-200 transition-all cursor-pointer border border-amber-900/40 hover:scale-105 active:scale-95 shadow-sm"
             >
               + INSCRIBE NOTE
             </button>
@@ -533,12 +533,12 @@ export function DashboardPage() {
                 playSound('paper_flip');
                 setLogs([]);
               }}
-              className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-cinzel text-stone-300 transition-all cursor-pointer border border-white/10"
+              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-cinzel font-semibold text-stone-300 transition-all cursor-pointer border border-white/10 hover:scale-105 active:scale-95"
             >
               CLEAR
             </button>
-            <span className="text-[10px] font-cinzel text-amber-400 flex items-center gap-1 ml-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs font-cinzel text-amber-400 flex items-center gap-1.5 ml-2">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               HEARTH LIT
             </span>
           </div>

@@ -525,7 +525,7 @@ export function GMDashboard() {
 
   return (
     <motion.div
-      className={`w-full mx-auto ${activeTab === 'spells' ? 'max-w-[1700px]' : 'max-w-6xl'}`}
+      className="w-full max-w-[1680px] mx-auto pb-28"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -549,19 +549,19 @@ export function GMDashboard() {
       </div>
 
       {/* Tab Bar */}
-      <div className="flex gap-1.5 mb-6 arcane-glass p-1.5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl overflow-x-auto no-scrollbar shadow-lg">
+      <div className="flex gap-2 mb-6 arcane-glass p-2 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl overflow-x-auto no-scrollbar shadow-lg">
         {TABS.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
               activeTab === tab.key
                 ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
                 : 'text-stone-400 hover:text-amber-200 hover:bg-white/5'
             }`}
           >
             {tab.icon}
-            <span className="hidden sm:inline text-[11px]">{tab.label}</span>
+            <span className="hidden sm:inline text-xs">{tab.label}</span>
           </button>
         ))}
       </div>

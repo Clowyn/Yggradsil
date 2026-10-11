@@ -205,12 +205,12 @@ export function CharacterCreation() {
   };
 
   return (
-    <div className="max-w-[1700px] w-full mx-auto px-2 sm:px-4 space-y-6 sm:space-y-8">
+    <div className="max-w-[1680px] w-full mx-auto px-2 sm:px-6 space-y-6 sm:space-y-8 pb-32">
       {/* Top Header: Progress Indicator + Compact Quick Next */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-amber-500/10">
-        <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2 flex-wrap">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-amber-500/15">
+        <div className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-3 flex-wrap">
           {STEPS.map((s, i) => (
-            <div key={s.key} className="flex items-center gap-1 sm:gap-2">
+            <div key={s.key} className="flex items-center gap-1.5 sm:gap-3">
               <button
                 type="button"
                 onClick={() => {
@@ -219,28 +219,28 @@ export function CharacterCreation() {
                     setStep(i);
                   }
                 }}
-                className="flex items-center gap-1.5 sm:gap-2 transition-all duration-300 cursor-pointer"
+                className="flex items-center gap-2 transition-all duration-300 cursor-pointer"
               >
                 <div
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold font-cinzel transition-all duration-500"
                   style={{
                     backgroundColor: i === step ? '#ffd700' : i < step ? '#ffd70050' : 'rgba(255,255,255,0.1)',
                     color: i === step ? '#0a0a0f' : i < step ? '#ffd700' : '#64748b',
-                    boxShadow: i === step ? '0 0 15px rgba(255,215,0,0.5)' : 'none',
+                    boxShadow: i === step ? '0 0 18px rgba(255,215,0,0.6)' : 'none',
                   }}
                 >
                   {i < step ? '✓' : i + 1}
                 </div>
                 <span
-                  className="text-xs font-medium hidden sm:inline"
-                  style={{ color: i === step ? '#ffd700' : '#64748b' }}
+                  className="text-xs sm:text-sm font-cinzel font-bold hidden sm:inline"
+                  style={{ color: i === step ? '#ffd700' : '#94a3b8' }}
                 >
                   {locale === 'tr' ? s.label_tr : s.label_en}
                 </span>
               </button>
               {i < STEPS.length - 1 && (
                 <div
-                  className="w-4 sm:w-8 h-px transition-colors duration-300"
+                  className="w-5 sm:w-10 h-0.5 transition-colors duration-300"
                   style={{ backgroundColor: i < step ? '#ffd700' : 'rgba(255,255,255,0.1)' }}
                 />
               )}
@@ -249,12 +249,12 @@ export function CharacterCreation() {
         </div>
 
         {/* Compact navigation in header */}
-        <div className="flex items-center justify-end gap-2 shrink-0">
+        <div className="flex items-center justify-end gap-2.5 shrink-0">
           {step > 0 && (
             <button
               type="button"
               onClick={goBack}
-              className="px-3.5 py-1.5 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-amber-500/30 bg-black/40 text-xs font-[Cinzel] font-semibold transition cursor-pointer"
+              className="px-5 py-2.5 rounded-xl border border-amber-900/40 text-stone-300 hover:text-amber-200 hover:border-amber-400/50 bg-black/60 text-xs sm:text-sm font-cinzel font-bold transition-all shadow-md cursor-pointer hover:scale-105 active:scale-95"
             >
               ← {locale === 'tr' ? 'Geri' : 'Back'}
             </button>
@@ -264,24 +264,24 @@ export function CharacterCreation() {
               type="button"
               onClick={goNext}
               disabled={!canNext()}
-              className="px-4 py-1.5 rounded-lg font-[Cinzel] text-xs font-bold transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-md cursor-pointer hover:scale-105 active:scale-95"
+              className="px-6 py-2.5 rounded-xl font-cinzel text-xs sm:text-sm font-black transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg cursor-pointer hover:scale-105 active:scale-95"
               style={{
                 background: canNext()
                   ? 'linear-gradient(135deg, #ffd700, #ffa500)'
                   : '#27272a',
                 color: canNext() ? '#0a0a0f' : '#71717a',
-                boxShadow: canNext() ? '0 0 15px rgba(255,215,0,0.4)' : 'none',
+                boxShadow: canNext() ? '0 0 20px rgba(255,215,0,0.5)' : 'none',
               }}
             >
               <span>{locale === 'tr' ? 'Hızlı İleri' : 'Quick Next'}</span>
-              <span>→</span>
+              <span className="text-sm">→</span>
             </button>
           )}
         </div>
       </div>
 
       {/* Step Content with Animation */}
-      <div className="relative min-h-[500px] pb-24">
+      <div className="relative min-h-[460px] pb-24">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -299,19 +299,19 @@ export function CharacterCreation() {
 
       {/* Sticky / Floating Bar at Bottom */}
       {step < 4 && (
-        <div className="sticky bottom-4 z-40 bg-zinc-950/85 backdrop-blur-xl border border-amber-500/30 rounded-2xl p-4 shadow-2xl flex justify-between items-center max-w-4xl mx-auto">
+        <div className="sticky bottom-6 z-40 bg-[#0e1017]/95 backdrop-blur-2xl border border-amber-500/40 rounded-2xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex justify-between items-center w-full max-w-5xl mx-auto">
           <button
             type="button"
             onClick={goBack}
             disabled={step === 0}
-            className="px-5 py-2.5 rounded-xl border border-white/10 text-slate-300 hover:text-white hover:border-amber-500/30 bg-black/40 text-sm font-[Cinzel] font-semibold transition-all disabled:opacity-20 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
+            className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-amber-900/40 text-stone-200 hover:text-amber-200 hover:border-amber-400/50 bg-black/60 text-sm sm:text-base font-cinzel font-bold transition-all disabled:opacity-20 disabled:cursor-not-allowed flex items-center gap-2.5 cursor-pointer hover:scale-105 active:scale-95 shadow-md"
           >
             <span>←</span>
             <span>{locale === 'tr' ? 'Geri' : 'Back'}</span>
           </button>
 
           {/* Current Selection summary */}
-          <div className="hidden sm:flex items-center gap-2 text-xs font-[Cinzel] text-amber-200/80 bg-amber-500/10 px-4 py-2 rounded-xl border border-amber-500/20">
+          <div className="hidden sm:flex items-center gap-2.5 text-xs sm:text-sm font-cinzel text-amber-200/90 bg-amber-500/10 px-5 py-3 rounded-xl border border-amber-500/30 shadow-inner">
             <span className="text-amber-400 font-bold">
               {STEPS[step] ? (locale === 'tr' ? STEPS[step].label_tr : STEPS[step].label_en) : ''}:
             </span>
@@ -342,19 +342,19 @@ export function CharacterCreation() {
             type="button"
             onClick={goNext}
             disabled={!canNext()}
-            className="px-8 sm:px-10 py-3 rounded-xl font-[Cinzel] text-base font-extrabold tracking-wide transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed flex items-center gap-2.5 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+            className="px-10 sm:px-14 py-3.5 sm:py-4 rounded-xl font-cinzel text-base sm:text-lg font-black tracking-wider transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed flex items-center gap-3 hover:scale-105 active:scale-95 cursor-pointer shadow-2xl"
             style={{
               background: canNext()
                 ? 'linear-gradient(135deg, #ffd700 0%, #f59e0b 50%, #d97706 100%)'
                 : '#27272a',
               color: canNext() ? '#0a0a0f' : '#71717a',
               boxShadow: canNext()
-                ? '0 0 25px rgba(245, 158, 11, 0.55), 0 0 50px rgba(251, 191, 36, 0.3)'
+                ? '0 0 30px rgba(245, 158, 11, 0.6), 0 0 60px rgba(251, 191, 36, 0.35)'
                 : 'none',
             }}
           >
             <span>{locale === 'tr' ? 'İleri' : 'Next'}</span>
-            <span className="text-lg">→</span>
+            <span className="text-xl">→</span>
           </button>
         </div>
       )}

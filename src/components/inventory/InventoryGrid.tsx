@@ -227,7 +227,7 @@ export function InventoryGrid() {
 
   return (
     <motion.div
-      className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6"
+      className="w-full max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 pb-28"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

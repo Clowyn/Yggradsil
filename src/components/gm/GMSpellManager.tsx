@@ -1235,15 +1235,15 @@ export function GMSpellManager() {
             </div>
 
             {selectedCharId && (
-              <div className="flex flex-wrap items-center gap-2.5 pt-2 lg:pt-0 border-t lg:border-t-0 border-white/5">
+              <div className="flex flex-wrap items-center gap-3 pt-2 lg:pt-0 border-t lg:border-t-0 border-white/5">
                 <button
                   type="button"
                   onClick={handleTeachAllSpells}
                   disabled={loading}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-emerald-600/25 via-amber-600/20 to-emerald-600/25 hover:from-emerald-600/35 hover:via-amber-600/30 hover:to-emerald-600/35 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400/60 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-900/60 hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-40"
+                  className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-emerald-600/30 via-amber-600/25 to-emerald-600/30 hover:from-emerald-600/45 hover:via-amber-600/35 hover:to-emerald-600/45 text-emerald-200 border border-emerald-500/50 hover:border-emerald-400/70 shadow-xl shadow-emerald-950/50 hover:shadow-emerald-900/70 hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-40"
                   title={locale === 'tr' ? 'Karakterin alt sınıfına/ağacına uygun tüm büyüleri öğretir' : 'Teach all eligible spells to this character'}
                 >
-                  <BookOpen size={14} className="text-emerald-400" />
+                  <BookOpen size={16} className="text-emerald-400" />
                   <span>{locale === 'tr' ? 'Tüm Büyüleri Öğret' : 'Teach All Spells'}</span>
                 </button>
 
@@ -1251,10 +1251,10 @@ export function GMSpellManager() {
                   type="button"
                   onClick={handleForgetAllSpells}
                   disabled={loading}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-red-700/25 via-rose-900/30 to-red-700/25 hover:from-red-700/35 hover:via-rose-900/40 hover:to-red-700/35 text-red-300 border border-red-500/40 hover:border-red-400/60 shadow-lg shadow-red-950/40 hover:shadow-red-900/60 hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-40"
+                  className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-red-700/30 via-rose-900/35 to-red-700/30 hover:from-red-700/45 hover:via-rose-900/50 hover:to-red-700/45 text-red-200 border border-red-500/50 hover:border-red-400/70 shadow-xl shadow-red-950/50 hover:shadow-red-900/70 hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-40"
                   title={locale === 'tr' ? 'Karakterin tüm büyülerini sıfırlar/kaldırır' : 'Remove all learned spells from this character'}
                 >
-                  <Trash2 size={14} className="text-red-400" />
+                  <Trash2 size={16} className="text-red-400" />
                   <span>{locale === 'tr' ? 'Tüm Büyüleri Unut' : 'Forget All Spells'}</span>
                 </button>
               </div>
@@ -1299,10 +1299,10 @@ export function GMSpellManager() {
                       </div>
                       <button
                         onClick={() => handleToggleSpellForPlayer(spell.id, isUnlocked)}
-                        className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-xl text-xs font-cinzel font-bold uppercase transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-sm ${
                           isUnlocked
-                            ? 'bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400'
-                            : 'bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 text-emerald-400'
+                            ? 'bg-red-500/15 border border-red-500/30 hover:bg-red-500/25 text-red-300'
+                            : 'bg-emerald-500/15 border border-emerald-500/30 hover:bg-emerald-500/25 text-emerald-300'
                         }`}
                       >
                         {isUnlocked

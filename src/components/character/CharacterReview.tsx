@@ -24,9 +24,9 @@ export function CharacterReview({ characterName, onNameChange, raceKey, subclass
   };
 
   return (
-    <div className="space-y-8 max-w-2xl mx-auto">
+    <div className="space-y-8 max-w-4xl mx-auto pb-24">
       <div className="text-center">
-        <h2 className="text-2xl font-[Cinzel] text-gold-gradient mb-2">
+        <h2 className="text-2xl sm:text-3xl font-[Cinzel] text-gold-gradient mb-2">
           {locale === 'tr' ? 'Karakterini Onayla' : 'Review Your Character'}
         </h2>
       </div>
@@ -119,14 +119,14 @@ export function CharacterReview({ characterName, onNameChange, raceKey, subclass
       <button
         onClick={onConfirm}
         disabled={!characterName.trim()}
-        className="w-full py-4 rounded-xl font-[Cinzel] text-lg font-bold transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+        className="w-full py-5 rounded-2xl font-[Cinzel] text-lg sm:text-xl font-black tracking-wide transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer hover:scale-[1.02] active:scale-[0.98] shadow-2xl"
         style={{
           background: characterName.trim()
-            ? 'linear-gradient(135deg, #ffd700, #ffa500, #ff8c00)'
-            : '#333',
-          color: characterName.trim() ? '#0a0a0f' : '#666',
+            ? 'linear-gradient(135deg, #ffd700 0%, #f59e0b 50%, #d97706 100%)'
+            : '#27272a',
+          color: characterName.trim() ? '#0a0a0f' : '#71717a',
           boxShadow: characterName.trim()
-            ? '0 0 20px rgba(255,215,0,0.3), 0 0 40px rgba(255,215,0,0.1)'
+            ? '0 0 30px rgba(245, 158, 11, 0.5), 0 0 60px rgba(251, 191, 36, 0.25)'
             : 'none',
         }}
       >

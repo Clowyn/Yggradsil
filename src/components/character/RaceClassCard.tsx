@@ -54,7 +54,7 @@ export const RaceClassCard = memo(function RaceClassCard({
   return (
     <button
       onClick={onSelect}
-      className="relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-3.5 sm:p-4 text-left cursor-pointer group overflow-hidden w-full"
+      className="relative rounded-2xl border border-amber-900/35 bg-[#0e1017]/85 hover:border-amber-400/50 backdrop-blur-md p-4 sm:p-5 text-left cursor-pointer group overflow-hidden w-full transition-all duration-300 shadow-md"
       style={{ ...baseStyle, ...selectedStyle, ...dimmedStyle }}
     >
       {/* Glow background effect when selected */}
