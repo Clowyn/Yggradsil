@@ -1,0 +1,32 @@
+import { useState, Suspense, type ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Sidebar } from './Sidebar';
+import { Header } from './Header';
+import { FloatingDock } from './FloatingDock';
+import { ArcaneLoadingFallback } from '../common/ArcaneLoadingFallback';
+
+export interface AppLayoutProps {
+  children?: ReactNode;
+}
+
+export function AppLayout({ children }: AppLayoutProps) {
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  return (
+    <div className="flex h-screen bg-[#08090c] arcane-bg overflow-hidden relative selection:bg-amber-500/30 selection:text-amber-100">
+      <Sidebar
+        isMobileOpen={isMobileOpen}
+        onMobileClose={() => setIsMobileOpen(false)}
+      />
+      <div className="flex flex-col flex-1 overflow-hidden relative">
+        <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 pb-10 md:pb-28 relative">
+          <Suspense fallback={<ArcaneLoadingFallback message="COMMUNING WITH REALM..." subMessage="Attuning ancient grimoires & celestial alignments" />}>
+            {children ?? <Outlet />}
+          </Suspense>
+        </main>
+        <FloatingDock />
+      </div>
+    </div>
+  );
+}

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cinzel+Decorative:wght@700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
@@ -325,4 +324,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-spin-slow {
   animation: spin-slow 16s linear infinite;
+}
+
+/* --- Ambient Glow Floating & Form Fade In Animations --- */
+@keyframes ambient-float-1 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.15; }
+  50% { transform: translate(30px, -40px); opacity: 0.35; }
+}
+
+@keyframes ambient-float-2 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+  50% { transform: translate(-20px, 30px); opacity: 0.25; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-ambient-float-1 {
+  animation: ambient-float-1 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-ambient-float-2 {
+  animation: ambient-float-2 16s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

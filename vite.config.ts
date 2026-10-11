@@ -12,23 +12,14 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (/[\\/]node_modules[\\/](react|react-dom|scheduler|react-router|react-router-dom|react-is)[\\/]/.test(id)) {
+              return 'vendor-react';
+            }
             if (id.includes('@xyflow')) {
               return 'vendor-xyflow';
             }
-            if (id.includes('framer-motion')) {
-              return 'vendor-motion';
-            }
-            if (id.includes('@dnd-kit')) {
-              return 'vendor-dnd';
-            }
             if (id.includes('@supabase')) {
               return 'vendor-supabase';
-            }
-            if (id.includes('lucide-react')) {
-              return 'vendor-icons';
-            }
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor-react';
             }
           }
         },

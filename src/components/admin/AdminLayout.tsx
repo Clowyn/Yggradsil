@@ -1,9 +1,11 @@
-import { useState, type ReactNode } from 'react';
+import { useState, Suspense, type ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
 import { AdminSidebar } from './AdminSidebar';
 import { Activity } from 'lucide-react';
+import { ArcaneLoadingFallback } from '../common/ArcaneLoadingFallback';
 
 interface AdminLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function AdminLayout({ children }: AdminLayoutProps) {
@@ -35,7 +37,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
         {/* Scrollable Page Body */}
         <main className="flex-1 overflow-y-auto p-6 md:p-8 bg-neutral-950">
-          <div className="max-w-7xl mx-auto space-y-6">{children}</div>
+          <div className="max-w-7xl mx-auto space-y-6">
+            <Suspense fallback={<ArcaneLoadingFallback message="ACCESSING ARCHIVES..." subMessage="Querying high sanctum records" />}>
+              {children ?? <Outlet />}
+            </Suspense>
+          </div>
         </main>
       </div>
     </div>

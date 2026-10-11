@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from 'react';
-import { motion } from 'framer-motion';
 import { UserPlus, Mail, Lock, User, Sparkles } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
@@ -32,24 +31,13 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full max-w-md mx-auto"
-    >
+    <div className="w-full max-w-md mx-auto animate-fade-in-up">
       <div className="arcane-glass rounded-2xl p-7 sm:p-9 shadow-2xl border border-amber-900/35 bg-[#0e1017]/90">
         {/* Guild Enrollment Header */}
         <div className="text-center mb-7">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 220, delay: 0.15 }}
-            className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-900/40 text-amber-400 mb-3.5 shadow-md"
-          >
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-900/40 text-amber-400 mb-3.5 shadow-md">
             <Sparkles size={26} />
-          </motion.div>
+          </div>
           <div className="flex items-center justify-center gap-1.5 text-[10px] font-cinzel text-amber-400 mb-1">
             <span>NEW ADVENTURER ENROLLMENT</span>
           </div>
@@ -132,22 +120,16 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
 
           {/* Error */}
           {error && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-rose-300 text-xs font-inter text-center bg-rose-950/30 border border-rose-900/40 rounded-xl py-2 px-3 tracking-wide"
-            >
+            <p className="text-rose-300 text-xs font-inter text-center bg-rose-950/30 border border-rose-900/40 rounded-xl py-2 px-3 tracking-wide animate-fade-in-up">
               {error}
-            </motion.p>
+            </p>
           )}
 
           {/* Submit */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 text-black font-cinzel font-extrabold text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-2"
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 text-black font-cinzel font-extrabold text-xs tracking-widest uppercase shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-2"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
@@ -157,7 +139,7 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
                 SEAL YOUR OATH
               </>
             )}
-          </motion.button>
+          </button>
         </form>
 
         {/* Divider */}
@@ -183,6 +165,6 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
           </button>
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }

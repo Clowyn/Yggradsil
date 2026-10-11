@@ -177,15 +177,40 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
         }
 
         if (activeCampaignId) {
-          // Load campaign details
-          let { data: campDetails } = await supabase
-            .from('campaigns')
-            .select('*')
-            .eq('id', activeCampaignId)
-            .maybeSingle();
+          // Parallelize campaign details, members, and characters queries to eradicate waterfalls
+          const [campDetailsRes, membersRes, charRes] = await Promise.all([
+            supabase
+              .from('campaigns')
+              .select('*')
+              .eq('id', activeCampaignId)
+              .maybeSingle(),
+            supabase
+              .from('campaign_members')
+              .select('*, profile:profiles(*)')
+              .eq('campaign_id', activeCampaignId),
+            supabase
+              .from('characters')
+              .select(`
+                *,
+                race:race_definitions(
+                  *,
+                  tier:race_tiers(*)
+                ),
+                subclass:subclass_definitions(
+                  *,
+                  category:class_categories(*)
+                ),
+                profile:profiles(*)
+              `)
+              .eq('campaign_id', activeCampaignId),
+          ]);
+
+          let campDetails = campDetailsRes.data;
+          let membersData = membersRes.data || [];
+          let charsData = (charRes.data as unknown as Character[]) || [];
 
           if (!campDetails) {
-            // If activeCampaignId didn't return a campaign, try to get any campaign
+            // If activeCampaignId didn't return a campaign, try fallback
             const { data: fallbackCamp } = await supabase
               .from('campaigns')
               .select('*')
@@ -194,67 +219,58 @@ export function CampaignProvider({ children }: { children: ReactNode }) {
             if (fallbackCamp) {
               campDetails = fallbackCamp;
               activeCampaignId = fallbackCamp.id;
+              const [fallbackMembers, fallbackChars] = await Promise.all([
+                supabase
+                  .from('campaign_members')
+                  .select('*, profile:profiles(*)')
+                  .eq('campaign_id', activeCampaignId),
+                supabase
+                  .from('characters')
+                  .select(`
+                    *,
+                    race:race_definitions(
+                      *,
+                      tier:race_tiers(*)
+                    ),
+                    subclass:subclass_definitions(
+                      *,
+                      category:class_categories(*)
+                    ),
+                    profile:profiles(*)
+                  `)
+                  .eq('campaign_id', activeCampaignId),
+              ]);
+              membersData = fallbackMembers.data || [];
+              charsData = (fallbackChars.data as unknown as Character[]) || [];
+            }
+          }
+
+          setMembers(membersData);
+          setCharacters(charsData);
+
+          let savedId: string | null = null;
+          try {
+            savedId = localStorage.getItem('dnd_active_character_id');
+          } catch {
+            // ignore
+          }
+
+          const savedChar = savedId ? charsData.find(c => c.id === savedId) : null;
+          if (savedChar) {
+            setActiveCharacterId(savedChar.id);
+          } else {
+            const userCharacter = charsData.find((c: Character) => c.profile_id === user.id);
+            if (userCharacter) {
+              setActiveCharacterId(userCharacter.id);
+            } else if (profile?.role === 'gm' || profile?.role === 'admin') {
+              setActiveCharacterId(charsData[0]?.id || null);
+            } else {
+              setActiveCharacterId(null);
             }
           }
 
           if (campDetails) {
             setCampaign(campDetails);
-
-            // Load campaign members safely
-            try {
-              const { data: memberDetails } = await supabase
-                .from('campaign_members')
-                .select('*, profile:profiles(*)')
-                .eq('campaign_id', campDetails.id);
-              setMembers(memberDetails || []);
-            } catch (mErr) {
-              console.warn('Could not load campaign members:', mErr);
-            }
-
-            // Load characters safely
-            try {
-              const { data: charData } = await supabase
-                .from('characters')
-                .select(`
-                  *,
-                  race:race_definitions(
-                    *,
-                    tier:race_tiers(*)
-                  ),
-                  subclass:subclass_definitions(
-                    *,
-                    category:class_categories(*)
-                  ),
-                  profile:profiles(*)
-                `)
-                .eq('campaign_id', campDetails.id);
-
-              if (charData) {
-                const allChars = (charData as unknown as Character[]) || [];
-                setCharacters(allChars);
-
-                let savedId: string | null = null;
-                try {
-                  savedId = localStorage.getItem('dnd_active_character_id');
-                } catch {
-                  // ignore
-                }
-
-                const savedChar = savedId ? allChars.find(c => c.id === savedId) : null;
-                if (savedChar) {
-                  setActiveCharacterId(savedChar.id);
-                } else {
-                  const userCharacter = allChars.find((c: Character) => c.profile_id === user.id);
-                  if (userCharacter) {
-                    setActiveCharacterId(userCharacter.id);
-                  } else if (profile?.role === 'gm' || profile?.role === 'admin') {
-                    setActiveCharacterId(allChars[0]?.id || null);
-                  }
-                }
-              }
-            } catch (cErr) {
-              console.warn('Could not load characters:', cErr);
-            }
           }
         } else {
           setCampaign(null);

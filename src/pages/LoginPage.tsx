@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { LoginForm } from '../components/auth/LoginForm';
 import { RegisterForm } from '../components/auth/RegisterForm';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,26 +16,22 @@ export function LoginPage() {
     <div className="min-h-screen w-full flex bg-[#08090c] arcane-bg relative overflow-hidden">
       {/* Left Column: Dark Fantasy Lore Artwork & Realm Ambiance */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-[#0e1017] overflow-hidden flex-col justify-between p-12 border-r border-amber-900/30">
-        {/* Background Artwork */}
+        {/* Background Artwork - Optimized WebP asset */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[20s] hover:scale-105 opacity-30 mix-blend-luminosity"
-          style={{ backgroundImage: 'url(/assets/login-bg.png)' }}
+          style={{ backgroundImage: 'url(/assets/login-bg.webp)' }}
         />
 
         {/* Ambient Gradients */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#08090c]/60 to-[#08090c] pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#08090c] via-transparent to-[#08090c]/70 pointer-events-none" />
 
-        {/* Floating Hearth Amber Orbs */}
-        <motion.div
-          animate={{ x: [0, 30, -20, 0], y: [0, -40, 20, 0], opacity: [0.15, 0.35, 0.15] }}
-          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-amber-600/15 blur-[120px] pointer-events-none"
+        {/* Floating Hearth Amber Orbs - GPU Accelerated CSS keyframes */}
+        <div
+          className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-amber-600/15 blur-[120px] pointer-events-none animate-ambient-float-1"
         />
-        <motion.div
-          animate={{ x: [0, -20, 30, 0], y: [0, 30, -20, 0], opacity: [0.1, 0.25, 0.1] }}
-          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-rose-900/20 blur-[140px] pointer-events-none"
+        <div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-rose-900/20 blur-[140px] pointer-events-none animate-ambient-float-2"
         />
 
         {/* Top Header */}
@@ -79,13 +74,11 @@ export function LoginPage() {
 
         {/* Content Container */}
         <div className="w-full max-w-md relative z-10 flex flex-col items-center">
-          <AnimatePresence mode="wait">
-            {isLogin ? (
-              <LoginForm key="login" onToggle={() => setIsLogin(false)} />
-            ) : (
-              <RegisterForm key="register" onToggle={() => setIsLogin(true)} />
-            )}
-          </AnimatePresence>
+          {isLogin ? (
+            <LoginForm key="login" onToggle={() => setIsLogin(false)} />
+          ) : (
+            <RegisterForm key="register" onToggle={() => setIsLogin(true)} />
+          )}
         </div>
       </div>
     </div>

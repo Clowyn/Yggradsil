@@ -1,13 +1,13 @@
-import { lazy, Suspense, useState, type ReactNode } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { CampaignProvider } from './contexts/CampaignContext';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
-import { Sidebar } from './components/layout/Sidebar';
-import { Header } from './components/layout/Header';
-import { AdminLayout } from './components/admin/AdminLayout';
+import { ArcaneLoadingFallback } from './components/common/ArcaneLoadingFallback';
 
-import { FloatingDock } from './components/layout/FloatingDock';
+// Lazy-loaded layouts for initial bundle optimization
+const AppLayout = lazy(() => import('./components/layout/AppLayout').then(m => ({ default: m.AppLayout })));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then(m => ({ default: m.AdminLayout })));
 
 // Lazy-loaded pages for route-based code-splitting
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
@@ -28,44 +28,7 @@ const ItemCatalogPage = lazy(() => import('./pages/admin/ItemCatalogPage').then(
 const LogsPage = lazy(() => import('./pages/admin/LogsPage').then(m => ({ default: m.LogsPage })));
 
 function PageFallback() {
-  return (
-    <div className="flex h-full min-h-[300px] w-full items-center justify-center">
-      <div className="flex flex-col items-center gap-3">
-        <div className="relative w-12 h-12 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border-2 border-amber-500/20 border-t-amber-400 animate-spin" />
-          <div className="w-4 h-4 rounded-full bg-amber-500/40 animate-pulse" />
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-          <span className="text-[11px] font-cinzel text-amber-200/80 tracking-widest uppercase">
-            COMMUNING WITH REALM...
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AppLayout({ children }: { children: ReactNode }) {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  return (
-    <div className="flex h-screen bg-[#08090c] arcane-bg overflow-hidden relative selection:bg-amber-500/30 selection:text-amber-100">
-      <Sidebar
-        isMobileOpen={isMobileOpen}
-        onMobileClose={() => setIsMobileOpen(false)}
-      />
-      <div className="flex flex-col flex-1 overflow-hidden relative">
-        <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto p-3 sm:p-6 pb-10 md:pb-28 relative">
-          <Suspense fallback={<PageFallback />}>
-            {children}
-          </Suspense>
-        </main>
-        <FloatingDock />
-      </div>
-    </div>
-  );
+  return <ArcaneLoadingFallback fullScreen message="COMMUNING WITH REALM..." subMessage="Attuning ancient grimoires & celestial alignments" />;
 }
 
 function App() {
@@ -76,138 +39,47 @@ function App() {
           <Suspense fallback={<PageFallback />}>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <DashboardPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/character"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <CharacterPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/stat-tree"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <SkillTreePage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/spells"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <SpellTreePage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/map"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <MapPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/inventory"
-                element={
-                  <ProtectedRoute>
-                    <AppLayout>
-                      <InventoryPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/gm"
-                element={
-                  <ProtectedRoute requireGM>
-                    <AppLayout>
-                      <GMPage />
-                    </AppLayout>
-                  </ProtectedRoute>
-                }
-              />
 
-              {/* Domain Admin Routes */}
+              {/* Main App Routes with Persistent Shell */}
               <Route
-                path="/admin"
                 element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <AdminDashboardPage />
-                    </AdminLayout>
+                  <ProtectedRoute>
+                    <AppLayout />
                   </ProtectedRoute>
                 }
-              />
+              >
+                <Route path="/" element={<DashboardPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/character" element={<CharacterPage />} />
+                <Route path="/stat-tree" element={<SkillTreePage />} />
+                <Route path="/spells" element={<SpellTreePage />} />
+                <Route path="/map" element={<MapPage />} />
+                <Route path="/inventory" element={<InventoryPage />} />
+                <Route
+                  path="/gm"
+                  element={
+                    <ProtectedRoute requireGM>
+                      <GMPage />
+                    </ProtectedRoute>
+                  }
+                />
+              </Route>
+
+              {/* Domain Admin Routes with Persistent Admin Shell */}
               <Route
-                path="/admin/users"
                 element={
                   <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <UsersPage />
-                    </AdminLayout>
+                    <AdminLayout />
                   </ProtectedRoute>
                 }
-              />
-              <Route
-                path="/admin/characters"
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <CharactersPage />
-                    </AdminLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/campaigns"
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <CampaignsPage />
-                    </AdminLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/items"
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <ItemCatalogPage />
-                    </AdminLayout>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/logs"
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout>
-                      <LogsPage />
-                    </AdminLayout>
-                  </ProtectedRoute>
-                }
-              />
+              >
+                <Route path="/admin" element={<AdminDashboardPage />} />
+                <Route path="/admin/users" element={<UsersPage />} />
+                <Route path="/admin/characters" element={<CharactersPage />} />
+                <Route path="/admin/campaigns" element={<CampaignsPage />} />
+                <Route path="/admin/items" element={<ItemCatalogPage />} />
+                <Route path="/admin/logs" element={<LogsPage />} />
+              </Route>
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
