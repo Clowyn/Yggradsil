@@ -15,7 +15,7 @@ export const BRANCH_COLORS: Record<string, string> = {
 const TREE_SPACING = 2500;
 const SUBCLASS_Y = 250;
 
-const MOCK_SPELLS: SpellNode[] = [
+export const MOCK_SPELLS: SpellNode[] = [
   {
     id: 'mock-blood-bolt',
     spell_tree_id: 'mock-blood-mage-tree',
