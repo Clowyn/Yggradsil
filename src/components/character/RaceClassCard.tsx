@@ -54,7 +54,7 @@ export const RaceClassCard = memo(function RaceClassCard({
   return (
     <button
       onClick={onSelect}
-      className="relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 text-left cursor-pointer group overflow-hidden w-full"
+      className="relative rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-3.5 sm:p-4 text-left cursor-pointer group overflow-hidden w-full"
       style={{ ...baseStyle, ...selectedStyle, ...dimmedStyle }}
     >
       {/* Glow background effect when selected */}
@@ -70,7 +70,7 @@ export const RaceClassCard = memo(function RaceClassCard({
       {/* Watermark avatar background */}
       {image && !imageError && (
         <div
-          className="absolute right-[-10px] bottom-[-10px] w-28 h-28 opacity-10 group-hover:opacity-20 transition-all duration-500 pointer-events-none rounded-br-xl"
+          className="absolute right-[-10px] bottom-[-10px] w-24 h-24 opacity-10 group-hover:opacity-20 transition-all duration-500 pointer-events-none rounded-br-xl"
           style={{
             backgroundImage: `url(${image})`,
             backgroundSize: 'cover',
@@ -83,19 +83,19 @@ export const RaceClassCard = memo(function RaceClassCard({
 
       {/* Badge */}
       {badge && (
-        <span className="absolute top-3 right-3 text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 z-10">
+        <span className="absolute top-2.5 right-2.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 z-10">
           {badge}
         </span>
       )}
 
-      <div className="relative z-10 flex gap-4 items-start">
+      <div className="relative z-10 flex gap-3 items-start">
         {/* Avatar/Initial Circle */}
         {image && !imageError ? (
           <img
             src={image}
             alt={title}
             onError={() => setImageError(true)}
-            className="w-12 h-12 rounded-full object-cover shrink-0 border-2"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover shrink-0 border-2"
             style={{
               borderColor: selected ? glowColor : 'rgba(255,255,255,0.2)',
               transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -103,7 +103,7 @@ export const RaceClassCard = memo(function RaceClassCard({
           />
         ) : (
           <div
-            className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold font-[Cinzel] shrink-0 border-2"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-base sm:text-lg font-bold font-[Cinzel] shrink-0 border-2"
             style={{
               borderColor: selected ? glowColor : 'rgba(255,255,255,0.2)',
               backgroundColor: selected ? `${glowColor}20` : 'rgba(255,255,255,0.05)',
@@ -118,7 +118,7 @@ export const RaceClassCard = memo(function RaceClassCard({
         <div className="flex-1 min-w-0">
           {/* Title */}
           <h3
-            className="text-base font-semibold font-[Cinzel] mb-0.5 truncate"
+            className="text-sm sm:text-base font-semibold font-[Cinzel] mb-0.5 truncate"
             style={{ color: selected ? glowColor : '#e2e8f0' }}
           >
             {title}
@@ -126,21 +126,21 @@ export const RaceClassCard = memo(function RaceClassCard({
 
           {/* Subtitle */}
           {subtitle && (
-            <p className="text-xs text-slate-400 mb-1.5">{subtitle}</p>
+            <p className="text-[11px] sm:text-xs text-slate-400 mb-1 truncate">{subtitle}</p>
           )}
 
           {/* Description */}
-          <p className="text-sm text-slate-300/80 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-slate-300/80 line-clamp-2 leading-relaxed">
             {description}
           </p>
 
           {/* Stat Badges */}
           {stats && Object.keys(stats).length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-2.5">
+            <div className="flex flex-wrap gap-1 mt-2">
               {(Object.entries(stats) as [StatKey, number][]).map(([key, val]) => (
                 <span
                   key={key}
-                  className="text-[10px] font-bold px-1.5 py-0.5 rounded border"
+                  className="text-[9px] font-bold px-1.5 py-0.5 rounded border"
                   style={{
                     color: STAT_INFO[key]?.color ?? '#94a3b8',
                     borderColor: `${STAT_INFO[key]?.color ?? '#94a3b8'}40`,

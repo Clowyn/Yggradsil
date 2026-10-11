@@ -525,7 +525,7 @@ export function GMDashboard() {
 
   return (
     <motion.div
-      className="w-full max-w-6xl mx-auto"
+      className={`w-full mx-auto ${activeTab === 'spells' ? 'max-w-[1700px]' : 'max-w-6xl'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

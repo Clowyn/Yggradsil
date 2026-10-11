@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { SpellTree, SpellTreeAssignment, SpellNode, Character, CharacterSpell } from '../../lib/types';
-import { Plus, Trash2, Edit2, AlertTriangle, User, RefreshCw } from 'lucide-react';
+import { Plus, Trash2, Edit2, AlertTriangle, User, RefreshCw, BookOpen } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function GMSpellManager() {
@@ -77,7 +77,7 @@ export function GMSpellManager() {
 
       const { data: charData, error: charError } = await supabase
         .from('characters')
-        .select('*');
+        .select('*, subclass:subclass_definitions(*, category:class_categories(*)), race:race_definitions(*)');
       if (charError) throw charError;
 
       const { data: charSpellsData, error: charSpellsError } = await supabase
@@ -112,7 +112,7 @@ export function GMSpellManager() {
         {
           id: 'mock-assign-1',
           spell_tree_id: 'mock-tree-id',
-          class_key: 'arcane',
+          class_key: 'mage',
           min_level: 1
         }
       ]);
@@ -148,7 +148,30 @@ export function GMSpellManager() {
           xp_total: 1000,
           avatar_url: null,
           created_at: '',
-          updated_at: ''
+          updated_at: '',
+          subclass: {
+            id: 'subclass-1',
+            category_id: 'cat-1',
+            key: 'mana_mage',
+            name_tr: 'Mana Büyücüsü',
+            name_en: 'Mana Mage',
+            ability_name_tr: 'Mana Havuzu',
+            ability_name_en: 'Mana Pool',
+            ability_desc_tr: 'Mana kapasitesini artırır.',
+            ability_desc_en: 'Increases mana capacity.',
+            is_low_rate: false,
+            is_advanced: false,
+            icon_url: null,
+            base_stats: {},
+            category: {
+              id: 'cat-1',
+              key: 'mage',
+              name_tr: 'Büyücü',
+              name_en: 'Mage',
+              icon_url: null,
+              sort_order: 1
+            }
+          }
         }
       ]);
       setSelectedCharId('mock-char-1');
@@ -408,7 +431,21 @@ export function GMSpellManager() {
   // Toggle Player Spell (Teach / Remove)
   const handleToggleSpellForPlayer = async (spellId: string, isUnlocked: boolean) => {
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      if (isUnlocked) {
+        setCharacterSpells(prev => prev.filter(cs => !(cs.character_id === selectedCharId && cs.spell_id === spellId)));
+      } else {
+        const foundSpell = spells.find(s => s.id === spellId);
+        setCharacterSpells(prev => [
+          ...prev,
+          {
+            id: `mock-cs-${spellId}-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+            character_id: selectedCharId,
+            spell_id: spellId,
+            unlocked: true,
+            spell: foundSpell
+          }
+        ]);
+      }
       return;
     }
     try {
@@ -421,20 +458,179 @@ export function GMSpellManager() {
           .eq('spell_id', spellId);
         if (error) throw error;
       } else {
-        // Teach spell (insert record)
+        // Teach spell (upsert record to prevent duplicate key constraint violations)
         const { error } = await supabase
           .from('character_spells')
-          .insert({
-            character_id: selectedCharId,
-            spell_id: spellId,
-            unlocked: true,
-            unlocked_at: new Date().toISOString()
-          });
+          .upsert(
+            {
+              character_id: selectedCharId,
+              spell_id: spellId,
+              unlocked: true,
+              unlocked_at: new Date().toISOString()
+            },
+            { onConflict: 'character_id,spell_id' }
+          );
         if (error) throw error;
       }
       loadData();
     } catch (err) {
       console.error('Failed to toggle player spell:', err);
+    }
+  };
+
+  // Helper to determine if an assignment accurately matches a character
+  const isAssignmentMatch = (
+    assign: SpellTreeAssignment,
+    subclassKey?: string,
+    classCategoryKey?: string,
+    raceKey?: string
+  ) => {
+    if (assign.subclass_key && assign.subclass_key !== subclassKey) return false;
+    if (assign.class_key && assign.class_key !== classCategoryKey) return false;
+    if (assign.race_key && assign.race_key !== raceKey) return false;
+
+    return Boolean(
+      (assign.subclass_key && assign.subclass_key === subclassKey) ||
+      (assign.class_key && assign.class_key === classCategoryKey) ||
+      (assign.race_key && assign.race_key === raceKey)
+    );
+  };
+
+  // Teach All Eligible Spells for Player
+  const handleTeachAllSpells = async () => {
+    if (!selectedCharId) return;
+    const char = characters.find(c => c.id === selectedCharId);
+    if (!char) return;
+
+    // Find trees matching character's class category, subclass, or race with strict criteria
+    const classCategoryKey = char.subclass?.category?.key;
+    const subclassKey = char.subclass?.key;
+    const raceKey = char.race?.key;
+
+    const matchedTreeIds = spellTrees.filter(tree => {
+      const treeAssigns = assignments.filter(a => a.spell_tree_id === tree.id);
+      if (treeAssigns.length === 0) return false;
+      return treeAssigns.some(assign =>
+        isAssignmentMatch(assign, subclassKey, classCategoryKey, raceKey)
+      );
+    }).map(t => t.id);
+
+    // If matched trees found, unlock spells in those trees; else ask confirmation for all spells
+    let targetSpells = spells;
+    if (matchedTreeIds.length > 0) {
+      targetSpells = spells.filter(s => matchedTreeIds.includes(s.spell_tree_id));
+    } else {
+      const confirmAll = window.confirm(
+        locale === 'tr'
+          ? `${char.name} için özel bir büyü ağacı ataması bulunamadı. Mevcut TÜM büyüler öğretilsin mi?`
+          : `No specific spell tree assigned for ${char.name}. Teach ALL available spells in the system?`
+      );
+      if (!confirmAll) return;
+    }
+
+    const alreadyUnlockedIds = new Set(
+      characterSpells
+        .filter(cs => cs.character_id === selectedCharId)
+        .map(cs => cs.spell_id)
+    );
+
+    const spellsToTeach = targetSpells.filter(s => !alreadyUnlockedIds.has(s.id));
+
+    if (spellsToTeach.length === 0) {
+      alert(
+        locale === 'tr'
+          ? 'Öğretilecek yeni büyü bulunamadı. (Tüm uygun büyüler zaten açık)'
+          : 'No new spells to teach. (All eligible spells are already unlocked)'
+      );
+      return;
+    }
+
+    try {
+      if (isOffline) {
+        const mockNewSpells: CharacterSpell[] = spellsToTeach.map(s => ({
+          id: `mock-cs-${s.id}-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+          character_id: selectedCharId,
+          spell_id: s.id,
+          unlocked: true,
+          spell: s
+        }));
+        setCharacterSpells(prev => [...prev, ...mockNewSpells]);
+        alert(
+          locale === 'tr'
+            ? `${spellsToTeach.length} büyü başarıyla öğretildi (Demo Modu).`
+            : `Successfully taught ${spellsToTeach.length} spells (Demo Mode).`
+        );
+      } else {
+        const insertPayload = spellsToTeach.map(s => ({
+          character_id: selectedCharId,
+          spell_id: s.id,
+          unlocked: true,
+          unlocked_at: new Date().toISOString()
+        }));
+
+        const { error } = await supabase
+          .from('character_spells')
+          .upsert(insertPayload, { onConflict: 'character_id,spell_id' });
+        if (error) throw error;
+        await loadData();
+        alert(
+          locale === 'tr'
+            ? `${spellsToTeach.length} büyü başarıyla öğretildi.`
+            : `Successfully taught ${spellsToTeach.length} spells.`
+        );
+      }
+    } catch (err) {
+      console.error('Failed to teach all spells:', err);
+      alert(locale === 'tr' ? 'Büyüler öğretilirken bir hata oluştu.' : 'Failed to teach spells.');
+    }
+  };
+
+  // Forget All Spells for Player
+  const handleForgetAllSpells = async () => {
+    if (!selectedCharId) return;
+    const char = characters.find(c => c.id === selectedCharId);
+    const charName = char?.name || (locale === 'tr' ? 'Karakter' : 'Character');
+
+    const learnedCount = characterSpells.filter(cs => cs.character_id === selectedCharId).length;
+    if (learnedCount === 0) {
+      alert(
+        locale === 'tr'
+          ? `${charName} için zaten öğrenilmiş büyü bulunmuyor.`
+          : `${charName} has no learned spells to forget.`
+      );
+      return;
+    }
+
+    const confirmMsg = locale === 'tr'
+      ? `${charName} için öğrenilmiş TÜM büyüleri (${learnedCount} büyü) unutmak istediğinizden emin misiniz? Bu işlem geri alınamaz.`
+      : `Are you sure you want to forget ALL spells (${learnedCount} spells) for ${charName}? This cannot be undone.`;
+
+    if (!window.confirm(confirmMsg)) return;
+
+    try {
+      if (isOffline) {
+        setCharacterSpells(prev => prev.filter(cs => cs.character_id !== selectedCharId));
+        alert(
+          locale === 'tr'
+            ? 'Tüm büyüler başarıyla silindi (Demo Modu).'
+            : 'All spells have been removed (Demo Mode).'
+        );
+      } else {
+        const { error } = await supabase
+          .from('character_spells')
+          .delete()
+          .eq('character_id', selectedCharId);
+        if (error) throw error;
+        await loadData();
+        alert(
+          locale === 'tr'
+            ? 'Tüm büyüler başarıyla silindi.'
+            : 'All spells have been removed.'
+        );
+      }
+    } catch (err) {
+      console.error('Failed to forget all spells:', err);
+      alert(locale === 'tr' ? 'Büyüler silinirken bir hata oluştu.' : 'Failed to remove spells.');
     }
   };
 
@@ -939,7 +1135,7 @@ export function GMSpellManager() {
                 </form>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {spells.map(spell => {
                   const targetTree = spellTrees.find(t => t.id === spell.spell_tree_id);
                   return (
@@ -1006,38 +1202,76 @@ export function GMSpellManager() {
       {/* Tab 2: Player Spells */}
       {activeTab === 'player' && (
         <div className="space-y-6">
-          <div className="flex items-center gap-3 bg-black/20 p-3 rounded-lg border border-white/5">
-            <User className="text-gold w-5 h-5" />
-            <div className="flex flex-col gap-1 w-full max-w-[240px]">
-              <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">
-                {locale === 'tr' ? 'Oyuncu Seç' : 'Select Player'}
-              </label>
-              <select
-                value={selectedCharId}
-                onChange={e => setSelectedCharId(e.target.value)}
-                className="bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-gold"
-              >
-                {characters.map(c => (
-                  <option key={c.id} value={c.id}>
-                    {c.name} (Lv.{c.level})
-                  </option>
-                ))}
-              </select>
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-black/30 p-4 rounded-xl border border-white/5">
+            <div className="flex items-center gap-3 flex-wrap">
+              <User className="text-gold w-5 h-5 shrink-0" />
+              <div className="flex flex-col gap-1 w-full sm:w-auto min-w-[200px]">
+                <label className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">
+                  {locale === 'tr' ? 'Oyuncu Seç' : 'Select Player'}
+                </label>
+                <select
+                  value={selectedCharId}
+                  onChange={e => setSelectedCharId(e.target.value)}
+                  className="bg-black/40 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-gold"
+                >
+                  {characters.map(c => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} (Lv.{c.level})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {activeChar && (
+                <div className="text-[10px] text-gray-400 flex flex-wrap gap-3 uppercase">
+                  {activeChar.subclass && (
+                    <div>
+                      {locale === 'tr' ? 'Sınıf:' : 'Class:'} <span className="text-amber-400 font-bold">{locale === 'tr' ? activeChar.subclass.name_tr : activeChar.subclass.name_en}</span>
+                    </div>
+                  )}
+                  <div>XP Total: <span className="text-white font-bold">{activeChar.xp_total}</span></div>
+                  <div>XP Available: <span className="text-gold font-bold">{activeChar.xp_available}</span></div>
+                </div>
+              )}
             </div>
-            {activeChar && (
-              <div className="text-[10px] text-gray-400 flex gap-4 ml-6 uppercase">
-                <div>XP Total: <span className="text-white font-bold">{activeChar.xp_total}</span></div>
-                <div>XP Available: <span className="text-gold font-bold">{activeChar.xp_available}</span></div>
+
+            {selectedCharId && (
+              <div className="flex flex-wrap items-center gap-2.5 pt-2 lg:pt-0 border-t lg:border-t-0 border-white/5">
+                <button
+                  type="button"
+                  onClick={handleTeachAllSpells}
+                  disabled={loading}
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-emerald-600/25 via-amber-600/20 to-emerald-600/25 hover:from-emerald-600/35 hover:via-amber-600/30 hover:to-emerald-600/35 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400/60 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-900/60 hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-40"
+                  title={locale === 'tr' ? 'Karakterin alt sınıfına/ağacına uygun tüm büyüleri öğretir' : 'Teach all eligible spells to this character'}
+                >
+                  <BookOpen size={14} className="text-emerald-400" />
+                  <span>{locale === 'tr' ? 'Tüm Büyüleri Öğret' : 'Teach All Spells'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleForgetAllSpells}
+                  disabled={loading}
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-red-700/25 via-rose-900/30 to-red-700/25 hover:from-red-700/35 hover:via-rose-900/40 hover:to-red-700/35 text-red-300 border border-red-500/40 hover:border-red-400/60 shadow-lg shadow-red-950/40 hover:shadow-red-900/60 hover:scale-[1.02] active:scale-[0.98] cursor-pointer disabled:opacity-40"
+                  title={locale === 'tr' ? 'Karakterin tüm büyülerini sıfırlar/kaldırır' : 'Remove all learned spells from this character'}
+                >
+                  <Trash2 size={14} className="text-red-400" />
+                  <span>{locale === 'tr' ? 'Tüm Büyüleri Unut' : 'Forget All Spells'}</span>
+                </button>
               </div>
             )}
           </div>
 
           {selectedCharId ? (
             <div className="space-y-3">
-              <h4 className="font-cinzel text-xs text-gold font-bold tracking-wider">
-                {locale === 'tr' ? 'Büyüleri Öğret / Kaldır' : 'Teach / Remove Spells'}
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-cinzel text-xs text-gold font-bold tracking-wider">
+                  {locale === 'tr' ? 'Büyüleri Öğret / Kaldır' : 'Teach / Remove Spells'}
+                </h4>
+                <span className="text-[11px] text-gray-400 font-medium">
+                  {characterSpells.filter(cs => cs.character_id === selectedCharId).length} / {spells.length} {locale === 'tr' ? 'öğrenildi' : 'unlocked'}
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
                 {spells.map(spell => {
                   const isUnlocked = characterSpells.some(
                     cs => cs.character_id === selectedCharId && cs.spell_id === spell.id

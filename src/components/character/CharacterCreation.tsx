@@ -9,6 +9,7 @@ import { CharacterReview } from './CharacterReview';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCampaign } from '../../contexts/CampaignContext';
 import { supabase } from '../../lib/supabase';
+import { RACE_TIERS, RACES, CLASS_CATEGORIES, SUBCLASSES } from '../../lib/constants';
 
 const STEPS = [
   { key: 'tier', label_en: 'Race Tier', label_tr: 'Irk Katmanı' },
@@ -204,49 +205,83 @@ export function CharacterCreation() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
-      {/* Progress Indicator */}
-      <div className="flex items-center justify-center gap-2">
-        {STEPS.map((s, i) => (
-          <div key={s.key} className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                if (i < step) {
-                  setDirection(-1);
-                  setStep(i);
-                }
-              }}
-              className="flex items-center gap-2 transition-all duration-300"
-            >
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500"
-                style={{
-                  backgroundColor: i === step ? '#ffd700' : i < step ? '#ffd70050' : 'rgba(255,255,255,0.1)',
-                  color: i === step ? '#0a0a0f' : i < step ? '#ffd700' : '#64748b',
-                  boxShadow: i === step ? '0 0 15px rgba(255,215,0,0.5)' : 'none',
+    <div className="max-w-[1700px] w-full mx-auto px-2 sm:px-4 space-y-6 sm:space-y-8">
+      {/* Top Header: Progress Indicator + Compact Quick Next */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-amber-500/10">
+        <div className="flex items-center justify-center sm:justify-start gap-1 sm:gap-2 flex-wrap">
+          {STEPS.map((s, i) => (
+            <div key={s.key} className="flex items-center gap-1 sm:gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  if (i < step) {
+                    setDirection(-1);
+                    setStep(i);
+                  }
                 }}
+                className="flex items-center gap-1.5 sm:gap-2 transition-all duration-300 cursor-pointer"
               >
-                {i < step ? '✓' : i + 1}
-              </div>
-              <span
-                className="text-xs font-medium hidden sm:inline"
-                style={{ color: i === step ? '#ffd700' : '#64748b' }}
-              >
-                {locale === 'tr' ? s.label_tr : s.label_en}
-              </span>
+                <div
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500"
+                  style={{
+                    backgroundColor: i === step ? '#ffd700' : i < step ? '#ffd70050' : 'rgba(255,255,255,0.1)',
+                    color: i === step ? '#0a0a0f' : i < step ? '#ffd700' : '#64748b',
+                    boxShadow: i === step ? '0 0 15px rgba(255,215,0,0.5)' : 'none',
+                  }}
+                >
+                  {i < step ? '✓' : i + 1}
+                </div>
+                <span
+                  className="text-xs font-medium hidden sm:inline"
+                  style={{ color: i === step ? '#ffd700' : '#64748b' }}
+                >
+                  {locale === 'tr' ? s.label_tr : s.label_en}
+                </span>
+              </button>
+              {i < STEPS.length - 1 && (
+                <div
+                  className="w-4 sm:w-8 h-px transition-colors duration-300"
+                  style={{ backgroundColor: i < step ? '#ffd700' : 'rgba(255,255,255,0.1)' }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Compact navigation in header */}
+        <div className="flex items-center justify-end gap-2 shrink-0">
+          {step > 0 && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="px-3.5 py-1.5 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-amber-500/30 bg-black/40 text-xs font-[Cinzel] font-semibold transition cursor-pointer"
+            >
+              ← {locale === 'tr' ? 'Geri' : 'Back'}
             </button>
-            {i < STEPS.length - 1 && (
-              <div
-                className="w-8 h-px transition-colors duration-300"
-                style={{ backgroundColor: i < step ? '#ffd700' : 'rgba(255,255,255,0.1)' }}
-              />
-            )}
-          </div>
-        ))}
+          )}
+          {step < 4 && (
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={!canNext()}
+              className="px-4 py-1.5 rounded-lg font-[Cinzel] text-xs font-bold transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-md cursor-pointer hover:scale-105 active:scale-95"
+              style={{
+                background: canNext()
+                  ? 'linear-gradient(135deg, #ffd700, #ffa500)'
+                  : '#27272a',
+                color: canNext() ? '#0a0a0f' : '#71717a',
+                boxShadow: canNext() ? '0 0 15px rgba(255,215,0,0.4)' : 'none',
+              }}
+            >
+              <span>{locale === 'tr' ? 'Hızlı İleri' : 'Quick Next'}</span>
+              <span>→</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Step Content with Animation */}
-      <div className="relative min-h-[500px]">
+      <div className="relative min-h-[500px] pb-24">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={step}
@@ -262,30 +297,64 @@ export function CharacterCreation() {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Buttons */}
+      {/* Sticky / Floating Bar at Bottom */}
       {step < 4 && (
-        <div className="flex justify-between items-center pt-4 border-t border-white/5">
+        <div className="sticky bottom-4 z-40 bg-zinc-950/85 backdrop-blur-xl border border-amber-500/30 rounded-2xl p-4 shadow-2xl flex justify-between items-center max-w-4xl mx-auto">
           <button
+            type="button"
             onClick={goBack}
             disabled={step === 0}
-            className="px-6 py-2.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-all disabled:opacity-20 disabled:cursor-not-allowed font-[Cinzel] text-sm"
+            className="px-5 py-2.5 rounded-xl border border-white/10 text-slate-300 hover:text-white hover:border-amber-500/30 bg-black/40 text-sm font-[Cinzel] font-semibold transition-all disabled:opacity-20 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer"
           >
-            ← {locale === 'tr' ? 'Geri' : 'Back'}
+            <span>←</span>
+            <span>{locale === 'tr' ? 'Geri' : 'Back'}</span>
           </button>
 
+          {/* Current Selection summary */}
+          <div className="hidden sm:flex items-center gap-2 text-xs font-[Cinzel] text-amber-200/80 bg-amber-500/10 px-4 py-2 rounded-xl border border-amber-500/20">
+            <span className="text-amber-400 font-bold">
+              {STEPS[step] ? (locale === 'tr' ? STEPS[step].label_tr : STEPS[step].label_en) : ''}:
+            </span>
+            <span className="text-white font-semibold">
+              {(() => {
+                if (step === 0 && selectedTier) {
+                  const t = RACE_TIERS.find(tier => tier.key === selectedTier);
+                  return t ? (locale === 'tr' ? t.name_tr : t.name_en) : selectedTier.toUpperCase();
+                }
+                if (step === 1 && selectedRace) {
+                  const r = RACES.find(race => race.key === selectedRace);
+                  return r ? r.name : selectedRace.toUpperCase();
+                }
+                if (step === 2 && selectedCategory) {
+                  const c = CLASS_CATEGORIES.find(cat => cat.key === selectedCategory);
+                  return c ? (locale === 'tr' ? c.name_tr : c.name_en) : selectedCategory.toUpperCase();
+                }
+                if (step === 3 && selectedSubclass) {
+                  const sc = SUBCLASSES.find(sub => sub.key === selectedSubclass);
+                  return sc ? (locale === 'tr' ? sc.name_tr : sc.name_en) : selectedSubclass.toUpperCase();
+                }
+                return locale === 'tr' ? 'Seçim Yapın' : 'Select';
+              })()}
+            </span>
+          </div>
+
           <button
+            type="button"
             onClick={goNext}
             disabled={!canNext()}
-            className="px-8 py-2.5 rounded-lg font-[Cinzel] text-sm font-bold transition-all disabled:opacity-20 disabled:cursor-not-allowed"
+            className="px-8 sm:px-10 py-3 rounded-xl font-[Cinzel] text-base font-extrabold tracking-wide transition-all duration-300 disabled:opacity-25 disabled:cursor-not-allowed flex items-center gap-2.5 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
             style={{
               background: canNext()
-                ? 'linear-gradient(135deg, #ffd700, #ffa500)'
-                : '#333',
-              color: canNext() ? '#0a0a0f' : '#666',
-              boxShadow: canNext() ? '0 0 15px rgba(255,215,0,0.3)' : 'none',
+                ? 'linear-gradient(135deg, #ffd700 0%, #f59e0b 50%, #d97706 100%)'
+                : '#27272a',
+              color: canNext() ? '#0a0a0f' : '#71717a',
+              boxShadow: canNext()
+                ? '0 0 25px rgba(245, 158, 11, 0.55), 0 0 50px rgba(251, 191, 36, 0.3)'
+                : 'none',
             }}
           >
-            {locale === 'tr' ? 'İleri' : 'Next'} →
+            <span>{locale === 'tr' ? 'İleri' : 'Next'}</span>
+            <span className="text-lg">→</span>
           </button>
         </div>
       )}

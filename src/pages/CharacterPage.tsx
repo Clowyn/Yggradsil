@@ -22,7 +22,7 @@ export function CharacterPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="p-3 sm:p-6 max-w-7xl mx-auto space-y-6"
+      className={`p-3 sm:p-6 w-full mx-auto space-y-6 ${showSheet ? 'max-w-7xl' : 'max-w-[1700px]'}`}
     >
       {/* Tab Switcher if an active character exists */}
       {activeCharacter && (
