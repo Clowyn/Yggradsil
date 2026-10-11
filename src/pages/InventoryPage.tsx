@@ -7,7 +7,7 @@ export function InventoryPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="p-6"
+      className="w-full flex justify-center pb-8"
     >
       <InventoryGrid />
     </motion.div>

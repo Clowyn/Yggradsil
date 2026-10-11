@@ -35,7 +35,7 @@ export function LoginForm({ onToggle }: LoginFormProps) {
       className="w-full max-w-md mx-auto"
     >
       <div className="arcane-glass rounded-2xl p-7 sm:p-9 shadow-2xl border border-amber-900/35 bg-[#0e1017]/90">
-        {/* Terminal Header */}
+        {/* Sanctum Header */}
         <div className="text-center mb-7">
           <motion.div
             initial={{ scale: 0 }}
@@ -47,7 +47,7 @@ export function LoginForm({ onToggle }: LoginFormProps) {
           </motion.div>
           <div className="flex items-center justify-center gap-1.5 text-[10px] font-cinzel text-amber-400 mb-1">
             <Flame size={12} className="animate-candle-flicker" />
-            <span>// ENTER THE REALM</span>
+            <span>ENTER THE REALM</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-cinzel text-gold-gradient font-black tracking-wider uppercase">
             SANCTUM PORTAL

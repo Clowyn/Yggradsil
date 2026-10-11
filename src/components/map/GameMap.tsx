@@ -280,7 +280,7 @@ export function GameMap() {
         )}
 
         {/* Token count indicator */}
-        <div className="absolute bottom-3 left-3 bg-[#08090c]/85 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
+        <div className="absolute bottom-4 left-4 z-10 bg-[#08090c]/90 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
           <div className="flex -space-x-1">
             {tokens.map((t) => (
               <div

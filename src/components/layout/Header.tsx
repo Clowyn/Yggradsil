@@ -71,7 +71,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
       <div className="flex items-center gap-2 sm:gap-3 ml-auto">
         {/* GM Character Selector */}
         {isGM && characters && characters.length > 0 && (
-          <div className="flex items-center gap-1.5 sm:gap-2 mr-1">
+          <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 mr-1">
             <Users size={13} className="text-amber-400/80 shrink-0" />
             <select
               value={activeCharacterId || ''}

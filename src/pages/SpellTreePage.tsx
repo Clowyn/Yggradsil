@@ -7,7 +7,7 @@ export function SpellTreePage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="h-[calc(100vh-60px)] p-6"
+      className="w-full h-[calc(100vh-130px)] sm:h-[calc(100vh-140px)]"
     >
       <SpellTreeGraph />
     </motion.div>

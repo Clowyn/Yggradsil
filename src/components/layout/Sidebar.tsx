@@ -11,7 +11,7 @@ import {
   Crown,
   X,
   Sparkles,
-  Terminal,
+  Scale,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
@@ -192,7 +192,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps) {
               className="p-2 rounded-xl bg-amber-500/10 border border-amber-900/40 text-amber-400 hover:text-amber-200 transition-colors"
               title="High Council"
             >
-              <Terminal size={14} />
+              <Scale size={14} />
             </NavLink>
           )}
         </div>

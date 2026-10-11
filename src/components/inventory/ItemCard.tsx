@@ -24,10 +24,18 @@ export interface InventoryItemLocal {
 interface ItemCardProps {
   id: string;
   item: InventoryItemLocal | null;
+  isSelected?: boolean;
+  onSelect?: (id: string) => void;
   onEquipToggle?: (id: string) => void;
 }
 
-export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: ItemCardProps) {
+export const ItemCard = memo(function ItemCard({
+  id,
+  item,
+  isSelected,
+  onSelect,
+  onEquipToggle,
+}: ItemCardProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const {
@@ -64,6 +72,7 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
           cursor-grab active:cursor-grabbing
           w-full aspect-square flex flex-col items-center justify-center gap-1
           hover:bg-white/5 transition-all duration-200
+          ${isSelected ? 'ring-2 ring-amber-400 !border-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.5)] scale-[1.03]' : ''}
           ${isDragging ? 'opacity-50 scale-95' : ''}
         `}
         whileHover={{ scale: 1.05 }}
@@ -97,16 +106,18 @@ export const ItemCard = memo(function ItemCard({ id, item, onEquipToggle }: Item
           </div>
         )}
 
-        {/* Double-click to equip */}
-        {onEquipToggle && (
-          <div
-            className="absolute inset-0"
-            onDoubleClick={(e) => {
-              e.stopPropagation();
-              onEquipToggle(item.id);
-            }}
-          />
-        )}
+        {/* Click to select & Double-click to equip */}
+        <div
+          className="absolute inset-0"
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect?.(item.id);
+          }}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            onEquipToggle?.(item.id);
+          }}
+        />
 
         {/* Tooltip */}
         {showTooltip && (

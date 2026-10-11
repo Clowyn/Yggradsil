@@ -46,7 +46,7 @@ export function LoginPage() {
           </div>
           <div>
             <span className="font-cinzel text-base font-extrabold text-amber-100 tracking-wider uppercase">
-              YGGDRASIL // REALM
+              YGGDRASIL • REALM
             </span>
             <p className="text-[10px] font-cinzel text-amber-200/60 tracking-wider">
               GRIMDARK FANTASY EXPEDITION OS
@@ -59,7 +59,7 @@ export function LoginPage() {
           <div className="flex items-center justify-between mb-2.5 pb-2.5 border-b border-amber-900/25">
             <div className="flex items-center gap-2 text-xs font-cinzel text-amber-300 font-bold">
               <Scroll size={15} />
-              <span>// CHRONICLES OF THE WORLD TREE</span>
+              <span>CHRONICLES OF THE WORLD TREE</span>
             </div>
             <span className="text-[10px] font-cinzel text-amber-400 flex items-center gap-1 font-semibold">
               <Shield size={12} />

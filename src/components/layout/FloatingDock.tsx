@@ -9,7 +9,7 @@ import {
   Map as MapIcon,
   Backpack,
   Crown,
-  Terminal,
+  Scale,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
@@ -71,7 +71,7 @@ const DOCK_ITEMS: DockItem[] = [
     to: '/admin',
     labelEn: 'High Council',
     labelTr: 'Yüksek Konsey',
-    icon: <Terminal size={20} />,
+    icon: <Scale size={20} />,
     adminOnly: true,
   },
 ];
@@ -89,7 +89,7 @@ export function FloatingDock() {
 
   return (
     <div
-      className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-40 pointer-events-auto"
+      className="hidden md:block fixed bottom-5 left-1/2 -translate-x-1/2 z-40 pointer-events-auto"
       role="navigation"
       aria-label="macOS Floating Island Dock"
     >

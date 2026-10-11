@@ -525,7 +525,7 @@ export function GMDashboard() {
 
   return (
     <motion.div
-      className="w-full max-w-[900px] mx-auto"
+      className="w-full max-w-6xl mx-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -807,7 +807,7 @@ function OverviewTab({
         {STATS.map((stat, i) => (
           <motion.div
             key={stat.label}
-            className="holo-card p-4 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300"
+            className="arcane-glass p-4 border border-amber-900/35 hover:border-amber-500/40 transition-all duration-300 rounded-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
@@ -815,79 +815,139 @@ function OverviewTab({
           >
             <div className="flex items-center gap-2 mb-2">
               <stat.icon className="w-4 h-4" style={{ color: stat.color }} />
-              <span className="text-[10px] text-parchment-dim font-mono uppercase tracking-widest">{stat.label}</span>
+              <span className="text-[10px] text-amber-200/70 font-cinzel uppercase tracking-widest">{stat.label}</span>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black font-orbitron" style={{ color: stat.color }}>
+              <span className="text-2xl font-black font-cinzel" style={{ color: stat.color }}>
                 {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
               </span>
-              {stat.suffix && <span className="text-[10px] text-parchment-dim font-mono">{stat.suffix}</span>}
+              {stat.suffix && <span className="text-[10px] text-amber-200/60 font-cinzel">{stat.suffix}</span>}
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Quick Actions */}
-      <div>
-        <h3 className="text-xs font-orbitron font-bold text-parchment-dim uppercase tracking-widest mb-3">
-          // QUICK COMMANDS
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {NAV_BUTTONS.map((btn, i) => {
-            const inner = (
-              <motion.div
-                className="holo-card p-4 border border-cyan-400/20 hover:border-cyan-400/50 text-left transition-all duration-300 group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 + 0.3 }}
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
-                  style={{ backgroundColor: `${btn.color}20`, border: `1px solid ${btn.color}50` }}
-                >
-                  <btn.icon className="w-4 h-4" style={{ color: btn.color }} />
-                </div>
-                <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 mb-0.5 font-orbitron transition-colors">{btn.label}</h4>
-                <p className="text-[10px] text-parchment-dim font-mono">{btn.desc}</p>
-              </motion.div>
-            );
-
-            return (
-              <div key={btn.label} onClick={btn.action}>
-                {inner}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Recent XP Log */}
-      {xpLog.length > 0 && (
-        <div>
-          <h3 className="text-xs font-cinzel font-bold text-gray-400 uppercase tracking-widest mb-3">
-            Recent XP Activity
+      {/* Two-Column Command Center Grid on Large Screens */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left Column: Sanctum Commands & Modules (7 cols) */}
+        <div className="lg:col-span-7 space-y-3">
+          <h3 className="text-xs font-cinzel font-bold text-amber-200/80 uppercase tracking-widest">
+            SANCTUM COMMANDS & MODULES
           </h3>
-          <div className="glass rounded-xl border border-white/5 divide-y divide-white/5">
-            {xpLog.slice(0, 5).map(entry => (
-              <div key={entry.id} className="flex items-center gap-3 p-3">
-                <Sparkles className="w-3.5 h-3.5 text-[#ffd700] shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs text-gray-300 font-bold">{entry.playerName}</span>
-                  <span className="text-[10px] text-gray-500 ml-2">{entry.reason}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {NAV_BUTTONS.map((btn, i) => {
+              const inner = (
+                <motion.div
+                  className="arcane-glass p-4 border border-amber-900/35 hover:border-amber-500/50 text-left transition-all duration-300 group cursor-pointer rounded-xl h-full flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 + 0.2 }}
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div>
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
+                      style={{ backgroundColor: `${btn.color}20`, border: `1px solid ${btn.color}50` }}
+                    >
+                      <btn.icon className="w-4 h-4" style={{ color: btn.color }} />
+                    </div>
+                    <h4 className="text-sm font-bold text-amber-100 group-hover:text-amber-300 mb-0.5 font-cinzel transition-colors">
+                      {btn.label}
+                    </h4>
+                    <p className="text-[10px] text-stone-400 font-inter">{btn.desc}</p>
+                  </div>
+                </motion.div>
+              );
+
+              return (
+                <div key={btn.label} onClick={btn.action} className="h-full">
+                  {inner}
                 </div>
-                <span className={`text-xs font-bold tabular-nums ${entry.amount >= 0 ? 'text-[#ffd700]' : 'text-red-400'}`}>
-                  {entry.amount >= 0 ? '+' : ''}{entry.amount.toLocaleString()} XP
-                </span>
-                <span className="text-[9px] text-gray-600 shrink-0">
-                  {entry.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
-      )}
+
+        {/* Right Column: Hero Vitals & Activity (5 cols) */}
+        <div className="lg:col-span-5 space-y-4">
+          {players.length > 0 && (
+            <div className="arcane-glass p-5 rounded-2xl border border-amber-900/35">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-amber-900/25">
+                <div className="flex items-center gap-2">
+                  <Users size={15} className="text-amber-400" />
+                  <h3 className="text-xs font-cinzel font-bold text-amber-100 uppercase tracking-wider">
+                    ACTIVE HERO VITALS
+                  </h3>
+                </div>
+                <button
+                  onClick={() => onNavigate('party')}
+                  className="text-xs font-cinzel text-amber-400 hover:text-amber-200 transition-colors font-semibold cursor-pointer"
+                >
+                  MANAGE ROSTER →
+                </button>
+              </div>
+
+              <div className="space-y-2.5">
+                {players.map((p) => (
+                  <div
+                    key={p.id}
+                    className="p-3 rounded-xl bg-black/40 border border-amber-900/30 flex flex-col justify-between"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div
+                          className="w-7 h-7 rounded-lg flex items-center justify-center font-cinzel font-bold text-xs border shrink-0"
+                          style={{ backgroundColor: `${p.color}20`, borderColor: `${p.color}60`, color: p.color }}
+                        >
+                          {p.name[0]}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-cinzel font-bold text-amber-200 truncate">{p.name}</p>
+                          <p className="text-[10px] text-stone-400 font-inter">Lv. {p.level} {p.className}</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-cinzel font-bold text-amber-400 border border-amber-900/40 px-1.5 py-0.5 rounded bg-black/50">
+                        AC {p.ac}
+                      </span>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-[10px] font-cinzel text-stone-300 mb-1">
+                        <span>HP</span>
+                        <span className="text-rose-400 font-bold">{p.hp.current} / {p.hp.max}</span>
+                      </div>
+                      <div className="w-full h-1.5 rounded-full bg-black/60 overflow-hidden border border-rose-950/40">
+                        <div
+                          className="h-full bg-gradient-to-r from-rose-700 to-rose-500 rounded-full"
+                          style={{ width: `${Math.min(100, Math.round((p.hp.current / Math.max(p.hp.max, 1)) * 100))}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Recent XP Log */}
+          {xpLog.length > 0 && (
+            <div className="arcane-glass p-5 rounded-2xl border border-amber-900/35">
+              <h3 className="text-xs font-cinzel font-bold text-amber-200/70 uppercase tracking-widest mb-3">
+                RECENT XP ACTIVITY
+              </h3>
+              <div className="divide-y divide-amber-900/20">
+                {xpLog.slice(0, 4).map(entry => (
+                  <div key={entry.id} className="py-2 flex items-center justify-between text-xs">
+                    <span className="text-amber-200 font-cinzel">{entry.playerName}</span>
+                    <span className="text-amber-400 font-bold font-cinzel">+{entry.amount} XP</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

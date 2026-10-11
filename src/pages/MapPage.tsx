@@ -7,7 +7,7 @@ export function MapPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="h-[calc(100vh-60px)]"
+      className="w-full flex justify-center pb-6"
     >
       <GameMap />
     </motion.div>

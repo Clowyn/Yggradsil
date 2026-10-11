@@ -757,7 +757,7 @@ export function GMCombatTracker() {
                           </span>
                           <span>•</span>
                           <span className="flex items-center gap-1">
-                            <Shield className="w-3 h-3 text-cyan-400" /> AC {c.ac}
+                            <Shield className="w-3 h-3 text-amber-400" /> AC {c.ac}
                           </span>
                         </div>
                       </div>
@@ -773,7 +773,7 @@ export function GMCombatTracker() {
                           <span className="font-bold tabular-nums">
                             {c.hp_current} / {c.hp_max}
                             {c.hp_temp > 0 && (
-                              <span className="text-cyan-400 text-[10px] ml-1">
+                              <span className="text-amber-400 text-[10px] ml-1">
                                 (+{c.hp_temp} Geçici)
                               </span>
                             )}

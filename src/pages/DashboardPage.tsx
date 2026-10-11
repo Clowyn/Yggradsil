@@ -109,7 +109,7 @@ export function DashboardPage() {
         desc: isTr
           ? 'Karakter istatistikleri, pasif algılar ve kuşanılan kadim eşyalar.'
           : 'Character attributes, passive perception & equipped relics.',
-        badge: 'FOLIO',
+        badge: isTr ? 'Karakter' : 'Hero Folio',
         icon: <User className="w-5 h-5 text-amber-400" />,
         accent: 'from-amber-500/10 to-transparent',
       },
@@ -120,7 +120,7 @@ export function DashboardPage() {
         desc: isTr
           ? 'Dünya ağacının derin köklerinden güç alan temel stat geliştirmeleri.'
           : 'Core attribute ascension branching from the roots of the world tree.',
-        badge: 'ESSENCE',
+        badge: isTr ? 'Dünya Ağacı' : 'World Tree',
         icon: <TreePine className="w-5 h-5 text-emerald-400" />,
         accent: 'from-emerald-500/10 to-transparent',
       },
@@ -130,8 +130,8 @@ export function DashboardPage() {
         subtitle: isTr ? 'Kadim Rün Düğümleri' : 'Ancient Rune Nodes',
         desc: isTr
           ? 'Ateş, buz ve arkan büyü yolları; efsunlu büyüler ve yetenek rünleri.'
-          : 'Attuned spell matrix, elemental rites and sacred arcana.',
-        badge: 'GRIMOIRE',
+          : 'Attuned spell grimoire, elemental rites and sacred arcana.',
+        badge: isTr ? 'Büyü Kitabı' : 'Spell Grimoire',
         icon: <Sparkles className="w-5 h-5 text-purple-400" />,
         accent: 'from-purple-500/10 to-transparent',
       },
@@ -142,7 +142,7 @@ export function DashboardPage() {
         desc: isTr
           ? 'Savaş alanı sisleri, taktiksel ızgara ve dost/düşman piyonları.'
           : 'Dynamic fog-of-war, terrain grid and tactical adventurer tokens.',
-        badge: 'RECON',
+        badge: isTr ? 'Sefer Atlası' : 'Battle Atlas',
         icon: <MapIcon className="w-5 h-5 text-sky-400" />,
         accent: 'from-sky-500/10 to-transparent',
       },
@@ -153,12 +153,35 @@ export function DashboardPage() {
         desc: isTr
           ? 'Efsanevi kılıçlar, iksirler, parşömenler ve altın sikke kesesi.'
           : 'Fixed-slot inventory, legendary gear, potions and gold coin purse.',
-        badge: 'CARGO',
+        badge: isTr ? 'Teçhizat' : 'Adventurer Pack',
         icon: <Backpack className="w-5 h-5 text-amber-500" />,
         accent: 'from-amber-600/10 to-transparent',
       },
+      isGM
+        ? {
+            to: '/gm',
+            title: isTr ? 'GM Kontrol Odası' : 'GM Chamber',
+            subtitle: isTr ? 'Zindan Ustası Masası' : 'Overseer Sanctum',
+            desc: isTr
+              ? 'Savaş simülatörü, hava durumu/ortam ve hazine sandığı dağıtımı.'
+              : 'Encounter simulation, atmospheric chronicle & loot chest distribution.',
+            badge: isTr ? 'GM Odası' : 'GM Sanctum',
+            icon: <Crown className="w-5 h-5 text-rose-400" />,
+            accent: 'from-rose-950/25 to-transparent',
+          }
+        : {
+            to: '/character',
+            title: isTr ? 'Kader Ağacı' : 'Destiny Path',
+            subtitle: isTr ? 'Yetenek Yükselişi' : 'Ascension Rites',
+            desc: isTr
+              ? 'Seviye atlama hakları, yetenek puanları ve sınıf kazanımları.'
+              : 'Level progression, heroic traits, and class ascension features.',
+            badge: isTr ? 'Kader Yolu' : 'Destiny Path',
+            icon: <Shield className="w-5 h-5 text-amber-300" />,
+            accent: 'from-amber-700/10 to-transparent',
+          },
     ],
-    [isTr]
+    [isTr, isGM]
   );
 
   return (
@@ -277,7 +300,7 @@ export function DashboardPage() {
                 <span className="font-cinzel text-xl sm:text-2xl font-black text-amber-100 tracking-wider">
                   LVL {currentLevel}
                 </span>
-                <span className="text-[11px] font-cinzel text-amber-300/90 font-bold uppercase truncate max-w-[120px]">
+                <span className="text-[11px] font-cinzel text-amber-300/90 font-bold uppercase truncate max-w-[170px] px-1">
                   {activeCharacter?.name || (isTr ? 'Valen Shadowflame' : 'Valen Shadowflame')}
                 </span>
               </div>
@@ -389,20 +412,20 @@ export function DashboardPage() {
                   className="group block"
                 >
                   <div
-                    className={`arcane-glass p-4 h-full flex flex-col justify-between border border-amber-900/30 bg-gradient-to-br ${charm.accent} hover:border-amber-500/40 transition-all duration-300 cursor-pointer relative overflow-hidden`}
+                    className={`arcane-glass p-5 min-h-[168px] h-full flex flex-col justify-between border border-amber-900/35 hover:border-amber-400/50 hover:shadow-[0_0_24px_rgba(245,158,11,0.18)] bg-gradient-to-br ${charm.accent} transition-all duration-300 cursor-pointer relative overflow-hidden rounded-2xl`}
                   >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-cinzel text-amber-300/70 tracking-widest uppercase">
-                        [{charm.badge}]
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-cinzel text-amber-300/80 font-bold tracking-widest uppercase">
+                        {charm.badge}
                       </span>
-                      <span className="text-[9px] font-cinzel font-bold px-2 py-0.5 rounded-full bg-amber-950/40 text-amber-300 border border-amber-900/40">
-                        OPEN
+                      <span className="text-[9px] font-cinzel font-bold px-2 py-0.5 rounded-full bg-amber-950/50 text-amber-300 border border-amber-900/40">
+                        {isTr ? 'GİRİŞ' : 'ENTER'}
                       </span>
                     </div>
 
-                    <div className="space-y-1 my-2">
+                    <div className="space-y-1 my-1">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-black/50 border border-amber-900/30 group-hover:scale-105 transition-transform">
+                        <div className="p-2 rounded-xl bg-black/50 border border-amber-900/40 group-hover:scale-105 transition-transform shrink-0">
                           {charm.icon}
                         </div>
                         <div>
@@ -414,57 +437,18 @@ export function DashboardPage() {
                           </p>
                         </div>
                       </div>
-                      <p className="text-xs text-stone-300 pt-2 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-stone-300 pt-1 line-clamp-2 leading-relaxed">
                         {charm.desc}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-amber-900/20 flex items-center justify-between text-xs font-cinzel text-amber-400 group-hover:translate-x-1 transition-transform">
+                    <div className="mt-3 pt-2 border-t border-amber-900/25 flex items-center justify-between text-xs font-cinzel text-amber-400 group-hover:translate-x-1 transition-transform">
                       <span>{isTr ? 'GÖRÜNTÜLE' : 'INSPECT'}</span>
                       <ArrowRight size={14} />
                     </div>
                   </div>
                 </Link>
               ))}
-
-              {/* GM Chamber Card if GM */}
-              {isGM && (
-                <Link
-                  to="/gm"
-                  onClick={() => playSound('lock_click')}
-                  className="group block sm:col-span-2"
-                >
-                  <div className="arcane-glass p-4 border border-rose-900/40 bg-gradient-to-r from-rose-950/20 via-black/40 to-transparent hover:border-rose-700/50 transition-all cursor-pointer flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl bg-rose-950/40 border border-rose-900/50 text-rose-300">
-                        <Crown size={20} />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-cinzel text-rose-400 font-bold uppercase tracking-wider">
-                            LOREMASTER COMMAND
-                          </span>
-                          <span className="px-1.5 py-0.2 rounded bg-rose-900 text-rose-100 text-[9px] font-cinzel font-bold">
-                            GM ONLY
-                          </span>
-                        </div>
-                        <h3 className="font-cinzel text-sm sm:text-base font-bold text-amber-100 group-hover:text-rose-300 transition-colors">
-                          {isTr ? 'GM KONTROL ODASI' : 'GAME MASTER OVERSEER CHAMBER'}
-                        </h3>
-                        <p className="text-xs text-stone-400">
-                          {isTr
-                            ? 'Savaş simülatörü, hava durumu/ortam ve hazine sandığı dağıtımı.'
-                            : 'Encounter simulation, atmospheric chronicle & loot chest distribution.'}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-2 text-xs font-cinzel text-rose-300">
-                      <span>ENTER</span>
-                      <ArrowRight size={16} />
-                    </div>
-                  </div>
-                </Link>
-              )}
             </div>
           )}
 
@@ -533,7 +517,7 @@ export function DashboardPage() {
           <div className="flex items-center gap-2">
             <Scroll size={16} className="text-amber-400" />
             <h3 className="font-cinzel text-xs sm:text-sm font-bold text-amber-100 tracking-wider uppercase">
-              // CHRONICLES OF YGGDRASIL
+              CHRONICLES OF YGGDRASIL
             </h3>
           </div>
 
@@ -567,21 +551,21 @@ export function DashboardPage() {
               key={log.id}
               className="flex items-start gap-2.5 text-stone-300 hover:bg-white/[0.03] p-1.5 rounded-lg transition-colors"
             >
-              <span className="text-amber-200/60 font-cinzel select-none shrink-0 text-[11px]">
-                [{log.timestamp}]
+              <span className="text-amber-200/80 font-cinzel select-none shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-black/40 border border-amber-900/30">
+                {log.timestamp}
               </span>
               <span
-                className={`font-cinzel font-bold select-none shrink-0 text-[11px] ${
+                className={`font-cinzel font-bold select-none shrink-0 text-[10px] px-1.5 py-0.5 rounded border ${
                   log.type === 'QUEST'
-                    ? 'text-amber-400'
+                    ? 'text-amber-400 bg-amber-500/10 border-amber-500/30'
                     : log.type === 'RUNE'
-                    ? 'text-purple-400'
+                    ? 'text-purple-300 bg-purple-500/10 border-purple-500/30'
                     : log.type === 'PARTY'
-                    ? 'text-emerald-400'
-                    : 'text-amber-200'
+                    ? 'text-emerald-300 bg-emerald-500/10 border-emerald-500/30'
+                    : 'text-amber-200 bg-amber-950/30 border-amber-900/30'
                 }`}
               >
-                [{log.type}]
+                {log.type}
               </span>
               <span className="text-stone-200 font-inter leading-relaxed">{log.text}</span>
             </div>

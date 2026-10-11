@@ -226,7 +226,7 @@ function SpellTreeFlow() {
   }, [visibleSpells]);
 
   return (
-    <div className="relative w-full h-[calc(100vh-8rem)] bg-abyss rounded-xl overflow-hidden border border-glass-border">
+    <div className="relative w-full h-full bg-abyss rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl">
       {/* Fallback offline indicator */}
       <AnimatePresence>
         {isMock && (

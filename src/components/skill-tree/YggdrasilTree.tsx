@@ -36,7 +36,7 @@ export function YggdrasilTree() {
   const memoEdges = useMemo<Edge[]>(() => edges, [edges]);
 
   return (
-    <div className="relative w-full h-[calc(100vh-4rem)] bg-abyss rounded-xl overflow-hidden border border-glass-border">
+    <div className="relative w-full h-full bg-abyss rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl">
       {/* ── Unified Yggdrasil Tree HUD Bar ── */}
       <motion.div
         className="absolute top-4 left-4 right-4 z-10 flex flex-col md:flex-row md:items-center justify-between gap-3 pointer-events-none"

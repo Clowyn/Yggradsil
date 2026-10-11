@@ -57,7 +57,7 @@ function AppLayout({ children }: { children: ReactNode }) {
       />
       <div className="flex flex-col flex-1 overflow-hidden relative">
         <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto p-3 sm:p-6 pb-28 sm:pb-32 relative">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 pb-10 md:pb-28 relative">
           <Suspense fallback={<PageFallback />}>
             {children}
           </Suspense>

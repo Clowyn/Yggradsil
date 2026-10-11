@@ -40,7 +40,7 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
       className="w-full max-w-md mx-auto"
     >
       <div className="arcane-glass rounded-2xl p-7 sm:p-9 shadow-2xl border border-amber-900/35 bg-[#0e1017]/90">
-        {/* Terminal Header */}
+        {/* Guild Enrollment Header */}
         <div className="text-center mb-7">
           <motion.div
             initial={{ scale: 0 }}
@@ -51,7 +51,7 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
             <Sparkles size={26} />
           </motion.div>
           <div className="flex items-center justify-center gap-1.5 text-[10px] font-cinzel text-amber-400 mb-1">
-            <span>// NEW ADVENTURER ENROLLMENT</span>
+            <span>NEW ADVENTURER ENROLLMENT</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-cinzel text-gold-gradient font-black tracking-wider uppercase">
             JOIN THE GUILD
