@@ -37,7 +37,7 @@ function SpellNodeComponent({ data }: NodeProps) {
       return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed opacity-30`;
     }
 
-    const cursorClass = 'cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200';
+    const cursorClass = 'cursor-pointer hover:brightness-125 transition-all duration-200';
 
     switch (status) {
       case 'unlocked':

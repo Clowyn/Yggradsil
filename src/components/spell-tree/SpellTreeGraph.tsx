@@ -246,21 +246,86 @@ function SpellTreeFlow() {
         )}
       </AnimatePresence>
 
-      {/* Title block */}
+      {/* Unified Holographic Spell Matrix HUD Bar (Responsive, No Collision) */}
       <motion.div
-        className="absolute top-4 left-4 z-10 glass rounded-xl px-5 py-3 border border-glass-border"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="absolute top-4 left-4 right-4 z-10 flex flex-col md:flex-row md:items-center justify-between gap-3 pointer-events-none"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
       >
-        <div className="flex items-center gap-2">
-          <BookOpen className="w-5 h-5 text-gold" />
-          <h2 className="text-lg font-cinzel font-bold text-gold-gradient">
-            {locale === 'tr' ? 'Büyü Ağacı' : 'Spell Tree'}
-          </h2>
+        {/* Left: Title block */}
+        <div className="holo-card px-4 py-2.5 border border-cyan-400/30 flex items-center gap-3 pointer-events-auto bg-black/85 backdrop-blur-md self-start shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+          <div className="p-1.5 rounded-lg bg-cyan-400/10 text-cyan-400 border border-cyan-400/30">
+            <BookOpen className="w-4 h-4" />
+          </div>
+          <div>
+            <h2 className="text-sm sm:text-base font-orbitron font-bold text-white tracking-wide flex items-center gap-2">
+              <span>{locale === 'tr' ? 'BÜYÜ MATRİSİ' : 'SPELL MATRIX'}</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-400/20 text-cyan-300 border border-cyan-400/30">
+                ARC.04
+              </span>
+            </h2>
+            <p className="text-[10px] text-parchment-dim font-mono tracking-wider uppercase">
+              {locale === 'tr' ? 'Antik Büyüler ve Dallar' : 'Ancient Magic & Branches'}
+            </p>
+          </div>
         </div>
-        <p className="text-[10px] text-gray-500 mt-0.5 tracking-wider uppercase">
-          {locale === 'tr' ? 'Antik Büyüler ve Dallar' : 'Ancient Magic & Branches'}
-        </p>
+
+        {/* Right: XP Display & Progress Panel */}
+        <div className="holo-card px-4 py-2.5 border border-cyan-400/30 min-w-[220px] pointer-events-auto bg-black/85 backdrop-blur-md self-end md:self-auto shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+          {characters && characters.length > 1 ? (
+            <div className="flex items-center gap-2 mb-1.5 bg-black/40 rounded px-2 py-1 border border-cyan-400/20">
+              <Users size={12} className="text-cyan-400 shrink-0" />
+              <div className="flex flex-col flex-1 min-w-0">
+                <select
+                  value={activeCharacterId || ''}
+                  onChange={(e) => setActiveCharacterId(e.target.value)}
+                  className="bg-transparent text-[11px] text-cyan-300 font-bold outline-none cursor-pointer w-full truncate border-none p-0"
+                >
+                  {characters.map((char) => (
+                    <option key={char.id} value={char.id} className="bg-obsidian text-parchment">
+                      {char.name} ({char.subclass?.name_tr || char.subclass?.name_en || char.subclass?.key || 'Temel'})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          ) : character ? (
+            <div className="flex items-center gap-1.5 mb-1 text-[11px] font-mono text-cyan-300 font-bold">
+              <Users size={12} className="text-cyan-400/70" />
+              <span>{character.name}</span>
+            </div>
+          ) : null}
+
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-1 text-[10px] font-mono text-parchment-dim uppercase">
+              <Sparkles className="w-3 h-3 text-cyan-400" />
+              <span>{locale === 'tr' ? 'Kullanılabilir XP' : 'Available XP'}</span>
+            </div>
+            <div className="text-sm font-bold font-orbitron text-cyan-300">
+              {xp.toLocaleString()} XP
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] font-mono text-parchment-dim mt-1">
+            <span>
+              {locale === 'tr'
+                ? `${unlockedCount} / ${totalSpells} büyü açıldı`
+                : `${unlockedCount} / ${totalSpells} unlocked`}
+            </span>
+            <span className="text-emerald font-semibold">
+              {totalSpells > 0 ? Math.round((unlockedCount / totalSpells) * 100) : 0}%
+            </span>
+          </div>
+
+          <div className="mt-1 w-full h-1 rounded-full bg-white/10 overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-[0_0_6px_#00f0ff]"
+              initial={{ width: 0 }}
+              animate={{ width: `${totalSpells > 0 ? (unlockedCount / totalSpells) * 100 : 0}%` }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            />
+          </div>
+        </div>
       </motion.div>
 
       {/* Branch filters overlay */}
@@ -377,69 +442,6 @@ function SpellTreeFlow() {
         )}
       </motion.div>
 
-      {/* XP Display & Progress Panel */}
-      <motion.div
-        className="absolute top-4 right-4 z-10 glass rounded-xl px-5 py-3 min-w-[220px] border border-glass-border"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-      >
-        {characters && characters.length > 1 ? (
-          <div className="flex items-center gap-2 mb-3 bg-black/40 rounded px-2.5 py-1.5 border border-gold/20">
-            <Users size={14} className="text-gold shrink-0" />
-            <div className="flex flex-col flex-1 min-w-0">
-              <span className="text-[9px] text-parchment/50 uppercase leading-none">
-                {locale === 'tr' ? 'Seçili Karakter' : 'Active Character'}
-              </span>
-              <select
-                value={activeCharacterId || ''}
-                onChange={(e) => setActiveCharacterId(e.target.value)}
-                className="bg-transparent text-xs text-gold font-bold outline-none cursor-pointer mt-0.5 w-full truncate border-none p-0"
-              >
-                {characters.map(char => (
-                  <option key={char.id} value={char.id} className="bg-obsidian text-parchment">
-                    {char.name} ({char.subclass?.name_tr || char.subclass?.name_en || char.subclass?.key || 'Temel'})
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        ) : character ? (
-          <div className="flex items-center gap-2 mb-3 bg-black/30 rounded px-2.5 py-1.5 border border-white/5">
-            <Users size={12} className="text-gold/70" />
-            <div className="flex flex-col">
-              <span className="text-[9px] text-parchment/50 uppercase leading-none">Character</span>
-              <span className="text-xs text-gold font-bold leading-tight mt-0.5">{character.name}</span>
-            </div>
-          </div>
-        ) : null}
-        <div className="flex items-center gap-2 mb-1">
-          <Sparkles className="w-4 h-4 text-[#ffd700]" />
-          <span className="text-xs text-gray-400 uppercase tracking-widest font-cinzel font-semibold">
-            {locale === 'tr' ? 'Kullanılabilir XP' : 'Available XP'}
-          </span>
-        </div>
-        <div className="text-2xl font-bold text-gold-gradient font-cinzel">
-          {xp.toLocaleString()} XP
-        </div>
-        <div className="mt-2.5 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="flex items-center justify-between mt-2.5">
-          <span className="text-[11px] text-gray-400">
-            {locale === 'tr'
-              ? `${unlockedCount} / ${totalSpells} büyü açıldı`
-              : `${unlockedCount} / ${totalSpells} spells unlocked`}
-          </span>
-        </div>
-        {/* Progress bar */}
-        <div className="mt-1.5 w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
-          <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-[#ffd700]"
-            initial={{ width: 0 }}
-            animate={{ width: `${totalSpells > 0 ? (unlockedCount / totalSpells) * 100 : 0}%` }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          />
-        </div>
-      </motion.div>
 
       {/* React Flow Component */}
       <ReactFlow

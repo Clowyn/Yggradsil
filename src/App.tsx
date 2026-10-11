@@ -29,10 +29,16 @@ function PageFallback() {
   return (
     <div className="flex h-full min-h-[300px] w-full items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <div className="w-9 h-9 rounded-full border-2 border-gold/20 border-t-gold animate-spin" />
-        <span className="text-[11px] font-cinzel text-gold/70 tracking-widest uppercase">
-          Yükleniyor...
-        </span>
+        <div className="relative w-12 h-12 flex items-center justify-center">
+          <div className="absolute inset-0 rounded-full border-2 border-gold/20 border-t-gold animate-spin" />
+          <div className="w-4 h-4 rounded-full bg-gold/40 animate-pulse" />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-gold animate-ping" />
+          <span className="text-[11px] font-orbitron text-gold/80 tracking-widest uppercase">
+            UPLINK_SYNCHRONIZING...
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -43,7 +49,10 @@ function AppLayout({ children }: { children: ReactNode }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-abyss overflow-hidden">
+    <div className="flex h-screen bg-abyss cyber-grid-bg overflow-hidden relative selection:bg-gold/30 selection:text-white">
+      {/* Subtle top laser scanning beam */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent pointer-events-none z-50 opacity-70" />
+
       <Sidebar
         isOpen={isSidebarOpen}
         onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -52,7 +61,7 @@ function AppLayout({ children }: { children: ReactNode }) {
       />
       <div className="flex flex-col flex-1 overflow-hidden relative">
         <Header onToggleSidebar={() => setIsMobileOpen((prev) => !prev)} />
-        <main className="flex-1 overflow-y-auto p-3 sm:p-6">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-6 relative">
           <Suspense fallback={<PageFallback />}>
             {children}
           </Suspense>

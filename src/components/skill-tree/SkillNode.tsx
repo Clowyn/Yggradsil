@@ -25,7 +25,7 @@ function SkillNodeComponent({ data }: NodeProps) {
     const base = `
       relative flex flex-col items-center justify-center rounded-full
       cursor-pointer select-none transition-all duration-200
-      hover:scale-110 active:scale-95 transition-transform duration-200
+      hover:brightness-125 transition-all duration-200
       border-2 ${sizeClass}
     `;
 

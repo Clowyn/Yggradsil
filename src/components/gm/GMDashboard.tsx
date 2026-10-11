@@ -532,33 +532,36 @@ export function GMDashboard() {
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#ffd700]/20 to-[#ff8c00]/10 border border-[#ffd700]/30 flex items-center justify-center">
-          <Crown className="w-5 h-5 text-[#ffd700]" />
+        <div className="w-11 h-11 rounded-xl bg-crimson/20 border border-crimson/40 flex items-center justify-center shadow-[0_0_15px_rgba(255,0,85,0.25)]">
+          <Crown className="w-5 h-5 text-crimson" />
         </div>
         <div>
-          <h1 className="text-xl font-cinzel font-bold text-gold-gradient">
-            Game Master Dashboard
+          <h1 className="text-xl font-orbitron font-extrabold text-white tracking-wide uppercase flex items-center gap-2">
+            <span>Game Master Overseer</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-crimson/20 text-crimson border border-crimson/40">
+              CMD.07
+            </span>
           </h1>
-          <p className="text-[11px] text-gray-500 tracking-wider uppercase">
-            {campaign?.name ?? 'Campaign'} — {members.length} adventurers
+          <p className="text-[11px] text-parchment-dim font-mono tracking-wider uppercase">
+            {campaign?.name ?? 'Campaign'} — {members.length} OPERATORS LINKED
           </p>
         </div>
       </div>
 
       {/* Tab Bar */}
-      <div className="flex gap-1 mb-6 glass rounded-xl p-1.5 border border-white/5 overflow-x-auto scrollbar-thin">
+      <div className="flex gap-1.5 mb-6 holo-card p-1.5 border border-cyan-400/20 bg-black/70 overflow-x-auto scrollbar-thin">
         {TABS.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 shrink-0 ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
               activeTab === tab.key
-                ? 'bg-gradient-to-r from-[#ffd700]/20 to-[#ff8c00]/10 text-[#ffd700] border border-[#ffd700]/30 shadow-[0_0_15px_rgba(255,215,0,0.1)]'
-                : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
+                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                : 'text-parchment-dim hover:text-white hover:bg-white/5'
             }`}
           >
             {tab.icon}
-            <span className="hidden sm:inline">{tab.label}</span>
+            <span className="hidden sm:inline font-orbitron text-[11px]">{tab.label}</span>
           </button>
         ))}
       </div>
@@ -800,11 +803,11 @@ function OverviewTab({
   return (
     <div className="space-y-6">
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {STATS.map((stat, i) => (
           <motion.div
             key={stat.label}
-            className="glass rounded-xl p-4 border border-white/5 hover:border-white/10 transition-all duration-300"
+            className="holo-card p-4 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
@@ -812,13 +815,13 @@ function OverviewTab({
           >
             <div className="flex items-center gap-2 mb-2">
               <stat.icon className="w-4 h-4" style={{ color: stat.color }} />
-              <span className="text-[10px] text-gray-500 uppercase tracking-widest">{stat.label}</span>
+              <span className="text-[10px] text-parchment-dim font-mono uppercase tracking-widest">{stat.label}</span>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold font-cinzel" style={{ color: stat.color }}>
+              <span className="text-2xl font-black font-orbitron" style={{ color: stat.color }}>
                 {typeof stat.value === 'number' ? stat.value.toLocaleString() : stat.value}
               </span>
-              {stat.suffix && <span className="text-[10px] text-gray-600">{stat.suffix}</span>}
+              {stat.suffix && <span className="text-[10px] text-parchment-dim font-mono">{stat.suffix}</span>}
             </div>
           </motion.div>
         ))}
@@ -826,12 +829,14 @@ function OverviewTab({
 
       {/* Quick Actions */}
       <div>
-        <h3 className="text-xs font-cinzel font-bold text-gray-400 uppercase tracking-widest mb-3">Quick Actions</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <h3 className="text-xs font-orbitron font-bold text-parchment-dim uppercase tracking-widest mb-3">
+          // QUICK COMMANDS
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {NAV_BUTTONS.map((btn, i) => {
             const inner = (
               <motion.div
-                className="glass rounded-xl p-4 border border-white/5 hover:border-white/15 text-left transition-all duration-300 group cursor-pointer"
+                className="holo-card p-4 border border-cyan-400/20 hover:border-cyan-400/50 text-left transition-all duration-300 group cursor-pointer"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 + 0.3 }}
@@ -840,12 +845,12 @@ function OverviewTab({
               >
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
-                  style={{ backgroundColor: `${btn.color}15`, border: `1px solid ${btn.color}30` }}
+                  style={{ backgroundColor: `${btn.color}20`, border: `1px solid ${btn.color}50` }}
                 >
                   <btn.icon className="w-4 h-4" style={{ color: btn.color }} />
                 </div>
-                <h4 className="text-sm font-bold text-gray-200 mb-0.5 font-cinzel">{btn.label}</h4>
-                <p className="text-[10px] text-gray-600">{btn.desc}</p>
+                <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 mb-0.5 font-orbitron transition-colors">{btn.label}</h4>
+                <p className="text-[10px] text-parchment-dim font-mono">{btn.desc}</p>
               </motion.div>
             );
 

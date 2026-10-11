@@ -214,23 +214,33 @@ export function GameMap() {
   }, []);
 
   return (
-    <div className="relative w-full">
-      {/* Title */}
+    <div className="relative w-full space-y-3">
+      {/* Tactical Radar Header & Telemetry */}
       <motion.div
-        className="flex items-center gap-2 mb-4"
+        className="flex flex-wrap items-center justify-between gap-3"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <MapIcon className="w-5 h-5 text-[#ffd700]" />
-        <h2 className="text-lg font-cinzel font-bold text-gold-gradient">
-          Battle Map
-        </h2>
+        <div className="flex items-center gap-2">
+          <MapIcon className="w-5 h-5 text-gold animate-pulse" />
+          <h2 className="text-base sm:text-lg font-orbitron font-extrabold text-gold-gradient tracking-wider uppercase">
+            // SECTOR TACTICAL RADAR
+          </h2>
+        </div>
+
+        <div className="flex items-center gap-2 px-3 py-1 rounded bg-black/60 border border-gold/30 text-[10px] font-mono text-parchment-dim shadow-[0_0_10px_rgba(0,240,255,0.1)]">
+          <span className="text-gold font-bold">GRID: 40x40</span>
+          <span className="text-white/20">|</span>
+          <span className="text-emerald">SAT-LINK: STABLE</span>
+          <span className="text-white/20">|</span>
+          <span className="text-gold-bright">TARGETS: {tokens.length}</span>
+        </div>
       </motion.div>
 
       {/* Map Container */}
       <motion.div
         ref={containerRef}
-        className="relative rounded-xl overflow-hidden border border-glass-border"
+        className="relative cyber-panel rounded-lg overflow-hidden border border-gold/30 shadow-[0_0_30px_rgba(0,240,255,0.12)]"
         style={{ width: W, height: H, maxWidth: '100%' }}
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -270,18 +280,18 @@ export function GameMap() {
         )}
 
         {/* Token count indicator */}
-        <div className="absolute bottom-3 left-3 glass rounded-lg px-3 py-1.5 flex items-center gap-2">
+        <div className="absolute bottom-3 left-3 bg-black/75 border border-gold/30 rounded px-3 py-1.5 flex items-center gap-2 shadow-[0_0_10px_rgba(0,240,255,0.15)]">
           <div className="flex -space-x-1">
             {tokens.map((t) => (
               <div
                 key={t.id}
-                className="w-3 h-3 rounded-full border border-black/50"
+                className="w-3.5 h-3.5 rounded-full border border-black/80 shadow-[0_0_4px_currentColor]"
                 style={{ backgroundColor: t.color }}
               />
             ))}
           </div>
-          <span className="text-[10px] text-gray-400">
-            {tokens.length} tokens
+          <span className="text-[10px] font-mono text-gold font-bold">
+            {tokens.length} ACTIVE BEACONS
           </span>
         </div>
       </motion.div>

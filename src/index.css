@@ -1,32 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
-   D&D Companion App — Dark Fantasy Theme
+   Yggdrasil Quantum HUD — Futuristic Cyber-Arcane Theme
    ============================================================ */
 
 /* --- CSS Custom Properties (Theme Tokens) --- */
 @theme {
-  --color-abyss: #0a0a0f;
-  --color-void: #0f0f18;
-  --color-shadow: #1a0a2e;
-  --color-obsidian: #151520;
-  --color-slate-dark: #1e1e2e;
-  --color-gold: #ffd700;
-  --color-gold-dim: #b8860b;
-  --color-gold-bright: #ffed4a;
-  --color-crimson: #dc143c;
-  --color-crimson-dim: #8b0000;
-  --color-arcane: #6366f1;
-  --color-arcane-dim: #4338ca;
-  --color-emerald: #10b981;
-  --color-parchment: #d4c5a9;
-  --color-parchment-dim: #8b7d6b;
-  --color-glass: rgba(255, 255, 255, 0.05);
-  --color-glass-border: rgba(255, 255, 255, 0.1);
-  --color-glass-hover: rgba(255, 255, 255, 0.08);
+  --color-abyss: #030612;
+  --color-void: #060b1e;
+  --color-shadow: #0b132b;
+  --color-obsidian: #0f1c3f;
+  --color-slate-dark: #14244d;
+  
+  /* Primary Cyber HUD Neon Accents */
+  --color-gold: #00f0ff;
+  --color-gold-dim: #0284c7;
+  --color-gold-bright: #67e8f9;
+  
+  /* Tactical Secondary Accents */
+  --color-crimson: #ff0055;
+  --color-crimson-dim: #990033;
+  --color-arcane: #a855f7;
+  --color-arcane-dim: #7e22ce;
+  --color-emerald: #00ff9d;
+  --color-amber-cyber: #f59e0b;
+  --color-neon-pink: #ec4899;
+  
+  /* Telemetry Text & Surfaces */
+  --color-parchment: #c8d6e5;
+  --color-parchment-dim: #64748b;
+  --color-glass: rgba(6, 15, 38, 0.72);
+  --color-glass-border: rgba(0, 240, 255, 0.22);
+  --color-glass-hover: rgba(0, 240, 255, 0.12);
 
-  --font-cinzel: 'Cinzel', serif;
+  /* Typography */
+  --font-cinzel: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-rajdhani: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   --font-inter: 'Inter', sans-serif;
 }
 
@@ -39,6 +51,7 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
@@ -57,159 +70,217 @@ body {
 
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-cinzel);
+  font-family: var(--font-orbitron);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-/* --- Custom Scrollbar --- */
+/* --- Custom Futuristic Scrollbar --- */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-void);
+  background: var(--color-abyss);
+  border-left: 1px solid rgba(0, 240, 255, 0.08);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-gold-dim), var(--color-shadow));
-  border-radius: 4px;
+  background: linear-gradient(180deg, var(--color-gold), var(--color-arcane));
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--color-gold), var(--color-arcane-dim));
+  background: linear-gradient(180deg, var(--color-gold-bright), var(--color-neon-pink));
 }
 
-/* --- Glass Morphism Utility --- */
+/* --- Futuristic Glass Morphism --- */
 .glass {
   background: var(--color-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(0, 240, 255, 0.02);
 }
 
 .glass-hover:hover {
   background: var(--color-glass-hover);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
 }
 
-/* --- Holy Light Animation (Character Selection) --- */
+/* --- Cyber HUD Panels with Refined Corner Reticles --- */
+.cyber-panel {
+  background: linear-gradient(135deg, rgba(8, 18, 42, 0.85), rgba(3, 7, 20, 0.95));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 240, 255, 0.02);
+}
+
+/* --- Holographic Card (High-End Sleek Sci-Fi Surface) --- */
+.holo-card {
+  background: linear-gradient(145deg, rgba(10, 22, 50, 0.7), rgba(4, 10, 26, 0.88));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.holo-card:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 12px 45px rgba(0, 240, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* --- Holographic Arc Reactor & Dials --- */
+@keyframes reactor-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes reactor-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-reactor-spin {
+  animation: reactor-spin 20s linear infinite;
+}
+
+.animate-reactor-spin-reverse {
+  animation: reactor-spin-reverse 15s linear infinite;
+}
+
+/* --- Radar Sonar Sweep --- */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes sonar-ring {
+  0% {
+    transform: scale(0.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-sonar-ring {
+  animation: sonar-ring 2.4s cubic-bezier(0.1, 0.6, 0.3, 1) infinite;
+}
+
+/* --- Cyber Angled Cut Corners --- */
+.cyber-cut {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+.cyber-cut-tr {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.cyber-cut-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+/* --- Cyber Grid & Ambient Background --- */
+.cyber-grid-bg {
+  background-color: var(--color-abyss);
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.09) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.09) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.03) 0%, transparent 60%);
+  background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+.bg-dark-pattern {
+  background-color: var(--color-abyss);
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* --- Holographic Scanline Overlay --- */
+.cyber-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 2px,
+    rgba(0, 240, 255, 0.02) 2px,
+    rgba(0, 240, 255, 0.02) 4px
+  );
+  pointer-events: none;
+}
+
+@keyframes laser-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+.animate-laser-sweep {
+  animation: laser-sweep 4s ease-in-out infinite;
+}
+
+/* --- Quantum Light & Holy Glow --- */
 @keyframes holy-glow {
   0%, 100% {
     box-shadow:
-      0 0 20px #ffd700,
-      0 0 40px #ffa500,
-      0 0 60px #ff8c00,
-      inset 0 0 20px rgba(255, 215, 0, 0.3);
+      0 0 15px #00f0ff,
+      0 0 35px rgba(0, 240, 255, 0.5),
+      inset 0 0 15px rgba(0, 240, 255, 0.3);
   }
   50% {
     box-shadow:
-      0 0 40px #ffd700,
-      0 0 80px #ffa500,
-      0 0 120px #ff8c00,
-      inset 0 0 40px rgba(255, 215, 0, 0.5);
-  }
-}
-
-@keyframes holy-glow-custom {
-  0%, 100% {
-    box-shadow:
-      0 0 20px var(--glow-color, #ffd700),
-      0 0 40px var(--glow-color, #ffa500),
-      0 0 60px var(--glow-color, #ff8c00),
-      inset 0 0 20px color-mix(in srgb, var(--glow-color, #ffd700) 30%, transparent);
-  }
-  50% {
-    box-shadow:
-      0 0 40px var(--glow-color, #ffd700),
-      0 0 80px var(--glow-color, #ffa500),
-      0 0 120px var(--glow-color, #ff8c00),
-      inset 0 0 40px color-mix(in srgb, var(--glow-color, #ffd700) 50%, transparent);
-  }
-}
-
-@keyframes fade-to-darkness {
-  from {
-    opacity: 1;
-    filter: brightness(1);
-  }
-  to {
-    opacity: 0.3;
-    filter: brightness(0.4) grayscale(0.8);
+      0 0 30px #00f0ff,
+      0 0 60px rgba(0, 240, 255, 0.7),
+      inset 0 0 30px rgba(0, 240, 255, 0.5);
   }
 }
 
 .holy-selected {
-  animation: holy-glow 2s ease-in-out infinite;
-  filter: brightness(1.3);
-  transform: scale(1.05);
+  animation: holy-glow 2.5s ease-in-out infinite;
+  border-color: #00f0ff !important;
+  transform: scale(1.02);
 }
 
 .holy-unselected {
-  opacity: 0.3;
-  filter: brightness(0.4) grayscale(0.8);
+  opacity: 0.35;
+  filter: brightness(0.5) grayscale(0.7);
 }
 
 .holy-card {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- Particle Effect for Selected Cards --- */
-.holy-selected::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: inherit;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
-  animation: holy-glow 2s ease-in-out infinite;
-  z-index: -1;
-}
-
-/* --- Skill Tree Animations --- */
-@keyframes skill-unlock-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-  }
-}
-
-@keyframes energy-flow {
-  0% {
-    stroke-dashoffset: 20;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes node-glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.8), 0 0 50px rgba(16, 185, 129, 0.3);
-  }
-}
-
-.skill-unlockable {
-  animation: node-glow-pulse 2s ease-in-out infinite;
-  cursor: pointer;
-}
-
+/* --- Quantum Node Glow & Ring --- */
 @keyframes unlockable-ring {
   0%, 100% {
-    opacity: 0.3;
+    opacity: 0.4;
     transform: scale(1);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
   }
   50% {
-    opacity: 0.85;
-    transform: scale(1.08);
+    opacity: 1;
+    transform: scale(1.12);
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.9);
   }
 }
 
@@ -218,60 +289,48 @@ h1, h2, h3, h4, h5, h6 {
   will-change: transform, opacity;
 }
 
-.skill-unlock-burst {
-  animation: skill-unlock-pulse 0.6s ease-out;
+/* --- Audio / Telemetry Equalizer Bars --- */
+@keyframes eq-pulse {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
 }
 
-/* --- XP Counter Animation --- */
-@keyframes xp-increment {
-  0% {
-    transform: scale(1);
-    color: var(--color-gold);
-  }
-  50% {
-    transform: scale(1.3);
-    color: var(--color-gold-bright);
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-  }
-  100% {
-    transform: scale(1);
-    color: var(--color-gold);
-  }
-}
+.eq-bar-1 { animation: eq-pulse 1.2s ease-in-out infinite; }
+.eq-bar-2 { animation: eq-pulse 0.9s ease-in-out infinite 0.2s; }
+.eq-bar-3 { animation: eq-pulse 1.5s ease-in-out infinite 0.4s; }
+.eq-bar-4 { animation: eq-pulse 1.1s ease-in-out infinite 0.1s; }
 
-.xp-animate {
-  animation: xp-increment 0.5s ease-out;
+/* --- Item Rarity Neon Glows --- */
+.rarity-common {
+  border-color: #64748b;
+  box-shadow: 0 0 6px rgba(100, 116, 139, 0.25);
 }
-
-/* --- Fog Drift Animation (Map) --- */
-@keyframes fog-drift {
-  0%, 100% {
-    opacity: 0.92;
-  }
-  50% {
-    opacity: 0.88;
-  }
+.rarity-uncommon {
+  border-color: #00ff9d;
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.35);
 }
-
-/* --- Item Rarity Glow --- */
-.rarity-common { border-color: #9ca3af; }
-.rarity-uncommon { border-color: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
-.rarity-rare { border-color: #3b82f6; box-shadow: 0 0 8px rgba(59, 130, 246, 0.3); }
-.rarity-epic { border-color: #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4); }
+.rarity-rare {
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+.rarity-epic {
+  border-color: #a855f7;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.5);
+}
 .rarity-legendary {
-  border-color: #f97316;
-  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
-  animation: holy-glow 3s ease-in-out infinite;
+  border-color: #ff0055;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+  animation: holy-glow 2.5s ease-in-out infinite;
 }
 
-/* --- Golden Gradient Text --- */
+/* --- Futuristic Gradient Text --- */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #ffd700, #ffed4a, #ffa500, #ffd700);
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, #00f0ff 0%, #38bdf8 25%, #c084fc 70%, #00f0ff 100%);
+  background-size: 250% 250%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-shift 4s ease-in-out infinite;
+  animation: gradient-shift 5s ease-in-out infinite;
 }
 
 @keyframes gradient-shift {
@@ -280,57 +339,69 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position: 0% 50%; }
 }
 
-/* --- Background Pattern --- */
-.bg-dark-pattern {
-  background-color: var(--color-abyss);
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(26, 10, 46, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
-}
-
-/* --- React Flow Overrides --- */
+/* --- React Flow Futuristic Canvas Styling --- */
 .react-flow__background {
   background-color: var(--color-abyss) !important;
 }
 
 .react-flow__minimap {
   background-color: var(--color-void) !important;
-  border: 1px solid var(--color-glass-border) !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.15) !important;
 }
 
 .react-flow__controls {
-  background: var(--color-glass) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid var(--color-glass-border) !important;
-  border-radius: 8px !important;
+  background: rgba(6, 15, 38, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2) !important;
 }
 
 .react-flow__controls-button {
   background: transparent !important;
-  border-bottom: 1px solid var(--color-glass-border) !important;
-  color: #e2e8f0 !important;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15) !important;
+  color: #00f0ff !important;
 }
 
 .react-flow__controls-button:hover {
-  background: var(--color-glass-hover) !important;
+  background: rgba(0, 240, 255, 0.15) !important;
+  color: #ffffff !important;
 }
 
-/* --- Utility Classes --- */
-.font-cinzel {
-  font-family: var(--font-cinzel);
+/* --- Font Utility Classes --- */
+.font-cinzel, .font-orbitron {
+  font-family: var(--font-orbitron);
+}
+
+.font-rajdhani {
+  font-family: var(--font-rajdhani);
+}
+
+.font-mono, .font-mono-code {
+  font-family: var(--font-mono);
 }
 
 .font-inter {
   font-family: var(--font-inter);
 }
 
-/* Loading spinner */
+/* --- Spinner Animations --- */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 .animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
+  animation: spin-slow 4s linear infinite;
+}
+
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.92); }
+}
+
+.animate-pulse-fast {
+  animation: pulse-fast 1.5s ease-in-out infinite;
 }
