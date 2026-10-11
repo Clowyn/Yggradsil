@@ -17,6 +17,7 @@ const SkillTreePage = lazy(() => import('./pages/SkillTreePage').then(m => ({ de
 const SpellTreePage = lazy(() => import('./pages/SpellTreePage').then(m => ({ default: m.SpellTreePage })));
 const MapPage = lazy(() => import('./pages/MapPage').then(m => ({ default: m.MapPage })));
 const InventoryPage = lazy(() => import('./pages/InventoryPage').then(m => ({ default: m.InventoryPage })));
+const ArenaPage = lazy(() => import('./pages/ArenaPage').then(m => ({ default: m.ArenaPage })));
 const GMPage = lazy(() => import('./pages/GMPage').then(m => ({ default: m.GMPage })));
 
 // Admin Pages
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/spells" element={<SpellTreePage />} />
                 <Route path="/map" element={<MapPage />} />
                 <Route path="/inventory" element={<InventoryPage />} />
+                <Route path="/arena" element={<ArenaPage />} />
                 <Route
                   path="/gm"
                   element={

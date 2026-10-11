@@ -7,6 +7,8 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useCampaign } from '../../contexts/CampaignContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { translations } from '../../lib/translations';
 import { GMTableNotice } from './GMTableNotice';
 import type {
   CampaignEncounter,
@@ -31,6 +33,8 @@ const DND_CONDITIONS: { key: DndCondition; label: string; icon: string; color: s
 ];
 
 export function GMCombatTracker() {
+  const { locale } = useAuth();
+  const t = translations[locale] || translations.en;
   const { campaign, characters } = useCampaign();
   const campaignId = campaign?.id;
 
@@ -499,10 +503,10 @@ export function GMCombatTracker() {
           </div>
           <div>
             <h2 className="text-base font-cinzel font-bold text-gold-gradient">
-              Combat & Initiative Tracker
+              {t.combatTracker.title}
             </h2>
             <p className="text-[11px] text-gray-400">
-              Manage encounters, roll initiative, track 5e conditions & HP in real-time.
+              {t.combatTracker.subtitle}
             </p>
           </div>
         </div>
@@ -515,7 +519,7 @@ export function GMCombatTracker() {
             className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#ffd700]/10 hover:bg-[#ffd700]/20 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold transition-all"
           >
             <Plus className="w-4 h-4" />
-            <span>Yeni Karşılaşma</span>
+            <span>{t.combatTracker.newEncounter}</span>
           </button>
         </div>
       </div>
@@ -551,14 +555,14 @@ export function GMCombatTracker() {
                     >
                       {enc.status}
                     </span>
-                    <span className="text-[10px] text-gray-500">Tur {enc.round || 1}</span>
+                    <span className="text-[10px] text-gray-500">{t.combatTracker.turn} {enc.round || 1}</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   data-testid="delete-encounter-btn"
-                  title="Karşılaşmayı Sil"
+                  title={t.combatTracker.deleteEncounter}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteEncounter(enc.id);
@@ -575,13 +579,13 @@ export function GMCombatTracker() {
         !loading && (
           <div className="p-8 text-center glass rounded-xl border border-white/5 space-y-3">
             <Skull className="w-10 h-10 text-gray-600 mx-auto" />
-            <p className="text-xs text-gray-400">Aktif bir karşılaşma bulunmuyor.</p>
+            <p className="text-xs text-gray-400">{t.combatTracker.noEncounters}</p>
             <button
               type="button"
               onClick={() => setShowNewEncounterModal(true)}
               className="px-3 py-1.5 rounded-lg bg-[#ffd700]/10 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold"
             >
-              İlk Karşılaşmayı Oluştur
+              {t.combatTracker.createFirstEncounter}
             </button>
           </div>
         )
@@ -595,7 +599,7 @@ export function GMCombatTracker() {
             <div className="flex items-center gap-4">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-gray-500">
-                  Aktif Karşılaşma
+                  {t.combatTracker.activeEncounter}
                 </span>
                 <h3 className="text-lg font-cinzel font-bold text-[#ffd700]">
                   {activeEncounter.name}
@@ -615,7 +619,11 @@ export function GMCombatTracker() {
                         : 'text-gray-400 hover:text-gray-200'
                     }`}
                   >
-                    {st}
+                    {st === 'preparing'
+                      ? t.combatTracker.statusPreparing
+                      : st === 'active'
+                      ? t.combatTracker.statusActive
+                      : t.combatTracker.statusCompleted}
                   </button>
                 ))}
               </div>
@@ -624,7 +632,7 @@ export function GMCombatTracker() {
             {/* Round & Turn Actions */}
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1.5 rounded-lg border border-white/10">
-                <span className="text-xs text-gray-400 font-bold">Tur:</span>
+                <span className="text-xs text-gray-400 font-bold">{t.combatTracker.turn}:</span>
                 <button
                   type="button"
                   data-testid="prev-round-btn"
@@ -659,7 +667,7 @@ export function GMCombatTracker() {
                 onClick={handleNextTurn}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-md shadow-red-900/30 transition-all"
               >
-                <span>Sıradaki Hamle</span>
+                <span>{t.combatTracker.nextTurn}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -675,7 +683,7 @@ export function GMCombatTracker() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gray-200"
               >
                 <Plus className="w-3.5 h-3.5 text-[#ffd700]" />
-                <span>Savaşçı / NPC Ekle</span>
+                <span>{t.combatTracker.addCombatant}</span>
               </button>
 
               <button
@@ -684,7 +692,7 @@ export function GMCombatTracker() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gray-200"
               >
                 <Users className="w-3.5 h-3.5 text-blue-400" />
-                <span>Grup Üyelerini Çek</span>
+                <span>{t.combatTracker.pullPartyMembers}</span>
               </button>
             </div>
 
@@ -696,7 +704,7 @@ export function GMCombatTracker() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold"
               >
                 <Dices className="w-3.5 h-3.5" />
-                <span>Toplu İnisiyatif Zarı At (d20)</span>
+                <span>{t.combatTracker.autoRollInitiative}</span>
               </button>
             </div>
           </div>
@@ -737,27 +745,27 @@ export function GMCombatTracker() {
                           <span className="font-bold text-sm text-gray-200">{c.name}</span>
                           {c.is_npc ? (
                             <span className="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                              NPC
+                              {t.combatTracker.npcBadge}
                             </span>
                           ) : (
                             <span className="text-[9px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                              Oyuncu
+                              {t.combatTracker.playerBadge}
                             </span>
                           )}
                           {isCurrentTurn && (
                             <span className="text-[9px] px-1.5 py-0.2 rounded bg-red-500 text-white font-bold flex items-center gap-1 animate-pulse">
-                              <Flame className="w-2.5 h-2.5" /> SIRADA
+                              <Flame className="w-2.5 h-2.5" /> {t.combatTracker.turnNextTurnBadge}
                             </span>
                           )}
                         </div>
 
                         <div className="flex items-center gap-3 text-[11px] text-gray-400 mt-0.5">
                           <span>
-                            İnisiyatif: <strong className="text-gray-200">{c.initiative}</strong>
+                            {t.combatTracker.initiative}: <strong className="text-gray-200">{c.initiative}</strong>
                           </span>
                           <span>•</span>
                           <span className="flex items-center gap-1">
-                            <Shield className="w-3 h-3 text-amber-400" /> AC {c.ac}
+                            <Shield className="w-3 h-3 text-amber-400" /> {t.combatTracker.ac} {c.ac}
                           </span>
                         </div>
                       </div>
@@ -774,7 +782,7 @@ export function GMCombatTracker() {
                             {c.hp_current} / {c.hp_max}
                             {c.hp_temp > 0 && (
                               <span className="text-amber-400 text-[10px] ml-1">
-                                (+{c.hp_temp} Geçici)
+                                (+{c.hp_temp} {t.combatTracker.tempHpSuffix})
                               </span>
                             )}
                           </span>
@@ -792,7 +800,7 @@ export function GMCombatTracker() {
                         <button
                           type="button"
                           data-testid={`hp-damage-${c.id}`}
-                          title="-5 Hasar"
+                          title={t.combatTracker.damage5}
                           onClick={() => handleAdjustHP(c.id, -5)}
                           className="px-2 py-1 rounded bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-300 text-xs font-bold"
                         >
@@ -800,7 +808,7 @@ export function GMCombatTracker() {
                         </button>
                         <button
                           type="button"
-                          title="-1 Hasar"
+                          title={t.combatTracker.damage1}
                           onClick={() => handleAdjustHP(c.id, -1)}
                           className="px-2 py-1 rounded bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-300 text-xs font-bold"
                         >
@@ -808,7 +816,7 @@ export function GMCombatTracker() {
                         </button>
                         <button
                           type="button"
-                          title="+1 İyileş"
+                          title={t.combatTracker.heal1}
                           onClick={() => handleAdjustHP(c.id, 1)}
                           className="px-2 py-1 rounded bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 text-emerald-300 text-xs font-bold"
                         >
@@ -817,7 +825,7 @@ export function GMCombatTracker() {
                         <button
                           type="button"
                           data-testid={`hp-heal-${c.id}`}
-                          title="+5 İyileş"
+                          title={t.combatTracker.heal5}
                           onClick={() => handleAdjustHP(c.id, 5)}
                           className="px-2 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 text-xs font-bold"
                         >
@@ -830,7 +838,7 @@ export function GMCombatTracker() {
                     <div className="flex items-center gap-1">
                       <button
                         type="button"
-                        title="Savaşçıyı Sil"
+                        title={t.combatTracker.deleteCombatant}
                         onClick={() => handleDeleteCombatant(c.id)}
                         className="p-1.5 rounded hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-colors"
                       >
@@ -842,7 +850,7 @@ export function GMCombatTracker() {
                   {/* Conditions Row */}
                   <div className="mt-2 pt-2 border-t border-white/5 flex flex-wrap items-center gap-1.5">
                     <span className="text-[10px] uppercase tracking-wider text-gray-500 mr-1">
-                      Durumlar:
+                      {t.combatTracker.conditions}
                     </span>
                     {DND_CONDITIONS.map((cond) => {
                       const isActive = (c.conditions || []).includes(cond.key);
@@ -867,7 +875,7 @@ export function GMCombatTracker() {
                           }
                         >
                           <span>{cond.icon}</span>
-                          <span>{cond.label}</span>
+                          <span>{t.combatTracker.conditionLabels?.[cond.key] || cond.label}</span>
                         </button>
                       );
                     })}
@@ -890,13 +898,13 @@ export function GMCombatTracker() {
               className="glass rounded-2xl border border-white/10 w-full max-w-md p-6 space-y-4"
             >
               <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
-                <Swords className="w-5 h-5 text-[#ffd700]" /> Yeni Karşılaşma Oluştur
+                <Swords className="w-5 h-5 text-[#ffd700]" /> {t.combatTracker.newEncounterTitle}
               </h3>
 
               <form onSubmit={handleCreateEncounter} className="space-y-4">
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    Karşılaşma Adı
+                    {t.combatTracker.encounterName}
                   </label>
                   <input
                     type="text"
@@ -904,20 +912,20 @@ export function GMCombatTracker() {
                     data-testid="encounter-name-input"
                     value={newEncounterName}
                     onChange={(e) => setNewEncounterName(e.target.value)}
-                    placeholder="Örn: Goblin Pususu, Ejderha Yuvası"
+                    placeholder={t.combatTracker.encounterNamePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
 
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    GM Notları
+                    {t.combatTracker.gmNotes}
                   </label>
                   <textarea
                     rows={3}
                     value={newEncounterNotes}
                     onChange={(e) => setNewEncounterNotes(e.target.value)}
-                    placeholder="Taktikler, çevre tehlikeleri, sürpriz faktörleri..."
+                    placeholder={t.combatTracker.gmNotesPlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
@@ -928,14 +936,14 @@ export function GMCombatTracker() {
                     onClick={() => setShowNewEncounterModal(false)}
                     className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-gray-200"
                   >
-                    İptal
+                    {t.common.cancel}
                   </button>
                   <button
                     type="submit"
                     data-testid="encounter-submit-btn"
                     className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold"
                   >
-                    Oluştur
+                    {t.common.create}
                   </button>
                 </div>
               </form>
@@ -955,20 +963,20 @@ export function GMCombatTracker() {
               className="glass rounded-2xl border border-white/10 w-full max-w-md p-6 space-y-4"
             >
               <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
-                <Plus className="w-5 h-5 text-[#ffd700]" /> Savaşçı / Yaratık Ekle
+                <Plus className="w-5 h-5 text-[#ffd700]" /> {t.combatTracker.addCombatantTitle}
               </h3>
 
               <form onSubmit={handleAddCombatant} className="space-y-4">
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    İsim
+                    {t.combatTracker.combatantName}
                   </label>
                   <input
                     type="text"
                     required
                     value={newCombatantName}
                     onChange={(e) => setNewCombatantName(e.target.value)}
-                    placeholder="Örn: Goblin Okçusu, Kara Şövalye"
+                    placeholder={t.combatTracker.combatantNamePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
@@ -976,7 +984,7 @@ export function GMCombatTracker() {
                 <div className="grid grid-cols-3 gap-3">
                   <div>
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Maks HP
+                      {t.combatTracker.maxHp}
                     </label>
                     <input
                       type="number"
@@ -990,7 +998,7 @@ export function GMCombatTracker() {
 
                   <div>
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Zırh (AC)
+                      {t.combatTracker.ac}
                     </label>
                     <input
                       type="number"
@@ -1004,7 +1012,7 @@ export function GMCombatTracker() {
 
                   <div>
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      İnisiyatif
+                      {t.combatTracker.initiative}
                     </label>
                     <input
                       type="number"
@@ -1027,7 +1035,7 @@ export function GMCombatTracker() {
                     className="w-4 h-4 rounded bg-white/5 border-white/10 text-[#ffd700] focus:ring-0"
                   />
                   <label htmlFor="is-npc-checkbox" className="text-xs text-gray-300">
-                    NPC / Canavar (Oyuncu karakteri değil)
+                    {t.combatTracker.isNpc}
                   </label>
                 </div>
 
@@ -1037,13 +1045,13 @@ export function GMCombatTracker() {
                     onClick={() => setShowAddCombatantModal(false)}
                     className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-gray-200"
                   >
-                    İptal
+                    {t.common.cancel}
                   </button>
                   <button
                     type="submit"
                     className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold"
                   >
-                    Ekle
+                    {t.common.add}
                   </button>
                 </div>
               </form>

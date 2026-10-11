@@ -41,7 +41,11 @@ export type SoundType =
   | 'scan'
   | 'unlock'
   | 'powerup'
-  | 'alert';
+  | 'alert'
+  | 'fire_blast'
+  | 'dice_roll'
+  | 'sword_hit'
+  | 'potion_drink';
 
 export function playSound(type: SoundType) {
   if (isMuted) return;
@@ -242,6 +246,109 @@ export function playSound(type: SoundType) {
 
         osc.start(now);
         osc.stop(now + 0.21);
+        break;
+      }
+
+      // 9. Fire blast / roaring flames (Explosion roar with noise rumble)
+      case 'fire_blast': {
+        const duration = 1.2;
+        const bufferSize = Math.floor(ctx.sampleRate * duration);
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(350, now);
+        filter.frequency.linearRampToValueAtTime(120, now + duration);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        noise.start(now);
+        break;
+      }
+
+      // 10. Dice Roll / Tumbling click rattle
+      case 'dice_roll': {
+        const clicks = 5;
+        for (let i = 0; i < clicks; i++) {
+          const clickTime = now + i * 0.06;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(1200 + Math.random() * 600, clickTime);
+          osc.frequency.exponentialRampToValueAtTime(200, clickTime + 0.03);
+
+          gain.gain.setValueAtTime(0.04, clickTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, clickTime + 0.03);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(clickTime);
+          osc.stop(clickTime + 0.035);
+        }
+        break;
+      }
+
+      // 11. Sword Hit / Metallic clash
+      case 'sword_hit': {
+        const osc = ctx.createOscillator();
+        const filter = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.18);
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1400, now);
+        filter.Q.setValueAtTime(4.0, now);
+
+        gain.gain.setValueAtTime(0.07, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.2);
+        break;
+      }
+
+      // 12. Potion Drink / Liquid chime bubble
+      case 'potion_drink': {
+        [400, 560, 720].forEach((freq, idx) => {
+          const t = now + idx * 0.08;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t);
+          osc.frequency.linearRampToValueAtTime(freq + 100, t + 0.07);
+
+          gain.gain.setValueAtTime(0.04, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(t);
+          osc.stop(t + 0.085);
+        });
         break;
       }
     }

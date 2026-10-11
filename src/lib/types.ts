@@ -393,3 +393,102 @@ export interface CampaignLootChest {
   created_at: string;
 }
 
+// --- Map Library & Movement System ---
+export interface RevealedArea {
+  x: number;
+  y: number;
+  r: number;
+}
+
+export type MapMovementMode = 'free' | 'approved';
+
+export interface CampaignMap {
+  id: string;
+  campaign_id: string;
+  name: string;
+  image_url: string;
+  grid_size: number;
+  width: number;
+  height: number;
+  fog_radius: number;
+  is_active: boolean;
+  movement_mode: MapMovementMode;
+  revealed_areas: RevealedArea[];
+  created_at: string;
+  updated_at?: string;
+}
+
+export type MovementRequestStatus = 'pending' | 'approved' | 'rejected';
+
+export interface MapMovementRequest {
+  id: string;
+  campaign_id: string;
+  token_id: string;
+  character_id: string | null;
+  from_x: number;
+  from_y: number;
+  target_x: number;
+  target_y: number;
+  status: MovementRequestStatus;
+  created_at: string;
+}
+
+// --- Combat Arena (4v4 Engine) ---
+export type ArenaStatus = 'lobby' | 'intro' | 'active' | 'finished';
+export type ArenaTeam = 'team_a' | 'team_b';
+
+export interface ArenaStatusEffect {
+  type: 'poison' | 'burn' | 'shield' | 'stun';
+  value: number; // e.g. 4 damage per turn
+  remaining_turns: number;
+}
+
+export interface CombatArena {
+  id: string;
+  campaign_id: string;
+  name: string;
+  status: ArenaStatus;
+  round_number: number;
+  active_combatant_id: string | null;
+  team_a_name: string;
+  team_b_name: string;
+  winner_team?: string | null;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface CombatArenaParticipant {
+  id: string;
+  arena_id: string;
+  character_id: string | null;
+  name: string;
+  avatar_url: string | null;
+  team: ArenaTeam;
+  slot_index: number; // 0 to 3
+  current_hp: number;
+  max_hp: number;
+  current_mana: number;
+  max_mana: number;
+  ac: number;
+  initiative_score: number;
+  is_alive: boolean;
+  status_effects: ArenaStatusEffect[];
+  is_npc?: boolean;
+}
+
+export type CombatArenaActionType = 'attack' | 'spell' | 'item' | 'dot' | 'system';
+
+export interface CombatArenaLog {
+  id: string;
+  arena_id: string;
+  message: string;
+  actor_name?: string | null;
+  target_name?: string | null;
+  action_type?: CombatArenaActionType | null;
+  dice_roll?: number | null;
+  damage_dealt?: number | null;
+  healing_done?: number | null;
+  created_at: string;
+}
+
+

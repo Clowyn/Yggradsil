@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useCampaign } from '../../contexts/CampaignContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { translations } from '../../lib/translations';
 import { GMTableNotice } from './GMTableNotice';
 import type {
   CampaignLootChest,
@@ -22,17 +24,19 @@ const RARITY_COLORS: Record<ItemRarity, { text: string; bg: string; border: stri
 };
 
 const ITEM_PRESETS: LootItem[] = [
-  { name: 'İyileşme İksiri (Healing Potion)', icon: '🧪', rarity: 'common', type: 'consumable', quantity: 2, properties: { healing: '2d4+2' } },
-  { name: 'Üstün İyileşme İksiri (Greater Healing)', icon: '🧪', rarity: 'uncommon', type: 'consumable', quantity: 1, properties: { healing: '4d4+4' } },
-  { name: 'Güneş Kılıcı (Sunblade)', icon: '🗡️', rarity: 'legendary', type: 'weapon', quantity: 1, properties: { damage: '1d8 radiant', versatile: '1d10' } },
-  { name: 'Mithril Zincir Zırh (Mithril Mail)', icon: '🛡️', rarity: 'epic', type: 'armor', quantity: 1, properties: { ac: 16, stealth: 'no penalty' } },
-  { name: 'Görünmezlik Yüzüğü (Ring of Invisibility)', icon: '💍', rarity: 'legendary', type: 'misc', quantity: 1, properties: { effect: 'turn invisible' } },
-  { name: 'Eşya Çantası (Bag of Holding)', icon: '👝', rarity: 'rare', type: 'misc', quantity: 1, properties: { capacity: '500 lbs' } },
-  { name: 'Ateş Topu Parşömeni (Scroll of Fireball)', icon: '📜', rarity: 'uncommon', type: 'consumable', quantity: 1, properties: { spell: 'Fireball 3rd level' } },
-  { name: 'Elven Çizmeleri (Boots of Elvenkind)', icon: '👢', rarity: 'rare', type: 'misc', quantity: 1, properties: { stealth: 'advantage' } },
+  { name: 'Healing Potion', icon: '🧪', rarity: 'common', type: 'consumable', quantity: 2, properties: { healing: '2d4+2' } },
+  { name: 'Greater Healing Potion', icon: '🧪', rarity: 'uncommon', type: 'consumable', quantity: 1, properties: { healing: '4d4+4' } },
+  { name: 'Sunblade', icon: '🗡️', rarity: 'legendary', type: 'weapon', quantity: 1, properties: { damage: '1d8 radiant', versatile: '1d10' } },
+  { name: 'Mithril Mail', icon: '🛡️', rarity: 'epic', type: 'armor', quantity: 1, properties: { ac: 16, stealth: 'no penalty' } },
+  { name: 'Ring of Invisibility', icon: '💍', rarity: 'legendary', type: 'misc', quantity: 1, properties: { effect: 'turn invisible' } },
+  { name: 'Bag of Holding', icon: '👝', rarity: 'rare', type: 'misc', quantity: 1, properties: { capacity: '500 lbs' } },
+  { name: 'Scroll of Fireball', icon: '📜', rarity: 'uncommon', type: 'consumable', quantity: 1, properties: { spell: 'Fireball 3rd level' } },
+  { name: 'Boots of Elvenkind', icon: '👢', rarity: 'rare', type: 'misc', quantity: 1, properties: { stealth: 'advantage' } },
 ];
 
 export function GMLootDispenser() {
+  const { locale } = useAuth();
+  const t = translations[locale] || translations.en;
   const { campaign, characters } = useCampaign();
   const campaignId = campaign?.id;
 
@@ -346,10 +350,10 @@ export function GMLootDispenser() {
           </div>
           <div>
             <h2 className="text-base font-cinzel font-bold text-gold-gradient">
-              Loot Vault & Item Dispenser
+              {t.lootDispenser.title}
             </h2>
             <p className="text-[11px] text-gray-400">
-              Create treasure chests, manage party rewards, and dispense directly to 24-slot player inventories.
+              {t.lootDispenser.subtitle}
             </p>
           </div>
         </div>
@@ -361,7 +365,7 @@ export function GMLootDispenser() {
           className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#ffd700]/10 hover:bg-[#ffd700]/20 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Yeni Sandık Oluştur</span>
+          <span>{t.lootDispenser.createChest}</span>
         </button>
       </div>
 
@@ -397,7 +401,7 @@ export function GMLootDispenser() {
                     data-testid="delete-chest-btn"
                     onClick={() => handleDeleteChest(chest.id)}
                     className="p-1 rounded hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-colors shrink-0"
-                    title="Sandığı Sil"
+                    title={t.lootDispenser.deleteChest}
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -420,14 +424,14 @@ export function GMLootDispenser() {
                     }`}
                   >
                     {chest.is_looted ? <Check className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                    <span>{chest.is_looted ? 'Toplandı (Looted)' : 'Kilitli / Dolu'}</span>
+                    <span>{chest.is_looted ? t.lootDispenser.looted : t.lootDispenser.locked}</span>
                   </button>
                 </div>
 
                 {/* Items List */}
                 <div className="space-y-1.5 mb-4">
                   <div className="text-[10px] uppercase tracking-wider text-gray-400 font-bold">
-                    İçerik ({chest.items?.length || 0} Eşya):
+                    {t.lootDispenser.contents} ({chest.items?.length || 0}):
                   </div>
                   <div className="space-y-1 max-h-36 overflow-y-auto pr-1 scrollbar-thin">
                     {(chest.items || []).map((item, idx) => {
@@ -468,7 +472,7 @@ export function GMLootDispenser() {
                   className="w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-gradient-to-r from-[#ffd700]/20 to-[#ff8c00]/10 hover:from-[#ffd700]/30 hover:to-[#ff8c00]/20 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold transition-all shadow-sm"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Karaktere Dağıt (Dispense)</span>
+                  <span>{t.lootDispenser.dispenseToCharacter}</span>
                 </button>
               </div>
             </div>
@@ -478,13 +482,13 @@ export function GMLootDispenser() {
         !loading && (
           <div className="p-8 text-center glass rounded-xl border border-white/5 space-y-3">
             <Package className="w-10 h-10 text-gray-600 mx-auto" />
-            <p className="text-xs text-gray-400">Henüz oluşturulmuş bir ganimet sandığı yok.</p>
+            <p className="text-xs text-gray-400">{t.lootDispenser.noChests}</p>
             <button
               type="button"
               onClick={() => setShowNewChestModal(true)}
               className="px-3 py-1.5 rounded-lg bg-[#ffd700]/10 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold"
             >
-              İlk Sandığı Yarat
+              {t.lootDispenser.createFirstChest}
             </button>
           </div>
         )
@@ -501,13 +505,13 @@ export function GMLootDispenser() {
               className="glass rounded-2xl border border-white/10 w-full max-w-lg p-6 space-y-4 max-h-[90vh] overflow-y-auto"
             >
               <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
-                <Package className="w-5 h-5 text-[#ffd700]" /> Yeni Ganimet Sandığı Oluştur
+                <Package className="w-5 h-5 text-[#ffd700]" /> {t.lootDispenser.createChestTitle}
               </h3>
 
               <form onSubmit={handleCreateChest} className="space-y-4">
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    Sandık Adı
+                    {t.lootDispenser.chestName}
                   </label>
                   <input
                     type="text"
@@ -515,7 +519,7 @@ export function GMLootDispenser() {
                     data-testid="chest-name-input"
                     value={newChestName}
                     onChange={(e) => setNewChestName(e.target.value)}
-                    placeholder="Örn: Ejderha Hazinesi, Zindan Sandığı"
+                    placeholder={t.lootDispenser.chestNamePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
@@ -523,20 +527,20 @@ export function GMLootDispenser() {
                 <div className="grid grid-cols-3 gap-3">
                   <div className="col-span-2">
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Açıklama / Konum
+                      {t.lootDispenser.chestDesc}
                     </label>
                     <input
                       type="text"
                       value={newChestDesc}
                       onChange={(e) => setNewChestDesc(e.target.value)}
-                      placeholder="Örn: Tahtın altındaki gizli bölme"
+                      placeholder={t.lootDispenser.chestDescPlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                     />
                   </div>
 
                   <div>
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Altın (GP)
+                      {t.lootDispenser.goldAmount}
                     </label>
                     <input
                       type="number"
@@ -554,7 +558,7 @@ export function GMLootDispenser() {
                 <div className="space-y-2 pt-2 border-t border-white/5">
                   <div className="flex items-center justify-between">
                     <label className="text-xs text-gray-400 uppercase font-bold">
-                      Sandıktaki Eşyalar ({newChestItems.length})
+                      {t.lootDispenser.itemsInChest} ({newChestItems.length})
                     </label>
 
                     <button
@@ -562,13 +566,13 @@ export function GMLootDispenser() {
                       onClick={() => handleAddItemToBuilder()}
                       className="text-xs text-[#ffd700] hover:underline flex items-center gap-1 font-bold"
                     >
-                      <Plus className="w-3.5 h-3.5" /> Özel Eşya Ekle
+                      <Plus className="w-3.5 h-3.5" /> {t.lootDispenser.addCustomItem}
                     </button>
                   </div>
 
                   {/* Quick Preset Buttons */}
                   <div className="flex flex-wrap gap-1.5 pb-1">
-                    <span className="text-[10px] text-gray-500 self-center">Hazır Şablonlar:</span>
+                    <span className="text-[10px] text-gray-500 self-center">{t.lootDispenser.quickPresets}</span>
                     {ITEM_PRESETS.slice(0, 5).map((p, i) => (
                       <button
                         key={i}
@@ -611,7 +615,7 @@ export function GMLootDispenser() {
                               prev.map((it, i) => (i === idx ? { ...it, name: val } : it))
                             );
                           }}
-                          placeholder="Eşya adı..."
+                          placeholder={t.lootDispenser.itemName + '...'}
                           className="flex-1 bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-gray-200"
                         />
 
@@ -663,14 +667,14 @@ export function GMLootDispenser() {
                     onClick={() => setShowNewChestModal(false)}
                     className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-gray-200"
                   >
-                    İptal
+                    {t.common.cancel}
                   </button>
                   <button
                     type="submit"
                     data-testid="chest-submit-btn"
                     className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold"
                   >
-                    Sandığı Kaydet
+                    {t.common.save}
                   </button>
                 </div>
               </form>
@@ -690,13 +694,12 @@ export function GMLootDispenser() {
               className="glass rounded-2xl border border-white/10 w-full max-w-md p-6 space-y-4"
             >
               <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
-                <Send className="w-5 h-5 text-[#ffd700]" /> Ganimeti Karaktere Dağıt
+                <Send className="w-5 h-5 text-[#ffd700]" /> {t.lootDispenser.dispenseToCharacter}
               </h3>
 
               <p className="text-xs text-gray-400">
-                <strong>{dispenseTargetChest.name}</strong> sandığındaki eşyalar ve{' '}
-                <strong>{dispenseTargetChest.gold_amount} GP</strong> seçili karakterin 24-slotluk
-                envanterine aktarılacaktır.
+                <strong>{dispenseTargetChest.name}</strong> •{' '}
+                <strong>{dispenseTargetChest.gold_amount} GP</strong>
               </p>
 
               {dispenseStatusMessage && (
@@ -718,7 +721,7 @@ export function GMLootDispenser() {
 
               <div className="space-y-1">
                 <label className="text-xs uppercase tracking-wider text-gray-400 font-bold">
-                  Hedef Karakter
+                  {t.lootDispenser.selectCharacter}
                 </label>
                 <select
                   value={selectedCharId}
@@ -739,7 +742,7 @@ export function GMLootDispenser() {
                   onClick={() => setDispenseTargetChest(null)}
                   className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-gray-200"
                 >
-                  İptal
+                  {t.common.cancel}
                 </button>
                 <button
                   type="button"
@@ -747,7 +750,7 @@ export function GMLootDispenser() {
                   className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold flex items-center gap-1.5"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>Envantere Aktar</span>
+                  <span>{t.lootDispenser.dispenseToCharacter}</span>
                 </button>
               </div>
             </motion.div>

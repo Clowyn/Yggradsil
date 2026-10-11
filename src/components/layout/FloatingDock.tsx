@@ -10,6 +10,7 @@ import {
   Backpack,
   Crown,
   Scale,
+  Swords,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
@@ -59,6 +60,12 @@ const DOCK_ITEMS: DockItem[] = [
     labelEn: 'Adventurer Pack',
     labelTr: 'Maceracı Çantası',
     icon: <Backpack size={23} />,
+  },
+  {
+    to: '/arena',
+    labelEn: 'Combat Arena',
+    labelTr: 'Savaş Arenası',
+    icon: <Swords size={23} />,
   },
   {
     to: '/gm',

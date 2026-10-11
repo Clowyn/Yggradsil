@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, RotateCcw } from 'lucide-react';
+import { Eye, EyeOff, RotateCcw, FolderOpen, ShieldAlert, Sparkles } from 'lucide-react';
+import type { MapMovementMode } from '../../lib/types';
+import { useAuth } from '../../contexts/AuthContext';
+import { translations } from '../../lib/translations';
 
 interface GMMapControlsProps {
   fogRadius: number;
@@ -7,6 +10,12 @@ interface GMMapControlsProps {
   onResetPositions: () => void;
   showFog: boolean;
   onToggleFog: () => void;
+  movementMode: MapMovementMode;
+  onToggleMovementMode: (mode: MapMovementMode) => void;
+  onResetFog: () => void;
+  onOpenMapLibrary: () => void;
+  activeMapName: string;
+  pendingRequestsCount?: number;
 }
 
 export function GMMapControls({
@@ -15,27 +24,89 @@ export function GMMapControls({
   onResetPositions,
   showFog,
   onToggleFog,
+  movementMode,
+  onToggleMovementMode,
+  onResetFog,
+  onOpenMapLibrary,
+  activeMapName,
+  pendingRequestsCount = 0,
 }: GMMapControlsProps) {
+  const { locale } = useAuth();
+  const t = translations[locale] || translations.en;
+
   return (
     <motion.div
-      className="absolute top-4 right-4 z-20 arcane-glass rounded-2xl p-4 min-w-[220px] border border-amber-900/40 bg-[#0e1017]/90 shadow-2xl"
+      className="absolute top-4 right-4 z-20 arcane-glass rounded-2xl p-4 min-w-[260px] border border-amber-900/40 bg-[#0e1017]/95 shadow-2xl backdrop-blur-xl"
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3, duration: 0.4 }}
+      transition={{ delay: 0.2, duration: 0.3 }}
     >
-      {/* Title */}
-      <div className="flex items-center gap-2 mb-3">
-        <div className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]" />
-        <h3 className="text-xs font-cinzel font-bold text-amber-200 uppercase tracking-widest">
-          GM CONTROLS
-        </h3>
+      {/* Title & Active Map badge */}
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]" />
+          <h3 className="text-xs font-cinzel font-bold text-amber-200 uppercase tracking-widest">
+            {t.map.gmControls}
+          </h3>
+        </div>
+
+        <button
+          type="button"
+          onClick={onOpenMapLibrary}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[10px] font-bold font-cinzel transition-all cursor-pointer shadow-sm"
+          title={t.map.mapLibrary}
+        >
+          <FolderOpen className="w-3.5 h-3.5" />
+          <span>{t.map.mapLibrary}</span>
+        </button>
+      </div>
+
+      <div className="text-[11px] font-cinzel text-amber-300/80 mb-3 px-2 py-1 rounded bg-black/40 border border-white/5 truncate">
+        <span className="text-stone-400 mr-1">{t.map.activeMap}:</span>
+        <span className="font-bold">{activeMapName}</span>
+      </div>
+
+      {/* Movement Mode Toggle */}
+      <div className="mb-3.5">
+        <label className="text-[10px] font-cinzel text-stone-400 uppercase tracking-wider block mb-1">
+          {t.map.movementMode}
+        </label>
+        <div className="grid grid-cols-2 gap-1.5 bg-black/40 p-1 rounded-xl border border-white/5">
+          <button
+            type="button"
+            onClick={() => onToggleMovementMode('free')}
+            className={`py-1.5 px-2 rounded-lg text-[10px] font-cinzel font-bold transition-all text-center cursor-pointer ${
+              movementMode === 'free'
+                ? 'bg-amber-500/20 border border-amber-500/50 text-amber-300 shadow-sm'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            {t.map.freeExploration}
+          </button>
+          <button
+            type="button"
+            onClick={() => onToggleMovementMode('approved')}
+            className={`relative py-1.5 px-2 rounded-lg text-[10px] font-cinzel font-bold transition-all text-center cursor-pointer ${
+              movementMode === 'approved'
+                ? 'bg-rose-500/20 border border-rose-500/50 text-rose-300 shadow-sm'
+                : 'text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            {t.map.gmApprovedMode}
+            {pendingRequestsCount > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[9px] font-bold flex items-center justify-center animate-pulse">
+                {pendingRequestsCount}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Fog Radius Slider */}
-      <div className="mb-4">
+      <div className="mb-3.5">
         <div className="flex items-center justify-between mb-1.5">
           <label className="text-[10px] font-cinzel text-stone-400 uppercase tracking-wider">
-            FOG RADIUS
+            {t.map.fogRadius}
           </label>
           <span className="text-xs font-cinzel font-bold text-amber-400 tabular-nums">
             {fogRadius}px
@@ -43,47 +114,66 @@ export function GMMapControls({
         </div>
         <input
           type="range"
-          min={20}
+          min={30}
           max={200}
           value={fogRadius}
           onChange={(e) => onFogRadiusChange(Number(e.target.value))}
           className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #b45309 0%, #f59e0b ${((fogRadius - 20) / 180) * 100}%, #222 ${((fogRadius - 20) / 180) * 100}%, #222 100%)`,
+            background: `linear-gradient(to right, #b45309 0%, #f59e0b ${((fogRadius - 30) / 170) * 100}%, #222 ${((fogRadius - 30) / 170) * 100}%, #222 100%)`,
           }}
         />
-        <div className="flex justify-between text-[9px] font-cinzel text-stone-600 mt-0.5">
-          <span>20</span>
-          <span>200</span>
-        </div>
       </div>
 
       {/* Divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-amber-500/25 to-transparent mb-3" />
 
-      {/* Toggle Fog */}
-      <button
-        onClick={onToggleFog}
-        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 hover:bg-amber-500/10 border border-amber-900/30 hover:border-amber-500/40 transition-all duration-200 mb-2 cursor-pointer"
-      >
-        {showFog ? (
-          <EyeOff className="w-3.5 h-3.5 text-stone-400" />
-        ) : (
-          <Eye className="w-3.5 h-3.5 text-amber-400" />
-        )}
-        <span className="text-[11px] font-cinzel text-stone-300">
-          {showFog ? 'Hide Fog (GM View)' : 'Show Fog (Player View)'}
-        </span>
-      </button>
+      {/* Toggle Fog & Reset Fog */}
+      <div className="space-y-1.5 mb-2">
+        <button
+          type="button"
+          onClick={onToggleFog}
+          className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 hover:bg-amber-500/10 border border-amber-900/30 hover:border-amber-500/40 transition-all duration-200 cursor-pointer"
+        >
+          {showFog ? (
+            <EyeOff className="w-3.5 h-3.5 text-stone-400" />
+          ) : (
+            <Eye className="w-3.5 h-3.5 text-amber-400" />
+          )}
+          <span className="text-[11px] font-cinzel text-stone-300">
+            {showFog ? t.map.toggleFogGm : t.map.toggleFogPlayer}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={onResetFog}
+          className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 hover:bg-amber-500/10 border border-amber-900/30 hover:border-amber-500/40 transition-all duration-200 cursor-pointer"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-stone-400" />
+          <span className="text-[11px] font-cinzel text-stone-300">{t.map.resetFog}</span>
+        </button>
+      </div>
 
       {/* Reset Positions */}
       <button
+        type="button"
         onClick={onResetPositions}
-        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 hover:bg-rose-950/30 border border-amber-900/30 hover:border-rose-900/40 transition-all duration-200 cursor-pointer"
+        className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 hover:bg-rose-950/30 border border-amber-900/30 hover:border-rose-900/40 transition-all duration-200 cursor-pointer"
       >
         <RotateCcw className="w-3.5 h-3.5 text-stone-400" />
-        <span className="text-[11px] font-cinzel text-stone-300">Reset Positions</span>
+        <span className="text-[11px] font-cinzel text-stone-300">{t.map.resetPositions}</span>
       </button>
+
+      {/* Pending Movement Alert if any */}
+      {pendingRequestsCount > 0 && (
+        <div className="mt-3 p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center gap-2 text-rose-300 text-[10px] font-cinzel">
+          <ShieldAlert className="w-3.5 h-3.5 shrink-0 text-rose-400" />
+          <span>
+            {pendingRequestsCount} {t.map.pendingMoves}
+          </span>
+        </div>
+      )}
     </motion.div>
   );
 }

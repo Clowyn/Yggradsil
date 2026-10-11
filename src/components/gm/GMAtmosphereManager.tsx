@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useCampaign } from '../../contexts/CampaignContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { translations } from '../../lib/translations';
 import { GMTableNotice } from './GMTableNotice';
 import type {
   CampaignEnvironment,
@@ -17,106 +19,80 @@ import type {
   EnvironmentDangerLevel,
 } from '../../lib/types';
 
-const WEATHER_OPTIONS: {
+const WEATHER_BASE: {
   key: EnvironmentWeather;
-  label: string;
-  desc: string;
   icon: typeof CloudFog;
   color: string;
   bgGrad: string;
 }[] = [
-  {
-    key: 'fog',
-    label: 'Yoğun Sis (Fog)',
-    desc: 'Görüş mesafesi 10ft ile sınırlı, algı zarları dezavantajlı.',
-    icon: CloudFog,
-    color: '#94a3b8',
-    bgGrad: 'from-slate-900/40 to-slate-800/20',
-  },
-  {
-    key: 'rain',
-    label: 'Sağanak Yağmur (Rain)',
-    desc: 'Zemin çamurlu, menzilli saldırılarda dezavantaj.',
-    icon: CloudRain,
-    color: '#38bdf8',
-    bgGrad: 'from-cyan-950/40 to-blue-900/20',
-  },
-  {
-    key: 'storm',
-    label: 'Fırtına (Storm)',
-    desc: 'Şiddetli rüzgarlar, şimşek tehdidi ve uçuş kısıtlaması.',
-    icon: CloudLightning,
-    color: '#a855f7',
-    bgGrad: 'from-purple-950/40 to-indigo-900/20',
-  },
-  {
-    key: 'ash',
-    label: 'Kül Yağmuru (Ash)',
-    desc: 'Hava zehirli parçacıklarla dolu, nefes almak güçleşir.',
-    icon: Flame,
-    color: '#f97316',
-    bgGrad: 'from-orange-950/40 to-red-950/20',
-  },
-  {
-    key: 'sunny',
-    label: 'Açık / Güneşli (Sunny)',
-    desc: 'Tam görüş, doğal ışık aydınlatması.',
-    icon: Sun,
-    color: '#eab308',
-    bgGrad: 'from-amber-950/30 to-yellow-900/10',
-  },
-  {
-    key: 'clear',
-    label: 'Berrak Gece (Clear)',
-    desc: 'Yıldızlar net, gizlilik operasyonları için elverişli.',
-    icon: Moon,
-    color: '#818cf8',
-    bgGrad: 'from-indigo-950/40 to-slate-900/20',
-  },
+  { key: 'fog', icon: CloudFog, color: '#94a3b8', bgGrad: 'from-slate-900/40 to-slate-800/20' },
+  { key: 'rain', icon: CloudRain, color: '#38bdf8', bgGrad: 'from-cyan-950/40 to-blue-900/20' },
+  { key: 'storm', icon: CloudLightning, color: '#a855f7', bgGrad: 'from-purple-950/40 to-indigo-900/20' },
+  { key: 'ash', icon: Flame, color: '#f97316', bgGrad: 'from-orange-950/40 to-red-950/20' },
+  { key: 'sunny', icon: Sun, color: '#eab308', bgGrad: 'from-amber-950/30 to-yellow-900/10' },
+  { key: 'clear', icon: Moon, color: '#818cf8', bgGrad: 'from-indigo-950/40 to-slate-900/20' },
 ];
 
-const TIME_OF_DAY_OPTIONS: {
+const TIME_OF_DAY_BASE: {
   key: EnvironmentTimeOfDay;
-  label: string;
   icon: typeof Sunrise;
   color: string;
 }[] = [
-  { key: 'dawn', label: 'Şafak Vakti (Dawn)', icon: Sunrise, color: '#f59e0b' },
-  { key: 'noon', label: 'Öğle Vakti (Noon)', icon: Sun, color: '#fbbf24' },
-  { key: 'dusk', label: 'Alacakaranlık (Dusk)', icon: Sunset, color: '#f97316' },
-  { key: 'midnight', label: 'Gece Yarısı (Midnight)', icon: Moon, color: '#6366f1' },
+  { key: 'dawn', icon: Sunrise, color: '#f59e0b' },
+  { key: 'noon', icon: Sun, color: '#fbbf24' },
+  { key: 'dusk', icon: Sunset, color: '#f97316' },
+  { key: 'midnight', icon: Moon, color: '#6366f1' },
 ];
 
-const AMBIENT_PRESETS: {
-  key: string;
-  label: string;
-  desc: string;
-  category: string;
-}[] = [
-  { key: 'abyss_winds', label: 'Uçurum Rüzgarları', desc: 'Uğuldayan karanlık ve rüzgar yankıları', category: 'Zindan' },
-  { key: 'dungeon_drip', label: 'Nemli Mahzen', desc: 'Damlama sesleri ve uzak zincir şıngırtıları', category: 'Zindan' },
-  { key: 'tavern_bustle', label: 'Han & Meyhane', desc: 'Kadeh tokuşturma, ud nameleri ve kahkahalar', category: 'Sosyal' },
-  { key: 'storm_ruins', label: 'Fırtınalı Harabeler', desc: 'Kükreyen gök gürültüsü ve yıkık tapınak', category: 'Dış Mekan' },
-  { key: 'celestial_choir', label: 'Semavi Koro', desc: 'Ruhani yankılar ve ilahi fısıltılar', category: 'Mistik' },
-  { key: 'crypt_silence', label: 'Mezar Sessizliği', desc: 'Neredeyse mutlak sessizlik, kalp atışları', category: 'Korku' },
+const AMBIENT_PRESET_KEYS = [
+  'abyss_winds',
+  'dungeon_drip',
+  'tavern_bustle',
+  'storm_ruins',
+  'celestial_choir',
+  'crypt_silence',
 ];
 
-const DANGER_LEVELS: {
+const DANGER_LEVEL_BASE: {
   key: EnvironmentDangerLevel;
-  label: string;
   color: string;
   badgeBg: string;
 }[] = [
-  { key: 'safe', label: 'Güvenli (Safe)', color: '#22c55e', badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
-  { key: 'low', label: 'Düşük Tehdit (Low)', color: '#38bdf8', badgeBg: 'bg-sky-500/20 text-sky-300 border-sky-500/30' },
-  { key: 'normal', label: 'Normal (Moderate)', color: '#eab308', badgeBg: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' },
-  { key: 'high', label: 'Yüksek Tehlike (High)', color: '#f97316', badgeBg: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
-  { key: 'deadly', label: 'Ölümcül (Deadly)', color: '#ef4444', badgeBg: 'bg-red-500/20 text-red-300 border-red-500/30' },
+  { key: 'safe', color: '#22c55e', badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+  { key: 'low', color: '#38bdf8', badgeBg: 'bg-sky-500/20 text-sky-300 border-sky-500/30' },
+  { key: 'normal', color: '#eab308', badgeBg: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' },
+  { key: 'high', color: '#f97316', badgeBg: 'bg-orange-500/20 text-orange-300 border-orange-500/30' },
+  { key: 'deadly', color: '#ef4444', badgeBg: 'bg-red-500/20 text-red-300 border-red-500/30' },
 ];
 
 export function GMAtmosphereManager() {
+  const { locale } = useAuth();
+  const t = translations[locale] || translations.en;
   const { campaign } = useCampaign();
   const campaignId = campaign?.id;
+
+  const weatherOptions = WEATHER_BASE.map((w) => ({
+    ...w,
+    label: t.atmosphere.weatherOptions?.[w.key]?.label || w.key,
+    desc: t.atmosphere.weatherOptions?.[w.key]?.desc || '',
+  }));
+
+  const timeOfDayOptions = TIME_OF_DAY_BASE.map((tod) => ({
+    ...tod,
+    label: t.atmosphere.timeOptions?.[tod.key]?.label || tod.key,
+  }));
+
+  const dangerLevels = DANGER_LEVEL_BASE.map((dl) => ({
+    ...dl,
+    label: t.atmosphere.dangerOptions?.[dl.key]?.label || dl.key,
+  }));
+
+  const ambientPresets = AMBIENT_PRESET_KEYS.map((k) => ({
+    key: k,
+    label: t.atmosphere.ambientPresets?.[k]?.label || k,
+    desc: t.atmosphere.ambientPresets?.[k]?.desc || '',
+    category: t.atmosphere.ambientPresets?.[k]?.category || '',
+  }));
 
   const [tableMissing, setTableMissing] = useState(false);
 
@@ -202,7 +178,7 @@ export function GMAtmosphereManager() {
     } catch {
       setTableMissing(true);
     }
-  }, [campaignId]);
+  }, [campaignId, setFormSessionNum]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -379,10 +355,10 @@ export function GMAtmosphereManager() {
           </div>
           <div>
             <h2 className="text-base font-cinzel font-bold text-gold-gradient">
-              Atmosphere & Session Chronicles
+              {t.atmosphere.title}
             </h2>
             <p className="text-[11px] text-gray-400">
-              Live weather synchronization, time of day, ambient presets, and quest chronicles.
+              {t.atmosphere.subtitle}
             </p>
           </div>
         </div>
@@ -401,7 +377,7 @@ export function GMAtmosphereManager() {
           className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#ffd700]/10 hover:bg-[#ffd700]/20 border border-[#ffd700]/30 text-[#ffd700] text-xs font-bold transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Yeni Seans Günlüğü Yaz</span>
+          <span>{t.atmosphere.writeNewChronicle}</span>
         </button>
       </div>
 
@@ -413,15 +389,15 @@ export function GMAtmosphereManager() {
           <div className="glass p-5 rounded-xl border border-white/10 space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-cinzel font-bold text-gold-gradient uppercase tracking-widest flex items-center gap-2">
-                <CloudFog className="w-4 h-4 text-[#ffd700]" /> Hava Durumu Kontrolleri
+                <CloudFog className="w-4 h-4 text-[#ffd700]" /> {t.atmosphere.weatherControls}
               </h3>
               <span className="text-[11px] text-gray-400 capitalize">
-                Aktif: <strong className="text-gray-200">{environment.weather}</strong>
+                {t.atmosphere.activeWeather}: <strong className="text-gray-200">{environment.weather}</strong>
               </span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-              {WEATHER_OPTIONS.map((w) => {
+              {weatherOptions.map((w) => {
                 const Icon = w.icon;
                 const isSelected = environment.weather === w.key;
                 return (
@@ -454,31 +430,31 @@ export function GMAtmosphereManager() {
           <div className="glass p-5 rounded-xl border border-white/10 space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-cinzel font-bold text-gold-gradient uppercase tracking-widest flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#ffd700]" /> Günün Saati (Time of Day)
+                <Clock className="w-4 h-4 text-[#ffd700]" /> {t.atmosphere.timeOfDay}
               </h3>
               <span className="text-[11px] text-gray-400 capitalize">
-                Aktif: <strong className="text-gray-200">{environment.time_of_day}</strong>
+                {t.common.active}: <strong className="text-gray-200">{environment.time_of_day}</strong>
               </span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {TIME_OF_DAY_OPTIONS.map((t) => {
-                const Icon = t.icon;
-                const isSelected = environment.time_of_day === t.key;
+              {timeOfDayOptions.map((tod) => {
+                const Icon = tod.icon;
+                const isSelected = environment.time_of_day === tod.key;
                 return (
                   <button
-                    key={t.key}
+                    key={tod.key}
                     type="button"
-                    data-testid={`time-btn-${t.key}`}
-                    onClick={() => updateEnvironment({ time_of_day: t.key })}
+                    data-testid={`time-btn-${tod.key}`}
+                    onClick={() => updateEnvironment({ time_of_day: tod.key })}
                     className={`p-3 rounded-xl border text-center transition-all ${
                       isSelected
                         ? 'border-[#ffd700]/70 bg-gradient-to-b from-[#ffd700]/20 to-transparent shadow-[0_0_15px_rgba(255,215,0,0.1)]'
                         : 'border-white/5 glass hover:border-white/20'
                     }`}
                   >
-                    <Icon className="w-5 h-5 mx-auto mb-1.5" style={{ color: t.color }} />
-                    <div className="text-xs font-bold text-gray-200">{t.label}</div>
+                    <Icon className="w-5 h-5 mx-auto mb-1.5" style={{ color: tod.color }} />
+                    <div className="text-xs font-bold text-gray-200">{tod.label}</div>
                   </button>
                 );
               })}
@@ -495,12 +471,12 @@ export function GMAtmosphereManager() {
           >
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-cinzel font-bold text-gold-gradient uppercase tracking-widest flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-red-400" /> Tehlike Seviyesi (Danger Meter)
+                <ShieldAlert className="w-4 h-4 text-red-400" /> {t.atmosphere.dangerLevel}
               </h3>
             </div>
 
             <div className="space-y-2">
-              {DANGER_LEVELS.map((lvl) => {
+              {dangerLevels.map((lvl) => {
                 const isSelected = environment.danger_level === lvl.key;
                 return (
                   <button
@@ -525,7 +501,7 @@ export function GMAtmosphereManager() {
           <div className="glass p-5 rounded-xl border border-white/10 space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-cinzel font-bold text-gold-gradient uppercase tracking-widest flex items-center gap-2">
-                <Volume2 className="w-4 h-4 text-[#ffd700]" /> Ortam Ses Önayarı (Audio)
+                <Volume2 className="w-4 h-4 text-[#ffd700]" /> {t.atmosphere.audioPreset}
               </h3>
 
               <button
@@ -536,14 +512,14 @@ export function GMAtmosphereManager() {
                     ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                     : 'bg-white/5 border-white/10 text-gray-400'
                 }`}
-                title={isPlayingAudio ? 'Sesi Durdur' : 'Önizleme Çal'}
+                title={isPlayingAudio ? t.atmosphere.stopAudio : t.atmosphere.playPreview}
               >
                 {isPlayingAudio ? <Volume2 className="w-4 h-4 animate-pulse" /> : <VolumeX className="w-4 h-4" />}
               </button>
             </div>
 
             <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1 scrollbar-thin">
-              {AMBIENT_PRESETS.map((p) => {
+              {ambientPresets.map((p) => {
                 const isSelected = environment.ambient_preset === p.key;
                 return (
                   <div
@@ -592,11 +568,11 @@ export function GMAtmosphereManager() {
           <div className="flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-[#ffd700]" />
             <h3 className="text-sm font-cinzel font-bold text-[#ffd700]">
-              Seans Günlükleri (Session Chronicles)
+              {t.atmosphere.sessionChronicles}
             </h3>
           </div>
           <span className="text-xs text-gray-400">
-            Toplam {chronicles.length} seans kaydı
+            {chronicles.length} {t.atmosphere.totalRecords}
           </span>
         </div>
 
@@ -611,15 +587,15 @@ export function GMAtmosphereManager() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="px-2 py-0.5 rounded bg-[#ffd700]/20 text-[#ffd700] text-[10px] font-bold font-mono">
-                        Seans #{ch.session_number}
+                        {t.atmosphere.sessionNo} #{ch.session_number}
                       </span>
                       {ch.is_published ? (
                         <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                          <Eye className="w-2.5 h-2.5" /> Oyunculara Açık
+                          <Eye className="w-2.5 h-2.5" /> {t.atmosphere.publicToPlayers}
                         </span>
                       ) : (
                         <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                          <EyeOff className="w-2.5 h-2.5" /> Gizli Taslak
+                          <EyeOff className="w-2.5 h-2.5" /> {t.atmosphere.hiddenDraft}
                         </span>
                       )}
                     </div>
@@ -633,7 +609,7 @@ export function GMAtmosphereManager() {
                       type="button"
                       onClick={() => openEditChronicle(ch)}
                       className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-gray-200 transition-colors"
-                      title="Düzenle"
+                      title={t.common.edit}
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
@@ -642,7 +618,7 @@ export function GMAtmosphereManager() {
                       data-testid="delete-session-btn"
                       onClick={() => handleDeleteChronicle(ch.id)}
                       className="p-1 rounded hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-colors"
-                      title="Sil"
+                      title={t.common.delete}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -652,7 +628,7 @@ export function GMAtmosphereManager() {
                 {ch.in_game_date && (
                   <div className="flex items-center gap-1.5 text-[10px] text-gray-400">
                     <Calendar className="w-3 h-3 text-[#ffd700]" />
-                    <span>Oyun İçi Tarih: {ch.in_game_date}</span>
+                    <span>{t.atmosphere.inGameDate}: {ch.in_game_date}</span>
                   </div>
                 )}
 
@@ -664,7 +640,7 @@ export function GMAtmosphereManager() {
                 {ch.gm_secrets && (
                   <div className="p-2.5 rounded-lg border border-red-500/20 bg-red-950/20 text-xs text-red-200/90 space-y-1">
                     <div className="text-[10px] uppercase font-bold text-red-400 flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" /> GM Gizli Notu:
+                      <Sparkles className="w-3 h-3" /> {t.atmosphere.gmNotes}:
                     </div>
                     <p className="text-[11px] leading-snug">{ch.gm_secrets}</p>
                   </div>
@@ -675,7 +651,7 @@ export function GMAtmosphereManager() {
         ) : (
           <div className="p-8 text-center glass rounded-xl border border-white/5 space-y-2">
             <BookOpen className="w-8 h-8 text-gray-600 mx-auto" />
-            <p className="text-xs text-gray-400">Henüz kaydedilmiş bir seans günlüğü bulunmuyor.</p>
+            <p className="text-xs text-gray-400">{t.atmosphere.noChronicles}</p>
           </div>
         )}
       </div>
@@ -692,14 +668,14 @@ export function GMAtmosphereManager() {
             >
               <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-[#ffd700]" />
-                {editingChronicle ? 'Seans Günlüğünü Düzenle' : 'Yeni Seans Günlüğü Ekle'}
+                {editingChronicle ? t.atmosphere.editChronicle : t.atmosphere.writeNewChronicle}
               </h3>
 
               <form onSubmit={handleSaveChronicle} className="space-y-4">
                 <div className="grid grid-cols-3 gap-3">
                   <div>
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Seans No
+                      {t.atmosphere.sessionNo}
                     </label>
                     <input
                       type="number"
@@ -713,13 +689,13 @@ export function GMAtmosphereManager() {
 
                   <div className="col-span-2">
                     <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                      Oyun İçi Tarih (In-Game Date)
+                      {t.atmosphere.inGameDate}
                     </label>
                     <input
                       type="text"
                       value={formInGameDate}
                       onChange={(e) => setFormInGameDate(e.target.value)}
-                      placeholder="Örn: 1492 DR, 12 Mirtul"
+                      placeholder={t.atmosphere.inGameDatePlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                     />
                   </div>
@@ -727,7 +703,7 @@ export function GMAtmosphereManager() {
 
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    Seans Başlığı
+                    {t.atmosphere.sessionTitle}
                   </label>
                   <input
                     type="text"
@@ -735,14 +711,14 @@ export function GMAtmosphereManager() {
                     data-testid="session-title-input"
                     value={formTitle}
                     onChange={(e) => setFormTitle(e.target.value)}
-                    placeholder="Örn: Gölge Kalesi Baskını"
+                    placeholder={t.atmosphere.sessionTitlePlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
 
                 <div>
                   <label className="text-xs text-gray-400 uppercase font-bold block mb-1">
-                    Seans Özeti (Hikaye Günlüğü)
+                    {t.atmosphere.sessionSummary}
                   </label>
                   <textarea
                     rows={4}
@@ -750,21 +726,21 @@ export function GMAtmosphereManager() {
                     data-testid="session-summary-input"
                     value={formSummary}
                     onChange={(e) => setFormSummary(e.target.value)}
-                    placeholder="Grup zindan kapısını kırarak içeri girdi. Gardiyanlar alt edildi..."
+                    placeholder={t.atmosphere.sessionSummaryPlaceholder}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   />
                 </div>
 
                 <div>
                   <label className="text-xs text-red-400 uppercase font-bold block mb-1 flex items-center gap-1">
-                    <Sparkles className="w-3 h-3" /> GM Gizli Notları (Oyuncular Göremez)
+                    <Sparkles className="w-3 h-3" /> {t.atmosphere.gmNotes}
                   </label>
                   <textarea
                     rows={2}
                     data-testid="session-secrets-input"
                     value={formGmSecrets}
                     onChange={(e) => setFormGmSecrets(e.target.value)}
-                    placeholder="Heykelin arkasında gizli bir tuzak mekanizması var..."
+                    placeholder={t.atmosphere.gmNotesPlaceholder}
                     className="w-full bg-red-950/20 border border-red-500/20 rounded-lg px-3 py-2 text-sm text-red-200 placeholder-red-400/40 focus:outline-none focus:border-red-500/40"
                   />
                 </div>
@@ -779,7 +755,7 @@ export function GMAtmosphereManager() {
                     className="w-4 h-4 rounded bg-white/5 border-white/10 text-[#ffd700] focus:ring-0"
                   />
                   <label htmlFor="chronicle-publish-checkbox" className="text-xs text-gray-300">
-                    Oyunculara Yayınla (Oyuncular kendi panellerinde bu özeti görebilir)
+                    {t.atmosphere.publishToPlayers}
                   </label>
                 </div>
 
@@ -789,14 +765,14 @@ export function GMAtmosphereManager() {
                     onClick={() => setShowChronicleModal(false)}
                     className="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400 hover:text-gray-200"
                   >
-                    İptal
+                    {t.common.cancel}
                   </button>
                   <button
                     type="submit"
                     data-testid="session-submit-btn"
                     className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold"
                   >
-                    {editingChronicle ? 'Güncelle' : 'Kaydet'}
+                    {editingChronicle ? t.atmosphere.updateChronicle : t.common.save}
                   </button>
                 </div>
               </form>

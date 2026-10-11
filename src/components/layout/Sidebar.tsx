@@ -12,6 +12,7 @@ import {
   X,
   Sparkles,
   Scale,
+  Swords,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/spells', labelEn: 'Spell Grimoire', labelTr: 'Büyü Kitabı', icon: <Sparkles size={18} /> },
   { to: '/map', labelEn: 'Battle Map', labelTr: 'Savaş Haritası', icon: <MapIcon size={18} /> },
   { to: '/inventory', labelEn: 'Adventurer Pack', labelTr: 'Maceracı Çantası', icon: <Backpack size={18} /> },
+  { to: '/arena', labelEn: 'Combat Arena', labelTr: 'Savaş Arenası', icon: <Swords size={18} /> },
   { to: '/gm', labelEn: 'GM Chamber', labelTr: 'GM Odası', icon: <Crown size={18} />, gmOnly: true },
 ];
 

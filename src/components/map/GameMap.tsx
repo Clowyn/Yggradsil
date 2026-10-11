@@ -1,24 +1,36 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { Map as MapIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Map as MapIcon,
+  Plus,
+  Trash2,
+  Check,
+  X,
+  Upload,
+  Image as ImageIcon,
+  CheckCircle2,
+  Clock,
+  Sparkles,
+} from 'lucide-react';
 
 import { useMap } from '../../hooks/useMap';
 import { renderFog } from './FogOfWar';
 import { GMMapControls } from './GMMapControls';
-import type { MapToken } from '../../lib/types';
+import { useAuth } from '../../contexts/AuthContext';
+import { translations } from '../../lib/translations';
+import type { MapToken, MapMovementRequest } from '../../lib/types';
 
 // ─── Constants ─────────────────────────────────────────────────
 
 const TOKEN_RADIUS = 16;
 const GRID_CELL_SIZE = 40;
 
-// ─── Drawing Helpers ───────────────────────────────────────────
+// ─── Canvas Drawing Helpers ────────────────────────────────────
 
 function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
   ctx.lineWidth = 1;
 
-  // Vertical lines
   for (let x = 0; x <= w; x += GRID_CELL_SIZE) {
     ctx.beginPath();
     ctx.moveTo(x, 0);
@@ -26,7 +38,6 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
     ctx.stroke();
   }
 
-  // Horizontal lines
   for (let y = 0; y <= h; y += GRID_CELL_SIZE) {
     ctx.beginPath();
     ctx.moveTo(0, y);
@@ -34,8 +45,7 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
     ctx.stroke();
   }
 
-  // Intersection dots
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
   for (let x = 0; x <= w; x += GRID_CELL_SIZE) {
     for (let y = 0; y <= h; y += GRID_CELL_SIZE) {
       ctx.beginPath();
@@ -43,6 +53,40 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
       ctx.fill();
     }
   }
+}
+
+function drawGhostPaths(ctx: CanvasRenderingContext2D, requests: MapMovementRequest[]) {
+  requests.forEach((req) => {
+    ctx.save();
+    ctx.setLineDash([6, 6]);
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2.5;
+
+    ctx.beginPath();
+    ctx.moveTo(req.from_x, req.from_y);
+    ctx.lineTo(req.target_x, req.target_y);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.arc(req.target_x, req.target_y, TOKEN_RADIUS, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+    ctx.fill();
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(req.target_x, req.target_y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#f59e0b';
+    ctx.fill();
+
+    ctx.fillStyle = '#f59e0b';
+    ctx.font = 'bold 9px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('REQUESTED', req.target_x, req.target_y - TOKEN_RADIUS - 4);
+    ctx.restore();
+  });
 }
 
 function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
@@ -66,7 +110,7 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     ctx.fill();
 
     // Border
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
     ctx.lineWidth = 2;
     ctx.stroke();
 
@@ -85,8 +129,8 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     ctx.fillText(initials, x, y);
 
     // Name label below
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-    ctx.font = '9px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.font = 'bold 9px Inter, sans-serif';
     ctx.fillText(token.label || '', x, y + TOKEN_RADIUS + 12);
   });
 }
@@ -94,20 +138,57 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
 // ─── GameMap Component ─────────────────────────────────────────
 
 export function GameMap() {
-  const { mapState, tokens, updateTokenPosition, updateFogRadius, resetPositions, isGM } = useMap();
+  const { locale } = useAuth();
+  const t = translations[locale] || translations.en;
+
+  const {
+    maps,
+    activeMap,
+    movementMode,
+    movementRequests,
+    tokens,
+    fogRadius,
+    revealedAreas,
+    isGM,
+    updateTokenPosition,
+    updateFogRadius,
+    setMovementMode,
+    approveMovement,
+    rejectMovement,
+    resetFog,
+    resetPositions,
+    createMap,
+    switchActiveMap,
+    deleteMap,
+  } = useMap();
 
   const mapCanvasRef = useRef<HTMLCanvasElement>(null);
   const fogCanvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const mapImageRef = useRef<HTMLImageElement | null>(null);
 
-  const [showFog, setShowFog] = useState(false);
+  // By default, players have Fog of War on; GMs can toggle it
+  const [showFog, setShowFog] = useState(!isGM);
+
+  // Modals & player notices
+  const [showLibraryModal, setShowLibraryModal] = useState(false);
+  const [playerNotice, setPlayerNotice] = useState<string | null>(null);
+
+  // New map form state
+  const [newMapName, setNewMapName] = useState('');
+  const [newMapUrl, setNewMapUrl] = useState('');
+  const [newMapFilePreview, setNewMapFilePreview] = useState<string | null>(null);
+
+  // Drag state
   const [dragState, setDragState] = useState<{
     tokenId: string | null;
     offsetX: number;
     offsetY: number;
   }>({ tokenId: null, offsetX: 0, offsetY: 0 });
+  const [dragPreviewPos, setDragPreviewPos] = useState<{ x: number; y: number } | null>(null);
 
-  const { map_width: W, map_height: H, fog_radius } = mapState;
+  const W = activeMap.width || 1200;
+  const H = activeMap.height || 800;
 
   // ── Render map canvas ──
   const renderMap = useCallback(() => {
@@ -116,23 +197,90 @@ export function GameMap() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Clear
     ctx.clearRect(0, 0, W, H);
 
-    // Background
-    ctx.fillStyle = '#0a0a0f';
-    ctx.fillRect(0, 0, W, H);
-
-    // Subtle gradient background
-    const bg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.6);
-    bg.addColorStop(0, 'rgba(26, 10, 46, 0.3)');
-    bg.addColorStop(1, 'rgba(10, 10, 15, 0)');
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, W, H);
+    // Draw background image if available, else arcane dark background
+    if (mapImageRef.current) {
+      try {
+        ctx.drawImage(mapImageRef.current, 0, 0, W, H);
+        // Dark vignette over map image for contrast
+        ctx.fillStyle = 'rgba(5, 5, 12, 0.2)';
+        ctx.fillRect(0, 0, W, H);
+      } catch {
+        // Fallback to fill
+        ctx.fillStyle = '#0a0a0f';
+        ctx.fillRect(0, 0, W, H);
+      }
+    } else {
+      ctx.fillStyle = '#0a0a0f';
+      ctx.fillRect(0, 0, W, H);
+      const bg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.6);
+      bg.addColorStop(0, 'rgba(26, 10, 46, 0.45)');
+      bg.addColorStop(1, 'rgba(10, 10, 15, 0)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+    }
 
     drawGrid(ctx, W, H);
+
+    // Draw ghost paths for pending movement requests
+    if (movementRequests.length > 0) {
+      drawGhostPaths(ctx, movementRequests);
+    }
+
+    // Draw live drag guide line & ghost token for player in approved mode
+    if (dragState.tokenId && dragPreviewPos && movementMode === 'approved' && !isGM) {
+      const draggedToken = tokens.find((t) => t.id === dragState.tokenId);
+      if (draggedToken) {
+        ctx.save();
+        ctx.setLineDash([5, 5]);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.moveTo(draggedToken.x_position, draggedToken.y_position);
+        ctx.lineTo(dragPreviewPos.x, dragPreviewPos.y);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.arc(dragPreviewPos.x, dragPreviewPos.y, TOKEN_RADIUS, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+        ctx.fill();
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = 'bold 9px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('TARGET', dragPreviewPos.x, dragPreviewPos.y - TOKEN_RADIUS - 4);
+        ctx.restore();
+      }
+    }
+
     drawTokens(ctx, tokens);
-  }, [W, H, tokens]);
+  }, [W, H, tokens, movementRequests, dragState.tokenId, dragPreviewPos, movementMode, isGM]);
+
+  // Preload background map image when activeMap changes
+  useEffect(() => {
+    if (activeMap.image_url) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = activeMap.image_url;
+      img.onload = () => {
+        mapImageRef.current = img;
+        renderMap();
+      };
+      img.onerror = () => {
+        mapImageRef.current = null;
+        renderMap();
+      };
+    } else {
+      mapImageRef.current = null;
+      renderMap();
+    }
+  }, [activeMap.image_url, renderMap]);
 
   // ── Render fog canvas ──
   const renderFogLayer = useCallback(() => {
@@ -141,15 +289,13 @@ export function GameMap() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    if (!showFog || isGM) {
+    if (!showFog) {
       ctx.clearRect(0, 0, W, H);
-      // If showFog is on (player view) but not GM, render fog
-      if (showFog) {
-        renderFog(ctx, W, H, tokens, fog_radius);
-      }
       return;
     }
-  }, [W, H, tokens, fog_radius, showFog, isGM]);
+
+    renderFog(ctx, W, H, tokens, fogRadius, revealedAreas);
+  }, [W, H, tokens, fogRadius, revealedAreas, showFog]);
 
   useEffect(() => {
     renderMap();
@@ -162,10 +308,12 @@ export function GameMap() {
       const canvas = mapCanvasRef.current;
       if (!canvas) return null;
       const rect = canvas.getBoundingClientRect();
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
+      const scaleX = W / rect.width;
+      const scaleY = H / rect.height;
 
-      // Check in reverse order (top-most first)
+      const x = (clientX - rect.left) * scaleX;
+      const y = (clientY - rect.top) * scaleY;
+
       for (let i = tokens.length - 1; i >= 0; i--) {
         const t = tokens[i];
         const dx = x - t.x_position;
@@ -176,7 +324,7 @@ export function GameMap() {
       }
       return null;
     },
-    [tokens],
+    [tokens, W, H]
   );
 
   // ── Mouse handlers ──
@@ -191,7 +339,7 @@ export function GameMap() {
         });
       }
     },
-    [findTokenAt],
+    [findTokenAt]
   );
 
   const handleMouseMove = useCallback(
@@ -200,18 +348,81 @@ export function GameMap() {
       const canvas = mapCanvasRef.current;
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
+      const scaleX = W / rect.width;
+      const scaleY = H / rect.height;
 
-      const x = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, e.clientX - rect.left - dragState.offsetX));
-      const y = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, e.clientY - rect.top - dragState.offsetY));
+      const currentX = (e.clientX - rect.left) * scaleX - dragState.offsetX;
+      const currentY = (e.clientY - rect.top) * scaleY - dragState.offsetY;
 
-      updateTokenPosition(dragState.tokenId, x, y);
+      const clampedX = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, currentX));
+      const clampedY = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, currentY));
+
+      // In free mode or if GM: token follows mouse
+      if (movementMode === 'free' || isGM) {
+        updateTokenPosition(dragState.tokenId, clampedX, clampedY);
+      } else {
+        setDragPreviewPos({ x: clampedX, y: clampedY });
+      }
     },
-    [dragState, W, H, updateTokenPosition],
+    [dragState, W, H, movementMode, isGM, updateTokenPosition]
   );
 
-  const handleMouseUp = useCallback(() => {
-    setDragState({ tokenId: null, offsetX: 0, offsetY: 0 });
-  }, []);
+  const handleMouseUp = useCallback(
+    (e: React.MouseEvent) => {
+      if (dragState.tokenId) {
+        setDragPreviewPos(null);
+        // If in approved mode and player released mouse: send movement request
+        if (movementMode === 'approved' && !isGM) {
+          const canvas = mapCanvasRef.current;
+          if (canvas) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = W / rect.width;
+            const scaleY = H / rect.height;
+            const targetX = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, (e.clientX - rect.left) * scaleX));
+            const targetY = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, (e.clientY - rect.top) * scaleY));
+
+            updateTokenPosition(dragState.tokenId, Math.round(targetX), Math.round(targetY));
+            setPlayerNotice(t.map.moveRequested);
+            setTimeout(() => setPlayerNotice(null), 4000);
+          }
+        }
+        setDragState({ tokenId: null, offsetX: 0, offsetY: 0 });
+      }
+    },
+    [dragState, movementMode, isGM, W, H, updateTokenPosition, t.map.moveRequested]
+  );
+
+  // File upload reader for custom map
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setNewMapFilePreview(reader.result);
+        setNewMapUrl(reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleCreateNewMap = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMapName.trim() || !newMapUrl.trim()) return;
+
+    await createMap({
+      name: newMapName.trim(),
+      image_url: newMapUrl.trim(),
+      width: W,
+      height: H,
+      fog_radius: fogRadius,
+    });
+
+    setNewMapName('');
+    setNewMapUrl('');
+    setNewMapFilePreview(null);
+  };
 
   return (
     <div className="relative w-full space-y-3">
@@ -224,77 +435,333 @@ export function GameMap() {
         <div className="flex items-center gap-2">
           <MapIcon className="w-5 h-5 text-amber-400" />
           <h2 className="text-base sm:text-lg font-cinzel font-extrabold text-gold-gradient tracking-wider uppercase">
-            TACTICAL BATTLE MAP
+            {t.map.tacticalBattleMap}
           </h2>
         </div>
 
         <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-black/50 border border-amber-900/30 text-[11px] font-cinzel text-amber-200/80 shadow-md">
-          <span className="text-amber-300 font-bold">GRID: 40x40</span>
+          <span className="text-amber-300 font-bold">{t.map.gridTelemetry}</span>
           <span className="text-amber-900">|</span>
-          <span className="text-emerald-400">WAR TABLE: ATTUNED</span>
+          <span className="text-emerald-400">{t.map.warTableAttuned}</span>
           <span className="text-amber-900">|</span>
-          <span className="text-amber-300">HEROES: {tokens.length}</span>
+          <span className="text-amber-300">
+            {t.map.heroesCount}: {tokens.length}
+          </span>
+          <span className="text-amber-900">|</span>
+          <span className={movementMode === 'approved' ? 'text-rose-400 font-bold' : 'text-blue-400 font-bold'}>
+            {movementMode === 'approved' ? t.map.gmApprovedMode : t.map.freeExploration}
+          </span>
         </div>
       </motion.div>
 
-      {/* Map Container */}
+      {/* Player Feedback Notice */}
+      <AnimatePresence>
+        {playerNotice && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="p-3 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs font-cinzel flex items-center gap-2 shadow-lg"
+          >
+            <Clock className="w-4 h-4 text-amber-400 animate-spin" />
+            <span>{playerNotice}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Map Canvas Container */}
       <motion.div
         ref={containerRef}
-        className="relative arcane-glass rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl"
-        style={{ width: W, height: H, maxWidth: '100%' }}
+        className="relative arcane-glass rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl mx-auto"
+        style={{ width: W, height: H, maxWidth: '100%', aspectRatio: `${W}/${H}` }}
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
       >
-        {/* Bottom canvas: map + grid + tokens */}
+        {/* Bottom canvas: Map image, grid, ghost paths, tokens */}
         <canvas
           ref={mapCanvasRef}
           width={W}
           height={H}
-          className="absolute inset-0 cursor-crosshair"
-          style={{ width: W, height: H }}
+          className="absolute inset-0 cursor-crosshair w-full h-full"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         />
 
-        {/* Top canvas: fog of war */}
+        {/* Top canvas: Dynamic fog of war */}
         <canvas
           ref={fogCanvasRef}
           width={W}
           height={H}
-          className="absolute inset-0 pointer-events-none"
-          style={{ width: W, height: H }}
+          className="absolute inset-0 pointer-events-none w-full h-full"
         />
 
         {/* GM Controls overlay */}
         {isGM && (
           <GMMapControls
-            fogRadius={fog_radius}
+            fogRadius={fogRadius}
             onFogRadiusChange={updateFogRadius}
             onResetPositions={resetPositions}
             showFog={showFog}
             onToggleFog={() => setShowFog(!showFog)}
+            movementMode={movementMode}
+            onToggleMovementMode={setMovementMode}
+            onResetFog={resetFog}
+            onOpenMapLibrary={() => setShowLibraryModal(true)}
+            activeMapName={activeMap.name}
+            pendingRequestsCount={movementRequests.length}
           />
         )}
 
-        {/* Token count indicator */}
+        {/* GM Pending Movement Requests Queue */}
+        {isGM && movementRequests.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-4 right-4 z-20 max-w-sm w-full space-y-2"
+          >
+            <div className="bg-[#0e1017]/95 border border-amber-900/40 rounded-xl p-3 shadow-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between text-xs font-cinzel font-bold text-amber-300 mb-2">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-amber-400" />
+                  {t.map.pendingMoves} ({movementRequests.length})
+                </span>
+              </div>
+
+              <div className="space-y-1.5 max-h-40 overflow-y-auto no-scrollbar">
+                {movementRequests.map((req) => {
+                  const token = tokens.find((t) => t.id === req.token_id);
+                  const label = token?.label || 'Token';
+
+                  return (
+                    <div
+                      key={req.id}
+                      className="p-2 rounded-lg bg-black/50 border border-white/5 flex items-center justify-between gap-2"
+                    >
+                      <div className="text-[11px] font-cinzel text-stone-300 truncate">
+                        <span className="font-bold text-amber-200">{label}</span>
+                        <span className="text-[9px] text-stone-500 block">
+                          → ({req.target_x}, {req.target_y})
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => approveMovement(req.id)}
+                          className="px-2 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold flex items-center gap-1 transition-all cursor-pointer"
+                        >
+                          <Check className="w-3 h-3" />
+                          <span>{t.map.approveMove}</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => rejectMovement(req.id)}
+                          className="p-1 rounded hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition-colors cursor-pointer"
+                          title={t.map.rejectMove}
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Token Count & Expedition Telemetry */}
         <div className="absolute bottom-4 left-4 z-10 bg-[#08090c]/90 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
           <div className="flex -space-x-1">
-            {tokens.map((t) => (
+            {tokens.map((tok) => (
               <div
-                key={t.id}
+                key={tok.id}
                 className="w-3.5 h-3.5 rounded-full border border-black/80 shadow-[0_0_4px_currentColor]"
-                style={{ backgroundColor: t.color }}
+                style={{ backgroundColor: tok.color }}
               />
             ))}
           </div>
           <span className="text-[10px] font-cinzel text-amber-200 font-bold">
-            {tokens.length} EXPEDITION TOKENS
+            {tokens.length} {t.map.expeditionTokens}
           </span>
         </div>
       </motion.div>
+
+      {/* GM Map Library Modal */}
+      <AnimatePresence>
+        {showLibraryModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="glass rounded-2xl border border-white/10 w-full max-w-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <h3 className="text-lg font-cinzel font-bold text-gold-gradient flex items-center gap-2">
+                  <MapIcon className="w-5 h-5 text-[#ffd700]" /> {t.map.mapLibrary}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowLibraryModal(false)}
+                  className="p-1.5 rounded-lg hover:bg-white/10 text-stone-400 hover:text-white transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Upload or Add Map Section */}
+              <form onSubmit={handleCreateNewMap} className="glass p-4 rounded-xl border border-white/10 space-y-3">
+                <h4 className="text-xs font-cinzel font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <Plus className="w-3.5 h-3.5" /> {t.map.uploadMap}
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] uppercase font-bold text-stone-400 block mb-1">
+                      {t.map.mapName}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={newMapName}
+                      onChange={(e) => setNewMapName(e.target.value)}
+                      placeholder={t.map.newMapNamePlaceholder}
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-stone-200 focus:outline-none focus:border-[#ffd700]/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] uppercase font-bold text-stone-400 block mb-1">
+                      {t.map.mapUrl}
+                    </label>
+                    <input
+                      type="text"
+                      value={newMapUrl}
+                      onChange={(e) => setNewMapUrl(e.target.value)}
+                      placeholder="https://example.com/map.jpg"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-stone-200 focus:outline-none focus:border-[#ffd700]/50"
+                    />
+                  </div>
+                </div>
+
+                {/* File picker */}
+                <div className="flex items-center gap-3 pt-1">
+                  <label className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-stone-300 font-cinzel cursor-pointer transition-all">
+                    <Upload className="w-3.5 h-3.5 text-amber-400" />
+                    <span>{t.map.uploadImageOrUrl}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+
+                  {newMapFilePreview && (
+                    <span className="text-[10px] text-emerald-400 flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3" /> Görsel Hazır
+                    </span>
+                  )}
+
+                  <div className="flex-1" />
+
+                  <button
+                    type="submit"
+                    className="px-4 py-1.5 rounded-lg bg-[#ffd700]/20 hover:bg-[#ffd700]/30 border border-[#ffd700]/40 text-[#ffd700] text-xs font-bold font-cinzel transition-all cursor-pointer"
+                  >
+                    {t.common.create}
+                  </button>
+                </div>
+              </form>
+
+              {/* Saved Maps List */}
+              <div className="space-y-2">
+                <h4 className="text-xs font-cinzel font-bold text-stone-400 uppercase tracking-wider">
+                  {t.map.mapLibrary} ({maps.length})
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {maps.map((m) => {
+                    const isActive = m.id === activeMap.id;
+
+                    return (
+                      <div
+                        key={m.id}
+                        onClick={() => switchActiveMap(m.id)}
+                        className={`group p-3 rounded-xl border transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                          isActive
+                            ? 'border-[#ffd700]/60 bg-[#ffd700]/10 shadow-[0_0_15px_rgba(255,215,0,0.15)]'
+                            : 'border-white/5 bg-black/40 hover:border-white/20'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="truncate">
+                            <h5 className="font-cinzel text-xs font-bold text-stone-200 truncate flex items-center gap-1.5">
+                              <ImageIcon className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                              {m.name}
+                            </h5>
+                            <span className="text-[9px] text-stone-500">
+                              {m.width}x{m.height} px • Sis {m.fog_radius}px
+                            </span>
+                          </div>
+
+                          {isActive ? (
+                            <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-[#ffd700] text-black uppercase">
+                              {t.common.active}
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteMap(m.id);
+                              }}
+                              className="p-1 rounded hover:bg-red-500/20 text-stone-500 hover:text-red-400 transition-colors"
+                              title={t.common.delete}
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Thumbnail */}
+                        <div className="h-24 rounded-lg bg-black/60 border border-white/5 overflow-hidden flex items-center justify-center relative">
+                          {m.image_url ? (
+                            <img
+                              src={m.image_url}
+                              alt={m.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Sparkles className="w-6 h-6 text-stone-600" />
+                          )}
+                        </div>
+
+                        {!isActive && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              switchActiveMap(m.id);
+                            }}
+                            className="w-full py-1 rounded bg-white/5 hover:bg-white/10 text-stone-300 text-[10px] font-cinzel font-bold transition-all text-center"
+                          >
+                            {t.map.switchMap}
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
