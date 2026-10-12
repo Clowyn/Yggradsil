@@ -24,6 +24,12 @@ Bu dizin, D&D Sefer Yönetim Uygulaması için hazırlanan R6 gereksinimi kapsam
    - Tablolarda Row Level Security (RLS) etkinleştirir: Oyuncular sadece okuyabilir (`SELECT`), GM'ler ise tam yetkiye (`INSERT/UPDATE/DELETE`) sahiptir.
    - Tabloları `supabase_realtime` yayınına ekler.
 
+4. **`06_character_spells_hardening.sql`**:
+   - **Amaç**: `character_spells` tablosu için RLS politikalarını düzenler.
+
+5. **`07_gm_bulk_teach_spells.sql`**:
+   - **Amaç**: `public.gm_teach_spells(p_character_id uuid, p_spell_ids uuid[])` SECURITY DEFINER fonksiyonunu tanımlayarak GM ekranından toplu büyü öğretiminin RLS kısıtlamalarına takılmadan tek RPC ile çalıştırılabilmesini sağlar.
+
 ## Nasıl Uygulanır? (How to Apply)
 
 ### Yöntem 1: Supabase Dashboard SQL Editor (Önerilen)
@@ -33,6 +39,8 @@ Bu dizin, D&D Sefer Yönetim Uygulaması için hazırlanan R6 gereksinimi kapsam
    - `01_security_and_rls_hardening.sql`
    - `02_schema_consistency.sql`
    - `03_new_gm_modules.sql`
+   - `06_character_spells_hardening.sql`
+   - `07_gm_bulk_teach_spells.sql`
 
 ### Güvenlik ve Geriye Dönüklük Güvencesi
 - Tüm migrasyonlar `CREATE TABLE IF NOT EXISTS`, `ADD COLUMN IF NOT EXISTS`, `CREATE OR REPLACE FUNCTION` ve `DROP POLICY IF EXISTS` yönergeleriyle yazılmıştır.

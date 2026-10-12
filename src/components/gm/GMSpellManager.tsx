@@ -675,17 +675,11 @@ export function GMSpellManager() {
           optimisticEntry
         ]);
 
-        const { error } = await supabase
-          .from('character_spells')
-          .upsert(
-            {
-              character_id: selectedCharId,
-              spell_id: spell.id,
-              unlocked: true,
-              unlocked_at: new Date().toISOString()
-            },
-            { onConflict: 'character_id,spell_id', ignoreDuplicates: true }
-          );
+        const { error } = await supabase.rpc('unlock_spell', {
+          char_id: selectedCharId,
+          spell_val_id: spell.id,
+          xp_val_cost: 0
+        });
         if (error) throw error;
       }
       // Background sync
@@ -770,20 +764,20 @@ export function GMSpellManager() {
       ]);
 
       if (!isOffline) {
-        const insertPayload = spellsToTeach.map(s => ({
-          character_id: selectedCharId,
-          spell_id: s.id,
-          unlocked: true,
-          unlocked_at: new Date().toISOString()
-        }));
-
-        // Batch upsert in chunks of 50 to avoid payload limits
-        for (let i = 0; i < insertPayload.length; i += 50) {
-          const batch = insertPayload.slice(i, i + 50);
-          const { error } = await supabase
-            .from('character_spells')
-            .upsert(batch, { onConflict: 'character_id,spell_id', ignoreDuplicates: true });
-          if (error) throw error;
+        // Teach spells in concurrent chunks to avoid throttling while bypassing RLS via unlock_spell RPC
+        const CHUNK_SIZE = 10;
+        for (let i = 0; i < spellsToTeach.length; i += CHUNK_SIZE) {
+          const chunk = spellsToTeach.slice(i, i + CHUNK_SIZE);
+          await Promise.all(
+            chunk.map(async s => {
+              const { error } = await supabase.rpc('unlock_spell', {
+                char_id: selectedCharId,
+                spell_val_id: s.id,
+                xp_val_cost: 0
+              });
+              if (error) throw error;
+            })
+          );
         }
 
         // Background sync
@@ -1442,11 +1436,14 @@ export function GMSpellManager() {
                   onChange={e => setSelectedCharId(e.target.value)}
                   className="bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-amber-400 transition"
                 >
-                  {characters.map(c => (
-                    <option key={c.id} value={c.id}>
-                      {c.name} (Lv.{c.level})
-                    </option>
-                  ))}
+                  {characters.map(c => {
+                    const learnedCount = characterSpells.filter(cs => cs.character_id === c.id).length;
+                    return (
+                      <option key={c.id} value={c.id}>
+                        {c.name} (Lv.{c.level}) — #{c.id.slice(0, 4)} ({learnedCount} {locale === 'tr' ? 'büyü açık' : 'spells unlocked'})
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
