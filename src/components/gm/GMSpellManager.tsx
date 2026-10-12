@@ -655,12 +655,20 @@ export function GMSpellManager() {
       if (isUnlocked) {
         // Optimistic UI update: remove spell
         setCharacterSpells(prev => prev.filter(cs => !(cs.character_id === selectedCharId && cs.spell_id === spell.id)));
-        const { error } = await supabase
-          .from('character_spells')
-          .delete()
-          .eq('character_id', selectedCharId)
-          .eq('spell_id', spell.id);
-        if (error) throw error;
+        
+        // Try SECURITY DEFINER RPC first to bypass RLS, fallback to table delete
+        const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
+          p_character_id: selectedCharId,
+          p_spell_id: spell.id
+        });
+        if (rpcError) {
+          const { error } = await supabase
+            .from('character_spells')
+            .delete()
+            .eq('character_id', selectedCharId)
+            .eq('spell_id', spell.id);
+          if (error) throw error;
+        }
       } else {
         // Optimistic UI update: teach spell
         const optimisticEntry: CharacterSpell = {
@@ -828,11 +836,17 @@ export function GMSpellManager() {
       setCharacterSpells(prev => prev.filter(cs => cs.character_id !== selectedCharId));
 
       if (!isOffline) {
-        const { error } = await supabase
-          .from('character_spells')
-          .delete()
-          .eq('character_id', selectedCharId);
-        if (error) throw error;
+        // Try SECURITY DEFINER RPC first to bypass RLS, fallback to table delete
+        const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
+          p_character_id: selectedCharId
+        });
+        if (rpcError) {
+          const { error } = await supabase
+            .from('character_spells')
+            .delete()
+            .eq('character_id', selectedCharId);
+          if (error) throw error;
+        }
         await reloadCharacterSpells(selectedCharId);
       }
 
