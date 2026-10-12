@@ -16,7 +16,7 @@ BEGIN
   END IF;
 
   INSERT INTO character_spells (character_id, spell_id, unlocked, unlocked_at)
-  SELECT p_character_id, s_id, true, now()
+  SELECT DISTINCT p_character_id, s_id, true, now()
   FROM unnest(p_spell_ids) AS s_id
   ON CONFLICT (character_id, spell_id)
   DO UPDATE SET unlocked = true;
@@ -25,3 +25,23 @@ $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 -- Grant execution permissions
 GRANT EXECUTE ON FUNCTION public.gm_teach_spells(uuid, uuid[]) TO authenticated, service_role, anon;
+
+-- Helper to safely remove spells bypassing RLS
+CREATE OR REPLACE FUNCTION public.gm_forget_spells(
+  p_character_id uuid,
+  p_spell_id uuid DEFAULT NULL
+) RETURNS void AS $$
+BEGIN
+  IF p_character_id IS NULL THEN
+    RETURN;
+  END IF;
+
+  IF p_spell_id IS NULL THEN
+    DELETE FROM character_spells WHERE character_id = p_character_id;
+  ELSE
+    DELETE FROM character_spells WHERE character_id = p_character_id AND spell_id = p_spell_id;
+  END IF;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+GRANT EXECUTE ON FUNCTION public.gm_forget_spells(uuid, uuid) TO authenticated, service_role, anon;

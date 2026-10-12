@@ -175,7 +175,7 @@ export function GMSpellManager() {
       setTreeSpellsCache(prev => ({ ...initialCache, ...prev }));
 
       if (charData && charData.length > 0) {
-        setSelectedCharId(prev => prev || charData[0].id);
+        setSelectedCharId(prev => (prev && charData.some(c => c.id === prev) ? prev : charData[0].id));
       }
       setIsOffline(false);
     } catch (err) {
@@ -683,11 +683,11 @@ export function GMSpellManager() {
         if (error) throw error;
       }
       // Background sync
-      reloadCharacterSpells(selectedCharId);
+      await reloadCharacterSpells(selectedCharId);
     } catch (err) {
       console.error('Failed to toggle player spell:', err);
       // Revert from DB
-      reloadCharacterSpells(selectedCharId);
+      await reloadCharacterSpells(selectedCharId);
       alert(locale === 'tr' ? 'Büyü durumu güncellenirken hata oluştu.' : 'Failed to update spell.');
     }
   };
@@ -728,11 +728,17 @@ export function GMSpellManager() {
 
     const alreadyUnlockedIds = new Set(
       characterSpells
-        .filter(cs => cs.character_id === selectedCharId)
+        .filter(cs => cs.character_id === selectedCharId && cs.unlocked !== false)
         .map(cs => cs.spell_id)
     );
 
-    const spellsToTeach = targetSpells.filter(s => !alreadyUnlockedIds.has(s.id));
+    const uniqueSpellsMap = new Map<string, SpellNode>();
+    for (const s of targetSpells) {
+      if (!alreadyUnlockedIds.has(s.id) && !uniqueSpellsMap.has(s.id)) {
+        uniqueSpellsMap.set(s.id, s);
+      }
+    }
+    const spellsToTeach = Array.from(uniqueSpellsMap.values());
 
     if (spellsToTeach.length === 0) {
       alert(
@@ -791,7 +797,7 @@ export function GMSpellManager() {
       );
     } catch (err) {
       console.error('Failed to teach all spells:', err);
-      reloadCharacterSpells(selectedCharId);
+      await reloadCharacterSpells(selectedCharId);
       alert(locale === 'tr' ? 'Büyüler öğretilirken bir hata oluştu.' : 'Failed to teach spells.');
     }
   };
@@ -1433,11 +1439,21 @@ export function GMSpellManager() {
                 </label>
                 <select
                   value={selectedCharId}
-                  onChange={e => setSelectedCharId(e.target.value)}
+                  onChange={e => {
+                    const newId = e.target.value;
+                    setSelectedCharId(newId);
+                    if (newId && !isOffline) {
+                      reloadCharacterSpells(newId);
+                    }
+                  }}
                   className="bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-amber-400 transition"
                 >
                   {characters.map(c => {
-                    const learnedCount = characterSpells.filter(cs => cs.character_id === c.id).length;
+                    const learnedCount = new Set(
+                      characterSpells
+                        .filter(cs => cs.character_id === c.id && cs.unlocked !== false)
+                        .map(cs => cs.spell_id)
+                    ).size;
                     return (
                       <option key={c.id} value={c.id}>
                         {c.name} (Lv.{c.level}) — #{c.id.slice(0, 4)} ({learnedCount} {locale === 'tr' ? 'büyü açık' : 'spells unlocked'})
@@ -1574,10 +1590,10 @@ export function GMSpellManager() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-[11px] text-emerald-400 font-semibold bg-emerald-950/40 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
-                    {playerDisplayedSpells.filter(s => characterSpells.some(cs => cs.character_id === selectedCharId && cs.spell_id === s.id)).length} / {playerDisplayedSpells.length} {locale === 'tr' ? 'öğrenildi' : 'unlocked in view'}
+                    {playerDisplayedSpells.filter(s => characterSpells.some(cs => cs.character_id === selectedCharId && cs.spell_id === s.id && cs.unlocked !== false)).length} / {playerDisplayedSpells.length} {locale === 'tr' ? 'öğrenildi' : 'unlocked in view'}
                   </span>
                   <span className="text-[11px] text-gray-400 font-medium">
-                    {locale === 'tr' ? 'Toplam Öğrenilen:' : 'Total Learned:'} <strong className="text-white">{characterSpells.filter(cs => cs.character_id === selectedCharId).length}</strong>
+                    {locale === 'tr' ? 'Toplam Öğrenilen:' : 'Total Learned:'} <strong className="text-white">{new Set(characterSpells.filter(cs => cs.character_id === selectedCharId && cs.unlocked !== false).map(cs => cs.spell_id)).size}</strong>
                   </span>
                 </div>
               </div>
@@ -1595,7 +1611,7 @@ export function GMSpellManager() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
                   {playerDisplayedSpells.map(spell => {
                     const isUnlocked = characterSpells.some(
-                      cs => cs.character_id === selectedCharId && cs.spell_id === spell.id
+                      cs => cs.character_id === selectedCharId && cs.spell_id === spell.id && cs.unlocked !== false
                     );
 
                     return (
