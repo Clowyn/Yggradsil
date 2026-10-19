@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // In-flight profile fetch deduplication map
   const inFlightProfileFetchRef = useRef<Map<string, Promise<Profile | null>>>(new Map());
 
-  const fetchProfile = useCallback(async (userId: string, email?: string) => {
+  const fetchProfile = useCallback(async (userId: string, email?: string, metaUsername?: string) => {
     if (inFlightProfileFetchRef.current.has(userId)) {
       return inFlightProfileFetchRef.current.get(userId);
     }
@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             // ignore
           }
 
-          const username = email ? email.split('@')[0] : 'Adventurer';
+          const username = metaUsername?.trim() || (email ? email.split('@')[0] : 'Adventurer');
           const { data: newProfile, error: insertError } = await supabase
             .from('profiles')
             .insert({
@@ -125,7 +125,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!isMounted) return;
         if (session?.user) {
           setUser({ id: session.user.id, email: session.user.email ?? '' });
-          await fetchProfile(session.user.id, session.user.email);
+          const metaUsername = typeof session.user.user_metadata?.username === 'string' ? session.user.user_metadata.username : undefined;
+          await fetchProfile(session.user.id, session.user.email, metaUsername);
         } else {
           setUser(null);
           setProfile(null);
@@ -148,7 +149,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email ?? '' });
-        await fetchProfile(session.user.id, session.user.email);
+        const metaUsername = typeof session.user.user_metadata?.username === 'string' ? session.user.user_metadata.username : undefined;
+        await fetchProfile(session.user.id, session.user.email, metaUsername);
       } else {
         setUser(null);
         setProfile(null);
@@ -188,8 +190,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = useCallback(async (email: string, password: string, username: string) => {
     setLoading(true);
-    // 1. Sign up user in Supabase auth
-    const { data, error: authError } = await supabase.auth.signUp({ email, password });
+    // 1. Sign up user in Supabase auth (persist username & locale in metadata so it survives email confirmation)
+    const { data, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          username: username.trim(),
+          locale,
+        },
+      },
+    });
     if (authError) {
       setLoading(false);
       throw authError;
@@ -197,6 +208,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!data.user) {
       setLoading(false);
       throw new Error('Sign up failed: no user returned.');
+    }
+
+    // If Supabase "Confirm email" is enabled, data.session is null until the user clicks the email link.
+    // Do not attempt an unauthenticated profiles insert (which would fail RLS and cause repeated clicks/rate-limits);
+    // fetchProfile will automatically create the profile row upon first confirmed sign-in.
+    if (!data.session) {
+      setLoading(false);
+      throw new Error('CONFIRM_EMAIL_REQUIRED');
     }
 
     // 2. Determine initial role: first registered user becomes 'admin', subsequent users are 'player'
@@ -212,10 +231,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.warn('Could not count profiles, defaulting to player:', err);
     }
 
-    // 3. Create profile in database
-    const { error: profileError } = await supabase.from('profiles').insert({
+    // 3. Create profile in database (upsert to avoid duplicate key if trigger/auth state already created it)
+    const { error: profileError } = await supabase.from('profiles').upsert({
       id: data.user.id,
-      username,
+      username: username.trim() || email.split('@')[0],
       role,
       locale,
     });

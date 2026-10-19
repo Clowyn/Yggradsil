@@ -13,10 +13,12 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    setInfoMessage('');
     if (password.length < 6) {
       setError('Password cipher must contain at least 6 characters.');
       return;
@@ -25,8 +27,22 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
       playSound('lock_click');
       await signUp(email, password, username);
     } catch (err: unknown) {
+      const rawMsg = err instanceof Error ? err.message : 'Registration failed. Check network connection.';
+      if (rawMsg === 'CONFIRM_EMAIL_REQUIRED') {
+        playSound('unlock');
+        setInfoMessage(
+          'Hesabınız oluşturuldu! E-posta doğrulaması aktif olduğu için gelen kutunuzdaki onay bağlantısına tıklayıp giriş yapabilirsiniz (veya GM Supabase panelinden kullanıcıyı onaylayabilir).'
+        );
+        return;
+      }
       playSound('stone_tap');
-      setError(err instanceof Error ? err.message : 'Registration failed. Check network connection.');
+      if (rawMsg.toLowerCase().includes('rate limit')) {
+        setError(
+          'E-posta gönderim limiti aşıldı (Supabase ücretsiz paket saatlik e-posta sınırı). Hesabınız ilk tıklamada oluşmuş olabilir — doğrudan Giriş (Sign In) yapmayı deneyin veya Supabase > Authentication > Providers > Email altından "Confirm email" seçeneğini kapatın.'
+        );
+      } else {
+        setError(rawMsg);
+      }
     }
   };
 
@@ -123,6 +139,20 @@ export function RegisterForm({ onToggle }: RegisterFormProps) {
             <p className="text-rose-300 text-xs font-inter text-center bg-rose-950/30 border border-rose-900/40 rounded-xl py-2 px-3 tracking-wide animate-fade-in-up">
               {error}
             </p>
+          )}
+
+          {/* Info (Confirmation Required) */}
+          {infoMessage && (
+            <div className="text-emerald-200 text-xs font-inter text-center bg-emerald-950/35 border border-emerald-500/40 rounded-xl py-2.5 px-3 tracking-wide animate-fade-in-up space-y-2">
+              <p>{infoMessage}</p>
+              <button
+                type="button"
+                onClick={onToggle}
+                className="text-amber-300 hover:text-amber-100 font-cinzel font-bold underline underline-offset-4 cursor-pointer"
+              >
+                Giriş Ekranına Geç (Sign In) →
+              </button>
+            </div>
           )}
 
           {/* Submit */}
