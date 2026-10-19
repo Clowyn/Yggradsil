@@ -143,4 +143,64 @@ test.describe('10-Phase Multi-Viewport UI/UX Verification (Web, Tablet, Mobile)'
     await expect(gmTabs).toBeVisible({ timeout: 10000 });
     await expect(gmTabs.getByText('Combat Tracker')).toBeVisible();
   });
+
+  test('Arena Volumetric Fire VFX & 3D 20-Sided Icosahedron Attack Dice Roller', async ({
+    page,
+  }) => {
+    const pageErrors: string[] = [];
+    page.on('pageerror', (err) => pageErrors.push(err.message));
+
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/arena');
+    await page.waitForLoadState('domcontentloaded');
+
+    // 1. Launch Arena Combat from Lobby
+    const launchBtn = page.getByTestId('launch-combat-btn');
+    await expect(launchBtn).toBeVisible({ timeout: 10000 });
+    await launchBtn.click();
+
+    // 2. Verify Volumetric Fire Inferno Overlay & Ambient Fire Canvas are rendered
+    const infernoOverlay = page.getByTestId('arena-inferno-overlay');
+    await expect(infernoOverlay).toBeVisible({ timeout: 5000 });
+    await expect(page.getByTestId('arena-inferno-canvas')).toBeVisible();
+    await expect(page.getByTestId('arena-ambient-fire-canvas')).toBeVisible();
+    await expect(page.locator('#arena-heat-distortion')).toBeAttached();
+
+    // 3. Enter Combat Stage
+    const enterArenaBtn = page.getByTestId('enter-arena-btn');
+    await expect(enterArenaBtn).toBeVisible({ timeout: 5000 });
+    await enterArenaBtn.click({ force: true });
+
+    // 4. Select an opponent fighter card and execute Basic Strike
+    const fighterTarget = page.getByTestId('arena-fighter-team_a-0');
+    await expect(fighterTarget).toBeVisible({ timeout: 8000 });
+    await fighterTarget.click();
+
+    const basicAttackBtn = page.getByTestId('arena-basic-attack-btn');
+    await expect(basicAttackBtn).toBeEnabled();
+    await basicAttackBtn.click();
+
+    // 5. Verify Arena DiceRollerModal opens with the 3D 20-Sided Regular Icosahedron (20 triangular faces)
+    const arenaDiceModal = page.getByTestId('arena-dice-roller-modal');
+    await expect(arenaDiceModal).toBeVisible({ timeout: 5000 });
+
+    const arenaDie3D = page.getByTestId('arena-polyhedral-die-3d');
+    await expect(arenaDie3D).toBeVisible();
+    await expect(arenaDie3D).toHaveAttribute('data-die-type', 'd20');
+
+    // Verify all 20 triangular faces of the regular icosahedron are present inside the Arena modal
+    const d20Faces = arenaDiceModal.locator('[data-testid^="dice-d20-face-"]');
+    await expect(d20Faces).toHaveCount(20);
+
+    // 6. Roll the 3D d20 and confirm result
+    const rollBtn = page.getByTestId('arena-roll-d20-btn');
+    await rollBtn.click();
+
+    const confirmBtn = page.getByTestId('arena-confirm-roll-btn');
+    await expect(confirmBtn).toBeVisible({ timeout: 5000 });
+    await confirmBtn.click();
+
+    expect(pageErrors).toEqual([]);
+  });
 });
+

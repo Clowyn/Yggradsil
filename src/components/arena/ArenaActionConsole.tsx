@@ -221,6 +221,7 @@ export function ArenaActionConsole({
 
               <button
                 type="button"
+                data-testid="arena-basic-attack-btn"
                 disabled={!canAct || !selectedTarget}
                 onClick={() => onExecuteAction({ actionKind: 'basic_attack' })}
                 className={`px-4 py-2 rounded-xl font-cinzel font-bold text-xs tracking-wider transition-all shrink-0 cursor-pointer ${

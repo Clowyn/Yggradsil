@@ -43,6 +43,7 @@ export function ArenaField({
     return (
       <motion.div
         key={p.id}
+        data-testid={`arena-fighter-${p.team}-${p.slot_index}`}
         onClick={() => !isDead && onSelectTarget(p.id)}
         whileHover={!isDead ? { scale: 1.02 } : {}}
         className={`relative p-3.5 rounded-2xl border transition-all cursor-pointer ${

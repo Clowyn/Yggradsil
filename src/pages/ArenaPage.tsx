@@ -438,7 +438,16 @@ export function ArenaPage() {
 
         if (arenaErr || !arenaData || !isMounted) return;
 
-        setArena(arenaData as CombatArena);
+        setArena((prev) => {
+          const incoming = arenaData as CombatArena;
+          if (prev.status === 'active' && incoming.status === 'intro') {
+            return { ...incoming, status: 'active' };
+          }
+          if (prev.status === 'intro' && incoming.status === 'lobby') {
+            return prev;
+          }
+          return incoming;
+        });
 
         const { data: partData } = await supabase
           .from('combat_arena_participants')
@@ -472,7 +481,12 @@ export function ArenaPage() {
         { event: '*', schema: 'public', table: 'combat_arenas', filter: `campaign_id=eq.${campaignId}` },
         (payload) => {
           if (payload.new && typeof payload.new === 'object') {
-            setArena((prev) => ({ ...prev, ...(payload.new as CombatArena) }));
+            const incoming = payload.new as CombatArena;
+            setArena((prev) => ({
+              ...prev,
+              ...incoming,
+              status: prev.status === 'active' && incoming.status === 'intro' ? 'active' : incoming.status,
+            }));
           }
         }
       )
@@ -525,7 +539,10 @@ export function ArenaPage() {
           .single();
 
         if (newArena) {
-          setArena(newArena as CombatArena);
+          setArena((prev) => ({
+            ...(newArena as CombatArena),
+            status: prev.status === 'active' ? 'active' : (newArena as CombatArena).status,
+          }));
           const participantsToInsert = participants.map((p) => ({
             arena_id: newArena.id,
             character_id: p.character_id,
@@ -550,7 +567,21 @@ export function ArenaPage() {
             .select();
 
           if (insertedParts && insertedParts.length > 0) {
-            setParticipants(insertedParts as CombatArenaParticipant[]);
+            const typedParts = insertedParts as CombatArenaParticipant[];
+            const sortedInserted = [...typedParts]
+              .filter((p) => p.is_alive)
+              .sort((a, b) => b.initiative_score - a.initiative_score);
+            const nextActive = sortedInserted[0] || null;
+            setParticipants(typedParts);
+            setArena((prev) => ({
+              ...prev,
+              active_combatant_id: nextActive?.id || prev.active_combatant_id,
+            }));
+            if (nextActive) {
+              const oppTeam = nextActive.team === 'team_a' ? 'team_b' : 'team_a';
+              const opp = typedParts.find((p) => p.team === oppTeam && p.is_alive);
+              if (opp) setSelectedTargetId(opp.id);
+            }
           }
         }
       } catch {
@@ -561,11 +592,22 @@ export function ArenaPage() {
 
   // Intro face-off completes -> enter active arena
   const handleIntroComplete = () => {
-    setArena((prev) => ({
-      ...prev,
-      status: 'active',
-      active_combatant_id: initiativeOrder[0]?.id || null,
-    }));
+    const firstActiveId = initiativeOrder[0]?.id || null;
+    setArena((prev) => {
+      if (campaignId && !prev.id.startsWith('arena-demo')) {
+        Promise.resolve(
+          supabase
+            .from('combat_arenas')
+            .update({ status: 'active', active_combatant_id: firstActiveId })
+            .eq('id', prev.id)
+        ).catch(() => {});
+      }
+      return {
+        ...prev,
+        status: 'active',
+        active_combatant_id: firstActiveId,
+      };
+    });
 
     // Default target
     const opponentTeam = initiativeOrder[0]?.team === 'team_a' ? 'team_b' : 'team_a';
