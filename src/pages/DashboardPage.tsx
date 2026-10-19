@@ -21,6 +21,7 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { useCampaign } from '../contexts/CampaignContext';
 import { playSound } from '../lib/audio';
+import { supabase, isSupabaseOffline } from '../lib/supabase';
 
 interface ChronicleLog {
   id: string;
@@ -29,6 +30,33 @@ interface ChronicleLog {
   text: string;
 }
 
+const DEFAULT_CHRONICLE_LOGS: ChronicleLog[] = [
+  {
+    id: '1',
+    timestamp: 'Session VIII',
+    type: 'QUEST',
+    text: 'The party shattered the Shadow Well and deciphered the Ancient Runic Gateway.',
+  },
+  {
+    id: '2',
+    timestamp: 'Session VII',
+    type: 'RUNE',
+    text: 'Arcane resonances attuned across Yggdrasil. The Astral Spire revealed its sanctum.',
+  },
+  {
+    id: '3',
+    timestamp: 'Session VI',
+    type: 'PARTY',
+    text: 'Expedition party gathered at the High Crossroads under the waning blood moon.',
+  },
+  {
+    id: '4',
+    timestamp: 'Session V',
+    type: 'SANCTUM',
+    text: 'Restored the Dragon Crest talisman to the Vault of the Archmage.',
+  },
+];
+
 export function DashboardPage() {
   const { profile, isGM, locale } = useAuth();
   const { campaign, members, characters, activeCharacterId } = useCampaign();
@@ -36,32 +64,80 @@ export function DashboardPage() {
 
   const [currentTime, setCurrentTime] = useState<string>('');
   const [activeDeckTab, setActiveDeckTab] = useState<'charms' | 'expedition'>('charms');
-  const [logs, setLogs] = useState<ChronicleLog[]>([
-    {
-      id: '1',
-      timestamp: 'Session VIII',
-      type: 'QUEST',
-      text: 'The party shattered the Shadow Well and deciphered the Ancient Runic Gateway.',
-    },
-    {
-      id: '2',
-      timestamp: 'Session VII',
-      type: 'RUNE',
-      text: 'Arcane resonances attuned across Yggdrasil. The Astral Spire revealed its sanctum.',
-    },
-    {
-      id: '3',
-      timestamp: 'Session VI',
-      type: 'PARTY',
-      text: 'Expedition party gathered at the High Crossroads under the waning blood moon.',
-    },
-    {
-      id: '4',
-      timestamp: 'Session V',
-      type: 'SANCTUM',
-      text: 'Restored the Dragon Crest talisman to the Vault of the Archmage.',
-    },
-  ]);
+  const [logs, setLogs] = useState<ChronicleLog[]>(DEFAULT_CHRONICLE_LOGS);
+
+  // Fetch live published chronicles from Supabase (get_session_chronicles RPC / session_chronicles_public)
+  useEffect(() => {
+    if (!campaign?.id || isSupabaseOffline()) return;
+    let isMounted = true;
+
+    const fetchChronicles = async () => {
+      try {
+        const { data: rpcData, error: rpcErr } = await supabase.rpc('get_session_chronicles', {
+          p_campaign_id: campaign.id,
+        });
+
+        let rows: Array<Record<string, unknown>> = [];
+        if (!rpcErr && Array.isArray(rpcData) && rpcData.length > 0) {
+          rows = rpcData as Array<Record<string, unknown>>;
+        } else {
+          const { data: viewData } = await supabase
+            .from('session_chronicles_public')
+            .select('id, session_number, title, summary, is_published, created_at')
+            .eq('campaign_id', campaign.id)
+            .eq('is_published', true)
+            .order('session_number', { ascending: false })
+            .limit(10);
+          if (viewData && viewData.length > 0) {
+            rows = viewData as Array<Record<string, unknown>>;
+          }
+        }
+
+        if (isMounted && rows.length > 0) {
+          const publishedRows = rows.filter((r) => r.is_published !== false);
+          if (publishedRows.length > 0) {
+            const mapped: ChronicleLog[] = publishedRows.map((r, idx) => {
+              const summaryText = String(r.summary || r.public_summary || '');
+              return {
+                id: String(r.id || `chron-${idx}`),
+                timestamp: r.session_number ? `Session ${r.session_number}` : 'Chronicle',
+                type: idx % 2 === 0 ? 'QUEST' : 'RUNE',
+                text: r.title
+                  ? `${String(r.title)}${summaryText ? ` — ${summaryText}` : ''}`
+                  : summaryText,
+              };
+            });
+            setLogs([...mapped, ...DEFAULT_CHRONICLE_LOGS].slice(0, 8));
+          }
+        }
+      } catch {
+        // graceful fallback to DEFAULT_CHRONICLE_LOGS
+      }
+    };
+
+    fetchChronicles();
+
+    const channel = supabase
+      .channel(`dashboard_chronicles_${campaign.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'session_chronicles',
+          filter: `campaign_id=eq.${campaign.id}`,
+        },
+        () => {
+          fetchChronicles();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      isMounted = false;
+      supabase.removeChannel(channel);
+    };
+  }, [campaign?.id]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -81,7 +157,7 @@ export function DashboardPage() {
     return () => clearInterval(interval);
   }, [isTr]);
 
-  const addCustomLog = (type: 'QUEST' | 'RUNE', message: string) => {
+  const addCustomLog = async (type: 'QUEST' | 'RUNE', message: string) => {
     playSound('paper_flip');
     const newLog: ChronicleLog = {
       id: String(Date.now()),
@@ -89,7 +165,21 @@ export function DashboardPage() {
       type,
       text: message,
     };
-    setLogs((prev) => [newLog, ...prev.slice(0, 5)]);
+    setLogs((prev) => [newLog, ...prev.slice(0, 7)]);
+
+    if (isGM && campaign?.id && !isSupabaseOffline()) {
+      try {
+        await supabase.from('session_chronicles').insert({
+          campaign_id: campaign.id,
+          session_number: logs.length + 1,
+          title: type === 'QUEST' ? 'Expedition Note' : 'Runic Commune',
+          summary: message,
+          is_published: true,
+        });
+      } catch {
+        // ignore
+      }
+    }
   };
 
   const activeCharacter = characters?.find((c) => c.id === activeCharacterId);
@@ -99,6 +189,32 @@ export function DashboardPage() {
   const currentXp = activeCharacter?.xp_total ?? 0;
   const nextLevelXp = currentLevel * 1500;
   const xpPercent = Math.min(100, Math.round((currentXp / Math.max(nextLevelXp, 1)) * 100));
+
+  const { currentHp, maxHp, hpPercent } = useMemo(() => {
+    const defaultMax = Math.max(10, 50 + (currentLevel - 1) * 6);
+    let savedCurrent: number | undefined;
+    if (activeCharacterId) {
+      try {
+        const raw = localStorage.getItem(`dnd_vitals_${activeCharacterId}`);
+        if (raw) {
+          const parsed = JSON.parse(raw) as { currentHp?: number };
+          if (typeof parsed.currentHp === 'number') savedCurrent = parsed.currentHp;
+        }
+      } catch {
+        // ignore
+      }
+    }
+    const charVitals =
+      activeCharacter?.vitals && Object.keys(activeCharacter.vitals).length > 0
+        ? activeCharacter.vitals
+        : activeCharacter?.appearance?.vitals;
+    const resolvedCurrent = Math.min(
+      defaultMax,
+      Math.max(0, savedCurrent ?? charVitals?.currentHp ?? defaultMax)
+    );
+    const pct = Math.max(0, Math.min(100, Math.round((resolvedCurrent / defaultMax) * 100)));
+    return { currentHp: resolvedCurrent, maxHp: defaultMax, hpPercent: pct };
+  }, [activeCharacterId, activeCharacter?.vitals, activeCharacter?.appearance?.vitals, currentLevel]);
 
   const navCharms = useMemo(
     () => [
@@ -258,7 +374,7 @@ export function DashboardPage() {
               </span>
             </div>
             <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-900/40 text-emerald-300 font-semibold">
-              VITALITY: FULL
+              VITALITY: {hpPercent === 100 ? 'FULL' : `${hpPercent}%`}
             </span>
           </div>
 
@@ -331,11 +447,14 @@ export function DashboardPage() {
                   {isTr ? 'Can Puanı (HP)' : 'Hit Points (HP)'}
                 </span>
                 <span className="text-rose-300 font-bold">
-                  84 / 84 HP <span className="text-emerald-400">(100%)</span>
+                  {currentHp} / {maxHp} HP <span className="text-emerald-400">({hpPercent}%)</span>
                 </span>
               </div>
               <div className="w-full h-2 rounded-full bg-black/60 overflow-hidden border border-rose-950/40">
-                <div className="h-full bg-gradient-to-r from-rose-700 to-rose-500 w-full shadow-sm" />
+                <div
+                  className="h-full bg-gradient-to-r from-rose-700 to-rose-500 shadow-sm transition-all duration-300"
+                  style={{ width: `${hpPercent}%` }}
+                />
               </div>
             </div>
 

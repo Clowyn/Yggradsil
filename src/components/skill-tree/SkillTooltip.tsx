@@ -18,17 +18,17 @@ export function SkillTooltip({ skill, status, statColor }: SkillTooltipProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.9 }}
+      initial={{ opacity: 0, y: 6, scale: 0.94 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.9 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
-      className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-50 pointer-events-none"
+      exit={{ opacity: 0, y: 6, scale: 0.94 }}
+      transition={{ duration: 0.18, ease: 'easeOut' }}
+      className="absolute left-1/2 -translate-x-1/2 top-full mt-3 z-[100] pointer-events-none"
     >
       <div
-        className="glass rounded-xl p-4 min-w-[240px] max-w-[280px]"
+        className="bg-[#0b0d14]/98 border border-white/15 rounded-xl p-4 min-w-[240px] max-w-[280px] shadow-2xl"
         style={{
-          borderColor: `${statColor}44`,
-          boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 20px ${statColor}22`,
+          borderColor: `${statColor}55`,
+          boxShadow: `0 14px 36px rgba(0,0,0,0.88), 0 0 22px ${statColor}28`,
         }}
       >
         {/* Header */}

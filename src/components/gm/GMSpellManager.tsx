@@ -1,11 +1,14 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { SpellTree, SpellTreeAssignment, SpellNode, Character, CharacterSpell } from '../../lib/types';
 import { Plus, Trash2, Edit2, AlertTriangle, User, RefreshCw, BookOpen, Search, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useCampaign } from '../../contexts/CampaignContext';
+import { arcaneToast } from '../../lib/toast';
 
 export function GMSpellManager() {
   const { locale } = useAuth();
+  const { activeCharacterId, setActiveCharacterId } = useCampaign();
   const [activeTab, setActiveTab] = useState<'manage' | 'player'>('manage');
   const [manageSubTab, setManageSubTab] = useState<'trees' | 'assignments' | 'spells'>('trees');
   
@@ -61,10 +64,22 @@ export function GMSpellManager() {
   // Manage Tab Spells Subtab Filter State
   const [manageSpellTreeFilter, setManageSpellTreeFilter] = useState<string>('all');
 
-  // Player Spells State
-  const [selectedCharId, setSelectedCharId] = useState<string>('');
+  // Player Spells State — synchronized with CampaignContext activeCharacterId
+  const [selectedCharId, setSelectedCharId] = useState<string>(() => activeCharacterId || '');
   const [playerTreeFilter, setPlayerTreeFilter] = useState<string>('eligible');
   const [playerSearchQuery, setPlayerSearchQuery] = useState<string>('');
+
+  // Follow global active character changes (Header selector) without setState-in-effect
+  const [prevActiveCharacterId, setPrevActiveCharacterId] = useState(activeCharacterId);
+  if (activeCharacterId !== prevActiveCharacterId) {
+    setPrevActiveCharacterId(activeCharacterId);
+    if (activeCharacterId) setSelectedCharId(activeCharacterId);
+  }
+
+  const activeCharacterIdRef = useRef(activeCharacterId);
+  useEffect(() => {
+    activeCharacterIdRef.current = activeCharacterId;
+  }, [activeCharacterId]);
 
   // Fetch spells for specific trees (cached and grouped)
   const fetchSpellsForTrees = useCallback(async (treeIds: string[]): Promise<SpellNode[]> => {
@@ -175,7 +190,13 @@ export function GMSpellManager() {
       setTreeSpellsCache(prev => ({ ...initialCache, ...prev }));
 
       if (charData && charData.length > 0) {
-        setSelectedCharId(prev => (prev && charData.some(c => c.id === prev) ? prev : charData[0].id));
+        setSelectedCharId(prev => {
+          const globalActiveId = activeCharacterIdRef.current;
+          if (globalActiveId && charData.some(c => c.id === globalActiveId)) {
+            return globalActiveId;
+          }
+          return prev && charData.some(c => c.id === prev) ? prev : charData[0].id;
+        });
       }
       setIsOffline(false);
     } catch (err) {
@@ -329,7 +350,7 @@ export function GMSpellManager() {
   const handleSaveTree = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     try {
@@ -356,14 +377,14 @@ export function GMSpellManager() {
       loadData();
     } catch (err) {
       console.error('Failed to save tree:', err);
-      alert('Failed to save tree.');
+      arcaneToast.error('Failed to save tree.');
     }
   };
 
   // Delete Spell Tree
   const handleDeleteTree = async (id: string) => {
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     if (!confirm(locale === 'tr' ? 'Büyü ağacını silmek istediğinizden emin misiniz?' : 'Are you sure you want to delete this spell tree?')) return;
@@ -383,7 +404,7 @@ export function GMSpellManager() {
   const handleSaveAssignment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     try {
@@ -411,14 +432,14 @@ export function GMSpellManager() {
       loadData();
     } catch (err) {
       console.error('Failed to save assignment:', err);
-      alert('Failed to save assignment.');
+      arcaneToast.error('Failed to save assignment.');
     }
   };
 
   // Delete Assignment
   const handleDeleteAssignment = async (id: string) => {
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     if (!confirm(locale === 'tr' ? 'Atamayı silmek istediğinizden emin misiniz?' : 'Are you sure you want to delete this assignment?')) return;
@@ -438,14 +459,14 @@ export function GMSpellManager() {
   const handleSaveSpell = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     let parsedEffects: Record<string, unknown>;
     try {
       parsedEffects = JSON.parse(effectsJson);
     } catch {
-      alert(locale === 'tr' ? 'Etkiler JSON formatı geçersiz.' : 'Effects JSON format is invalid.');
+      arcaneToast.error(locale === 'tr' ? 'Etkiler JSON formatı geçersiz.' : 'Effects JSON format is invalid.');
       return;
     }
 
@@ -488,14 +509,14 @@ export function GMSpellManager() {
       loadData();
     } catch (err) {
       console.error('Failed to save spell:', err);
-      alert('Failed to save spell.');
+      arcaneToast.error('Failed to save spell.');
     }
   };
 
   // Delete Spell Node
   const handleDeleteSpell = async (id: string) => {
     if (isOffline) {
-      alert('Cannot perform write operations in offline mock mode.');
+      arcaneToast.warning('Cannot perform write operations in offline mock mode.');
       return;
     }
     if (!confirm(locale === 'tr' ? 'Büyüyü silmek istediğinizden emin misiniz?' : 'Are you sure you want to delete this spell?')) return;
@@ -629,13 +650,31 @@ export function GMSpellManager() {
     return list;
   }, [playerTreeFilter, matchedTreeIds, treeSpellsCache, spells, playerSearchQuery]);
 
+  // Resolve all character IDs that represent the same character (handles duplicate character rows with identical profile_id, name, and subclass_id)
+  const getTargetCharacterIds = useCallback((primaryId: string): string[] => {
+    const primary = characters.find(c => c.id === primaryId);
+    if (!primary) return [primaryId];
+    const matching = characters
+      .filter(
+        c =>
+          c.id === primaryId ||
+          (c.name.trim().toLowerCase() === primary.name.trim().toLowerCase() &&
+            c.profile_id === primary.profile_id &&
+            c.subclass_id === primary.subclass_id)
+      )
+      .map(c => c.id);
+    return Array.from(new Set([primaryId, ...matching]));
+  }, [characters]);
+
   // Toggle Player Spell (Teach / Remove)
   const handleToggleSpellForPlayer = async (spell: SpellNode, isUnlocked: boolean) => {
     if (!selectedCharId) return;
+    setActiveCharacterId(selectedCharId);
+    const targetCharIds = getTargetCharacterIds(selectedCharId);
 
     if (isOffline) {
       if (isUnlocked) {
-        setCharacterSpells(prev => prev.filter(cs => !(cs.character_id === selectedCharId && cs.spell_id === spell.id)));
+        setCharacterSpells(prev => prev.filter(cs => !(targetCharIds.includes(cs.character_id) && cs.spell_id === spell.id)));
       } else {
         setCharacterSpells(prev => [
           ...prev,
@@ -654,55 +693,68 @@ export function GMSpellManager() {
     try {
       if (isUnlocked) {
         // Optimistic UI update: remove spell
-        setCharacterSpells(prev => prev.filter(cs => !(cs.character_id === selectedCharId && cs.spell_id === spell.id)));
+        setCharacterSpells(prev => prev.filter(cs => !(targetCharIds.includes(cs.character_id) && cs.spell_id === spell.id)));
         
-        // Try SECURITY DEFINER RPC first to bypass RLS, fallback to table delete
-        const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
-          p_character_id: selectedCharId,
-          p_spell_id: spell.id
-        });
-        if (rpcError) {
-          const { error } = await supabase
-            .from('character_spells')
-            .delete()
-            .eq('character_id', selectedCharId)
-            .eq('spell_id', spell.id);
-          if (error) throw error;
+        for (const charId of targetCharIds) {
+          const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
+            p_character_id: charId,
+            p_spell_id: spell.id
+          });
+          if (rpcError) {
+            const { error } = await supabase
+              .from('character_spells')
+              .delete()
+              .eq('character_id', charId)
+              .eq('spell_id', spell.id);
+            if (error && charId === selectedCharId) throw error;
+          }
         }
       } else {
         // Optimistic UI update: teach spell
-        const optimisticEntry: CharacterSpell = {
-          id: `opt-cs-${selectedCharId}-${spell.id}`,
-          character_id: selectedCharId,
+        const optimisticEntries: CharacterSpell[] = targetCharIds.map(charId => ({
+          id: `opt-cs-${charId}-${spell.id}`,
+          character_id: charId,
           spell_id: spell.id,
           unlocked: true,
           spell
-        };
+        }));
         setCharacterSpells(prev => [
-          ...prev.filter(cs => !(cs.character_id === selectedCharId && cs.spell_id === spell.id)),
-          optimisticEntry
+          ...prev.filter(cs => !(targetCharIds.includes(cs.character_id) && cs.spell_id === spell.id)),
+          ...optimisticEntries
         ]);
 
-        const { error } = await supabase.rpc('unlock_spell', {
-          char_id: selectedCharId,
-          spell_val_id: spell.id,
-          xp_val_cost: 0
-        });
-        if (error) throw error;
+        for (const charId of targetCharIds) {
+          const { error: rpcErr } = await supabase.rpc('unlock_spell', {
+            char_id: charId,
+            spell_val_id: spell.id,
+            xp_val_cost: 0
+          });
+          if (rpcErr) {
+            const { error: upsertErr } = await supabase
+              .from('character_spells')
+              .upsert(
+                { character_id: charId, spell_id: spell.id, unlocked: true },
+                { onConflict: 'character_id,spell_id' }
+              );
+            if (upsertErr && charId === selectedCharId) throw upsertErr;
+          }
+        }
       }
       // Background sync
-      await reloadCharacterSpells(selectedCharId);
+      await Promise.all(targetCharIds.map(id => reloadCharacterSpells(id)));
+      window.dispatchEvent(new CustomEvent('dnd:spells-updated', { detail: { characterId: selectedCharId } }));
     } catch (err) {
       console.error('Failed to toggle player spell:', err);
-      // Revert from DB
       await reloadCharacterSpells(selectedCharId);
-      alert(locale === 'tr' ? 'Büyü durumu güncellenirken hata oluştu.' : 'Failed to update spell.');
+      arcaneToast.error(locale === 'tr' ? 'Büyü durumu güncellenirken hata oluştu.' : 'Failed to update spell.');
     }
   };
 
   // Teach All Eligible Spells for Player
   const handleTeachAllSpells = async () => {
     if (!selectedCharId || !activeChar) return;
+    setActiveCharacterId(selectedCharId);
+    const targetCharIds = getTargetCharacterIds(selectedCharId);
 
     let targetSpells: SpellNode[];
 
@@ -726,7 +778,7 @@ export function GMSpellManager() {
     }
 
     if (targetSpells.length === 0) {
-      alert(
+      arcaneToast.warning(
         locale === 'tr'
           ? 'Öğretilecek büyü bulunamadı. Lütfen geçerli bir büyü ağacı seçin.'
           : 'No spells found to teach. Please select a valid spell tree.'
@@ -746,10 +798,14 @@ export function GMSpellManager() {
         uniqueSpellsMap.set(s.id, s);
       }
     }
+    const allTargetSpells = Array.from(new Map(targetSpells.map(s => [s.id, s])).values());
     const spellsToTeach = Array.from(uniqueSpellsMap.values());
 
-    if (spellsToTeach.length === 0) {
-      alert(
+    // Even if primary character already has all spells, ensure any duplicate character rows are synced
+    const syncList = spellsToTeach.length > 0 ? spellsToTeach : allTargetSpells;
+
+    if (spellsToTeach.length === 0 && targetCharIds.length <= 1) {
+      arcaneToast.info(
         locale === 'tr'
           ? `${activeChar.name} için seçili ağaçtaki tüm büyüler (${targetSpells.length} büyü) zaten açık!`
           : `All spells in the selected tree (${targetSpells.length} spells) are already unlocked for ${activeChar.name}!`
@@ -757,67 +813,96 @@ export function GMSpellManager() {
       return;
     }
 
-    const confirmMsg = locale === 'tr'
-      ? `${activeChar.name} karakterine ${spellsToTeach.length} yeni büyü öğretilsin mi?`
-      : `Teach ${spellsToTeach.length} new spells to ${activeChar.name}?`;
-    if (!window.confirm(confirmMsg)) return;
+    if (spellsToTeach.length > 0) {
+      const confirmMsg = locale === 'tr'
+        ? `${activeChar.name} karakterine ${spellsToTeach.length} yeni büyü öğretilsin mi?`
+        : `Teach ${spellsToTeach.length} new spells to ${activeChar.name}?`;
+      if (!window.confirm(confirmMsg)) return;
+    }
 
     try {
-      // Optimistic update
-      const newMockSpells: CharacterSpell[] = spellsToTeach.map(s => ({
-        id: `mock-cs-${selectedCharId}-${s.id}`,
-        character_id: selectedCharId,
-        spell_id: s.id,
-        unlocked: true,
-        spell: s
-      }));
+      // Optimistic update across target character(s)
+      const newMockSpells: CharacterSpell[] = targetCharIds.flatMap(charId =>
+        syncList.map(s => ({
+          id: `mock-cs-${charId}-${s.id}`,
+          character_id: charId,
+          spell_id: s.id,
+          unlocked: true,
+          spell: s
+        }))
+      );
 
       setCharacterSpells(prev => [
-        ...prev.filter(cs => !(cs.character_id === selectedCharId && spellsToTeach.some(st => st.id === cs.spell_id))),
+        ...prev.filter(cs => !(targetCharIds.includes(cs.character_id) && syncList.some(st => st.id === cs.spell_id))),
         ...newMockSpells
       ]);
 
       if (!isOffline) {
-        // Teach spells in concurrent chunks to avoid throttling while bypassing RLS via unlock_spell RPC
-        const CHUNK_SIZE = 10;
-        for (let i = 0; i < spellsToTeach.length; i += CHUNK_SIZE) {
-          const chunk = spellsToTeach.slice(i, i + CHUNK_SIZE);
-          await Promise.all(
-            chunk.map(async s => {
-              const { error } = await supabase.rpc('unlock_spell', {
-                char_id: selectedCharId,
-                spell_val_id: s.id,
-                xp_val_cost: 0
-              });
-              if (error) throw error;
-            })
-          );
+        const spellIds = syncList.map(s => s.id);
+        for (const charId of targetCharIds) {
+          const { error: bulkErr } = await supabase.rpc('gm_teach_spells', {
+            p_character_id: charId,
+            p_spell_ids: spellIds,
+          });
+
+          if (bulkErr) {
+            // Fallback 1: direct upsert into character_spells
+            const rows = syncList.map(s => ({
+              character_id: charId,
+              spell_id: s.id,
+              unlocked: true,
+            }));
+            const { error: upsertErr } = await supabase
+              .from('character_spells')
+              .upsert(rows, { onConflict: 'character_id,spell_id' });
+
+            if (upsertErr) {
+              // Fallback 2: Teach spells in concurrent chunks via unlock_spell RPC
+              const CHUNK_SIZE = 10;
+              for (let i = 0; i < syncList.length; i += CHUNK_SIZE) {
+                const chunk = syncList.slice(i, i + CHUNK_SIZE);
+                await Promise.all(
+                  chunk.map(async s => {
+                    const { error } = await supabase.rpc('unlock_spell', {
+                      char_id: charId,
+                      spell_val_id: s.id,
+                      xp_val_cost: 0
+                    });
+                    if (error && charId === selectedCharId) throw error;
+                  })
+                );
+              }
+            }
+          }
         }
 
         // Background sync
-        await reloadCharacterSpells(selectedCharId);
+        await Promise.all(targetCharIds.map(id => reloadCharacterSpells(id)));
+        window.dispatchEvent(new CustomEvent('dnd:spells-updated', { detail: { characterId: selectedCharId } }));
       }
 
-      alert(
+      arcaneToast.success(
         locale === 'tr'
-          ? `${activeChar.name} karakterine ${spellsToTeach.length} büyü başarıyla öğretildi.`
-          : `Successfully taught ${spellsToTeach.length} spells to ${activeChar.name}.`
+          ? `${activeChar.name} karakterine ${syncList.length} büyü başarıyla öğretildi ve Büyü Ağacı ile eşitlendi.`
+          : `Successfully taught and synced ${syncList.length} spells for ${activeChar.name}.`
       );
     } catch (err) {
       console.error('Failed to teach all spells:', err);
       await reloadCharacterSpells(selectedCharId);
-      alert(locale === 'tr' ? 'Büyüler öğretilirken bir hata oluştu.' : 'Failed to teach spells.');
+      arcaneToast.error(locale === 'tr' ? 'Büyüler öğretilirken bir hata oluştu.' : 'Failed to teach spells.');
     }
   };
 
   // Forget All Spells for Player
   const handleForgetAllSpells = async () => {
     if (!selectedCharId || !activeChar) return;
+    setActiveCharacterId(selectedCharId);
+    const targetCharIds = getTargetCharacterIds(selectedCharId);
     const charName = activeChar.name || (locale === 'tr' ? 'Karakter' : 'Character');
 
-    const learnedSpells = characterSpells.filter(cs => cs.character_id === selectedCharId);
+    const learnedSpells = characterSpells.filter(cs => targetCharIds.includes(cs.character_id));
     if (learnedSpells.length === 0) {
-      alert(
+      arcaneToast.info(
         locale === 'tr'
           ? `${charName} için zaten öğrenilmiş büyü bulunmuyor.`
           : `${charName} has no learned spells to forget.`
@@ -826,39 +911,41 @@ export function GMSpellManager() {
     }
 
     const confirmMsg = locale === 'tr'
-      ? `${charName} için öğrenilmiş TÜM büyüleri (${learnedSpells.length} büyü) silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.`
-      : `Are you sure you want to forget ALL spells (${learnedSpells.length} spells) for ${charName}? This cannot be undone.`;
+      ? `${charName} için öğrenilmiş TÜM büyüleri silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.`
+      : `Are you sure you want to forget ALL spells for ${charName}? This cannot be undone.`;
 
     if (!window.confirm(confirmMsg)) return;
 
     try {
       // Optimistic update
-      setCharacterSpells(prev => prev.filter(cs => cs.character_id !== selectedCharId));
+      setCharacterSpells(prev => prev.filter(cs => !targetCharIds.includes(cs.character_id)));
 
       if (!isOffline) {
-        // Try SECURITY DEFINER RPC first to bypass RLS, fallback to table delete
-        const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
-          p_character_id: selectedCharId
-        });
-        if (rpcError) {
-          const { error } = await supabase
-            .from('character_spells')
-            .delete()
-            .eq('character_id', selectedCharId);
-          if (error) throw error;
+        for (const charId of targetCharIds) {
+          const { error: rpcError } = await supabase.rpc('gm_forget_spells', {
+            p_character_id: charId
+          });
+          if (rpcError) {
+            const { error } = await supabase
+              .from('character_spells')
+              .delete()
+              .eq('character_id', charId);
+            if (error && charId === selectedCharId) throw error;
+          }
         }
-        await reloadCharacterSpells(selectedCharId);
+        await Promise.all(targetCharIds.map(id => reloadCharacterSpells(id)));
+        window.dispatchEvent(new CustomEvent('dnd:spells-updated', { detail: { characterId: selectedCharId } }));
       }
 
-      alert(
+      arcaneToast.success(
         locale === 'tr'
-          ? `${charName} karakterinin tüm büyüleri (${learnedSpells.length} büyü) başarıyla silindi.`
-          : `Successfully removed all ${learnedSpells.length} spells for ${charName}.`
+          ? `${charName} karakterinin tüm büyüleri başarıyla silindi.`
+          : `Successfully removed all spells for ${charName}.`
       );
     } catch (err) {
       console.error('Failed to forget all spells:', err);
       reloadCharacterSpells(selectedCharId);
-      alert(locale === 'tr' ? 'Büyüler silinirken bir hata oluştu.' : 'Failed to remove spells.');
+      arcaneToast.error(locale === 'tr' ? 'Büyüler silinirken bir hata oluştu.' : 'Failed to remove spells.');
     }
   };
 
@@ -1456,6 +1543,7 @@ export function GMSpellManager() {
                   onChange={e => {
                     const newId = e.target.value;
                     setSelectedCharId(newId);
+                    if (newId) setActiveCharacterId(newId);
                     if (newId && !isOffline) {
                       reloadCharacterSpells(newId);
                     }

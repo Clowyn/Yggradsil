@@ -115,7 +115,7 @@ function SpellTreeFlow() {
 
       if (activePathIds) {
         if (activePathIds.has(node.id)) {
-          opacity = 1.0;
+          opacity = node.data?.isDimmed ? 0.35 : 1.0;
         } else {
           opacity = 0.15;
         }
@@ -132,11 +132,18 @@ function SpellTreeFlow() {
         return node;
       }
 
+      const isDimmedByFilterOrPath = Boolean(node.data?.isDimmed || opacity < 0.5);
+
       return {
         ...node,
+        data:
+          isDimmedByFilterOrPath !== Boolean(node.data?.isDimmed) || node.data?.styleOpacity !== opacity
+            ? { ...node.data, isDimmed: isDimmedByFilterOrPath, styleOpacity: opacity }
+            : node.data,
         style: {
           ...node.style,
           opacity,
+          pointerEvents: isDimmedByFilterOrPath ? 'none' : undefined,
         },
       };
     });
@@ -199,7 +206,8 @@ function SpellTreeFlow() {
 
   const handleNodeClick = useCallback(
     (event: React.MouseEvent, node: Node) => {
-      if (node.data?.isDimmed) return; // Prevent clicks on dimmed sibling subclass trees
+      const styleOpacity = typeof node.style?.opacity === 'number' ? node.style.opacity : 1;
+      if (node.data?.isDimmed || styleOpacity < 0.5) return; // Prevent clicks on dimmed nodes
       onNodeClick(event, node);
       setSelectedNodeId(node.id);
 
@@ -283,7 +291,7 @@ function SpellTreeFlow() {
                 >
                   {characters.map((char) => (
                     <option key={char.id} value={char.id} className="bg-[#0e1017] text-amber-100">
-                      {char.name} ({char.subclass?.name_tr || char.subclass?.name_en || char.subclass?.key || 'Temel'})
+                      {char.name} (#{char.id.slice(0, 4)} · {char.subclass?.name_tr || char.subclass?.name_en || char.subclass?.key || 'Temel'})
                     </option>
                   ))}
                 </select>

@@ -118,16 +118,64 @@ CREATE POLICY "GMs manage environment" ON public.campaign_environments
 ALTER TABLE public.session_chronicles ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Players view published chronicles" ON public.session_chronicles;
-CREATE POLICY "Players view published chronicles" ON public.session_chronicles
-  FOR SELECT USING (
-    public.is_gm() OR (is_published = true AND auth.uid() IS NOT NULL)
-  );
-
 DROP POLICY IF EXISTS "GMs manage chronicles" ON public.session_chronicles;
 CREATE POLICY "GMs manage chronicles" ON public.session_chronicles
   FOR ALL
   USING (public.is_gm())
   WITH CHECK (public.is_gm());
+
+-- Safe public view & RPC that masks gm_secrets from non-GM players
+CREATE OR REPLACE VIEW public.session_chronicles_public AS
+  SELECT
+    id,
+    campaign_id,
+    session_number,
+    title,
+    summary,
+    in_game_date,
+    is_published,
+    CASE WHEN public.is_gm() THEN gm_secrets ELSE NULL END AS gm_secrets,
+    created_at
+  FROM public.session_chronicles
+  WHERE public.is_gm() OR (is_published = true AND auth.uid() IS NOT NULL);
+
+GRANT SELECT ON public.session_chronicles_public TO authenticated;
+
+CREATE OR REPLACE FUNCTION public.get_session_chronicles(p_campaign_id uuid)
+RETURNS TABLE (
+  id uuid,
+  campaign_id uuid,
+  session_number int,
+  title text,
+  summary text,
+  in_game_date text,
+  is_published boolean,
+  gm_secrets text,
+  created_at timestamptz
+)
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public
+STABLE
+AS $$
+  SELECT
+    sc.id,
+    sc.campaign_id,
+    sc.session_number,
+    sc.title,
+    sc.summary,
+    sc.in_game_date,
+    sc.is_published,
+    CASE WHEN public.is_gm() THEN sc.gm_secrets ELSE NULL END AS gm_secrets,
+    sc.created_at
+  FROM public.session_chronicles sc
+  WHERE sc.campaign_id = p_campaign_id
+    AND (public.is_gm() OR (sc.is_published = true AND auth.uid() IS NOT NULL))
+  ORDER BY sc.session_number DESC;
+$$;
+
+REVOKE EXECUTE ON FUNCTION public.get_session_chronicles(uuid) FROM anon, PUBLIC;
+GRANT EXECUTE ON FUNCTION public.get_session_chronicles(uuid) TO authenticated, service_role;
 
 
 -- ─────────────────────────────────────────────────────────────────────────────

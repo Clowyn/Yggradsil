@@ -78,6 +78,21 @@ export interface RaceDefinition {
 }
 
 // --- Characters ---
+export interface CharacterVitals {
+  currentHp: number;
+  tempHp: number;
+  hitDiceTotal: number;
+  hitDiceRemaining: number;
+  hitDieType: number;
+  deathSaves: {
+    successes: number;
+    failures: number;
+  };
+  spellSlots: Record<string, { max: number; used: number }>;
+  spellSlotsUsed?: Record<string, number>;
+  gold?: number;
+}
+
 export interface Character {
   id: string;
   profile_id: string;
@@ -88,7 +103,14 @@ export interface Character {
   level: number;
   xp_total: number;
   xp_available: number;
+  gold?: number;
+  vitals?: CharacterVitals;
   avatar_url: string | null;
+  appearance?: {
+    vitals?: CharacterVitals;
+    gold?: number;
+    [key: string]: unknown;
+  };
   created_at: string;
   updated_at: string;
   race?: RaceDefinition;
@@ -103,6 +125,7 @@ export interface CharacterStat {
   stat_key: StatKey;
   base_value: number;
   bonus_value: number;
+  updated_at?: string;
 }
 
 // --- Skills ---
@@ -113,7 +136,11 @@ export interface SkillDefinition {
   name_tr: string;
   name_en: string;
   description: string;
+  description_tr?: string | null;
+  description_en?: string | null;
   stat_parent: StatKey;
+  subclass_restriction?: string | null;
+  race_restriction?: string | null;
   xp_cost: number;
   tier: number;
   prerequisites: string[];
@@ -169,6 +196,7 @@ export interface InventoryItem {
   quantity: number;
   equipped: boolean;
   slot_index?: number;
+  custom_properties?: Record<string, unknown>;
   acquired_at: string;
   item_definition?: ItemDefinition;
 }
@@ -181,6 +209,7 @@ export interface MapState {
   map_width: number;
   map_height: number;
   fog_radius: number;
+  revealed_areas?: RevealedArea[];
   updated_at: string;
 }
 
@@ -214,6 +243,16 @@ export interface CampaignMember {
   profile?: Profile;
 }
 
+export interface XpLedgerEntry {
+  id: string;
+  campaign_id: string;
+  character_id: string;
+  amount: number;
+  reason: string;
+  gm_id: string | null;
+  created_at: string;
+}
+
 // --- Utility ---
 export function t(obj: { name_tr?: string; name_en?: string } | undefined, locale: Locale): string {
   if (!obj) return '';
@@ -242,6 +281,7 @@ export interface SpellTreeAssignment {
   subclass_key?: string | null;
   race_key?: string | null;
   min_level: number;
+  created_at?: string;
 }
 
 export interface SpellNode {
@@ -402,6 +442,15 @@ export interface RevealedArea {
 
 export type MapMovementMode = 'free' | 'approved';
 
+export interface MapWallSegment {
+  id: string;
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  type?: 'wall' | 'door' | 'window';
+}
+
 export interface CampaignMap {
   id: string;
   campaign_id: string;
@@ -414,6 +463,8 @@ export interface CampaignMap {
   is_active: boolean;
   movement_mode: MapMovementMode;
   revealed_areas: RevealedArea[];
+  walls?: MapWallSegment[];
+  los_enabled?: boolean;
   created_at: string;
   updated_at?: string;
 }
@@ -491,4 +542,75 @@ export interface CombatArenaLog {
   created_at: string;
 }
 
+// --- Phase 3: Realtime Table Chat, Dice Log & GM Whispers ---
+export type TableMessageType = 'chat' | 'whisper' | 'roll' | 'secret_roll' | 'dice' | 'system';
+
+export interface CampaignMessageDiceData {
+  formula?: string;
+  dieType: string;
+  count: number;
+  modifier: number;
+  rolls: number[];
+  keptRoll: number;
+  discardedRoll?: number;
+  total: number;
+  mode?: 'normal' | 'advantage' | 'disadvantage';
+  isCrit?: boolean;
+  isFumble?: boolean;
+  label?: string;
+}
+
+export interface CampaignMessage {
+  id: string;
+  campaign_id: string;
+  sender_id: string | null;
+  sender_name: string;
+  sender_role: UserRole;
+  recipient_id: string | null;
+  recipient_name: string | null;
+  message_type: TableMessageType;
+  content: string;
+  dice_data: CampaignMessageDiceData | null;
+  is_whisper?: boolean;
+  is_secret_roll?: boolean;
+  created_at: string;
+}
+
+// --- Phase 3: D&D 5e Monster & NPC Bestiary ---
+export interface MonsterAction {
+  name: string;
+  nameTr: string;
+  attackBonus: number;
+  damageDice: string;
+  damageType: string;
+  isAoE?: boolean;
+  saveDC?: number;
+  saveAbility?: 'STR' | 'DEX' | 'CON' | 'INT' | 'WIS' | 'CHA';
+  description: string;
+  descriptionTr?: string;
+}
+
+export interface BestiaryMonster {
+  id: string;
+  name: string;
+  nameTr: string;
+  type: string;
+  typeTr: string;
+  cr: string;
+  xp: number;
+  hp: number;
+  hpFormula: string;
+  ac: number;
+  initiativeBonus: number;
+  speed: string;
+  stats: {
+    str: number;
+    dex: number;
+    con: number;
+    int: number;
+    wis: number;
+    cha: number;
+  };
+  actions: MonsterAction[];
+}
 

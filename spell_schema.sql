@@ -64,17 +64,17 @@ ALTER TABLE character_spells ENABLE ROW LEVEL SECURITY;
 -- ── spell_trees Policies
 CREATE POLICY "Spell trees viewable by everyone" ON spell_trees FOR SELECT USING (true);
 CREATE POLICY "GMs manage spell trees" ON spell_trees FOR ALL 
-  USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'gm'));
+  USING (public.is_gm()) WITH CHECK (public.is_gm());
 
 -- ── spell_tree_assignments Policies
 CREATE POLICY "Assignments viewable by everyone" ON spell_tree_assignments FOR SELECT USING (true);
 CREATE POLICY "GMs manage assignments" ON spell_tree_assignments FOR ALL 
-  USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'gm'));
+  USING (public.is_gm()) WITH CHECK (public.is_gm());
 
 -- ── spells Policies
 CREATE POLICY "Spells viewable by everyone" ON spells FOR SELECT USING (true);
 CREATE POLICY "GMs manage spells" ON spells FOR ALL 
-  USING (EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'gm'));
+  USING (public.is_gm()) WITH CHECK (public.is_gm());
 
 -- ── character_spells Policies
 CREATE POLICY "Users view own character spells, GMs view all" ON character_spells FOR SELECT USING (
@@ -138,30 +138,54 @@ BEGIN
 END $$;
 
 -- ==========================================
--- ATOMIC TRANSACTION TRANSACTION FUNCTION
+-- ATOMIC TRANSACTION FUNCTION
 -- ==========================================
-CREATE OR REPLACE FUNCTION unlock_spell(
+CREATE OR REPLACE FUNCTION public.unlock_spell(
   char_id uuid,
   spell_val_id uuid,
   xp_val_cost int
 ) RETURNS void AS $$
+DECLARE
+  v_effective_cost int;
 BEGIN
+  -- 0. Verify caller is GM or owner of the character
+  IF NOT (
+    public.is_gm() OR
+    EXISTS (SELECT 1 FROM public.characters WHERE id = char_id AND profile_id = auth.uid())
+  ) THEN
+    RAISE EXCEPTION 'Unauthorized: You can only unlock spells for your own character.';
+  END IF;
+
+  -- Enforce non-negative cost and server-side spell xp_cost for non-GM callers
+  IF public.is_gm() THEN
+    v_effective_cost := GREATEST(COALESCE(xp_val_cost, 0), 0);
+  ELSE
+    v_effective_cost := GREATEST(
+      COALESCE((SELECT xp_cost FROM public.spells WHERE id = spell_val_id), xp_val_cost, 0),
+      COALESCE(xp_val_cost, 0),
+      0
+    );
+  END IF;
+
   -- 1. Check if character has enough available XP
-  IF (SELECT xp_available FROM characters WHERE id = char_id) < xp_val_cost THEN
+  IF (SELECT xp_available FROM public.characters WHERE id = char_id) < v_effective_cost THEN
     RAISE EXCEPTION 'Insufficient XP to unlock this spell';
   END IF;
 
   -- 2. Deduct XP from character
-  UPDATE characters 
-  SET xp_available = xp_available - xp_val_cost 
+  UPDATE public.characters 
+  SET xp_available = xp_available - v_effective_cost 
   WHERE id = char_id;
 
   -- 3. Insert character spell
-  INSERT INTO character_spells (character_id, spell_id, unlocked)
+  INSERT INTO public.character_spells (character_id, spell_id, unlocked)
   VALUES (char_id, spell_val_id, true)
   ON CONFLICT (character_id, spell_id) DO UPDATE SET unlocked = true;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+
+REVOKE EXECUTE ON FUNCTION public.unlock_spell(uuid, uuid, int) FROM anon, PUBLIC;
+GRANT EXECUTE ON FUNCTION public.unlock_spell(uuid, uuid, int) TO authenticated, service_role;
 
 -- ==========================================
 -- SEED DATA FOR DEMO SPELL TREE

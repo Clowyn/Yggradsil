@@ -256,18 +256,37 @@ export function useAdminCharacters(initialPageSize = 20) {
     }
   };
 
-  // Bulk level update
+  // Bulk level update (RPC + grouped batch fallback — eliminates N+1 sequential updates)
   const bulkUpdateLevel = async (charIds: string[], levelDelta: number) => {
+    if (charIds.length === 0 || levelDelta === 0) return;
     try {
-      for (const id of charIds) {
-        const char = characters.find((c) => c.id === id);
-        if (char) {
-          const newLevel = Math.max(1, Math.min(20, char.level + levelDelta));
-          await supabase
-            .from('characters')
-            .update({ level: newLevel, updated_at: new Date().toISOString() })
-            .eq('id', id);
+      const { error: rpcErr } = await supabase.rpc('bulk_update_character_levels', {
+        p_character_ids: charIds,
+        p_level_delta: levelDelta,
+      });
+
+      if (rpcErr) {
+        // Grouped batch fallback by target level using .in('id', groupIds)
+        const levelGroups = new Map<number, string[]>();
+        for (const id of charIds) {
+          const char = characters.find((c) => c.id === id);
+          if (char) {
+            const newLevel = Math.max(1, Math.min(20, char.level + levelDelta));
+            const group = levelGroups.get(newLevel) || [];
+            group.push(id);
+            levelGroups.set(newLevel, group);
+          }
         }
+
+        const nowIso = new Date().toISOString();
+        await Promise.all(
+          Array.from(levelGroups.entries()).map(([newLevel, groupIds]) =>
+            supabase
+              .from('characters')
+              .update({ level: newLevel, updated_at: nowIso })
+              .in('id', groupIds)
+          )
+        );
       }
 
       if (currentAdmin) {

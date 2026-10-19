@@ -19,57 +19,79 @@ export function useAdminStats() {
     setLoading(true);
     setError(null);
     try {
-      // 1. Fetch profiles count & roles
-      const { data: profilesData, error: profilesErr } = await supabase
-        .from('profiles')
-        .select('role');
-
-      if (profilesErr) throw profilesErr;
-
-      const totalUsers = profilesData?.length ?? 0;
+      // 1. Fetch role breakdown via server-side RPC or parallel HEAD count queries (no full-table row transfer)
       const roleBreakdown = { admin: 0, gm: 0, player: 0 };
-      profilesData?.forEach((p) => {
-        if (p.role === 'admin') roleBreakdown.admin++;
-        else if (p.role === 'gm') roleBreakdown.gm++;
-        else roleBreakdown.player++;
-      });
+      let totalUsers = 0;
 
-      // 2. Fetch characters count
-      const { count: totalCharacters, error: charErr } = await supabase
-        .from('characters')
-        .select('*', { count: 'exact', head: true });
-      if (charErr) throw charErr;
+      const { data: rpcRoleData, error: rpcRoleErr } = await supabase.rpc(
+        'get_admin_role_counts'
+      );
 
-      // 3. Fetch campaigns count
-      const { count: totalCampaigns, error: campErr } = await supabase
-        .from('campaigns')
-        .select('*', { count: 'exact', head: true });
-      if (campErr) throw campErr;
+      if (!rpcRoleErr && rpcRoleData && typeof rpcRoleData === 'object') {
+        if (Array.isArray(rpcRoleData)) {
+          rpcRoleData.forEach((row: { role?: string; total?: number }) => {
+            if (row.role === 'admin') roleBreakdown.admin = Number(row.total) || 0;
+            if (row.role === 'gm') roleBreakdown.gm = Number(row.total) || 0;
+            if (row.role === 'player') roleBreakdown.player = Number(row.total) || 0;
+          });
+          totalUsers = roleBreakdown.admin + roleBreakdown.gm + roleBreakdown.player;
+        } else {
+          const typed = rpcRoleData as Record<string, number>;
+          roleBreakdown.admin = Number(typed.admin) || 0;
+          roleBreakdown.gm = Number(typed.gm) || 0;
+          roleBreakdown.player = Number(typed.player) || 0;
+          totalUsers =
+            Number(typed.total) ||
+            roleBreakdown.admin + roleBreakdown.gm + roleBreakdown.player;
+        }
+      } else {
+        const [adminRes, gmRes, playerRes] = await Promise.all([
+          supabase
+            .from('profiles')
+            .select('*', { count: 'exact', head: true })
+            .eq('role', 'admin'),
+          supabase
+            .from('profiles')
+            .select('*', { count: 'exact', head: true })
+            .eq('role', 'gm'),
+          supabase
+            .from('profiles')
+            .select('*', { count: 'exact', head: true })
+            .eq('role', 'player'),
+        ]);
 
-      // 4. Fetch items count
-      const { count: totalItems, error: itemErr } = await supabase
-        .from('item_definitions')
-        .select('*', { count: 'exact', head: true });
-      if (itemErr) throw itemErr;
-
-      // 5. Fetch spells count (if table exists)
-      let totalSpells = 0;
-      try {
-        const { count: spellCount } = await supabase
-          .from('spells')
-          .select('*', { count: 'exact', head: true });
-        totalSpells = spellCount ?? 0;
-      } catch (err) {
-        console.warn('Could not fetch spells count:', err);
+        if (adminRes.error) throw adminRes.error;
+        roleBreakdown.admin = adminRes.count ?? 0;
+        roleBreakdown.gm = gmRes.count ?? 0;
+        roleBreakdown.player = playerRes.count ?? 0;
+        totalUsers = roleBreakdown.admin + roleBreakdown.gm + roleBreakdown.player;
       }
+
+      // 2. Fetch characters, campaigns, items, and spells counts in parallel
+      const [charRes, campRes, itemRes, spellRes] = await Promise.all([
+        supabase.from('characters').select('*', { count: 'exact', head: true }),
+        supabase.from('campaigns').select('*', { count: 'exact', head: true }),
+        supabase.from('item_definitions').select('*', { count: 'exact', head: true }),
+        supabase
+          .from('spells')
+          .select('*', { count: 'exact', head: true })
+          .then(
+            (r) => r,
+            () => ({ count: 0, error: null })
+          ),
+      ]);
+
+      if (charRes.error) throw charRes.error;
+      if (campRes.error) throw campRes.error;
+      if (itemRes.error) throw itemRes.error;
 
       setStats({
         totalUsers,
         roleBreakdown,
-        totalCharacters: totalCharacters ?? 0,
-        totalCampaigns: totalCampaigns ?? 0,
-        totalItems: totalItems ?? 0,
-        totalSpells,
+        totalCharacters: charRes.count ?? 0,
+        totalCampaigns: campRes.count ?? 0,
+        totalItems: itemRes.count ?? 0,
+        totalSpells: spellRes.count ?? 0,
       });
 
       // 6. Fetch recent 10 admin logs

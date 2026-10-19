@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Map as MapIcon,
@@ -11,14 +11,18 @@ import {
   CheckCircle2,
   Clock,
   Sparkles,
+  ScanEye,
+  BrickWall,
 } from 'lucide-react';
 
 import { useMap } from '../../hooks/useMap';
-import { renderFog } from './FogOfWar';
+import { renderFog, hasLineOfSight } from './FogOfWar';
 import { GMMapControls } from './GMMapControls';
+import { MapTokenComponent } from './MapToken';
 import { useAuth } from '../../contexts/AuthContext';
+import { useCampaign } from '../../contexts/CampaignContext';
 import { translations } from '../../lib/translations';
-import type { MapToken, MapMovementRequest } from '../../lib/types';
+import type { MapToken, MapMovementRequest, MapWallSegment } from '../../lib/types';
 
 // ─── Constants ─────────────────────────────────────────────────
 
@@ -55,6 +59,52 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
   }
 }
 
+function drawWalls(
+  ctx: CanvasRenderingContext2D,
+  walls: MapWallSegment[],
+  losEnabled: boolean
+) {
+  if (walls.length === 0) return;
+
+  ctx.save();
+  walls.forEach((wall) => {
+    // Outer wall glow
+    ctx.beginPath();
+    ctx.moveTo(wall.x1, wall.y1);
+    ctx.lineTo(wall.x2, wall.y2);
+    ctx.strokeStyle = losEnabled
+      ? 'rgba(245, 158, 11, 0.35)'
+      : 'rgba(148, 163, 184, 0.2)';
+    ctx.lineWidth = 9;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Core stone/arcane barrier line
+    ctx.beginPath();
+    ctx.moveTo(wall.x1, wall.y1);
+    ctx.lineTo(wall.x2, wall.y2);
+    ctx.strokeStyle = losEnabled ? '#f59e0b' : '#64748b';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Pillar endpoints
+    [
+      { x: wall.x1, y: wall.y1 },
+      { x: wall.x2, y: wall.y2 },
+    ].forEach((pt) => {
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#1e293b';
+      ctx.fill();
+      ctx.strokeStyle = losEnabled ? '#fbbf24' : '#94a3b8';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+  });
+  ctx.restore();
+}
+
 function drawGhostPaths(ctx: CanvasRenderingContext2D, requests: MapMovementRequest[]) {
   requests.forEach((req) => {
     ctx.save();
@@ -89,10 +139,26 @@ function drawGhostPaths(ctx: CanvasRenderingContext2D, requests: MapMovementRequ
   });
 }
 
-function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
+function drawTokens(
+  ctx: CanvasRenderingContext2D,
+  tokens: MapToken[],
+  occludedTokenIds: Set<string>,
+  hideOccludedFromPlayer: boolean,
+  selectedTokenId: string | null
+) {
   tokens.forEach((token) => {
+    const isOccluded = occludedTokenIds.has(token.id);
+    if (isOccluded && hideOccludedFromPlayer) {
+      return; // Hidden behind wall & fog for non-GM player view
+    }
+
     const { x_position: x, y_position: y, color } = token;
     const safeLabel = token.label || 'T';
+
+    ctx.save();
+    if (isOccluded) {
+      ctx.globalAlpha = 0.45;
+    }
 
     // Outer glow
     const glow = ctx.createRadialGradient(x, y, 0, x, y, TOKEN_RADIUS + 8);
@@ -109,9 +175,10 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     ctx.fillStyle = color;
     ctx.fill();
 
-    // Border
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.lineWidth = 2;
+    // Border (highlight if selected observer)
+    ctx.strokeStyle =
+      token.id === selectedTokenId ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = token.id === selectedTokenId ? 3 : 2;
     ctx.stroke();
 
     // Initials
@@ -132,6 +199,7 @@ function drawTokens(ctx: CanvasRenderingContext2D, tokens: MapToken[]) {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
     ctx.font = 'bold 9px Inter, sans-serif';
     ctx.fillText(token.label || '', x, y + TOKEN_RADIUS + 12);
+    ctx.restore();
   });
 }
 
@@ -149,6 +217,8 @@ export function GameMap() {
     tokens,
     fogRadius,
     revealedAreas,
+    walls,
+    losEnabled,
     isGM,
     updateTokenPosition,
     updateFogRadius,
@@ -160,6 +230,10 @@ export function GameMap() {
     createMap,
     switchActiveMap,
     deleteMap,
+    addWallSegment,
+    clearWalls,
+    loadPresetWalls,
+    toggleLosEnabled,
   } = useMap();
 
   const mapCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -168,7 +242,10 @@ export function GameMap() {
   const mapImageRef = useRef<HTMLImageElement | null>(null);
 
   // By default, players have Fog of War on; GMs can toggle it
+  const { activeCharacterId } = useCampaign();
   const [showFog, setShowFog] = useState(!isGM);
+  const [isWallDrawMode, setIsWallDrawMode] = useState(false);
+  const [selectedTokenId, setSelectedTokenId] = useState<string | null>(null);
 
   // Modals & player notices
   const [showLibraryModal, setShowLibraryModal] = useState(false);
@@ -179,7 +256,7 @@ export function GameMap() {
   const [newMapUrl, setNewMapUrl] = useState('');
   const [newMapFilePreview, setNewMapFilePreview] = useState<string | null>(null);
 
-  // Drag state
+  // Token drag state
   const [dragState, setDragState] = useState<{
     tokenId: string | null;
     offsetX: number;
@@ -187,8 +264,46 @@ export function GameMap() {
   }>({ tokenId: null, offsetX: 0, offsetY: 0 });
   const [dragPreviewPos, setDragPreviewPos] = useState<{ x: number; y: number } | null>(null);
 
+  // Wall drawing drag state
+  const [wallDraft, setWallDraft] = useState<{
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+  } | null>(null);
+
   const W = activeMap.width || 1200;
   const H = activeMap.height || 800;
+
+  const observerToken = useMemo(
+    () =>
+      (selectedTokenId ? tokens.find((tok) => tok.id === selectedTokenId) : null) ||
+      (activeCharacterId ? tokens.find((tok) => tok.character_id === activeCharacterId) : null) ||
+      tokens[0] ||
+      null,
+    [tokens, selectedTokenId, activeCharacterId]
+  );
+
+  // Compute which tokens are occluded by walls from the observer token (or party vision)
+  const occludedTokenIds = useMemo(() => {
+    const set = new Set<string>();
+    if (!losEnabled || walls.length === 0 || !observerToken) return set;
+
+    tokens.forEach((target) => {
+      if (target.id === observerToken.id) return;
+      const visible = hasLineOfSight(
+        observerToken.x_position,
+        observerToken.y_position,
+        target.x_position,
+        target.y_position,
+        walls
+      );
+      if (!visible) {
+        set.add(target.id);
+      }
+    });
+    return set;
+  }, [tokens, observerToken, walls, losEnabled]);
 
   // ── Render map canvas ──
   const renderMap = useCallback(() => {
@@ -203,11 +318,9 @@ export function GameMap() {
     if (mapImageRef.current) {
       try {
         ctx.drawImage(mapImageRef.current, 0, 0, W, H);
-        // Dark vignette over map image for contrast
         ctx.fillStyle = 'rgba(5, 5, 12, 0.2)';
         ctx.fillRect(0, 0, W, H);
       } catch {
-        // Fallback to fill
         ctx.fillStyle = '#0a0a0f';
         ctx.fillRect(0, 0, W, H);
       }
@@ -222,6 +335,22 @@ export function GameMap() {
     }
 
     drawGrid(ctx, W, H);
+
+    // Draw dungeon walls
+    drawWalls(ctx, walls, losEnabled);
+
+    // Draw live wall-drawing draft segment if GM is dragging a new wall
+    if (wallDraft) {
+      ctx.save();
+      ctx.setLineDash([8, 4]);
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(wallDraft.x1, wallDraft.y1);
+      ctx.lineTo(wallDraft.x2, wallDraft.y2);
+      ctx.stroke();
+      ctx.restore();
+    }
 
     // Draw ghost paths for pending movement requests
     if (movementRequests.length > 0) {
@@ -259,8 +388,29 @@ export function GameMap() {
       }
     }
 
-    drawTokens(ctx, tokens);
-  }, [W, H, tokens, movementRequests, dragState.tokenId, dragPreviewPos, movementMode, isGM]);
+    drawTokens(
+      ctx,
+      tokens,
+      occludedTokenIds,
+      !isGM && showFog && losEnabled,
+      observerToken?.id || null
+    );
+  }, [
+    W,
+    H,
+    tokens,
+    walls,
+    losEnabled,
+    wallDraft,
+    movementRequests,
+    dragState.tokenId,
+    dragPreviewPos,
+    movementMode,
+    isGM,
+    showFog,
+    occludedTokenIds,
+    observerToken,
+  ]);
 
   // Preload background map image when activeMap changes
   useEffect(() => {
@@ -294,8 +444,14 @@ export function GameMap() {
       return;
     }
 
-    renderFog(ctx, W, H, tokens, fogRadius, revealedAreas);
-  }, [W, H, tokens, fogRadius, revealedAreas, showFog]);
+    // When LoS is enabled and an observer token is selected, cast active vision strictly from the observer token
+    const visionSources =
+      losEnabled && walls.length > 0 && observerToken
+        ? [observerToken]
+        : tokens;
+
+    renderFog(ctx, W, H, visionSources, fogRadius, revealedAreas, walls, losEnabled);
+  }, [W, H, tokens, fogRadius, revealedAreas, showFog, walls, losEnabled, observerToken]);
 
   useEffect(() => {
     renderMap();
@@ -330,8 +486,22 @@ export function GameMap() {
   // ── Mouse handlers ──
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      const canvas = mapCanvasRef.current;
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = W / rect.width;
+      const scaleY = H / rect.height;
+      const canvasX = Math.round((e.clientX - rect.left) * scaleX);
+      const canvasY = Math.round((e.clientY - rect.top) * scaleY);
+
+      if (isGM && isWallDrawMode) {
+        setWallDraft({ x1: canvasX, y1: canvasY, x2: canvasX, y2: canvasY });
+        return;
+      }
+
       const hit = findTokenAt(e.clientX, e.clientY);
       if (hit) {
+        setSelectedTokenId(hit.token.id);
         setDragState({
           tokenId: hit.token.id,
           offsetX: hit.offsetX,
@@ -339,17 +509,25 @@ export function GameMap() {
         });
       }
     },
-    [findTokenAt]
+    [findTokenAt, W, H, isGM, isWallDrawMode]
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
-      if (!dragState.tokenId) return;
       const canvas = mapCanvasRef.current;
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       const scaleX = W / rect.width;
       const scaleY = H / rect.height;
+
+      if (wallDraft) {
+        const curX = Math.max(0, Math.min(W, Math.round((e.clientX - rect.left) * scaleX)));
+        const curY = Math.max(0, Math.min(H, Math.round((e.clientY - rect.top) * scaleY)));
+        setWallDraft((prev) => (prev ? { ...prev, x2: curX, y2: curY } : null));
+        return;
+      }
+
+      if (!dragState.tokenId) return;
 
       const currentX = (e.clientX - rect.left) * scaleX - dragState.offsetX;
       const currentY = (e.clientY - rect.top) * scaleY - dragState.offsetY;
@@ -364,11 +542,26 @@ export function GameMap() {
         setDragPreviewPos({ x: clampedX, y: clampedY });
       }
     },
-    [dragState, W, H, movementMode, isGM, updateTokenPosition]
+    [wallDraft, dragState, W, H, movementMode, isGM, updateTokenPosition]
   );
 
   const handleMouseUp = useCallback(
     (e: React.MouseEvent) => {
+      if (wallDraft) {
+        const length = Math.hypot(wallDraft.x2 - wallDraft.x1, wallDraft.y2 - wallDraft.y1);
+        if (length >= 12) {
+          addWallSegment({
+            x1: wallDraft.x1,
+            y1: wallDraft.y1,
+            x2: wallDraft.x2,
+            y2: wallDraft.y2,
+            type: 'wall',
+          });
+        }
+        setWallDraft(null);
+        return;
+      }
+
       if (dragState.tokenId) {
         setDragPreviewPos(null);
         // If in approved mode and player released mouse: send movement request
@@ -389,7 +582,7 @@ export function GameMap() {
         setDragState({ tokenId: null, offsetX: 0, offsetY: 0 });
       }
     },
-    [dragState, movementMode, isGM, W, H, updateTokenPosition, t.map.moveRequested]
+    [wallDraft, addWallSegment, dragState, movementMode, isGM, W, H, updateTokenPosition, t.map.moveRequested]
   );
 
   // File upload reader for custom map
@@ -439,7 +632,7 @@ export function GameMap() {
           </h2>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-black/50 border border-amber-900/30 text-[11px] font-cinzel text-amber-200/80 shadow-md">
+        <div className="flex flex-wrap items-center gap-2 px-3 py-1 rounded-xl bg-black/50 border border-amber-900/30 text-[11px] font-cinzel text-amber-200/80 shadow-md">
           <span className="text-amber-300 font-bold">{t.map.gridTelemetry}</span>
           <span className="text-amber-900">|</span>
           <span className="text-emerald-400">{t.map.warTableAttuned}</span>
@@ -448,11 +641,48 @@ export function GameMap() {
             {t.map.heroesCount}: {tokens.length}
           </span>
           <span className="text-amber-900">|</span>
+          <span
+            data-testid="los-telemetry-badge"
+            className={`flex items-center gap-1 font-bold ${
+              losEnabled ? 'text-emerald-400' : 'text-stone-400'
+            }`}
+          >
+            <ScanEye className="w-3.5 h-3.5" />
+            {losEnabled ? `LoS (${walls.length})` : 'LoS OFF'}
+          </span>
+          <span className="text-amber-900">|</span>
           <span className={movementMode === 'approved' ? 'text-rose-400 font-bold' : 'text-blue-400 font-bold'}>
             {movementMode === 'approved' ? t.map.gmApprovedMode : t.map.freeExploration}
           </span>
         </div>
       </motion.div>
+
+      {/* Wall Draw Mode Active Banner */}
+      <AnimatePresence>
+        {isGM && isWallDrawMode && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            data-testid="wall-draw-mode-banner"
+            className="p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-200 text-xs font-cinzel flex items-center justify-between gap-2 shadow-lg"
+          >
+            <span className="flex items-center gap-2">
+              <BrickWall className="w-4 h-4 text-amber-400" />
+              {locale === 'tr'
+                ? 'Duvar Çizim Modu Aktif: Harita üzerinde basılı tutup sürükleyerek görüş engelleyici duvar ekleyin.'
+                : 'Wall Draw Mode Active: Click and drag on the battle map canvas to place line-of-sight blocking walls.'}
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsWallDrawMode(false)}
+              className="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-[10px] font-bold cursor-pointer"
+            >
+              {locale === 'tr' ? 'Tamamla' : 'Done'}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Player Feedback Notice */}
       <AnimatePresence>
@@ -478,9 +708,10 @@ export function GameMap() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
       >
-        {/* Bottom canvas: Map image, grid, ghost paths, tokens */}
+        {/* Bottom canvas: Map image, grid, walls, ghost paths, tokens */}
         <canvas
           ref={mapCanvasRef}
+          data-testid="battle-map-canvas"
           width={W}
           height={H}
           className="absolute inset-0 cursor-crosshair w-full h-full"
@@ -490,9 +721,10 @@ export function GameMap() {
           onMouseLeave={handleMouseUp}
         />
 
-        {/* Top canvas: Dynamic fog of war */}
+        {/* Top canvas: Dynamic fog of war with 2D Raycasted Visibility Polygons */}
         <canvas
           ref={fogCanvasRef}
+          data-testid="fog-of-war-canvas"
           width={W}
           height={H}
           className="absolute inset-0 pointer-events-none w-full h-full"
@@ -512,6 +744,13 @@ export function GameMap() {
             onOpenMapLibrary={() => setShowLibraryModal(true)}
             activeMapName={activeMap.name}
             pendingRequestsCount={movementRequests.length}
+            losEnabled={losEnabled}
+            onToggleLos={() => toggleLosEnabled()}
+            isWallDrawMode={isWallDrawMode}
+            onToggleWallDrawMode={() => setIsWallDrawMode((prev) => !prev)}
+            wallCount={walls.length}
+            onLoadPresetWalls={loadPresetWalls}
+            onClearWalls={clearWalls}
           />
         )}
 
@@ -573,20 +812,34 @@ export function GameMap() {
           </motion.div>
         )}
 
-        {/* Token Count & Expedition Telemetry */}
-        <div className="absolute bottom-4 left-4 z-10 bg-[#08090c]/90 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
-          <div className="flex -space-x-1">
+        {/* Token Count, Interactive MapToken Roster & LoS Occlusion Telemetry */}
+        <div className="absolute bottom-4 left-4 z-10 bg-[#08090c]/90 border border-amber-900/40 rounded-xl px-3 py-1.5 flex items-center gap-2.5 shadow-lg backdrop-blur-md">
+          <div className="flex items-center gap-1">
             {tokens.map((tok) => (
-              <div
+              <MapTokenComponent
                 key={tok.id}
-                className="w-3.5 h-3.5 rounded-full border border-black/80 shadow-[0_0_4px_currentColor]"
-                style={{ backgroundColor: tok.color }}
+                token={tok}
+                compact
+                isSelected={tok.id === observerToken?.id}
+                isOccluded={occludedTokenIds.has(tok.id)}
+                onClick={(clicked) => setSelectedTokenId(clicked.id)}
               />
             ))}
           </div>
-          <span className="text-[10px] font-cinzel text-amber-200 font-bold">
-            {tokens.length} {t.map.expeditionTokens}
-          </span>
+          <div className="text-[10px] font-cinzel text-amber-200 font-bold">
+            <span>
+              {tokens.length} {t.map.expeditionTokens}
+            </span>
+            {losEnabled && walls.length > 0 && (
+              <span
+                data-testid="los-visible-summary"
+                className="block text-[9px] text-emerald-400/90 font-normal"
+              >
+                {tokens.length - occludedTokenIds.size}/{tokens.length}{' '}
+                {locale === 'tr' ? 'Görüş Alanında' : 'In Line of Sight'}
+              </span>
+            )}
+          </div>
         </div>
       </motion.div>
 

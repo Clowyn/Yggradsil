@@ -10,15 +10,35 @@ interface SpellNodeData {
   nodeColor: string;
   isDimmed?: boolean;
   isActiveSubclassTree?: boolean;
+  styleOpacity?: number;
 }
 
-function SpellNodeComponent({ data }: NodeProps) {
+function SpellNodeComponent(props: NodeProps) {
+  const { data } = props;
   const [showTooltip, setShowTooltip] = useState(false);
   const nodeRef = useRef<HTMLDivElement>(null);
   const { locale } = useAuth();
 
   const nodeData = data as unknown as SpellNodeData;
-  const { spell, status, nodeColor, isDimmed = false, isActiveSubclassTree = false } = nodeData;
+  const {
+    spell,
+    status,
+    nodeColor,
+    isDimmed = false,
+    isActiveSubclassTree = false,
+    styleOpacity: dataStyleOpacity,
+  } = nodeData;
+  const propStyleOpacity = (props as { style?: React.CSSProperties }).style?.opacity;
+  const resolvedOpacity =
+    typeof propStyleOpacity === 'number'
+      ? propStyleOpacity
+      : typeof dataStyleOpacity === 'number'
+        ? dataStyleOpacity
+        : undefined;
+  const hasWrapperOpacity = typeof resolvedOpacity === 'number' && resolvedOpacity < 1;
+  const effectiveDimmed = Boolean(
+    isDimmed || (typeof resolvedOpacity === 'number' && resolvedOpacity < 0.5)
+  );
 
   if (!spell) return null;
 
@@ -33,8 +53,9 @@ function SpellNodeComponent({ data }: NodeProps) {
       border-2 w-[110px] h-[110px]
     `;
 
-    if (isDimmed) {
-      return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed opacity-30`;
+    if (effectiveDimmed) {
+      const fallbackOpacityClass = hasWrapperOpacity ? '' : 'opacity-30';
+      return `${base} border-gray-800 bg-gray-950/80 cursor-not-allowed pointer-events-none ${fallbackOpacityClass}`;
     }
 
     const cursorClass = 'cursor-pointer hover:brightness-125 transition-all duration-200';
@@ -63,36 +84,35 @@ function SpellNodeComponent({ data }: NodeProps) {
       <Handle
         type="target"
         position={Position.Top}
-        className="!bg-transparent !border-0 !w-2 !h-2"
+        className="!bg-transparent !border-0 !w-1.5 !h-1.5 !min-w-0 !min-h-0 !top-0"
       />
 
       <div
         ref={nodeRef}
         className={getNodeStyles()}
         onMouseEnter={() => {
-          if (!isDimmed) {
+          if (!effectiveDimmed) {
             setShowTooltip(true);
             if (nodeRef.current) {
               const parent = nodeRef.current.closest('.react-flow__node') as HTMLElement;
-              if (parent) parent.style.zIndex = '1000';
+              if (parent) {
+                parent.style.zIndex = '1000';
+                parent.classList.add('rf-tooltip-active');
+              }
             }
           }
         }}
         onMouseLeave={() => {
           setShowTooltip(false);
-          if (nodeRef.current) {
-            const parent = nodeRef.current.closest('.react-flow__node') as HTMLElement;
-            if (parent) parent.style.zIndex = '';
-          }
         }}
         style={{
-          ...(!isDimmed && status === 'unlocked'
+          ...(!effectiveDimmed && status === 'unlocked'
             ? { boxShadow: `0 0 16px ${nodeColor}44, 0 0 28px ${nodeColor}22, inset 0 0 10px ${nodeColor}11` }
             : {}),
         }}
       >
         {/* R3. Optimized Divine Light Effect (Active Subclass Tree Root Node) */}
-        {isSubclassRoot && isActiveSubclassTree && (
+        {isSubclassRoot && isActiveSubclassTree && !effectiveDimmed && (
           <>
             {/* Outer soft light beam - uses gradient feathering instead of heavy blur */}
             <div 
@@ -122,7 +142,7 @@ function SpellNodeComponent({ data }: NodeProps) {
         )}
 
         {/* R4. Dark Mist Effect (Inactive/Sibling Subclass Tree Root Node) */}
-        {isSubclassRoot && isDimmed && (
+        {isSubclassRoot && effectiveDimmed && (
           <div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] pointer-events-none -z-20 rounded-full animate-pulse"
             style={{
@@ -133,7 +153,7 @@ function SpellNodeComponent({ data }: NodeProps) {
         )}
 
         {/* Runic spin ring for unlocked (GPU off-thread quad rotation) */}
-        {!isDimmed && status === 'unlocked' && (
+        {!effectiveDimmed && status === 'unlocked' && (
           <div
             className="absolute inset-[-5px] rounded-full border-2 border-dashed opacity-60 animate-spin pointer-events-none"
             style={{ borderColor: nodeColor, animationDuration: '25s', willChange: 'transform' }}
@@ -141,7 +161,7 @@ function SpellNodeComponent({ data }: NodeProps) {
         )}
 
         {/* Pulsing green ring for unlockable (Off-thread GPU CSS animation) */}
-        {!isDimmed && status === 'unlockable' && (
+        {!effectiveDimmed && status === 'unlockable' && (
           <div className="absolute inset-[-6px] rounded-full border-2 border-[#4ade80] pointer-events-none animate-unlockable-ring" />
         )}
 
@@ -154,50 +174,60 @@ function SpellNodeComponent({ data }: NodeProps) {
         <div
           className="mt-1 text-[9px] md:text-[10px] font-bold tracking-wide text-center px-2.5 font-cinzel line-clamp-2 max-w-full leading-tight select-none"
           style={{
-            color: isDimmed || status === 'locked' ? '#555' : nodeColor,
-            textShadow: !isDimmed && status !== 'locked' ? `0 0 8px ${nodeColor}44` : 'none',
+            color: effectiveDimmed || status === 'locked' ? '#555' : nodeColor,
+            textShadow: !effectiveDimmed && status !== 'locked' ? `0 0 8px ${nodeColor}44` : 'none',
           }}
         >
           {name}
         </div>
 
         {/* Lock icon overlay */}
-        {(status === 'locked' || isDimmed) && (
+        {(status === 'locked' || !isActiveSubclassTree) && (
           <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40">
             <span className="text-sm opacity-70">🔒</span>
           </div>
         )}
 
         {/* Checkmark badge for unlocked */}
-        {!isDimmed && status === 'unlocked' && (
-          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#ffd700] flex items-center justify-center shadow-lg border border-black/20">
+        {!effectiveDimmed && status === 'unlocked' && (
+          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#ffd700] flex items-center justify-center shadow-lg border border-black/20 z-20">
             <span className="text-[10px] text-black font-bold">✓</span>
           </div>
         )}
 
         {/* XP cost badge for unlockable */}
-        {!isDimmed && status === 'unlockable' && (
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-[#0a2e1a] border border-[#4ade80] text-[9px] text-[#4ade80] font-bold whitespace-nowrap shadow-lg">
+        {!effectiveDimmed && status === 'unlockable' && (
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-[#0a2e1a] border border-[#4ade80] text-[9px] text-[#4ade80] font-bold whitespace-nowrap shadow-lg z-20">
             {spell.xp_cost} XP
           </div>
         )}
       </div>
 
       {/* Tooltip (optimized background without expensive backdrop-filter) */}
-      <AnimatePresence>
-        {showTooltip && (
+      <AnimatePresence
+        onExitComplete={() => {
+          if (nodeRef.current) {
+            const parent = nodeRef.current.closest('.react-flow__node') as HTMLElement | null;
+            if (parent) {
+              parent.style.zIndex = '';
+              parent.classList.remove('rf-tooltip-active');
+            }
+          }
+        }}
+      >
+        {showTooltip && !effectiveDimmed && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.9 }}
+            initial={{ opacity: 0, y: 6, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.9 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute left-1/2 -translate-x-1/2 top-full mt-4 z-50 pointer-events-none"
+            exit={{ opacity: 0, y: 6, scale: 0.94 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 z-[100] pointer-events-none"
           >
             <div
-              className="bg-[#0e0e18]/95 border border-white/10 rounded-xl p-4 min-w-[240px] max-w-[280px] shadow-2xl"
+              className="bg-[#0b0d14]/98 border border-white/15 rounded-xl p-4 min-w-[240px] max-w-[280px] shadow-2xl"
               style={{
-                borderColor: `${nodeColor}44`,
-                boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 20px ${nodeColor}22`,
+                borderColor: `${nodeColor}55`,
+                boxShadow: `0 14px 36px rgba(0,0,0,0.88), 0 0 22px ${nodeColor}28`,
               }}
             >
               {/* Header */}
@@ -259,7 +289,7 @@ function SpellNodeComponent({ data }: NodeProps) {
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!bg-transparent !border-0 !w-2 !h-2"
+        className="!bg-transparent !border-0 !w-1.5 !h-1.5 !min-w-0 !min-h-0 !bottom-0"
       />
     </>
   );
@@ -270,13 +300,18 @@ function areSpellNodePropsEqual(prev: NodeProps, next: NodeProps): boolean {
   const nextData = next.data as unknown as SpellNodeData | undefined;
   if (!prevData || !nextData) return false;
 
+  const prevStyle = (prev as { style?: React.CSSProperties }).style;
+  const nextStyle = (next as { style?: React.CSSProperties }).style;
+
   return (
     prev.id === next.id &&
     prevData.status === nextData.status &&
     prevData.isDimmed === nextData.isDimmed &&
     prevData.isActiveSubclassTree === nextData.isActiveSubclassTree &&
     prevData.nodeColor === nextData.nodeColor &&
+    prevData.styleOpacity === nextData.styleOpacity &&
     prev.selected === next.selected &&
+    prevStyle?.opacity === nextStyle?.opacity &&
     prevData.spell?.id === nextData.spell?.id
   );
 }

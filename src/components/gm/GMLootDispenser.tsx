@@ -227,7 +227,7 @@ export function GMLootDispenser() {
     setNewChestItems((prev) => prev.filter((_, i) => i !== idx));
   };
 
-  // Dispense items to Character's 24-slot inventory
+  // Dispense items & gold to Character's 24-slot inventory
   const handleDispenseToCharacter = async () => {
     if (!dispenseTargetChest || !selectedCharId) return;
 
@@ -244,7 +244,7 @@ export function GMLootDispenser() {
       const usedSlotIndices = new Set<number>();
       if (!slotsErr && existingSlots) {
         existingSlots.forEach((s) => {
-          if (s.slot_index !== null && s.slot_index !== undefined) {
+          if (typeof s.slot_index === 'number') {
             usedSlotIndices.add(s.slot_index);
           }
         });
@@ -264,16 +264,15 @@ export function GMLootDispenser() {
       }[] = [];
 
       const chestItems = dispenseTargetChest.items || [];
-      let currentSlot = 0;
+      let currentSlot = 4; // Start in Adventurer's Pack bag slots (4..23)
 
       for (const item of chestItems) {
-        // Find next free slot in [0..23]
         while (currentSlot < 24 && usedSlotIndices.has(currentSlot)) {
           currentSlot++;
         }
 
         if (currentSlot >= 24) {
-          // Inventory full!
+          // Bag slots full!
           break;
         }
 
@@ -286,10 +285,6 @@ export function GMLootDispenser() {
               d.name_en?.toLowerCase() === item.name.toLowerCase()
           );
           matchedDefId = match?.id || allDefs[0].id;
-        }
-
-        if (!matchedDefId && allDefs && allDefs.length > 0) {
-          matchedDefId = allDefs[0].id;
         }
 
         if (matchedDefId) {
@@ -305,18 +300,64 @@ export function GMLootDispenser() {
         }
       }
 
-      // 3. Insert into inventory_items if any
+      // 3. Insert into inventory_items if any (with fallback if slot_index is not yet migrated)
       if (itemsToInsert.length > 0) {
         const { error: insertErr } = await supabase
           .from('inventory_items')
           .insert(itemsToInsert);
 
         if (insertErr) {
-          console.warn('Inventory insert returned error:', insertErr);
+          const fallbackItems = itemsToInsert.map(({ character_id, item_definition_id, quantity, equipped }) => ({
+            character_id,
+            item_definition_id,
+            quantity,
+            equipped,
+          }));
+          await supabase.from('inventory_items').insert(fallbackItems);
         }
       }
 
-      // 4. Mark chest as looted
+      // 4. Award chest gold_amount to the target character
+      const chestGold = Math.max(0, Number(dispenseTargetChest.gold_amount) || 0);
+      if (chestGold > 0) {
+        const goldStorageKey = `dnd_gold_${selectedCharId}`;
+        let currentGold =
+          typeof targetChar.appearance?.gold === 'number'
+            ? targetChar.appearance.gold
+            : typeof targetChar.gold === 'number'
+            ? targetChar.gold
+            : 1247;
+        try {
+          const savedLocalGold = localStorage.getItem(goldStorageKey);
+          if (savedLocalGold !== null && !Number.isNaN(Number(savedLocalGold))) {
+            currentGold = Number(savedLocalGold);
+          }
+        } catch {
+          // ignore
+        }
+        const nextGold = currentGold + chestGold;
+        try {
+          localStorage.setItem(goldStorageKey, String(nextGold));
+        } catch {
+          // ignore
+        }
+        const nextAppearance = {
+          ...(targetChar.appearance || {}),
+          gold: nextGold,
+        };
+        const { error: goldErr } = await supabase
+          .from('characters')
+          .update({ gold: nextGold, appearance: nextAppearance })
+          .eq('id', selectedCharId);
+        if (goldErr) {
+          await supabase
+            .from('characters')
+            .update({ appearance: nextAppearance })
+            .eq('id', selectedCharId);
+        }
+      }
+
+      // 5. Mark chest as looted
       await handleToggleLooted(dispenseTargetChest.id, false);
 
       setDispenseStatusMessage({

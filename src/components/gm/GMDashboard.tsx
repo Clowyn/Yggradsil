@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -10,11 +10,32 @@ import {
 import { useCampaign } from '../../contexts/CampaignContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import { GMSpellManager } from './GMSpellManager';
-import { GMCombatTracker } from './GMCombatTracker';
-import { GMAtmosphereManager } from './GMAtmosphereManager';
-import { GMLootDispenser } from './GMLootDispenser';
 import type { RaceDefinition, SubclassDefinition, StatKey } from '../../lib/types';
+import { arcaneToast } from '../../lib/toast';
+import { DEMO_SKILLS } from '../../hooks/useSkillTree';
+
+// Lazy-loaded heavy GM sub-modules for optimal chunk splitting
+const GMSpellManager = lazy(() =>
+  import('./GMSpellManager').then((m) => ({ default: m.GMSpellManager }))
+);
+const GMCombatTracker = lazy(() =>
+  import('./GMCombatTracker').then((m) => ({ default: m.GMCombatTracker }))
+);
+const GMAtmosphereManager = lazy(() =>
+  import('./GMAtmosphereManager').then((m) => ({ default: m.GMAtmosphereManager }))
+);
+const GMLootDispenser = lazy(() =>
+  import('./GMLootDispenser').then((m) => ({ default: m.GMLootDispenser }))
+);
+const PlayerManager = lazy(() =>
+  import('./PlayerManager').then((m) => ({ default: m.PlayerManager }))
+);
+const XPDistributor = lazy(() =>
+  import('./XPDistributor').then((m) => ({ default: m.XPDistributor }))
+);
+const GMItemManager = lazy(() =>
+  import('../inventory/GMItemManager').then((m) => ({ default: m.GMItemManager }))
+);
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -39,6 +60,8 @@ interface DemoItem {
   name: string;
   icon: string;
   rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  type?: string;
+  description?: string;
   quantity: number;
   equipped: boolean;
 }
@@ -52,7 +75,7 @@ interface XPLogEntry {
   timestamp: Date;
 }
 
-// ─── Demo Data ──────────────────────────────────────────────────
+// ─── Constants ──────────────────────────────────────────────────
 
 const RARITY_COLORS: Record<string, string> = {
   common: '#9ca3af',
@@ -61,53 +84,6 @@ const RARITY_COLORS: Record<string, string> = {
   epic: '#a855f7',
   legendary: '#ffd700',
 };
-
-/*
-const DEMO_INVENTORY: DemoItem[] = [
-  { id: 'i1', name: 'Flamebrand', icon: '🗡️', rarity: 'legendary', quantity: 1, equipped: true },
-  { id: 'i2', name: 'Healing Potion', icon: '🧪', rarity: 'common', quantity: 5, equipped: false },
-  { id: 'i3', name: 'Mithril Chainmail', icon: '🛡️', rarity: 'epic', quantity: 1, equipped: true },
-  { id: 'i4', name: 'Dragon Scale', icon: '🐉', rarity: 'uncommon', quantity: 3, equipped: false },
-  { id: 'i5', name: 'Ring of Shadows', icon: '💍', rarity: 'rare', quantity: 1, equipped: true },
-];
-*/
-
-/*
-const INITIAL_PLAYERS: DemoPlayer[] = [
-  {
-    id: 'p1', name: 'Kael the Bold', race: 'Human', className: 'Warrior',
-    level: 8, xp: 3400, color: '#dc2626',
-    hp: { current: 72, max: 85 }, ac: 18,
-    stats: { STR: 18, DEX: 12, CON: 16, INT: 10, WIS: 13, CHA: 14 },
-    skills: ['Power Strike', 'Stone Skin'],
-    inventory: [...DEMO_INVENTORY],
-  },
-  {
-    id: 'p2', name: 'Lyria Moonweaver', race: 'Elf', className: 'Mage',
-    level: 7, xp: 2800, color: '#2563eb',
-    hp: { current: 38, max: 42 }, ac: 12,
-    stats: { STR: 8, DEX: 14, CON: 12, INT: 20, WIS: 15, CHA: 13 },
-    skills: ['Arcane Focus', 'Swift Dodge'],
-    inventory: [...DEMO_INVENTORY.slice(1, 4)],
-  },
-  {
-    id: 'p3', name: 'Thorne Ironbark', race: 'Dwarf', className: 'Paladin',
-    level: 9, xp: 4100, color: '#16a34a',
-    hp: { current: 95, max: 98 }, ac: 20,
-    stats: { STR: 16, DEX: 10, CON: 18, INT: 11, WIS: 16, CHA: 14 },
-    skills: ['Stone Skin', 'Inspire', 'Power Strike'],
-    inventory: [...DEMO_INVENTORY.slice(0, 3)],
-  },
-  {
-    id: 'p4', name: 'Mora Shadowveil', race: 'Tiefling', className: 'Rogue',
-    level: 6, xp: 2100, color: '#9333ea',
-    hp: { current: 44, max: 52 }, ac: 15,
-    stats: { STR: 10, DEX: 20, CON: 13, INT: 14, WIS: 11, CHA: 16 },
-    skills: ['Swift Dodge'],
-    inventory: [...DEMO_INVENTORY.slice(2)],
-  },
-];
-*/
 
 const ALL_ITEMS: DemoItem[] = [
   { id: 'new-1', name: 'Potion of Invisibility', icon: '🫧', rarity: 'rare', quantity: 1, equipped: false },
@@ -179,6 +155,14 @@ export function GMDashboard() {
     level: number;
     xp_total: number;
     xp_available: number;
+    vitals?: {
+      currentHp?: number;
+    } | null;
+    appearance?: {
+      vitals?: {
+        currentHp?: number;
+      };
+    } | null;
     race?: {
       id: string;
       name: string;
@@ -256,8 +240,26 @@ export function GMDashboard() {
     const idStr = char.id || '';
     const colorIndex = Math.abs(idStr.split('').reduce((acc: number, code: string) => acc + code.charCodeAt(0), 0)) % colors.length;
     
+    const charLevel = char.level || 1;
     const conStat = statsMap['CON'] || 10;
-    const maxHP = 50 + Math.floor((conStat - 10) / 2) * 5;
+    const maxHP = Math.max(10, 50 + Math.floor((conStat - 10) / 2) * 5 + (charLevel - 1) * 6);
+    const dbVitals =
+      char.vitals && Object.keys(char.vitals).length > 0
+        ? char.vitals
+        : char.appearance?.vitals;
+    let currentHP = typeof dbVitals?.currentHp === 'number' ? Math.min(maxHP, dbVitals.currentHp) : maxHP;
+    try {
+      const localVitals = localStorage.getItem(`dnd_vitals_${char.id}`);
+      if (localVitals) {
+        const parsed = JSON.parse(localVitals) as { currentHp?: number };
+        if (typeof parsed.currentHp === 'number') {
+          currentHP = Math.min(maxHP, Math.max(0, parsed.currentHp));
+        }
+      }
+    } catch {
+      // ignore
+    }
+
     const dexStat = statsMap['DEX'] || 10;
     const baseAC = 10 + Math.floor((dexStat - 10) / 2);
     const equippedArmor = char.inventory?.find((i) => i.equipped && i.item_definition?.type === 'armor');
@@ -268,11 +270,11 @@ export function GMDashboard() {
       name: char.name,
       race: char.race?.name || 'Unknown',
       className: char.subclass ? (locale === 'en' ? char.subclass.name_en : char.subclass.name_tr) : 'Unknown',
-      level: char.level || 1,
+      level: charLevel,
       xp: char.xp_total || 0,
       xp_available: char.xp_available ?? 0,
       color: colors[colorIndex],
-      hp: { current: maxHP, max: maxHP },
+      hp: { current: currentHP, max: maxHP },
       ac,
       stats: statsMap,
       skills: skillsList,
@@ -352,6 +354,37 @@ export function GMDashboard() {
     };
   }, [campaign?.id, fetchLiveCharacters]);
 
+  // Load initial XP ledger logs
+  useEffect(() => {
+    if (!campaign?.id || players.length === 0) return;
+    let isMounted = true;
+    const playerIds = players.map((p) => p.id);
+    supabase
+      .from('xp_ledger')
+      .select('id, character_id, amount, reason, created_at')
+      .in('character_id', playerIds)
+      .order('created_at', { ascending: false })
+      .limit(20)
+      .then(({ data }) => {
+        if (!isMounted || !data || data.length === 0) return;
+        const mapped: XPLogEntry[] = data.map((row: Record<string, unknown>) => {
+          const matchedPlayer = players.find((p) => p.id === row.character_id);
+          return {
+            id: String(row.id),
+            playerId: String(row.character_id),
+            playerName: matchedPlayer?.name || 'Adventurer',
+            amount: Number(row.amount) || 0,
+            reason: (row.reason as string) || 'XP Awarded',
+            timestamp: row.created_at ? new Date(String(row.created_at)) : new Date(),
+          };
+        });
+        setXpLog(mapped);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [campaign?.id, players]);
+
   // ── XP Handlers ──
   const giveXP = async (playerId: string, amount: number, reason: string) => {
     if (amount === 0) return;
@@ -361,76 +394,318 @@ export function GMDashboard() {
     const newXp = Math.max(0, player.xp + amount);
     const newLevel = Math.floor(newXp / 1000) + 1;
     const newXpAvailable = Math.max(0, (player.xp_available ?? 0) + amount);
+    const cleanReason = reason || (amount > 0 ? 'XP Awarded' : 'XP Deducted');
+
+    // Optimistically update local state & log
+    setPlayers(prev => prev.map(p =>
+      p.id === playerId ? { ...p, xp: newXp, xp_available: newXpAvailable, level: newLevel } : p
+    ));
+
+    setXpLog(prev => [{
+      id: `xp-${Date.now()}`,
+      playerId,
+      playerName: player.name,
+      amount,
+      reason: cleanReason,
+      timestamp: new Date(),
+    }, ...prev]);
 
     try {
-      const { error } = await supabase
-        .from('characters')
-        .update({
-          xp_total: newXp,
-          xp_available: newXpAvailable,
-          level: newLevel,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', playerId);
-
-      if (error) throw error;
-      
-      // Update local state
-      setPlayers(prev => prev.map(p =>
-        p.id === playerId ? { ...p, xp: newXp, xp_available: newXpAvailable, level: newLevel } : p
-      ));
-
-      setXpLog(prev => [{
-        id: `xp-${Date.now()}`,
-        playerId,
-        playerName: player.name,
+      // First attempt authoritative gm_award_xp RPC (updates characters + inserts xp_ledger atomically)
+      const { error: rpcError } = await supabase.rpc('gm_award_xp', {
+        char_id: playerId,
         amount,
-        reason: reason || (amount > 0 ? 'XP Awarded' : 'XP Deducted'),
-        timestamp: new Date(),
-      }, ...prev]);
+        award_reason: cleanReason,
+      });
+
+      if (rpcError) {
+        // Fallback: direct table update + xp_ledger insert
+        const { error } = await supabase
+          .from('characters')
+          .update({
+            xp_total: newXp,
+            xp_available: newXpAvailable,
+            level: newLevel,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', playerId);
+
+        if (error) throw error;
+
+        await supabase.from('xp_ledger').insert({
+          campaign_id: campaign?.id,
+          character_id: playerId,
+          amount,
+          reason: cleanReason,
+        });
+      }
+
+      arcaneToast.success(
+        locale === 'tr'
+          ? `${player.name}: ${amount > 0 ? `+${amount}` : amount} XP kaydedildi.`
+          : `${player.name}: ${amount > 0 ? `+${amount}` : amount} XP recorded.`
+      );
     } catch (err) {
       console.error('Failed to update XP:', err);
     }
   };
 
-  // ── Inventory Handlers ──
-  const addItem = (playerId: string, item: DemoItem) => {
+  // ── Inventory Handlers (Live Supabase inventory_items + item_definitions) ──
+  const addItem = async (playerId: string, item: DemoItem) => {
+    const tempId = `${item.id}-${Date.now()}`;
     setPlayers(prev => prev.map(p =>
       p.id === playerId
-        ? { ...p, inventory: [...p.inventory, { ...item, id: `${item.id}-${Date.now()}` }] }
+        ? { ...p, inventory: [...p.inventory, { ...item, id: tempId }] }
         : p
     ));
+
+    try {
+      // 1. Resolve or create item_definition in Supabase
+      let itemDefId: string | null = null;
+      const { data: existingDefs } = await supabase
+        .from('item_definitions')
+        .select('id, name_en, name_tr')
+        .or(`name_en.ilike.${item.name},name_tr.ilike.${item.name}`)
+        .limit(1);
+
+      if (existingDefs && existingDefs.length > 0) {
+        itemDefId = String(existingDefs[0].id);
+      } else {
+        const { data: createdDef } = await supabase
+          .from('item_definitions')
+          .insert({
+            name_en: item.name,
+            name_tr: item.name,
+            description_en: item.description || `Granted by the Game Master: ${item.name}.`,
+            description_tr: item.description || `Oyun Yöneticisi tarafından verildi: ${item.name}.`,
+            type: item.type || 'misc',
+            rarity: item.rarity || 'common',
+            icon_url: item.icon || '🎒',
+            properties: { icon: item.icon || '🎒', Weight: '1' },
+          })
+          .select('id')
+          .single();
+        if (createdDef) {
+          itemDefId = String(createdDef.id);
+        }
+      }
+
+      if (!itemDefId) return;
+
+      // 2. Find an available bag slot_index (4..23)
+      const { data: existingInv } = await supabase
+        .from('inventory_items')
+        .select('slot_index')
+        .eq('character_id', playerId);
+
+      const usedSlots = new Set(
+        (existingInv || [])
+          .map((r: Record<string, unknown>) => r.slot_index)
+          .filter((idx): idx is number => typeof idx === 'number')
+      );
+      let targetSlot = 4;
+      for (let s = 4; s < 24; s++) {
+        if (!usedSlots.has(s)) {
+          targetSlot = s;
+          break;
+        }
+      }
+
+      // 3. Insert into inventory_items
+      const { data: insertedRow, error: insertErr } = await supabase
+        .from('inventory_items')
+        .insert({
+          character_id: playerId,
+          item_definition_id: itemDefId,
+          quantity: item.quantity || 1,
+          equipped: false,
+          slot_index: targetSlot,
+        })
+        .select('id')
+        .single();
+
+      if (insertErr) {
+        // Fallback if slot_index is not yet migrated on remote DB
+        const { data: fallbackRow } = await supabase
+          .from('inventory_items')
+          .insert({
+            character_id: playerId,
+            item_definition_id: itemDefId,
+            quantity: item.quantity || 1,
+            equipped: false,
+          })
+          .select('id')
+          .single();
+        if (fallbackRow?.id) {
+          setPlayers(prev => prev.map(p =>
+            p.id === playerId
+              ? { ...p, inventory: p.inventory.map(i => i.id === tempId ? { ...i, id: String(fallbackRow.id) } : i) }
+              : p
+          ));
+        }
+      } else if (insertedRow?.id) {
+        setPlayers(prev => prev.map(p =>
+          p.id === playerId
+            ? { ...p, inventory: p.inventory.map(i => i.id === tempId ? { ...i, id: String(insertedRow.id) } : i) }
+            : p
+        ));
+      }
+
+      arcaneToast.success(
+        locale === 'tr'
+          ? `${item.name} envantere eklendi!`
+          : `${item.name} added to character inventory!`
+      );
+    } catch (err) {
+      console.error('Failed to add inventory item:', err);
+    }
   };
 
-  const removeItem = (playerId: string, itemId: string) => {
+  const removeItem = async (playerId: string, itemId: string) => {
     setPlayers(prev => prev.map(p =>
       p.id === playerId
         ? { ...p, inventory: p.inventory.filter(i => i.id !== itemId) }
         : p
     ));
+
+    try {
+      await supabase
+        .from('inventory_items')
+        .delete()
+        .eq('id', itemId);
+    } catch (err) {
+      console.error('Failed to delete inventory item:', err);
+    }
   };
 
-  // ── Skill Handlers ──
-  const addSkill = (playerId: string, skill: string) => {
+  // ── Skill Handlers (Live Supabase character_skills + localStorage sync) ──
+  const addSkill = async (playerId: string, skill: string) => {
     setPlayers(prev => prev.map(p =>
       p.id === playerId && !p.skills.includes(skill)
         ? { ...p, skills: [...p.skills, skill] }
         : p
     ));
+
+    const matchedDemoSkill = DEMO_SKILLS.find(
+      (s) => s.name.toLowerCase() === skill.toLowerCase() || s.nameTr?.toLowerCase() === skill.toLowerCase()
+    );
+    const canonicalSkillId = matchedDemoSkill?.id || skill;
+
+    try {
+      const storageKey = `dnd_unlocked_skills_${playerId}`;
+      const existingRaw = localStorage.getItem(storageKey);
+      const currentSet = new Set<string>(existingRaw ? (JSON.parse(existingRaw) as string[]) : []);
+      currentSet.add(canonicalSkillId);
+      localStorage.setItem(storageKey, JSON.stringify([...currentSet]));
+    } catch {
+      // ignore storage errors
+    }
+
+    try {
+      // Look up matching skill_definitions row in Supabase
+      let targetSkillId: string | null = null;
+      const { data: skillRows } = await supabase
+        .from('skill_definitions')
+        .select('id, skill_key, name_en, name_tr')
+        .or(`skill_key.eq.${canonicalSkillId},name_en.ilike.${skill},name_tr.ilike.${skill}`)
+        .limit(1);
+
+      if (skillRows && skillRows.length > 0) {
+        targetSkillId = String(skillRows[0].id);
+      } else if (matchedDemoSkill) {
+        const { data: createdSkill } = await supabase
+          .from('skill_definitions')
+          .insert({
+            skill_key: matchedDemoSkill.id,
+            name_en: matchedDemoSkill.name,
+            name_tr: matchedDemoSkill.nameTr || matchedDemoSkill.name,
+            description_en: matchedDemoSkill.description,
+            description_tr: matchedDemoSkill.descriptionTr || matchedDemoSkill.description,
+            stat_parent: matchedDemoSkill.stat,
+            xp_cost: matchedDemoSkill.xpCost,
+            tier: matchedDemoSkill.tier,
+            prerequisites: matchedDemoSkill.prerequisites,
+            effects: matchedDemoSkill.effects,
+          })
+          .select('id')
+          .single();
+        if (createdSkill?.id) {
+          targetSkillId = String(createdSkill.id);
+        }
+      }
+
+      if (targetSkillId) {
+        await supabase
+          .from('character_skills')
+          .upsert(
+            {
+              character_id: playerId,
+              skill_definition_id: targetSkillId,
+              unlocked: true,
+              unlocked_at: new Date().toISOString(),
+            },
+            { onConflict: 'character_id,skill_definition_id' }
+          );
+      }
+
+      arcaneToast.success(
+        locale === 'tr'
+          ? `${skill} yeteneği açıldı!`
+          : `Unlocked skill: ${skill}!`
+      );
+    } catch (err) {
+      console.error('Failed to unlock skill in Supabase:', err);
+    }
   };
 
-  const removeSkill = (playerId: string, skill: string) => {
+  const removeSkill = async (playerId: string, skill: string) => {
     setPlayers(prev => prev.map(p =>
       p.id === playerId
         ? { ...p, skills: p.skills.filter(s => s !== skill) }
         : p
     ));
+
+    const matchedDemoSkill = DEMO_SKILLS.find(
+      (s) => s.name.toLowerCase() === skill.toLowerCase() || s.nameTr?.toLowerCase() === skill.toLowerCase()
+    );
+    const canonicalSkillId = matchedDemoSkill?.id || skill;
+
+    try {
+      const storageKey = `dnd_unlocked_skills_${playerId}`;
+      const existingRaw = localStorage.getItem(storageKey);
+      if (existingRaw) {
+        const currentSet = new Set<string>(JSON.parse(existingRaw) as string[]);
+        currentSet.delete(canonicalSkillId);
+        localStorage.setItem(storageKey, JSON.stringify([...currentSet]));
+      }
+    } catch {
+      // ignore
+    }
+
+    try {
+      const { data: skillRows } = await supabase
+        .from('skill_definitions')
+        .select('id, skill_key, name_en, name_tr')
+        .or(`skill_key.eq.${canonicalSkillId},name_en.ilike.${skill},name_tr.ilike.${skill}`)
+        .limit(1);
+
+      if (skillRows && skillRows.length > 0) {
+        const targetSkillId = String(skillRows[0].id);
+        await supabase
+          .from('character_skills')
+          .delete()
+          .eq('character_id', playerId)
+          .eq('skill_definition_id', targetSkillId);
+      }
+    } catch (err) {
+      console.error('Failed to remove skill in Supabase:', err);
+    }
   };
 
   const handleCreateChar = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!campaign?.id || !newCharName || !newCharProfileId || !newCharRaceId || !newCharSubclassId) {
-      alert('Please fill in all fields');
+      arcaneToast.warning(locale === 'tr' ? 'Lütfen tüm alanları doldurun.' : 'Please fill in all fields');
       return;
     }
 
@@ -495,7 +770,7 @@ export function GMDashboard() {
       fetchLiveCharacters();
     } catch (err) {
       console.error('Failed to create character:', err);
-      alert('Error creating character: ' + (err as Error).message);
+      arcaneToast.error('Error creating character: ' + (err as Error).message);
     }
   };
 
@@ -575,57 +850,65 @@ export function GMDashboard() {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25 }}
         >
-          {activeTab === 'overview' && (
-            <OverviewTab players={players} xpLog={xpLog} onNavigate={setActiveTab} />
-          )}
-          {activeTab === 'combat' && (
-            <GMCombatTracker />
-          )}
-          {activeTab === 'atmosphere' && (
-            <GMAtmosphereManager />
-          )}
-          {activeTab === 'loot' && (
-            <GMLootDispenser />
-          )}
-          {activeTab === 'party' && (
-            <PartyTab
-              players={players}
-              selectedId={selectedPlayerId}
-              onSelect={setSelectedPlayerId}
-              onNavigate={setActiveTab}
-              onCreateClick={() => setShowCreateModal(true)}
-            />
-          )}
-          {activeTab === 'xp' && (
-            <XPTab
-              players={players}
-              xpLog={xpLog}
-              onGiveXP={giveXP}
-              selectedId={selectedPlayerId}
-              onSelect={setSelectedPlayerId}
-            />
-          )}
-          {activeTab === 'inventory' && (
-            <InventoryTab
-              players={players}
-              selectedId={selectedPlayerId}
-              onSelect={setSelectedPlayerId}
-              onAddItem={addItem}
-              onRemoveItem={removeItem}
-            />
-          )}
-          {activeTab === 'stats' && (
-            <StatTreeTab
-              players={players}
-              selectedId={selectedPlayerId}
-              onSelect={setSelectedPlayerId}
-              onAddSkill={addSkill}
-              onRemoveSkill={removeSkill}
-            />
-          )}
-          {activeTab === 'spells' && (
-            <GMSpellManager />
-          )}
+          <Suspense
+            fallback={
+              <div className="p-8 text-center text-xs font-cinzel text-amber-400/70 uppercase tracking-widest animate-pulse">
+                Loading Sanctum Module...
+              </div>
+            }
+          >
+            {activeTab === 'overview' && (
+              <OverviewTab players={players} xpLog={xpLog} onNavigate={setActiveTab} />
+            )}
+            {activeTab === 'combat' && (
+              <GMCombatTracker />
+            )}
+            {activeTab === 'atmosphere' && (
+              <GMAtmosphereManager />
+            )}
+            {activeTab === 'loot' && (
+              <GMLootDispenser />
+            )}
+            {activeTab === 'party' && (
+              <PartyTab
+                players={players}
+                selectedId={selectedPlayerId}
+                onSelect={setSelectedPlayerId}
+                onNavigate={setActiveTab}
+                onCreateClick={() => setShowCreateModal(true)}
+              />
+            )}
+            {activeTab === 'xp' && (
+              <XPTab
+                players={players}
+                xpLog={xpLog}
+                onGiveXP={giveXP}
+                selectedId={selectedPlayerId}
+                onSelect={setSelectedPlayerId}
+              />
+            )}
+            {activeTab === 'inventory' && (
+              <InventoryTab
+                players={players}
+                selectedId={selectedPlayerId}
+                onSelect={setSelectedPlayerId}
+                onAddItem={addItem}
+                onRemoveItem={removeItem}
+              />
+            )}
+            {activeTab === 'stats' && (
+              <StatTreeTab
+                players={players}
+                selectedId={selectedPlayerId}
+                onSelect={setSelectedPlayerId}
+                onAddSkill={addSkill}
+                onRemoveSkill={removeSkill}
+              />
+            )}
+            {activeTab === 'spells' && (
+              <GMSpellManager />
+            )}
+          </Suspense>
         </motion.div>
       </AnimatePresence>
 
@@ -1119,6 +1402,25 @@ function PartyTab({
           </motion.div>
         );
       })}
+
+      {/* Quick Party Roster Summary (PlayerManager integration) */}
+      <div className="pt-4 border-t border-white/5">
+        <PlayerManager
+          players={players.map(p => ({
+            id: p.id,
+            name: p.name,
+            race: p.race,
+            className: p.className,
+            level: p.level,
+            xp: p.xp,
+            color: p.color,
+            hp: p.hp,
+            ac: p.ac,
+            stats: p.stats,
+          }))}
+          onSelectPlayer={(id) => onSelect(id)}
+        />
+      </div>
     </div>
   );
 }
@@ -1227,6 +1529,14 @@ function XPTab({
           </motion.div>
         ))}
       </div>
+
+      {/* Quick Preset XP Distributor */}
+      <XPDistributor
+        players={players.map(p => ({ id: p.id, name: p.name, level: p.level, xp: p.xp, color: p.color }))}
+        onGiveXP={(playerId, amount, reason) => {
+          onGiveXP(playerId, amount, reason);
+        }}
+      />
 
       {/* XP History */}
       {xpLog.length > 0 && (
@@ -1360,6 +1670,24 @@ function InventoryTab({
             {selectedPlayer.inventory.length === 0 && (
               <div className="text-center py-8 text-gray-600 text-sm">No items in inventory</div>
             )}
+          </div>
+
+          {/* Custom Item Forger (GMItemManager) */}
+          <div className="pt-4 border-t border-white/5">
+            <GMItemManager
+              players={players.map(p => ({ id: p.id, name: p.name }))}
+              selectedPlayerId={selectedPlayer.id}
+              onGiveItemToPlayer={(playerId, item) => {
+                onAddItem(playerId, {
+                  id: item.id,
+                  name: item.name,
+                  icon: item.icon,
+                  rarity: item.rarity,
+                  quantity: item.quantity,
+                  equipped: item.equipped,
+                });
+              }}
+            />
           </div>
         </div>
       ) : (

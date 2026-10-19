@@ -4,6 +4,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { CampaignProvider } from './contexts/CampaignContext';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { ArcaneLoadingFallback } from './components/common/ArcaneLoadingFallback';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
+import { ArcaneToastContainer } from './components/common/ArcaneToast';
 
 // Lazy-loaded layouts for initial bundle optimization
 const AppLayout = lazy(() => import('./components/layout/AppLayout').then(m => ({ default: m.AppLayout })));
@@ -34,61 +36,64 @@ function PageFallback() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <CampaignProvider>
-          <Suspense fallback={<PageFallback />}>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <AuthProvider>
+          <CampaignProvider>
+            <ArcaneToastContainer />
+            <Suspense fallback={<PageFallback />}>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
 
-              {/* Main App Routes with Persistent Shell */}
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/character" element={<CharacterPage />} />
-                <Route path="/stat-tree" element={<SkillTreePage />} />
-                <Route path="/spells" element={<SpellTreePage />} />
-                <Route path="/map" element={<MapPage />} />
-                <Route path="/inventory" element={<InventoryPage />} />
-                <Route path="/arena" element={<ArenaPage />} />
+                {/* Main App Routes with Persistent Shell */}
                 <Route
-                  path="/gm"
                   element={
-                    <ProtectedRoute requireGM>
-                      <GMPage />
+                    <ProtectedRoute>
+                      <AppLayout />
                     </ProtectedRoute>
                   }
-                />
-              </Route>
+                >
+                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/character" element={<CharacterPage />} />
+                  <Route path="/stat-tree" element={<SkillTreePage />} />
+                  <Route path="/spells" element={<SpellTreePage />} />
+                  <Route path="/map" element={<MapPage />} />
+                  <Route path="/inventory" element={<InventoryPage />} />
+                  <Route path="/arena" element={<ArenaPage />} />
+                  <Route
+                    path="/gm"
+                    element={
+                      <ProtectedRoute requireGM>
+                        <GMPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Route>
 
-              {/* Domain Admin Routes with Persistent Admin Shell */}
-              <Route
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <AdminLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route path="/admin" element={<AdminDashboardPage />} />
-                <Route path="/admin/users" element={<UsersPage />} />
-                <Route path="/admin/characters" element={<CharactersPage />} />
-                <Route path="/admin/campaigns" element={<CampaignsPage />} />
-                <Route path="/admin/items" element={<ItemCatalogPage />} />
-                <Route path="/admin/logs" element={<LogsPage />} />
-              </Route>
+                {/* Domain Admin Routes with Persistent Admin Shell */}
+                <Route
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <AdminLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route path="/admin" element={<AdminDashboardPage />} />
+                  <Route path="/admin/users" element={<UsersPage />} />
+                  <Route path="/admin/characters" element={<CharactersPage />} />
+                  <Route path="/admin/campaigns" element={<CampaignsPage />} />
+                  <Route path="/admin/items" element={<ItemCatalogPage />} />
+                  <Route path="/admin/logs" element={<LogsPage />} />
+                </Route>
 
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Suspense>
-        </CampaignProvider>
-      </AuthProvider>
-    </BrowserRouter>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
+          </CampaignProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

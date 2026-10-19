@@ -10,6 +10,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useCampaign } from '../../contexts/CampaignContext';
 import { supabase } from '../../lib/supabase';
 import { RACE_TIERS, RACES, CLASS_CATEGORIES, SUBCLASSES } from '../../lib/constants';
+import { arcaneToast } from '../../lib/toast';
 
 const STEPS = [
   { key: 'tier', label_en: 'Race Tier', label_tr: 'Irk Katmanı' },
@@ -36,7 +37,7 @@ const slideVariants = {
 
 export function CharacterCreation() {
   const { user, locale } = useAuth();
-  const { campaign, loading: campaignLoading } = useCampaign();
+  const { campaign, loading: campaignLoading, setActiveCharacterId } = useCampaign();
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -74,11 +75,11 @@ export function CharacterCreation() {
   const handleConfirm = async () => {
     try {
       if (!user) {
-        alert(locale === 'tr' ? 'Oturum açmadınız!' : 'Not logged in!');
+        arcaneToast.error(locale === 'tr' ? 'Oturum açmadınız!' : 'Not logged in!');
         return;
       }
       if (campaignLoading) {
-        alert(locale === 'tr' ? 'Hikaye yükleniyor, lütfen bekleyin...' : 'Story is still loading, please wait...');
+        arcaneToast.warning(locale === 'tr' ? 'Hikaye yükleniyor, lütfen bekleyin...' : 'Story is still loading, please wait...');
         return;
       }
       let activeCampaign = campaign;
@@ -106,7 +107,11 @@ export function CharacterCreation() {
 
       if (!activeCampaign) {
         console.error('Campaign is null. Check browser console for RLS or Supabase errors.');
-        alert(locale === 'tr' ? 'Aktif hikaye bulunamadı! Lütfen Supabase SQL Editor üzerinden admin_migration.sql dosyasını çalıştırdığınızdan emin olun.' : 'No active story found! Please ensure admin_migration.sql has been executed in Supabase SQL Editor.');
+        arcaneToast.error(
+          locale === 'tr'
+            ? 'Aktif hikaye bulunamadı! Lütfen Supabase SQL Editor üzerinden admin_migration.sql dosyasını çalıştırdığınızdan emin olun.'
+            : 'No active story found! Please ensure admin_migration.sql has been executed in Supabase SQL Editor.'
+        );
         return;
       }
 
@@ -169,13 +174,21 @@ export function CharacterCreation() {
         color: '#ffd700',
       });
 
-      alert(locale === 'tr' ? `${characterName} başarıyla oluşturuldu! 🎉` : `${characterName} has been successfully created! 🎉`);
+      setActiveCharacterId(charData.id);
+
+      arcaneToast.success(
+        locale === 'tr'
+          ? `${characterName} başarıyla oluşturuldu! 🎉`
+          : `${characterName} has been successfully created! 🎉`
+      );
       
-      // Force reload or redirect
-      window.location.reload();
+      // Allow toast notification to display briefly before reload
+      setTimeout(() => {
+        window.location.reload();
+      }, 900);
     } catch (err) {
       console.error('Error creating character:', err);
-      alert(locale === 'tr' ? 'Karakter oluşturulurken hata oluştu.' : 'Failed to create character.');
+      arcaneToast.error(locale === 'tr' ? 'Karakter oluşturulurken hata oluştu.' : 'Failed to create character.');
     }
   };
 

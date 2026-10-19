@@ -11,6 +11,13 @@ import { useCampaign } from '../../contexts/CampaignContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { translations } from '../../lib/translations';
 import { GMTableNotice } from './GMTableNotice';
+import {
+  startAmbientSoundscape,
+  stopAmbientSoundscape,
+  setAmbientVolume,
+  subscribeToAmbientEngine,
+  getAmbientEngineState,
+} from '../../lib/audio';
 import type {
   CampaignEnvironment,
   SessionChronicle,
@@ -51,6 +58,8 @@ const AMBIENT_PRESET_KEYS = [
   'storm_ruins',
   'celestial_choir',
   'crypt_silence',
+  'mystic_forest',
+  'combat_tension',
 ];
 
 const DANGER_LEVEL_BASE: {
@@ -96,19 +105,38 @@ export function GMAtmosphereManager() {
 
   const [tableMissing, setTableMissing] = useState(false);
 
-  // Environment State
-  const [environment, setEnvironment] = useState<CampaignEnvironment>({
-    id: 'local-env',
-    campaign_id: campaignId || '00000000-0000-0000-0000-000000000001',
-    weather: 'fog',
-    time_of_day: 'dusk',
-    ambient_preset: 'abyss_winds',
-    danger_level: 'normal',
-    updated_at: new Date().toISOString(),
+  // Environment State (with localStorage fallback)
+  const [environment, setEnvironment] = useState<CampaignEnvironment>(() => {
+    try {
+      const saved = localStorage.getItem(`dnd_campaign_env_${campaignId || 'default'}`);
+      if (saved) {
+        return JSON.parse(saved) as CampaignEnvironment;
+      }
+    } catch {
+      // ignore
+    }
+    return {
+      id: 'local-env',
+      campaign_id: campaignId || '00000000-0000-0000-0000-000000000001',
+      weather: 'fog',
+      time_of_day: 'dusk',
+      ambient_preset: 'abyss_winds',
+      danger_level: 'normal',
+      updated_at: new Date().toISOString(),
+    };
   });
 
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [audioVolume, setAudioVolume] = useState(70);
+  const initialEngineState = getAmbientEngineState();
+  const [isPlayingAudio, setIsPlayingAudio] = useState(initialEngineState.isPlaying);
+  const [audioVolume, setAudioVolume] = useState(initialEngineState.volume);
+
+  // Subscribe to global procedural Web Audio ambiance engine
+  useEffect(() => {
+    return subscribeToAmbientEngine((st) => {
+      setIsPlayingAudio(st.isPlaying);
+      setAudioVolume(st.volume);
+    });
+  }, []);
 
   // Session Chronicles State
   const [chronicles, setChronicles] = useState<SessionChronicle[]>([]);
@@ -147,7 +175,19 @@ export function GMAtmosphereManager() {
         }
       } else if (envData) {
         setTableMissing(false);
-        setEnvironment(envData as CampaignEnvironment);
+        const typedEnv = envData as CampaignEnvironment;
+        setEnvironment(typedEnv);
+        try {
+          localStorage.setItem(`dnd_campaign_env_${campaignId}`, JSON.stringify(typedEnv));
+          window.dispatchEvent(new CustomEvent('dnd-environment-updated', { detail: typedEnv }));
+        } catch {
+          // ignore
+        }
+        // If audio is actively playing and preset changed remotely, switch live synthesizer
+        const currentEngine = getAmbientEngineState();
+        if (currentEngine.isPlaying && currentEngine.activePreset !== typedEnv.ambient_preset) {
+          startAmbientSoundscape(typedEnv.ambient_preset, currentEngine.volume);
+        }
       }
     } catch {
       setTableMissing(true);
@@ -212,10 +252,36 @@ export function GMAtmosphereManager() {
     };
   }, [tableMissing, campaignId, fetchData]);
 
+  // Toggle Procedural Web Audio Ambiance
+  const handleToggleAmbientAudio = () => {
+    if (isPlayingAudio) {
+      stopAmbientSoundscape();
+    } else {
+      startAmbientSoundscape(environment.ambient_preset, audioVolume);
+    }
+  };
+
+  // Volume change handler
+  const handleVolumeChange = (newVol: number) => {
+    setAmbientVolume(newVol);
+  };
+
   // Update Environment
   const updateEnvironment = async (updates: Partial<CampaignEnvironment>) => {
     const next = { ...environment, ...updates, updated_at: new Date().toISOString() };
     setEnvironment(next);
+
+    // If ambient_preset changed while playing, switch the procedural synthesizer immediately
+    if (updates.ambient_preset && isPlayingAudio) {
+      startAmbientSoundscape(updates.ambient_preset, audioVolume);
+    }
+
+    try {
+      localStorage.setItem(`dnd_campaign_env_${campaignId || 'default'}`, JSON.stringify(next));
+      window.dispatchEvent(new CustomEvent('dnd-environment-updated', { detail: next }));
+    } catch {
+      // ignore
+    }
 
     if (!tableMissing && campaignId) {
       try {
@@ -506,15 +572,26 @@ export function GMAtmosphereManager() {
 
               <button
                 type="button"
-                onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                className={`p-1.5 rounded-lg border transition-all ${
+                data-testid="ambient-audio-toggle"
+                onClick={handleToggleAmbientAudio}
+                className={`p-1.5 rounded-lg border transition-all flex items-center gap-1.5 text-[10px] font-bold px-2.5 cursor-pointer ${
                   isPlayingAudio
-                    ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-                    : 'bg-white/5 border-white/10 text-gray-400'
+                    ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]'
+                    : 'bg-white/5 border-white/10 text-gray-400 hover:text-gray-200'
                 }`}
                 title={isPlayingAudio ? t.atmosphere.stopAudio : t.atmosphere.playPreview}
               >
-                {isPlayingAudio ? <Volume2 className="w-4 h-4 animate-pulse" /> : <VolumeX className="w-4 h-4" />}
+                {isPlayingAudio ? (
+                  <>
+                    <Volume2 className="w-4 h-4 animate-pulse" />
+                    <span>LIVE SYNTH</span>
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="w-4 h-4" />
+                    <span>{t.atmosphere.playPreview}</span>
+                  </>
+                )}
               </button>
             </div>
 
@@ -524,6 +601,7 @@ export function GMAtmosphereManager() {
                 return (
                   <div
                     key={p.key}
+                    data-testid={`ambient-preset-${p.key}`}
                     onClick={() => updateEnvironment({ ambient_preset: p.key })}
                     className={`p-2.5 rounded-lg border cursor-pointer transition-all ${
                       isSelected
@@ -548,10 +626,11 @@ export function GMAtmosphereManager() {
               <Volume2 className="w-3.5 h-3.5 text-gray-400" />
               <input
                 type="range"
+                data-testid="ambient-volume-slider"
                 min="0"
                 max="100"
                 value={audioVolume}
-                onChange={(e) => setAudioVolume(parseInt(e.target.value, 10))}
+                onChange={(e) => handleVolumeChange(parseInt(e.target.value, 10))}
                 className="w-full accent-[#ffd700] h-1 bg-white/10 rounded-lg cursor-pointer"
               />
               <span className="text-[10px] text-gray-400 tabular-nums w-8 text-right">

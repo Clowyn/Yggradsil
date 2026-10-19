@@ -41,10 +41,57 @@ CREATE POLICY "GMs manage campaign maps" ON public.campaign_maps
   WITH CHECK (public.is_gm());
 
 DROP POLICY IF EXISTS "Players update revealed areas on campaign maps" ON public.campaign_maps;
-CREATE POLICY "Players update revealed areas on campaign maps" ON public.campaign_maps
+DROP POLICY IF EXISTS "GMs manage campaign maps update" ON public.campaign_maps;
+CREATE POLICY "GMs manage campaign maps update" ON public.campaign_maps
   FOR UPDATE
-  USING (auth.uid() IS NOT NULL)
-  WITH CHECK (auth.uid() IS NOT NULL);
+  USING (public.is_gm())
+  WITH CHECK (public.is_gm());
+
+-- Controlled RPC so authenticated campaign players can reveal fog without modifying map metadata
+CREATE OR REPLACE FUNCTION public.reveal_map_fog(
+  p_map_id uuid,
+  p_revealed_areas jsonb
+) RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  IF auth.uid() IS NULL THEN
+    RAISE EXCEPTION 'Unauthorized: Authentication required.';
+  END IF;
+
+  IF p_map_id IS NULL OR p_revealed_areas IS NULL OR jsonb_typeof(p_revealed_areas) <> 'array' THEN
+    RETURN;
+  END IF;
+
+  IF NOT (
+    public.is_gm() OR
+    EXISTS (
+      SELECT 1 FROM public.campaign_maps cm
+      WHERE cm.id = p_map_id
+        AND (
+          EXISTS (SELECT 1 FROM public.campaign_members m WHERE m.campaign_id = cm.campaign_id AND m.profile_id = auth.uid())
+          OR EXISTS (SELECT 1 FROM public.characters c WHERE c.campaign_id = cm.campaign_id AND c.profile_id = auth.uid())
+        )
+    )
+  ) THEN
+    RAISE EXCEPTION 'Unauthorized: You do not belong to this campaign map.';
+  END IF;
+
+  UPDATE public.campaign_maps
+  SET revealed_areas = p_revealed_areas,
+      updated_at = now()
+  WHERE id = p_map_id
+    AND (
+      public.is_gm() OR
+      jsonb_array_length(p_revealed_areas) >= jsonb_array_length(COALESCE(revealed_areas, '[]'::jsonb))
+    );
+END;
+$$;
+
+REVOKE EXECUTE ON FUNCTION public.reveal_map_fog(uuid, jsonb) FROM anon, PUBLIC;
+GRANT EXECUTE ON FUNCTION public.reveal_map_fog(uuid, jsonb) TO authenticated, service_role;
 
 
 

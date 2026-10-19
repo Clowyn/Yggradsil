@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, useRef, useCallback, memo } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { AnimatePresence } from 'framer-motion';
 import type { SkillNodeData } from '../../hooks/useSkillTree';
@@ -8,10 +8,24 @@ import { SkillTooltip } from './SkillTooltip';
 
 function SkillNodeComponent({ data }: NodeProps) {
   const [showTooltip, setShowTooltip] = useState(false);
+  const nodeRef = useRef<HTMLDivElement>(null);
   const nodeData = data as unknown as SkillNodeData;
   const { skill, status, statColor, nodeKind } = nodeData;
   const isCore = nodeKind === 'root';
   const isBranchRoot = nodeKind === 'branch';
+
+  const elevateParentNode = useCallback((elevate: boolean) => {
+    if (!nodeRef.current) return;
+    const parent = nodeRef.current.closest('.react-flow__node') as HTMLElement | null;
+    if (!parent) return;
+    if (elevate) {
+      parent.style.zIndex = '1000';
+      parent.classList.add('rf-tooltip-active');
+    } else {
+      parent.style.zIndex = '';
+      parent.classList.remove('rf-tooltip-active');
+    }
+  }, []);
 
   // ── Size classes ──
   const sizeClass = isCore
@@ -24,8 +38,7 @@ function SkillNodeComponent({ data }: NodeProps) {
   const getNodeStyles = (): string => {
     const base = `
       relative flex flex-col items-center justify-center rounded-full
-      cursor-pointer select-none transition-all duration-200
-      hover:brightness-125 transition-all duration-200
+      cursor-pointer select-none transition-shadow duration-200
       border-2 ${sizeClass}
     `;
 
@@ -63,27 +76,45 @@ function SkillNodeComponent({ data }: NodeProps) {
         <Handle
           type="target"
           position={Position.Top}
-          className="!bg-transparent !border-0 !w-2 !h-2"
+          className="!bg-transparent !border-0 !w-1.5 !h-1.5 !min-w-0 !min-h-0 !top-0"
         />
       )}
 
       {/* Node body */}
       <div
+        ref={nodeRef}
         className={getNodeStyles()}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onMouseEnter={() => {
+          setShowTooltip(true);
+          elevateParentNode(true);
+        }}
+        onMouseLeave={() => {
+          setShowTooltip(false);
+          if (isCore) elevateParentNode(false);
+        }}
         style={{
-          ...(isBranchRoot ? { borderColor: statColor } : {}),
+          ...(isBranchRoot
+            ? {
+                borderColor: statColor,
+                boxShadow: showTooltip
+                  ? `0 0 24px ${statColor}66, 0 0 36px ${statColor}33`
+                  : `0 0 16px ${statColor}33`,
+              }
+            : {}),
           ...(status === 'unlocked' && !isCore && !isBranchRoot
-            ? { boxShadow: `0 0 16px ${statColor}44, 0 0 28px ${statColor}22` }
+            ? {
+                boxShadow: showTooltip
+                  ? `0 0 22px ${statColor}66, 0 0 34px ${statColor}33`
+                  : `0 0 16px ${statColor}44, 0 0 28px ${statColor}22`,
+              }
             : {}),
         }}
       >
-        {/* Golden ring for unlocked */}
+        {/* Runic dashed golden ring for unlocked */}
         {status === 'unlocked' && !isCore && !isBranchRoot && (
           <div
-            className="absolute inset-[-4px] rounded-full border-2 border-[#ffd700] opacity-60 animate-spin"
-            style={{ animationDuration: '20s' }}
+            className="absolute inset-[-5px] rounded-full border-2 border-dashed border-[#ffd700] opacity-65 pointer-events-none animate-spin"
+            style={{ animationDuration: '22s', willChange: 'transform' }}
           />
         )}
 
@@ -93,35 +124,37 @@ function SkillNodeComponent({ data }: NodeProps) {
         )}
 
         {/* Icon */}
-        <span className={`${iconSize} leading-none`} role="img">
+        <span className={`${iconSize} leading-none z-10`} role="img">
           {skill.icon}
         </span>
 
         {/* Lock icon overlay */}
         {status === 'locked' && !isBranchRoot && (
-          <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40">
+          <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40 z-10">
             <span className="text-sm opacity-70">🔒</span>
           </div>
         )}
 
         {/* Checkmark for unlocked */}
         {status === 'unlocked' && !isCore && !isBranchRoot && (
-          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#ffd700] flex items-center justify-center shadow-lg">
+          <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#ffd700] flex items-center justify-center shadow-lg z-20">
             <span className="text-[10px] text-black font-bold">✓</span>
           </div>
         )}
 
         {/* XP cost badge for unlockable */}
         {status === 'unlockable' && (
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-[#0a2e1a] border border-[#4ade80] text-[9px] text-[#4ade80] font-bold whitespace-nowrap shadow-lg">
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-[#0a2e1a] border border-[#4ade80] text-[9px] text-[#4ade80] font-bold whitespace-nowrap shadow-lg z-20">
             {skill.xpCost} XP
           </div>
         )}
       </div>
 
-      {/* Skill name label */}
+      {/* Skill name label (hidden while tooltip is open so it never clips under the tooltip header) */}
       <div
-        className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-bold whitespace-nowrap tracking-wide text-center max-w-[120px] truncate pointer-events-none"
+        className={`absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-bold whitespace-nowrap tracking-wide text-center max-w-[120px] truncate pointer-events-none transition-opacity duration-150 ${
+          showTooltip && !isCore ? 'opacity-0' : 'opacity-100'
+        }`}
         style={{
           color: status === 'locked' ? '#555' : isCore ? '#ffd700' : statColor,
           fontFamily: "'Cinzel', serif",
@@ -132,7 +165,7 @@ function SkillNodeComponent({ data }: NodeProps) {
       </div>
 
       {/* Tooltip */}
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={() => elevateParentNode(false)}>
         {showTooltip && !isCore && (
           <SkillTooltip skill={skill} status={status} statColor={statColor} />
         )}
@@ -142,7 +175,7 @@ function SkillNodeComponent({ data }: NodeProps) {
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!bg-transparent !border-0 !w-2 !h-2"
+        className="!bg-transparent !border-0 !w-1.5 !h-1.5 !min-w-0 !min-h-0 !bottom-0"
       />
     </>
   );

@@ -4,8 +4,10 @@ import type {
   CampaignMap,
   MapMovementRequest,
   MapMovementMode,
+  MapWallSegment,
   RevealedArea,
 } from '../lib/types';
+import { DEFAULT_DUNGEON_WALLS } from '../components/map/FogOfWar';
 import { useAuth } from '../contexts/AuthContext';
 import { useCampaign } from '../contexts/CampaignContext';
 import { supabase } from '../lib/supabase';
@@ -13,6 +15,29 @@ import { supabase } from '../lib/supabase';
 // ─── Default Demo Data ──────────────────────────────────────────
 
 const DEFAULT_MAP_IMAGE = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80';
+
+function getStoredWalls(mapId: string, fallback: MapWallSegment[]): MapWallSegment[] {
+  try {
+    const raw = localStorage.getItem(`dnd_map_walls_${mapId}`);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch {
+    // ignore
+  }
+  return fallback;
+}
+
+function getStoredLos(mapId: string, fallback = true): boolean {
+  try {
+    const raw = localStorage.getItem(`dnd_map_los_${mapId}`);
+    if (raw !== null) return raw === 'true';
+  } catch {
+    // ignore
+  }
+  return fallback;
+}
 
 const INITIAL_DEFAULT_MAP: CampaignMap = {
   id: 'demo-campaign-map-01',
@@ -22,13 +47,15 @@ const INITIAL_DEFAULT_MAP: CampaignMap = {
   grid_size: 40,
   width: 1200,
   height: 800,
-  fog_radius: 90,
+  fog_radius: 130,
   is_active: true,
   movement_mode: 'free',
   revealed_areas: [
     { x: 300, y: 250, r: 120 },
     { x: 550, y: 400, r: 120 },
   ],
+  walls: getStoredWalls('demo-campaign-map-01', DEFAULT_DUNGEON_WALLS),
+  los_enabled: getStoredLos('demo-campaign-map-01', true),
   created_at: new Date().toISOString(),
 };
 
@@ -97,6 +124,8 @@ export function useMap() {
   const movementMode = activeMap.movement_mode || 'free';
   const fogRadius = activeMap.fog_radius || 80;
   const revealedAreas = activeMap.revealed_areas || [];
+  const walls = activeMap.walls || [];
+  const losEnabled = activeMap.los_enabled ?? true;
 
   // Ref to avoid stale state in callbacks
   const activeMapRef = useRef(activeMap);
@@ -156,7 +185,17 @@ export function useMap() {
 
       setIsDbConnected(true);
       if (data && data.length > 0) {
-        const typedMaps = data as CampaignMap[];
+        const typedMaps = (data as CampaignMap[]).map((m) => ({
+          ...m,
+          walls:
+            Array.isArray(m.walls) && m.walls.length > 0
+              ? m.walls
+              : getStoredWalls(m.id, DEFAULT_DUNGEON_WALLS),
+          los_enabled:
+            typeof m.los_enabled === 'boolean'
+              ? getStoredLos(m.id, m.los_enabled)
+              : getStoredLos(m.id, true),
+        }));
         setMaps(typedMaps);
         const active = typedMaps.find((m) => m.is_active) || typedMaps[0];
         setActiveMapId(active.id);
@@ -167,6 +206,44 @@ export function useMap() {
       setLoading(false);
     }
   }, [campaignId]);
+
+  // Fetch map tokens from database
+  const fetchTokens = useCallback(async () => {
+    if (!campaignId) return;
+    try {
+      const { data, error } = await supabase
+        .from('map_tokens')
+        .select('*')
+        .eq('campaign_id', campaignId);
+
+      if (!error && data && data.length > 0) {
+        setTokens((prev) => {
+          const dbTokens = data as MapToken[];
+          if (characters && characters.length > 0) {
+            const colors = ['#dc2626', '#2563eb', '#16a34a', '#9333ea', '#ea580c', '#0891b2'];
+            return characters.map((c, idx) => {
+              const dbMatch = dbTokens.find((t) => t.character_id === c.id);
+              const existing = prev.find((t) => t.character_id === c.id);
+              return {
+                id: dbMatch?.id || existing?.id || `char-token-${c.id}`,
+                character_id: c.id,
+                campaign_id: campaignId,
+                x_position: dbMatch?.x_position ?? existing?.x_position ?? 200 + (idx % 4) * 150,
+                y_position: dbMatch?.y_position ?? existing?.y_position ?? 200 + Math.floor(idx / 4) * 150,
+                icon_url: dbMatch?.icon_url || c.avatar_url || null,
+                color: dbMatch?.color || existing?.color || colors[idx % colors.length],
+                label: dbMatch?.label || c.name,
+                updated_at: dbMatch?.updated_at || new Date().toISOString(),
+              };
+            });
+          }
+          return dbTokens;
+        });
+      }
+    } catch {
+      // Ignore offline errors
+    }
+  }, [campaignId, characters]);
 
   // Fetch movement requests
   const fetchMovementRequests = useCallback(async () => {
@@ -191,10 +268,11 @@ export function useMap() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMaps();
+    fetchTokens();
     fetchMovementRequests();
-  }, [fetchMaps, fetchMovementRequests]);
+  }, [fetchMaps, fetchTokens, fetchMovementRequests]);
 
-  // Realtime subscription for maps & movement requests
+  // Realtime subscription for maps, tokens & movement requests
   useEffect(() => {
     if (!campaignId || !isDbConnected) return;
 
@@ -209,6 +287,13 @@ export function useMap() {
       )
       .on(
         'postgres_changes',
+        { event: '*', schema: 'public', table: 'map_tokens', filter: `campaign_id=eq.${campaignId}` },
+        () => {
+          fetchTokens();
+        }
+      )
+      .on(
+        'postgres_changes',
         { event: '*', schema: 'public', table: 'map_movement_requests', filter: `campaign_id=eq.${campaignId}` },
         () => {
           fetchMovementRequests();
@@ -219,7 +304,7 @@ export function useMap() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [campaignId, isDbConnected, fetchMaps, fetchMovementRequests]);
+  }, [campaignId, isDbConnected, fetchMaps, fetchTokens, fetchMovementRequests]);
 
   // Update revealed areas in state and DB
   const revealFogAt = useCallback(
@@ -247,10 +332,16 @@ export function useMap() {
         if (fogDebounceRef.current) clearTimeout(fogDebounceRef.current);
         fogDebounceRef.current = setTimeout(async () => {
           try {
-            await supabase
-              .from('campaign_maps')
-              .update({ revealed_areas: nextAreas })
-              .eq('id', current.id);
+            const { error: rpcError } = await supabase.rpc('reveal_map_fog', {
+              p_map_id: current.id,
+              p_revealed_areas: nextAreas,
+            });
+            if (rpcError) {
+              await supabase
+                .from('campaign_maps')
+                .update({ revealed_areas: nextAreas })
+                .eq('id', current.id);
+            }
           } catch {
             // Ignore
           }
@@ -314,6 +405,34 @@ export function useMap() {
 
       // Reveal fog around new position
       revealFogAt(x, y, current.fog_radius || 80);
+
+      // Persist token position to map_tokens table
+      if (campaignId) {
+        try {
+          if (!id.startsWith('token-') && !id.startsWith('char-token-')) {
+            await supabase
+              .from('map_tokens')
+              .update({
+                x_position: Math.round(x),
+                y_position: Math.round(y),
+                updated_at: new Date().toISOString(),
+              })
+              .eq('id', id);
+          } else if (targetToken.character_id && !targetToken.character_id.startsWith('char-')) {
+            await supabase
+              .from('map_tokens')
+              .update({
+                x_position: Math.round(x),
+                y_position: Math.round(y),
+                updated_at: new Date().toISOString(),
+              })
+              .eq('character_id', targetToken.character_id)
+              .eq('campaign_id', campaignId);
+          }
+        } catch {
+          // ignore offline errors
+        }
+      }
     },
     [tokens, isGM, campaignId, isDbConnected, activeCharacterId, revealFogAt]
   );
@@ -339,6 +458,33 @@ export function useMap() {
       // Remove from pending
       setMovementRequests((prev) => prev.filter((r) => r.id !== requestId));
 
+      if (campaignId) {
+        try {
+          if (!req.token_id.startsWith('token-') && !req.token_id.startsWith('char-token-')) {
+            await supabase
+              .from('map_tokens')
+              .update({
+                x_position: Math.round(req.target_x),
+                y_position: Math.round(req.target_y),
+                updated_at: new Date().toISOString(),
+              })
+              .eq('id', req.token_id);
+          } else if (req.character_id) {
+            await supabase
+              .from('map_tokens')
+              .update({
+                x_position: Math.round(req.target_x),
+                y_position: Math.round(req.target_y),
+                updated_at: new Date().toISOString(),
+              })
+              .eq('character_id', req.character_id)
+              .eq('campaign_id', campaignId);
+          }
+        } catch {
+          // ignore
+        }
+      }
+
       if (isDbConnected && !requestId.startsWith('req-')) {
         try {
           await supabase
@@ -350,7 +496,7 @@ export function useMap() {
         }
       }
     },
-    [movementRequests, revealFogAt, isDbConnected]
+    [movementRequests, revealFogAt, isDbConnected, campaignId]
   );
 
   // GM Rejects a pending movement request
@@ -463,6 +609,8 @@ export function useMap() {
         is_active: false,
         movement_mode: 'free',
         revealed_areas: [],
+        walls: DEFAULT_DUNGEON_WALLS,
+        los_enabled: true,
         created_at: new Date().toISOString(),
       };
 
@@ -486,8 +634,19 @@ export function useMap() {
             .single();
 
           if (!error && data) {
-            setMaps((prev) => [...prev, data as CampaignMap]);
-            return data as CampaignMap;
+            const hydrated: CampaignMap = {
+              ...(data as CampaignMap),
+              walls:
+                Array.isArray((data as CampaignMap).walls) && (data as CampaignMap).walls!.length > 0
+                  ? (data as CampaignMap).walls
+                  : getStoredWalls((data as CampaignMap).id, DEFAULT_DUNGEON_WALLS),
+              los_enabled:
+                typeof (data as CampaignMap).los_enabled === 'boolean'
+                  ? (data as CampaignMap).los_enabled
+                  : true,
+            };
+            setMaps((prev) => [...prev, hydrated]);
+            return hydrated;
           }
         } catch {
           // fallback
@@ -550,6 +709,94 @@ export function useMap() {
     [activeMapId, isDbConnected]
   );
 
+  // Persist wall segments & LoS state to localStorage + Supabase
+  const persistWallsToMap = useCallback(
+    async (nextWalls: MapWallSegment[]) => {
+      const current = activeMapRef.current;
+      try {
+        localStorage.setItem(`dnd_map_walls_${current.id}`, JSON.stringify(nextWalls));
+      } catch {
+        // ignore
+      }
+
+      setMaps((prev) =>
+        prev.map((m) => (m.id === current.id ? { ...m, walls: nextWalls } : m))
+      );
+
+      if (isDbConnected && current.id && !current.id.startsWith('demo-')) {
+        try {
+          await supabase
+            .from('campaign_maps')
+            .update({ walls: nextWalls })
+            .eq('id', current.id);
+        } catch {
+          // ignore
+        }
+      }
+    },
+    [isDbConnected]
+  );
+
+  const addWallSegment = useCallback(
+    async (segment: Omit<MapWallSegment, 'id'>) => {
+      const current = activeMapRef.current;
+      const newWall: MapWallSegment = {
+        ...segment,
+        id: `wall-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      };
+      const nextWalls = [...(current.walls || []), newWall];
+      await persistWallsToMap(nextWalls);
+      return newWall;
+    },
+    [persistWallsToMap]
+  );
+
+  const removeWallSegment = useCallback(
+    async (wallId: string) => {
+      const current = activeMapRef.current;
+      const nextWalls = (current.walls || []).filter((w) => w.id !== wallId);
+      await persistWallsToMap(nextWalls);
+    },
+    [persistWallsToMap]
+  );
+
+  const clearWalls = useCallback(async () => {
+    await persistWallsToMap([]);
+  }, [persistWallsToMap]);
+
+  const loadPresetWalls = useCallback(async () => {
+    await persistWallsToMap(DEFAULT_DUNGEON_WALLS);
+  }, [persistWallsToMap]);
+
+  const toggleLosEnabled = useCallback(
+    async (enabled?: boolean) => {
+      const current = activeMapRef.current;
+      const nextLos = enabled !== undefined ? enabled : !(current.los_enabled ?? true);
+
+      try {
+        localStorage.setItem(`dnd_map_los_${current.id}`, String(nextLos));
+      } catch {
+        // ignore
+      }
+
+      setMaps((prev) =>
+        prev.map((m) => (m.id === current.id ? { ...m, los_enabled: nextLos } : m))
+      );
+
+      if (isDbConnected && current.id && !current.id.startsWith('demo-')) {
+        try {
+          await supabase
+            .from('campaign_maps')
+            .update({ los_enabled: nextLos })
+            .eq('id', current.id);
+        } catch {
+          // ignore
+        }
+      }
+    },
+    [isDbConnected]
+  );
+
   return {
     maps,
     activeMap,
@@ -559,6 +806,8 @@ export function useMap() {
     tokens,
     fogRadius,
     revealedAreas,
+    walls,
+    losEnabled,
     loading,
     isGM,
     user,
@@ -573,5 +822,10 @@ export function useMap() {
     createMap,
     switchActiveMap,
     deleteMap,
+    addWallSegment,
+    removeWallSegment,
+    clearWalls,
+    loadPresetWalls,
+    toggleLosEnabled,
   };
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -11,9 +11,17 @@ import {
   Crown,
   Scale,
   Swords,
+  Dices,
+  MessageSquare,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
+import { toggleDiceTray } from '../../lib/diceRoller';
+import {
+  toggleTableChat,
+  getTableChannelState,
+  subscribeToTableChannel,
+} from '../../lib/tableChannel';
 
 interface DockItem {
   to: string;
@@ -86,7 +94,16 @@ const DOCK_ITEMS: DockItem[] = [
 export function FloatingDock() {
   const { isGM, isAdmin, locale } = useAuth();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [diceHovered, setDiceHovered] = useState(false);
+  const [chatHovered, setChatHovered] = useState(false);
+  const [unreadChatCount, setUnreadChatCount] = useState(() => getTableChannelState().unreadCount);
   const isTr = locale === 'tr';
+
+  useEffect(() => {
+    return subscribeToTableChannel((st) => {
+      setUnreadChatCount(st.unreadCount);
+    });
+  }, []);
 
   const visibleItems = DOCK_ITEMS.filter((item) => {
     if (item.adminOnly && !isAdmin) return false;
@@ -180,6 +197,101 @@ export function FloatingDock() {
             </div>
           );
         })}
+
+        {/* Divider */}
+        <div className="h-6 w-px bg-amber-900/40 mx-0.5 shrink-0" />
+
+        {/* Table Chat & Dice Log Dock Action */}
+        <div
+          className="relative flex flex-col items-center"
+          onMouseEnter={() => {
+            setChatHovered(true);
+            playSound('paper_flip');
+          }}
+          onMouseLeave={() => setChatHovered(false)}
+        >
+          <AnimatePresence>
+            {chatHovered && (
+              <motion.div
+                initial={{ opacity: 0, y: 6, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 6, scale: 0.9 }}
+                transition={{ duration: 0.15 }}
+                className="absolute -top-11 px-3 py-1.5 rounded-xl bg-[#0e1017]/95 border border-amber-900/50 text-amber-200 text-xs font-cinzel font-bold tracking-wider whitespace-nowrap shadow-2xl pointer-events-none z-50"
+              >
+                {isTr ? 'Masa Sohbeti & Zarlar' : 'Table Chat & Rolls'}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            type="button"
+            data-testid="dock-table-chat-btn"
+            onClick={() => {
+              playSound('lock_click');
+              toggleTableChat();
+            }}
+            aria-label={isTr ? 'Masa Sohbeti' : 'Table Chat'}
+            className="relative p-2.5 sm:p-3 rounded-2xl transition-all duration-200 flex flex-col items-center justify-center cursor-pointer text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+          >
+            <motion.div
+              whileHover={{ y: -4, scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              className="flex flex-col items-center"
+            >
+              <MessageSquare size={22} className="text-amber-400" />
+            </motion.div>
+            {unreadChatCount > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-amber-500 text-black text-[9px] font-bold flex items-center justify-center shadow">
+                {unreadChatCount > 9 ? '9+' : unreadChatCount}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Universal Dice Tray Dock Action */}
+        <div
+          className="relative flex flex-col items-center"
+          onMouseEnter={() => {
+            setDiceHovered(true);
+            playSound('paper_flip');
+          }}
+          onMouseLeave={() => setDiceHovered(false)}
+        >
+          <AnimatePresence>
+            {diceHovered && (
+              <motion.div
+                initial={{ opacity: 0, y: 6, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 6, scale: 0.9 }}
+                transition={{ duration: 0.15 }}
+                className="absolute -top-11 px-3 py-1.5 rounded-xl bg-[#0e1017]/95 border border-amber-900/50 text-amber-200 text-xs font-cinzel font-bold tracking-wider whitespace-nowrap shadow-2xl pointer-events-none z-50"
+              >
+                {isTr ? 'Zar Tepsisi' : 'Dice Tray'}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            type="button"
+            onClick={() => {
+              playSound('lock_click');
+              toggleDiceTray();
+            }}
+            aria-label={isTr ? 'Zar Tepsisi' : 'Dice Tray'}
+            className="relative p-2.5 sm:p-3 rounded-2xl transition-all duration-200 flex flex-col items-center justify-center cursor-pointer text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.15)]"
+          >
+            <motion.div
+              whileHover={{ y: -4, scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+              className="flex flex-col items-center"
+            >
+              <Dices size={23} className="text-amber-400" />
+            </motion.div>
+          </button>
+        </div>
       </motion.nav>
     </div>
   );

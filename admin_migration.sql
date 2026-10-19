@@ -3,12 +3,19 @@
 -- Run this in Supabase Dashboard -> SQL Editor
 -- ==========================================
 
--- 1. UPDATE PROFILES ROLE CONSTRAINT
+-- 1. UPDATE PROFILES & CAMPAIGN MEMBERS ROLE CONSTRAINTS
 ALTER TABLE profiles
   DROP CONSTRAINT IF EXISTS profiles_role_check;
 
 ALTER TABLE profiles
   ADD CONSTRAINT profiles_role_check
+  CHECK (role IN ('admin', 'gm', 'player'));
+
+ALTER TABLE campaign_members
+  DROP CONSTRAINT IF EXISTS campaign_members_role_check;
+
+ALTER TABLE campaign_members
+  ADD CONSTRAINT campaign_members_role_check
   CHECK (role IN ('admin', 'gm', 'player'));
 
 -- 2. ENSURE CASCADE CONSTRAINTS ON ALL RELATIONAL TABLES
@@ -186,7 +193,9 @@ CREATE POLICY "View characters" ON characters
   FOR SELECT USING (true);
 
 CREATE POLICY "Insert characters" ON characters
-  FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+  FOR INSERT WITH CHECK (
+    public.is_gm() OR profile_id = auth.uid()
+  );
 
 CREATE POLICY "Update characters" ON characters
   FOR UPDATE USING (

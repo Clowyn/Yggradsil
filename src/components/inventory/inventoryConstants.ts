@@ -91,3 +91,62 @@ export const DEMO_ITEMS: InventoryItemLocal[] = [
     properties: { Effect: 'Reroll 1 death save/day', Attunement: 'Required' },
   },
 ];
+
+export const TOTAL_SLOTS = 24;
+export const EQUIP_SLOTS = 4;
+export const MAX_ATTUNED = 3;
+
+export const EQUIP_SLOT_CONFIG: Record<number, { label: string; allowedTypes: string[] }> = {
+  0: { label: 'Main Hand', allowedTypes: ['weapon'] },
+  1: { label: 'Armor', allowedTypes: ['armor'] },
+  2: { label: 'Off-Hand / Ring', allowedTypes: ['weapon', 'armor', 'shield', 'ring', 'accessory', 'misc'] },
+  3: { label: 'Amulet / Relic', allowedTypes: ['amulet', 'ring', 'accessory', 'relic', 'misc'] },
+};
+
+export function canEquipInSlot(
+  item: Pick<InventoryItemLocal, 'name' | 'type' | 'properties'>,
+  slotIdx: number
+): { valid: boolean; reason?: string } {
+  if (slotIdx < 0 || slotIdx >= TOTAL_SLOTS) {
+    return { valid: false, reason: 'Slot index out of bounds.' };
+  }
+  if (slotIdx >= EQUIP_SLOTS) return { valid: true };
+
+  const itemType = (item.type || 'misc').toLowerCase().trim();
+  if (itemType === 'consumable' || itemType === 'quest') {
+    return {
+      valid: false,
+      reason: `${item.name} (${item.type}) cannot be equipped in an active armament slot.`,
+    };
+  }
+
+  const config = EQUIP_SLOT_CONFIG[slotIdx];
+  if (config && !config.allowedTypes.includes(itemType)) {
+    return {
+      valid: false,
+      reason: `${item.name} (${item.type}) cannot be placed in the ${config.label} slot.`,
+    };
+  }
+  return { valid: true };
+}
+
+export function calculateMaxCarryWeight(strScore: number): number {
+  const validStr = Number.isFinite(strScore) ? Math.max(1, Math.floor(strScore)) : 10;
+  return Math.max(15, validStr * 15);
+}
+
+export function computeDefaultSpellSlots(level: number): Record<string, { max: number; used: number }> {
+  const safeLevel = Math.max(1, Math.min(20, Math.floor(level || 1)));
+  return {
+    '1': { max: Math.min(4, Math.max(2, safeLevel + 1)), used: 0 },
+    '2': { max: safeLevel >= 3 ? Math.min(3, safeLevel - 1) : 2, used: 0 },
+    '3': { max: safeLevel >= 5 ? Math.min(3, safeLevel - 3) : 2, used: 0 },
+    '4': { max: safeLevel >= 7 ? Math.min(3, safeLevel - 5) : 1, used: 0 },
+    '5': { max: safeLevel >= 9 ? Math.min(3, safeLevel - 7) : 1, used: 0 },
+    '6': { max: safeLevel >= 11 ? 2 : 1, used: 0 },
+    '7': { max: safeLevel >= 13 ? 2 : 1, used: 0 },
+    '8': { max: 1, used: 0 },
+    '9': { max: 1, used: 0 },
+  };
+}
+

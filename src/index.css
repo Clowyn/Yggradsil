@@ -235,20 +235,26 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Node Unlockable Indicator Ring --- */
 @keyframes unlockable-ring {
   0%, 100% {
-    opacity: 0.4;
+    opacity: 0.45;
     transform: scale(1);
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.35);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.12);
-    box-shadow: 0 0 22px rgba(245, 158, 11, 0.9);
+    opacity: 0.95;
+    transform: scale(1.08);
+    box-shadow: 0 0 18px rgba(74, 222, 128, 0.8), 0 0 6px rgba(74, 222, 128, 0.4) inset;
   }
 }
 
 .animate-unlockable-ring {
-  animation: unlockable-ring 2s ease-in-out infinite;
+  animation: unlockable-ring 2.2s ease-in-out infinite;
   will-change: transform, opacity;
+}
+
+/* Ensure hovered React Flow nodes and nodes with active tooltips stack above sibling nodes */
+.react-flow__node:hover,
+.react-flow__node.rf-tooltip-active {
+  z-index: 1000 !important;
 }
 
 /* --- React Flow Grimdark Canvas Styling --- */

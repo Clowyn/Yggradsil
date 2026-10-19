@@ -1,5 +1,4 @@
-import { useMemo } from 'react';
-import { ReactFlow, Controls, MiniMap, Background, type Node, type Edge } from '@xyflow/react';
+import { ReactFlow, Controls, MiniMap, Background, type Node } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { motion } from 'framer-motion';
 import { TreePine, Sparkles } from 'lucide-react';
@@ -28,12 +27,10 @@ export function YggdrasilTree() {
   const { activeCharacterId, characters } = useCampaign();
   const activeCharacter = characters?.find(c => c.id === activeCharacterId);
 
-  // Pass activeCharacterId to useSkillTree when implemented in backend
-  const { nodes, edges, onNodeClick, xp, unlockedCount, totalSkills } = useSkillTree();
-
-  // Memoize to prevent unnecessary re-renders
-  const memoNodes = useMemo<Node[]>(() => nodes, [nodes]);
-  const memoEdges = useMemo<Edge[]>(() => edges, [edges]);
+  const { nodes, edges, onNodeClick, xp, unlockedCount, totalSkills } = useSkillTree({
+    characterId: activeCharacterId,
+    availableXp: activeCharacter?.xp_available ?? 1500,
+  });
 
   return (
     <div className="relative w-full h-full bg-abyss rounded-2xl overflow-hidden border border-amber-900/35 shadow-2xl">
@@ -99,8 +96,8 @@ export function YggdrasilTree() {
 
       {/* ── React Flow ── */}
       <ReactFlow
-        nodes={memoNodes}
-        edges={memoEdges}
+        nodes={nodes}
+        edges={edges}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodeClick={onNodeClick}

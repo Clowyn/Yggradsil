@@ -41,8 +41,22 @@ CREATE POLICY "GMs manage combat arenas" ON public.combat_arenas
 DROP POLICY IF EXISTS "Authenticated users update combat arenas" ON public.combat_arenas;
 CREATE POLICY "Authenticated users update combat arenas" ON public.combat_arenas
   FOR UPDATE
-  USING (auth.uid() IS NOT NULL)
-  WITH CHECK (auth.uid() IS NOT NULL);
+  USING (
+    public.is_gm() OR
+    EXISTS (
+      SELECT 1 FROM public.combat_arena_participants cap
+      JOIN public.characters c ON c.id = cap.character_id
+      WHERE cap.arena_id = combat_arenas.id AND c.profile_id = auth.uid()
+    )
+  )
+  WITH CHECK (
+    public.is_gm() OR
+    EXISTS (
+      SELECT 1 FROM public.combat_arena_participants cap
+      JOIN public.characters c ON c.id = cap.character_id
+      WHERE cap.arena_id = combat_arenas.id AND c.profile_id = auth.uid()
+    )
+  );
 
 
 
@@ -81,8 +95,20 @@ CREATE POLICY "Players view arena participants" ON public.combat_arena_participa
 DROP POLICY IF EXISTS "Players update own combatant or GMs manage" ON public.combat_arena_participants;
 CREATE POLICY "Players update own combatant or GMs manage" ON public.combat_arena_participants
   FOR ALL
-  USING (public.is_gm() OR auth.uid() IS NOT NULL)
-  WITH CHECK (public.is_gm() OR auth.uid() IS NOT NULL);
+  USING (
+    public.is_gm() OR
+    (character_id IS NOT NULL AND EXISTS (
+      SELECT 1 FROM public.characters
+      WHERE id = character_id AND profile_id = auth.uid()
+    ))
+  )
+  WITH CHECK (
+    public.is_gm() OR
+    (character_id IS NOT NULL AND EXISTS (
+      SELECT 1 FROM public.characters
+      WHERE id = character_id AND profile_id = auth.uid()
+    ))
+  );
 
 
 -- ─────────────────────────────────────────────────────────────────────────────

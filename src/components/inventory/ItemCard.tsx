@@ -9,6 +9,7 @@ import { RARITY_COLORS } from '../../lib/types';
 
 export interface InventoryItemLocal {
   id: string;
+  dbId?: string;
   name: string;
   description: string;
   icon: string;
@@ -16,7 +17,10 @@ export interface InventoryItemLocal {
   type: string;
   quantity: number;
   equipped: boolean;
+  attuned?: boolean;
+  slotIndex?: number;
   properties?: Record<string, string>;
+  customProperties?: Record<string, unknown>;
 }
 
 // ─── ItemCard ──────────────────────────────────────────────────
@@ -25,6 +29,7 @@ interface ItemCardProps {
   id: string;
   item: InventoryItemLocal | null;
   isSelected?: boolean;
+  slotLabel?: string;
   onSelect?: (id: string) => void;
   onEquipToggle?: (id: string) => void;
 }
@@ -33,6 +38,7 @@ export const ItemCard = memo(function ItemCard({
   id,
   item,
   isSelected,
+  slotLabel,
   onSelect,
   onEquipToggle,
 }: ItemCardProps) {
@@ -55,7 +61,12 @@ export const ItemCard = memo(function ItemCard({
 
   if (!item) {
     return (
-      <div ref={setNodeRef} style={style} {...attributes} className="w-full aspect-square rounded-xl border-2 border-dashed border-amber-900/30 bg-black/30 flex items-center justify-center">
+      <div ref={setNodeRef} style={style} {...attributes} className="w-full aspect-square rounded-xl border-2 border-dashed border-amber-900/30 bg-black/30 flex flex-col items-center justify-center gap-0.5 px-1">
+        {slotLabel && (
+          <span className="text-[8px] font-cinzel text-amber-500/60 uppercase tracking-wider text-center leading-tight">
+            {slotLabel}
+          </span>
+        )}
         <span className="text-[11px] font-cinzel text-stone-600">Empty</span>
       </div>
     );
@@ -97,14 +108,19 @@ export const ItemCard = memo(function ItemCard({
           </div>
         )}
 
-        {/* Equipped indicator */}
-        {item.equipped && (
-          <div className="absolute top-1 left-1">
-            <div className="w-3.5 h-3.5 rounded-full bg-amber-400 flex items-center justify-center shadow-[0_0_6px_#f59e0b]">
+        {/* Equipped & Attuned indicators */}
+        <div className="absolute top-1 left-1 flex items-center gap-1">
+          {item.equipped && (
+            <div className="w-3.5 h-3.5 rounded-full bg-amber-400 flex items-center justify-center shadow-[0_0_6px_#f59e0b]" title="Equipped">
               <span className="text-[8px] text-black font-cinzel font-bold">E</span>
             </div>
-          </div>
-        )}
+          )}
+          {item.attuned && (
+            <div className="w-3.5 h-3.5 rounded-full bg-purple-500 flex items-center justify-center shadow-[0_0_6px_#a855f7]" title="Attuned">
+              <span className="text-[8px] text-white font-cinzel font-bold">✦</span>
+            </div>
+          )}
+        </div>
 
         {/* Click to select & Double-click to equip */}
         <div

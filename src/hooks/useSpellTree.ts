@@ -3,6 +3,7 @@ import { type Node, type Edge, Position } from '@xyflow/react';
 import { supabase } from '../lib/supabase';
 import type { SpellTree, SpellNode, CharacterSpell } from '../lib/types';
 import { CLASS_CATEGORIES, SUBCLASSES } from '../lib/constants';
+import { arcaneToast } from '../lib/toast';
 
 export const BRANCH_COLORS: Record<string, string> = {
   Offense: '#ef4444',
@@ -471,6 +472,40 @@ export function useSpellTree(characterId: string | null) {
   const [mockUnlockedKeys, setMockUnlockedKeys] = useState<Set<string>>(new Set(['blood_bolt']));
   const [mockXp, setMockXp] = useState<number>(1000);
 
+  // Bumped whenever learned spells change elsewhere (GM panel or realtime) to force a refetch
+  const [reloadToken, setReloadToken] = useState(0);
+
+  useEffect(() => {
+    if (!characterId) return;
+
+    const bump = () => setReloadToken(t => t + 1);
+
+    const handleSpellsUpdated = (e: Event) => {
+      const detail = (e as CustomEvent<{ characterId?: string }>).detail;
+      if (!detail?.characterId || detail.characterId === characterId) bump();
+    };
+    window.addEventListener('dnd:spells-updated', handleSpellsUpdated);
+
+    const channel = supabase
+      .channel(`spell-tree-character-spells-${characterId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'character_spells',
+          filter: `character_id=eq.${characterId}`,
+        },
+        bump
+      )
+      .subscribe();
+
+    return () => {
+      window.removeEventListener('dnd:spells-updated', handleSpellsUpdated);
+      supabase.removeChannel(channel);
+    };
+  }, [characterId]);
+
   useEffect(() => {
     if (!characterId) {
       return;
@@ -525,7 +560,7 @@ export function useSpellTree(characterId: string | null) {
     };
 
     loadData();
-  }, [characterId]);
+  }, [characterId, reloadToken]);
 
   // Compute effective character and unlocked spells depending on mode
   const effectiveCharacter = useMemo(() => {
@@ -652,7 +687,7 @@ export function useSpellTree(characterId: string | null) {
         ]);
       } catch (err) {
         console.error('Failed to unlock spell:', err);
-        alert('Failed to unlock spell. Please try again.');
+        arcaneToast.error('Failed to unlock spell. Please try again.');
       }
     }
   }, [effectiveCharacter, getSpellStatus, isFallbackMode]);

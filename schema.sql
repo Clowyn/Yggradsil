@@ -30,7 +30,7 @@ CREATE TABLE campaign_members (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   campaign_id uuid REFERENCES campaigns(id) ON DELETE CASCADE,
   profile_id uuid REFERENCES profiles(id) ON DELETE CASCADE,
-  role text DEFAULT 'player' CHECK (role IN ('gm', 'player')),
+  role text DEFAULT 'player' CHECK (role IN ('admin', 'gm', 'player')),
   joined_at timestamptz DEFAULT now(),
   UNIQUE(campaign_id, profile_id)
 );

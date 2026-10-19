@@ -11,6 +11,10 @@ CREATE OR REPLACE FUNCTION public.gm_teach_spells(
   p_spell_ids uuid[]
 ) RETURNS void AS $$
 BEGIN
+  IF NOT public.is_gm() THEN
+    RAISE EXCEPTION 'Unauthorized: Only Game Masters can teach spells in bulk.';
+  END IF;
+
   IF p_character_id IS NULL OR p_spell_ids IS NULL OR array_length(p_spell_ids, 1) IS NULL THEN
     RETURN;
   END IF;
@@ -23,15 +27,20 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
--- Grant execution permissions
-GRANT EXECUTE ON FUNCTION public.gm_teach_spells(uuid, uuid[]) TO authenticated, service_role, anon;
+-- Grant execution permissions only to authenticated and service_role (never anon)
+REVOKE EXECUTE ON FUNCTION public.gm_teach_spells(uuid, uuid[]) FROM anon, PUBLIC;
+GRANT EXECUTE ON FUNCTION public.gm_teach_spells(uuid, uuid[]) TO authenticated, service_role;
 
--- Helper to safely remove spells bypassing RLS
+-- Helper to safely remove spells bypassing RLS (GM only)
 CREATE OR REPLACE FUNCTION public.gm_forget_spells(
   p_character_id uuid,
   p_spell_id uuid DEFAULT NULL
 ) RETURNS void AS $$
 BEGIN
+  IF NOT public.is_gm() THEN
+    RAISE EXCEPTION 'Unauthorized: Only Game Masters can remove spells.';
+  END IF;
+
   IF p_character_id IS NULL THEN
     RETURN;
   END IF;
@@ -44,4 +53,5 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
-GRANT EXECUTE ON FUNCTION public.gm_forget_spells(uuid, uuid) TO authenticated, service_role, anon;
+REVOKE EXECUTE ON FUNCTION public.gm_forget_spells(uuid, uuid) FROM anon, PUBLIC;
+GRANT EXECUTE ON FUNCTION public.gm_forget_spells(uuid, uuid) TO authenticated, service_role;

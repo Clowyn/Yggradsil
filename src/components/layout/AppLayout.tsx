@@ -4,6 +4,8 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { FloatingDock } from './FloatingDock';
 import { ArcaneLoadingFallback } from '../common/ArcaneLoadingFallback';
+import { UniversalDiceTray } from '../common/UniversalDiceTray';
+import { TableChatDrawer } from '../common/TableChatDrawer';
 
 export interface AppLayoutProps {
   children?: ReactNode;
@@ -26,6 +28,8 @@ export function AppLayout({ children }: AppLayoutProps) {
           </Suspense>
         </main>
         <FloatingDock />
+        <UniversalDiceTray />
+        <TableChatDrawer />
       </div>
     </div>
   );

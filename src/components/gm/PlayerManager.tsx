@@ -4,7 +4,7 @@ import { Users, ChevronDown, ChevronUp } from 'lucide-react';
 
 // ─── Types ─────────────────────────────────────────────────────
 
-interface PlayerInfo {
+export interface PlayerInfo {
   id: string;
   name: string;
   race: string;
@@ -14,7 +14,7 @@ interface PlayerInfo {
   color: string;
   hp: { current: number; max: number };
   ac: number;
-  stats: { STR: number; DEX: number; CON: number; INT: number; WIS: number; CHA: number };
+  stats: Record<string, number>;
 }
 
 // ─── Demo Data ─────────────────────────────────────────────────
@@ -52,30 +52,41 @@ const STAT_COLORS: Record<string, string> = {
   INT: '#2563eb', WIS: '#9333ea', CHA: '#ec4899',
 };
 
+interface PlayerManagerProps {
+  players?: PlayerInfo[];
+  onSelectPlayer?: (id: string) => void;
+}
+
 // ─── PlayerManager ─────────────────────────────────────────────
 
-export function PlayerManager() {
+export function PlayerManager({ players, onSelectPlayer }: PlayerManagerProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const activeList = players && players.length > 0 ? players : DEMO_PLAYERS;
 
-  const toggleExpanded = useCallback((id: string) => {
-    setExpandedId((prev) => (prev === id ? null : id));
-  }, []);
+  const toggleExpanded = useCallback(
+    (id: string) => {
+      setExpandedId((prev) => (prev === id ? null : id));
+      onSelectPlayer?.(id);
+    },
+    [onSelectPlayer]
+  );
 
   return (
     <motion.div
-      className="w-full max-w-[800px]"
-      initial={{ opacity: 0, y: 20 }}
+      data-testid="player-manager-table"
+      className="w-full"
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.35 }}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex items-center gap-2 mb-4">
         <Users className="w-5 h-5 text-[#ffd700]" />
-        <h2 className="text-lg font-cinzel font-bold text-gold-gradient">
-          Player Manager
+        <h2 className="text-base font-cinzel font-bold text-gold-gradient">
+          Tactical Party Matrix
         </h2>
         <span className="ml-auto text-xs text-gray-500">
-          {DEMO_PLAYERS.length} players
+          {activeList.length} adventurers
         </span>
       </div>
 
@@ -91,22 +102,23 @@ export function PlayerManager() {
 
       {/* Player rows */}
       <div className="space-y-1.5">
-        {DEMO_PLAYERS.map((player, i) => {
+        {activeList.map((player, i) => {
           const isExpanded = expandedId === player.id;
-          const hpPercent = (player.hp.current / player.hp.max) * 100;
+          const hpPercent = (player.hp.current / Math.max(1, player.hp.max)) * 100;
 
           return (
             <motion.div
               key={player.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.08 }}
+              transition={{ delay: i * 0.05 }}
             >
               {/* Main row */}
               <button
+                type="button"
                 onClick={() => toggleExpanded(player.id)}
                 className={`
-                  w-full glass rounded-xl p-3 border transition-all duration-300 text-left
+                  w-full glass rounded-xl p-3 border transition-all duration-300 text-left cursor-pointer
                   ${isExpanded ? 'border-white/15 rounded-b-none' : 'border-white/5 hover:border-white/10'}
                 `}
               >
@@ -206,7 +218,7 @@ export function PlayerManager() {
                       </label>
                       <div className="grid grid-cols-6 gap-2">
                         {STAT_KEYS.map((stat) => {
-                          const value = player.stats[stat];
+                          const value = player.stats[stat] ?? 10;
                           const modifier = Math.floor((value - 10) / 2);
                           return (
                             <div
