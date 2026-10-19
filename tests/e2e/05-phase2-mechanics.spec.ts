@@ -27,6 +27,12 @@ test.describe('Phase 2: Core RPG Mechanics & Data Integration', () => {
     expect(parseDiceFormula('1d12 - 1')).toEqual({ count: 1, dieType: 'd12', modifier: -1 });
     expect(parseDiceFormula('+4')).toEqual({ count: 1, dieType: 'd20', modifier: 4 });
     expect(parseDiceFormula('-2')).toEqual({ count: 1, dieType: 'd20', modifier: -2 });
+    expect(parseDiceFormula('d8+2')).toEqual({ count: 1, dieType: 'd8', modifier: 2 });
+    expect(parseDiceFormula('d12')).toEqual({ count: 1, dieType: 'd12', modifier: 0 });
+    expect(parseDiceFormula('d100')).toEqual({ count: 1, dieType: 'd100', modifier: 0 });
+    expect(parseDiceFormula('5')).toEqual({ count: 1, dieType: 'd20', modifier: 5 });
+    expect(parseDiceFormula('')).toEqual({ count: 1, dieType: 'd20', modifier: 0 });
+    expect(parseDiceFormula(undefined as unknown as string)).toEqual({ count: 1, dieType: 'd20', modifier: 0 });
     expect(parseDiceFormula('invalid')).toEqual({ count: 1, dieType: 'd20', modifier: 0 });
   });
 
@@ -35,6 +41,7 @@ test.describe('Phase 2: Core RPG Mechanics & Data Integration', () => {
       const adv = executeRoll({ dieType: 'd20', count: 1, modifier: 3, mode: 'advantage', label: 'Attack' });
       expect(adv.rolls).toHaveLength(2);
       expect(adv.keptRoll).toBe(Math.max(adv.rolls[0], adv.rolls[1]));
+      expect(adv.keptRolls).toEqual([adv.keptRoll]);
       expect(adv.discardedRoll).toBe(Math.min(adv.rolls[0], adv.rolls[1]));
       expect(adv.total).toBe(adv.keptRoll + 3);
       expect(adv.isCrit).toBe(adv.keptRoll === 20);
@@ -43,11 +50,13 @@ test.describe('Phase 2: Core RPG Mechanics & Data Integration', () => {
       const dis = executeRoll({ dieType: 'd20', count: 1, modifier: -1, mode: 'disadvantage', label: 'Stealth' });
       expect(dis.rolls).toHaveLength(2);
       expect(dis.keptRoll).toBe(Math.min(dis.rolls[0], dis.rolls[1]));
+      expect(dis.keptRolls).toEqual([dis.keptRoll]);
       expect(dis.discardedRoll).toBe(Math.max(dis.rolls[0], dis.rolls[1]));
       expect(dis.total).toBe(dis.keptRoll - 1);
 
       const multi = executeRoll({ formula: '3d6+2', label: 'Fireball Fragment' });
       expect(multi.rolls).toHaveLength(3);
+      expect(multi.keptRolls).toEqual(multi.rolls);
       expect(multi.keptRoll).toBe(multi.rolls.reduce((a, b) => a + b, 0));
       expect(multi.total).toBe(multi.keptRoll + 2);
       expect(multi.isCrit).toBe(false);

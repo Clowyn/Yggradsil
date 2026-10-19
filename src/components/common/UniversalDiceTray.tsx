@@ -14,6 +14,7 @@ import {
 } from '../../lib/diceRoller';
 import { useAuth } from '../../contexts/AuthContext';
 import { playSound } from '../../lib/audio';
+import { PolyhedralDice3D } from './PolyhedralDice3D';
 
 const DICE_TYPES: DieType[] = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'];
 
@@ -34,49 +35,56 @@ export function UniversalDiceTray() {
     history: [],
   });
 
-  const [animNumber, setAnimNumber] = useState<number>(20);
-
   useEffect(() => {
     return subscribeToDiceTray(setState);
   }, []);
 
-  useEffect(() => {
-    if (!state.rolling) return;
-    const max = DIE_MAX[state.selectedDie] || 20;
-    const interval = setInterval(() => {
-      setAnimNumber(Math.floor(Math.random() * max) + 1);
-    }, 55);
-    return () => clearInterval(interval);
-  }, [state.rolling, state.selectedDie]);
-
   if (!state.isOpen) return null;
 
   const current = state.currentResult;
-  const displayValue = state.rolling
-    ? animNumber
-    : current
-    ? current.total
-    : DIE_MAX[state.selectedDie];
+  const activeEntry = state.rolling
+    ? (state.targetResult ?? state.currentResult)
+    : state.currentResult;
+
+  const isD20AdvantageOrDisadvantage =
+    state.selectedDie === 'd20' &&
+    state.count === 1 &&
+    (state.mode === 'advantage' || state.mode === 'disadvantage');
 
   const handleSelectDie = (die: DieType) => {
+    if (state.rolling) return;
     playSound('lock_click');
+    const resetMode = die !== 'd20' && state.mode !== 'normal';
     updateDiceTrayConfig({
       selectedDie: die,
+      mode: resetMode ? 'normal' : state.mode,
       activeLabel: `${state.count}${die}${state.modifier >= 0 ? (state.modifier > 0 ? `+${state.modifier}` : '') : state.modifier}`,
     });
   };
 
   const handleSelectMode = (mode: RollMode) => {
+    if (state.rolling) return;
     playSound('lock_click');
-    updateDiceTrayConfig({ mode });
+    if (mode !== 'normal') {
+      updateDiceTrayConfig({ mode, selectedDie: 'd20', count: 1 });
+    } else {
+      updateDiceTrayConfig({ mode });
+    }
   };
 
   const handleRollClick = () => {
+    if (state.rolling) return;
     const modPart = state.modifier > 0 ? `+${state.modifier}` : state.modifier < 0 ? `${state.modifier}` : '';
+    const modeSuffix =
+      state.selectedDie === 'd20' && state.count === 1 && state.mode !== 'normal'
+        ? state.mode === 'advantage'
+          ? ' (Advantage)'
+          : ' (Disadvantage)'
+        : '';
     const customLabel =
       state.activeLabel && state.activeLabel !== 'Arcane Roll'
         ? state.activeLabel
-        : `${state.count}${state.selectedDie}${modPart}`;
+        : `${state.count}${state.selectedDie}${modPart}${modeSuffix}`;
 
     triggerDiceRoll({
       dieType: state.selectedDie,
@@ -134,19 +142,22 @@ export function UniversalDiceTray() {
             <div className="text-[10px] font-cinzel text-amber-200/60 uppercase tracking-widest mb-2 font-semibold">
               {isTr ? 'ZAR TÜRÜ SEÇİN' : 'SELECT POLYHEDRAL DIE'}
             </div>
-            <div className="grid grid-cols-7 gap-1.5">
+            <div className="grid grid-cols-7 gap-1 sm:gap-1.5">
               {DICE_TYPES.map((die) => {
                 const active = state.selectedDie === die;
                 return (
                   <button
                     key={die}
                     type="button"
+                    disabled={state.rolling}
                     onClick={() => handleSelectDie(die)}
-                    className={`py-2 rounded-xl font-cinzel text-xs font-extrabold uppercase transition-all cursor-pointer border ${
+                    aria-label={`Select ${die}`}
+                    aria-pressed={active}
+                    className={`py-2 rounded-xl font-cinzel text-[11px] sm:text-xs font-extrabold uppercase transition-all cursor-pointer border ${
                       active
                         ? 'bg-amber-500/25 border-amber-400 text-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.3)] scale-105'
                         : 'bg-black/50 border-amber-900/30 text-stone-400 hover:text-amber-200 hover:border-amber-500/30'
-                    }`}
+                    } ${state.rolling ? 'opacity-60 cursor-not-allowed' : ''}`}
                   >
                     {die}
                   </button>
@@ -177,7 +188,10 @@ export function UniversalDiceTray() {
                   <button
                     key={m}
                     type="button"
+                    disabled={state.rolling}
                     onClick={() => handleSelectMode(m)}
+                    aria-pressed={active}
+                    aria-label={`Roll mode ${label}`}
                     className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-cinzel font-bold uppercase transition-all cursor-pointer ${
                       active
                         ? m === 'advantage'
@@ -186,7 +200,7 @@ export function UniversalDiceTray() {
                           ? 'bg-rose-500/25 text-rose-200 border border-rose-500/50'
                           : 'bg-amber-500/20 text-amber-200 border border-amber-500/40'
                         : 'text-stone-400 hover:text-stone-200'
-                    }`}
+                    } ${state.rolling ? 'opacity-60 cursor-not-allowed' : ''}`}
                   >
                     {label}
                   </button>
@@ -203,8 +217,15 @@ export function UniversalDiceTray() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => updateDiceTrayConfig({ count: Math.max(1, state.count - 1) })}
-                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer"
+                  disabled={state.rolling}
+                  onClick={() => {
+                    const nextCount = Math.max(1, state.count - 1);
+                    updateDiceTrayConfig({
+                      count: nextCount,
+                      mode: nextCount > 1 ? 'normal' : state.mode,
+                    });
+                  }}
+                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Minus size={11} />
                 </button>
@@ -213,8 +234,15 @@ export function UniversalDiceTray() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => updateDiceTrayConfig({ count: Math.min(10, state.count + 1) })}
-                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer"
+                  disabled={state.rolling}
+                  onClick={() => {
+                    const nextCount = Math.min(10, state.count + 1);
+                    updateDiceTrayConfig({
+                      count: nextCount,
+                      mode: nextCount > 1 ? 'normal' : state.mode,
+                    });
+                  }}
+                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Plus size={11} />
                 </button>
@@ -229,8 +257,9 @@ export function UniversalDiceTray() {
                 </span>
                 <button
                   type="button"
+                  disabled={state.rolling}
                   onClick={() => updateDiceTrayConfig({ modifier: state.modifier - 1 })}
-                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer"
+                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Minus size={11} />
                 </button>
@@ -239,8 +268,9 @@ export function UniversalDiceTray() {
                 </span>
                 <button
                   type="button"
+                  disabled={state.rolling}
                   onClick={() => updateDiceTrayConfig({ modifier: state.modifier + 1 })}
-                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer"
+                  className="p-1 rounded bg-white/5 hover:bg-white/10 text-amber-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Plus size={11} />
                 </button>
@@ -248,41 +278,161 @@ export function UniversalDiceTray() {
             </div>
           </div>
 
-          {/* Center Interactive Die Emblem */}
-          <div className="my-5 flex flex-col items-center justify-center">
-            <motion.button
-              type="button"
-              onClick={handleRollClick}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              animate={
+          {/* Center Interactive 3D Die Stage */}
+          <div className="my-3 flex flex-col items-center justify-center">
+            <div
+              data-testid="dice-center-die"
+              role="button"
+              tabIndex={state.rolling ? -1 : 0}
+              aria-label={
                 state.rolling
-                  ? {
-                      rotate: [0, 120, 240, 360],
-                      scale: [1, 1.15, 0.95, 1],
-                    }
-                  : {}
+                  ? isTr
+                    ? 'Zar atılıyor'
+                    : 'Dice are rolling'
+                  : isTr
+                  ? 'Zarı atmak için tıklayın veya Enter tuşuna basın'
+                  : 'Click or press Enter to roll dice'
               }
-              transition={state.rolling ? { repeat: Infinity, duration: 0.4, ease: 'linear' } : {}}
-              className={`w-28 h-28 rounded-3xl flex flex-col items-center justify-center cursor-pointer select-none border-2 transition-all relative ${
-                current?.isCrit
-                  ? 'bg-gradient-to-br from-amber-500 to-yellow-300 text-black border-yellow-200 shadow-[0_0_35px_rgba(255,215,0,0.75)]'
-                  : current?.isFumble
-                  ? 'bg-gradient-to-br from-rose-950 to-red-800 text-rose-100 border-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.7)]'
-                  : 'bg-gradient-to-br from-[#1b1f2e] via-[#121521] to-[#090b10] text-amber-300 border-amber-500/50 hover:border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.25)]'
+              onClick={handleRollClick}
+              onKeyDown={(e) => {
+                if (!state.rolling && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  handleRollClick();
+                }
+              }}
+              className={`group flex flex-col items-center justify-center min-h-[160px] w-full transition-opacity ${
+                state.rolling ? 'cursor-not-allowed opacity-90' : 'cursor-pointer hover:opacity-100'
               }`}
             >
-              <span className="font-cinzel text-4xl font-black tabular-nums tracking-tight">
-                {displayValue}
-              </span>
-              <span className="text-[10px] font-cinzel uppercase font-bold tracking-widest mt-1 opacity-80">
-                {state.count}{state.selectedDie}
-                {state.modifier > 0 ? `+${state.modifier}` : state.modifier < 0 ? state.modifier : ''}
-              </span>
-            </motion.button>
+              {isD20AdvantageOrDisadvantage ? (
+                /* Advantage / Disadvantage Mode: Two 3D d20 Dice side by side */
+                <div className="flex items-center justify-center gap-4 sm:gap-8">
+                  {(() => {
+                    const r0 = activeEntry?.rolls?.[0] ?? current?.rolls?.[0] ?? 20;
+                    const r1 = activeEntry?.rolls?.[1] ?? current?.rolls?.[1] ?? 20;
+
+                    const isSettled =
+                      !state.rolling &&
+                      !!current &&
+                      current.dieType === 'd20' &&
+                      current.mode === state.mode &&
+                      current.rolls.length >= 2;
+                    let isRoll0Kept = false;
+                    let isRoll1Kept = false;
+                    if (isSettled) {
+                      if (state.mode === 'advantage') {
+                        isRoll0Kept = current.rolls[0] >= current.rolls[1];
+                        isRoll1Kept = !isRoll0Kept;
+                      } else {
+                        isRoll0Kept = current.rolls[0] <= current.rolls[1];
+                        isRoll1Kept = !isRoll0Kept;
+                      }
+                    }
+
+                    return (
+                      <>
+                        <PolyhedralDice3D
+                          dieType="d20"
+                          rolling={state.rolling}
+                          value={r0}
+                          rollId={activeEntry?.id ?? current?.id}
+                          isCrit={isSettled && isRoll0Kept && current.isCrit}
+                          isFumble={isSettled && isRoll0Kept && current.isFumble}
+                          isKept={isSettled ? isRoll0Kept : undefined}
+                          isDiscarded={isSettled ? !isRoll0Kept : undefined}
+                          size={54}
+                          testId="dice-3d-roll-0"
+                          subLabel={isTr ? '1. Zar' : 'Roll #1'}
+                        />
+                        <PolyhedralDice3D
+                          dieType="d20"
+                          rolling={state.rolling}
+                          value={r1}
+                          rollId={activeEntry?.id ?? current?.id}
+                          isCrit={isSettled && isRoll1Kept && current.isCrit}
+                          isFumble={isSettled && isRoll1Kept && current.isFumble}
+                          isKept={isSettled ? isRoll1Kept : undefined}
+                          isDiscarded={isSettled ? !isRoll1Kept : undefined}
+                          size={54}
+                          testId="dice-3d-roll-1"
+                          subLabel={isTr ? '2. Zar' : 'Roll #2'}
+                        />
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : state.count > 1 ? (
+                /* Multi-dice Roll (e.g. 2d6, 3d8) */
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+                  {(() => {
+                    const displayCount = Math.min(state.count, 3);
+                    const isMatchingDie = current && current.dieType === state.selectedDie;
+                    const rollsArray =
+                      activeEntry?.rolls ??
+                      (isMatchingDie ? current?.rolls : null) ??
+                      Array.from({ length: displayCount }, () => DIE_MAX[state.selectedDie] || 6);
+                    return (
+                      <>
+                        {Array.from({ length: displayCount }).map((_, idx) => {
+                          const val = rollsArray[idx] ?? DIE_MAX[state.selectedDie] ?? 6;
+                          return (
+                            <PolyhedralDice3D
+                              key={`multi-die-${state.selectedDie}-${idx}`}
+                              dieType={state.selectedDie}
+                              rolling={state.rolling}
+                              value={val}
+                              rollId={activeEntry?.id ?? current?.id}
+                              size={displayCount > 2 ? 46 : 56}
+                              testId={`polyhedral-die-3d-${idx}`}
+                              subLabel={`${state.selectedDie} #${idx + 1}`}
+                            />
+                          );
+                        })}
+                        {state.count > 3 && (
+                          <div className="self-center px-2 py-1 rounded-lg bg-black/60 border border-amber-900/40 text-[11px] font-cinzel text-amber-300 font-bold">
+                            +{state.count - 3} more
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : (
+                (() => {
+                  const isMatchingDie = Boolean(current && current.dieType === state.selectedDie);
+                  return (
+                    <PolyhedralDice3D
+                      dieType={state.selectedDie}
+                      rolling={state.rolling}
+                      value={
+                        state.rolling
+                          ? activeEntry
+                            ? activeEntry.keptRoll
+                            : DIE_MAX[state.selectedDie]
+                          : isMatchingDie && current
+                          ? current.keptRoll
+                          : DIE_MAX[state.selectedDie]
+                      }
+                      rollId={activeEntry?.id ?? current?.id}
+                      isCrit={!state.rolling && isMatchingDie && Boolean(current?.isCrit)}
+                      isFumble={!state.rolling && isMatchingDie && Boolean(current?.isFumble)}
+                      size={64}
+                      testId="polyhedral-die-3d"
+                      subLabel={`${state.count}${state.selectedDie}${
+                        state.modifier > 0
+                          ? `+${state.modifier}`
+                          : state.modifier < 0
+                          ? state.modifier
+                          : ''
+                      }`}
+                    />
+                  );
+                })()
+              )}
+            </div>
 
             {/* Current Result Breakdown */}
-            {current && !state.rolling && (
+            {current && !state.rolling && current.dieType === state.selectedDie && (
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}

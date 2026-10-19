@@ -53,6 +53,7 @@ export interface DiceTrayState {
   mode: RollMode;
   activeLabel: string;
   isSecretRoll: boolean;
+  targetResult?: DiceRollEntry | null;
   currentResult: DiceRollEntry | null;
   history: DiceRollEntry[];
 }
@@ -68,10 +69,13 @@ let trayState: DiceTrayState = {
   mode: 'normal',
   activeLabel: 'Arcane Roll',
   isSecretRoll: false,
+  targetResult: null,
   currentResult: null,
   history: [],
 };
 
+export const ROLL_DURATION_MS = 1000;
+let rollTimeoutId: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<DiceTrayListener>();
 
 function notifyListeners() {
@@ -95,16 +99,19 @@ export function parseDiceFormula(formula: string): {
   dieType: DieType;
   modifier: number;
 } {
-  const match = formula.match(/(\d+)\s*d\s*(4|6|8|100|10|12|20)(?:\s*([+-]\s*\d+))?/i);
+  if (!formula || typeof formula !== 'string') {
+    return { count: 1, dieType: 'd20', modifier: 0 };
+  }
+  const match = formula.match(/(?:(\d+)\s*)?d\s*(4|6|8|100|10|12|20)(?:\s*([+-]\s*\d+))?/i);
   if (!match) {
-    const bonusOnly = formula.match(/([+-]\s*\d+)/);
+    const bonusOnly = formula.match(/([+-]?\s*\d+)/);
     return {
       count: 1,
       dieType: 'd20',
       modifier: bonusOnly ? parseInt(bonusOnly[1].replace(/\s+/g, ''), 10) || 0 : 0,
     };
   }
-  const count = Math.max(1, Math.min(10, parseInt(match[1], 10) || 1));
+  const count = Math.max(1, Math.min(10, parseInt(match[1] || '1', 10) || 1));
   const sides = parseInt(match[2], 10);
   const dieKey = `d${sides}` as DieType;
   const dieType: DieType = DIE_MAX[dieKey] ? dieKey : 'd20';
@@ -140,7 +147,11 @@ export function updateDiceTrayConfig(
 }
 
 export function clearDiceHistory() {
-  trayState = { ...trayState, history: [], currentResult: null };
+  if (rollTimeoutId) {
+    clearTimeout(rollTimeoutId);
+    rollTimeoutId = null;
+  }
+  trayState = { ...trayState, history: [], currentResult: null, targetResult: null, rolling: false };
   notifyListeners();
 }
 
@@ -148,7 +159,6 @@ export function executeRoll(request?: DiceRollRequest): DiceRollEntry {
   let dieType = request?.dieType ?? trayState.selectedDie;
   let count = request?.count ?? trayState.count;
   let modifier = request?.modifier ?? trayState.modifier;
-  const mode = request?.mode ?? trayState.mode;
   const label = request?.label ?? trayState.activeLabel ?? 'Arcane Roll';
   const isSecretRoll = request?.isSecretRoll ?? trayState.isSecretRoll;
 
@@ -158,6 +168,8 @@ export function executeRoll(request?: DiceRollRequest): DiceRollEntry {
     count = parsed.count;
     modifier = parsed.modifier;
   }
+
+  const mode = request?.mode ?? (dieType === 'd20' && count === 1 ? trayState.mode : 'normal');
 
   const max = DIE_MAX[dieType] || 20;
   const rolls: number[] = [];
@@ -187,6 +199,11 @@ export function executeRoll(request?: DiceRollRequest): DiceRollEntry {
   const isCrit = dieType === 'd20' && count === 1 && keptRoll === 20;
   const isFumble = dieType === 'd20' && count === 1 && keptRoll === 1;
 
+  const keptRolls =
+    dieType === 'd20' && count === 1 && mode !== 'normal'
+      ? [keptRoll]
+      : rolls;
+
   const entry: DiceRollEntry = {
     id: `roll-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     label,
@@ -197,7 +214,7 @@ export function executeRoll(request?: DiceRollRequest): DiceRollEntry {
     rolls,
     discardedRoll,
     keptRoll,
-    keptRolls: [keptRoll],
+    keptRolls,
     total,
     isCrit,
     isFumble,
@@ -212,7 +229,6 @@ export function triggerDiceRoll(request?: DiceRollRequest): DiceRollEntry {
   let dieType = request?.dieType ?? trayState.selectedDie;
   let count = request?.count ?? (request?.dieType ? 1 : trayState.count);
   let modifier = request?.modifier ?? (request?.dieType || request?.label ? 0 : trayState.modifier);
-  const mode = request?.mode ?? trayState.mode;
   const label = request?.label ?? trayState.activeLabel ?? 'Arcane Roll';
   const isSecretRoll = request?.isSecretRoll ?? trayState.isSecretRoll;
 
@@ -222,6 +238,8 @@ export function triggerDiceRoll(request?: DiceRollRequest): DiceRollEntry {
     count = parsed.count;
     modifier = parsed.modifier;
   }
+
+  const mode = request?.mode ?? (dieType === 'd20' && count === 1 ? trayState.mode : 'normal');
 
   playSound('dice_roll');
 
@@ -267,10 +285,16 @@ export function triggerDiceRoll(request?: DiceRollRequest): DiceRollEntry {
     mode,
     activeLabel: label,
     isSecretRoll,
+    targetResult: entry,
   };
   notifyListeners();
 
-  setTimeout(() => {
+  if (rollTimeoutId) {
+    clearTimeout(rollTimeoutId);
+    rollTimeoutId = null;
+  }
+
+  rollTimeoutId = setTimeout(() => {
     if (entry.isCrit) {
       playSound('unlock');
     } else if (entry.isFumble) {
@@ -282,11 +306,17 @@ export function triggerDiceRoll(request?: DiceRollRequest): DiceRollEntry {
     trayState = {
       ...trayState,
       rolling: false,
+      targetResult: null,
       currentResult: entry,
       history: [entry, ...trayState.history].slice(0, 20),
     };
     notifyListeners();
-  }, 420);
+    rollTimeoutId = null;
+  }, ROLL_DURATION_MS);
 
   return entry;
+}
+
+if (typeof window !== 'undefined') {
+  (window as unknown as { triggerDiceRoll?: typeof triggerDiceRoll }).triggerDiceRoll = triggerDiceRoll;
 }
