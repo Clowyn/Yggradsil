@@ -225,22 +225,24 @@ export function Header({ onToggleSidebar }: HeaderProps) {
       </button>
 
       {/* Right side controls */}
-      <div className="flex items-center gap-2 sm:gap-3 ml-auto">
-        {/* GM Character Selector */}
-        {isGM && characters && characters.length > 0 && (
-          <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 mr-1">
-            <Users size={13} className="text-amber-400/80 shrink-0" />
+      <div className="flex items-center gap-1.5 sm:gap-2.5 ml-auto">
+        {/* Active Character Selector (Accessible on Mobile, Tablet & Desktop) */}
+        {(isGM || (characters && characters.length > 1)) && characters && characters.length > 0 && (
+          <div className="flex items-center gap-1 sm:gap-2 mr-0.5 sm:mr-1">
+            <Users size={13} className="hidden sm:block text-amber-400/80 shrink-0" />
             <select
+              data-testid="header-character-selector"
+              aria-label={locale === 'tr' ? 'Aktif Karakter Seçimi' : 'Active Character Selection'}
               value={activeCharacterId || ''}
               onChange={(e) => {
                 playSound('lock_click');
                 setActiveCharacterId(e.target.value);
               }}
-              className="bg-[#0e1017]/90 border border-amber-900/40 text-amber-100 text-xs rounded-lg px-2.5 py-1 outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 max-w-[130px] sm:max-w-xs font-inter truncate cursor-pointer shadow-sm"
+              className="bg-[#0e1017]/95 border border-amber-900/40 text-amber-100 text-[11px] sm:text-xs rounded-lg px-2 sm:px-2.5 py-1.5 outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/30 max-w-[105px] sm:max-w-[190px] md:max-w-xs font-inter truncate cursor-pointer shadow-sm"
             >
               {characters.map((char) => (
                 <option key={char.id} value={char.id}>
-                  {char.name} (Lv. {char.level}) #{char.id.slice(0, 4)}
+                  {char.name} (Lv.{char.level})
                 </option>
               ))}
             </select>

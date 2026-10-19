@@ -283,7 +283,10 @@ export function GMDashboard() {
   }, [locale]);
 
   const fetchLiveCharacters = useCallback(async () => {
-    if (!campaign?.id) return;
+    if (!campaign?.id) {
+      setLoading(false);
+      return;
+    }
     try {
       const { data, error } = await supabase
         .from('characters')
@@ -806,37 +809,40 @@ export function GMDashboard() {
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 rounded-2xl bg-rose-950/40 border border-rose-900/50 flex items-center justify-center shadow-lg">
-          <Crown className="w-6 h-6 text-rose-300" />
+      <div className="flex items-center gap-3 mb-5 sm:mb-6">
+        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-rose-950/40 border border-rose-900/50 flex items-center justify-center shadow-lg shrink-0">
+          <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-rose-300" />
         </div>
-        <div>
-          <h1 className="text-xl font-cinzel font-extrabold text-amber-100 tracking-wide uppercase flex items-center gap-2">
+        <div className="min-w-0">
+          <h1 className="text-base sm:text-xl font-cinzel font-extrabold text-amber-100 tracking-wide uppercase flex flex-wrap items-center gap-2">
             <span>LOREMASTER OVERSEER CHAMBER</span>
             <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-rose-950/40 text-rose-300 border border-rose-900/50">
               GM SANCTUM
             </span>
           </h1>
-          <p className="text-[11px] text-amber-200/70 font-cinzel tracking-wider uppercase">
+          <p className="text-[11px] text-amber-200/70 font-cinzel tracking-wider uppercase truncate">
             {campaign?.name ?? 'Campaign'} — {members.length} ADVENTURERS ASSEMBLED
           </p>
         </div>
       </div>
 
       {/* Tab Bar */}
-      <div className="flex gap-2 mb-6 arcane-glass p-2 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl overflow-x-auto no-scrollbar shadow-lg">
+      <div
+        data-testid="gm-dashboard-tabs"
+        className="flex gap-1.5 sm:gap-2 mb-6 arcane-glass p-2 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl overflow-x-auto no-scrollbar shadow-lg"
+      >
         {TABS.map(tab => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
+            className={`flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
               activeTab === tab.key
                 ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
                 : 'text-stone-400 hover:text-amber-200 hover:bg-white/5'
             }`}
           >
             {tab.icon}
-            <span className="hidden sm:inline text-xs">{tab.label}</span>
+            <span className="text-xs whitespace-nowrap">{tab.label}</span>
           </button>
         ))}
       </div>

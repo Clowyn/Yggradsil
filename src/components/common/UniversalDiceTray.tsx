@@ -98,13 +98,13 @@ export function UniversalDiceTray() {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-3 sm:p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.92, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 15 }}
           transition={{ duration: 0.2 }}
-          className="arcane-glass rounded-3xl border border-amber-500/40 bg-[#0c0e15]/95 w-full max-w-lg p-5 sm:p-6 shadow-[0_0_50px_rgba(0,0,0,0.9)] relative overflow-hidden"
+          className="arcane-glass rounded-3xl border border-amber-500/40 bg-[#0c0e15]/95 w-full max-w-lg max-h-[92dvh] overflow-y-auto p-4 sm:p-6 shadow-[0_0_50px_rgba(0,0,0,0.9)] relative"
         >
           {/* Top Hairline */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />

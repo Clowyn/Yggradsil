@@ -263,7 +263,7 @@ export function TableChatDrawer() {
           exit={{ x: '100%', opacity: 0 }}
           transition={{ type: 'spring', stiffness: 320, damping: 30 }}
           data-testid="table-chat-drawer"
-          className="w-full max-w-md h-full bg-[#0a0c12]/98 border-l border-amber-900/40 shadow-[-20px_0_50px_rgba(0,0,0,0.85)] flex flex-col font-inter text-gray-200"
+          className="w-full max-w-md h-dvh-screen safe-bottom bg-[#0a0c12]/98 border-l border-amber-900/40 shadow-[-20px_0_50px_rgba(0,0,0,0.85)] flex flex-col font-inter text-gray-200"
         >
           {/* Drawer Header */}
           <div className="p-4 border-b border-amber-900/30 flex items-center justify-between bg-black/40">

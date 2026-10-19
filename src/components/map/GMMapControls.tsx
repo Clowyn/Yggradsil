@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Eye,
@@ -10,6 +11,8 @@ import {
   ScanEye,
   Trash2,
   LayoutGrid,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import type { MapMovementMode } from '../../lib/types';
 import { useAuth } from '../../contexts/AuthContext';
@@ -58,16 +61,19 @@ export function GMMapControls({
 }: GMMapControlsProps) {
   const { locale } = useAuth();
   const t = translations[locale] || translations.en;
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <motion.div
-      className="absolute top-4 right-4 z-20 arcane-glass rounded-2xl p-4 min-w-[270px] max-w-[300px] border border-amber-900/40 bg-[#0e1017]/95 shadow-2xl backdrop-blur-xl"
+      className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-20 arcane-glass rounded-2xl p-3 sm:p-4 border border-amber-900/40 bg-[#0e1017]/95 shadow-2xl backdrop-blur-xl transition-all ${
+        isCollapsed ? 'min-w-[180px]' : 'min-w-[250px] sm:min-w-[270px] max-w-[calc(100vw-32px)] sm:max-w-[300px]'
+      }`}
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.2, duration: 0.3 }}
     >
       {/* Title & Active Map badge */}
-      <div className="flex items-center justify-between gap-2 mb-3">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]" />
           <h3 className="text-xs font-cinzel font-bold text-amber-200 uppercase tracking-widest">
@@ -75,21 +81,36 @@ export function GMMapControls({
           </h3>
         </div>
 
-        <button
-          type="button"
-          onClick={onOpenMapLibrary}
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[10px] font-bold font-cinzel transition-all cursor-pointer shadow-sm"
-          title={t.map.mapLibrary}
-        >
-          <FolderOpen className="w-3.5 h-3.5" />
-          <span>{t.map.mapLibrary}</span>
-        </button>
+        <div className="flex items-center gap-1.5">
+          {!isCollapsed && (
+            <button
+              type="button"
+              onClick={onOpenMapLibrary}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-[10px] font-bold font-cinzel transition-all cursor-pointer shadow-sm"
+              title={t.map.mapLibrary}
+            >
+              <FolderOpen className="w-3.5 h-3.5" />
+              <span>{t.map.mapLibrary}</span>
+            </button>
+          )}
+          <button
+            type="button"
+            data-testid="gm-map-controls-collapse-btn"
+            onClick={() => setIsCollapsed((prev) => !prev)}
+            className="p-1 rounded-lg bg-white/5 hover:bg-amber-500/15 border border-white/10 text-amber-300 cursor-pointer"
+            title={isCollapsed ? 'Expand GM Controls' : 'Minimize GM Controls'}
+          >
+            {isCollapsed ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
+          </button>
+        </div>
       </div>
 
-      <div className="text-[11px] font-cinzel text-amber-300/80 mb-3 px-2 py-1 rounded bg-black/40 border border-white/5 truncate">
-        <span className="text-stone-400 mr-1">{t.map.activeMap}:</span>
-        <span className="font-bold">{activeMapName}</span>
-      </div>
+      {!isCollapsed && (
+        <div className="mt-3">
+          <div className="text-[11px] font-cinzel text-amber-300/80 mb-3 px-2 py-1 rounded bg-black/40 border border-white/5 truncate">
+            <span className="text-stone-400 mr-1">{t.map.activeMap}:</span>
+            <span className="font-bold">{activeMapName}</span>
+          </div>
 
       {/* Movement Mode Toggle */}
       <div className="mb-3.5">
@@ -273,6 +294,8 @@ export function GMMapControls({
           <span>
             {pendingRequestsCount} {t.map.pendingMoves}
           </span>
+        </div>
+      )}
         </div>
       )}
     </motion.div>

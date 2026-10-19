@@ -684,147 +684,187 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
     return key === 'CON' || key === 'WIS';
   };
 
+  const [mobileSection, setMobileSection] = useState<'all' | 'vitals' | 'abilities' | 'spells' | 'gear'>('all');
+
+  const showVitalsOnMobile = mobileSection === 'all' || mobileSection === 'vitals';
+  const showSpellsOnMobile = mobileSection === 'all' || mobileSection === 'spells';
+  const showAbilitiesOnMobile = mobileSection === 'all' || mobileSection === 'abilities';
+  const showGearOnMobile = mobileSection === 'all' || mobileSection === 'gear';
+
   return (
-    <div className="space-y-6">
-      {/* ─── Hero Header & Identity Card ─────────────────────────── */}
+    <div className="space-y-5 sm:space-y-6">
+      {/* ─── Hero Header & Identity Card (Double-Bezel) ─────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="arcane-glass rounded-2xl p-6 border border-amber-900/35 relative overflow-hidden bg-[#0e1017]/85 shadow-2xl"
+        className="double-bezel relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="double-bezel-core p-4 sm:p-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
-          <div className="flex items-center gap-5">
-            {/* Avatar or Class Emblem */}
-            <div className="relative">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-b from-[#2a1f0e] to-[#0a0a0f] border-2 border-amber-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)] overflow-hidden">
-                {character.avatar_url ? (
-                  <img
-                    src={character.avatar_url}
-                    alt={character.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-4xl select-none">
-                    {character.race?.icon_url || '🧙'}
-                  </span>
-                )}
-              </div>
-              <div className="absolute -bottom-2 -right-2 bg-amber-500 text-black font-cinzel font-bold text-xs px-2 py-0.5 rounded-lg shadow-md border border-white/20">
-                Lv. {level}
-              </div>
-            </div>
-
-            {/* Name and Archetype Titles */}
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl lg:text-3xl font-cinzel font-bold text-gold-gradient tracking-wide">
-                  {character.name}
-                </h1>
-                {character.race?.tier && (
-                  <span className="text-[10px] font-cinzel uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-950/40 text-amber-300 border border-amber-900/40">
-                    {isTr ? character.race.tier.name_tr : character.race.tier.name_en}
-                  </span>
-                )}
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 mt-1.5 text-sm text-stone-300 font-inter">
-                <span className="flex items-center gap-1.5 text-amber-100 font-medium font-cinzel">
-                  <User size={14} className="text-amber-400" />
-                  {character.race?.name || (isTr ? 'Bilinmeyen Irk' : 'Unknown Race')}
-                </span>
-                <span className="text-amber-900">•</span>
-                <span className="flex items-center gap-1.5 text-amber-300 font-medium font-cinzel">
-                  <Flame size={14} className="text-amber-400" />
-                  {character.subclass
-                    ? isTr
-                      ? character.subclass.name_tr
-                      : character.subclass.name_en
-                    : isTr
-                    ? 'Sınıfsız'
-                    : 'Unclassed'}
-                </span>
-                {character.subclass?.category && (
-                  <>
-                    <span className="text-amber-900">•</span>
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-black/40 text-stone-300 border border-amber-900/30 font-cinzel">
-                      {isTr
-                        ? character.subclass.category.name_tr
-                        : character.subclass.category.name_en}
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 relative z-10">
+            <div className="flex items-center gap-4 sm:gap-5">
+              {/* Avatar or Class Emblem */}
+              <div className="relative shrink-0">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-b from-[#2a1f0e] to-[#0a0a0f] border-2 border-amber-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.2)] overflow-hidden">
+                  {character.avatar_url ? (
+                    <img
+                      src={character.avatar_url}
+                      alt={character.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl sm:text-4xl select-none">
+                      {character.race?.icon_url || '🧙'}
                     </span>
-                  </>
-                )}
+                  )}
+                </div>
+                <div className="absolute -bottom-2 -right-2 bg-amber-500 text-black font-cinzel font-bold text-xs px-2 py-0.5 rounded-lg shadow-md border border-white/20">
+                  Lv. {level}
+                </div>
+              </div>
+
+              {/* Name and Archetype Titles */}
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-cinzel font-bold text-gold-gradient tracking-wide truncate">
+                    {character.name}
+                  </h1>
+                  {character.race?.tier && (
+                    <span className="text-[10px] font-cinzel uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-950/40 text-amber-300 border border-amber-900/40">
+                      {isTr ? character.race.tier.name_tr : character.race.tier.name_en}
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 text-xs sm:text-sm text-stone-300 font-inter">
+                  <span className="flex items-center gap-1.5 text-amber-100 font-medium font-cinzel">
+                    <User size={14} className="text-amber-400" />
+                    {character.race?.name || (isTr ? 'Bilinmeyen Irk' : 'Unknown Race')}
+                  </span>
+                  <span className="text-amber-900">•</span>
+                  <span className="flex items-center gap-1.5 text-amber-300 font-medium font-cinzel">
+                    <Flame size={14} className="text-amber-400" />
+                    {character.subclass
+                      ? isTr
+                        ? character.subclass.name_tr
+                        : character.subclass.name_en
+                      : isTr
+                      ? 'Sınıfsız'
+                      : 'Unclassed'}
+                  </span>
+                  {character.subclass?.category && (
+                    <>
+                      <span className="text-amber-900 hidden sm:inline">•</span>
+                      <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full bg-black/40 text-stone-300 border border-amber-900/30 font-cinzel">
+                        {isTr
+                          ? character.subclass.category.name_tr
+                          : character.subclass.category.name_en}
+                      </span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Quick Actions & Navigation */}
-          <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto justify-end">
-            <Link
-              to="/spells"
-              className="px-3.5 py-2 rounded-xl bg-purple-950/30 hover:bg-purple-900/40 text-purple-200 border border-purple-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
-            >
-              <Sparkles size={14} className="text-purple-400" />
-              {isTr ? 'Büyü Kitabı' : 'Grimoire'}
-            </Link>
-            <Link
-              to="/stat-tree"
-              className="px-3.5 py-2 rounded-xl bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-200 border border-emerald-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
-            >
-              <Award size={14} className="text-emerald-400" />
-              {isTr ? 'Yggdrasil Ağacı' : 'Yggdrasil Tree'}
-            </Link>
-            <Link
-              to="/inventory"
-              className="px-3.5 py-2 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 text-amber-200 border border-amber-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
-            >
-              <Backpack size={14} className="text-amber-400" />
-              {isTr ? 'Maceracı Çantası' : 'Adventurer Pack'}
-            </Link>
-            {onOpenCreation && (
-              <button
-                type="button"
-                onClick={onOpenCreation}
-                className="px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 border border-amber-500/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+            {/* Quick Actions & Navigation */}
+            <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-start lg:justify-end">
+              <Link
+                to="/spells"
+                className="px-3 py-2 rounded-xl bg-purple-950/30 hover:bg-purple-900/40 text-purple-200 border border-purple-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
               >
-                <Compass size={14} className="text-amber-400" />
-                {isTr ? 'Yeni Maceracı' : 'New Adventurer'}
-              </button>
-            )}
+                <Sparkles size={14} className="text-purple-400" />
+                {isTr ? 'Büyü Kitabı' : 'Grimoire'}
+              </Link>
+              <Link
+                to="/stat-tree"
+                className="px-3 py-2 rounded-xl bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-200 border border-emerald-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
+              >
+                <Award size={14} className="text-emerald-400" />
+                {isTr ? 'Yggdrasil Ağacı' : 'Yggdrasil Tree'}
+              </Link>
+              <Link
+                to="/inventory"
+                className="px-3 py-2 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 text-amber-200 border border-amber-900/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all shadow-sm"
+              >
+                <Backpack size={14} className="text-amber-400" />
+                {isTr ? 'Maceracı Çantası' : 'Adventurer Pack'}
+              </Link>
+              {onOpenCreation && (
+                <button
+                  type="button"
+                  onClick={onOpenCreation}
+                  className="px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 border border-amber-500/40 text-xs font-cinzel font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                >
+                  <Compass size={14} className="text-amber-400" />
+                  {isTr ? 'Yeni Maceracı' : 'New Adventurer'}
+                </button>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* XP Progress Bar */}
-        <div className="mt-5 pt-4 border-t border-amber-900/25">
-          <div className="flex items-center justify-between text-xs mb-1.5 font-cinzel">
-            <div className="flex items-center gap-2">
-              <span className="text-stone-400 font-medium">
-                {isTr ? 'Deneyim (XP):' : 'Experience Points:'}
-              </span>
-              <span className="text-amber-300 font-bold">{xpCurrent.toLocaleString()} XP</span>
-              <span className="text-stone-500">/ {nextLevelXp.toLocaleString()} XP</span>
+          {/* XP Progress Bar */}
+          <div className="mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-amber-900/25">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs mb-1.5 font-cinzel">
+              <div className="flex items-center gap-2">
+                <span className="text-stone-400 font-medium">
+                  {isTr ? 'Deneyim (XP):' : 'Experience Points:'}
+                </span>
+                <span className="text-amber-300 font-bold">{xpCurrent.toLocaleString()} XP</span>
+                <span className="text-stone-500">/ {nextLevelXp.toLocaleString()} XP</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-emerald-400 font-medium bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-900/40">
+                  {isTr ? 'Harcanabilir XP:' : 'Available XP:'} {xpAvailable.toLocaleString()}
+                </span>
+                <span className="text-stone-400 font-semibold">{xpProgressPercent}%</span>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-emerald-400 font-medium bg-emerald-950/40 px-2.5 py-0.5 rounded-full border border-emerald-900/40">
-                {isTr ? 'Harcanabilir XP:' : 'Available XP:'} {xpAvailable.toLocaleString()}
-              </span>
-              <span className="text-stone-400 font-semibold">{xpProgressPercent}%</span>
+            <div className="w-full h-2 rounded-full bg-black/60 border border-amber-950/40 overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-amber-700 via-amber-500 to-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${xpProgressPercent}%` }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+              />
             </div>
-          </div>
-          <div className="w-full h-2 rounded-full bg-black/60 border border-amber-950/40 overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-amber-700 via-amber-500 to-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.5)]"
-              initial={{ width: 0 }}
-              animate={{ width: `${xpProgressPercent}%` }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            />
           </div>
         </div>
       </motion.div>
 
+      {/* ─── Sticky Mobile & Tablet Section Switcher (<1024px) ─────────────────── */}
+      <div
+        data-testid="character-sheet-mobile-tabs"
+        className="lg:hidden sticky top-0 z-20 -mx-2 px-2 py-2 bg-[#07080d]/95 border-y border-amber-900/30 flex items-center gap-1.5 overflow-x-auto no-scrollbar"
+      >
+        {([
+          { id: 'all', labelTr: 'Tümü', labelEn: 'All Sections' },
+          { id: 'vitals', labelTr: 'Yaşam & Savaş', labelEn: 'Vitals & Combat' },
+          { id: 'abilities', labelTr: 'Nitelikler & Beceriler', labelEn: 'Stats & Skills' },
+          { id: 'spells', labelTr: 'Büyü Yuvaları', labelEn: 'Spell Slots' },
+          { id: 'gear', labelTr: 'Teçhizat & Ağaç', labelEn: 'Relics & Nodes' },
+        ] as const).map((tab) => {
+          const active = mobileSection === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              data-testid={`char-tab-${tab.id}`}
+              onClick={() => setMobileSection(tab.id)}
+              className={`shrink-0 px-3 py-2 rounded-xl text-xs font-cinzel font-bold tracking-wider transition-all cursor-pointer border ${
+                active
+                  ? 'bg-amber-500/20 text-amber-200 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
+                  : 'bg-[#0e1017] text-stone-400 border-white/10 hover:text-amber-200'
+              }`}
+            >
+              {isTr ? tab.labelTr : tab.labelEn}
+            </button>
+          );
+        })}
+      </div>
+
       {/* ─── Vitals Hero Row ─────────────────────────────────────── */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className={`${showVitalsOnMobile ? 'grid' : 'hidden lg:grid'} grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3`}>
         {/* HP */}
         <div className="arcane-glass p-3.5 border border-rose-900/40 bg-rose-950/20 flex flex-col items-center justify-center text-center shadow-lg rounded-2xl">
           <div className="flex items-center gap-1.5 text-xs text-rose-400 font-cinzel font-bold mb-1">
@@ -932,9 +972,9 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       </div>
 
       {/* ─── D&D 5e Live Vitals, Rest & Spell Slot Engine (Task 2.3) ─── */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className={`${showVitalsOnMobile || showSpellsOnMobile ? 'grid' : 'hidden lg:grid'} grid-cols-1 lg:grid-cols-12 gap-4`}>
         {/* Left: Combat Vitals, Hit Dice & Rest Controls (7 cols) */}
-        <div className="lg:col-span-7 arcane-glass p-4 sm:p-5 border border-rose-900/35 bg-[#0e1017]/90 rounded-2xl shadow-xl space-y-4">
+        <div className={`${showVitalsOnMobile ? 'block' : 'hidden lg:block'} lg:col-span-7 arcane-glass p-4 sm:p-5 border border-rose-900/35 bg-[#0e1017]/90 rounded-2xl shadow-xl space-y-4`}>
           <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-amber-900/25">
             <div className="flex items-center gap-2">
               <Heart size={16} className="text-rose-400" />
@@ -946,7 +986,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
               <button
                 type="button"
                 onClick={handleShortRest}
-                className="px-3 py-1 rounded-xl bg-amber-950/50 hover:bg-amber-900/60 border border-amber-600/40 text-amber-200 text-[11px] font-cinzel font-bold flex items-center gap-1.5 cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-amber-950/50 hover:bg-amber-900/60 border border-amber-600/40 text-amber-200 text-[11px] font-cinzel font-bold flex items-center gap-1.5 cursor-pointer transition-all"
                 title="Short Rest: Spend a Hit Die to recover HP"
               >
                 <Sun size={12} className="text-amber-400" />
@@ -955,7 +995,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
               <button
                 type="button"
                 onClick={handleLongRest}
-                className="px-3 py-1 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/70 border border-indigo-500/40 text-indigo-200 text-[11px] font-cinzel font-bold flex items-center gap-1.5 cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/70 border border-indigo-500/40 text-indigo-200 text-[11px] font-cinzel font-bold flex items-center gap-1.5 cursor-pointer transition-all"
                 title="Long Rest: Restore full HP, Spell Slots, and Hit Dice"
               >
                 <Moon size={12} className="text-indigo-400" />
@@ -966,39 +1006,39 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
 
           {/* HP Controls Row */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               <button
                 type="button"
                 onClick={() => handleDamage(1)}
-                className="px-2.5 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900/70 border border-rose-700/50 text-rose-200 text-xs font-cinzel font-bold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900/70 border border-rose-700/50 text-rose-200 text-xs font-cinzel font-bold cursor-pointer"
               >
                 -1 HP
               </button>
               <button
                 type="button"
                 onClick={() => handleDamage(5)}
-                className="px-2.5 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900/70 border border-rose-700/50 text-rose-200 text-xs font-cinzel font-bold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900/70 border border-rose-700/50 text-rose-200 text-xs font-cinzel font-bold cursor-pointer"
               >
                 -5 HP
               </button>
               <button
                 type="button"
                 onClick={() => handleHeal(1)}
-                className="px-2.5 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/70 border border-emerald-700/50 text-emerald-200 text-xs font-cinzel font-bold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/70 border border-emerald-700/50 text-emerald-200 text-xs font-cinzel font-bold cursor-pointer"
               >
                 +1 HP
               </button>
               <button
                 type="button"
                 onClick={() => handleHeal(5)}
-                className="px-2.5 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/70 border border-emerald-700/50 text-emerald-200 text-xs font-cinzel font-bold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/70 border border-emerald-700/50 text-emerald-200 text-xs font-cinzel font-bold cursor-pointer"
               >
                 +5 HP
               </button>
               <button
                 type="button"
                 onClick={() => handleGrantTempHp(5)}
-                className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900/70 border border-cyan-700/50 text-cyan-200 text-xs font-cinzel font-bold cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900/70 border border-cyan-700/50 text-cyan-200 text-xs font-cinzel font-bold cursor-pointer"
               >
                 +5 Temp HP
               </button>
@@ -1098,7 +1138,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                           })
                         }
                         aria-label={`Death Save Success ${idx + 1}`}
-                        className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
+                        className={`w-4 h-4 rounded-full border transition-all cursor-pointer ${
                           active
                             ? 'bg-emerald-400 border-emerald-200 shadow-[0_0_6px_#34d399]'
                             : 'bg-black/60 border-emerald-800/60'
@@ -1126,7 +1166,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                           })
                         }
                         aria-label={`Death Save Failure ${idx + 1}`}
-                        className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
+                        className={`w-4 h-4 rounded-full border transition-all cursor-pointer ${
                           active
                             ? 'bg-rose-500 border-rose-200 shadow-[0_0_6px_#f43f5e]'
                             : 'bg-black/60 border-rose-800/60'
@@ -1141,7 +1181,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
         </div>
 
         {/* Right: Interactive Spell Slot Tracker (5 cols) */}
-        <div className="lg:col-span-5 arcane-glass p-4 sm:p-5 border border-purple-900/35 bg-[#0e1017]/90 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div className={`${showSpellsOnMobile ? 'flex' : 'hidden lg:flex'} lg:col-span-5 arcane-glass p-4 sm:p-5 border border-purple-900/35 bg-[#0e1017]/90 rounded-2xl shadow-xl flex-col justify-between`}>
           <div>
             <div className="flex items-center justify-between pb-2.5 border-b border-purple-900/30 mb-3">
               <div className="flex items-center gap-2">
@@ -1161,12 +1201,12 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                 return (
                   <div
                     key={lvlKey}
-                    className="flex items-center justify-between px-2.5 py-1.5 rounded-xl bg-black/40 border border-purple-900/25"
+                    className="flex items-center justify-between px-2.5 py-2 rounded-xl bg-black/40 border border-purple-900/25"
                   >
                     <span className="text-[11px] font-cinzel font-bold text-purple-200">
                       {isTr ? `Sv. ${lvlKey}` : `Lv. ${lvlKey}`}
                     </span>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
                       {Array.from({ length: slot.max }, (_, idx) => {
                         const isUsed = idx < slot.used;
                         return (
@@ -1175,7 +1215,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                             type="button"
                             onClick={() => handleToggleSpellSlot(lvlKey, idx)}
                             title={isUsed ? 'Expended Slot (Click to restore)' : 'Available Slot (Click to expend)'}
-                            className={`w-4 h-4 rounded-md border flex items-center justify-center transition-all cursor-pointer ${
+                            className={`w-5 h-5 sm:w-4 sm:h-4 rounded-md border flex items-center justify-center transition-all cursor-pointer ${
                               isUsed
                                 ? 'bg-black/70 border-stone-700 text-stone-600'
                                 : 'bg-purple-600/30 border-purple-400 text-purple-200 shadow-[0_0_8px_rgba(168,85,247,0.4)]'
@@ -1205,7 +1245,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       </div>
 
       {/* ─── Ability Scores & Saving Throws (Click-to-Roll) ─────────────────────── */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className={`${showAbilitiesOnMobile ? 'grid' : 'hidden lg:grid'} grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3`}>
         {(Object.keys(STAT_LABELS) as StatKey[]).map((key) => {
           const statData = stats[key];
           const label = STAT_LABELS[key];
@@ -1279,9 +1319,9 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
       </div>
 
       {/* ─── Two-Column Detail Grid: Skills Matrix & Gear / Level Up ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className={`${showAbilitiesOnMobile || showGearOnMobile ? 'grid' : 'hidden lg:grid'} grid-cols-1 lg:grid-cols-12 gap-6`}>
         {/* Left Column: Skills Matrix (7 cols) */}
-        <div className="lg:col-span-7 arcane-glass p-5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl space-y-4 shadow-xl">
+        <div className={`${showAbilitiesOnMobile ? 'block' : 'hidden lg:block'} lg:col-span-7 arcane-glass p-5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl space-y-4 shadow-xl`}>
           <div className="flex items-center justify-between pb-3 border-b border-amber-900/25">
             <div className="flex items-center gap-2">
               <Award className="text-amber-400" size={18} />
@@ -1313,7 +1353,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
                       characterName: character.name,
                     })
                   }
-                  className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] hover:bg-amber-500/10 border border-amber-900/15 hover:border-amber-500/40 transition-all cursor-pointer text-left group"
+                  className="flex items-center justify-between p-2.5 sm:p-2 rounded-xl bg-white/[0.02] hover:bg-amber-500/10 border border-amber-900/15 hover:border-amber-500/40 transition-all cursor-pointer text-left group"
                 >
                   <div className="flex items-center gap-2 truncate">
                     <div
@@ -1343,7 +1383,7 @@ export function CharacterSheet({ character, onOpenCreation }: CharacterSheetProp
         </div>
 
         {/* Right Column: Equipped Gear Preview, Yggdrasil Nodes & Class Details (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className={`${showGearOnMobile ? 'block' : 'hidden lg:block'} lg:col-span-5 space-y-6`}>
           {/* Equipped Items Preview */}
           <div className="arcane-glass p-5 border border-amber-900/30 bg-[#0e1017]/85 rounded-2xl space-y-3 shadow-xl">
             <div className="flex items-center justify-between pb-3 border-b border-amber-900/25">

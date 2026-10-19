@@ -483,23 +483,23 @@ export function GameMap() {
     [tokens, W, H]
   );
 
-  // ── Mouse handlers ──
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
+  // ── Mouse & Touch unified handlers ──
+  const handlePointerStartCoords = useCallback(
+    (clientX: number, clientY: number) => {
       const canvas = mapCanvasRef.current;
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       const scaleX = W / rect.width;
       const scaleY = H / rect.height;
-      const canvasX = Math.round((e.clientX - rect.left) * scaleX);
-      const canvasY = Math.round((e.clientY - rect.top) * scaleY);
+      const canvasX = Math.round((clientX - rect.left) * scaleX);
+      const canvasY = Math.round((clientY - rect.top) * scaleY);
 
       if (isGM && isWallDrawMode) {
         setWallDraft({ x1: canvasX, y1: canvasY, x2: canvasX, y2: canvasY });
         return;
       }
 
-      const hit = findTokenAt(e.clientX, e.clientY);
+      const hit = findTokenAt(clientX, clientY);
       if (hit) {
         setSelectedTokenId(hit.token.id);
         setDragState({
@@ -512,8 +512,8 @@ export function GameMap() {
     [findTokenAt, W, H, isGM, isWallDrawMode]
   );
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
+  const handlePointerMoveCoords = useCallback(
+    (clientX: number, clientY: number) => {
       const canvas = mapCanvasRef.current;
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
@@ -521,21 +521,20 @@ export function GameMap() {
       const scaleY = H / rect.height;
 
       if (wallDraft) {
-        const curX = Math.max(0, Math.min(W, Math.round((e.clientX - rect.left) * scaleX)));
-        const curY = Math.max(0, Math.min(H, Math.round((e.clientY - rect.top) * scaleY)));
+        const curX = Math.max(0, Math.min(W, Math.round((clientX - rect.left) * scaleX)));
+        const curY = Math.max(0, Math.min(H, Math.round((clientY - rect.top) * scaleY)));
         setWallDraft((prev) => (prev ? { ...prev, x2: curX, y2: curY } : null));
         return;
       }
 
       if (!dragState.tokenId) return;
 
-      const currentX = (e.clientX - rect.left) * scaleX - dragState.offsetX;
-      const currentY = (e.clientY - rect.top) * scaleY - dragState.offsetY;
+      const currentX = (clientX - rect.left) * scaleX - dragState.offsetX;
+      const currentY = (clientY - rect.top) * scaleY - dragState.offsetY;
 
       const clampedX = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, currentX));
       const clampedY = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, currentY));
 
-      // In free mode or if GM: token follows mouse
       if (movementMode === 'free' || isGM) {
         updateTokenPosition(dragState.tokenId, clampedX, clampedY);
       } else {
@@ -545,8 +544,8 @@ export function GameMap() {
     [wallDraft, dragState, W, H, movementMode, isGM, updateTokenPosition]
   );
 
-  const handleMouseUp = useCallback(
-    (e: React.MouseEvent) => {
+  const handlePointerEndCoords = useCallback(
+    (clientX?: number, clientY?: number) => {
       if (wallDraft) {
         const length = Math.hypot(wallDraft.x2 - wallDraft.x1, wallDraft.y2 - wallDraft.y1);
         if (length >= 12) {
@@ -564,15 +563,14 @@ export function GameMap() {
 
       if (dragState.tokenId) {
         setDragPreviewPos(null);
-        // If in approved mode and player released mouse: send movement request
-        if (movementMode === 'approved' && !isGM) {
+        if (movementMode === 'approved' && !isGM && clientX !== undefined && clientY !== undefined) {
           const canvas = mapCanvasRef.current;
           if (canvas) {
             const rect = canvas.getBoundingClientRect();
             const scaleX = W / rect.width;
             const scaleY = H / rect.height;
-            const targetX = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, (e.clientX - rect.left) * scaleX));
-            const targetY = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, (e.clientY - rect.top) * scaleY));
+            const targetX = Math.max(TOKEN_RADIUS, Math.min(W - TOKEN_RADIUS, (clientX - rect.left) * scaleX));
+            const targetY = Math.max(TOKEN_RADIUS, Math.min(H - TOKEN_RADIUS, (clientY - rect.top) * scaleY));
 
             updateTokenPosition(dragState.tokenId, Math.round(targetX), Math.round(targetY));
             setPlayerNotice(t.map.moveRequested);
@@ -583,6 +581,47 @@ export function GameMap() {
       }
     },
     [wallDraft, addWallSegment, dragState, movementMode, isGM, W, H, updateTokenPosition, t.map.moveRequested]
+  );
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => handlePointerStartCoords(e.clientX, e.clientY),
+    [handlePointerStartCoords]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => handlePointerMoveCoords(e.clientX, e.clientY),
+    [handlePointerMoveCoords]
+  );
+
+  const handleMouseUp = useCallback(
+    (e: React.MouseEvent) => handlePointerEndCoords(e.clientX, e.clientY),
+    [handlePointerEndCoords]
+  );
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      handlePointerStartCoords(touch.clientX, touch.clientY);
+    },
+    [handlePointerStartCoords]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      handlePointerMoveCoords(touch.clientX, touch.clientY);
+    },
+    [handlePointerMoveCoords]
+  );
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const touch = e.changedTouches[0];
+      handlePointerEndCoords(touch?.clientX, touch?.clientY);
+    },
+    [handlePointerEndCoords]
   );
 
   // File upload reader for custom map
@@ -714,11 +753,14 @@ export function GameMap() {
           data-testid="battle-map-canvas"
           width={W}
           height={H}
-          className="absolute inset-0 cursor-crosshair w-full h-full"
+          className="absolute inset-0 cursor-crosshair w-full h-full touch-none"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         />
 
         {/* Top canvas: Dynamic fog of war with 2D Raycasted Visibility Polygons */}

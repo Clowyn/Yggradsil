@@ -57,32 +57,34 @@ export function AdminSidebar({ isOpen, onToggle }: AdminSidebarProps) {
 
   return (
     <aside
-      className={`h-screen z-40 bg-neutral-950 text-neutral-200 flex flex-col border-r border-neutral-800/80 shrink-0 transition-all duration-300 ${
-        isOpen ? 'w-[260px]' : 'w-[72px] items-center'
+      className={`h-dvh-screen safe-bottom z-40 bg-[#0a0c12] text-stone-200 flex flex-col border-r border-amber-900/30 shrink-0 transition-all duration-300 fixed md:static inset-y-0 left-0 ${
+        isOpen
+          ? 'w-[260px] translate-x-0'
+          : '-translate-x-full md:translate-x-0 md:w-[72px] md:items-center'
       }`}
     >
       {/* Brand Header */}
       <div
-        className={`px-4 py-4 border-b border-neutral-800/80 flex items-center ${
+        className={`px-4 py-4 border-b border-amber-900/30 flex items-center ${
           isOpen ? 'justify-between' : 'justify-center'
         } shrink-0 h-[64px] w-full`}
       >
         {isOpen && (
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-red-950/60 border border-red-500/30 flex items-center justify-center text-red-400 font-bold shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-amber-950/60 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0">
               <Sparkles size={16} />
             </div>
             <div className="truncate">
-              <h1 className="text-sm font-semibold tracking-wide text-neutral-100 uppercase">
+              <h1 className="text-sm font-cinzel font-bold tracking-wide text-amber-100 uppercase">
                 Domain Admin
               </h1>
-              <p className="text-[11px] text-neutral-400 font-mono">Omniscient Mode</p>
+              <p className="text-[10px] text-amber-300/70 font-cinzel uppercase tracking-wider">Omniscient Mode</p>
             </div>
           </div>
         )}
         <button
           onClick={onToggle}
-          className="text-neutral-400 hover:text-neutral-200 p-1.5 rounded-md hover:bg-neutral-800/60 transition-colors shrink-0"
+          className="text-stone-400 hover:text-amber-200 p-1.5 rounded-md hover:bg-white/5 transition-colors shrink-0 cursor-pointer"
           title={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
         >
           {isOpen ? <ChevronLeft size={18} /> : <Menu size={18} />}

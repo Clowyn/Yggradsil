@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { DndContext, closestCenter, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, closestCenter, type DragEndEvent, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable';
 import { motion } from 'framer-motion';
 import { Backpack, Shield, Coins, Users, Feather, ArrowRightLeft, Info, Sparkles, Dices, Plus, Minus, AlertTriangle } from 'lucide-react';
@@ -651,6 +651,12 @@ export function InventoryGrid() {
       activationConstraint: {
         distance: 5,
       },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 180,
+        tolerance: 6,
+      },
     })
   );
 
@@ -757,6 +763,58 @@ export function InventoryGrid() {
             </div>
           </SortableContext>
         </DndContext>
+
+        {/* Mobile & Tablet Instant Relic Quick-Action Bar (<1024px) */}
+        {selectedItem && (
+          <div
+            data-testid="inventory-mobile-quick-bar"
+            className="lg:hidden mt-3 p-3 rounded-xl bg-black/65 border border-amber-500/35 flex flex-wrap items-center justify-between gap-2.5 shadow-lg"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="text-2xl shrink-0">{selectedItem.icon}</span>
+              <div className="min-w-0">
+                <div
+                  className="text-xs font-cinzel font-bold truncate"
+                  style={{ color: RARITY_COLORS[selectedItem.rarity] }}
+                >
+                  {selectedItem.name}
+                </div>
+                <div className="text-[10px] text-stone-400 font-inter capitalize">
+                  {selectedItem.rarity} {selectedItem.type} • {selectedItem.equipped ? 'Equipped' : 'In Pack'}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5">
+              {selectedItem.properties?.Damage && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    triggerDiceRoll({
+                      label: `${selectedItem.name} Damage`,
+                      formula: selectedItem.properties?.Damage || '1d8',
+                      characterName: activeCharacter?.name,
+                    })
+                  }
+                  className="px-2.5 py-1.5 rounded-lg bg-red-950/60 border border-red-700/50 text-red-200 text-[10px] font-cinzel font-bold flex items-center gap-1 cursor-pointer"
+                >
+                  <Dices size={12} className="text-red-400" />
+                  <span>{selectedItem.properties.Damage}</span>
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  playSound('lock_click');
+                  handleEquipToggle(selectedItem.id);
+                }}
+                className="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/50 text-amber-200 text-[10px] font-cinzel font-bold flex items-center gap-1 cursor-pointer"
+              >
+                <ArrowRightLeft size={11} />
+                <span>{selectedItem.equipped ? 'UNEQUIP' : 'EQUIP'}</span>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Gold Purse Counter & D&D 5e Currency Wallet (PP / GP / SP / CP) */}
         <div className="flex flex-wrap items-center justify-between gap-2 mt-4 bg-black/50 border border-amber-900/30 rounded-xl px-4 py-2.5 shadow-inner">

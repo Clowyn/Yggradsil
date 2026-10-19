@@ -112,7 +112,9 @@ export function FloatingDock() {
   });
 
   return (
+    <>
     <div
+      data-testid="desktop-floating-dock"
       className="hidden md:block fixed bottom-5 left-1/2 -translate-x-1/2 z-40 pointer-events-auto"
       role="navigation"
       aria-label="macOS Floating Island Dock"
@@ -294,5 +296,41 @@ export function FloatingDock() {
         </div>
       </motion.nav>
     </div>
+
+    {/* Mobile Ergonomic Thumb-Zone Navigation Bar (< 768px) */}
+    <nav
+      data-testid="mobile-bottom-nav"
+      aria-label="Mobile Sanctum Navigation"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#08090c]/95 backdrop-blur-2xl border-t border-amber-900/40 safe-bottom shadow-[0_-12px_32px_rgba(0,0,0,0.85)]"
+    >
+      <div className="flex items-center justify-between gap-1 px-2 py-1.5 overflow-x-auto no-scrollbar">
+        {visibleItems.map((item) => {
+          const shortLabel = isTr
+            ? item.labelTr.split(' ')[0]
+            : item.labelEn.split(' ')[0];
+          return (
+            <NavLink
+              key={`mob-${item.to}`}
+              to={item.to}
+              end={item.to === '/'}
+              onClick={() => playSound('lock_click')}
+              className={({ isActive }) =>
+                `relative min-w-[54px] flex-1 py-1.5 px-1.5 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all shrink-0 ${
+                  isActive
+                    ? 'text-amber-300 bg-amber-500/15 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
+                    : 'text-stone-400 hover:text-amber-200 border border-transparent'
+                }`
+              }
+            >
+              <span className="scale-90">{item.icon}</span>
+              <span className="text-[9px] font-cinzel font-bold tracking-wider truncate max-w-[60px]">
+                {shortLabel}
+              </span>
+            </NavLink>
+          );
+        })}
+      </div>
+    </nav>
+    </>
   );
 }

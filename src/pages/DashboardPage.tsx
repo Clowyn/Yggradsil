@@ -17,10 +17,13 @@ import {
   Scroll,
   Compass,
   Feather,
+  Dices,
+  Swords,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCampaign } from '../contexts/CampaignContext';
 import { playSound } from '../lib/audio';
+import { triggerDiceRoll } from '../lib/diceRoller';
 import { supabase, isSupabaseOffline } from '../lib/supabase';
 
 interface ChronicleLog {
@@ -301,58 +304,91 @@ export function DashboardPage() {
   );
 
   return (
-    <div className="space-y-6 w-full max-w-[1680px] mx-auto font-inter relative pb-28 px-2 sm:px-4">
+    <div className="space-y-5 sm:space-y-6 w-full max-w-[1680px] mx-auto font-inter relative pb-24 md:pb-28 px-1 sm:px-3">
       {/* ─── Hero Overview: War Table Header ───────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="arcane-glass p-5 sm:p-6 lg:p-7 relative overflow-hidden border border-amber-900/30"
+        className="double-bezel relative overflow-hidden"
       >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 relative z-10">
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="wax-seal-badge">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                CAMPAIGN WAR TABLE
-              </span>
-              <span className="text-xs font-cinzel text-amber-200/60 tracking-wider">
-                {currentTime}
-              </span>
+        <div className="double-bezel-core p-4 sm:p-6 lg:p-7 relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-5 relative z-10">
+            <div className="space-y-2 max-w-5xl">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="wax-seal-badge">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  CAMPAIGN WAR TABLE
+                </span>
+                <span className="text-xs font-cinzel text-amber-200/60 tracking-wider">
+                  {currentTime}
+                </span>
+              </div>
+
+              <h1 className="text-xl sm:text-3xl lg:text-[clamp(1.75rem,3vw,2.65rem)] leading-tight font-cinzel font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 tracking-wide max-w-5xl">
+                {isTr ? 'SEFER KONSOLU' : 'EXPEDITION COUNCIL'} • {profile?.username || 'WANDERER'}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs text-amber-200/80">
+                <Scroll size={14} className="text-amber-400 shrink-0" />
+                <span className="font-cinzel">{isTr ? 'AKTİF SERÜVEN:' : 'ACTIVE CAMPAIGN:'}</span>
+                <span className="font-cinzel text-amber-100 font-bold px-2.5 py-0.5 rounded-full bg-amber-950/40 border border-amber-900/40">
+                  {campaign?.name || (isTr ? 'Gölgeler Diyarı Seferi' : 'Chronicles of Yggdrasil')}
+                </span>
+              </div>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-cinzel font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 tracking-wide">
-              {isTr ? 'SEFER KONSOLU' : 'EXPEDITION COUNCIL'} • {profile?.username || 'WANDERER'}
-            </h1>
-
-            <div className="flex items-center gap-2.5 text-xs text-amber-200/80">
-              <Scroll size={14} className="text-amber-400 shrink-0" />
-              <span className="font-cinzel">{isTr ? 'AKTİF SERÜVEN:' : 'ACTIVE CAMPAIGN:'}</span>
-              <span className="font-cinzel text-amber-100 font-bold px-2.5 py-0.5 rounded-full bg-amber-950/40 border border-amber-900/40">
-                {campaign?.name || (isTr ? 'Gölgeler Diyarı Seferi' : 'Chronicles of Yggdrasil')}
-              </span>
-            </div>
-          </div>
-
-          {/* Quick Party Presence */}
-          <div className="flex flex-wrap items-center gap-3 bg-black/40 p-3 rounded-2xl border border-amber-900/30">
-            <div className="flex items-center gap-2 text-xs font-cinzel text-amber-200/90 px-3 py-1.5 rounded-xl bg-amber-950/30 border border-amber-900/30">
-              <Users size={14} className="text-amber-400" />
-              <span>
-                {members.length} {isTr ? 'Maceracı Hazır' : 'Adventurers Present'}
-              </span>
-            </div>
-
-            <button
-              onClick={() => {
-                playSound('paper_flip');
-                addCustomLog('RUNE', isTr ? 'Kutsal rünler şöminede parıldadı.' : 'Sacred runes gleamed in the hearth.');
-              }}
-              className="px-5 py-2.5 rounded-xl border border-amber-900/50 bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 text-xs sm:text-sm font-cinzel font-bold tracking-wider flex items-center gap-2 transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-md"
-              title="Commune with the party"
+            {/* Quick Party & Tactical Action Strip (Ergonomic on Mobile, Tablet & Desktop) */}
+            <div
+              data-testid="dashboard-quick-actions"
+              className="flex flex-wrap items-center gap-2 sm:gap-2.5 bg-black/45 p-2.5 sm:p-3 rounded-2xl border border-amber-900/30"
             >
-              <Feather size={15} className="text-amber-400" />
-              <span>{isTr ? 'NOT DÜŞ' : 'COMMUNE'}</span>
-            </button>
+              <div className="flex items-center gap-2 text-xs font-cinzel text-amber-200/90 px-3 py-2 rounded-xl bg-amber-950/30 border border-amber-900/30">
+                <Users size={14} className="text-amber-400 shrink-0" />
+                <span>
+                  {members.length} {isTr ? 'Maceracı' : 'Heroes'}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                data-testid="dashboard-roll-initiative-btn"
+                onClick={() => {
+                  triggerDiceRoll({
+                    dieType: 'd20',
+                    count: 1,
+                    modifier: 2,
+                    label: isTr ? 'İnisiyatif Zarı' : 'Initiative Roll',
+                    characterName: activeCharacter?.name || profile?.username,
+                  });
+                }}
+                className="px-3.5 py-2 rounded-xl border border-amber-500/45 bg-amber-500/15 hover:bg-amber-500/25 text-amber-200 text-xs font-cinzel font-bold tracking-wider flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-sm"
+              >
+                <Dices size={14} className="text-amber-400" />
+                <span>{isTr ? 'İNİSİYATİF (d20)' : 'INITIATIVE (d20)'}</span>
+              </button>
+
+              <Link
+                to="/arena"
+                onClick={() => playSound('lock_click')}
+                className="px-3.5 py-2 rounded-xl border border-rose-800/50 bg-rose-950/30 hover:bg-rose-900/40 text-rose-200 text-xs font-cinzel font-bold tracking-wider flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-sm"
+              >
+                <Swords size={14} className="text-rose-400" />
+                <span>{isTr ? 'ARENA' : 'ARENA'}</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => {
+                  playSound('paper_flip');
+                  addCustomLog('RUNE', isTr ? 'Kutsal rünler şöminede parıldadı.' : 'Sacred runes gleamed in the hearth.');
+                }}
+                className="px-3.5 py-2 rounded-xl border border-amber-900/50 bg-black/50 hover:bg-amber-500/15 text-amber-200 text-xs font-cinzel font-bold tracking-wider flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-sm"
+                title="Commune with the party"
+              >
+                <Feather size={14} className="text-amber-400" />
+                <span>{isTr ? 'NOT DÜŞ' : 'COMMUNE'}</span>
+              </button>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -362,10 +398,10 @@ export function DashboardPage() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 grid-flow-dense"
       >
-        {/* Adventurer's Medallion (4 cols on xl) */}
-        <div className="lg:col-span-5 xl:col-span-4 arcane-glass p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden border border-amber-900/30">
+        {/* Adventurer's Medallion (5 cols on lg, 4 cols on xl) */}
+        <div className="lg:col-span-5 xl:col-span-4 arcane-glass p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden border border-amber-900/30">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Compass size={17} className="text-amber-400" />
@@ -379,8 +415,8 @@ export function DashboardPage() {
           </div>
 
           {/* Central Medallion Visual */}
-          <div className="py-6 flex flex-col items-center justify-center relative">
-            <div className="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+          <div className="py-4 sm:py-6 flex flex-col items-center justify-center relative">
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
               {/* Outer Carved Brass Ring */}
               <div className="absolute inset-0 rounded-full border-2 border-dashed border-amber-900/40 animate-spin-slow" />
               <div className="absolute inset-2 rounded-full border border-amber-500/20" />
@@ -416,7 +452,7 @@ export function DashboardPage() {
                 <span className="font-cinzel text-xl sm:text-2xl font-black text-amber-100 tracking-wider">
                   LVL {currentLevel}
                 </span>
-                <span className="text-[11px] font-cinzel text-amber-300/90 font-bold uppercase truncate max-w-[170px] px-1">
+                <span className="text-[11px] font-cinzel text-amber-300/90 font-bold uppercase truncate max-w-[140px] sm:max-w-[170px] px-1">
                   {activeCharacter?.name || (isTr ? 'Valen Shadowflame' : 'Valen Shadowflame')}
                 </span>
               </div>
@@ -496,7 +532,7 @@ export function DashboardPage() {
                   playSound('lock_click');
                   setActiveDeckTab('charms');
                 }}
-                className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
                   activeDeckTab === 'charms'
                     ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm font-bold'
                     : 'text-stone-400 hover:text-stone-200'
@@ -509,7 +545,7 @@ export function DashboardPage() {
                   playSound('lock_click');
                   setActiveDeckTab('expedition');
                 }}
-                className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-cinzel font-semibold transition-all cursor-pointer ${
                   activeDeckTab === 'expedition'
                     ? 'bg-amber-500/20 text-amber-200 border border-amber-500/40 shadow-sm font-bold'
                     : 'text-stone-400 hover:text-stone-200'
@@ -520,15 +556,15 @@ export function DashboardPage() {
             </div>
           </div>
 
-          {/* Tab 1: Navigation Charms */}
+          {/* Tab 1: Navigation Charms (Gapless Bento Grid with Button-in-Button trailing icons) */}
           {activeDeckTab === 'charms' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 grid-flow-dense">
               {navCharms.map((charm) => (
                 <Link
-                  key={charm.to}
+                  key={charm.to + charm.title}
                   to={charm.to}
                   onClick={() => playSound('lock_click')}
-                  className="group block"
+                  className="group block active:scale-[0.99] transition-transform"
                 >
                   <div
                     className={`arcane-glass p-5 min-h-[175px] h-full flex flex-col justify-between border border-amber-900/35 hover:border-amber-400/50 hover:shadow-[0_0_24px_rgba(245,158,11,0.18)] bg-gradient-to-br ${charm.accent} transition-all duration-300 cursor-pointer relative overflow-hidden rounded-2xl`}
@@ -537,14 +573,14 @@ export function DashboardPage() {
                       <span className="text-[10px] font-cinzel text-amber-300/80 font-bold tracking-widest uppercase">
                         {charm.badge}
                       </span>
-                      <span className="text-[9px] font-cinzel font-bold px-2 py-0.5 rounded-full bg-amber-950/50 text-amber-300 border border-amber-900/40">
+                      <span className="text-[9px] font-cinzel font-bold px-2.5 py-0.5 rounded-full bg-amber-950/50 text-amber-300 border border-amber-900/40">
                         {isTr ? 'GİRİŞ' : 'ENTER'}
                       </span>
                     </div>
 
                     <div className="space-y-1 my-1">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-xl bg-black/50 border border-amber-900/40 group-hover:scale-105 transition-transform shrink-0">
+                        <div className="p-2.5 rounded-xl bg-black/50 border border-amber-900/40 group-hover:scale-105 transition-transform shrink-0">
                           {charm.icon}
                         </div>
                         <div>
@@ -556,14 +592,17 @@ export function DashboardPage() {
                           </p>
                         </div>
                       </div>
-                      <p className="text-xs text-stone-300 pt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-stone-300 pt-1.5 line-clamp-2 leading-relaxed">
                         {charm.desc}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-amber-900/25 flex items-center justify-between text-xs sm:text-sm font-cinzel font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
-                      <span>{isTr ? 'GÖRÜNTÜLE' : 'INSPECT'}</span>
-                      <ArrowRight size={15} />
+                    {/* Button-in-Button Trailing Icon Architecture */}
+                    <div className="mt-3 pt-2.5 border-t border-amber-900/25 flex items-center justify-between text-xs font-cinzel font-bold text-amber-300">
+                      <span>{isTr ? 'GÖRÜNTÜLE' : 'INSPECT SANCTUM'}</span>
+                      <span className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:translate-x-1 group-hover:-translate-y-[1px] group-hover:bg-amber-500/25 transition-all">
+                        <ArrowRight size={13} className="text-amber-300" />
+                      </span>
                     </div>
                   </div>
                 </Link>

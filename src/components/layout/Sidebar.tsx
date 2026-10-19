@@ -71,7 +71,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps) {
 
       {/* Drawer Container (Slide-in on mobile, hidden on desktop where FloatingDock takes over) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 md:hidden h-screen flex flex-col border-r border-amber-900/30 bg-[#08090c]/95 backdrop-blur-2xl shrink-0 transition-transform duration-300 ease-in-out w-[280px] max-w-[85vw] shadow-2xl ${
+        className={`fixed inset-y-0 left-0 z-50 md:hidden h-dvh-screen safe-bottom flex flex-col border-r border-amber-900/30 bg-[#08090c]/95 backdrop-blur-2xl shrink-0 transition-transform duration-300 ease-in-out w-[280px] max-w-[85vw] shadow-2xl ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

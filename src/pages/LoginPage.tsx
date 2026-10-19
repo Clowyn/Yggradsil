@@ -13,7 +13,7 @@ export function LoginPage() {
   if (user) return <Navigate to="/" replace />;
 
   return (
-    <div className="min-h-screen w-full flex bg-[#08090c] arcane-bg relative overflow-hidden">
+    <div className="min-h-dvh-screen w-full flex bg-[#08090c] arcane-bg relative overflow-hidden">
       {/* Left Column: Dark Fantasy Lore Artwork & Realm Ambiance */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-[#0e1017] overflow-hidden flex-col justify-between p-12 border-r border-amber-900/30">
         {/* Background Artwork - Optimized WebP asset */}
@@ -49,21 +49,23 @@ export function LoginPage() {
           </div>
         </div>
 
-        {/* Bottom Chronicle Lore Box */}
-        <div className="relative z-10 arcane-glass rounded-2xl p-6 border border-amber-900/30 bg-[#08090c]/85 shadow-2xl">
-          <div className="flex items-center justify-between mb-2.5 pb-2.5 border-b border-amber-900/25">
-            <div className="flex items-center gap-2 text-xs font-cinzel text-amber-300 font-bold">
-              <Scroll size={15} />
-              <span>CHRONICLES OF THE WORLD TREE</span>
+        {/* Bottom Chronicle Lore Box (Double-Bezel) */}
+        <div className="relative z-10 double-bezel">
+          <div className="double-bezel-core p-6">
+            <div className="flex items-center justify-between mb-2.5 pb-2.5 border-b border-amber-900/25">
+              <div className="flex items-center gap-2 text-xs font-cinzel text-amber-300 font-bold">
+                <Scroll size={15} />
+                <span>CHRONICLES OF THE WORLD TREE</span>
+              </div>
+              <span className="text-[10px] font-cinzel text-amber-400 flex items-center gap-1 font-semibold">
+                <Shield size={12} />
+                SANCTUARY READY
+              </span>
             </div>
-            <span className="text-[10px] font-cinzel text-amber-400 flex items-center gap-1 font-semibold">
-              <Shield size={12} />
-              SANCTUARY READY
-            </span>
+            <p className="text-xs text-stone-300 leading-relaxed font-inter">
+              Enter the realm of Yggdrasil. Ancient spell grimoires, tactical expedition war tables, and party chronicles are attuned.
+            </p>
           </div>
-          <p className="text-xs text-stone-300 leading-relaxed font-inter">
-            Enter the realm of Yggdrasil. Ancient spell grimoires, tactical expedition war tables, and party chronicles are attuned.
-          </p>
         </div>
       </div>
 

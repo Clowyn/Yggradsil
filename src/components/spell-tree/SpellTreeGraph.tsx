@@ -348,7 +348,7 @@ function SpellTreeFlow() {
         className={`absolute bottom-4 left-4 z-10 rounded-xl border backdrop-blur-xl shadow-2xl transition-colors duration-300 ${
           isFilterMinimized
             ? "p-2 bg-gradient-to-br from-white/10 via-white/[0.03] to-transparent border-gold/30 cursor-pointer hover:border-gold/60"
-            : "p-3 bg-gradient-to-br from-white/12 via-white/[0.04] to-transparent border-white/10 w-[290px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]"
+            : "p-3 bg-gradient-to-br from-white/12 via-white/[0.04] to-transparent border-white/10 w-[250px] sm:w-[290px] max-w-[calc(100vw-88px)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]"
         }`}
         onClick={() => {
           if (isFilterMinimized) setIsFilterMinimized(false);
@@ -475,7 +475,7 @@ function SpellTreeFlow() {
         <MiniMap
           nodeColor={getMiniMapNodeColor}
           maskColor="rgba(10, 10, 15, 0.85)"
-          className="!bottom-[80px] !right-4"
+          className="!bottom-[80px] !right-4 hidden sm:block"
         />
       </ReactFlow>
     </div>
