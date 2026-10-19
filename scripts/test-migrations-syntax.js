@@ -2,11 +2,10 @@ import fs from 'fs';
 import path from 'path';
 
 const migrationsDir = path.resolve(process.cwd(), 'supabase', 'migrations');
-const migrationFiles = [
-  '01_security_and_rls_hardening.sql',
-  '02_schema_consistency.sql',
-  '03_new_gm_modules.sql'
-];
+const migrationFiles = fs
+  .readdirSync(migrationsDir)
+  .filter((f) => f.endsWith('.sql'))
+  .sort();
 
 console.log('--- Validating SQL Migration Files ---');
 

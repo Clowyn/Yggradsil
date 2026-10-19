@@ -101,6 +101,12 @@ export function useAdminUsers(initialPageSize = 20) {
 
       if (updateErr) throw updateErr;
 
+      // Sync campaign_members role so AuthContext and GMDashboard stay consistent
+      await supabase
+        .from('campaign_members')
+        .update({ role: newRole })
+        .eq('profile_id', userId);
+
       // Log action
       if (currentAdmin) {
         await supabase.from('admin_logs').insert({

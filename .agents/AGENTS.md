@@ -18,3 +18,6 @@ For React Flow graphs with over 50 nodes (such as the Spell Tree and Skill Tree)
 2. Custom node and edge components must implement custom equality comparators with `React.memo(Component, arePropsEqual)` because `node.data` is typically instantiated as a new object literal on recalculation.
 3. Never apply heavy multi-filter CSS stacks (`grayscale()`, `brightness()`, `contrast()`) directly to React Flow node containers; use compositor `opacity` or styled inner elements instead.
 4. Suppress SVG SMIL `<animateMotion>` loops on dimmed or invisible edges to avoid running background animation calculations on the main thread.
+
+## Git Commit & Push Policy
+Always commit and push all completed changes to the remote GitHub repository (`origin`) after verifying that lint and build checks pass.

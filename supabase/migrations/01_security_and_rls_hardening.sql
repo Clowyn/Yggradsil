@@ -34,7 +34,7 @@ AS $$
 $$;
 
 -- 2. Privilege Escalation Prevention on Profiles
--- Prevents non-admins from changing their role or any user from self-promoting
+-- Prevents non-admins/non-GMs from changing roles or any user from self-promoting
 CREATE OR REPLACE FUNCTION public.protect_profile_role()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -42,11 +42,27 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
 BEGIN
-  -- If role is being changed and user is not an administrator, reject
-  IF NEW.role IS DISTINCT FROM OLD.role THEN
-    IF NOT public.is_admin() THEN
-      RAISE EXCEPTION 'Unauthorized: Only system administrators can modify user roles.';
+  IF auth.uid() IS DISTINCT FROM OLD.id AND NOT public.is_admin() THEN
+    IF NEW.username IS DISTINCT FROM OLD.username
+       OR NEW.avatar_url IS DISTINCT FROM OLD.avatar_url
+       OR NEW.locale IS DISTINCT FROM OLD.locale THEN
+      RAISE EXCEPTION 'Unauthorized: Game Masters can only update user roles, not personal profile fields.';
     END IF;
+  END IF;
+
+  -- If role is being changed, verify caller is admin or GM modifying another non-admin user
+  IF NEW.role IS DISTINCT FROM OLD.role THEN
+    IF public.is_admin() THEN
+      RETURN NEW;
+    END IF;
+    IF public.is_gm()
+       AND OLD.role <> 'admin'
+       AND NEW.role IN ('gm', 'player')
+       AND NEW.id <> auth.uid()
+       AND NOT (NEW.role = 'player' AND EXISTS (SELECT 1 FROM public.campaigns WHERE gm_id = NEW.id)) THEN
+      RETURN NEW;
+    END IF;
+    RAISE EXCEPTION 'Unauthorized: Only Game Masters or system administrators can modify user roles.';
   END IF;
   RETURN NEW;
 END;

@@ -57,11 +57,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
 
         if (data) {
-          setProfile(data);
-          if (data.locale) {
-            setLocale(data.locale as Locale);
+          let effectiveProfile: Profile = data;
+          if (data.role === 'player') {
+            try {
+              const { data: gmMemberships } = await supabase
+                .from('campaign_members')
+                .select('role')
+                .eq('profile_id', userId)
+                .eq('role', 'gm')
+                .limit(1);
+              if (gmMemberships && gmMemberships.length > 0) {
+                effectiveProfile = { ...data, role: 'gm' };
+              }
+            } catch {
+              // ignore
+            }
           }
-          return data;
+          setProfile(effectiveProfile);
+          if (effectiveProfile.locale) {
+            setLocale(effectiveProfile.locale as Locale);
+          }
+          return effectiveProfile;
         } else {
           console.warn('Profile record missing for user, creating default profile...');
           let role: UserRole = 'player';
@@ -164,6 +180,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       subscription.unsubscribe();
     };
   }, [fetchProfile]);
+
+  // Subscribe to live role changes on profiles and campaign_members for the current user
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const channel = supabase
+      .channel(`auth-role-sync-${user.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'profiles',
+          filter: `id=eq.${user.id}`,
+        },
+        () => {
+          fetchProfile(user.id, user.email);
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'campaign_members',
+          filter: `profile_id=eq.${user.id}`,
+        },
+        () => {
+          fetchProfile(user.id, user.email);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?.id, user?.email, fetchProfile]);
 
   const handleSetLocale = useCallback(async (newLocale: Locale) => {
     setLocale(newLocale);

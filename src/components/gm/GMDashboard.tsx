@@ -5,14 +5,15 @@ import {
   Crown, Users, Zap, Backpack, TreePine, Map,
   Plus, Minus, Send, Sparkles,
   Package, Shield, Sword, Heart, Clock,
-  Trash2, Check, X, Swords, CloudRain, Coins, ShieldAlert
+  Trash2, Check, X, Swords, CloudRain, Coins, ShieldAlert, UserCheck
 } from 'lucide-react';
 import { useCampaign } from '../../contexts/CampaignContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../lib/supabase';
-import type { RaceDefinition, SubclassDefinition, StatKey } from '../../lib/types';
+import type { RaceDefinition, SubclassDefinition, StatKey, Profile, CampaignMember, UserRole, Locale } from '../../lib/types';
 import { arcaneToast } from '../../lib/toast';
 import { DEMO_SKILLS } from '../../hooks/useSkillTree';
+import { GMUserRoleManager, type GMManagedUser } from './GMUserRoleManager';
 
 // Lazy-loaded heavy GM sub-modules for optimal chunk splitting
 const GMSpellManager = lazy(() =>
@@ -110,7 +111,7 @@ const STAT_COLORS: Record<string, string> = {
 
 // ─── Tab definitions ────────────────────────────────────────────
 
-type TabKey = 'overview' | 'combat' | 'atmosphere' | 'loot' | 'party' | 'xp' | 'inventory' | 'stats' | 'spells';
+type TabKey = 'overview' | 'combat' | 'atmosphere' | 'loot' | 'party' | 'users' | 'xp' | 'inventory' | 'stats' | 'spells';
 
 const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
   { key: 'overview', label: 'Overview', icon: <Crown size={16} /> },
@@ -118,6 +119,7 @@ const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
   { key: 'atmosphere', label: 'Atmosphere & Chronicle', icon: <CloudRain size={16} /> },
   { key: 'loot', label: 'Loot Dispenser', icon: <Coins size={16} /> },
   { key: 'party', label: 'Party', icon: <Users size={16} /> },
+  { key: 'users', label: 'GM Roles', icon: <UserCheck size={16} /> },
   { key: 'xp', label: 'XP', icon: <Zap size={16} /> },
   { key: 'inventory', label: 'Inventory', icon: <Backpack size={16} /> },
   { key: 'stats', label: 'Stat Tree', icon: <TreePine size={16} /> },
@@ -128,13 +130,18 @@ const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
 
 export function GMDashboard() {
   const { campaign, members } = useCampaign();
-  const { locale, isGM } = useAuth();
+  const { locale, isGM, user } = useAuth();
 
   const [activeTab, setActiveTab] = useState<TabKey>('overview');
   const [players, setPlayers] = useState<DemoPlayer[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [xpLog, setXpLog] = useState<XPLogEntry[]>([]);
+
+  // GM Role & User Management state
+  const [allUsers, setAllUsers] = useState<GMManagedUser[]>([]);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [updatingRoleUserId, setUpdatingRoleUserId] = useState<string | null>(null);
 
   // Definitions for selection
   const [races, setRaces] = useState<RaceDefinition[]>([]);
@@ -317,6 +324,230 @@ export function GMDashboard() {
       setLoading(false);
     }
   }, [campaign, mapCharacterToDemoPlayer]);
+
+  // Fetch all system profiles and campaign members for GM Role Management
+  const fetchUsersForGM = useCallback(async () => {
+    setUsersLoading(true);
+    try {
+      const [profilesRes, membersRes, charsRes] = await Promise.all([
+        supabase.from('profiles').select('*').order('created_at', { ascending: false }),
+        campaign?.id
+          ? supabase
+              .from('campaign_members')
+              .select('*, profile:profiles(*)')
+              .eq('campaign_id', campaign.id)
+          : Promise.resolve({ data: null, error: null }),
+        supabase.from('characters').select('profile_id, name'),
+      ]);
+
+      const rawProfiles = (profilesRes.data || []) as Profile[];
+      const rawMembers = ((membersRes.data as CampaignMember[] | null) || members || []);
+
+      const memberRoleByProfileId = new globalThis.Map<string, UserRole>();
+      const memberProfilesMap = new globalThis.Map<string, Profile>();
+
+      rawMembers.forEach((m) => {
+        if (m.profile_id) {
+          memberRoleByProfileId.set(m.profile_id, m.role);
+          if (m.profile) {
+            memberProfilesMap.set(m.profile_id, m.profile);
+          }
+        }
+      });
+
+      const mergedMap = new globalThis.Map<string, Profile>();
+      rawProfiles.forEach((p) => {
+        if (p && p.id) mergedMap.set(p.id, p);
+      });
+      memberProfilesMap.forEach((p: Profile, id: string) => {
+        if (!mergedMap.has(id)) mergedMap.set(id, p);
+      });
+
+      const charNamesByProfileId = new globalThis.Map<string, string[]>();
+      ((charsRes.data || []) as { profile_id?: string; user_id?: string; name?: string }[]).forEach((c) => {
+        const ownerId = c.profile_id || c.user_id;
+        if (ownerId && c.name) {
+          const list = charNamesByProfileId.get(ownerId) || [];
+          if (!list.includes(c.name)) list.push(c.name);
+          charNamesByProfileId.set(ownerId, list);
+        }
+      });
+
+      const list: GMManagedUser[] = Array.from(mergedMap.values()).map((p: Profile) => {
+        const memRole = memberRoleByProfileId.get(p.id);
+        let effectiveRole: UserRole;
+        if (p.role === 'admin' || memRole === 'admin') {
+          effectiveRole = 'admin';
+        } else if (campaign?.gm_id === p.id || memRole === 'gm' || p.role === 'gm') {
+          effectiveRole = 'gm';
+        } else {
+          effectiveRole = 'player';
+        }
+        return {
+          id: p.id,
+          username: p.username || 'Adventurer',
+          avatar_url: p.avatar_url || null,
+          role: effectiveRole,
+          created_at: p.created_at || new Date().toISOString(),
+          isCampaignMember: memberRoleByProfileId.has(p.id),
+          characterNames: charNamesByProfileId.get(p.id) || [],
+        };
+      });
+
+      setAllUsers(list);
+    } catch (err) {
+      console.error('Failed to fetch users for GM role manager:', err);
+    } finally {
+      setUsersLoading(false);
+    }
+  }, [campaign, members]);
+
+  useEffect(() => {
+    let ignore = false;
+    queueMicrotask(() => {
+      if (!ignore) {
+        fetchUsersForGM();
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [fetchUsersForGM]);
+
+  const handleUpdateUserRole = async (targetUserId: string, newRole: 'gm' | 'player') => {
+    if (!targetUserId) return;
+    if (targetUserId === user?.id) {
+      arcaneToast.warning(
+        locale === 'tr'
+          ? 'Kendi GM yetkinizi buradan değiştiremezsiniz.'
+          : 'You cannot change your own GM role.'
+      );
+      return;
+    }
+
+    const targetUser = allUsers.find((u) => u.id === targetUserId);
+    if (targetUser?.role === 'admin') {
+      arcaneToast.warning(
+        locale === 'tr'
+          ? 'Sistem yöneticilerinin (Admin) rolü değiştirilemez.'
+          : 'Administrator roles cannot be modified.'
+      );
+      return;
+    }
+
+    if (campaign?.gm_id && targetUserId === campaign.gm_id && newRole === 'player') {
+      arcaneToast.warning(
+        locale === 'tr'
+          ? 'Sefer kurucusunun (Host) GM yetkisi kaldırılamaz.'
+          : 'Campaign Host GM role cannot be revoked.'
+      );
+      return;
+    }
+
+    setUpdatingRoleUserId(targetUserId);
+    const targetName = targetUser?.username || 'User';
+
+    const previousUsers = allUsers;
+    setAllUsers((prev) =>
+      prev.map((u) =>
+        u.id === targetUserId ? { ...u, role: newRole, isCampaignMember: true } : u
+      )
+    );
+
+    try {
+      let persisted = false;
+
+      // 1. Try authoritative SECURITY DEFINER RPC gm_set_user_role
+      const { error: rpcError } = await supabase.rpc('gm_set_user_role', {
+        p_target_user_id: targetUserId,
+        p_new_role: newRole,
+      });
+
+      if (!rpcError) {
+        persisted = true;
+      } else {
+        // 2. Fallback: direct update on profiles table
+        const { data: updatedProfile, error: profileErr } = await supabase
+          .from('profiles')
+          .update({ role: newRole })
+          .eq('id', targetUserId)
+          .select('id, role');
+
+        if (!profileErr && updatedProfile && updatedProfile.length > 0) {
+          persisted = true;
+        }
+      }
+
+      // 3. Sync campaign_members role for active campaign
+      let targetCampaignId = campaign?.id;
+      if (!targetCampaignId) {
+        const { data: firstCamp } = await supabase
+          .from('campaigns')
+          .select('id')
+          .limit(1)
+          .maybeSingle();
+        targetCampaignId = firstCamp?.id;
+      }
+
+      if (targetCampaignId) {
+        const { data: existingMem } = await supabase
+          .from('campaign_members')
+          .select('id')
+          .eq('campaign_id', targetCampaignId)
+          .eq('profile_id', targetUserId)
+          .maybeSingle();
+
+        if (existingMem?.id) {
+          const { error: memUpdErr } = await supabase
+            .from('campaign_members')
+            .update({ role: newRole })
+            .eq('id', existingMem.id);
+          if (!memUpdErr) {
+            persisted = true;
+          }
+        } else {
+          const { error: memInsErr } = await supabase
+            .from('campaign_members')
+            .insert({
+              campaign_id: targetCampaignId,
+              profile_id: targetUserId,
+              role: newRole,
+            });
+          if (!memInsErr) {
+            persisted = true;
+          }
+        }
+      }
+
+      if (!persisted) {
+        throw new Error(
+          locale === 'tr'
+            ? 'Yetki güncellenemedi. Lütfen veritabanı izinlerini kontrol edin.'
+            : 'Could not update role. Please check database permissions.'
+        );
+      }
+
+      arcaneToast.success(
+        newRole === 'gm'
+          ? locale === 'tr'
+            ? `${targetName} kullanıcısına Oyun Yöneticisi (GM) yetkisi verildi!`
+            : `${targetName} has been promoted to Game Master (GM)!`
+          : locale === 'tr'
+            ? `${targetName} kullanıcısının rolü Oyuncu olarak güncellendi.`
+            : `${targetName} role has been set to Player.`
+      );
+    } catch (err) {
+      console.error('Failed to update user role:', err);
+      setAllUsers(previousUsers);
+      arcaneToast.error(
+        locale === 'tr'
+          ? `Rol güncellenirken hata oluştu: ${(err as Error).message}`
+          : `Failed to update role: ${(err as Error).message}`
+      );
+    } finally {
+      setUpdatingRoleUserId(null);
+    }
+  };
 
   // Load static definitions and characters
   useEffect(() => {
@@ -809,21 +1040,33 @@ export function GMDashboard() {
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-5 sm:mb-6">
-        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-rose-950/40 border border-rose-900/50 flex items-center justify-center shadow-lg shrink-0">
-          <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-rose-300" />
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-5 sm:mb-6">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-rose-950/40 border border-rose-900/50 flex items-center justify-center shadow-lg shrink-0">
+            <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-rose-300" />
+          </div>
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-xl font-cinzel font-extrabold text-amber-100 tracking-wide uppercase flex flex-wrap items-center gap-2">
+              <span>LOREMASTER OVERSEER CHAMBER</span>
+              <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-rose-950/40 text-rose-300 border border-rose-900/50">
+                GAME MASTER SANCTUM
+              </span>
+            </h1>
+            <p className="text-[11px] text-amber-200/70 font-cinzel tracking-wider uppercase truncate">
+              {campaign?.name ?? 'Campaign'} — {members.length} ADVENTURERS ASSEMBLED
+            </p>
+          </div>
         </div>
-        <div className="min-w-0">
-          <h1 className="text-base sm:text-xl font-cinzel font-extrabold text-amber-100 tracking-wide uppercase flex flex-wrap items-center gap-2">
-            <span>LOREMASTER OVERSEER CHAMBER</span>
-            <span className="text-[10px] font-cinzel px-2.5 py-0.5 rounded-full bg-rose-950/40 text-rose-300 border border-rose-900/50">
-              GM SANCTUM
-            </span>
-          </h1>
-          <p className="text-[11px] text-amber-200/70 font-cinzel tracking-wider uppercase truncate">
-            {campaign?.name ?? 'Campaign'} — {members.length} ADVENTURERS ASSEMBLED
-          </p>
-        </div>
+
+        <button
+          type="button"
+          data-testid="gm-header-manage-roles-btn"
+          onClick={() => setActiveTab('users')}
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-200 text-xs font-cinzel font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.15)] transition-all cursor-pointer shrink-0"
+        >
+          <UserCheck className="w-4 h-4 text-amber-400" />
+          <span>{locale === 'tr' ? 'GM Yetkileri' : 'Manage GM Roles'}</span>
+        </button>
       </div>
 
       {/* Tab Bar */}
@@ -834,6 +1077,7 @@ export function GMDashboard() {
         {TABS.map(tab => (
           <button
             key={tab.key}
+            data-testid={`gm-tab-${tab.key}`}
             onClick={() => setActiveTab(tab.key)}
             className={`flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-cinzel font-bold uppercase tracking-wider transition-all duration-200 shrink-0 cursor-pointer ${
               activeTab === tab.key
@@ -882,6 +1126,26 @@ export function GMDashboard() {
                 onSelect={setSelectedPlayerId}
                 onNavigate={setActiveTab}
                 onCreateClick={() => setShowCreateModal(true)}
+                users={allUsers}
+                usersLoading={usersLoading}
+                currentUserId={user?.id}
+                campaignGmId={campaign?.gm_id}
+                updatingRoleUserId={updatingRoleUserId}
+                locale={locale}
+                onUpdateRole={handleUpdateUserRole}
+                onRefreshUsers={fetchUsersForGM}
+              />
+            )}
+            {activeTab === 'users' && (
+              <GMUserRoleManager
+                users={allUsers}
+                loading={usersLoading}
+                currentUserId={user?.id}
+                campaignGmId={campaign?.gm_id}
+                updatingUserId={updatingRoleUserId}
+                locale={locale}
+                onUpdateRole={handleUpdateUserRole}
+                onRefresh={fetchUsersForGM}
               />
             )}
             {activeTab === 'xp' && (
@@ -964,9 +1228,12 @@ export function GMDashboard() {
                     className="w-full bg-[#1c1c1e] border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-[#ffd700]/40"
                   >
                     <option value="" disabled>Select a user...</option>
-                    {members.map(m => (
-                      <option key={m.id} value={m.profile?.id || m.profile_id}>
-                        {m.profile?.username || 'Unknown'}
+                    {(allUsers.length > 0
+                      ? allUsers.map(u => ({ id: u.id, username: u.username }))
+                      : members.map(m => ({ id: m.profile?.id || m.profile_id, username: m.profile?.username || 'Unknown' }))
+                    ).map(u => (
+                      <option key={u.id} value={u.id}>
+                        {u.username}
                       </option>
                     ))}
                   </select>
@@ -1084,6 +1351,7 @@ function OverviewTab({
     { label: 'Combat Tracker', icon: Swords, color: '#ef4444', desc: 'Encounter & initiative order', action: () => onNavigate('combat') },
     { label: 'Atmosphere & Lore', icon: CloudRain, color: '#38bdf8', desc: 'Weather & session chronicles', action: () => onNavigate('atmosphere') },
     { label: 'Loot Dispenser', icon: Coins, color: '#ffd700', desc: 'Chest vault & inventory items', action: () => onNavigate('loot') },
+    { label: 'Manage GM Roles', icon: UserCheck, color: '#f59e0b', desc: 'Promote other users to Game Master', action: () => onNavigate('users') },
     { label: 'Battle Map', icon: Map, color: '#dc143c', desc: 'Open the fog of war map', action: () => navigate('/map') },
     { label: 'Manage Items', icon: Package, color: '#a855f7', desc: 'View & edit player gear', action: () => onNavigate('inventory') },
     { label: 'Distribute XP', icon: Zap, color: '#eab308', desc: 'Award experience points', action: () => onNavigate('xp') },
@@ -1246,16 +1514,36 @@ function OverviewTab({
 // ═══════════════════════════════════════════════════════════════
 
 function PartyTab({
-  players, selectedId, onSelect, onNavigate, onCreateClick
+  players,
+  selectedId,
+  onSelect,
+  onNavigate,
+  onCreateClick,
+  users,
+  usersLoading,
+  currentUserId,
+  campaignGmId,
+  updatingRoleUserId,
+  locale,
+  onUpdateRole,
+  onRefreshUsers,
 }: {
   players: DemoPlayer[];
   selectedId: string | null;
   onSelect: (id: string | null) => void;
   onNavigate: (tab: TabKey) => void;
   onCreateClick: () => void;
+  users: GMManagedUser[];
+  usersLoading: boolean;
+  currentUserId?: string | null;
+  campaignGmId?: string | null;
+  updatingRoleUserId?: string | null;
+  locale: Locale;
+  onUpdateRole: (userId: string, newRole: 'gm' | 'player') => Promise<void> | void;
+  onRefreshUsers: () => void;
 }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div className="flex justify-between items-center mb-2">
         <h3 className="text-xs font-cinzel font-bold text-gray-400 uppercase tracking-widest">
           Campaign Party ({players.length} members)
@@ -1425,6 +1713,20 @@ function PartyTab({
             stats: p.stats,
           }))}
           onSelectPlayer={(id) => onSelect(id)}
+        />
+      </div>
+
+      {/* GM User & Role Management inside Party Tab */}
+      <div className="pt-4 border-t border-white/5">
+        <GMUserRoleManager
+          users={users}
+          loading={usersLoading}
+          currentUserId={currentUserId}
+          campaignGmId={campaignGmId}
+          updatingUserId={updatingRoleUserId}
+          locale={locale}
+          onUpdateRole={onUpdateRole}
+          onRefresh={onRefreshUsers}
         />
       </div>
     </div>
